@@ -401,10 +401,10 @@ if(n2.has(message.author.id))
             rid_1 = rid_1.slice(0, rid_1.indexOf('/'))
           }
         }
-        console.log(id_1)
+        console.log(rid_1)
        let options = {
         host: 'api.steampowered.com',
-        path: '/ISteamUser/ResolveVanityURL/v0001/?key=DF0A08E817CCE67F129D35FFFB14901A&vanityurl='+id_1,
+        path: '/ISteamUser/ResolveVanityURL/v0001/?key=DF0A08E817CCE67F129D35FFFB14901A&vanityurl='+rid_1,
         agent: false
         };
         const req = https.get(options, function (res) {
