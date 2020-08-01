@@ -585,6 +585,29 @@ if(n2.has(message.author.id))
                         }
                         return;
                       }
+                    } else
+                    {
+                      var options = {
+                        host: 'dbd.onteh.net.au',
+                        path: '/api/playerstats?steamid='+sid_2
+                      };      
+                      var req1 = https.get(options, function (res) {
+                      var bodyChunks = [];
+                      res.on('data', function (chunk) {
+                          bodyChunks.push(chunk);
+                      }).on('end', function () {
+                          var body = Buffer.concat(bodyChunks);
+                          if(args[0].toLowerCase() == 'survivor') 
+                          {
+                            obtenervalorsurv(body, message.channel.id, message.author.id, message.guild.id, sid_2, usa.getTime())
+                          }
+                          if(args[0].toLowerCase() == 'killer') 
+                          {
+                            obtenervalorkill(body, message.channel.id, message.author.id, message.guild.id, sid_2, usa.getTime())
+                          }
+                      })
+                    });
+                    return;
                     }
                   }
                 } else
