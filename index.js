@@ -2,6 +2,7 @@
 const client = new Discord.Client();
 const config = require("./config.json");
 const mysql = require("mysql")
+const superagent = require("superagent")
 const PerkSurv = 80;
 const PerkKill = 72;
 const Niveles = 3;
@@ -399,6 +400,24 @@ if(n2.has(message.author.id))
                 host: 'dbd.onteh.net.au',
                 path: '/api/playerstats?steamid='+sid_2
             };      
+            superagent.get(options, function (res) {
+              var bodyChunks = [];
+              res.on('data', function (chunk) {
+                  bodyChunks.push(chunk);
+              }).on('end', function () {
+                  var body = Buffer.concat(bodyChunks);
+                  if(isEmptyObject(body)) return message.channel.send('No estás registrado.')
+                  if(args[0] == 'survivor') 
+                  {
+                    obtenervalorsurv(body, message.channel.id, message.author.id, message.guild.id)
+                  }
+                  if(args[0] == 'killer') 
+                  {
+                    obtenervalorkill(body, message.channel.id, message.author.id, message.guild.id)
+                  }
+                })
+                })
+            /*
             var req1 = https.get(options, function (res) {
                 var bodyChunks = [];
                 res.on('data', function (chunk) {
@@ -414,7 +433,7 @@ if(n2.has(message.author.id))
                     {
                       obtenervalorkill(body, message.channel.id, message.author.id, message.guild.id)
                     }
-                })
+                })*/
               });
             })
           })
