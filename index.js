@@ -435,8 +435,43 @@ if(n2.has(message.author.id))
                   let update_att = rows[0].update_at;
                   if(k_rank == 0)
                   {
+                    if((parseInt(usa.getTime())-parseInt(update_att)) < 60000*60)
+                    {
                       message.channel.send('La cuenta de Steam está en la cola para ser agregada. Recuerda que tarda hasta 1-6 hora/s.')
                       return;
+                    }
+                    else
+                    {
+                      var options = {
+                        host: 'dbd.onteh.net.au',
+                        path: '/api/playerstats?steamid='+sid_2
+                      };     
+                        if(isEmptyObject(body))
+                        {
+                          message.channel.send('La cuenta de Steam está en la cola para ser agregada. Recuerda que tarda hasta 1-6 hora/s.')
+                          con.query(`UPDATE EntityUsers SET update_at = ${usa.getTime()} WHERE SID = '${sid_2}'`)
+                          return;
+                        } else
+                        {
+                              var req1 = https.get(options, function (res) {
+                              var bodyChunks = [];
+                              res.on('data', function (chunk) {
+                                  bodyChunks.push(chunk);
+                              }).on('end', function () {
+                                  var body = Buffer.concat(bodyChunks);
+                                  if(args[0].toLowerCase() == 'survivor') 
+                                  {
+                                    obtenervalorsurv(body, message.channel.id, message.author.id, message.guild.id, sid_2, usa.getTime())
+                                  }
+                                  if(args[0].toLowerCase() == 'killer') 
+                                  {
+                                    obtenervalorkill(body, message.channel.id, message.author.id, message.guild.id, sid_2, usa.getTime())
+                                  }
+                                })
+                            })
+                        }
+                    return;
+                    }
                   } else
                   {
                     if((parseInt(usa.getTime())-parseInt(update_att)) < 60000*60*3)
@@ -456,6 +491,21 @@ if(n2.has(message.author.id))
                         let survivorshitwhilecarrying = rows[0].survivorshitwhilecarrying_1
                         let hatchesclosed = rows[0].hatchesclosed_1
                         let survivorsinterruptedcleansingtotem = rows[0].survivorsinterruptedcleansingtotem_1
+                        if(killer_rank == 20 && killed == 0 && bloodpoints == 0 && sacrificed == 0)
+                        {
+                          const embedd = new Discord.RichEmbed()
+                        .setColor('#FF0000')
+                        .setTitle('¡Ups! Esto es vergonzoso...')
+                        .setAuthor(message.member.user.tag, message.member.user.avatarURL)
+                        .setThumbnail(message.member.user.avatarURL)
+                        .addField('Al parecer tu cuenta está en privada.', 'Recuerda tener todas las opciones de privacidad en público.')
+                        .addField('¿Ya cambiaste todas tus configuraciones a público y sigues sin aparecer?', 'Normalmente al pasar tu perfil a público, puede tardar hasta 24 horas en actualizar tus datos la web (ajeno a nosotros).')
+                        .addField('Si siempre tuviste todo en público y no funciona:', 'Deberás esperar, lamentablemente la web no es nuestra y no podemos repararlo. Aunque estamos en constante contacto para informar de errores.')
+                        .setTimestamp()
+                        .setFooter('La entidad', client.user.avatarURL);
+                        message.channel.send(embedd)
+                        return;
+                        } else {
                         const embedd = new Discord.RichEmbed()
                         .setColor('#FF0000')
                         .setTitle('Estadisticas de Asesino de '+message.member.user.tag)
@@ -477,6 +527,7 @@ if(n2.has(message.author.id))
                         .setTimestamp()
                         .setFooter('La entidad', client.user.avatarURL);
                         message.channel.send(embedd)
+                        }
                         return;
                       } else if(args[0].toLowerCase() == 'survivor') 
                       {
@@ -494,6 +545,22 @@ if(n2.has(message.author.id))
                         let exitgatesopened = rows[0].exitgatesopened_1
                         let unhookedself = rows[0].unhookedself_1
                         let mysteryboxesopened = rows[0].mysteryboxesopened_1
+                        if(survivor_rank == 20 && equivgensrepaired == 0 && escaped == 0 && bloodpoints == 0)
+                        {
+                          const embedd = new Discord.RichEmbed()
+                        .setColor('#FF0000')
+                        .setTitle('¡Ups! Esto es vergonzoso...')
+                        .setAuthor(message.member.user.tag, message.member.user.avatarURL)
+                        .setThumbnail(message.member.user.avatarURL)
+                        .addField('Al parecer tu cuenta está en privada.', 'Recuerda tener todas las opciones de privacidad en público.')
+                        .addField('¿Ya cambiaste todas tus configuraciones a público y sigues sin aparecer?', 'Normalmente al pasar tu perfil a público, puede tardar hasta 24 horas en actualizar tus datos la web (ajeno a nosotros).')
+                        .addField('Si siempre tuviste todo en público y no funciona:', 'Deberás esperar, lamentablemente la web no es nuestra y no podemos repararlo. Aunque estamos en constante contacto para informar de errores.')
+                        .setTimestamp()
+                        .setFooter('La entidad', client.user.avatarURL);
+                        message.channel.send(embedd)
+                        return;
+                        } else
+                        {
                         const embedd = new Discord.RichEmbed()
                         .setColor('#FF0000')
                         .setTitle('Estadisticas de Superviviente de '+message.member.user.tag)
@@ -515,6 +582,7 @@ if(n2.has(message.author.id))
                         .setTimestamp()
                         .setFooter('La entidad', client.user.avatarURL)
                         message.channel.send(embedd)
+                        }
                         return;
                       }
                     }
@@ -1864,6 +1932,21 @@ function obtenervalorkill(variable, canal, usuario, server, sid, usa)
   //Veces que interrumpiste a un survivor rompiendo un totem
   var survivorsinterruptedcleansingtotem_1 = variable.slice(variable.indexOf('survivorsinterruptedcleansingtotem')+34+3)
   var survivorsinterruptedcleansingtotem_2 = survivorsinterruptedcleansingtotem_1.slice(0, survivorsinterruptedcleansingtotem_1.indexOf(',')-1)
+  if(killer_rank_2 == 20 && killed_2 == 0 && sacrificed_2 == 0 && bloodpoints_2 == 0)
+  {
+    const embedd = new Discord.RichEmbed()
+    .setColor('#FF0000')
+    .setTitle('¡Ups! Esto es vergonzoso...')
+    .setAuthor(message.member.user.tag, message.member.user.avatarURL)
+    .setThumbnail(message.member.user.avatarURL)
+    .addField('Al parecer tu cuenta está en privada.', 'Recuerda tener todas las opciones de privacidad en público.')
+    .addField('¿Ya cambiaste todas tus configuraciones a público y sigues sin aparecer?', 'Normalmente al pasar tu perfil a público, puede tardar hasta 24 horas en actualizar tus datos la web (ajeno a nosotros).')
+    .addField('Si siempre tuviste todo en público y no funciona:', 'Deberás esperar, lamentablemente la web no es nuestra y no podemos repararlo. Aunque estamos en constante contacto para informar de errores.')
+    .setTimestamp()
+    .setFooter('La entidad', client.user.avatarURL);
+    message.channel.send(embedd)
+    return;
+  } 
   const embedd = new Discord.RichEmbed()
 	.setColor('#FF0000')
   .setTitle('Estadisticas de Asesino de '+user.user.tag)
@@ -1956,6 +2039,21 @@ function obtenervalorsurv(variable, canal, usuario, server, sid, usa)
   var unhookedself_2 = unhookedself_1.slice(0, unhookedself_1.indexOf(',')-1)
   var mysteryboxesopened_1 = variable.slice(variable.indexOf('mysteryboxesopened')+18+3)
   var mysteryboxesopened_2 = mysteryboxesopened_1.slice(0, mysteryboxesopened_1.indexOf(',')-1)
+  if(survivor_rank_2 == 20 && equivgensrepaired_2 == 0 && escaped_2 == 0 && bloodpoints_2 == 0)
+  {
+    const embedd = new Discord.RichEmbed()
+    .setColor('#FF0000')
+    .setTitle('¡Ups! Esto es vergonzoso...')
+    .setAuthor(message.member.user.tag, message.member.user.avatarURL)
+    .setThumbnail(message.member.user.avatarURL)
+    .addField('Al parecer tu cuenta está en privada.', 'Recuerda tener todas las opciones de privacidad en público.')
+    .addField('¿Ya cambiaste todas tus configuraciones a público y sigues sin aparecer?', 'Normalmente al pasar tu perfil a público, puede tardar hasta 24 horas en actualizar tus datos la web (ajeno a nosotros).')
+    .addField('Si siempre tuviste todo en público y no funciona:', 'Deberás esperar, lamentablemente la web no es nuestra y no podemos repararlo. Aunque estamos en constante contacto para informar de errores.')
+    .setTimestamp()
+    .setFooter('La entidad', client.user.avatarURL);
+    message.channel.send(embedd)
+    return;
+  } 
   const embedd = new Discord.RichEmbed()
 	.setColor('#FF0000')
   .setTitle('Estadisticas de Superviviente de '+user.user.tag)
