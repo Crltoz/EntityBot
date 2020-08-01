@@ -416,9 +416,11 @@ if(n2.has(message.author.id))
               let sid_2 = sid_1.slice(0, sid_1.indexOf(',')-1)
               con.query(`SELECT * FROM EntityUsers WHERE SID = '${sid_2}'`, (err, rows) =>
               {
+                console.log('Activado SELECT')
                 if(err) throw err;
                 if(rows.length >= 1)
                 {
+                  console.log('Activado ROWS')
                   let k_rank = rows[0].killer_rank_1
                   let update_att = rows[0].update_at;
                   if(k_rank == 0)
@@ -430,6 +432,7 @@ if(n2.has(message.author.id))
                     }
                   } else
                   {
+                    console.log('Activado CACHE: '+usa-update_att)
                     if(usa-update_att < 60000*60*3)
                     {
                       if(args[0].toLowerCase() == 'killer') 
@@ -471,6 +474,7 @@ if(n2.has(message.author.id))
                         message.channel.send(embedd)
                       } else if(args[0].toLowerCase() == 'survivor') 
                       {
+                        console.log('Activado survivor')
                         cache = 1;
                         let bloodpoints = rows[0].bloodpoints_1
                         let survivor_rank = rows[0].survivor_rank_1
@@ -514,6 +518,7 @@ if(n2.has(message.author.id))
               })
               if(cache == 1)
               {
+                console.log('RETURN CACHE')
                 return;
               } else
               {
