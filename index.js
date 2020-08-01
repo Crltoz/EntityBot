@@ -386,7 +386,7 @@ if(n2.has(message.author.id))
        let text = args[1];
        if(!text.includes('steamcommunity.com/id/') && !text.includes('steamcommunity.com/profiles/')) return message.channel.send('El link del perfil de Steam debe ser válido.')
        var id_1;
-       let cache = 0;
+       var cache = 0;
        if(text.includes('id'))
        {
        id_1 = text.slice(text.indexOf('id')+3, text.length)
@@ -424,7 +424,7 @@ if(n2.has(message.author.id))
                 {
                   let k_rank = rows[0].killer_rank_1
                   let update_att = rows[0].update_at;
-                  console.log('Activado ROWS | Update_at: '+update_att+' | Usa: '+usa+' | total: '+usa-update_att)
+                  console.log('Activado ROWS | total: '+(parseInt(usa.getTime())-parseInt(update_att)))
                   if(k_rank == 0)
                   {
                     if((parseInt(usa.getTime())-parseInt(update_att)) < 60000*60)
@@ -519,6 +519,9 @@ if(n2.has(message.author.id))
                   }
                 }
               })
+              if(cache == 0)
+              {
+                console.log('cache: '+cache)
               var options = {
                 host: 'dbd.onteh.net.au',
                 path: '/api/playerstats?steamid='+sid_2
@@ -567,6 +570,7 @@ if(n2.has(message.author.id))
                     }
                 })
               });
+            }
             })
           })
       return;
