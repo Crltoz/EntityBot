@@ -5,6 +5,7 @@ var https = require('https');
 var http = require('http');
 var useragent = require('express-useragent')
 const mysql = require("mysql");
+const { parse } = require("path");
 const PerkSurv = 80;
 const PerkKill = 72;
 const Niveles = 3;
@@ -377,6 +378,7 @@ if(n2.has(message.author.id))
     return;
      }
 
+
      if (command == 'stats') {
        if(!texto) return message.channel.send('Usa: **/stats [Survivor o Killer] [URL Perfil Steam]**')
        if(args[0].toLowerCase() != 'killer' && args[0].toLowerCase() != 'survivor') return message.channel.send('Usa: **/stats [Survivor o Killer] [URL Perfil Steam]**')
@@ -425,15 +427,14 @@ if(n2.has(message.author.id))
                   console.log('Activado ROWS | Update_at: '+update_att+' | Usa: '+usa+' | total: '+usa-update_att)
                   if(k_rank == 0)
                   {
-                    if(usa-update_att < 60000*60*1)
+                    if((parseInt(usa.getTime())-parseInt(update_att)) < 60000*60)
                     {
                       message.channel.send('La cuenta de Steam está en la cola para ser agregada. Recuerda que tarda hasta 1 hora.')
                       return;
                     }
                   } else
                   {
-                    console.log('Activado CACHE: TIME: '+usa-update_att)
-                    if(usa-update_att < 60000*60*3)
+                    if((parseInt(usa.getTime())-parseInt(update_att)) < 60000*60*3)
                     {
                       if(args[0].toLowerCase() == 'killer') 
                       {
@@ -546,9 +547,9 @@ if(n2.has(message.author.id))
                           if(err) throw err;
                           if(rows.length >= 1)
                           {
-                            con.query(`UPDATE EntityUsers SET update_at = ${usa} WHERE SID = '${sid_2}'`)
+                            con.query(`UPDATE EntityUsers SET update_at = ${usa.getTime()} WHERE SID = '${sid_2}'`)
                           } else{
-                            con.query(`INSERT INTO EntityUsers (SID, update_at) VALUES ('${sid_2}', '${usa}')`)
+                            con.query(`INSERT INTO EntityUsers (SID, update_at) VALUES ('${sid_2}', '${usa.getTime()}')`)
                           }
                         })
                         console.log('statusCode:', res.statusCode);
@@ -562,11 +563,11 @@ if(n2.has(message.author.id))
                     }
                     if(args[0].toLowerCase() == 'survivor') 
                     {
-                      obtenervalorsurv(body, message.channel.id, message.author.id, message.guild.id, sid_2, usa)
+                      obtenervalorsurv(body, message.channel.id, message.author.id, message.guild.id, sid_2, usa.getTime())
                     }
                     if(args[0].toLowerCase() == 'killer') 
                     {
-                      obtenervalorkill(body, message.channel.id, message.author.id, message.guild.id, sid_2, usa)
+                      obtenervalorkill(body, message.channel.id, message.author.id, message.guild.id, sid_2, usa.getTime())
                     }
                 })
               });
@@ -2074,5 +2075,15 @@ function Coma(x) {
 function isEmptyObject(obj) {
   return !Object.keys(obj).length;
 }
+
+function twoDigits(d) {
+  if(0 <= d && d < 10) return "0" + d.toString();
+  if(-10 < d && d < 0) return "-0" + (-1*d).toString();
+  return d.toString();
+}
+
+Date.prototype.toMysqlFormat = function() {
+  return this.getUTCFullYear() + "-" + twoDigits(1 + this.getUTCMonth()) + "-" + twoDigits(this.getUTCDate()) + " " + twoDigits(this.getUTCHours()) + ":" + twoDigits(this.getUTCMinutes()) + ":" + twoDigits(this.getUTCSeconds());
+};
 
 client.login('NzI0NzAyNzYwMzU1NzU4MjM1.XvECWQ.XhJKHaD9n2pXN2gFeR25PezJkps');
