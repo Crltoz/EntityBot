@@ -386,6 +386,9 @@ if(n2.has(message.author.id))
        let text = args[1];
        if(!text.includes('steamcommunity.com/id/') && !text.includes('steamcommunity.com/profiles/')) return message.channel.send('El link del perfil de Steam debe ser válido.')
        var rid_1;
+       var sid_1;
+       var sid_2;
+       let esprofile = 0;
        if(text.includes('id'))
        {
         rid_1 = text.slice(text.indexOf('id')+3, text.length)
@@ -395,13 +398,14 @@ if(n2.has(message.author.id))
         }
        } else
        {
+        esprofile = 1;
         rid_1 = text.slice(text.indexOf('profiles')+9, text.length)
           if(rid_1.includes('/')) 
           {
             rid_1 = rid_1.slice(0, rid_1.indexOf('/'))
           }
         }
-        console.log(rid_1)
+
        let options = {
         host: 'api.steampowered.com',
         path: '/ISteamUser/ResolveVanityURL/v0001/?key=DF0A08E817CCE67F129D35FFFB14901A&vanityurl='+rid_1,
@@ -413,11 +417,15 @@ if(n2.has(message.author.id))
               bodyChunks2.push(chunk);
           }).on('end', function () {
               var body2 = Buffer.concat(bodyChunks2);
-              if(isEmptyObject(body2)) return message.channel.send('La cuenta de Steam es inválida.')
-              let sid_1 = body2.slice(body2.indexOf('steamid')+10)
-              let sid_2 = sid_1.slice(0, sid_1.indexOf(',')-1)
-              console.log('sid_1 ' +sid_1)
-              console.log(sid_2)
+              if(isEmptyObject(body2) && esprofile == 0) return message.channel.send('La cuenta de Steam es inválida.')
+              if(esprofile == 0)
+              {
+                sid_1 = body2.slice(body2.indexOf('steamid')+10)
+                sid_2 = sid_1.slice(0, sid_1.indexOf(',')-1)
+              } else
+              {
+                sid_2 = rid_1;
+              }
               con.query(`SELECT * FROM EntityUsers WHERE SID = '${sid_2}'`, (err, rows) =>
               {
                 if(err) throw err;
