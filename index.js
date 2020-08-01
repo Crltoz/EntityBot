@@ -473,6 +473,7 @@ if(n2.has(message.author.id))
                         .setTimestamp()
                         .setFooter('La entidad', client.user.avatarURL);
                         message.channel.send(embedd)
+                        return;
                       } else if(args[0].toLowerCase() == 'survivor') 
                       {
                         console.log('Activado survivor')
@@ -512,17 +513,12 @@ if(n2.has(message.author.id))
                         .setTimestamp()
                         .setFooter('La entidad', client.user.avatarURL)
                         message.channel.send(embedd)
+                        return;
                       }
                     }
                   }
                 }
               })
-              if(cache == 1)
-              {
-                console.log('RETURN CACHE')
-                return;
-              } else
-              {
               var options = {
                 host: 'dbd.onteh.net.au',
                 path: '/api/playerstats?steamid='+sid_2
@@ -571,7 +567,6 @@ if(n2.has(message.author.id))
                     }
                 })
               });
-            }
             })
           })
       return;
