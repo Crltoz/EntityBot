@@ -384,6 +384,7 @@ if(n2.has(message.author.id))
        let text = args[1];
        if(!text.includes('steamcommunity.com/id/') && !text.includes('steamcommunity.com/profiles/')) return message.channel.send('El link del perfil de Steam debe ser válido.')
        var id_1;
+       let cache = 0;
        if(text.includes('id'))
        {
        id_1 = text.slice(text.indexOf('id')+3, text.length)
@@ -433,6 +434,7 @@ if(n2.has(message.author.id))
                     {
                       if(args[0].toLowerCase() == 'killer') 
                       {
+                        cache = 1;
                         let bloodpoints = rows[0].bloodpoints_1
                         let killer_rank = rows[0].killer_rank_1
                         let killer_perfectgames = rows[0].killer_perfectgames_1
@@ -467,9 +469,9 @@ if(n2.has(message.author.id))
                         .setTimestamp()
                         .setFooter('La entidad', client.user.avatarURL);
                         message.channel.send(embedd)
-                        return;
                       } else if(args[0].toLowerCase() == 'survivor') 
                       {
+                        cache = 1;
                         let bloodpoints = rows[0].bloodpoints_1
                         let survivor_rank = rows[0].survivor_rank_1
                         let survivor_perfectgames = rows[0].survivor_perfectgames_1
@@ -505,12 +507,16 @@ if(n2.has(message.author.id))
                         .setTimestamp()
                         .setFooter('La entidad', client.user.avatarURL)
                         message.channel.send(embedd)
-                        return;
                       }
                     }
                   }
                 }
               })
+              if(cache == 1)
+              {
+                return;
+              } else
+              {
               var options = {
                 host: 'dbd.onteh.net.au',
                 path: '/api/playerstats?steamid='+sid_2
@@ -559,6 +565,7 @@ if(n2.has(message.author.id))
                     }
                 })
               });
+            }
             })
           })
       return;
