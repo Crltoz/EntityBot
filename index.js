@@ -2004,7 +2004,7 @@ function obtenervalorsurv(variable, canal, usuario, server, sid, usa)
   //Veces que interrumpiste a un survivor rompiendo un totem
   var survivorsinterruptedcleansingtotem_1 = variable.slice(variable.indexOf('survivorsinterruptedcleansingtotem')+34+3)
   var survivorsinterruptedcleansingtotem_2 = survivorsinterruptedcleansingtotem_1.slice(0, survivorsinterruptedcleansingtotem_1.indexOf(',')-1)
-  var killer_r = parseInt(killer_rank_2)
+  var killer_r = parseInt(killer_rank_2.toString("hex"), 16)
   con.query(`SELECT * FROM EntityUsers WHERE SID = '${sid}'`, (err, rows) => {
     if(err) throw err;
     if(rows.length >= 1)
