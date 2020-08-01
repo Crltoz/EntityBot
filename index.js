@@ -1,8 +1,10 @@
 ﻿const Discord = require("discord.js");
 const client = new Discord.Client();
 const config = require("./config.json");
-const mysql = require("mysql")
-const superagent = require("superagent")
+var https = require('https');
+var http = require('http');
+var useragent = require('express-useragent')
+const mysql = require("mysql");
 const PerkSurv = 80;
 const PerkKill = 72;
 const Niveles = 3;
@@ -42,6 +44,15 @@ var db_config = {
 }
 var con;
 
+var srv = http.createServer(function (req, res) {
+  var source = req.headers['user-agent'],
+  ua = useragent.parse(source);
+  res.writeHead(200, {'EntityBot': 'Tools for Discord (Dead By Daylight)'});
+  res.end(JSON.stringify(ua));
+});
+
+srv.listen(3000);
+
 client.on("ready", () => {
     console.log("El bot esta cargando sistemas, base de datos.");
     handleDisconnect();
@@ -53,10 +64,6 @@ client.on("ready", () => {
       }
   } );
 });
-
-
-var https = require('https');
-var http = require('http');
 
 
 client.on("messageReactionAdd", (messageReaction, user) => {
@@ -385,7 +392,8 @@ if(n2.has(message.author.id))
        }
        let options = {
         host: 'api.steampowered.com',
-        path: '/ISteamUser/ResolveVanityURL/v0001/?key=DF0A08E817CCE67F129D35FFFB14901A&vanityurl='+id_1
+        path: '/ISteamUser/ResolveVanityURL/v0001/?key=DF0A08E817CCE67F129D35FFFB14901A&vanityurl='+id_1,
+        agent: false
         };
         const req = https.get(options, function (res) {
           var bodyChunks2 = [];
@@ -400,31 +408,31 @@ if(n2.has(message.author.id))
                 host: 'dbd.onteh.net.au',
                 path: '/api/playerstats?steamid='+sid_2
             };      
-            superagent.get(options, function (res) {
-              var bodyChunks = [];
-              res.on('data', function (chunk) {
-                  bodyChunks.push(chunk);
-              }).on('end', function () {
-                  var body = Buffer.concat(bodyChunks);
-                  if(isEmptyObject(body)) return message.channel.send('No estás registrado.')
-                  if(args[0] == 'survivor') 
-                  {
-                    obtenervalorsurv(body, message.channel.id, message.author.id, message.guild.id)
-                  }
-                  if(args[0] == 'killer') 
-                  {
-                    obtenervalorkill(body, message.channel.id, message.author.id, message.guild.id)
-                  }
-                })
-                })
-            /*
             var req1 = https.get(options, function (res) {
                 var bodyChunks = [];
                 res.on('data', function (chunk) {
                     bodyChunks.push(chunk);
                 }).on('end', function () {
                     var body = Buffer.concat(bodyChunks);
-                    if(isEmptyObject(body)) return message.channel.send('No estás registrado.')
+                    if(isEmptyObject(body))
+                    {
+                      var options2 = {
+                        host: 'dbd.onteh.net.au',
+                        path: '/api/playerstats?steamid='+sid_2,
+                        method: 'POST'
+                    };     
+                      options2.agent = new https.Agent(options2)
+                      const reqq = https.request(options2, (res) => {
+                        message.channel.send('La cuenta ingresada no estaba registrada, fue agregada automáticamente y en las próximas horas deberían estar sus estadísticas disponibles.')
+                        console.log('statusCode:', res.statusCode);
+                        console.log('headers:', res.headers);
+                      })
+                      reqq.on('error', (e) => {
+                        console.error(e);
+                      });
+                      reqq.end();
+                      return;
+                    }
                     if(args[0] == 'survivor') 
                     {
                       obtenervalorsurv(body, message.channel.id, message.author.id, message.guild.id)
@@ -433,7 +441,7 @@ if(n2.has(message.author.id))
                     {
                       obtenervalorkill(body, message.channel.id, message.author.id, message.guild.id)
                     }
-                })*/
+                })
               });
             })
           })
