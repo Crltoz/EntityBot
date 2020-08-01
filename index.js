@@ -420,9 +420,9 @@ if(n2.has(message.author.id))
                 if(err) throw err;
                 if(rows.length >= 1)
                 {
-                  console.log('Activado ROWS')
                   let k_rank = rows[0].killer_rank_1
                   let update_att = rows[0].update_at;
+                  console.log('Activado ROWS | Update_at: '+update_att+' | Usa: '+usa+' | total: '+usa-update_att)
                   if(k_rank == 0)
                   {
                     if(usa-update_att < 60000*60*1)
@@ -432,7 +432,7 @@ if(n2.has(message.author.id))
                     }
                   } else
                   {
-                    console.log('Activado CACHE: '+usa-update_att)
+                    console.log('Activado CACHE: TIME: '+usa-update_att)
                     if(usa-update_att < 60000*60*3)
                     {
                       if(args[0].toLowerCase() == 'killer') 
