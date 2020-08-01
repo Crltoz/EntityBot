@@ -379,17 +379,26 @@ if(n2.has(message.author.id))
 
      if (command == 'stats') {
        if(!texto) return message.channel.send('Usa: **/stats [Survivor o Killer] [URL Perfil Steam]**')
-       if(args[0].toLocaleLowerCase() != 'killer' && args[0].toLocaleLowerCase() != 'survivor') return message.channel.send('Usa: **/stats [Survivor o Killer] [SteamID]**')
+       if(args[0].toLowerCase() != 'killer' && args[0].toLowerCase() != 'survivor') return message.channel.send('Usa: **/stats [Survivor o Killer] [URL Perfil Steam]**')
        if(!args[1]) return message.channel.send('Usa: **/stats [Survivor o Killer] [URL Perfil Steam]**')
        let text = args[1];
        if(!text.includes('steamcommunity.com/id/') && !text.includes('steamcommunity.com/profiles/')) return message.channel.send('El link del perfil de Steam debe ser válido.')
+       var id_1;
        if(text.includes('id'))
        {
-       let id_1 = text.slice(text.indexOf('id')+3, text.length)
+       id_1 = text.slice(text.indexOf('id')+3, text.length)
        if(id_1.includes('/')) 
        {
          id_1 = id_1.slice(0, id_1.indexOf('/'))
        }
+      } else
+      {
+        id_1 = text.slice(text.indexOf('profiles')+9, text.length)
+       if(id_1.includes('/')) 
+       {
+         id_1 = id_1.slice(0, id_1.indexOf('/'))
+       }
+      }
        let options = {
         host: 'api.steampowered.com',
         path: '/ISteamUser/ResolveVanityURL/v0001/?key=DF0A08E817CCE67F129D35FFFB14901A&vanityurl='+id_1,
@@ -404,6 +413,104 @@ if(n2.has(message.author.id))
               if(isEmptyObject(body2)) return message.channel.send('La cuenta de Steam es inválida.')
               let sid_1 = body2.slice(body2.indexOf('steamid')+10)
               let sid_2 = sid_1.slice(0, sid_1.indexOf(',')-1)
+              con.query(`SELECT * FROM EntityUsers WHERE SID = '${sid_2}'`, (err, rows) =>
+              {
+                if(err) throw err;
+                if(rows.length >= 1)
+                {
+                  let k_rank = rows[0].killer_rank_1
+                  let update_att = rows[0].update_at;
+                  if(k_rank == 0)
+                  {
+                    if(usa-update_att < 60000*60*1)
+                    {
+                      message.channel.send('La cuenta de Steam está en la cola para ser agregada. Recuerda que tarda hasta 1 hora.')
+                      return;
+                    }
+                  } else
+                  {
+                    if(usa-update_att < 60000*60*3)
+                    {
+                      if(args[0].toLowerCase() == 'killer') 
+                      {
+                        let bloodpoints = rows[0].bloodpoints_1
+                        let killer_rank = rows[0].killer_rank_1
+                        let killer_perfectgames = rows[0].killer_perfectgames_1
+                        let killed = rows[0].killed_1
+                        let killed_sacrificed_afterlastgen = rows[0].killed_sacrificed_afterlastgen_1
+                        let sacrificed = rows[0].sacrificed_1
+                        let chainsawhits = rows[0].chainsawhits_1
+                        let beartrapcatches = rows[0].beartrapcatches_1
+                        let hatchetsthrown = rows[0].hatchetsthrown_1
+                        let survivorsgrabbedrepairinggen = rows[0].survivorsgrabbedrepairinggen_1
+                        let survivorshitwhilecarrying = rows[0].survivorshitwhilecarrying_1
+                        let hatchesclosed = rows[0].hatchesclosed_1
+                        let survivorsinterruptedcleansingtotem = rows[0].survivorsinterruptedcleansingtotem_1
+                        const embedd = new Discord.RichEmbed()
+                        .setColor('#FF0000')
+                        .setTitle('Estadisticas de Asesino de '+user.user.tag)
+                        .setAuthor(user.user.tag, user.user.avatarURL)
+                        .setThumbnail(user.user.avatarURL)
+                        .addField('<:bp:724724401333076071> Puntos de sangre totales:', Coma(bloodpoints))
+                        .addField('Rango:', killer_rank, true)
+                        .addField('Partidas perfectas:', killer_perfectgames,true)
+                        .addField('Asesinatos con Mori:', killed)
+                        .addField('Sacrificiaste a todos después del último generador:', killed_sacrificed_afterlastgen,true)
+                        .addField('Sacrificios en ganchos:', sacrificed,true)
+                        .addField('Ataques con motosierra (HillBilly):', chainsawhits, true)
+                        .addField('Atrapados en trampas (Trampero):', beartrapcatches, true)
+                        .addField('Hachas lanzadas:', hatchetsthrown, true)
+                        .addField('Surpervivientes interrumpidos en gens:', survivorsgrabbedrepairinggen, true)
+                        .addField('Supervivientes golpeados mientras cargas con otro:', survivorshitwhilecarrying, true)
+                        .addField('Trampillas cerradas:', hatchesclosed, true)
+                        .addField('Supervivientes interrumpidos en totems:', survivorsinterruptedcleansingtotem, true)
+                        .setTimestamp()
+                        .setFooter('La entidad', client.user.avatarURL);
+                        message.channel.send(embedd)
+                        return;
+                      } else if(args[0].toLowerCase() == 'survivor') 
+                      {
+                        let bloodpoints = rows[0].bloodpoints_1
+                        let survivor_rank = rows[0].survivor_rank_1
+                        let survivor_perfectgames = rows[0].survivor_perfectgames_1
+                        let equivgensrepaired = rows[0].equivgensrepaired_1
+                        let equivsurvivorshealed = rows[0].equivsurvivorshealed_1
+                        let equivsurvivorshealed_coop = rows[0].equivsurvivorshealed_coop_1
+                        let skillchecks = rows[0].skillchecks_1
+                        let escaped = rows[0].escaped_1
+                        let escaped_ko = rows[0].escaped_ko_1
+                        let escaped_hatch = rows[0].escaped_hatch_1
+                        let protectionhits = rows[0].protectionhits_1
+                        let exitgatesopened = rows[0].exitgatesopened_1
+                        let unhookedself = rows[0].unhookedself_1
+                        let mysteryboxesopened = rows[0].mysteryboxesopened_1
+                        const embedd = new Discord.RichEmbed()
+                        .setColor('#FF0000')
+                        .setTitle('Estadisticas de Superviviente de '+user.user.tag)
+                        .setAuthor(user.user.tag, user.user.avatarURL)
+                        .setThumbnail(user.user.avatarURL)
+                        .addField('<:bp:724724401333076071> Puntos de sangre totales:', Coma(bloodpoints))
+                        .addField('Rango:', survivor_rank, true)
+                        .addField('Partidas perfectas:', survivor_perfectgames,true)
+                        .addField('Generadores reparados:', equivgensrepaired)
+                        .addField('Jugadores curados:', equivsurvivorshealed+'/'+equivsurvivorshealed_coop+' (Coop)',true)
+                        .addField('SkillChecks:', skillchecks,true)
+                        .addField('Total de Escapes:', escaped, true)
+                        .addField('Escapes arrastrándose:', escaped_ko, true)
+                        .addField('Escapes por trampilla:', escaped_hatch, true)
+                        .addField('Zafarse del gancho:', unhookedself, true)
+                        .addField('Hits de protección:', protectionhits, true)
+                        .addField('Puertas abiertas:', exitgatesopened, true)
+                        .addField('Cofres abiertos:', mysteryboxesopened, true)
+                        .setTimestamp()
+                        .setFooter('La entidad', client.user.avatarURL)
+                        message.channel.send(embedd)
+                        return;
+                      }
+                    }
+                  }
+                }
+              })
               var options = {
                 host: 'dbd.onteh.net.au',
                 path: '/api/playerstats?steamid='+sid_2
@@ -420,10 +527,19 @@ if(n2.has(message.author.id))
                         host: 'dbd.onteh.net.au',
                         path: '/api/playerstats?steamid='+sid_2,
                         method: 'POST'
-                    };     
+                    };    
                       options2.agent = new https.Agent(options2)
                       const reqq = https.request(options2, (res) => {
                         message.channel.send('La cuenta ingresada no estaba registrada, fue agregada automáticamente y en las próximas horas deberían estar sus estadísticas disponibles.')
+                        con.query(`SELECT * FROM EntityUsers WHERE SID = '${sid_2}'`, (err, rows) => {
+                          if(err) throw err;
+                          if(rows.length >= 1)
+                          {
+                            con.query(`UPDATE EntityUsers SET update_at = ${usa} WHERE SID = '${sid_2}'`)
+                          } else{
+                            con.query(`INSERT INTO EntityUsers (SID, update_at) VALUES ('${sid_2}', '${usa}')`)
+                          }
+                        })
                         console.log('statusCode:', res.statusCode);
                         console.log('headers:', res.headers);
                       })
@@ -433,19 +549,18 @@ if(n2.has(message.author.id))
                       reqq.end();
                       return;
                     }
-                    if(args[0] == 'survivor') 
+                    if(args[0].toLowerCase() == 'survivor') 
                     {
-                      obtenervalorsurv(body, message.channel.id, message.author.id, message.guild.id)
+                      obtenervalorsurv(body, message.channel.id, message.author.id, message.guild.id, sid_2, usa)
                     }
-                    if(args[0] == 'killer') 
+                    if(args[0].toLowerCase() == 'killer') 
                     {
-                      obtenervalorkill(body, message.channel.id, message.author.id, message.guild.id)
+                      obtenervalorkill(body, message.channel.id, message.author.id, message.guild.id, sid_2, usa)
                     }
                 })
               });
             })
           })
-        }
       return;
      }
 
@@ -1694,7 +1809,7 @@ function ObtenerPerkKiller(numero)
   }
 }
 
-function obtenervalorkill(variable, canal, usuario, server)
+function obtenervalorkill(variable, canal, usuario, server, sid, usa)
 {
   var serverr = client.guilds.get(server)
   var user = serverr.members.get(usuario)
@@ -1758,10 +1873,49 @@ function obtenervalorkill(variable, canal, usuario, server)
 	.setTimestamp()
   .setFooter('La entidad', client.user.avatarURL);
   client.channels.get(canal).send(embedd)
+  var survivor_rank_1 = variable.slice(variable.indexOf('survivor_rank')+16)
+  var survivor_rank_2 = survivor_rank_1.slice(0, survivor_rank_1.indexOf(',')-1)
+  var survivor_perfectgames_1 = variable.slice(variable.indexOf('survivor_perfectgames')+21+3)
+  var survivor_perfectgames_2 = survivor_perfectgames_1.slice(0, survivor_perfectgames_1.indexOf(',')-1)
+  var equivgensrepaired_1 = variable.slice(variable.indexOf('equivgensrepaired')+17+3)
+  var equivgensrepaired_2 = equivgensrepaired_1.slice(0, equivgensrepaired_1.indexOf(',')-1)
+  var equivsurvivorshealed_1 = variable.slice(variable.indexOf('equivsurvivorshealed')+20+3)
+  var equivsurvivorshealed_2 = equivsurvivorshealed_1.slice(0, equivsurvivorshealed_1.indexOf(',')-1)
+  var equivsurvivorshealed_coop_1 = variable.slice(variable.indexOf('equivsurvivorshealed_coop')+25+3)
+  var equivsurvivorshealed_coop_2 = equivsurvivorshealed_coop_1.slice(0, equivsurvivorshealed_coop_1.indexOf(',')-1)
+  var skillchecks_1 = variable.slice(variable.indexOf('skillchecks')+11+3)
+  var skillchecks_2 = skillchecks_1.slice(0, skillchecks_1.indexOf(',')-1)
+  var escaped_1 = variable.slice(variable.indexOf('escaped')+7+3)
+  var escaped_2 = escaped_1.slice(0, escaped_1.indexOf(',')-1)
+  var escaped_ko_1 = variable.slice(variable.indexOf('escaped_ko')+10+3)
+  var escaped_ko_2 = escaped_ko_1.slice(0, escaped_ko_1.indexOf(',')-1)
+  var escaped_hatch_1 = variable.slice(variable.indexOf('escaped_hatch')+13+3)
+  var escaped_hatch_2 = escaped_hatch_1.slice(0, escaped_hatch_1.indexOf(',')-1)
+  var protectionhits_1 = variable.slice(variable.indexOf('protectionhits')+14+3)
+  var protectionhits_2 = protectionhits_1.slice(0, protectionhits_1.indexOf(',')-1)
+  var exitgatesopened_1 = variable.slice(variable.indexOf('exitgatesopened')+15+3)
+  var exitgatesopened_2 = exitgatesopened_1.slice(0, exitgatesopened_1.indexOf(',')-1)
+  var unhookedself_1 = variable.slice(variable.indexOf('unhookedself')+12+3)
+  var unhookedself_2 = unhookedself_1.slice(0, unhookedself_1.indexOf(',')-1)
+  var mysteryboxesopened_1 = variable.slice(variable.indexOf('mysteryboxesopened')+18+3)
+  var mysteryboxesopened_2 = mysteryboxesopened_1.slice(0, mysteryboxesopened_1.indexOf(',')-1)
+  con.query(`SELECT * FROM EntityUsers WHERE SID = '${sid}'`, (err, rows) => {
+    if(err) throw err;
+    if(rows.length >= 1)
+    {
+      con.query(`UPDATE EntityUsers SET bloodpoints_1 = ${bloodpoints_2}, killer_rank_1 = ${killer_rank_2}, killer_perfectgames_1 = ${killer_perfectgames_2}, killed_1 = ${killed_2}, killed_sacrificed_afterlastgen_1 = ${killed_sacrificed_afterlastgen_2}, sacrificed_1 = ${sacrificed_2}, chainsawhits_1 = ${chainsawhits_2}, beartrapcatches_1 = ${beartrapcatches_2}, hatchetsthrown_1 = ${hatchetsthrown_2}, survivorsgrabbedrepairinggen_1 = ${survivorsgrabbedrepairinggen_2}, survivorshitwhilecarrying_1 = ${survivorshitwhilecarrying_2}, hatchesclosed_1 = ${hatchesclosed_2}, survivorsinterruptedcleansingtotem_1 = ${survivorsinterruptedcleansingtotem_2}, survivor_rank_1 = ${survivor_rank_2}, survivor_perfectgames_1 = ${survivor_perfectgames_2}, equivgensrepaired_1 = ${equivgensrepaired_2}, equivsurvivorshealed_1 = ${equivsurvivorshealed_2}, equivsurvivorshealed_coop_1 = ${equivsurvivorshealed_coop_2}, skillchecks_1 = ${skillchecks_2}, escaped_1 = ${escaped_2}, escaped_ko_1 = ${escaped_ko_2}, escaped_hatch_1 = ${escaped_hatch_2}, protectionhits_1 = ${protectionhits_2}, exitgatesopened_1 = ${exitgatesopened_2}, unhookedself_1 = ${unhookedself_2}, mysteryboxesopened_1 = ${mysteryboxesopened_2}, update_at = ${usa} WHERE SID = '${sid}'`)
+    } else
+    {
+      con.query(`INSERT INTO EntityUsers (SID, update_at) VALUES ('${sid}', '${usa}')`)
+      setTimeout(() => {
+        con.query(`UPDATE EntityUsers SET bloodpoints_1 = ${bloodpoints_2}, killer_rank_1 = ${killer_rank_2}, killer_perfectgames_1 = ${killer_perfectgames_2}, killed_1 = ${killed_2}, killed_sacrificed_afterlastgen_1 = ${killed_sacrificed_afterlastgen_2}, sacrificed_1 = ${sacrificed_2}, chainsawhits_1 = ${chainsawhits_2}, beartrapcatches_1 = ${beartrapcatches_2}, hatchetsthrown_1 = ${hatchetsthrown_2}, survivorsgrabbedrepairinggen_1 = ${survivorsgrabbedrepairinggen_2}, survivorshitwhilecarrying_1 = ${survivorshitwhilecarrying_2}, hatchesclosed_1 = ${hatchesclosed_2}, survivorsinterruptedcleansingtotem_1 = ${survivorsinterruptedcleansingtotem_2}, survivor_rank_1 = ${survivor_rank_2}, survivor_perfectgames_1 = ${survivor_perfectgames_2}, equivgensrepaired_1 = ${equivgensrepaired_2}, equivsurvivorshealed_1 = ${equivsurvivorshealed_2}, equivsurvivorshealed_coop_1 = ${equivsurvivorshealed_coop_2}, skillchecks_1 = ${skillchecks_2}, escaped_1 = ${escaped_2}, escaped_ko_1 = ${escaped_ko_2}, escaped_hatch_1 = ${escaped_hatch_2}, protectionhits_1 = ${protectionhits_2}, exitgatesopened_1 = ${exitgatesopened_2}, unhookedself_1 = ${unhookedself_2}, mysteryboxesopened_1 = ${mysteryboxesopened_2} WHERE SID = '${sid}'`)
+        }, 500);
+    }
+  })
   return;
 }
 
-function obtenervalorsurv(variable, canal, usuario, server)
+function obtenervalorsurv(variable, canal, usuario, server, sid, usa)
 {
   var serverr = client.guilds.get(server)
   var user = serverr.members.get(usuario)
@@ -1814,6 +1968,57 @@ function obtenervalorsurv(variable, canal, usuario, server)
 	.setTimestamp()
   .setFooter('La entidad', client.user.avatarURL)
   client.channels.get(canal).send(embedd)
+  //Rango de killer
+  var killer_rank_1 = variable.slice(variable.indexOf('killer_rank')+11+3)
+  var killer_rank_2 = killer_rank_1.slice(0, killer_rank_1.indexOf(',')-1)
+  //Cantidad de partidas perfectas
+  var killer_perfectgames_1 = variable.slice(variable.indexOf('killer_perfectgames')+19+3)
+  var killer_perfectgames_2 = killer_perfectgames_1.slice(0, killer_perfectgames_1.indexOf(',')-1)
+  //Survivors asesinados con tus propias manos
+  var killed_1 = variable.slice(variable.indexOf('killed')+6+3)
+  var killed_2 = killed_1.slice(0, killed_1.indexOf(',')-1)
+  //Veces que sacrificaste a todos despues de que reparen el ultimo generador
+  var killed_sacrificed_afterlastgen_1 = variable.slice(variable.indexOf('killed_sacrificed_afterlastgen')+30+3)
+  var killed_sacrificed_afterlastgen_2 = killed_sacrificed_afterlastgen_1.slice(0, killed_sacrificed_afterlastgen_1.indexOf(',')-1)
+  //Survivors sacrificados en ganchos
+  var sacrificed_1 = variable.slice(variable.indexOf('sacrificed')+10+3)
+  var sacrificed_2 = sacrificed_1.slice(0, sacrificed_1.indexOf(',')-1)
+  //Ataques con motosierra de Hillbi
+  var chainsawhits_1 = variable.slice(variable.indexOf('chainsawhits')+12+3)
+  var chainsawhits_2 = chainsawhits_1.slice(0, chainsawhits_1.indexOf(',')-1)
+  //Survivors atrapados con trampas del trampero
+  var beartrapcatches_1 = variable.slice(variable.indexOf('beartrapcatches')+15+3)
+  var beartrapcatches_2 = beartrapcatches_1.slice(0, beartrapcatches_1.indexOf(',')-1)
+  //Hachas lanzadas
+  var hatchetsthrown_1 = variable.slice(variable.indexOf('hatchetsthrown')+14+3)
+  var hatchetsthrown_2 = hatchetsthrown_1.slice(0, hatchetsthrown_1.indexOf(',')-1)
+  //Survivors interrumpidos mientras reparan generadores
+  var survivorsgrabbedrepairinggen_1 = variable.slice(variable.indexOf('survivorsgrabbedrepairinggen')+28+3)
+  var survivorsgrabbedrepairinggen_2 = survivorsgrabbedrepairinggen_1.slice(0, survivorsgrabbedrepairinggen_1.indexOf(',')-1)
+  //Survivors golpeados mientras cargas a otro survivor
+  var survivorshitwhilecarrying_1 = variable.slice(variable.indexOf('survivorshitwhilecarrying')+25+3)
+  var survivorshitwhilecarrying_2 = survivorshitwhilecarrying_1.slice(0, survivorshitwhilecarrying_1.indexOf(',')-1)
+  //Trampillas cerradas
+  var hatchesclosed_1 = variable.slice(variable.indexOf('hatchesclosed')+13+3)
+  var hatchesclosed_2 = hatchesclosed_1.slice(0, hatchesclosed_1.indexOf(',')-1)
+  //Veces que interrumpiste a un survivor rompiendo un totem
+  var survivorsinterruptedcleansingtotem_1 = variable.slice(variable.indexOf('survivorsinterruptedcleansingtotem')+34+3)
+  var survivorsinterruptedcleansingtotem_2 = survivorsinterruptedcleansingtotem_1.slice(0, survivorsinterruptedcleansingtotem_1.indexOf(',')-1)
+  var killer_r = parseInt(killer_rank_2)
+  con.query(`SELECT * FROM EntityUsers WHERE SID = '${sid}'`, (err, rows) => {
+    if(err) throw err;
+    if(rows.length >= 1)
+    {
+      con.query(`UPDATE EntityUsers SET bloodpoints_1 = ${bloodpoints_2}, survivor_rank_1 = ${survivor_rank_2}, survivor_perfectgames_1 = ${survivor_perfectgames_2}, equivgensrepaired_1 = ${equivgensrepaired_2}, equivsurvivorshealed_1 = ${equivsurvivorshealed_2}, equivsurvivorshealed_coop_1 = ${equivsurvivorshealed_coop_2}, skillchecks_1 = ${skillchecks_2}, escaped_1 = ${escaped_2}, escaped_ko_1 = ${escaped_ko_2}, escaped_hatch_1 = ${escaped_hatch_2}, protectionhits_1 = ${protectionhits_2}, exitgatesopened_1 = ${exitgatesopened_2}, unhookedself_1 = ${unhookedself_2}, mysteryboxesopened_1 = ${mysteryboxesopened_2}, killer_rank_1 = ${killer_rank_2}, killer_perfectgames_1 = ${killer_perfectgames_2}, killed_1 = ${killed_2}, killed_sacrificed_afterlastgen_1 = ${killed_sacrificed_afterlastgen_2}, sacrificed_1 = ${sacrificed_2}, chainsawhits_1 = ${chainsawhits_2}, beartrapcatches_1 = ${beartrapcatches_2}, hatchetsthrown_1 = ${hatchetsthrown_2}, survivorsgrabbedrepairinggen_1 = ${survivorsgrabbedrepairinggen_2}, survivorshitwhilecarrying_1 = ${survivorshitwhilecarrying_2}, hatchesclosed_1 = ${hatchesclosed_2}, survivorsinterruptedcleansingtotem_1 = ${survivorsinterruptedcleansingtotem_2}, update_at = ${usa} WHERE SID = '${sid}'`)
+    } else
+    {
+      con.query(`INSERT INTO EntityUsers (SID, update_at) VALUES ('${sid}', '${usa}')`)
+      setTimeout(() => {
+        con.query(`UPDATE EntityUsers SET bloodpoints_1 = ${bloodpoints_2}, survivor_rank_1 = ${survivor_rank_2}, survivor_perfectgames_1 = ${survivor_perfectgames_2}, equivgensrepaired_1 = '${equivgensrepaired_2}', equivsurvivorshealed_1 = ${equivsurvivorshealed_2}, equivsurvivorshealed_coop_1 = ${equivsurvivorshealed_coop_2}, skillchecks_1 = ${skillchecks_2}, escaped_1 = ${escaped_2}, escaped_ko_1 = ${escaped_ko_2}, escaped_hatch_1 = ${escaped_hatch_2}, protectionhits_1 = ${protectionhits_2}, exitgatesopened_1 = ${exitgatesopened_2}, unhookedself_1 = ${unhookedself_2}, mysteryboxesopened_1 = ${mysteryboxesopened_2}, killer_rank_1 = ${killer_r}, killer_perfectgames_1 = ${killer_perfectgames_2}, killed_1 = ${killed_2}, killed_sacrificed_afterlastgen_1 = ${killed_sacrificed_afterlastgen_2}, sacrificed_1 = ${sacrificed_2}, chainsawhits_1 = ${chainsawhits_2}, beartrapcatches_1 = ${beartrapcatches_2}, hatchetsthrown_1 = ${hatchetsthrown_2}, survivorsgrabbedrepairinggen_1 = ${survivorsgrabbedrepairinggen_2}, survivorshitwhilecarrying_1 = ${survivorshitwhilecarrying_2}, hatchesclosed_1 = ${hatchesclosed_2}, survivorsinterruptedcleansingtotem_1 = ${survivorsinterruptedcleansingtotem_2} WHERE SID = '${sid}'`)
+        console.log(`UPDATE EntityUsers SET bloodpoints_1 = ${bloodpoints_2}, survivor_rank_1 = ${survivor_rank_2}, survivor_perfectgames_1 = ${survivor_perfectgames_2}, equivgensrepaired_1 = ${equivgensrepaired_2}, equivsurvivorshealed_1 = ${equivsurvivorshealed_2}, equivsurvivorshealed_coop_1 = ${equivsurvivorshealed_coop_2}, skillchecks_1 = ${skillchecks_2}, escaped_1 = ${escaped_2}, escaped_ko_1 = ${escaped_ko_2}, escaped_hatch_1 = ${escaped_hatch_2}, protectionhits_1 = ${protectionhits_2}, exitgatesopened_1 = ${exitgatesopened_2}, unhookedself_1 = ${unhookedself_2}, mysteryboxesopened_1 = ${mysteryboxesopened_2}, killer_rank_1 = ${killer_r}, killer_perfectgames_1 = ${killer_perfectgames_2}, killed_1 = ${killed_2}, killed_sacrificed_afterlastgen_1 = ${killed_sacrificed_afterlastgen_2}, sacrificed_1 = ${sacrificed_2}, chainsawhits_1 = ${chainsawhits_2}, beartrapcatches_1 = ${beartrapcatches_2}, hatchetsthrown_1 = ${hatchetsthrown_2}, survivorsgrabbedrepairinggen_1 = ${survivorsgrabbedrepairinggen_2}, survivorshitwhilecarrying_1 = ${survivorshitwhilecarrying_2}, hatchesclosed_1 = ${hatchesclosed_2}, survivorsinterruptedcleansingtotem_1 = ${survivorsinterruptedcleansingtotem_2} WHERE SID = '${sid}'`)
+      }, 500);
+    }
+  })
   return;
 }
 
