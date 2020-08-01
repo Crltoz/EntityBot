@@ -386,22 +386,21 @@ if(n2.has(message.author.id))
        let text = args[1];
        if(!text.includes('steamcommunity.com/id/') && !text.includes('steamcommunity.com/profiles/')) return message.channel.send('El link del perfil de Steam debe ser válido.')
        var id_1;
-       var cache = 0;
        if(text.includes('id'))
        {
-       id_1 = text.slice(text.indexOf('id')+3, text.length)
-       if(id_1.includes('/')) 
+        id_1 = text.slice(text.indexOf('id')+3, text.length)
+        if(id_1.includes('/')) 
+        {
+          id_1 = id_1.slice(0, id_1.indexOf('/'))
+        }
+       } else
        {
-         id_1 = id_1.slice(0, id_1.indexOf('/'))
-       }
-      } else
-      {
         id_1 = text.slice(text.indexOf('profiles')+9, text.length)
-       if(id_1.includes('/')) 
-       {
-         id_1 = id_1.slice(0, id_1.indexOf('/'))
-       }
-      }
+          if(id_1.includes('/')) 
+          {
+            id_1 = id_1.slice(0, id_1.indexOf('/'))
+          }
+        }
        let options = {
         host: 'api.steampowered.com',
         path: '/ISteamUser/ResolveVanityURL/v0001/?key=DF0A08E817CCE67F129D35FFFB14901A&vanityurl='+id_1,
@@ -427,18 +426,14 @@ if(n2.has(message.author.id))
                   console.log('Activado ROWS | total: '+(parseInt(usa.getTime())-parseInt(update_att)))
                   if(k_rank == 0)
                   {
-                    if((parseInt(usa.getTime())-parseInt(update_att)) < 60000*60)
-                    {
-                      message.channel.send('La cuenta de Steam está en la cola para ser agregada. Recuerda que tarda hasta 1 hora.')
+                      message.channel.send('La cuenta de Steam está en la cola para ser agregada. Recuerda que tarda hasta 1-6 hora/s.')
                       return;
-                    }
                   } else
                   {
                     if((parseInt(usa.getTime())-parseInt(update_att)) < 60000*60*3)
                     {
                       if(args[0].toLowerCase() == 'killer') 
                       {
-                        cache = 1;
                         let bloodpoints = rows[0].bloodpoints_1
                         let killer_rank = rows[0].killer_rank_1
                         let killer_perfectgames = rows[0].killer_perfectgames_1
@@ -476,8 +471,6 @@ if(n2.has(message.author.id))
                         return;
                       } else if(args[0].toLowerCase() == 'survivor') 
                       {
-                        console.log('Activado survivor')
-                        cache = 1;
                         let bloodpoints = rows[0].bloodpoints_1
                         let survivor_rank = rows[0].survivor_rank_1
                         let survivor_perfectgames = rows[0].survivor_perfectgames_1
@@ -517,60 +510,58 @@ if(n2.has(message.author.id))
                       }
                     }
                   }
+                } else
+                {
+                    var options = {
+                      host: 'dbd.onteh.net.au',
+                      path: '/api/playerstats?steamid='+sid_2
+                    };      
+                    var req1 = https.get(options, function (res) {
+                    var bodyChunks = [];
+                    res.on('data', function (chunk) {
+                        bodyChunks.push(chunk);
+                    }).on('end', function () {
+                        var body = Buffer.concat(bodyChunks);
+                        if(isEmptyObject(body))
+                        {
+                          var options2 = {
+                            host: 'dbd.onteh.net.au',
+                            path: '/api/playerstats?steamid='+sid_2,
+                            method: 'POST'
+                        };    
+                          options2.agent = new https.Agent(options2)
+                          const reqq = https.request(options2, (res) => {
+                            message.channel.send('La cuenta ingresada no estaba registrada, fue agregada automáticamente y en las próximas horas deberían estar sus estadísticas disponibles.')
+                            con.query(`SELECT * FROM EntityUsers WHERE SID = '${sid_2}'`, (err, rows) => {
+                              if(err) throw err;
+                              if(rows.length >= 1)
+                              {
+                                con.query(`UPDATE EntityUsers SET update_at = ${usa.getTime()} WHERE SID = '${sid_2}'`)
+                              } else{
+                                con.query(`INSERT INTO EntityUsers (SID, update_at) VALUES ('${sid_2}', '${usa.getTime()}')`)
+                              }
+                            })
+                            console.log('statusCode:', res.statusCode);
+                            console.log('headers:', res.headers);
+                          })
+                          reqq.on('error', (e) => {
+                            console.error(e);
+                          });
+                          reqq.end();
+                          return;
+                        }
+                        if(args[0].toLowerCase() == 'survivor') 
+                        {
+                          obtenervalorsurv(body, message.channel.id, message.author.id, message.guild.id, sid_2, usa.getTime())
+                        }
+                        if(args[0].toLowerCase() == 'killer') 
+                        {
+                          obtenervalorkill(body, message.channel.id, message.author.id, message.guild.id, sid_2, usa.getTime())
+                        }
+                    })
+                  });
                 }
               })
-              if(cache == 0)
-              {
-                console.log('cache: '+cache)
-              var options = {
-                host: 'dbd.onteh.net.au',
-                path: '/api/playerstats?steamid='+sid_2
-            };      
-            var req1 = https.get(options, function (res) {
-                var bodyChunks = [];
-                res.on('data', function (chunk) {
-                    bodyChunks.push(chunk);
-                }).on('end', function () {
-                    var body = Buffer.concat(bodyChunks);
-                    if(isEmptyObject(body))
-                    {
-                      var options2 = {
-                        host: 'dbd.onteh.net.au',
-                        path: '/api/playerstats?steamid='+sid_2,
-                        method: 'POST'
-                    };    
-                      options2.agent = new https.Agent(options2)
-                      const reqq = https.request(options2, (res) => {
-                        message.channel.send('La cuenta ingresada no estaba registrada, fue agregada automáticamente y en las próximas horas deberían estar sus estadísticas disponibles.')
-                        con.query(`SELECT * FROM EntityUsers WHERE SID = '${sid_2}'`, (err, rows) => {
-                          if(err) throw err;
-                          if(rows.length >= 1)
-                          {
-                            con.query(`UPDATE EntityUsers SET update_at = ${usa.getTime()} WHERE SID = '${sid_2}'`)
-                          } else{
-                            con.query(`INSERT INTO EntityUsers (SID, update_at) VALUES ('${sid_2}', '${usa.getTime()}')`)
-                          }
-                        })
-                        console.log('statusCode:', res.statusCode);
-                        console.log('headers:', res.headers);
-                      })
-                      reqq.on('error', (e) => {
-                        console.error(e);
-                      });
-                      reqq.end();
-                      return;
-                    }
-                    if(args[0].toLowerCase() == 'survivor') 
-                    {
-                      obtenervalorsurv(body, message.channel.id, message.author.id, message.guild.id, sid_2, usa.getTime())
-                    }
-                    if(args[0].toLowerCase() == 'killer') 
-                    {
-                      obtenervalorkill(body, message.channel.id, message.author.id, message.guild.id, sid_2, usa.getTime())
-                    }
-                })
-              });
-            }
             })
           })
       return;
