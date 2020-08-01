@@ -417,13 +417,11 @@ if(n2.has(message.author.id))
               let sid_2 = sid_1.slice(0, sid_1.indexOf(',')-1)
               con.query(`SELECT * FROM EntityUsers WHERE SID = '${sid_2}'`, (err, rows) =>
               {
-                console.log('Activado SELECT')
                 if(err) throw err;
                 if(rows.length >= 1)
                 {
                   let k_rank = rows[0].killer_rank_1
                   let update_att = rows[0].update_at;
-                  console.log('Activado ROWS | total: '+(parseInt(usa.getTime())-parseInt(update_att)))
                   if(k_rank == 0)
                   {
                       message.channel.send('La cuenta de Steam está en la cola para ser agregada. Recuerda que tarda hasta 1-6 hora/s.')
@@ -1917,7 +1915,6 @@ function obtenervalorkill(variable, canal, usuario, server, sid, usa)
 
 function obtenervalorsurv(variable, canal, usuario, server, sid, usa)
 {
-  console.log('activado')
   var serverr = client.guilds.get(server)
   var user = serverr.members.get(usuario)
   var bloodpoints_1 = variable.slice(variable.indexOf('bloodpoints')+14)
