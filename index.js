@@ -417,7 +417,7 @@ if(n2.has(message.author.id))
               bodyChunks2.push(chunk);
           }).on('end', function () {
               var body2 = Buffer.concat(bodyChunks2);
-              if(isEmptyObject(body2) && esprofile == 0) return message.channel.send('La cuenta de Steam es inválida.')
+              if(isEmptyObject(body2) && esprofile == 0) return message.channel.send('La cuenta de Steam es inválida, recuerda que debe ser pública.')
               if(esprofile == 0)
               {
                 sid_1 = body2.slice(body2.indexOf('steamid')+10)
@@ -426,6 +426,7 @@ if(n2.has(message.author.id))
               {
                 sid_2 = rid_1;
               }
+              if(sid_2.includes('u')) return message.channel.send('La cuenta de Steam es inválida, recuerda que debe ser pública.')
               con.query(`SELECT * FROM EntityUsers WHERE SID = '${sid_2}'`, (err, rows) =>
               {
                 if(err) throw err;
@@ -446,29 +447,30 @@ if(n2.has(message.author.id))
                         host: 'dbd.onteh.net.au',
                         path: '/api/playerstats?steamid='+sid_2
                       };     
-                        if(isEmptyObject(body))
+                      var req1 = https.get(options, function (res) {
+                        var bodyChunks = [];
+                        res.on('data', function (chunk) {
+                            bodyChunks.push(chunk);
+                        }).on('end', function () {
+                        var body3 = Buffer.concat(bodyChunks);
+                        if(isEmptyObject(body3))
                         {
                           message.channel.send('La cuenta de Steam está en la cola para ser agregada. Recuerda que tarda hasta 1-6 hora/s.')
                           con.query(`UPDATE EntityUsers SET update_at = ${usa.getTime()} WHERE SID = '${sid_2}'`)
                           return;
                         } else
                         {
-                              var req1 = https.get(options, function (res) {
-                              var bodyChunks = [];
-                              res.on('data', function (chunk) {
-                                  bodyChunks.push(chunk);
-                              }).on('end', function () {
-                                  var body = Buffer.concat(bodyChunks);
                                   if(args[0].toLowerCase() == 'survivor') 
                                   {
-                                    obtenervalorsurv(body, message.channel.id, message.author.id, message.guild.id, sid_2, usa.getTime())
+                                    obtenervalorsurv(body3, message.channel.id, message.author.id, message.guild.id, sid_2, usa.getTime())
                                   }
                                   if(args[0].toLowerCase() == 'killer') 
                                   {
-                                    obtenervalorkill(body, message.channel.id, message.author.id, message.guild.id, sid_2, usa.getTime())
+                                    obtenervalorkill(body3, message.channel.id, message.author.id, message.guild.id, sid_2, usa.getTime())
                                   }
-                                })
-                            })
+                        }
+                        })
+                        })
                         }
                     return;
                     }
