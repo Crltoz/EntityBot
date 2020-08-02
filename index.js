@@ -64,7 +64,7 @@ client.on("ready", () => {
 
 
 client.on("messageReactionAdd", (messageReaction, user) => {
-                if (messageReaction.emoji == '1⃣' || messageReaction.emoji == '2⃣' || messageReaction.emoji == '3⃣' || messageReaction.emoji == '4⃣' || messageReaction.emoji == '5⃣') {
+                if (messageReaction.emoji == '1⃣' || messageReaction.emoji == '2⃣' || messageReaction.emoji == '3⃣' || messageReaction.emoji == '4⃣') {
                 if(lobby_set.has(user.id))
                 {
                   lobby_set.delete(user.id)
@@ -176,6 +176,7 @@ client.on("messageReactionAdd", (messageReaction, user) => {
                   {
                     r2.add(user.id)
                     messageReaction.message.channel.send(user.tag+', envía por aquí "**survivor**" o "**killer**" para calcular el valor de todas las perks del que elijas.')
+                    return;
                   }
                 }
                 return;
@@ -308,7 +309,7 @@ if(n2.has(message.author.id))
   ps1.delete(message.author.id)
   perks3[message.author.id] = message.content;
   ps2.add(message.author.id)
-  message.channel.send('Envía cuantas perks a nivel 2 tienes.')
+  message.channel.send('Envía cuantas perks a nivel 2 tienes, '+message.author.id)
   return;
  }
 
@@ -320,7 +321,7 @@ if(n2.has(message.author.id))
   if(perks3[message.author.id]*3+parseInt(message.content)*2 >= PerkSurv*3) return message.member.send('No puedes tener todas o más perks de las existentes.').catch(function(err) { message.channel.send(message.member.user+' Activa tus mensajes privados para que el bot pueda informarte.') } );
   ps2.delete(message.author.id)
   perks2[message.author.id] = message.content;
-  message.channel.send('Envía cuantas perks a nivel 1 tienes.')
+  message.channel.send('Envía cuantas perks a nivel 1 tienes, '+message.author.id)
   ps3.add(message.author.id)
   return;
  }
@@ -333,7 +334,7 @@ if(n2.has(message.author.id))
   if(perks3[message.author.id]*3+perks2[message.author.id]*2+parseInt(message.content) >= PerkSurv*3) return message.member.send('No puedes tener todas o más perks de las existentes.').catch(function(err) { message.channel.send(message.member.user+' Activa tus mensajes privados para que el bot pueda informarte.') } );
   ps3.delete(message.author.id)
   perks1[message.author.id] = message.content;
-  message.channel.send('Envía en que nivel estás con tu personaje.')
+  message.channel.send('Envía en que nivel estás con tu personaje, '+message.author.id)
   ps4.add(message.author.id)
   return;
  }
@@ -397,6 +398,35 @@ if(n2.has(message.author.id))
     message.member.send('Usa: **/calcular [Opción]** | Opciones: Killer o Survivor | Comando para obtener puntos de sangre necesarios para comprar todas las perks desde el nivel que estés.').catch(function(err) { message.channel.send(message.member.user+' Activa tus mensajes privados para que el bot pueda informarte.') } );
     return;
      }
+
+     if(command == 'ayuda')
+     {
+      const embedd = new Discord.RichEmbed()
+      .setColor('#FF0000')
+      .setTitle('🔰 Ayuda - Comandos 🔰')
+      .setAuthor(message.member.user.tag, message.member.user.avatarURL)
+      .setURL('https://deadbydaylight.gamepedia.com/Dead_by_Daylight_Wiki')
+      .setThumbnail(client.user.avatarURL)
+      .addField('/:', Coma(bloodpoints), true)
+      .addField('Horas de juego:', Math.round(playtime/60), true)
+      .addBlankField()
+      .addField('Rango:', killer_rank, true)
+      .addField('Partidas perfectas:', killer_perfectgames,true)
+      .addField('<:Icons_killer:739182105870991410> Asesinatos con Mori:', killed, true)
+      .addField('<:Icons_Bgen:739182106474709042> Sacrificiaste a todos después del último generador:', killed_sacrificed_afterlastgen,true)
+      .addField('Sacrificios en ganchos:', sacrificed,true)
+      .addField('Ataques con motosierra (HillBilly):', chainsawhits, true)
+      .addField('<:Icons_tramp:739182105900351578> Atrapados en trampas (Trampero):', beartrapcatches, true)
+      .addField('<:Icons_axe:739182102947299539> Hachas lanzadas:', hatchetsthrown, true)
+      .addField('<:Icons_Gen:739182107095466014> Surpervivientes interrumpidos en gens:', survivorsgrabbedrepairinggen, true)
+      .addField('<:icons_upa:739182105853952120> Supervivientes golpeados mientras cargas con otro:', survivorshitwhilecarrying, true)
+      .addField('<:Icons_Hatch:739182106751664168> Trampillas cerradas:', hatchesclosed, true)
+      .addField('<:icons_totem:739182106282033272> Supervivientes interrumpidos en totems:', survivorsinterruptedcleansingtotem, true)
+      .setTimestamp()
+      .setFooter('La entidad', client.user.avatarURL);
+      message.channel.send(embedd)
+      return;
+    }
 
 
      if (command == 'stats') {
@@ -721,6 +751,7 @@ if(n2.has(message.author.id))
   }
      
      if (command == 'canal') {
+         if(!message.member.permissions.has('ADMINISTRATOR')) return message.channel.send('El comando sólo puede ser por personas con permisos de Administrador.')
          if (!texto) return message.member.send('Usa: **/canal #Nombre** | Para setear un canal donde puedan usarse los comandos. Si deseas quitar la restriccion de canales usa **/canal borrar**.')
          if (texto == 'borrar') {
              con.query(`SELECT * FROM Servidores WHERE ID = '${message.guild.id}'`, (err, rows) => {
