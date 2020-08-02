@@ -28,11 +28,7 @@ var ImagenPersonaje;
 var cid = {}
 const lobby_set = new Set();
 const r1 = new Set();
-const r1_1 = new Set();
 const r2 = new Set();
-const r3 = new Set();
-const r4 = new Set();
-const r5 = new Set();
 const n1 = {}
 const n2 = new Set();
 
@@ -175,6 +171,11 @@ client.on("messageReactionAdd", (messageReaction, user) => {
                         .addField('ㅤ', '**► '+ObtenerPerkKiller(numero_perk_1)+'**\n**► '+ObtenerPerkKiller(numero_perk_2)+'**\n**► '+ObtenerPerkKiller(numero_perk_3)+'**\n**► '+ObtenerPerkKiller(numero_perk_4)+'**', true)
                         .setColor(0xFF0000)
                     messageReaction.message.channel.send(embed)
+                    return;
+                  } else if(messageReaction.emoji == '4⃣')
+                  {
+                    r2.add(user.id)
+                    messageReaction.message.channel.send(user.tag+', envía por aquí "**survivor**" o "**killer**" para calcular el valor de todas las perks del que elijas.')
                   }
                 }
                 return;
@@ -187,6 +188,25 @@ client.on("message", async (message) => {
  if(message.webhookID) return;
  if(!message.member) return;
 
+
+ if(r2.has(message.author.id))
+ {
+  if(message.content.toLowerCase().includes('killer'))
+  {
+    r2.delete(message.author.id)
+    LC[message.author.id] = 0;
+    message.channel.send('Ingresa cuántas perks a nivel 3 tienes, '+message.author.tag)
+    p1.add(message.author.id)
+    return;
+  } else if(message.content.toLowerCase().includes('survivor'))
+  {
+    r2.delete(message.author.id)
+    LC[message.author.id] = 0;
+    message.channel.send('Ingresa cuántas perks a nivel 3 tienes, '+message.author.tag)
+    ps1.add(message.author.id)
+    return;
+  } else return message.channel.send(message.author.tag+', envía por aquí "**survivor**" o "**killer**" para calcular el valor de todas las perks del que elijas.')
+ }
  if(r1.has(message.author.id))
  {
   if(message.content > 50 || message.content < 1 || message.content > 50) return message.member.send('El nivel debe ser entre 1 y 50.').catch(function(err) { message.channel.send(message.member.user+' Activa tus mensajes privados para que el bot pueda informarte.') } );
@@ -363,14 +383,14 @@ if(n2.has(message.author.id))
     if(texto.toLowerCase() == 'killer')
     {
       LC[message.author.id] = 0;
-      message.channel.send('Ingresa cuántas perks a nivel 3 tienes.')
+      message.channel.send('Ingresa cuántas perks a nivel 3 tienes, '+message.author.tag)
       p1.add(message.author.id)
       return;
     }
     if(texto.toLowerCase() == 'survivor')
     {
       LC[message.author.id] = 0;
-      message.channel.send('Ingresa cuántas perks a nivel 3 tienes.')
+      message.channel.send('Ingresa cuántas perks a nivel 3 tienes, '+message.author.tag)
       ps1.add(message.author.id)
       return;
     }
