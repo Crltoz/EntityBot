@@ -474,7 +474,7 @@ if(n2.has(message.author.id))
                         }
                     return;
                     }
-                  } else
+                    else
                   {
                     if((parseInt(usa.getTime())-parseInt(update_att)) < 60000*60*3)
                     {
