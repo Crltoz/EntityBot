@@ -477,9 +477,9 @@ if(n2.has(message.author.id))
                   let update_att = rows[0].update_at;
                   if(k_rank == 0)
                   {
-                    if((parseInt(usa.getTime())-parseInt(update_att)) < 60000*60)
+                    if((parseInt(usa.getTime())-parseInt(update_att)) < 30000*60)
                     {
-                      message.channel.send('La cuenta de Steam está en la cola para ser agregada. Recuerda que tarda hasta 1-6 hora/s.')
+                      message.channel.send('La cuenta de Steam está en la cola para ser agregada. Recuerda que tarda de 30 minutos a 6 horas.')
                       return;
                     }
                     else
