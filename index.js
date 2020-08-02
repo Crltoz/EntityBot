@@ -789,7 +789,6 @@ if(n2.has(message.author.id))
              .addField('2⃣ Survivor random con 4 perks.', 'Te asignaré un survivor random con 4 perks.')
              .addField('3⃣ Killer random con 4 perks.', 'Te asignaré un killer random con 4 perks.')
              .addField('4⃣ Calcular puntos de sangre para obtener todas las perks.', 'Se calcula los puntos de sangre necesarios para comprar todas las perks de todos los personajes según las que ya tengas.')
-             .addField('5⃣ Estadísticas.', 'Podrás ver las estadísticas que tengas en Dead By Daylight. (Sólo STEAM)')
              .setTimestamp()
              .setFooter('V0.5 - Beta Cerrada', client.user.avatarURL);
              message.channel.send(lembed).then(function (message) {
@@ -800,9 +799,6 @@ if(n2.has(message.author.id))
                          message.react('3⃣')
                          setTimeout(() => {
                              message.react('4⃣')
-                             setTimeout(() => {
-                              message.react('5⃣')
-                          }, 50);
                          }, 100);
                      }, 300);
                  }, 400);
