@@ -1981,7 +1981,7 @@ function obtenervalorkill(variable, canal, usuario, server, sid, usa)
     .addField('Si siempre tuviste todo en público y no funciona:', 'Deberás esperar, lamentablemente la web no es nuestra y no podemos repararlo. Aunque estamos en constante contacto para informar de errores.')
     .setTimestamp()
     .setFooter('La entidad', client.user.avatarURL);
-    message.channel.send(embedd)
+    client.channels.get(canal).send(embedd)
     return;
   } 
   const embedd = new Discord.RichEmbed()
@@ -2094,7 +2094,7 @@ function obtenervalorsurv(variable, canal, usuario, server, sid, usa)
     .addField('Si siempre tuviste todo en público y no funciona:', 'Deberás esperar, lamentablemente la web no es nuestra y no podemos repararlo. Aunque estamos en constante contacto para informar de errores.')
     .setTimestamp()
     .setFooter('La entidad', client.user.avatarURL);
-    message.channel.send(embedd)
+    client.channels.get(canal).send(embedd)
     return;
   } 
   const embedd = new Discord.RichEmbed()
