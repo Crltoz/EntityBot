@@ -449,7 +449,6 @@ if(n2.has(message.author.id))
         let perkk_2 = rows[0].perk_2
         let perkk_3 = rows[0].perk_3
         let perkk_4 = rows[0].perk_4
-        console.log(perkk_1)
         const embed = new Discord.RichEmbed()
       .setThumbnail(message.member.user.avatarURL)
       .setAuthor('| '+message.author.tag+' |', )
@@ -470,12 +469,13 @@ if(n2.has(message.author.id))
       .setAuthor(message.member.user.tag, message.member.user.avatarURL)
       .setURL('https://deadbydaylight.gamepedia.com/Dead_by_Daylight_Wiki')
       .setThumbnail(client.user.avatarURL)
-      .addField('/calcular [Killer o Survivor]', 'Podrás calcular cuánto cuesta tener todas las perks de tu superviviente o asesino, el bot luego te preguntará las perks que tengas para hacer el cálculo.')
+      .addField('/calcular [Killer o Survivor]', 'Podrás calcular cuánto cuesta tener todas las perks de tu superviviente o asesino, el bot luego te preguntará la cantidad de perks que tengas para hacer el cálculo.')
       .addField('/stats [Survivor o Killer] [URL Perfil Steam]', 'Obtendrás las estadísticas de un jugador poniendo su Perfil de Steam y seleccionando si quieres ver las de Killer o Survivor.')
       .addField('/nivel [Nivel Inicial] [Nivel Final]', 'Este comando calcula los puntos de sangre necesarios para comprar los niveles que selecciones.')
       .addField('/canal #nombre', 'Sólo puede ser usado por **ADMINISTRADORES**, puedes selecccionar un canal para que los comandos sólo funcionen allí. Usa **/canal borrar** para poder usarlos en cualquier canal nuevamente.')
       .addField('/lobby', 'Aquí hay funciones como los comandos de arriba, pero se utilizan a través de reacciones, más fácil para la gente que no le gusta usar los comandos.')
       .addField('/random [Survivor o Killer]', 'Generará y enviará por el canal una Build random de 4 perks, según lo que elijas, Killer o Survivor.')
+      .addField('/santuario', 'Informará sobre el santuario de los secretos actual y el valor de fragmentos iridiscentes de cada perk.')
       .setTimestamp()
       .setFooter('La entidad', client.user.avatarURL);
       message.channel.send(embedd)
