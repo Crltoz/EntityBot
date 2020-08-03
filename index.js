@@ -31,7 +31,8 @@ const r1 = new Set();
 const r2 = new Set();
 const n1 = {}
 const n2 = new Set();
-
+var actualizar = 1;
+var force = 0;
 
 var db_config = {
     host: '185.201.10.94',
@@ -407,15 +408,37 @@ if(n2.has(message.author.id))
       return;
      }
 
-     if(command == 'prueba')
+     if(command == 'forzar')
      {
-       console.log(usa.getUTCHours()+ '<- hora | minutos -> ' +usa.getUTCMinutes())
-       return;
+      if(message.author.id != '277506787261939712' && message.author.id != '313496742156959745' && message.author.id != '389320439932911626' && message.author.id != '169818091281186816') return message.member.send('SACA LA MANO DE AHÍ CARAJO',  {files: [{ attachment: 'https://i.ytimg.com/vi/7A6FricobFA/hqdefault.jpg',
+      name: "SACA_LA_MANO.jpg"}]}); 
+      let options = {
+        host: 'dbd.onteh.net.au/api/shrine',
+        agent: false
+        };
+        const req = https.get(options, function (res) {
+          var bodyChunks2 = [];
+          res.on('data', function (chunk) {
+              bodyChunks2.push(chunk);
+          }).on('end', function () {
+            var body2 = Buffer.concat(bodyChunks2);
+            var perk_1_a = body2.slice(body2.indexOf('id')+5)
+            var perk_1_b = perk_1_a.slice(0, perk_1_a.indexOf('"'))
+            var perk_2_a = perk_1_b.slice(perk_1_b.indexOf('id')+5)
+            var perk_2_b = perk_2_a.slice(0, perk_2_a.indexOf('"'))
+            var perk_3_a = perk_2_b.slice(perk_2_b.indexOf('id')+5)
+            var perk_3_b = perk_3_a.slice(0, perk_3_a.indexOf('"'))
+            var perk_4_a = perk_3_b.slice(perk_3_b.indexOf('id')+5)
+            var perk_4_b = perk_4_a.slice(0, perk_4_a.indexOf('"'))
+            con.query(`DELETE * FROM santuario`)
+            con.query(`INSERT INTO santuario (perk_1, perk_2, perk_3, perk_4) VALUES ('${perk_1_b}', '${perk_2_b}', '${perk_3_b}', '${perk_4_b}')`)
+          })
+        })
+        return;
      }
 
      if(command == 'santuario')
      {
-      if(usa.toUTCString().toLowerCase().includes('wed') && usa.getUTCHours() == '00' && usa.getUTCMinutes() == '00')
       con.query(``)
       const embed = new Discord.RichEmbed()
       .setThumbnail(ImagenPersonaje)
@@ -425,6 +448,7 @@ if(n2.has(message.author.id))
       .addField('ㅤ', '**► '+TraducirPerk(perk_1)+'**\n**► '+TraducirPerk(numero_perk_2)+'**\n**► '+TraducirPerk(numero_perk_3)+'**\n**► '+TraducirPerk(numero_perk_4)+'**', true)
       .setColor(0xFF0000)
       message.channel.send(embed)
+      }
       return;
      }
 
@@ -2422,6 +2446,7 @@ function handleDisconnect() {
             }
             setInterval(function () {
                 con.query('SELECT * FROM Servidores')
+                VerificarSantuario();
             }, 5000);
     })
 
@@ -2436,6 +2461,41 @@ function handleDisconnect() {
         });
     }
 
+
+function VerificarSantuario()
+{
+  const time = new Date();
+  if(time.toUTCString().toLowerCase().includes('wed') && time.getUTCHours() == '0' && time.getUTCMinutes() == '1' && actualizar == '1')
+  {
+        actualizar = 0;
+        setTimeout(() => {
+          actualizar = 1;
+        }, 120000)
+        let options = {
+          host: 'dbd.onteh.net.au/api/shrine',
+          agent: false
+          };
+          const req = https.get(options, function (res) {
+            var bodyChunks2 = [];
+            res.on('data', function (chunk) {
+                bodyChunks2.push(chunk);
+            }).on('end', function () {
+              var body2 = Buffer.concat(bodyChunks2);
+              var perk_1_a = body2.slice(body2.indexOf('id')+5)
+              var perk_1_b = perk_1_a.slice(0, perk_1_a.indexOf('"'))
+              var perk_2_a = perk_1_b.slice(perk_1_b.indexOf('id')+5)
+              var perk_2_b = perk_2_a.slice(0, perk_2_a.indexOf('"'))
+              var perk_3_a = perk_2_b.slice(perk_2_b.indexOf('id')+5)
+              var perk_3_b = perk_3_a.slice(0, perk_3_a.indexOf('"'))
+              var perk_4_a = perk_3_b.slice(perk_3_b.indexOf('id')+5)
+              var perk_4_b = perk_4_a.slice(0, perk_4_a.indexOf('"'))
+              con.query(`DELETE * FROM santuario`)
+              con.query(`INSERT INTO santuario (perk_1, perk_2, perk_3, perk_4) VALUES ('${perk_1_b}', '${perk_2_b}', '${perk_3_b}', '${perk_4_b}')`)
+            })
+          })
+          return;
+      }
+}
 
 function Coma(x) {
   return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
