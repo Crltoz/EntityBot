@@ -466,13 +466,6 @@ if(n2.has(message.author.id))
       return;
      }
 
-     if(command == 'asd')
-     {
-       message.channel.send('asd', {files: [{ attachment: 'https://i.ytimg.com/vi/7A6FricobFA/hqdefault.jpg',
-       name: "SACA_LA_MANO.jpg", attachment: 'https://i.ytimg.com/vi/7A6FricobFA/hqdefault.jpg', attachment: 'https://i.ytimg.com/vi/7A6FricobFA/hqdefault.jpg', attachment: 'https://i.ytimg.com/vi/7A6FricobFA/hqdefault.jpg'}]})
-       return;
-     }
-
      if(command == 'ayuda')
      {
       const embedd = new Discord.RichEmbed()
