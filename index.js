@@ -448,7 +448,6 @@ if(n2.has(message.author.id))
       .addField('ㅤ', '**► '+TraducirPerk(perk_1)+'**\n**► '+TraducirPerk(numero_perk_2)+'**\n**► '+TraducirPerk(numero_perk_3)+'**\n**► '+TraducirPerk(numero_perk_4)+'**', true)
       .setColor(0xFF0000)
       message.channel.send(embed)
-      }
       return;
      }
 
