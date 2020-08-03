@@ -179,6 +179,11 @@ client.on("messageReactionAdd", (messageReaction, user) => {
                     messageReaction.message.channel.send(user.tag+', envía por aquí "**survivor**" o "**killer**" para calcular el valor de todas las perks del que elijas.')
                     return;
                   }
+                  else if(messageReaction.emoji == '5⃣')
+                  {
+                    messageReaction.message.channel.send('<:Entityicon:733814957111771146> En nuestro Discord podrás obtener el bot para tu servidor, y soporte. Link: https://discord.gg/6eBRcRK')
+                    return;
+                  }
                 }
                 return;
               }
@@ -476,13 +481,20 @@ if(n2.has(message.author.id))
       .addField('/lobby', 'Aquí hay funciones como los comandos de arriba, pero se utilizan a través de reacciones, más fácil para la gente que no le gusta usar los comandos.')
       .addField('/random [Survivor o Killer]', 'Generará y enviará por el canal una Build random de 4 perks, según lo que elijas, Killer o Survivor.')
       .addField('/santuario', 'Informará sobre el santuario de los secretos actual y el valor de fragmentos iridiscentes de cada perk.')
+      .addField('/discord', 'Invitación del Discord Oficial del bot, aquí podrás obtener el link para unir el bot a tu Server de Discord o soporte del mismo.')
       .setTimestamp()
       .setFooter('La entidad', client.user.avatarURL);
       message.channel.send(embedd)
       return;
     }
 
+    if(command == 'discord')
+    {
+      message.channel.send('<:Entityicon:733814957111771146> En nuestro Discord podrás obtener el bot para tu servidor, y soporte. Link: https://discord.gg/6eBRcRK')
+      return;
+    }
 
+    
      if (command == 'stats') {
        if(!texto) return message.channel.send('Usa: **/stats [Survivor o Killer] [URL Perfil Steam]**')
        if(args[0].toLowerCase() != 'killer' && args[0].toLowerCase() != 'survivor') return message.channel.send('Usa: **/stats [Survivor o Killer] [URL Perfil Steam]**')
@@ -852,6 +864,8 @@ if(n2.has(message.author.id))
              .addField('2⃣ Survivor random con 4 perks.', 'Te asignaré un survivor random con 4 perks.')
              .addField('3⃣ Killer random con 4 perks.', 'Te asignaré un killer random con 4 perks.')
              .addField('4⃣ Calcular puntos de sangre para obtener todas las perks.', 'Se calcula los puntos de sangre necesarios para comprar todas las perks de todos los personajes según las que ya tengas.')
+             .addField('5⃣ Invitación del Discord Oficial del bot, aquí podrás obtener el link para unir el bot a tu Server de Discord o soporte del mismo.')
+             
              .setTimestamp()
              .setFooter('V0.5 - Beta Cerrada', client.user.avatarURL);
              message.channel.send(lembed).then(function (message) {
@@ -862,6 +876,9 @@ if(n2.has(message.author.id))
                          message.react('3⃣')
                          setTimeout(() => {
                              message.react('4⃣')
+                             setTimeout(() => {
+                              message.react('5⃣')
+                          }, 50);
                          }, 100);
                      }, 300);
                  }, 400);
