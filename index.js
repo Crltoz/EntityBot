@@ -399,6 +399,21 @@ if(n2.has(message.author.id))
     return;
      }
 
+     if(command == 'sv')
+     {
+       //if(message.author.id != '277506787261939712' && message.author.id != '313496742156959745' && message.author.id != '389320439932911626' && message.author.id != '169818091281186816') return message.member.send('SACA LA MANO DE AHÍ CARAJO',  {files: [{ attachment: 'https://i.ytimg.com/vi/7A6FricobFA/hqdefault.jpg',
+       //name: "SACA_LA_MANO.jpg"}]}); 
+       if(message.author.id != '313496742156959745') return message.member.send('SACA LA MANO DE AHÍ CARAJO',  {files: [{ attachment: 'https://i.ytimg.com/vi/7A6FricobFA/hqdefault.jpg',
+       name: "SACA_LA_MANO.jpg"}]}); 
+       message.channel.send('Estoy actualmente en **'+client.guilds.size+'** servidores.')
+      return;
+     }
+
+     if(command == 'santuario')
+     {
+       
+     }
+
      if(command == 'ayuda')
      {
       const embedd = new Discord.RichEmbed()
@@ -805,7 +820,7 @@ if(n2.has(message.author.id))
              })
          setTimeout(() => {
              lobby_set.delete(message.author.id)
-         }, 20000);
+         }, 120000);
              return;
      }
 
