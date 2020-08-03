@@ -443,15 +443,21 @@ if(n2.has(message.author.id))
 
      if(command == 'santuario')
      {
-      con.query(``)
-      const embed = new Discord.RichEmbed()
-      .setThumbnail(ImagenPersonaje)
-      .setAuthor('| '+NombrePersonaje+' |', ImagenPersonaje)
-      .setTitle('Perks:')
+      con.query(`SELECT * FROM santuario`, (err, rows) => {
+        if(err) throw err;
+        let perkk_1 = rows[0].perkk_1
+        let perkk_2 = rows[0].perkk_2
+        let perkk_3 = rows[0].perkk_3
+        let perkk_4 = rows[0].perkk_4
+        const embed = new Discord.RichEmbed()
+      .setThumbnail(message.member.user.avatarURL)
+      .setAuthor('| '+message.author.tag+' |', )
+      .setTitle('🈴 Santuario de los secretos:')
       .setURL('https://deadbydaylight.gamepedia.com/Dead_by_Daylight_Wiki')
-      .addField('ㅤ', '**► '+TraducirPerk(perk_1)+'**\n**► '+TraducirPerk(numero_perk_2)+'**\n**► '+TraducirPerk(numero_perk_3)+'**\n**► '+TraducirPerk(numero_perk_4)+'**', true)
+      .addField('Habilidades:', '**► '+TraducirPerk(perkk_1)+'** - <:frag_iri:739690491829813369>2000\n**► '+TraducirPerk(perkk_1)+'** - <:frag_iri:739690491829813369>2000\n**► '+TraducirPerk(perkk_1)+'** - <:frag_iri:739690491829813369>2000\n**► '+TraducirPerk(perkk_1)+'** <:frag_iri:739690491829813369>2000', true)
       .setColor(0xFF0000)
       message.channel.send(embed)
+      })
       return;
      }
 
