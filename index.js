@@ -445,10 +445,10 @@ if(n2.has(message.author.id))
      {
       con.query(`SELECT * FROM santuario`, (err, rows) => {
         if(err) throw err;
-        let perkk_1 = rows[0].perkk_1
-        let perkk_2 = rows[0].perkk_2
-        let perkk_3 = rows[0].perkk_3
-        let perkk_4 = rows[0].perkk_4
+        let perkk_1 = rows[0].perk_1
+        let perkk_2 = rows[0].perk_2
+        let perkk_3 = rows[0].perk_3
+        let perkk_4 = rows[0].perk_4
         const embed = new Discord.RichEmbed()
       .setThumbnail(message.member.user.avatarURL)
       .setAuthor('| '+message.author.tag+' |', )
