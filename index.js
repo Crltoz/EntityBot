@@ -449,12 +449,13 @@ if(n2.has(message.author.id))
         let perkk_2 = rows[0].perk_2
         let perkk_3 = rows[0].perk_3
         let perkk_4 = rows[0].perk_4
+        console.log(perkk_1)
         const embed = new Discord.RichEmbed()
       .setThumbnail(message.member.user.avatarURL)
       .setAuthor('| '+message.author.tag+' |', )
       .setTitle('🈴 Santuario de los secretos:')
       .setURL('https://deadbydaylight.gamepedia.com/Dead_by_Daylight_Wiki')
-      .addField('Habilidades:', '**► '+TraducirPerk(perkk_1)+'** - <:frag_iri:739690491829813369>2000\n**► '+TraducirPerk(perkk_2)+'** - <:frag_iri:739690491829813369>2000\n**► '+TraducirPerk(perkk_3)+'** - <:frag_iri:739690491829813369>2000\n**► '+TraducirPerk(perkk_4)+'** <:frag_iri:739690491829813369>2000', true)
+      .addField('Habilidades:', '**► '+TraducirPerk(perkk_1.toLowerCase())+'** - <:frag_iri:739690491829813369>2000\n**► '+TraducirPerk(perkk_2.toLowerCase())+'** - <:frag_iri:739690491829813369>2000\n**► '+TraducirPerk(perkk_3.toLowerCase())+'** - <:frag_iri:739690491829813369>2000\n**► '+TraducirPerk(perkk_4.toLowerCase())+'** <:frag_iri:739690491829813369>2000', true)
       .setColor(0xFF0000)
       message.channel.send(embed)
       })
