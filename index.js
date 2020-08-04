@@ -778,9 +778,25 @@ if(n2.has(message.author.id))
 
                     var options2 = {
                       host: 'dbd.onteh.net.au',
-                      path: '/api/playerstats?steamid='+sid_2
+                      path: '/api/playerstats?steamid='+sid_2,
+                      method: 'POST'
                   };    
+                    options2.agent = new https.Agent(options2)
                     const reqq1 = https.request(options2, (res) => {
+                      if(res.statusCode != 201)
+                            {
+                              const embedd = new Discord.RichEmbed()
+                              .setColor('#FF0000')
+                              .setTitle('No podemos agregar tu cuenta...')
+                              .setAuthor(message.member.user.tag, message.member.user.avatarURL)
+                              .setThumbnail(client.user.avatarURL)
+                              .addField('Tenemos problemas con la web.', 'Actualmente, por muchas peticiones, la web no nos permite postear cuentas, por lo que deberás hacerlo apretando el botón de abajo y pegando tu link de perfil. Luego de ponerla ya podrás ver tus **/stats** por aquí sin problema.')
+                              .addField('[Haz click aquí](https://dbd.onteh.net.au)', 'Agrega tu cuenta en la web de arriba con tu link de Steam.')
+                              .setTimestamp()
+                              .setFooter('La entidad', client.user.avatarURL)
+                              message.channel.send(embedd)
+                              return;
+                            }
                       message.channel.send('La cuenta ingresada no estaba registrada, fue agregada automáticamente y en las próximas horas deberían estar sus estadísticas disponibles.')
                       con.query(`SELECT * FROM EntityUsers WHERE SID = '${sid_2}'`, (err, rows) => {
                         if(err) throw err;
@@ -1069,7 +1085,22 @@ if(n2.has(message.author.id))
                             path: '/api/playerstats?steamid='+sid_2,
                             method: 'POST'
                         };    
-                          const reqq = https.get(options2, (res) => {
+                          options2.agent = new https.Agent(options2)
+                          const reqq = https.request(options2, (res) => {
+                            if(res.statusCode != 201)
+                            {
+                              const embedd = new Discord.RichEmbed()
+                              .setColor('#FF0000')
+                              .setTitle('No podemos agregar tu cuenta...')
+                              .setAuthor(message.member.user.tag, message.member.user.avatarURL)
+                              .setThumbnail(client.user.avatarURL)
+                              .addField('Tenemos problemas con la web.', 'Actualmente, por muchas peticiones, la web no nos permite postear cuentas, por lo que deberás hacerlo apretando el botón de abajo y pegando tu link de perfil. Luego de ponerla ya podrás ver tus **/stats** por aquí sin problema.')
+                              .addField('[Haz click aquí](https://dbd.onteh.net.au)', 'Agrega tu cuenta en la web de arriba con tu link de Steam.')
+                              .setTimestamp()
+                              .setFooter('La entidad', client.user.avatarURL)
+                              message.channel.send(embedd)
+                              return;
+                            }
                             message.channel.send('La cuenta ingresada no estaba registrada, fue agregada automáticamente y en las próximas horas deberían estar sus estadísticas disponibles.')
                             con.query(`SELECT * FROM EntityUsers WHERE SID = '${sid_2}'`, (err, rows) => {
                               if(err) throw err;
