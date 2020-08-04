@@ -63,6 +63,21 @@ client.on("ready", () => {
   } );
 });
 
+client.on("guildCreate", guild => {
+  
+  let defaultChannel = "";
+  guild.channels.forEach((channel) => {
+    if(channel.type == "text" && defaultChannel == "") {
+      if(channel.permissionsFor(guild.me).has("SEND_MESSAGES")) {
+        defaultChannel = channel;
+      }
+    }
+  })
+  defaultChannel.send("**Gracias por añadirme!** :white_check_mark:\n**-** Mi prefijo es `/`\n**-** Puedes ver mis comandos con `/ayuda` o `/lobby`\n**-** Cualquier consulta, sugerencia o reporte de bug. Hazla en nuestro discord: https://discord.gg/T6rEERg")
+  client.channels.get().send('| Nuevo servidor | Nombre: '+guild.name+' | Usuarios: '+guild.memberCount)
+})
+
+
 
 client.on("messageReactionAdd", (messageReaction, user) => {
                 if (messageReaction.emoji == '1⃣' || messageReaction.emoji == '2⃣' || messageReaction.emoji == '3⃣' || messageReaction.emoji == '4⃣') {
@@ -864,7 +879,7 @@ if(n2.has(message.author.id))
              .addField('2⃣ Survivor random con 4 perks.', 'Te asignaré un survivor random con 4 perks.')
              .addField('3⃣ Killer random con 4 perks.', 'Te asignaré un killer random con 4 perks.')
              .addField('4⃣ Calcular puntos de sangre para obtener todas las perks.', 'Se calcula los puntos de sangre necesarios para comprar todas las perks de todos los personajes según las que ya tengas.')
-             .addField('5⃣ Invitación del Discord Oficial del bot, aquí podrás obtener el link para unir el bot a tu Server de Discord o soporte del mismo.')
+             .addField('5⃣ Invitación del Discord Oficial del bot.', 'Aquí podrás obtener el link para unir el bot a tu Server de Discord o soporte del mismo.')
              
              .setTimestamp()
              .setFooter('V0.5 - Beta Cerrada', client.user.avatarURL);
