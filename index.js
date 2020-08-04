@@ -778,8 +778,7 @@ if(n2.has(message.author.id))
 
                     var options2 = {
                       host: 'dbd.onteh.net.au',
-                      path: '/api/playerstats?steamid='+sid_2,
-                      method: 'POST'
+                      path: '/api/playerstats?steamid='+sid_2
                   };    
                     const reqq1 = https.request(options2, (res) => {
                       message.channel.send('La cuenta ingresada no estaba registrada, fue agregada automáticamente y en las próximas horas deberían estar sus estadísticas disponibles.')
@@ -1067,8 +1066,7 @@ if(n2.has(message.author.id))
                         {
                           var options2 = {
                             host: 'dbd.onteh.net.au',
-                            path: '/api/playerstats?steamid='+sid_2,
-                            method: 'POST'
+                            path: '/api/playerstats?steamid='+sid_2
                         };    
                           const reqq = https.request(options2, (res) => {
                             message.channel.send('La cuenta ingresada no estaba registrada, fue agregada automáticamente y en las próximas horas deberían estar sus estadísticas disponibles.')
