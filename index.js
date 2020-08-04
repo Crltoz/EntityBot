@@ -565,7 +565,7 @@ if(n2.has(message.author.id))
        let text = args[1];
        if(!text.includes('steamcommunity.com/id/') && !text.includes('steamcommunity.com/profiles/')) 
        {
-        if(!isNaN(args[1])) return message.channel.send('El código de amigo o el URL de perfil de Steam es incorrecto, '+message.member.user)
+        if(isNaN(args[1])) return message.channel.send('El código de amigo o el URL de perfil de Steam es incorrecto, '+message.member.user)
         let sid_2 = args[1];
         con.query(`SELECT * FROM EntityUsers WHERE SID = '${sid_2}'`, (err, rows) =>
         {
@@ -812,6 +812,7 @@ if(n2.has(message.author.id))
             });
           }
         })
+        return;
        } else
        {
        var rid_1;
