@@ -612,7 +612,7 @@ if(n2.has(message.author.id))
                   }
                   })
                   })
-                  }
+                }
               return;
               }
               else
@@ -766,7 +766,7 @@ if(n2.has(message.author.id))
               var options = {
                 host: 'dbd.onteh.net.au',
                 path: '/api/playerstats?steamid='+sid_2
-              };      
+              }     
               var req1 = https.get(options, function (res) {
               var bodyChunks = [];
               res.on('data', function (chunk) {
@@ -775,13 +775,13 @@ if(n2.has(message.author.id))
                   var body = Buffer.concat(bodyChunks);
                   if(isEmptyObject(body))
                   {
+
                     var options2 = {
                       host: 'dbd.onteh.net.au',
                       path: '/api/playerstats?steamid='+sid_2,
                       method: 'POST'
                   };    
-                    options2.agent = new https.Agent(options2)
-                    const reqq = https.request(options2, (res) => {
+                    const reqq1 = https.request(options2, (res) => {
                       message.channel.send('La cuenta ingresada no estaba registrada, fue agregada automáticamente y en las próximas horas deberían estar sus estadísticas disponibles.')
                       con.query(`SELECT * FROM EntityUsers WHERE SID = '${sid_2}'`, (err, rows) => {
                         if(err) throw err;
@@ -795,10 +795,10 @@ if(n2.has(message.author.id))
                       console.log('statusCode:', res.statusCode);
                       console.log('headers:', res.headers);
                     })
-                    reqq.on('error', (e) => {
+                    reqq1.on('error', (e) => {
                       console.error(e);
                     });
-                    reqq.end();
+                    reqq1.end();
                     return;
                   }
                   if(args[0].toLowerCase() == 'survivor') 
@@ -1070,7 +1070,6 @@ if(n2.has(message.author.id))
                             path: '/api/playerstats?steamid='+sid_2,
                             method: 'POST'
                         };    
-                          options2.agent = new https.Agent(options2)
                           const reqq = https.request(options2, (res) => {
                             message.channel.send('La cuenta ingresada no estaba registrada, fue agregada automáticamente y en las próximas horas deberían estar sus estadísticas disponibles.')
                             con.query(`SELECT * FROM EntityUsers WHERE SID = '${sid_2}'`, (err, rows) => {
