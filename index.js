@@ -191,7 +191,7 @@ client.on("messageReactionAdd", (messageReaction, user) => {
                   } else if(messageReaction.emoji == '4⃣')
                   {
                     r2.add(user.id)
-                    messageReaction.message.channel.send(user.tag+', envía por aquí "**survivor**" o "**killer**" para calcular el valor de todas las perks del que elijas.')
+                    messageReaction.message.channel.send(user.tag+', envía por aquí "**survivor**" o "**killer**" para calcular el valor de todas las perks del que elijas, '+messageReaction.message.member.user)
                     return;
                   }
                   else if(messageReaction.emoji == '5⃣')
@@ -217,21 +217,23 @@ client.on("message", async (message) => {
   {
     r2.delete(message.author.id)
     LC[message.author.id] = 0;
-    message.channel.send('Ingresa cuántas perks a nivel 3 tienes, '+message.author.tag)
+    if(message.member) message.channel.send('Ingresa cuántas perks a nivel 3 tienes, '+message.member.user)
+    else message.channel.send('Ingresa cuántas perks a nivel 3 tienes, '+message.author.tag)
     p1.add(message.author.id)
     return;
   } else if(message.content.toLowerCase().includes('survivor'))
   {
     r2.delete(message.author.id)
     LC[message.author.id] = 0;
-    message.channel.send('Ingresa cuántas perks a nivel 3 tienes, '+message.author.tag)
+    if(message.member) message.channel.send('Ingresa cuántas perks a nivel 3 tienes, '+message.member.user)
+    else message.channel.send('Ingresa cuántas perks a nivel 3 tienes, '+message.author.tag)
     ps1.add(message.author.id)
     return;
   } else return message.channel.send(message.author.tag+', envía por aquí "**survivor**" o "**killer**" para calcular el valor de todas las perks del que elijas.')
  }
  if(r1.has(message.author.id))
  {
-  if(message.content > 50 || message.content < 1 || message.content > 50) return message.member.send('El nivel debe ser entre 1 y 50.').catch(function(err) { message.channel.send(message.member.user+' Activa tus mensajes privados para que el bot pueda informarte.') } );
+  if(message.content > 50 || message.content < 1 || message.content > 50) return message.member.send('El nivel debe ser entre 1 y 50, '+message.author.tag).catch(function(err) { message.channel.send(message.member.user+' Activa tus mensajes privados para que el bot pueda informarte.') } );
   if(message.content % 1 != '0') return message.member.send('El nivel no puede tener comas.').catch(function(err) { message.channel.send(message.member.user+' Activa tus mensajes privados para que el bot pueda informarte.') } );
   r1.delete(message.author.id)
   n1[message.author.id] = message.content
@@ -265,45 +267,68 @@ if(n2.has(message.author.id))
 
  if(p1.has(message.author.id))
  {
-  if(message.content % 1 != '0') return message.member.send('El numero no puede tener comas.').catch(function(err) { message.channel.send(message.member.user+' Activa tus mensajes privados para que el bot pueda informarte.') } );
+  if(message.content % 1 != '0') 
+  {
+    p1.delete(message.author.id)
+    message.member.send('El numero no puede tener comas, el calcular se ha cancelado.').catch(function(err) { message.channel.send(message.member.user+' Activa tus mensajes privados para que el bot pueda informarte.') } );
+    return;
+  }
   if(parseInt(message.content)*3 >= PerkKill*3) return message.member.send('No puedes tener todas o más perks de las existentes.').catch(function(err) { message.channel.send(message.member.user+' Activa tus mensajes privados para que el bot pueda informarte.') } );
   if(parseInt(message.content) < 0) return message.member.send('No puedes tener menos de 0 perks.').catch(function(err) { message.channel.send(message.member.user+' Activa tus mensajes privados para que el bot pueda informarte.') } );
   p1.delete(message.author.id)
   perks3[message.author.id] = message.content;
   p2.add(message.author.id)
-  message.channel.send('Envía cuantas perks a nivel 2 tienes.')
+  if(message.member) message.channel.send('Ingresa cuántas perks a nivel 2 tienes, '+message.member.user)
+    else message.channel.send('Ingresa cuántas perks a nivel 2 tienes, '+message.author.tag)
   return;
  }
 
  if(p2.has(message.author.id))
  {
-  if(message.content % 1 != '0') return message.member.send('El numero no puede tener comas.').catch(function(err) { message.channel.send(message.member.user+' Activa tus mensajes privados para que el bot pueda informarte.') } );
+  if(message.content % 1 != '0') 
+  {
+    p2.delete(message.author.id)
+    message.member.send('El numero no puede tener comas, el calcular se ha cancelado.').catch(function(err) { message.channel.send(message.member.user+' Activa tus mensajes privados para que el bot pueda informarte.') } );
+    return;
+  }
   if(parseInt(message.content)*2 >= PerkKill*3) return message.member.send('No puedes tener todas o más perks de las existentes.').catch(function(err) { message.channel.send(message.member.user+' Activa tus mensajes privados para que el bot pueda informarte.') } );
   if(parseInt(message.content) < 0) return message.member.send('No puedes tener menos de 0 perks.').catch(function(err) { message.channel.send(message.member.user+' Activa tus mensajes privados para que el bot pueda informarte.') } );
   if(perks3[message.author.id]*3+parseInt(message.content)*2 >= PerkKill*3) return message.member.send('No puedes tener todas o más perks de las existentes.').catch(function(err) { message.channel.send(message.member.user+' Activa tus mensajes privados para que el bot pueda informarte.') } );
   p2.delete(message.author.id)
   perks2[message.author.id] = message.content;
-  message.channel.send('Envía cuantas perks a nivel 1 tienes.')
+  if(message.member) message.channel.send('Ingresa cuántas perks a nivel 1 tienes, '+message.member.user)
+  else message.channel.send('Ingresa cuántas perks a nivel 1 tienes, '+message.author.tag)
   p3.add(message.author.id)
   return;
  }
 
  if(p3.has(message.author.id))
  {
-  if(message.content % 1 != '0') return message.member.send('El numero no puede tener comas.').catch(function(err) { message.channel.send(message.member.user+' Activa tus mensajes privados para que el bot pueda informarte.') } );
+  if(message.content % 1 != '0') 
+  {
+    p3.delete(message.author.id)
+    message.member.send('El numero no puede tener comas, el calcular se ha cancelado.').catch(function(err) { message.channel.send(message.member.user+' Activa tus mensajes privados para que el bot pueda informarte.') } );
+    return;
+  }
   if(parseInt(message.content) >= PerkKill*3) return message.member.send('No puedes tener todas o más perks de las existentes.').catch(function(err) { message.channel.send(message.member.user+' Activa tus mensajes privados para que el bot pueda informarte.') } );
   if(parseInt(message.content) < 0) return message.member.send('No puedes tener menos de 0 perks.').catch(function(err) { message.channel.send(message.member.user+' Activa tus mensajes privados para que el bot pueda informarte.') } );
   if(perks3[message.author.id]*3+perks2[message.author.id]*2+parseInt(message.content) >= PerkKill*3) return message.member.send('No puedes tener todas o más perks de las existentes.').catch(function(err) { message.channel.send(message.member.user+' Activa tus mensajes privados para que el bot pueda informarte.') } );
   p3.delete(message.author.id)
   perks1[message.author.id] = message.content;
-  message.channel.send('Envía en que nivel estás con tu personaje.')
+  if(message.member) message.channel.send('Ingresa a qué nivel estás con tu personaje, '+message.member.user)
+    else message.channel.send('Ingresa a qué nivel estás con tu personaje, '+message.author.tag)
   p4.add(message.author.id)
   return;
  }
 
  if(p4.has(message.author.id))
  {
-  if(message.content % 1 != '0') return message.member.send('El numero no puede tener comas.').catch(function(err) { message.channel.send(message.member.user+' Activa tus mensajes privados para que el bot pueda informarte.') } );
+  if(message.content % 1 != '0') 
+  {
+    p4.delete(message.author.id)
+    message.member.send('El numero no puede tener comas, el calcular se ha cancelado.').catch(function(err) { message.channel.send(message.member.user+' Activa tus mensajes privados para que el bot pueda informarte.') } );
+    return;
+  }
   if(parseInt(message.content) > 50 || parseInt(message.content) < 1) return message.member.send('Nivel inválido.').catch(function(err) { message.channel.send(message.member.user+' Activa tus mensajes privados para que el bot pueda informarte.') } );
   p4.delete(message.author.id)
   NivelPJ[message.author.id] = parseInt(message.content);
@@ -313,7 +338,7 @@ if(n2.has(message.author.id))
   const embed = new Discord.RichEmbed()
         .setThumbnail(message.member.user.avatarURL)
         .setAuthor(message.member.displayName+'#'+message.member.user.discriminator, message.member.user.avatarURL)
-        .setTitle('| Comprar todas las Perks |')
+        .setTitle('| Comprar todas las Perks de Killer |')
         .setURL('https://deadbydaylight.gamepedia.com/Dead_by_Daylight_Wiki')
         .addField('Puntos de Sangre necesarios <:bp:724724401333076071>', '**'+Coma(NivelValor)+'**', true)
         .addField('Niveles comprados', '**'+LC[message.author.id]+'**', true)
@@ -324,45 +349,68 @@ if(n2.has(message.author.id))
 
  if(ps1.has(message.author.id))
  {
-  if(message.content % 1 != '0') return message.member.send('El numero no puede tener comas.').catch(function(err) { message.channel.send(message.member.user+' Activa tus mensajes privados para que el bot pueda informarte.') } );
+  if(message.content % 1 != '0') 
+  {
+    ps1.delete(message.author.id)
+    message.member.send('El numero no puede tener comas, el calcular se ha cancelado.').catch(function(err) { message.channel.send(message.member.user+' Activa tus mensajes privados para que el bot pueda informarte.') } );
+    return;
+  }
   if(parseInt(message.content)*3 >= PerkSurv*3) return message.member.send('No puedes tener todas o más perks de las existentes.').catch(function(err) { message.channel.send(message.member.user+' Activa tus mensajes privados para que el bot pueda informarte.') } );
   if(parseInt(message.content) < 0) return message.member.send('No puedes tener menos de 0 perks.').catch(function(err) { message.channel.send(message.member.user+' Activa tus mensajes privados para que el bot pueda informarte.') } );
   ps1.delete(message.author.id)
   perks3[message.author.id] = message.content;
   ps2.add(message.author.id)
-  message.channel.send('Envía cuantas perks a nivel 2 tienes, '+message.author.id)
+  if(message.member) message.channel.send('Ingresa cuántas perks a nivel 2 tienes, '+message.member.user)
+    else message.channel.send('Ingresa cuántas perks a nivel 2 tienes, '+message.author.tag)
   return;
  }
 
  if(ps2.has(message.author.id))
  {
-  if(message.content % 1 != '0') return message.member.send('El numero no puede tener comas.').catch(function(err) { message.channel.send(message.member.user+' Activa tus mensajes privados para que el bot pueda informarte.') } );
+  if(message.content % 1 != '0') 
+  {
+    ps2.delete(message.author.id)
+    message.member.send('El numero no puede tener comas, el calcular se ha cancelado.').catch(function(err) { message.channel.send(message.member.user+' Activa tus mensajes privados para que el bot pueda informarte.') } );
+    return;
+  }
   if(parseInt(message.content)*2 >= PerkSurv*3) return message.member.send('No puedes tener todas o más perks de las existentes.').catch(function(err) { message.channel.send(message.member.user+' Activa tus mensajes privados para que el bot pueda informarte.') } );
   if(parseInt(message.content) < 0) return message.member.send('No puedes tener menos de 0 perks.').catch(function(err) { message.channel.send(message.member.user+' Activa tus mensajes privados para que el bot pueda informarte.') } );
   if(perks3[message.author.id]*3+parseInt(message.content)*2 >= PerkSurv*3) return message.member.send('No puedes tener todas o más perks de las existentes.').catch(function(err) { message.channel.send(message.member.user+' Activa tus mensajes privados para que el bot pueda informarte.') } );
   ps2.delete(message.author.id)
   perks2[message.author.id] = message.content;
-  message.channel.send('Envía cuantas perks a nivel 1 tienes, '+message.author.id)
+  if(message.member) message.channel.send('Ingresa cuántas perks a nivel 1 tienes, '+message.member.user)
+    else message.channel.send('Ingresa cuántas perks a nivel 1 tienes, '+message.author.tag)
   ps3.add(message.author.id)
   return;
  }
 
  if(ps3.has(message.author.id))
  {
-  if(message.content % 1 != '0') return message.member.send('El numero no puede tener comas.').catch(function(err) { message.channel.send(message.member.user+' Activa tus mensajes privados para que el bot pueda informarte.') } );
+  if(message.content % 1 != '0') 
+  {
+    ps3.delete(message.author.id)
+    message.member.send('El numero no puede tener comas, el calcular se ha cancelado.').catch(function(err) { message.channel.send(message.member.user+' Activa tus mensajes privados para que el bot pueda informarte.') } );
+    return;
+  }
   if(parseInt(message.content) >= PerkSurv*3) return message.member.send('No puedes tener todas o más perks de las existentes.').catch(function(err) { message.channel.send(message.member.user+' Activa tus mensajes privados para que el bot pueda informarte.') } );
   if(parseInt(message.content) < 0) return message.member.send('No puedes tener menos de 0 perks.').catch(function(err) { message.channel.send(message.member.user+' Activa tus mensajes privados para que el bot pueda informarte.') } );
   if(perks3[message.author.id]*3+perks2[message.author.id]*2+parseInt(message.content) >= PerkSurv*3) return message.member.send('No puedes tener todas o más perks de las existentes.').catch(function(err) { message.channel.send(message.member.user+' Activa tus mensajes privados para que el bot pueda informarte.') } );
   ps3.delete(message.author.id)
   perks1[message.author.id] = message.content;
-  message.channel.send('Envía en que nivel estás con tu personaje, '+message.author.id)
+  if(message.member) message.channel.send('Ingresa a qué nivel estás con tu personaje, '+message.member.user)
+    else message.channel.send('Ingresa a qué nivel estás contu personaje, '+message.author.tag)
   ps4.add(message.author.id)
   return;
  }
 
  if(ps4.has(message.author.id))
  {
-  if(message.content % 1 != '0') return message.member.send('El numero no puede tener comas.').catch(function(err) { message.channel.send(message.member.user+' Activa tus mensajes privados para que el bot pueda informarte.') } );
+  if(message.content % 1 != '0') 
+  {
+    ps4.delete(message.author.id)
+    message.member.send('El numero no puede tener comas, el calcular se ha cancelado.').catch(function(err) { message.channel.send(message.member.user+' Activa tus mensajes privados para que el bot pueda informarte.') } );
+    return;
+  }
   if(parseInt(message.content) > 50 || parseInt(message.content) < 1) return message.member.send('Nivel inválido.').catch(function(err) { message.channel.send(message.member.user+' Activa tus mensajes privados para que el bot pueda informarte.') } );
   ps4.delete(message.author.id)
   NivelPJ[message.author.id] = parseInt(message.content);
@@ -372,7 +420,7 @@ if(n2.has(message.author.id))
   const embed = new Discord.RichEmbed()
         .setThumbnail(message.member.user.avatarURL)
         .setAuthor(message.member.user.username+'#'+message.member.user.discriminator, message.member.user.avatarURL)
-        .setTitle('| Comprar todas las perks de Survivor |')
+        .setTitle('| Comprar todas las Perks de Survivor |')
         .setURL('https://deadbydaylight.gamepedia.com/Dead_by_Daylight_Wiki')
         .addField('Puntos de Sangre necesarios <:bp:724724401333076071>', '**'+Coma(NivelValor)+'**', true)
         .addField('Niveles comprados', '**'+LC[message.author.id]+'**', true)
@@ -405,14 +453,14 @@ if(n2.has(message.author.id))
     if(texto.toLowerCase() == 'killer')
     {
       LC[message.author.id] = 0;
-      message.channel.send('Ingresa cuántas perks a nivel 3 tienes, '+message.author.tag)
+      message.channel.send('Ingresa cuántas perks a nivel 3 tienes, '+message.member.user)
       p1.add(message.author.id)
       return;
     }
     if(texto.toLowerCase() == 'survivor')
     {
       LC[message.author.id] = 0;
-      message.channel.send('Ingresa cuántas perks a nivel 3 tienes, '+message.author.tag)
+      message.channel.send('Ingresa cuántas perks a nivel 3 tienes, '+message.member.user)
       ps1.add(message.author.id)
       return;
     }
