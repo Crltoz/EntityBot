@@ -1066,9 +1066,10 @@ if(n2.has(message.author.id))
                         {
                           var options2 = {
                             host: 'dbd.onteh.net.au',
-                            path: '/api/playerstats?steamid='+sid_2
+                            path: '/api/playerstats?steamid='+sid_2,
+                            method: 'POST'
                         };    
-                          const reqq = https.request(options2, (res) => {
+                          const reqq = https.get(options2, (res) => {
                             message.channel.send('La cuenta ingresada no estaba registrada, fue agregada automáticamente y en las próximas horas deberían estar sus estadísticas disponibles.')
                             con.query(`SELECT * FROM EntityUsers WHERE SID = '${sid_2}'`, (err, rows) => {
                               if(err) throw err;
