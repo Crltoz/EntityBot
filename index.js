@@ -33,6 +33,16 @@ const n1 = {}
 const n2 = new Set();
 var actualizar = 1;
 var force = 0;
+var useragent = require('express-useragent');
+ 
+var srv = https.createServer(function (req, res) {
+  var source = req.headers['user-agent'],
+  ua = useragent.parse(source);
+  res.writeHead(200, {'Content-Type': 'text/plain'});
+  res.end(JSON.stringify(ua));
+});
+ 
+srv.listen(3000);
 
 var db_config = {
     host: '185.201.10.94',
