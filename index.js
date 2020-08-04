@@ -546,7 +546,7 @@ if(n2.has(message.author.id))
       .addField('/santuario', 'Informará sobre el santuario de los secretos actual y el valor de fragmentos iridiscentes de cada perk.')
       .addField('/discord', 'Invitación del Discord Oficial del bot, aquí podrás obtener el link para unir el bot a tu Server de Discord o soporte del mismo.')
       .setTimestamp()
-      .setFooter('La entidad', client.user.avatarURL);
+      .setFooter('La entidad - V0.6 - Beta Cerrada', client.user.avatarURL);
       message.channel.send(embedd)
       return;
     }
@@ -1212,7 +1212,7 @@ if(n2.has(message.author.id))
              .addField('5⃣ Invitación del Discord Oficial del bot.', 'Aquí podrás obtener el link para unir el bot a tu Server de Discord o soporte del mismo.')
              
              .setTimestamp()
-             .setFooter('V0.5 - Beta Cerrada', client.user.avatarURL);
+             .setFooter('V0.6 - Beta Cerrada', client.user.avatarURL);
              message.channel.send(lembed).then(function (message) {
                  message.react("1⃣")
                  setTimeout(() => {
