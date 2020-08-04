@@ -74,7 +74,7 @@ client.on("guildCreate", guild => {
     }
   })
   defaultChannel.send("**Gracias por añadirme!** :white_check_mark:\n**-** Mi prefijo es `/`\n**-** Puedes ver mis comandos con `/ayuda` o `/lobby`\n**-** Cualquier consulta, sugerencia o reporte de bug. Hazla en nuestro discord: https://discord.gg/T6rEERg")
-  client.channels.get().send('| Nuevo servidor | Nombre: '+guild.name+' | Usuarios: '+guild.memberCount)
+  client.channels.get('739997803094343721').send('| Nuevo servidor | Nombre: '+guild.name+' | Usuarios: '+guild.memberCount)
 })
 
 
