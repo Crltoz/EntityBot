@@ -568,7 +568,7 @@ if(n2.has(message.author.id))
             let update_att = rows[0].update_at;
             if(k_rank == 0)
             {
-              if((parseInt(usa.getTime())-parseInt(update_att)) < 30000*60)
+              if((parseInt(usa.getTime())-parseInt(update_att)) < 1000*60*30)
               {
                 message.channel.send('La cuenta de Steam está en la cola para ser agregada. Vuelve a intentar en **'+Math.round((((parseInt(usa.getTime())-parseInt(update_att))/1000)/60)-30)+'** minutos.')
                 return;
@@ -877,7 +877,7 @@ if(n2.has(message.author.id))
                   let update_att = rows[0].update_at;
                   if(k_rank == 0)
                   {
-                    if((parseInt(usa.getTime())-parseInt(update_att)) < 30000*60)
+                    if((parseInt(usa.getTime())-parseInt(update_att)) < 1000*60*30)
                     {
                       message.channel.send('La cuenta de Steam está en la cola para ser agregada. Vuelve a intentar en **'+Math.round((((parseInt(usa.getTime())-parseInt(update_att))/1000)/60)-30)+'** minutos.')
                       return;
