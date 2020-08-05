@@ -32,16 +32,6 @@ const r2 = new Set();
 const n1 = {}
 const n2 = new Set();
 var actualizar = 1;
-var useragent = require('express-useragent');
- 
-var srv = https.createServer(function (req, res) {
-  var source = req.headers['user-agent'],
-  ua = useragent.parse(source);
-  res.writeHead(200, {'Content-Type': 'text/plain'});
-  res.end(JSON.stringify(ua));
-});
- 
-srv.listen(4000);
 
 var db_config = {
     host: '185.201.10.94',
@@ -51,14 +41,6 @@ var db_config = {
 }
 var con;
 
-var srv = http.createServer(function (req, res) {
-  var source = req.headers['user-agent'],
-  ua = useragent.parse(source);
-  res.writeHead(200, {'EntityBot': 'Tools for Discord (Dead By Daylight)'});
-  res.end(JSON.stringify(ua));
-});
-
-srv.listen(3000);
 
 client.on("ready", () => {
     console.log("El bot esta cargando sistemas, base de datos.");
@@ -595,7 +577,8 @@ if(n2.has(message.author.id))
               {
                 var options = {
                   host: 'dbd.onteh.net.au',
-                  path: '/api/playerstats?steamid='+sid_2
+                  path: '/api/playerstats?steamid='+sid_2,
+                  headers: { 'User-Agent': 'Mozilla/5.0' }
                 };     
                 var req1 = https.get(options, function (res) {
                   var bodyChunks = [];
@@ -749,7 +732,8 @@ if(n2.has(message.author.id))
               {
                 var options = {
                   host: 'dbd.onteh.net.au',
-                  path: '/api/playerstats?steamid='+sid_2
+                  path: '/api/playerstats?steamid='+sid_2,
+                  headers: { 'User-Agent': 'Mozilla/5.0' }
                 };      
                 var req1 = https.get(options, function (res) {
                 var bodyChunks = [];
@@ -774,7 +758,8 @@ if(n2.has(message.author.id))
           {
               var options = {
                 host: 'dbd.onteh.net.au',
-                path: '/api/playerstats?steamid='+sid_2
+                path: '/api/playerstats?steamid='+sid_2,
+                headers: { 'User-Agent': 'Mozilla/5.0' }
               }     
               var req1 = https.get(options, function (res) {
               var bodyChunks = [];
@@ -788,7 +773,8 @@ if(n2.has(message.author.id))
                     var options2 = {
                       host: 'dbd.onteh.net.au',
                       path: '/api/playerstats?steamid='+sid_2,
-                      method: 'POST'
+                      method: 'POST',
+                      headers: { 'User-Agent': 'Mozilla/5.0' }
                   };    
                     options2.agent = new https.Agent(options2)
                     const reqq1 = https.request(options2, (res) => {
@@ -864,7 +850,7 @@ if(n2.has(message.author.id))
        let options = {
         host: 'api.steampowered.com',
         path: '/ISteamUser/ResolveVanityURL/v0001/?key=DF0A08E817CCE67F129D35FFFB14901A&vanityurl='+rid_1,
-        agent: false
+        headers: { 'User-Agent': 'Mozilla/5.0' }
         };
         const req = https.get(options, function (res) {
           var bodyChunks2 = [];
@@ -900,7 +886,8 @@ if(n2.has(message.author.id))
                     {
                       var options = {
                         host: 'dbd.onteh.net.au',
-                        path: '/api/playerstats?steamid='+sid_2
+                        path: '/api/playerstats?steamid='+sid_2,
+                        headers: { 'User-Agent': 'Mozilla/5.0' }
                       };     
                       var req1 = https.get(options, function (res) {
                         var bodyChunks = [];
@@ -1079,7 +1066,8 @@ if(n2.has(message.author.id))
                 {
                     var options = {
                       host: 'dbd.onteh.net.au',
-                      path: '/api/playerstats?steamid='+sid_2
+                      path: '/api/playerstats?steamid='+sid_2,
+                      headers: { 'User-Agent': 'Mozilla/5.0' }
                     };      
                     var req1 = https.get(options, function (res) {
                     var bodyChunks = [];
@@ -1092,7 +1080,8 @@ if(n2.has(message.author.id))
                           var options2 = {
                             host: 'dbd.onteh.net.au',
                             path: '/api/playerstats?steamid='+sid_2,
-                            method: 'POST'
+                            method: 'POST',
+                            headers: { 'User-Agent': 'Mozilla/5.0' }
                         };    
                           options2.agent = new https.Agent(options2)
                           const reqq = https.request(options2, (res) => {
