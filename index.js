@@ -569,9 +569,9 @@ if(n2.has(message.author.id))
             let update_att = rows[0].update_at;
             if(k_rank == 0)
             {
-              if((parseInt(usa.getTime())-parseInt(update_att)) < 1000*60*30)
+              if((parseInt(usa.getTime())-parseInt(update_att)) < 1000*60*10)
               {
-                message.channel.send('La cuenta de Steam está en la cola para ser agregada. Vuelve a intentar en **'+(30-Math.round((((parseInt(usa.getTime())-parseInt(update_att))/1000)/60)))+'** minutos aproximadamente.')
+                message.channel.send('La cuenta de Steam está en la cola para ser agregada. Vuelve a intentar en **'+(10-Math.round((((parseInt(usa.getTime())-parseInt(update_att))/1000)/60)))+'** minutos aproximadamente.')
                 return;
               }
               else
@@ -589,7 +589,7 @@ if(n2.has(message.author.id))
                   var body3 = Buffer.concat(bodyChunks);
                   if(isEmptyObject(body3))
                   {
-                    message.channel.send('La cuenta de Steam está en la cola para ser agregada, intentalo en **30** minutos y recuerda que puede tardar hasta 2 horas.')
+                    message.channel.send('La cuenta de Steam está en la cola para ser agregada, intentalo en **10** minutos y recuerda que puede tardar hasta 1 hora.')
                     con.query(`UPDATE EntityUsers SET update_at = ${usa.getTime()} WHERE SID = '${sid_2}'`)
                     return;
                   } else
@@ -795,7 +795,7 @@ if(n2.has(message.author.id))
                               message.channel.send(embedd)
                               return;
                             }
-                      message.channel.send('La cuenta de Steam está en la cola para ser agregada ya que no estaba registrada, intentalo en **30** minutos y recuerda que puede tardar hasta 2 horas.')
+                      message.channel.send('La cuenta de Steam está en la cola para ser agregada ya que no estaba registrada, intentalo en **10** minutos y recuerda que puede tardar hasta 1 hora.')
                       con.query(`SELECT * FROM EntityUsers WHERE SID = '${sid_2}'`, (err, rows) => {
                         if(err) throw err;
                         if(rows.length >= 1)
@@ -1104,7 +1104,7 @@ if(n2.has(message.author.id))
                               message.channel.send(embedd)
                               return;
                             }
-                            message.channel.send('La cuenta de Steam está en la cola para ser agregada ya que no estaba registrada, intentalo en **30** minutos y recuerda que puede tardar hasta 2 horas.')
+                            message.channel.send('La cuenta de Steam está en la cola para ser agregada ya que no estaba registrada, intentalo en **10** minutos y recuerda que puede tardar hasta 2 horas.')
                             con.query(`SELECT * FROM EntityUsers WHERE SID = '${sid_2}'`, (err, rows) => {
                               if(err) throw err;
                               if(rows.length >= 1)
