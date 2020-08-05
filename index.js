@@ -639,6 +639,7 @@ if(n2.has(message.author.id))
                   .addField('¿Ya cambiaste todas tus configuraciones a público y sigues sin aparecer?', 'Normalmente al pasar tu perfil a público, puede tardar hasta 24 horas en actualizar tus datos la web (ajeno a nosotros).')
                   .addField('Si siempre tuviste todo en público y no funciona:', 'Deberás esperar, lamentablemente la web no es nuestra y no podemos repararlo. Aunque estamos en constante contacto para informar de errores.')
                   .setTimestamp()
+                  .setImage('https://cdn.discordapp.com/attachments/738848207328772237/739269462510796800/unknown.png')
                   .setFooter('La entidad', client.user.avatarURL);
                   message.channel.send(embedd)
                   return;
@@ -697,6 +698,7 @@ if(n2.has(message.author.id))
                   .addField('¿Ya cambiaste todas tus configuraciones a público y sigues sin aparecer?', 'Normalmente al pasar tu perfil a público, puede tardar hasta 24 horas en actualizar tus datos la web (ajeno a nosotros).')
                   .addField('Si siempre tuviste todo en público y no funciona:', 'Deberás esperar, lamentablemente la web no es nuestra y no podemos repararlo. Aunque estamos en constante contacto para informar de errores.')
                   .setTimestamp()
+                  .setImage('https://cdn.discordapp.com/attachments/738848207328772237/739269462510796800/unknown.png')
                   .setFooter('La entidad', client.user.avatarURL);
                   message.channel.send(embedd)
                   return;
@@ -948,6 +950,7 @@ if(n2.has(message.author.id))
                         .addField('¿Ya cambiaste todas tus configuraciones a público y sigues sin aparecer?', 'Normalmente al pasar tu perfil a público, puede tardar hasta 24 horas en actualizar tus datos la web (ajeno a nosotros).')
                         .addField('Si siempre tuviste todo en público y no funciona:', 'Deberás esperar, lamentablemente la web no es nuestra y no podemos repararlo. Aunque estamos en constante contacto para informar de errores.')
                         .setTimestamp()
+                        .setImage('https://cdn.discordapp.com/attachments/738848207328772237/739269462510796800/unknown.png')
                         .setFooter('La entidad', client.user.avatarURL);
                         message.channel.send(embedd)
                         return;
@@ -1006,6 +1009,7 @@ if(n2.has(message.author.id))
                         .addField('¿Ya cambiaste todas tus configuraciones a público y sigues sin aparecer?', 'Normalmente al pasar tu perfil a público, puede tardar hasta 24 horas en actualizar tus datos la web (ajeno a nosotros).')
                         .addField('Si siempre tuviste todo en público y no funciona:', 'Deberás esperar, lamentablemente la web no es nuestra y no podemos repararlo. Aunque estamos en constante contacto para informar de errores.')
                         .setTimestamp()
+                        .setImage('https://cdn.discordapp.com/attachments/738848207328772237/739269462510796800/unknown.png')
                         .setFooter('La entidad', client.user.avatarURL);
                         message.channel.send(embedd)
                         return;
@@ -2603,6 +2607,7 @@ function obtenervalorkill(variable, canal, usuario, server, sid, usa)
     .addField('¿Ya cambiaste todas tus configuraciones a público y sigues sin aparecer?', 'Normalmente al pasar tu perfil a público, puede tardar desde 1 a 24 horas en actualizar tus datos la web (ajeno a nosotros).')
     .addField('Si siempre tuviste todo en público y no funciona:', 'Deberás esperar, lamentablemente la web no es nuestra y no podemos repararlo. Aunque estamos en constante contacto para informar de errores.')
     .setTimestamp()
+    .setImage('https://cdn.discordapp.com/attachments/738848207328772237/739269462510796800/unknown.png')
     .setFooter('La entidad', client.user.avatarURL);
     client.channels.get(canal).send(embedd)
     return;
@@ -2717,6 +2722,7 @@ function obtenervalorsurv(variable, canal, usuario, server, sid, usa)
     .addField('¿Ya cambiaste todas tus configuraciones a público y sigues sin aparecer?', 'Normalmente al pasar tu perfil a público, puede tardar de 1 a 24 horas en actualizar tus datos la web (ajeno a nosotros).')
     .addField('Si siempre tuviste todo en público y no funciona:', 'Deberás esperar, lamentablemente la web no es nuestra y no podemos repararlo. Aunque estamos en constante contacto para informar de errores.')
     .setTimestamp()
+    .setImage('https://cdn.discordapp.com/attachments/738848207328772237/739269462510796800/unknown.png')
     .setFooter('La entidad', client.user.avatarURL);
     client.channels.get(canal).send(embedd)
     return;
