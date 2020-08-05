@@ -570,7 +570,7 @@ if(n2.has(message.author.id))
             {
               if((parseInt(usa.getTime())-parseInt(update_att)) < 30000*60)
               {
-                message.channel.send('La cuenta de Steam está en la cola para ser agregada. Vuelve a intentar en **'+((parseInt(usa.getTime())-parseInt(update_att))/1000)/60+'** minutos.')
+                message.channel.send('La cuenta de Steam está en la cola para ser agregada. Vuelve a intentar en **'+Math.round(((parseInt(usa.getTime())-parseInt(update_att))/1000)/60)+'** minutos.')
                 return;
               }
               else
@@ -879,7 +879,7 @@ if(n2.has(message.author.id))
                   {
                     if((parseInt(usa.getTime())-parseInt(update_att)) < 30000*60)
                     {
-                      message.channel.send('La cuenta de Steam está en la cola para ser agregada. Vuelve a intentar en **'+((parseInt(usa.getTime())-parseInt(update_att))/1000)/60+'** minutos.')
+                      message.channel.send('La cuenta de Steam está en la cola para ser agregada. Vuelve a intentar en **'+Math.round(((parseInt(usa.getTime())-parseInt(update_att))/1000)/60)+'** minutos.')
                       return;
                     }
                     else
@@ -2600,7 +2600,7 @@ function obtenervalorkill(variable, canal, usuario, server, sid, usa)
     .setAuthor(user.user.tag, user.user.avatarURL)
     .setThumbnail(user.user.avatarURL)
     .addField('Al parecer tu cuenta está en privada.', 'Recuerda tener todas las opciones de privacidad en público.')
-    .addField('¿Ya cambiaste todas tus configuraciones a público y sigues sin aparecer?', 'Normalmente al pasar tu perfil a público, puede tardar hasta 24 horas en actualizar tus datos la web (ajeno a nosotros). También puede ser que tu cuenta aún no se haya actualizada, así que ten paciencia.')
+    .addField('¿Ya cambiaste todas tus configuraciones a público y sigues sin aparecer?', 'Normalmente al pasar tu perfil a público, puede tardar desde 1 a 24 horas en actualizar tus datos la web (ajeno a nosotros).')
     .addField('Si siempre tuviste todo en público y no funciona:', 'Deberás esperar, lamentablemente la web no es nuestra y no podemos repararlo. Aunque estamos en constante contacto para informar de errores.')
     .setTimestamp()
     .setFooter('La entidad', client.user.avatarURL);
@@ -2714,7 +2714,7 @@ function obtenervalorsurv(variable, canal, usuario, server, sid, usa)
     .setAuthor(user.user.tag, user.user.avatarURL)
     .setThumbnail(user.user.avatarURL)
     .addField('Al parecer tu cuenta está en privada.', 'Recuerda tener todas las opciones de privacidad en público.')
-    .addField('¿Ya cambiaste todas tus configuraciones a público y sigues sin aparecer?', 'Normalmente al pasar tu perfil a público, puede tardar hasta 24 horas en actualizar tus datos la web (ajeno a nosotros).  También puede ser que tu cuenta aún no se haya actualizada, así que ten paciencia.')
+    .addField('¿Ya cambiaste todas tus configuraciones a público y sigues sin aparecer?', 'Normalmente al pasar tu perfil a público, puede tardar de 1 a 24 horas en actualizar tus datos la web (ajeno a nosotros).')
     .addField('Si siempre tuviste todo en público y no funciona:', 'Deberás esperar, lamentablemente la web no es nuestra y no podemos repararlo. Aunque estamos en constante contacto para informar de errores.')
     .setTimestamp()
     .setFooter('La entidad', client.user.avatarURL);
