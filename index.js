@@ -571,7 +571,7 @@ if(n2.has(message.author.id))
             {
               if((parseInt(usa.getTime())-parseInt(update_att)) < 1000*60*30)
               {
-                message.channel.send('La cuenta de Steam está en la cola para ser agregada. Vuelve a intentar en **'+(Math.round((((parseInt(usa.getTime())-parseInt(update_att))/1000)/60))-30)+'** minutos aproximadamente.')
+                message.channel.send('La cuenta de Steam está en la cola para ser agregada. Vuelve a intentar en **'+(30-Math.round((((parseInt(usa.getTime())-parseInt(update_att))/1000)/60)))+'** minutos aproximadamente.')
                 return;
               }
               else
@@ -882,7 +882,7 @@ if(n2.has(message.author.id))
                   {
                     if((parseInt(usa.getTime())-parseInt(update_att)) < 1000*60*30)
                     {
-                      message.channel.send('La cuenta de Steam está en la cola para ser agregada. Vuelve a intentar en **'+(Math.round((((parseInt(usa.getTime())-parseInt(update_att))/1000)/60))-30)+'** minutos aproximadamente.')
+                      message.channel.send('La cuenta de Steam está en la cola para ser agregada. Vuelve a intentar en **'+(30-Math.round((((parseInt(usa.getTime())-parseInt(update_att))/1000)/60)))+'** minutos aproximadamente.')
                       return;
                     }
                     else
