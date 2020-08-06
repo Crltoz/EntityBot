@@ -555,9 +555,9 @@ if(n2.has(message.author.id))
        if(args[0].toLowerCase() != 'killer' && args[0].toLowerCase() != 'survivor') return message.channel.send('Usa: **/stats [Survivor o Killer] [URL Perfil Steam]**')
        if(!args[1]) return message.channel.send('Usa: **/stats [Survivor o Killer] [URL Perfil Steam]**')
        let text = args[1];
-       if(!text.includes('steamcommunity.com/id/') && !text.includes('steamcommunity.com/profiles/')) 
-       {
-        if(isNaN(args[1])) return message.channel.send('El código de amigo o el URL de perfil de Steam es incorrecto, '+message.member.user)
+       //if(!text.includes('steamcommunity.com/id/') && !text.includes('steamcommunity.com/profiles/')) 
+       //{
+        /*if(isNaN(args[1])) return message.channel.send('El código de amigo o el URL de perfil de Steam es incorrecto, '+message.member.user)
         if(args[1].length < 8) return message.channel.send('El código de amigo es incorrecto, '+message.member.user)
         let sid_2 = args[1];
         con.query(`SELECT * FROM EntityUsers WHERE SID = '${sid_2}'`, (err, rows) =>
@@ -819,7 +819,7 @@ if(n2.has(message.author.id))
                           .setTitle('No podemos agregar tu cuenta...')
                           .setAuthor(message.member.user.tag, message.member.user.avatarURL)
                           .setThumbnail(client.user.avatarURL)
-                          .addField('Tenemos problemas con la web.', 'Actualmente, por muchas peticiones, la web no nos permite postear cuentas, por lo que deberás hacerlo apretando el botón de abajo y pegando tu link de perfil. Luego de ponerla ya podrás ver tus **/stats** por aquí sin problema.')
+                          .addField('Tenemos problemas con la web.', 'Actualmente, por muchas peticiones, la web no nos permite postear cuentas, por lo que deberás hacerlo apretando el botón de abajo y pegando tu link de perfil. Luego de ponerla ya podrás ver tus **//*stats** por aquí sin problema.')
                           .addField('Agregar cuenta:', '[Haz click aquí](https://dbd.onteh.net.au)')
                           .setTimestamp()
                           .setFooter('La entidad', client.user.avatarURL)
@@ -851,7 +851,7 @@ if(n2.has(message.author.id))
         })
         return;
        } else
-       {
+       {*/
           var rid_1;
           var sid_1;
           var sid_2;
@@ -1115,6 +1115,7 @@ if(n2.has(message.author.id))
                       bodyChunks3.push(chunk);
                   }).on('end', function () {
                       var body5 = Buffer.concat(bodyChunks3);
+                      console.log(body5.toString())
                       if(VerificarPrivado(body5) == 1)
                       {
                         const embedd = new Discord.RichEmbed()
