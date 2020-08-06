@@ -2966,6 +2966,7 @@ Date.prototype.toMysqlFormat = function() {
 function VerificarPrivado(buffer)
 {
   var state_1 = buffer.slice(buffer.indexOf('"state"')+10)
+  console.log(state_1)
   var state_2 = state_1.slice(0, state_1.indexOf(',')-1)
   var result = 0;
   console.log(state_2)
