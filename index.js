@@ -555,20 +555,20 @@ if(n2.has(message.author.id))
        if(args[0].toLowerCase() != 'killer' && args[0].toLowerCase() != 'survivor') return message.channel.send('Usa: **/stats [Survivor o Killer] [URL Perfil Steam]**')
        if(!args[1]) return message.channel.send('Usa: **/stats [Survivor o Killer] [URL Perfil Steam]**')
        let text = args[1];
-       //if(!text.includes('steamcommunity.com/id/') && !text.includes('steamcommunity.com/profiles/')) 
-       //{
-        /*if(isNaN(args[1])) return message.channel.send('El código de amigo o el URL de perfil de Steam es incorrecto, '+message.member.user)
+       if(!text.includes('steamcommunity.com/id/') && !text.includes('steamcommunity.com/profiles/')) 
+       {
+        if(isNaN(args[1])) return message.channel.send('El código de amigo o el URL de perfil de Steam es incorrecto, '+message.member.user)
         if(args[1].length < 8) return message.channel.send('El código de amigo es incorrecto, '+message.member.user)
         let sid_2 = args[1];
         con.query(`SELECT * FROM EntityUsers WHERE SID = '${sid_2}'`, (err, rows) =>
         {
-          if(err) throw err;
-          if(rows.length >= 1)
-          {
+              if(err) throw err;
+            if(rows.length >= 1)
+            {
             let k_rank = rows[0].killer_rank_1
             let update_att = rows[0].update_at;
-            let bloodp = rows[0].bloodpoints_1
             let st = rows[0].state
+            let bloodp = rows[0].bloodpoints_1
             if(k_rank == 0 || k_rank == 20 && bloodp == 0)
             {
               if((parseInt(usa.getTime())-parseInt(update_att)) < 60000*60*6 && st == 1)
@@ -589,14 +589,12 @@ if(n2.has(message.author.id))
                   headers: { 'User-Agent': 'EntityBot/0.6.5' }
                 };     
                 var req1 = https.get(options, function (res) {
-                  var bodyChunks = [];
+                  var bodyChunks_ = [];
                   res.on('data', function (chunk) {
-                      bodyChunks.push(chunk);
+                      bodyChunks_.push(chunk);
                   }).on('end', function () {
-                  var body3 = Buffer.concat(bodyChunks);
-                  var state_1 = body3.slice(body3.indexOf('state')+8)
-                  var state_2 = state_1.slice(0, state_1.indexOf(',')-1)
-                  if(state_2 == 1) 
+                  var body3 = Buffer.concat(bodyChunks_);
+                  if(VerificarPrivado(body3) == 1) 
                   {
                     const embedd = new Discord.RichEmbed()
                     .setColor('#FF0000')
@@ -730,14 +728,12 @@ if(n2.has(message.author.id))
                   headers: { 'User-Agent': 'EntityBot/0.6.5' }
                 };      
                 var req1 = https.get(options, function (res) {
-                var bodyChunks = [];
+                var bodyChunks2 = [];
                 res.on('data', function (chunk) {
-                    bodyChunks.push(chunk);
+                    bodyChunks2.push(chunk);
                 }).on('end', function () {
-                    var body = Buffer.concat(bodyChunks);
-                    var state_1 = body3.slice(body3.indexOf('state')+8)
-                    var state_2 = state_1.slice(0, state_1.indexOf(',')-1)
-                    if(state_2 == 1)
+                    var body4 = Buffer.concat(bodyChunks2);
+                    if(VerificarPrivado(body4) == 1)
                     {
                       const embedd = new Discord.RichEmbed()
                         .setColor('#FF0000')
@@ -757,11 +753,11 @@ if(n2.has(message.author.id))
                     }                  
                     if(args[0].toLowerCase() == 'survivor') 
                     {
-                      obtenervalorsurv(body, message.channel.id, message.author.id, message.guild.id, sid_2, usa.getTime())
+                      obtenervalorsurv(body4, message.channel.id, message.author.id, message.guild.id, sid_2, usa.getTime())
                     }
                     if(args[0].toLowerCase() == 'killer') 
                     {
-                      obtenervalorkill(body, message.channel.id, message.author.id, message.guild.id, sid_2, usa.getTime())
+                      obtenervalorkill(body4, message.channel.id, message.author.id, message.guild.id, sid_2, usa.getTime())
                     }
                 })
               });
@@ -776,14 +772,12 @@ if(n2.has(message.author.id))
                 headers: { 'User-Agent': 'EntityBot/0.6.5' }
               }     
               var req1 = https.get(options, function (res) {
-              var bodyChunks = [];
+              var bodyChunks3 = [];
               res.on('data', function (chunk) {
-                  bodyChunks.push(chunk);
+                  bodyChunks3.push(chunk);
               }).on('end', function () {
-                  var body = Buffer.concat(bodyChunks);
-                  var state_1 = body.slice(body.indexOf('state')+8)
-                  var state_2 = state_1.slice(0, state_1.indexOf(',')-1)
-                  if(state_2 == 1)
+                  var body5 = Buffer.concat(bodyChunks3);
+                  if(VerificarPrivado(body5) == 1)
                   {
                     const embedd = new Discord.RichEmbed()
                     .setColor('#FF0000')
@@ -799,9 +793,8 @@ if(n2.has(message.author.id))
                     message.channel.send(embedd)
                     con.query(`INSERT INTO EntityUsers (SID, update_at, state) VALUES ('${sid_2}', '${usa.getTime()}', '1')`)
                     return;
-                  }
-                  if(state_2 == 0) return message.channel.send('0')
-                  if(isEmptyObject(body))
+                  } 
+                  if(isEmptyObject(body5))
                   {
 
                     var options2 = {
@@ -819,7 +812,7 @@ if(n2.has(message.author.id))
                           .setTitle('No podemos agregar tu cuenta...')
                           .setAuthor(message.member.user.tag, message.member.user.avatarURL)
                           .setThumbnail(client.user.avatarURL)
-                          .addField('Tenemos problemas con la web.', 'Actualmente, por muchas peticiones, la web no nos permite postear cuentas, por lo que deberás hacerlo apretando el botón de abajo y pegando tu link de perfil. Luego de ponerla ya podrás ver tus **//*stats** por aquí sin problema.')
+                          .addField('Tenemos problemas con la web.', 'Actualmente, por muchas peticiones, la web no nos permite postear cuentas, por lo que deberás hacerlo apretando el botón de abajo y pegando tu link de perfil. Luego de ponerla ya podrás ver tus **/stats** por aquí sin problema.')
                           .addField('Agregar cuenta:', '[Haz click aquí](https://dbd.onteh.net.au)')
                           .setTimestamp()
                           .setFooter('La entidad', client.user.avatarURL)
@@ -839,11 +832,11 @@ if(n2.has(message.author.id))
                   }
                   if(args[0].toLowerCase() == 'survivor') 
                   {
-                    obtenervalorsurv(body, message.channel.id, message.author.id, message.guild.id, sid_2, usa.getTime())
+                    obtenervalorsurv(body5, message.channel.id, message.author.id, message.guild.id, sid_2, usa.getTime())
                   }
                   if(args[0].toLowerCase() == 'killer') 
                   {
-                    obtenervalorkill(body, message.channel.id, message.author.id, message.guild.id, sid_2, usa.getTime())
+                    obtenervalorkill(body5, message.channel.id, message.author.id, message.guild.id, sid_2, usa.getTime())
                   }
               })
             });
@@ -851,7 +844,7 @@ if(n2.has(message.author.id))
         })
         return;
        } else
-       {*/
+       {
           var rid_1;
           var sid_1;
           var sid_2;
@@ -897,289 +890,288 @@ if(n2.has(message.author.id))
                   con.query(`SELECT * FROM EntityUsers WHERE SID = '${sid_2}'`, (err, rows) =>
                   {
                     if(err) throw err;
-                if(rows.length >= 1)
-                {
-                let k_rank = rows[0].killer_rank_1
-                let update_att = rows[0].update_at;
-                let st = rows[0].state
-                let bloodp = rows[0].bloodpoints_1
-                if(k_rank == 0 || k_rank == 20 && bloodp == 0)
-                {
-                  if((parseInt(usa.getTime())-parseInt(update_att)) < 60000*60*6 && st == 1)
+                  if(rows.length >= 1)
                   {
-                    message.channel.send('Tu cuenta de steam estaba en privado la última vez, puedes volver a chequear en **'+tiempo(360-((((parseInt(usa.getTime())-parseInt(update_att))/1000)/60)))+'** aproximadamente.')
-                    return;
-                  }
-                  else if((parseInt(usa.getTime())-parseInt(update_att)) < 1000*60*10 && st == 0)
+                  let k_rank = rows[0].killer_rank_1
+                  let update_att = rows[0].update_at;
+                  let st = rows[0].state
+                  let bloodp = rows[0].bloodpoints_1
+                  if(k_rank == 0 || k_rank == 20 && bloodp == 0)
                   {
-                    message.channel.send('La cuenta de Steam está en la cola para ser agregada. Vuelve a intentar en **'+(10-Math.round((((parseInt(usa.getTime())-parseInt(update_att))/1000)/60)))+'** minutos aproximadamente.')
-                    return;
-                  }
-                  else
-                  {
-                    var options = {
-                      host: 'dbd.onteh.net.au',
-                      path: '/api/playerstats?steamid='+sid_2,
-                      headers: { 'User-Agent': 'EntityBot/0.6.5' }
-                    };     
-                    var req1 = https.get(options, function (res) {
-                      var bodyChunks_ = [];
-                      res.on('data', function (chunk) {
-                          bodyChunks_.push(chunk);
-                      }).on('end', function () {
-                      var body3 = Buffer.concat(bodyChunks_);
-                      var state_1 = body3.slice(body3.indexOf('state')+8)
-                      var state_2 = state_1.slice(0, state_1.indexOf(',')-1)
-                      if(state_2 == 1) 
-                      {
-                        const embedd = new Discord.RichEmbed()
-                        .setColor('#FF0000')
-                        .setTitle('¡Ups! Esto es vergonzoso...')
-                        .setAuthor(message.member.user.tag, message.member.user.avatarURL)
-                        .setThumbnail(message.member.user.avatarURL)
-                        .addField('Al parecer tu cuenta está en privada.', 'Recuerda tener todas las opciones de privacidad en público.')
-                        .addField('¿Ya cambiaste todas tus configuraciones a público y sigues sin aparecer?', 'Normalmente al pasar tu perfil a público, puede tardar desde 24 a 48 horas en actualizar tus datos la web (ajeno a nosotros).')
-                        .addField('Si siempre tuviste todo en público y no funciona:', 'Revisa esta imagen y asegurate de tener todo en orden.')
-                        .setTimestamp()
-                        .setImage('https://cdn.discordapp.com/attachments/738848207328772237/739269462510796800/unknown.png')
-                        .setFooter('La entidad', client.user.avatarURL);
-                        message.channel.send(embedd)
-                        con.query(`UPDATE EntityUsers SET state = 1, update_at = ${usa.getTime()} WHERE SID = '${sid_2}'`)
-                        return;
-                      }
-                      if(isEmptyObject(body3))
-                      {
-                        message.channel.send('La cuenta de Steam está en la cola para ser agregada, intentalo en **10** minutos y recuerda que puede tardar hasta 1 hora.')
-                        con.query(`UPDATE EntityUsers SET update_at = ${usa.getTime()}, state = 0 WHERE SID = '${sid_2}'`)
-                        return;
-                      } else
-                      {
-                                if(args[0].toLowerCase() == 'survivor') 
-                                {
-                                  obtenervalorsurv(body3, message.channel.id, message.author.id, message.guild.id, sid_2, usa.getTime())
-                                }
-                                if(args[0].toLowerCase() == 'killer') 
-                                {
-                                  obtenervalorkill(body3, message.channel.id, message.author.id, message.guild.id, sid_2, usa.getTime())
-                                }
-                      }
-                      })
-                      })
-                    }
-                  return;
-                  }
-                  else
-                {
-                  if((parseInt(usa.getTime())-parseInt(update_att)) < 60000*60*3)
-                  {
-                    if(args[0].toLowerCase() == 'killer') 
+                    if((parseInt(usa.getTime())-parseInt(update_att)) < 60000*60*6 && st == 1)
                     {
-                      let bloodpoints = rows[0].bloodpoints_1
-                      let killer_rank = rows[0].killer_rank_1
-                      let killer_perfectgames = rows[0].killer_perfectgames_1
-                      let killed = rows[0].killed_1
-                      let killed_sacrificed_afterlastgen = rows[0].killed_sacrificed_afterlastgen_1
-                      let sacrificed = rows[0].sacrificed_1
-                      let chainsawhits = rows[0].chainsawhits_1
-                      let beartrapcatches = rows[0].beartrapcatches_1
-                      let hatchetsthrown = rows[0].hatchetsthrown_1
-                      let survivorsgrabbedrepairinggen = rows[0].survivorsgrabbedrepairinggen_1
-                      let survivorshitwhilecarrying = rows[0].survivorshitwhilecarrying_1
-                      let hatchesclosed = rows[0].hatchesclosed_1
-                      let survivorsinterruptedcleansingtotem = rows[0].survivorsinterruptedcleansingtotem_1
-                      let playtime = rows[0].playtime_1
-                      let name = rows[0].name_1     
-                      const embedd = new Discord.RichEmbed()
-                      .setColor('#FF0000')
-                      .setTitle('Estadísticas de Asesino de '+name)
-                      .setAuthor(message.member.user.tag, message.member.user.avatarURL)
-                      .setThumbnail('https://i.imgur.com/y4KRvLf.png')
-                      .addField('<:bp:724724401333076071> Puntos de sangre totales:', Coma(bloodpoints), true)
-                      .addField('Horas de juego:', Math.round(playtime/60), true)
-                      .addBlankField()
-                      .addField('Rango:', killer_rank, true)
-                      .addField('Partidas perfectas:', killer_perfectgames,true)
-                      .addField('<:Icons_killer:739182105870991410> Asesinatos con Mori:', killed, true)
-                      .addField('<:Icons_Bgen:739182106474709042> Sacrificaste a todos después del último generador:', killed_sacrificed_afterlastgen,true)
-                      .addField('Sacrificios en ganchos:', sacrificed,true)
-                      .addField('Ataques con motosierra (HillBilly):', chainsawhits, true)
-                      .addField('<:Icons_tramp:739182105900351578> Atrapados en trampas (Trampero):', beartrapcatches, true)
-                      .addField('<:Icons_axe:739182102947299539> Hachas lanzadas:', hatchetsthrown, true)
-                      .addField('<:Icons_Gen:739182107095466014> Surpervivientes interrumpidos en gens:', survivorsgrabbedrepairinggen, true)
-                      .addField('<:icons_upa:739182105853952120> Supervivientes golpeados mientras cargas con otro:', survivorshitwhilecarrying, true)
-                      .addField('<:Icons_Hatch:739182106751664168> Trampillas cerradas:', hatchesclosed, true)
-                      .addField('<:icons_totem:739182106282033272> Supervivientes interrumpidos en totems:', survivorsinterruptedcleansingtotem, true)
-                      .setTimestamp()
-                      .setFooter('La entidad', client.user.avatarURL);
-                      message.channel.send(embedd)
-                      return;
-                    } else if(args[0].toLowerCase() == 'survivor') 
-                    {
-                      let bloodpoints = rows[0].bloodpoints_1
-                      let survivor_rank = rows[0].survivor_rank_1
-                      let survivor_perfectgames = rows[0].survivor_perfectgames_1
-                      let equivgensrepaired = rows[0].equivgensrepaired_1
-                      let equivsurvivorshealed = rows[0].equivsurvivorshealed_1
-                      let equivsurvivorshealed_coop = rows[0].equivsurvivorshealed_coop_1
-                      let skillchecks = rows[0].skillchecks_1
-                      let escaped = rows[0].escaped_1
-                      let escaped_ko = rows[0].escaped_ko_1
-                      let escaped_hatch = rows[0].escaped_hatch_1
-                      let protectionhits = rows[0].protectionhits_1
-                      let exitgatesopened = rows[0].exitgatesopened_1
-                      let unhookedself = rows[0].unhookedself_1
-                      let mysteryboxesopened = rows[0].mysteryboxesopened_1
-                      let playtime = rows[0].playtime_1
-                      let name = rows[0].name_1
-                      const embedd = new Discord.RichEmbed()
-                      .setColor('#FF0000')
-                      .setTitle('Estadísticas de Superviviente de '+name)
-                      .setAuthor(message.member.user.tag, message.member.user.avatarURL)
-                      .setThumbnail('https://i.imgur.com/DG6fm1A.png')
-                      .addField('<:bp:724724401333076071> Puntos de sangre totales:', Coma(bloodpoints), true)
-                      .addField('Horas de juego:', Math.round(playtime/60), true)
-                      .addBlankField()
-                      .addField('Rango:', survivor_rank, true)
-                      .addField('<:icons_perfect:739182106139295915> Partidas perfectas:', survivor_perfectgames,true)
-                      .addField('<:Icons_Gen:739182107095466014> Generadores reparados:', equivgensrepaired, true)
-                      .addField('<:Icons_Aidkit:739182102427467817> Jugadores curados:', equivsurvivorshealed+'/'+equivsurvivorshealed_coop+' (Coop <:Icons_coop:739182106319650966>)',true)
-                      .addField('<:icons_skillCheck:739182107259043860> SkillChecks:', skillchecks,true)
-                      .addField('Total de Escapes:', escaped, true)
-                      .addField('Escapes arrastrándose:', escaped_ko, true)
-                      .addField('Escapes por trampilla:', escaped_hatch, true)
-                      .addField('Zafarse del gancho:', unhookedself, true)
-                      .addField('Hits de protección:', protectionhits, true)
-                      .addField('Puertas abiertas:', exitgatesopened, true)
-                      .addField('<:Icons_cofre:739182106651131957> Cofres abiertos:', mysteryboxesopened, true)
-                      .setTimestamp()
-                      .setFooter('La entidad', client.user.avatarURL)
-                      message.channel.send(embedd)
+                      message.channel.send('Tu cuenta de steam estaba en privado la última vez, puedes volver a chequear en **'+tiempo(360-((((parseInt(usa.getTime())-parseInt(update_att))/1000)/60)))+'** aproximadamente.')
                       return;
                     }
-                  } else
-                  {
-                    var options = {
-                      host: 'dbd.onteh.net.au',
-                      path: '/api/playerstats?steamid='+sid_2,
-                      headers: { 'User-Agent': 'EntityBot/0.6.5' }
-                    };      
-                    var req1 = https.get(options, function (res) {
-                    var bodyChunks2 = [];
-                    res.on('data', function (chunk) {
-                        bodyChunks2.push(chunk);
-                    }).on('end', function () {
-                        var body4 = Buffer.concat(bodyChunks2);
-                        if(VerificarPrivado(body4) == 1)
+                    else if((parseInt(usa.getTime())-parseInt(update_att)) < 1000*60*10 && st == 0)
+                    {
+                      message.channel.send('La cuenta de Steam está en la cola para ser agregada. Vuelve a intentar en **'+(10-Math.round((((parseInt(usa.getTime())-parseInt(update_att))/1000)/60)))+'** minutos aproximadamente.')
+                      return;
+                    }
+                    else
+                    {
+                      var options = {
+                        host: 'dbd.onteh.net.au',
+                        path: '/api/playerstats?steamid='+sid_2,
+                        headers: { 'User-Agent': 'EntityBot/0.6.5' }
+                      };     
+                      var req1 = https.get(options, function (res) {
+                        var bodyChunks_ = [];
+                        res.on('data', function (chunk) {
+                            bodyChunks_.push(chunk);
+                        }).on('end', function () {
+                        var body3 = Buffer.concat(bodyChunks_);
+                        if(VerificarPrivado(body3) == 1) 
                         {
                           const embedd = new Discord.RichEmbed()
-                            .setColor('#FF0000')
-                            .setTitle('¡Ups! Esto es vergonzoso...')
-                            .setAuthor(message.member.user.tag, message.member.user.avatarURL)
-                            .setThumbnail(message.member.user.avatarURL)
-                            .addField('Al parecer tu cuenta está en privada.', 'Recuerda tener todas las opciones de privacidad en público.')
-                            .addField('¿Ya cambiaste todas tus configuraciones a público y sigues sin aparecer?', 'Normalmente al pasar tu perfil a público, puede tardar desde 24 a 48 horas en actualizar tus datos la web (ajeno a nosotros).')
-                            .addField('Si siempre tuviste todo en público y no funciona:', 'Revisa esta imagen y asegurate de tener todo en orden.')
-                            .addField('Tu cuenta no fue actualizada.', 'Anteriormente ya habías solicitado tus estadísticas correctamente, la próxima vez que solicites tus estadísticas se mostrarán las antiguas hasta que pongas tu perfil en público nuevamente.')
-                            .setTimestamp()
-                            .setImage('https://cdn.discordapp.com/attachments/738848207328772237/739269462510796800/unknown.png')
-                            .setFooter('La entidad', client.user.avatarURL);
-                            message.channel.send(embedd)
-                            con.query(`UPDATE EntityUsers SET state = 1, update_at = ${usa.getTime()} WHERE SID = ${sid_2}`)
-                            return;
-                        }                  
+                          .setColor('#FF0000')
+                          .setTitle('¡Ups! Esto es vergonzoso...')
+                          .setAuthor(message.member.user.tag, message.member.user.avatarURL)
+                          .setThumbnail(message.member.user.avatarURL)
+                          .addField('Al parecer tu cuenta está en privada.', 'Recuerda tener todas las opciones de privacidad en público.')
+                          .addField('¿Ya cambiaste todas tus configuraciones a público y sigues sin aparecer?', 'Normalmente al pasar tu perfil a público, puede tardar desde 24 a 48 horas en actualizar tus datos la web (ajeno a nosotros).')
+                          .addField('Si siempre tuviste todo en público y no funciona:', 'Revisa esta imagen y asegurate de tener todo en orden.')
+                          .setTimestamp()
+                          .setImage('https://cdn.discordapp.com/attachments/738848207328772237/739269462510796800/unknown.png')
+                          .setFooter('La entidad', client.user.avatarURL);
+                          message.channel.send(embedd)
+                          con.query(`UPDATE EntityUsers SET state = 1, update_at = ${usa.getTime()} WHERE SID = '${sid_2}'`)
+                          return;
+                        }
+                        if(isEmptyObject(body3))
+                        {
+                          message.channel.send('La cuenta de Steam está en la cola para ser agregada, intentalo en **10** minutos y recuerda que puede tardar hasta 1 hora.')
+                          con.query(`UPDATE EntityUsers SET update_at = ${usa.getTime()}, state = 0 WHERE SID = '${sid_2}'`)
+                          return;
+                        } else
+                        {
+                                  if(args[0].toLowerCase() == 'survivor') 
+                                  {
+                                    obtenervalorsurv(body3, message.channel.id, message.author.id, message.guild.id, sid_2, usa.getTime())
+                                  }
+                                  if(args[0].toLowerCase() == 'killer') 
+                                  {
+                                    obtenervalorkill(body3, message.channel.id, message.author.id, message.guild.id, sid_2, usa.getTime())
+                                  }
+                        }
+                        })
+                        })
+                      }
+                    return;
+                    }
+                    else
+                  {
+                    if((parseInt(usa.getTime())-parseInt(update_att)) < 60000*60*3)
+                    {
+                      if(args[0].toLowerCase() == 'killer') 
+                      {
+                        let bloodpoints = rows[0].bloodpoints_1
+                        let killer_rank = rows[0].killer_rank_1
+                        let killer_perfectgames = rows[0].killer_perfectgames_1
+                        let killed = rows[0].killed_1
+                        let killed_sacrificed_afterlastgen = rows[0].killed_sacrificed_afterlastgen_1
+                        let sacrificed = rows[0].sacrificed_1
+                        let chainsawhits = rows[0].chainsawhits_1
+                        let beartrapcatches = rows[0].beartrapcatches_1
+                        let hatchetsthrown = rows[0].hatchetsthrown_1
+                        let survivorsgrabbedrepairinggen = rows[0].survivorsgrabbedrepairinggen_1
+                        let survivorshitwhilecarrying = rows[0].survivorshitwhilecarrying_1
+                        let hatchesclosed = rows[0].hatchesclosed_1
+                        let survivorsinterruptedcleansingtotem = rows[0].survivorsinterruptedcleansingtotem_1
+                        let playtime = rows[0].playtime_1
+                        let name = rows[0].name_1     
+                        const embedd = new Discord.RichEmbed()
+                        .setColor('#FF0000')
+                        .setTitle('Estadísticas de Asesino de '+name)
+                        .setAuthor(message.member.user.tag, message.member.user.avatarURL)
+                        .setThumbnail('https://i.imgur.com/y4KRvLf.png')
+                        .addField('<:bp:724724401333076071> Puntos de sangre totales:', Coma(bloodpoints), true)
+                        .addField('Horas de juego:', Math.round(playtime/60), true)
+                        .addBlankField()
+                        .addField('Rango:', killer_rank, true)
+                        .addField('Partidas perfectas:', killer_perfectgames,true)
+                        .addField('<:Icons_killer:739182105870991410> Asesinatos con Mori:', killed, true)
+                        .addField('<:Icons_Bgen:739182106474709042> Sacrificaste a todos después del último generador:', killed_sacrificed_afterlastgen,true)
+                        .addField('Sacrificios en ganchos:', sacrificed,true)
+                        .addField('Ataques con motosierra (HillBilly):', chainsawhits, true)
+                        .addField('<:Icons_tramp:739182105900351578> Atrapados en trampas (Trampero):', beartrapcatches, true)
+                        .addField('<:Icons_axe:739182102947299539> Hachas lanzadas:', hatchetsthrown, true)
+                        .addField('<:Icons_Gen:739182107095466014> Surpervivientes interrumpidos en gens:', survivorsgrabbedrepairinggen, true)
+                        .addField('<:icons_upa:739182105853952120> Supervivientes golpeados mientras cargas con otro:', survivorshitwhilecarrying, true)
+                        .addField('<:Icons_Hatch:739182106751664168> Trampillas cerradas:', hatchesclosed, true)
+                        .addField('<:icons_totem:739182106282033272> Supervivientes interrumpidos en totems:', survivorsinterruptedcleansingtotem, true)
+                        .setTimestamp()
+                        .setFooter('La entidad', client.user.avatarURL);
+                        message.channel.send(embedd)
+                        return;
+                      } else if(args[0].toLowerCase() == 'survivor') 
+                      {
+                        let bloodpoints = rows[0].bloodpoints_1
+                        let survivor_rank = rows[0].survivor_rank_1
+                        let survivor_perfectgames = rows[0].survivor_perfectgames_1
+                        let equivgensrepaired = rows[0].equivgensrepaired_1
+                        let equivsurvivorshealed = rows[0].equivsurvivorshealed_1
+                        let equivsurvivorshealed_coop = rows[0].equivsurvivorshealed_coop_1
+                        let skillchecks = rows[0].skillchecks_1
+                        let escaped = rows[0].escaped_1
+                        let escaped_ko = rows[0].escaped_ko_1
+                        let escaped_hatch = rows[0].escaped_hatch_1
+                        let protectionhits = rows[0].protectionhits_1
+                        let exitgatesopened = rows[0].exitgatesopened_1
+                        let unhookedself = rows[0].unhookedself_1
+                        let mysteryboxesopened = rows[0].mysteryboxesopened_1
+                        let playtime = rows[0].playtime_1
+                        let name = rows[0].name_1
+                        const embedd = new Discord.RichEmbed()
+                        .setColor('#FF0000')
+                        .setTitle('Estadísticas de Superviviente de '+name)
+                        .setAuthor(message.member.user.tag, message.member.user.avatarURL)
+                        .setThumbnail('https://i.imgur.com/DG6fm1A.png')
+                        .addField('<:bp:724724401333076071> Puntos de sangre totales:', Coma(bloodpoints), true)
+                        .addField('Horas de juego:', Math.round(playtime/60), true)
+                        .addBlankField()
+                        .addField('Rango:', survivor_rank, true)
+                        .addField('<:icons_perfect:739182106139295915> Partidas perfectas:', survivor_perfectgames,true)
+                        .addField('<:Icons_Gen:739182107095466014> Generadores reparados:', equivgensrepaired, true)
+                        .addField('<:Icons_Aidkit:739182102427467817> Jugadores curados:', equivsurvivorshealed+'/'+equivsurvivorshealed_coop+' (Coop <:Icons_coop:739182106319650966>)',true)
+                        .addField('<:icons_skillCheck:739182107259043860> SkillChecks:', skillchecks,true)
+                        .addField('Total de Escapes:', escaped, true)
+                        .addField('Escapes arrastrándose:', escaped_ko, true)
+                        .addField('Escapes por trampilla:', escaped_hatch, true)
+                        .addField('Zafarse del gancho:', unhookedself, true)
+                        .addField('Hits de protección:', protectionhits, true)
+                        .addField('Puertas abiertas:', exitgatesopened, true)
+                        .addField('<:Icons_cofre:739182106651131957> Cofres abiertos:', mysteryboxesopened, true)
+                        .setTimestamp()
+                        .setFooter('La entidad', client.user.avatarURL)
+                        message.channel.send(embedd)
+                        return;
+                      }
+                    } else
+                    {
+                      var options = {
+                        host: 'dbd.onteh.net.au',
+                        path: '/api/playerstats?steamid='+sid_2,
+                        headers: { 'User-Agent': 'EntityBot/0.6.5' }
+                      };      
+                      var req1 = https.get(options, function (res) {
+                      var bodyChunks2 = [];
+                      res.on('data', function (chunk) {
+                          bodyChunks2.push(chunk);
+                      }).on('end', function () {
+                          var body4 = Buffer.concat(bodyChunks2);
+                          if(VerificarPrivado(body4) == 1)
+                          {
+                            const embedd = new Discord.RichEmbed()
+                              .setColor('#FF0000')
+                              .setTitle('¡Ups! Esto es vergonzoso...')
+                              .setAuthor(message.member.user.tag, message.member.user.avatarURL)
+                              .setThumbnail(message.member.user.avatarURL)
+                              .addField('Al parecer tu cuenta está en privada.', 'Recuerda tener todas las opciones de privacidad en público.')
+                              .addField('¿Ya cambiaste todas tus configuraciones a público y sigues sin aparecer?', 'Normalmente al pasar tu perfil a público, puede tardar desde 24 a 48 horas en actualizar tus datos la web (ajeno a nosotros).')
+                              .addField('Si siempre tuviste todo en público y no funciona:', 'Revisa esta imagen y asegurate de tener todo en orden.')
+                              .addField('Tu cuenta no fue actualizada.', 'Anteriormente ya habías solicitado tus estadísticas correctamente, la próxima vez que solicites tus estadísticas se mostrarán las antiguas hasta que pongas tu perfil en público nuevamente.')
+                              .setTimestamp()
+                              .setImage('https://cdn.discordapp.com/attachments/738848207328772237/739269462510796800/unknown.png')
+                              .setFooter('La entidad', client.user.avatarURL);
+                              message.channel.send(embedd)
+                              con.query(`UPDATE EntityUsers SET state = 1, update_at = ${usa.getTime()} WHERE SID = ${sid_2}`)
+                              return;
+                          }                  
+                          if(args[0].toLowerCase() == 'survivor') 
+                          {
+                            obtenervalorsurv(body4, message.channel.id, message.author.id, message.guild.id, sid_2, usa.getTime())
+                          }
+                          if(args[0].toLowerCase() == 'killer') 
+                          {
+                            obtenervalorkill(body4, message.channel.id, message.author.id, message.guild.id, sid_2, usa.getTime())
+                          }
+                      })
+                    });
+                    return;
+                    }
+                  }
+                } else
+                {
+                    var options = {
+                      host: 'dbd.onteh.net.au',
+                      path: '/api/playerstats?steamid='+sid_2,
+                      headers: { 'User-Agent': 'EntityBot/0.6.5' }
+                    }     
+                    var req1 = https.get(options, function (res) {
+                    var bodyChunks3 = [];
+                    res.on('data', function (chunk) {
+                        bodyChunks3.push(chunk);
+                    }).on('end', function () {
+                        var body5 = Buffer.concat(bodyChunks3);
+                        if(VerificarPrivado(body5) == 1)
+                        {
+                          const embedd = new Discord.RichEmbed()
+                          .setColor('#FF0000')
+                          .setTitle('¡Ups! Esto es vergonzoso...')
+                          .setAuthor(message.member.user.tag, message.member.user.avatarURL)
+                          .setThumbnail(message.member.user.avatarURL)
+                          .addField('Al parecer tu cuenta está en privada.', 'Recuerda tener todas las opciones de privacidad en público.')
+                          .addField('¿Ya cambiaste todas tus configuraciones a público y sigues sin aparecer?', 'Normalmente al pasar tu perfil a público, puede tardar desde 24 a 48 horas en actualizar tus datos la web (ajeno a nosotros).')
+                          .addField('Si siempre tuviste todo en público y no funciona:', 'Revisa esta imagen y asegurate de tener todo en orden.')
+                          .setTimestamp()
+                          .setImage('https://cdn.discordapp.com/attachments/738848207328772237/739269462510796800/unknown.png')
+                          .setFooter('La entidad', client.user.avatarURL);
+                          message.channel.send(embedd)
+                          con.query(`INSERT INTO EntityUsers (SID, update_at, state) VALUES ('${sid_2}', '${usa.getTime()}', '1')`)
+                          return;
+                        } 
+                        if(isEmptyObject(body5))
+                        {
+
+                          var options2 = {
+                            host: 'dbd.onteh.net.au',
+                            path: '/api/playerstats?steamid='+sid_2,
+                            method: 'POST',
+                            headers: { 'User-Agent': 'EntityBot/0.6.5' }
+                        };    
+                          options2.agent = new https.Agent(options2)
+                          const reqq1 = https.request(options2, (res) => {
+                            if(res.statusCode != 201)
+                            {
+                                const embedd = new Discord.RichEmbed()
+                                .setColor('#FF0000')
+                                .setTitle('No podemos agregar tu cuenta...')
+                                .setAuthor(message.member.user.tag, message.member.user.avatarURL)
+                                .setThumbnail(client.user.avatarURL)
+                                .addField('Tenemos problemas con la web.', 'Actualmente, por muchas peticiones, la web no nos permite postear cuentas, por lo que deberás hacerlo apretando el botón de abajo y pegando tu link de perfil. Luego de ponerla ya podrás ver tus **/stats** por aquí sin problema.')
+                                .addField('Agregar cuenta:', '[Haz click aquí](https://dbd.onteh.net.au)')
+                                .setTimestamp()
+                                .setFooter('La entidad', client.user.avatarURL)
+                                message.channel.send(embedd)
+                                return;
+                            }
+                            message.channel.send('La cuenta de Steam está en la cola para ser agregada ya que no estaba registrada, intentalo en **10** minutos y recuerda que puede tardar hasta 1 hora.')
+                            con.query(`INSERT INTO EntityUsers (SID, update_at) VALUES ('${sid_2}', '${usa.getTime()}')`)
+                            console.log('statusCode:', res.statusCode);
+                            console.log('headers:', res.headers);
+                          })
+                          reqq1.on('error', (e) => {
+                            console.error(e);
+                          });
+                          reqq1.end()
+                          return;
+                        }
                         if(args[0].toLowerCase() == 'survivor') 
                         {
-                          obtenervalorsurv(body4, message.channel.id, message.author.id, message.guild.id, sid_2, usa.getTime())
+                          obtenervalorsurv(body5, message.channel.id, message.author.id, message.guild.id, sid_2, usa.getTime())
                         }
                         if(args[0].toLowerCase() == 'killer') 
                         {
-                          obtenervalorkill(body4, message.channel.id, message.author.id, message.guild.id, sid_2, usa.getTime())
+                          obtenervalorkill(body5, message.channel.id, message.author.id, message.guild.id, sid_2, usa.getTime())
                         }
                     })
                   });
-                  return;
-                  }
                 }
-              } else
-              {
-                  var options = {
-                    host: 'dbd.onteh.net.au',
-                    path: '/api/playerstats?steamid='+sid_2,
-                    headers: { 'User-Agent': 'EntityBot/0.6.5' }
-                  }     
-                  var req1 = https.get(options, function (res) {
-                  var bodyChunks3 = [];
-                  res.on('data', function (chunk) {
-                      bodyChunks3.push(chunk);
-                  }).on('end', function () {
-                      var body5 = Buffer.concat(bodyChunks3);
-                      if(VerificarPrivado(body5) == 1)
-                      {
-                        const embedd = new Discord.RichEmbed()
-                        .setColor('#FF0000')
-                        .setTitle('¡Ups! Esto es vergonzoso...')
-                        .setAuthor(message.member.user.tag, message.member.user.avatarURL)
-                        .setThumbnail(message.member.user.avatarURL)
-                        .addField('Al parecer tu cuenta está en privada.', 'Recuerda tener todas las opciones de privacidad en público.')
-                        .addField('¿Ya cambiaste todas tus configuraciones a público y sigues sin aparecer?', 'Normalmente al pasar tu perfil a público, puede tardar desde 24 a 48 horas en actualizar tus datos la web (ajeno a nosotros).')
-                        .addField('Si siempre tuviste todo en público y no funciona:', 'Revisa esta imagen y asegurate de tener todo en orden.')
-                        .setTimestamp()
-                        .setImage('https://cdn.discordapp.com/attachments/738848207328772237/739269462510796800/unknown.png')
-                        .setFooter('La entidad', client.user.avatarURL);
-                        message.channel.send(embedd)
-                        con.query(`INSERT INTO EntityUsers (SID, update_at, state) VALUES ('${sid_2}', '${usa.getTime()}', '1')`)
-                        return;
-                      } 
-                      if(isEmptyObject(body5))
-                      {
-
-                        var options2 = {
-                          host: 'dbd.onteh.net.au',
-                          path: '/api/playerstats?steamid='+sid_2,
-                          method: 'POST',
-                          headers: { 'User-Agent': 'EntityBot/0.6.5' }
-                      };    
-                        options2.agent = new https.Agent(options2)
-                        const reqq1 = https.request(options2, (res) => {
-                          if(res.statusCode != 201)
-                          {
-                              const embedd = new Discord.RichEmbed()
-                              .setColor('#FF0000')
-                              .setTitle('No podemos agregar tu cuenta...')
-                              .setAuthor(message.member.user.tag, message.member.user.avatarURL)
-                              .setThumbnail(client.user.avatarURL)
-                              .addField('Tenemos problemas con la web.', 'Actualmente, por muchas peticiones, la web no nos permite postear cuentas, por lo que deberás hacerlo apretando el botón de abajo y pegando tu link de perfil. Luego de ponerla ya podrás ver tus **/stats** por aquí sin problema.')
-                              .addField('Agregar cuenta:', '[Haz click aquí](https://dbd.onteh.net.au)')
-                              .setTimestamp()
-                              .setFooter('La entidad', client.user.avatarURL)
-                              message.channel.send(embedd)
-                              return;
-                          }
-                          message.channel.send('La cuenta de Steam está en la cola para ser agregada ya que no estaba registrada, intentalo en **10** minutos y recuerda que puede tardar hasta 1 hora.')
-                          con.query(`INSERT INTO EntityUsers (SID, update_at) VALUES ('${sid_2}', '${usa.getTime()}')`)
-                          console.log('statusCode:', res.statusCode);
-                          console.log('headers:', res.headers);
-                        })
-                        reqq1.on('error', (e) => {
-                          console.error(e);
-                        });
-                        reqq1.end()
-                        return;
-                      }
-                      if(args[0].toLowerCase() == 'survivor') 
-                      {
-                        obtenervalorsurv(body5, message.channel.id, message.author.id, message.guild.id, sid_2, usa.getTime())
-                      }
-                      if(args[0].toLowerCase() == 'killer') 
-                      {
-                        obtenervalorkill(body5, message.channel.id, message.author.id, message.guild.id, sid_2, usa.getTime())
-                      }
-                  })
-                });
-              }
+              })
             })
           })
-        })
+        }
         return;
       }
 
