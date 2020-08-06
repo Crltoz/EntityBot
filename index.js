@@ -606,7 +606,7 @@ if(n2.has(message.author.id))
 
     if(command == 'discord')
     {
-      message.channel.send('<:Entityicon:733814957111771146> En nuestro Discord podrás obtener el bot para tu servidor, y soporte. Link: https://discord.gg/6eBRcRK')
+      message.channel.send('<:Entityicon:733814957111771146> Agrega el bot a tu servidor con el URL: https://cutt.ly/entidadbot | Y usa **/participo** para entrar al sorteo de un **DLC Chapter** a elección. (Sorteo válido para usuarios de Steam Argentina)')
       return;
     }
 
