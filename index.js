@@ -2734,7 +2734,6 @@ function obtenervalorsurv(variable, canal, usuario, server, sid, usa)
   var playtime_2 = playtime_1.slice(0, playtime_1.indexOf(',')-1)
   var bloodpoints_1 = variable.slice(variable.indexOf('bloodpoints')+14)
   var bloodpoints_2 = bloodpoints_1.slice(0, bloodpoints_1.indexOf(',')-1)
-  console.log(bloodpoints_2)
   var survivor_rank_1 = variable.slice(variable.indexOf('survivor_rank')+16)
   var survivor_rank_2 = survivor_rank_1.slice(0, survivor_rank_1.indexOf(',')-1)
   var survivor_perfectgames_1 = variable.slice(variable.indexOf('survivor_perfectgames')+21+3)
@@ -2968,9 +2967,17 @@ function VerificarPrivado(buffer)
   console.log(state_2)
   if(state_2 == 1)
   {
+  console.log('1')
   result = 1;
   return result;
   }
+  if(state_2 == 0)
+  {
+  console.log('0')
+  result = 1;
+  return result;
+  }
+  console.log('!= 1')
   return result;
 }
 
