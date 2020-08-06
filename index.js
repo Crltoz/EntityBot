@@ -2975,7 +2975,7 @@ function VerificarPrivado(buffer)
   if(state_2 == 0)
   {
   console.log('0')
-  result = 1;
+  result = 0;
   return result;
   }
   console.log('!= 1')
