@@ -568,7 +568,7 @@ if(n2.has(message.author.id))
             let k_rank = rows[0].killer_rank_1
             let update_att = rows[0].update_at;
             let bloodp = rows[0].bloodpoints_1
-            let st = state
+            let st = rows[0].state
             if(k_rank == 0 || k_rank == 20 && bloodp == 0)
             {
               if((parseInt(usa.getTime())-parseInt(update_att)) < 60000*60*6 && st == 0)
@@ -901,7 +901,7 @@ if(n2.has(message.author.id))
                 {
                 let k_rank = rows[0].killer_rank_1
                 let update_att = rows[0].update_at;
-                let st = state
+                let st = rows[0].state
                 if(k_rank == 0)
                 {
                   if((parseInt(usa.getTime())-parseInt(update_att)) < 60000*60*6 && st == 0)
