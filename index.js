@@ -781,7 +781,25 @@ if(n2.has(message.author.id))
                   bodyChunks.push(chunk);
               }).on('end', function () {
                   var body = Buffer.concat(bodyChunks);
-  
+                  var state_1 = body.slice(body.indexOf('state')+8)
+                  var state_2 = state_1.slice(0, state_1.indexOf(',')-1)
+                  if(state_2 == 0)
+                  {
+                    const embedd = new Discord.RichEmbed()
+                    .setColor('#FF0000')
+                    .setTitle('¡Ups! Esto es vergonzoso...')
+                    .setAuthor(message.member.user.tag, message.member.user.avatarURL)
+                    .setThumbnail(message.member.user.avatarURL)
+                    .addField('Al parecer tu cuenta está en privada.', 'Recuerda tener todas las opciones de privacidad en público.')
+                    .addField('¿Ya cambiaste todas tus configuraciones a público y sigues sin aparecer?', 'Normalmente al pasar tu perfil a público, puede tardar desde 24 a 48 horas en actualizar tus datos la web (ajeno a nosotros).')
+                    .addField('Si siempre tuviste todo en público y no funciona:', 'Revisa esta imagen y asegurate de tener todo en orden.')
+                    .setTimestamp()
+                    .setImage('https://cdn.discordapp.com/attachments/738848207328772237/739269462510796800/unknown.png')
+                    .setFooter('La entidad', client.user.avatarURL);
+                    message.channel.send(embedd)
+                    con.query(`INSERT INTO EntityUsers (SID, update_at, state) VALUES ('${sid_2}', '${usa.getTime()}', '0')`)
+                    return;
+                  }
                   if(isEmptyObject(body))
                   {
 
@@ -793,25 +811,6 @@ if(n2.has(message.author.id))
                   };    
                     options2.agent = new https.Agent(options2)
                     const reqq1 = https.request(options2, (res) => {
-                      var state_1 = body3.slice(body3.indexOf('state')+8)
-                      var state_2 = state_1.slice(0, state_1.indexOf(',')-1)
-                      if(state_2 == 0)
-                      {
-                        const embedd = new Discord.RichEmbed()
-                        .setColor('#FF0000')
-                        .setTitle('¡Ups! Esto es vergonzoso...')
-                        .setAuthor(message.member.user.tag, message.member.user.avatarURL)
-                        .setThumbnail(message.member.user.avatarURL)
-                        .addField('Al parecer tu cuenta está en privada.', 'Recuerda tener todas las opciones de privacidad en público.')
-                        .addField('¿Ya cambiaste todas tus configuraciones a público y sigues sin aparecer?', 'Normalmente al pasar tu perfil a público, puede tardar desde 24 a 48 horas en actualizar tus datos la web (ajeno a nosotros).')
-                        .addField('Si siempre tuviste todo en público y no funciona:', 'Revisa esta imagen y asegurate de tener todo en orden.')
-                        .setTimestamp()
-                        .setImage('https://cdn.discordapp.com/attachments/738848207328772237/739269462510796800/unknown.png')
-                        .setFooter('La entidad', client.user.avatarURL);
-                        message.channel.send(embedd)
-                        con.query(`INSERT INTO EntityUsers (SID, update_at, state) VALUES ('${sid_2}', '${usa.getTime()}', '0')`)
-                        return;
-                      }
                       if(res.statusCode != 201)
                       {
                           const embedd = new Discord.RichEmbed()
@@ -1069,7 +1068,7 @@ if(n2.has(message.author.id))
                         bodyChunks.push(chunk);
                     }).on('end', function () {
                         var body = Buffer.concat(bodyChunks);
-                        var state_1 = body3.slice(body3.indexOf('state')+8)
+                        var state_1 = body.slice(body.indexOf('state')+8)
                         var state_2 = state_1.slice(0, state_1.indexOf(',')-1)
                         if(state_2 == 0)
                         {
@@ -1115,7 +1114,25 @@ if(n2.has(message.author.id))
                       bodyChunks.push(chunk);
                   }).on('end', function () {
                       var body = Buffer.concat(bodyChunks);
-      
+                      var state_1 = body.slice(body.indexOf('state')+8)
+                      var state_2 = state_1.slice(0, state_1.indexOf(',')-1)
+                      if(state_2 == 0)
+                      {
+                        const embedd = new Discord.RichEmbed()
+                        .setColor('#FF0000')
+                        .setTitle('¡Ups! Esto es vergonzoso...')
+                        .setAuthor(message.member.user.tag, message.member.user.avatarURL)
+                        .setThumbnail(message.member.user.avatarURL)
+                        .addField('Al parecer tu cuenta está en privada.', 'Recuerda tener todas las opciones de privacidad en público.')
+                        .addField('¿Ya cambiaste todas tus configuraciones a público y sigues sin aparecer?', 'Normalmente al pasar tu perfil a público, puede tardar desde 24 a 48 horas en actualizar tus datos la web (ajeno a nosotros).')
+                        .addField('Si siempre tuviste todo en público y no funciona:', 'Revisa esta imagen y asegurate de tener todo en orden.')
+                        .setTimestamp()
+                        .setImage('https://cdn.discordapp.com/attachments/738848207328772237/739269462510796800/unknown.png')
+                        .setFooter('La entidad', client.user.avatarURL);
+                        message.channel.send(embedd)
+                        con.query(`INSERT INTO EntityUsers (SID, update_at, state) VALUES ('${sid_2}', '${usa.getTime()}', '0')`)
+                        return;
+                      }
                       if(isEmptyObject(body))
                       {
 
@@ -1127,25 +1144,6 @@ if(n2.has(message.author.id))
                       };    
                         options2.agent = new https.Agent(options2)
                         const reqq1 = https.request(options2, (res) => {
-                          var state_1 = body3.slice(body3.indexOf('state')+8)
-                          var state_2 = state_1.slice(0, state_1.indexOf(',')-1)
-                          if(state_2 == 0)
-                          {
-                            const embedd = new Discord.RichEmbed()
-                            .setColor('#FF0000')
-                            .setTitle('¡Ups! Esto es vergonzoso...')
-                            .setAuthor(message.member.user.tag, message.member.user.avatarURL)
-                            .setThumbnail(message.member.user.avatarURL)
-                            .addField('Al parecer tu cuenta está en privada.', 'Recuerda tener todas las opciones de privacidad en público.')
-                            .addField('¿Ya cambiaste todas tus configuraciones a público y sigues sin aparecer?', 'Normalmente al pasar tu perfil a público, puede tardar desde 24 a 48 horas en actualizar tus datos la web (ajeno a nosotros).')
-                            .addField('Si siempre tuviste todo en público y no funciona:', 'Revisa esta imagen y asegurate de tener todo en orden.')
-                            .setTimestamp()
-                            .setImage('https://cdn.discordapp.com/attachments/738848207328772237/739269462510796800/unknown.png')
-                            .setFooter('La entidad', client.user.avatarURL);
-                            message.channel.send(embedd)
-                            con.query(`INSERT INTO EntityUsers (SID, update_at, state) VALUES ('${sid_2}', '${usa.getTime()}', '0')`)
-                            return;
-                          }
                           if(res.statusCode != 201)
                           {
                               const embedd = new Discord.RichEmbed()
