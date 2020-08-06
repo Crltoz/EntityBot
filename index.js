@@ -26,6 +26,7 @@ var LC = {}
 var NombrePersonaje;
 var ImagenPersonaje;
 var cid = {}
+var prefix = {}
 const lobby_set = new Set();
 const r1 = new Set();
 const r2 = new Set();
@@ -64,7 +65,7 @@ client.on("guildCreate", guild => {
       }
     }
   })
-  defaultChannel.send("**Gracias por añadirme!** :white_check_mark:\n**-** Mi prefijo es `/`\n**-** Puedes ver mis comandos con `/ayuda` o `/lobby`\n**-** Cualquier consulta, sugerencia o reporte de bug. Hazla en nuestro discord: https://discord.gg/T6rEERg")
+  defaultChannel.send("**Gracias por añadirme!** :white_check_mark:\n**-** Mi prefijo es `/`\n**-** Puedes ver mis comandos con `/ayuda`\n**-** Si eres de Argentina y usas Steam, participa por un DLC Chapter con `/participo`")
   client.channels.get('739997803094343721').send('| Nuevo servidor | Nombre: '+guild.name+' | Usuarios: '+guild.memberCount)
 })
 
@@ -420,16 +421,15 @@ if(n2.has(message.author.id))
   return;
  }
 
- const args = message.content.slice(config.prefix.length).trim().split(/ +/g);
+ const args = message.content.slice(1).trim().split(/ +/g);
  var jejox = args.shift();
  const command = jejox.toLowerCase();
  let texto = args.join(" ");
  const usa = new Date();
 
 
- if(message.content.startsWith(config.prefix))
+ if(message.content.startsWith(prefix[message.guild.id]))
  {
-     message.delete(1);
      if (cid[message.guild.id] != null && message.channel.id != cid[message.guild.id])
      {
     const disc = client.channels.get(cid[message.guild.id]);
@@ -522,25 +522,86 @@ if(n2.has(message.author.id))
 
      if(command == 'ayuda')
      {
-      const embedd = new Discord.RichEmbed()
-      .setColor('#FF0000')
-      .setTitle('🔰 Ayuda - Comandos 🔰')
-      .setAuthor(message.member.user.tag, message.member.user.avatarURL)
-      .setURL('https://deadbydaylight.gamepedia.com/Dead_by_Daylight_Wiki')
-      .setThumbnail(client.user.avatarURL)
-      .addField('NOTA:', 'Los paréntesis: **[]** no deben ser usados en los comandos, es simplemente para resaltar cómo se usa el comando.')
-      .addField('/calcular [Killer o Survivor]', 'Podrás calcular cuánto cuesta tener todas las perks de tu superviviente o asesino, el bot luego te preguntará la cantidad de perks que tengas para hacer el cálculo.')
-      .addField('/stats [Survivor o Killer] [URL Perfil Steam o Código de amigo]', 'Obtendrás las estadísticas de un jugador poniendo su Perfil de Steam y seleccionando si quieres ver las de Killer o Survivor.')
-      .addField('/nivel [Nivel Inicial] [Nivel Final]', 'Este comando calcula los puntos de sangre necesarios para comprar los niveles en la red de sangre que desees.')
-      .addField('/canal #nombre', 'Sólo puede ser usado por **ADMINISTRADORES**, puedes selecccionar un canal para que los comandos sólo funcionen allí. Usa **/canal borrar** para poder usarlos en cualquier canal nuevamente.')
-      .addField('/lobby', 'Aquí hay funciones como los comandos de arriba, pero se utilizan a través de reacciones, más fácil para la gente que no le gusta usar los comandos.')
-      .addField('/random [Survivor o Killer]', 'Generará y enviará por el canal una Build random de 4 perks, según lo que elijas, Killer o Survivor.')
-      .addField('/santuario', 'Informará sobre el santuario de los secretos actual y el valor de fragmentos iridiscentes de cada perk.')
-      .addField('/discord', 'Invitación del Discord Oficial del bot, aquí podrás obtener el link para unir el bot a tu Server de Discord o soporte del mismo.')
-      .setTimestamp()
-      .setFooter('La entidad - V0.6.5 - Beta Cerrada', client.user.avatarURL);
-      message.channel.send(embedd)
+      if(texto != 'admin')
+      {
+        const embedd = new Discord.RichEmbed()
+        .setColor('#FF0000')
+        .setTitle('🔰 Ayuda - Comandos 🔰')
+        .setAuthor(message.member.user.tag, message.member.user.avatarURL)
+        .setURL('https://deadbydaylight.gamepedia.com/Dead_by_Daylight_Wiki')
+        .setThumbnail(client.user.avatarURL)
+        .addField(prefix[message.guild.id]+'participo', 'Ingresas en un sorteo de un DLC Chapter a elección, sólo para usuarios Steam de Argentina.')
+        .addField(prefix[message.guild.id]+'discord', 'Obtendrás el link para añadir el bot a tu servidor de Discord.')
+        .addField(prefix[message.guild.id]+'NOTA:', 'Los paréntesis: **[]** no deben ser usados en los comandos, es simplemente para resaltar cómo se usa el comando.')
+        .addField(prefix[message.guild.id]+'calcular [Killer o Survivor]', 'Podrás calcular cuánto cuesta tener todas las perks de tu superviviente o asesino, el bot luego te preguntará la cantidad de perks que tengas para hacer el cálculo.')
+        .addField(prefix[message.guild.id]+'stats [Survivor o Killer] [URL Perfil Steam o Código de amigo]', 'Obtendrás las estadísticas de un jugador poniendo su Perfil de Steam y seleccionando si quieres ver las de Killer o Survivor.')
+        .addField(prefix[message.guild.id]+'nivel [Nivel Inicial] [Nivel Final]', 'Este comando calcula los puntos de sangre necesarios para comprar los niveles en la red de sangre que desees.')
+        .addField(prefix[message.guild.id]+'lobby', 'Aquí hay funciones como los comandos de arriba, pero se utilizan a través de reacciones, más fácil para la gente que no le gusta usar los comandos.')
+        .addField(prefix[message.guild.id]+'random [Survivor o Killer]', 'Generará y enviará por el canal una Build random de 4 perks, según lo que elijas, Killer o Survivor.')
+        .addField(prefix[message.guild.id]+'santuario', 'Informará sobre el santuario de los secretos actual y el valor de fragmentos iridiscentes de cada perk.')
+        .addField(prefix[message.guild.id]+'ayuda admin', 'Mostrará los comandos que pueden ser utilizados por **administradores** para personalizar el bot.')
+        .setTimestamp()
+        .setFooter('La entidad - V0.7.0 - Beta Pública', client.user.avatarURL);
+        message.channel.send(embedd)
+        return;
+      }
+      else
+      {
+        if(!message.member.permissions.has('ADMINISTRATOR')) return message.channel.send('El comando sólo puede ser por personas con permisos de Administrador.')
+        const embedd = new Discord.RichEmbed()
+        .setColor('#FF0000')
+        .setTitle('🔰 Ayuda - Admins 🔰')
+        .setAuthor(message.member.user.tag, message.member.user.avatarURL)
+        .setURL('https://deadbydaylight.gamepedia.com/Dead_by_Daylight_Wiki')
+        .setThumbnail(client.user.avatarURL)
+        .addField(prefix[message.guild.id]+'prefijo [Opción]', 'Reemplaza **Opción** por el prefijo de comandos que te gustaría usar. Default: **/** | Opciones: **!**, **#**, **%**, **&**, **/**, **.** y **-**')
+        .addField(prefix[message.guild.id]+'canal #nombre', 'Sólo puede ser usado por **ADMINISTRADORES**, puedes selecccionar un canal para que los comandos sólo funcionen allí. Usa **/canal borrar** para poder usarlos en cualquier canal nuevamente.')
+        .setTimestamp()
+        .setFooter('La entidad - V0.7.0 - Beta Pública', client.user.avatarURL);
+        message.channel.send(embedd)
+        return;
+      }
+    }
+
+    if(command == 'participo')
+    {
+      var server = message.guild;
+      if(server.ownerID != message.author.id)
+      {
+        message.channel.send('Para ingresar en el sorteo debes agregar el bot a un Discord donde seas el creador: https://cutt.ly/entidadbot | Luego de agregarlo, usa **/participo** en tu servidor.')
+        return;
+      }
+      con.query(`SELECT * FROM Sorteo WHERE ID = ${message.author.id}`, (err, rows) => {
+        if(err) throw err;
+        if(rows.length >= 1)
+        { 
+          message.channel.send('Tu ya estás participando del sorteo **DLC Chapter** a elección, '+message.member.user+'. Recuerda que si ganas, debes ser de Argentina porque Steam no permite enviar regalos a otras regiones.')
+        } else
+        {
+          con.query(`INSERT INTO Sorteo (ID, SID) VALUES ('${message.author.id}', '${message.guild.id}')`)
+          message.channel.send('Excelente, ahora estás particiando por el **DLC Chapter** a eleección, '+message.member.user+'. Recuerda que si ganas, debes ser de Argentina porque Steam no permite enviar regalos a otras regiones.')
+        }
+      })
       return;
+    }
+
+    if(command == 'prefijo')
+    {
+      if(!message.member.permissions.has('ADMINISTRATOR')) return message.channel.send('El comando sólo puede ser por personas con permisos de Administrador.')
+      if(!texto) return message.channel.send('Usa **/prefijo [Opción]** | Reemplaza **Opción** por el prefijo de comandos que te gustaría usar. Default: **/** | Opciones: **!**, **#**, **%**, **&**, **/**, **.** y **-**')
+      if(texto != '!' && texto != '#' && texto != '%' && texto != '&' && texto != '/' && texto != '.' && texto != '-') return message.channel.send('Usa **/prefijo [Opción]** | Reemplaza **Opción** por el prefijo de comandos que te gustaría usar. Default: **/** | Opciones: **!**, **#**, **%**, **&**, **/**, **.** y **-**')
+      con.query(`SELECT * FROM Servidores WHERE ID = ${message.guild.id}`, (err, rows) =>{
+        if(err) throw err;
+        if(rows.length >= 1)
+        {
+          con.query(`UPDATE Servidores SET Prefix = '${texto}' WHERE ID = ${message.guild.id}`)
+        } else
+        {
+          con.query(`INSERT INTO Servidores (ID, cid, Prefijo) VALUES ('${message.guild.id}', 'null', '${texto}')`)
+        }
+      })
+      message.channel.send(`Cambiaste el prefijo para usar comandos a: **${texto}**`)
+      return;    
     }
 
     if(command == 'discord')
@@ -1250,7 +1311,7 @@ if(n2.has(message.author.id))
              .addField('5⃣ Invitación del Discord Oficial del bot.', 'Aquí podrás obtener el link para unir el bot a tu Server de Discord o soporte del mismo.')
              
              .setTimestamp()
-             .setFooter('V0.6.5 - Beta Cerrada', client.user.avatarURL);
+             .setFooter('V0.7.0 - Beta Pública', client.user.avatarURL);
              message.channel.send(lembed).then(function (message) {
                  message.react("1⃣")
                  setTimeout(() => {
@@ -2866,6 +2927,8 @@ function handleDisconnect() {
                     for (var x = 0; x < servers; x++) {
                         let cidd = rows[x].cid;
                         let IDD = rows[x].ID;
+                        let prefixx = rows[x].prefix
+                        prefix[IDD] = prefixx;
                         cid[IDD] = cidd;
                         if (cidd == null || cidd == 'null') cid[IDD] = null;
                     }
