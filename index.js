@@ -427,7 +427,7 @@ if(n2.has(message.author.id))
  let texto = args.join(" ");
  const usa = new Date();
 
-
+ if(prefix[message.guild.id] == null) prefix[message.guild.id] = '/';
  if(message.content.startsWith(prefix[message.guild.id]))
  {
      if (cid[message.guild.id] != null && message.channel.id != cid[message.guild.id])
