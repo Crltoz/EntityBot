@@ -1114,10 +1114,7 @@ if(n2.has(message.author.id))
                       bodyChunks.push(chunk);
                   }).on('end', function () {
                       var body = Buffer.concat(bodyChunks);
-                      var state_1 = body.slice(body.indexOf('state')+8)
-                      var state_2 = state_1.slice(0, state_1.indexOf(',')-1)
-                      console.log(state_2)
-                      if(state_2 == 1)
+                      if(VerificarPrivado(body) == 1)
                       {
                         const embedd = new Discord.RichEmbed()
                         .setColor('#FF0000')
@@ -1133,7 +1130,7 @@ if(n2.has(message.author.id))
                         message.channel.send(embedd)
                         con.query(`INSERT INTO EntityUsers (SID, update_at, state) VALUES ('${sid_2}', '${usa.getTime()}', '1')`)
                         return;
-                      }
+                      } 
                       if(isEmptyObject(body))
                       {
 
@@ -2961,5 +2958,19 @@ function tiempo(n) {
 Date.prototype.toMysqlFormat = function() {
   return this.getUTCFullYear() + "-" + twoDigits(1 + this.getUTCMonth()) + "-" + twoDigits(this.getUTCDate()) + " " + twoDigits(this.getUTCHours()) + ":" + twoDigits(this.getUTCMinutes()) + ":" + twoDigits(this.getUTCSeconds());
 };
+
+function VerificarPrivado(buffer)
+{
+  var state_1 = buffer.slice(buffer.indexOf('state')+8)
+  var state_2 = state_1.slice(0, state_1.indexOf(',')-1)
+  var result = 0;
+  console.log(state_2)
+  if(state_2 == 1)
+  {
+  result = 1;
+  return result;
+  }
+  return result;
+}
 
 client.login(process.env.token);
