@@ -879,15 +879,15 @@ if(n2.has(message.author.id))
             headers: { 'User-Agent': 'EntityBot/0.6.5' }
             };
             const req = https.get(options, function (res) {
-              var bodyChunks2 = [];
+              var bodyChunks = [];
               res.on('data', function (chunk) {
-                  bodyChunks2.push(chunk);
+                  bodyChunks.push(chunk);
               }).on('end', function () {
-                  var body2 = Buffer.concat(bodyChunks2);
-                  if(isEmptyObject(body2) && esprofile == 0) return message.channel.send('La cuenta de Steam es inválida, recuerda que debe ser pública.')
+                  var body = Buffer.concat(bodyChunks);
+                  if(isEmptyObject(body) && esprofile == 0) return message.channel.send('La cuenta de Steam es inválida, recuerda que debe ser pública.')
                   if(esprofile == 0)
                   {
-                    sid_1 = body2.slice(body2.indexOf('steamid')+10)
+                    sid_1 = body.slice(body.indexOf('steamid')+10)
                     sid_2 = sid_1.slice(0, sid_1.indexOf(',')-1)
                   } else
                   {
@@ -923,11 +923,11 @@ if(n2.has(message.author.id))
                       headers: { 'User-Agent': 'EntityBot/0.6.5' }
                     };     
                     var req1 = https.get(options, function (res) {
-                      var bodyChunks = [];
+                      var bodyChunks_ = [];
                       res.on('data', function (chunk) {
-                          bodyChunks.push(chunk);
+                          bodyChunks_.push(chunk);
                       }).on('end', function () {
-                      var body3 = Buffer.concat(bodyChunks);
+                      var body3 = Buffer.concat(bodyChunks_);
                       var state_1 = body3.slice(body3.indexOf('state')+8)
                       var state_2 = state_1.slice(0, state_1.indexOf(',')-1)
                       if(state_2 == 1) 
@@ -1064,12 +1064,12 @@ if(n2.has(message.author.id))
                       headers: { 'User-Agent': 'EntityBot/0.6.5' }
                     };      
                     var req1 = https.get(options, function (res) {
-                    var bodyChunks = [];
+                    var bodyChunks2 = [];
                     res.on('data', function (chunk) {
-                        bodyChunks.push(chunk);
+                        bodyChunks2.push(chunk);
                     }).on('end', function () {
-                        var body = Buffer.concat(bodyChunks);
-                        var state_1 = body.slice(body.indexOf('state')+8)
+                        var body4 = Buffer.concat(bodyChunks2);
+                        var state_1 = body4.slice(body4.indexOf('state')+8)
                         var state_2 = state_1.slice(0, state_1.indexOf(',')-1)
                         if(state_2 == 1)
                         {
@@ -1091,11 +1091,11 @@ if(n2.has(message.author.id))
                         }                  
                         if(args[0].toLowerCase() == 'survivor') 
                         {
-                          obtenervalorsurv(body, message.channel.id, message.author.id, message.guild.id, sid_2, usa.getTime())
+                          obtenervalorsurv(body4, message.channel.id, message.author.id, message.guild.id, sid_2, usa.getTime())
                         }
                         if(args[0].toLowerCase() == 'killer') 
                         {
-                          obtenervalorkill(body, message.channel.id, message.author.id, message.guild.id, sid_2, usa.getTime())
+                          obtenervalorkill(body4, message.channel.id, message.author.id, message.guild.id, sid_2, usa.getTime())
                         }
                     })
                   });
@@ -1110,12 +1110,12 @@ if(n2.has(message.author.id))
                     headers: { 'User-Agent': 'EntityBot/0.6.5' }
                   }     
                   var req1 = https.get(options, function (res) {
-                  var bodyChunks = [];
+                  var bodyChunks3 = [];
                   res.on('data', function (chunk) {
-                      bodyChunks.push(chunk);
+                      bodyChunks3.push(chunk);
                   }).on('end', function () {
-                      var body = Buffer.concat(bodyChunks);
-                      if(VerificarPrivado(body) == 1)
+                      var body5 = Buffer.concat(bodyChunks3);
+                      if(VerificarPrivado(body5) == 1)
                       {
                         const embedd = new Discord.RichEmbed()
                         .setColor('#FF0000')
@@ -1132,7 +1132,7 @@ if(n2.has(message.author.id))
                         con.query(`INSERT INTO EntityUsers (SID, update_at, state) VALUES ('${sid_2}', '${usa.getTime()}', '1')`)
                         return;
                       } 
-                      if(isEmptyObject(body))
+                      if(isEmptyObject(body5))
                       {
 
                         var options2 = {
@@ -1170,11 +1170,11 @@ if(n2.has(message.author.id))
                       }
                       if(args[0].toLowerCase() == 'survivor') 
                       {
-                        obtenervalorsurv(body, message.channel.id, message.author.id, message.guild.id, sid_2, usa.getTime())
+                        obtenervalorsurv(body5, message.channel.id, message.author.id, message.guild.id, sid_2, usa.getTime())
                       }
                       if(args[0].toLowerCase() == 'killer') 
                       {
-                        obtenervalorkill(body, message.channel.id, message.author.id, message.guild.id, sid_2, usa.getTime())
+                        obtenervalorkill(body5, message.channel.id, message.author.id, message.guild.id, sid_2, usa.getTime())
                       }
                   })
                 });
