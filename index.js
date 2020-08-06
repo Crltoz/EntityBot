@@ -573,7 +573,7 @@ if(n2.has(message.author.id))
             {
               if((parseInt(usa.getTime())-parseInt(update_att)) < 60000*60*6 && st == 0)
               {
-                message.channel.send('Tu cuenta de steam estaba en privado la última vez, puedes volver a chequear en **'+tiempo(360-(((parseInt(usa.getTime())-parseInt(update_att)/1000)/60)))+'** minutos aproximadamente.')
+                message.channel.send('Tu cuenta de steam estaba en privado la última vez, puedes volver a chequear en **'+tiempo(360-((((parseInt(usa.getTime())-parseInt(update_att))/1000)/60)))+'** minutos aproximadamente.')
                 return;
               }
               else if((parseInt(usa.getTime())-parseInt(update_att)) < 1000*60*10 && st == 1)
@@ -905,7 +905,7 @@ if(n2.has(message.author.id))
                 {
                   if((parseInt(usa.getTime())-parseInt(update_att)) < 60000*60*6 && st == 0)
                   {
-                    message.channel.send('Tu cuenta de steam estaba en privado la última vez, puedes volver a chequear en **'+tiempo(360-(((parseInt(usa.getTime())-parseInt(update_att)/1000)/60)))+'** minutos aproximadamente.')
+                    message.channel.send('Tu cuenta de steam estaba en privado la última vez, puedes volver a chequear en **'+tiempo(360-((((parseInt(usa.getTime())-parseInt(update_att))/1000)/60)))+'** minutos aproximadamente.')
                     return;
                   }
                   else if((parseInt(usa.getTime())-parseInt(update_att)) < 1000*60*10 && st == 1)
