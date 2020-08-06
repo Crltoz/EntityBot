@@ -1115,8 +1115,7 @@ if(n2.has(message.author.id))
                       bodyChunks3.push(chunk);
                   }).on('end', function () {
                       var body5 = Buffer.concat(bodyChunks3);
-                      console.log(body5.toString())
-                      if(VerificarPrivado(body5) == 1)
+                      if(VerificarPrivado(body5.toString()) == 1)
                       {
                         const embedd = new Discord.RichEmbed()
                         .setColor('#FF0000')
@@ -2967,9 +2966,10 @@ Date.prototype.toMysqlFormat = function() {
 function VerificarPrivado(buffer)
 {
   var state_1 = buffer.slice(buffer.indexOf('state')+8)
+  console.log(state_1)
   var state_2 = state_1.slice(0, state_1.indexOf(',')-1)
   var result = 0;
-  console.log(state_2.toString())
+  console.log(state_2)
   if(state_2 == '1')
   {
   console.log('1')
