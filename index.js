@@ -800,6 +800,7 @@ if(n2.has(message.author.id))
                     con.query(`INSERT INTO EntityUsers (SID, update_at, state) VALUES ('${sid_2}', '${usa.getTime()}', '1')`)
                     return;
                   }
+                  if(state_2 == 0) return message.channel.send('0')
                   if(isEmptyObject(body))
                   {
 
