@@ -2965,14 +2965,14 @@ function VerificarPrivado(buffer)
   var state_1 = buffer.slice(buffer.indexOf('state')+8)
   var state_2 = state_1.slice(0, state_1.indexOf(',')-1)
   var result = 0;
-  console.log(state_2)
-  if(state_2 == 1)
+  console.log(state_2.toString())
+  if(state_2 == '1')
   {
   console.log('1')
   result = 1;
   return result;
   }
-  if(state_2 == 0)
+  if(state_2 == '0')
   {
   console.log('0')
   result = 0;
