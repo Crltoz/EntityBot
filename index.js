@@ -571,12 +571,12 @@ if(n2.has(message.author.id))
             let st = rows[0].state
             if(k_rank == 0 || k_rank == 20 && bloodp == 0)
             {
-              if((parseInt(usa.getTime())-parseInt(update_att)) < 60000*60*6 && st == 0)
+              if((parseInt(usa.getTime())-parseInt(update_att)) < 60000*60*6 && st == 1)
               {
                 message.channel.send('Tu cuenta de steam estaba en privado la última vez, puedes volver a chequear en **'+tiempo(360-((((parseInt(usa.getTime())-parseInt(update_att))/1000)/60)))+'** aproximadamente.')
                 return;
               }
-              else if((parseInt(usa.getTime())-parseInt(update_att)) < 1000*60*10 && st == 1)
+              else if((parseInt(usa.getTime())-parseInt(update_att)) < 1000*60*10 && st == 0)
               {
                 message.channel.send('La cuenta de Steam está en la cola para ser agregada. Vuelve a intentar en **'+(10-Math.round((((parseInt(usa.getTime())-parseInt(update_att))/1000)/60)))+'** minutos aproximadamente.')
                 return;
@@ -596,7 +596,7 @@ if(n2.has(message.author.id))
                   var body3 = Buffer.concat(bodyChunks);
                   var state_1 = body3.slice(body3.indexOf('state')+8)
                   var state_2 = state_1.slice(0, state_1.indexOf(',')-1)
-                  if(state_2 == 0) 
+                  if(state_2 == 1) 
                   {
                     const embedd = new Discord.RichEmbed()
                     .setColor('#FF0000')
@@ -610,13 +610,13 @@ if(n2.has(message.author.id))
                     .setImage('https://cdn.discordapp.com/attachments/738848207328772237/739269462510796800/unknown.png')
                     .setFooter('La entidad', client.user.avatarURL);
                     message.channel.send(embedd)
-                    con.query(`UPDATE EntityUsers SET state = 0, update_at = ${usa.getTime()} WHERE SID = '${sid_2}'`)
+                    con.query(`UPDATE EntityUsers SET state = 1, update_at = ${usa.getTime()} WHERE SID = '${sid_2}'`)
                     return;
                   }
                   if(isEmptyObject(body3))
                   {
                     message.channel.send('La cuenta de Steam está en la cola para ser agregada, intentalo en **10** minutos y recuerda que puede tardar hasta 1 hora.')
-                    con.query(`UPDATE EntityUsers SET update_at = ${usa.getTime()}, state = 1 WHERE SID = '${sid_2}'`)
+                    con.query(`UPDATE EntityUsers SET update_at = ${usa.getTime()}, state = 0 WHERE SID = '${sid_2}'`)
                     return;
                   } else
                   {
@@ -737,7 +737,7 @@ if(n2.has(message.author.id))
                     var body = Buffer.concat(bodyChunks);
                     var state_1 = body3.slice(body3.indexOf('state')+8)
                     var state_2 = state_1.slice(0, state_1.indexOf(',')-1)
-                    if(state_2 == 0)
+                    if(state_2 == 1)
                     {
                       const embedd = new Discord.RichEmbed()
                         .setColor('#FF0000')
@@ -752,7 +752,7 @@ if(n2.has(message.author.id))
                         .setImage('https://cdn.discordapp.com/attachments/738848207328772237/739269462510796800/unknown.png')
                         .setFooter('La entidad', client.user.avatarURL);
                         message.channel.send(embedd)
-                        con.query(`UPDATE EntityUsers SET state = 0, update_at = ${usa.getTime()} WHERE SID = ${sid_2}`)
+                        con.query(`UPDATE EntityUsers SET state = 1, update_at = ${usa.getTime()} WHERE SID = ${sid_2}`)
                         return;
                     }                  
                     if(args[0].toLowerCase() == 'survivor') 
@@ -783,7 +783,7 @@ if(n2.has(message.author.id))
                   var body = Buffer.concat(bodyChunks);
                   var state_1 = body.slice(body.indexOf('state')+8)
                   var state_2 = state_1.slice(0, state_1.indexOf(',')-1)
-                  if(state_2 == 0)
+                  if(state_2 == 1)
                   {
                     const embedd = new Discord.RichEmbed()
                     .setColor('#FF0000')
@@ -797,7 +797,7 @@ if(n2.has(message.author.id))
                     .setImage('https://cdn.discordapp.com/attachments/738848207328772237/739269462510796800/unknown.png')
                     .setFooter('La entidad', client.user.avatarURL);
                     message.channel.send(embedd)
-                    con.query(`INSERT INTO EntityUsers (SID, update_at, state) VALUES ('${sid_2}', '${usa.getTime()}', '0')`)
+                    con.query(`INSERT INTO EntityUsers (SID, update_at, state) VALUES ('${sid_2}', '${usa.getTime()}', '1')`)
                     return;
                   }
                   if(isEmptyObject(body))
@@ -901,14 +901,15 @@ if(n2.has(message.author.id))
                 let k_rank = rows[0].killer_rank_1
                 let update_att = rows[0].update_at;
                 let st = rows[0].state
-                if(k_rank == 0)
+                let bloodp = rows[0].bloodpoints_1
+                if(k_rank == 0 || k_rank == 20 && bloodp == 0)
                 {
-                  if((parseInt(usa.getTime())-parseInt(update_att)) < 60000*60*6 && st == 0)
+                  if((parseInt(usa.getTime())-parseInt(update_att)) < 60000*60*6 && st == 1)
                   {
                     message.channel.send('Tu cuenta de steam estaba en privado la última vez, puedes volver a chequear en **'+tiempo(360-((((parseInt(usa.getTime())-parseInt(update_att))/1000)/60)))+'** aproximadamente.')
                     return;
                   }
-                  else if((parseInt(usa.getTime())-parseInt(update_att)) < 1000*60*10 && st == 1)
+                  else if((parseInt(usa.getTime())-parseInt(update_att)) < 1000*60*10 && st == 0)
                   {
                     message.channel.send('La cuenta de Steam está en la cola para ser agregada. Vuelve a intentar en **'+(10-Math.round((((parseInt(usa.getTime())-parseInt(update_att))/1000)/60)))+'** minutos aproximadamente.')
                     return;
@@ -928,8 +929,7 @@ if(n2.has(message.author.id))
                       var body3 = Buffer.concat(bodyChunks);
                       var state_1 = body3.slice(body3.indexOf('state')+8)
                       var state_2 = state_1.slice(0, state_1.indexOf(',')-1)
-                      console.log(state_2)
-                      if(state_2 == 0) 
+                      if(state_2 == 1) 
                       {
                         const embedd = new Discord.RichEmbed()
                         .setColor('#FF0000')
@@ -943,13 +943,13 @@ if(n2.has(message.author.id))
                         .setImage('https://cdn.discordapp.com/attachments/738848207328772237/739269462510796800/unknown.png')
                         .setFooter('La entidad', client.user.avatarURL);
                         message.channel.send(embedd)
-                        con.query(`UPDATE EntityUsers SET state = 0, update_at = ${usa.getTime()} WHERE SID = '${sid_2}'`)
+                        con.query(`UPDATE EntityUsers SET state = 1, update_at = ${usa.getTime()} WHERE SID = '${sid_2}'`)
                         return;
                       }
                       if(isEmptyObject(body3))
                       {
                         message.channel.send('La cuenta de Steam está en la cola para ser agregada, intentalo en **10** minutos y recuerda que puede tardar hasta 1 hora.')
-                        con.query(`UPDATE EntityUsers SET update_at = ${usa.getTime()}, state = 1 WHERE SID = '${sid_2}'`)
+                        con.query(`UPDATE EntityUsers SET update_at = ${usa.getTime()}, state = 0 WHERE SID = '${sid_2}'`)
                         return;
                       } else
                       {
@@ -1070,7 +1070,7 @@ if(n2.has(message.author.id))
                         var body = Buffer.concat(bodyChunks);
                         var state_1 = body.slice(body.indexOf('state')+8)
                         var state_2 = state_1.slice(0, state_1.indexOf(',')-1)
-                        if(state_2 == 0)
+                        if(state_2 == 1)
                         {
                           const embedd = new Discord.RichEmbed()
                             .setColor('#FF0000')
@@ -1085,7 +1085,7 @@ if(n2.has(message.author.id))
                             .setImage('https://cdn.discordapp.com/attachments/738848207328772237/739269462510796800/unknown.png')
                             .setFooter('La entidad', client.user.avatarURL);
                             message.channel.send(embedd)
-                            con.query(`UPDATE EntityUsers SET state = 0, update_at = ${usa.getTime()} WHERE SID = ${sid_2}`)
+                            con.query(`UPDATE EntityUsers SET state = 1, update_at = ${usa.getTime()} WHERE SID = ${sid_2}`)
                             return;
                         }                  
                         if(args[0].toLowerCase() == 'survivor') 
@@ -1116,7 +1116,7 @@ if(n2.has(message.author.id))
                       var body = Buffer.concat(bodyChunks);
                       var state_1 = body.slice(body.indexOf('state')+8)
                       var state_2 = state_1.slice(0, state_1.indexOf(',')-1)
-                      if(state_2 == 0)
+                      if(state_2 == 1)
                       {
                         const embedd = new Discord.RichEmbed()
                         .setColor('#FF0000')
@@ -1130,7 +1130,7 @@ if(n2.has(message.author.id))
                         .setImage('https://cdn.discordapp.com/attachments/738848207328772237/739269462510796800/unknown.png')
                         .setFooter('La entidad', client.user.avatarURL);
                         message.channel.send(embedd)
-                        con.query(`INSERT INTO EntityUsers (SID, update_at, state) VALUES ('${sid_2}', '${usa.getTime()}', '0')`)
+                        con.query(`INSERT INTO EntityUsers (SID, update_at, state) VALUES ('${sid_2}', '${usa.getTime()}', '1')`)
                         return;
                       }
                       if(isEmptyObject(body))
@@ -2656,10 +2656,10 @@ function obtenervalorkill(variable, canal, usuario, server, sid, usa)
       if(err) throw err;
       if(rows.length >= 1)
       {
-        con.query(`UPDATE EntityUsers SET killer_rank_1 = 0, update_at = ${usa}, state = 1 WHERE SID = '${sid}'`)
+        con.query(`UPDATE EntityUsers SET killer_rank_1 = 0, update_at = ${usa}, state = 0 WHERE SID = '${sid}'`)
       } else
       {
-        con.query(`INSERT INTO EntityUsers (SID, update_at, state) VALUES ('${sid}', '${usa}', '1')`)
+        con.query(`INSERT INTO EntityUsers (SID, update_at, state) VALUES ('${sid}', '${usa}', '0')`)
       }
     })
     return;
@@ -2777,10 +2777,10 @@ function obtenervalorsurv(variable, canal, usuario, server, sid, usa)
       if(err) throw err;
       if(rows.length >= 1)
       {
-        con.query(`UPDATE EntityUsers SET killer_rank_1 = 0, update_at = ${usa}, state = 1 WHERE SID = '${sid}'`)
+        con.query(`UPDATE EntityUsers SET killer_rank_1 = 0, update_at = ${usa}, state = 0 WHERE SID = '${sid}'`)
       } else
       {
-        con.query(`INSERT INTO EntityUsers (SID, update_at, state) VALUES ('${sid}', '${usa}', '1')`)
+        con.query(`INSERT INTO EntityUsers (SID, update_at, state) VALUES ('${sid}', '${usa}', '0')`)
       }
     })
     return;
