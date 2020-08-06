@@ -2658,10 +2658,10 @@ function obtenervalorkill(variable, canal, usuario, server, sid, usa)
       if(err) throw err;
       if(rows.length >= 1)
       {
-        con.query(`UPDATE EntityUsers SET killer_rank_1 = 0, update_at = ${usa.getTime()}, state = 1 WHERE SID = '${sid}'`)
+        con.query(`UPDATE EntityUsers SET killer_rank_1 = 0, update_at = ${usa}, state = 1 WHERE SID = '${sid}'`)
       } else
       {
-        con.query(`INSERT INTO EntityUsers (SID, update_at, state) VALUES ('${sid}', '${usa.getTime()}', '1')`)
+        con.query(`INSERT INTO EntityUsers (SID, update_at, state) VALUES ('${sid}', '${usa}', '1')`)
       }
     })
     return;
@@ -2779,10 +2779,10 @@ function obtenervalorsurv(variable, canal, usuario, server, sid, usa)
       if(err) throw err;
       if(rows.length >= 1)
       {
-        con.query(`UPDATE EntityUsers SET killer_rank_1 = 0, update_at = ${usa.getTime()}, state = 1 WHERE SID = '${sid}'`)
+        con.query(`UPDATE EntityUsers SET killer_rank_1 = 0, update_at = ${usa}, state = 1 WHERE SID = '${sid}'`)
       } else
       {
-        con.query(`INSERT INTO EntityUsers (SID, update_at, state) VALUES ('${sid}', '${usa.getTime()}', '1')`)
+        con.query(`INSERT INTO EntityUsers (SID, update_at, state) VALUES ('${sid}', '${usa}', '1')`)
       }
     })
     return;
