@@ -610,7 +610,7 @@ if(n2.has(message.author.id))
                     .setImage('https://cdn.discordapp.com/attachments/738848207328772237/739269462510796800/unknown.png')
                     .setFooter('La entidad', client.user.avatarURL);
                     message.channel.send(embedd)
-                    con.query(`UPDATE EntityUsers SET update_at = ${usa.getTime()} WHERE SID = '${sid_2}'`)
+                    con.query(`UPDATE EntityUsers SET state = 0, update_at = ${usa.getTime()} WHERE SID = '${sid_2}'`)
                     return;
                   }
                   if(isEmptyObject(body3))
@@ -944,7 +944,7 @@ if(n2.has(message.author.id))
                         .setImage('https://cdn.discordapp.com/attachments/738848207328772237/739269462510796800/unknown.png')
                         .setFooter('La entidad', client.user.avatarURL);
                         message.channel.send(embedd)
-                        con.query(`UPDATE EntityUsers SET update_at = ${usa.getTime()} WHERE SID = '${sid_2}'`)
+                        con.query(`UPDATE EntityUsers SET state = 0, update_at = ${usa.getTime()} WHERE SID = '${sid_2}'`)
                         return;
                       }
                       if(isEmptyObject(body3))
