@@ -600,6 +600,7 @@ if(n2.has(message.author.id))
           con.query(`INSERT INTO Servidores (ID, cid, Prefijo) VALUES ('${message.guild.id}', 'null', '${texto}')`)
         }
       })
+      prefix[message.guild.id] = texto;
       message.channel.send(`Cambiaste el prefijo para usar comandos a: **${texto}**`)
       return;    
     }
