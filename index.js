@@ -2692,7 +2692,7 @@ function obtenervalorkill(variable, canal, usuario, server, sid, usa)
   //Veces que interrumpiste a un survivor rompiendo un totem
   var survivorsinterruptedcleansingtotem_1 = variable.slice(variable.indexOf('survivorsinterruptedcleansingtotem')+34+3)
   var survivorsinterruptedcleansingtotem_2 = survivorsinterruptedcleansingtotem_1.slice(0, survivorsinterruptedcleansingtotem_1.indexOf(',')-1)
-  var state_1 = buffer.slice(buffer.indexOf('"state"')+9)
+  var state_1 = variable.slice(variable.indexOf('"state"')+9)
   var state_2 = state_1.slice(0, state_1.indexOf(',')-1)
   if(killer_rank_2 == 20 && killed_2 == 0 && sacrificed_2 == 0 && bloodpoints_2 == 0 && state_2 == 0)
   {
