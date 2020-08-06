@@ -1116,6 +1116,7 @@ if(n2.has(message.author.id))
                       var body = Buffer.concat(bodyChunks);
                       var state_1 = body.slice(body.indexOf('state')+8)
                       var state_2 = state_1.slice(0, state_1.indexOf(',')-1)
+                      console.log(state_2)
                       if(state_2 == 1)
                       {
                         const embedd = new Discord.RichEmbed()
