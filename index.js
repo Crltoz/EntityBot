@@ -1183,9 +1183,9 @@ if(n2.has(message.author.id))
             })
           })
         })
+        return;
       }
-      return;
-    }
+
 
   if(command == 'nivel')
   {
