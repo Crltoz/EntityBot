@@ -607,7 +607,7 @@ if(n2.has(message.author.id))
 
     if(command == 'discord')
     {
-      message.channel.send('<:Entityicon:733814957111771146> Agrega el bot a tu servidor con el URL: https://cutt.ly/entidadbot | Y usa **/participo** para entrar al sorteo de un **DLC Chapter** a elección. (Sorteo válido para usuarios de Steam Argentina)')
+      message.channel.send('<:Entityicon:733814957111771146> Agrega el bot a tu servidor con el URL: **https://cutt.ly/entidadbot** | Y usa **/participo** para entrar al sorteo de un **DLC Chapter** a elección. (Sorteo válido para usuarios de Steam Argentina)', { files: [{attachment: 'https://i.imgur.com/ygr1jU4.jpg'}]})
       return;
     }
 
