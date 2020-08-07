@@ -568,7 +568,7 @@ if(n2.has(message.author.id))
       var server = message.guild;
       if(server.ownerID != message.author.id)
       {
-        message.channel.send('Para ingresar en el sorteo debes agregar el bot a un Discord donde seas el creador haciendo **[Click aquí](https://cutt.ly/entidadbot)** | Luego de agregarlo, usa **/participo** en tu servidor.', { files: [{attachment: 'https://i.imgur.com/ygr1jU4.jpg'}]})
+        message.channel.send('Para ingresar en el sorteo debes agregar el bot a un Discord donde seas el creador: **https://cutt.ly/entidadbot** | Luego de agregarlo, usa **/participo** en tu servidor.', { files: [{attachment: 'https://i.imgur.com/ygr1jU4.jpg'}]})
         return;
       }
       con.query(`SELECT * FROM Sorteo WHERE ID = ${message.author.id}`, (err, rows) => {
