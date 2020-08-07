@@ -65,7 +65,7 @@ client.on("guildCreate", guild => {
       }
     }
   })
-  defaultChannel.send("**Gracias por añadirme!** :white_check_mark:\n**-** Mi prefijo es `/`\n**-** Puedes ver mis comandos con `/ayuda`\n**-** Si eres de Argentina y usas Steam, participa por un DLC Chapter con `/participo`")
+  defaultChannel.send("**Gracias por añadirme!** :white_check_mark:\n**-** Mi prefijo es `/`\n**-** Puedes ver mis comandos con `/ayuda`\n**-** Si eres de Argentina y usas Steam, participa por un DLC Chapter con `/participo`", { files: [{attachment: 'https://i.imgur.com/ygr1jU4.jpg'}]})
   client.channels.get('739997803094343721').send('| Nuevo servidor | Nombre: '+guild.name+' | Usuarios: '+guild.memberCount)
 })
 
@@ -568,18 +568,18 @@ if(n2.has(message.author.id))
       var server = message.guild;
       if(server.ownerID != message.author.id)
       {
-        message.channel.send('Para ingresar en el sorteo debes agregar el bot a un Discord donde seas el creador: https://cutt.ly/entidadbot | Luego de agregarlo, usa **/participo** en tu servidor.')
+        message.channel.send('Para ingresar en el sorteo debes agregar el bot a un Discord donde seas el creador: https://cutt.ly/entidadbot | Luego de agregarlo, usa **/participo** en tu servidor.', { files: [{attachment: 'https://i.imgur.com/ygr1jU4.jpg'}]})
         return;
       }
       con.query(`SELECT * FROM Sorteo WHERE ID = ${message.author.id}`, (err, rows) => {
         if(err) throw err;
         if(rows.length >= 1)
         { 
-          message.channel.send('Tu ya estás participando del sorteo **DLC Chapter** a elección, '+message.member.user+'. Recuerda que si ganas, debes ser de Argentina porque Steam no permite enviar regalos a otras regiones.')
+          message.channel.send('Tu ya estás participando del sorteo **DLC Chapter** a elección, '+message.member.user+'. Recuerda que si ganas, debes ser de Argentina porque Steam no permite enviar regalos a otras regiones.', { files: [{attachment: 'https://i.imgur.com/ygr1jU4.jpg'}]})
         } else
         {
           con.query(`INSERT INTO Sorteo (ID, SID) VALUES ('${message.author.id}', '${message.guild.id}')`)
-          message.channel.send('Excelente, ahora estás particiando por el **DLC Chapter** a eleección, '+message.member.user+'. Recuerda que si ganas, debes ser de Argentina porque Steam no permite enviar regalos a otras regiones.')
+          message.channel.send('Excelente, ahora estás particiando por el **DLC Chapter** a eleección, '+message.member.user+'. Recuerda que si ganas, debes ser de Argentina porque Steam no permite enviar regalos a otras regiones.', { files: [{attachment: 'https://i.imgur.com/ygr1jU4.jpg'}]})
         }
       })
       return;
