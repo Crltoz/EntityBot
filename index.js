@@ -439,7 +439,7 @@ if(n2.has(message.author.id))
   if(p1.has(message.author.id) || p2.has(message.author.id) || p3.has(message.author.id) || p4.has(message.author.id)) return message.member.send('Tienes un comando activo, termina de usarlo.')
   if(command == 'calcular')
   {
-    if(!texto) return message.member.send('Usa: **/calcular [Opción]** | Opciones: Killer o Survivor | Comando para obtener puntos de sangre necesarios para comprar todas las perks desde el nivel que estés.').catch(function(err) { message.channel.send(message.member.user+' Activa tus mensajes privados para que el bot pueda informarte.') } );
+    if(!texto) return message.member.send('Usa: **'+prefix[message.guild.id]+'calcular [Opción]** | Opciones: Killer o Survivor | Comando para obtener puntos de sangre necesarios para comprar todas las perks desde el nivel que estés.').catch(function(err) { message.channel.send(message.member.user+' Activa tus mensajes privados para que el bot pueda informarte.') } );
     if(p1.has(message.author.id)) return message.member.send('Ya tienes una solicitud abierta.').catch(function(err) { message.channel.send(message.member.user+' Activa tus mensajes privados para que el bot pueda informarte.') } );
     if(texto.toLowerCase() == 'killer')
     {
@@ -588,7 +588,7 @@ if(n2.has(message.author.id))
     if(command == 'prefijo')
     {
       if(!message.member.permissions.has('ADMINISTRATOR')) return message.channel.send('El comando sólo puede ser por personas con permisos de Administrador.')
-      if(!texto) return message.channel.send('Usa **/prefijo [Opción]** | Reemplaza **Opción** por el prefijo de comandos que te gustaría usar. Default: **/** | Opciones: **!**, **#**, **%**, **&**, **/**, **.** y **-**')
+      if(!texto) return message.channel.send('Usa **'+prefix[message.guild.id]+'prefijo [Opción]** | Reemplaza **Opción** por el prefijo de comandos que te gustaría usar. Default: **/** | Opciones: **!**, **#**, **%**, **&**, **/**, **.** y **-**')
       if(texto != '!' && texto != '#' && texto != '%' && texto != '&' && texto != '/' && texto != '.' && texto != '-') return message.channel.send('Usa **/prefijo [Opción]** | Reemplaza **Opción** por el prefijo de comandos que te gustaría usar. Default: **/** | Opciones: **!**, **#**, **%**, **&**, **/**, **.** y **-**')
       con.query(`SELECT * FROM Servidores WHERE ID = ${message.guild.id}`, (err, rows) =>{
         if(err) throw err;
@@ -613,9 +613,9 @@ if(n2.has(message.author.id))
 
     
      if (command == 'stats') {
-       if(!texto) return message.channel.send('Usa: **/stats [Survivor o Killer] [URL Perfil Steam o Código de amigo]**')
+       if(!texto) return message.channel.send('Usa: **'+prefix[message.guild.id]+'stats [Survivor o Killer] [URL Perfil Steam o Código de amigo]**')
        if(args[0].toLowerCase() != 'killer' && args[0].toLowerCase() != 'survivor') return message.channel.send('Usa: **/stats [Survivor o Killer] [URL Perfil Steam]**')
-       if(!args[1]) return message.channel.send('Usa: **/stats [Survivor o Killer] [URL Perfil Steam]**')
+       if(!args[1]) return message.channel.send('Usa: **'+prefix[message.guild.id]+'stats [Survivor o Killer] [URL Perfil Steam]**')
        let text = args[1];
        if(!text.includes('steamcommunity.com/id/') && !text.includes('steamcommunity.com/profiles/')) 
        {
@@ -1240,7 +1240,7 @@ if(n2.has(message.author.id))
 
   if(command == 'nivel')
   {
-    if(!texto) return message.member.send('Ingresa: **/nivel [Nivel Actual] [Nivel Deseado]** | Te dirá la cantidad de puntos de sangre necesaria para llegar a ese nivel.').catch(function(err) { message.channel.send(message.member.user+' Activa tus mensajes privados para que el bot pueda informarte.') } );
+    if(!texto) return message.member.send('Ingresa: **'+prefix[message.guild.id]+'nivel [Nivel Actual] [Nivel Deseado]** | Te dirá la cantidad de puntos de sangre necesaria para llegar a ese nivel.').catch(function(err) { message.channel.send(message.member.user+' Activa tus mensajes privados para que el bot pueda informarte.') } );
     if(parseInt(args[0]) >= parseInt(args[1])) return message.member.send('El nivel deseado no puede ser mayor o igual al que tenes.').catch(function(err) { message.channel.send(message.member.user+' Activa tus mensajes privados para que el bot pueda informarte.') } );
     if(parseInt(args[1]) > 50 || parseInt(args[0])  < 1 || parseInt(args[0]) > 50) return message.member.send('El nivel iniciado debe ser entre 1 y 49, y el nivel deseado entre 1 y 50.').catch(function(err) { message.channel.send(message.member.user+' Activa tus mensajes privados para que el bot pueda informarte.') } );
     if(parseInt(args[1])  % 1 != '0' || parseInt(args[0]) % 1 != '0') return message.member.send('El nivel no puede tener comas.').catch(function(err) { message.channel.send(message.member.user+' Activa tus mensajes privados para que el bot pueda informarte.') } );
@@ -1263,7 +1263,7 @@ if(n2.has(message.author.id))
      
      if (command == 'canal') {
          if(!message.member.permissions.has('ADMINISTRATOR')) return message.channel.send('El comando sólo puede ser por personas con permisos de Administrador.')
-         if (!texto) return message.member.send('Usa: **/canal #Nombre** | Para setear un canal donde puedan usarse los comandos. Si deseas quitar la restriccion de canales usa **/canal borrar**.')
+         if (!texto) return message.member.send('Usa: **'+prefix[message.guild.id]+'canal #Nombre** | Para setear un canal donde puedan usarse los comandos. Si deseas quitar la restriccion de canales usa **/canal borrar**.')
          if (texto == 'borrar') {
              con.query(`SELECT * FROM Servidores WHERE ID = '${message.guild.id}'`, (err, rows) => {
                  if (err) throw err;
@@ -1337,7 +1337,7 @@ if(n2.has(message.author.id))
   
   if(command == 'random')
   {
-    if(!texto) return message.member.send('Usa **/random [Survivor o Killer]** || Te retornará un survivor o killer aleatorio con 4 perks.')
+    if(!texto) return message.member.send('Usa **'+prefix[message.guild.id]+'random [Survivor o Killer]** || Te retornará un survivor o killer aleatorio con 4 perks.')
     if(texto.toLowerCase() == 'survivor')
     {
     let numero = Math.floor(Math.random() * 21);
