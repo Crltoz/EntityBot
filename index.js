@@ -3071,7 +3071,7 @@ function ReemplazarEspacio(texto)
   var str = texto
   while(str.includes('_'))
   {
-  str = texto.replace('_', ' ')
+  str = str.replace('_', ' ')
   }
   return str;
 }
