@@ -6,6 +6,7 @@ var http = require('http');
 var useragent = require('express-useragent')
 const mysql = require("mysql");
 const { parse } = require("path");
+const { SSL_OP_NO_TLSv1_1 } = require("constants");
 const PerkSurv = 80;
 const PerkKill = 72;
 const Niveles = 3;
@@ -436,7 +437,10 @@ if(n2.has(message.author.id))
     message.channel.send('Las utilidades del bot solo pueden ser usadas en el canal de: '+disc)
     return;
     }
-  if(p1.has(message.author.id) || p2.has(message.author.id) || p3.has(message.author.id) || p4.has(message.author.id)) return message.member.send('Tienes un comando activo, termina de usarlo.')
+  if(p1.has(message.author.id)) p1.delete(message.author.id)
+  if(p2.has(message.author.id)) p2.delete(message.author.id)
+  if(p3.has(message.author.id)) p3.delete(message.author.id)
+  if(p4.has(message.author.id)) p4.delete(message.author.id)
   if(command == 'calcular')
   {
     if(!texto) return message.member.send('Usa: **'+prefix[message.guild.id]+'calcular [Opción]** | Opciones: Killer o Survivor | Comando para obtener puntos de sangre necesarios para comprar todas las perks desde el nivel que estés.').catch(function(err) { message.channel.send(message.member.user+' Activa tus mensajes privados para que el bot pueda informarte.') } );
@@ -455,7 +459,7 @@ if(n2.has(message.author.id))
       ps1.add(message.author.id)
       return;
     }
-    message.member.send('Usa: **/calcular [Opción]** | Opciones: Killer o Survivor | Comando para obtener puntos de sangre necesarios para comprar todas las perks desde el nivel que estés.').catch(function(err) { message.channel.send(message.member.user+' Activa tus mensajes privados para que el bot pueda informarte.') } );
+    message.member.send('Usa: **'+prefix[message.guild.id]+'calcular [Opción]** | Opciones: Killer o Survivor | Comando para obtener puntos de sangre necesarios para comprar todas las perks desde el nivel que estés.').catch(function(err) { message.channel.send(message.member.user+' Activa tus mensajes privados para que el bot pueda informarte.') } );
     return;
      }
 
@@ -520,9 +524,14 @@ if(n2.has(message.author.id))
       return;
      }
 
+     if(command == 'prueba')
+     {
+       return message.channel.send(`TEXTO 1: ${texto} | Texto convertido: ${ReemplazarEspacio(texto)}`)
+     }
+
      if(command == 'ayuda')
      {
-      if(texto != 'admin')
+      if(!texto)
       {
         const embedd = new Discord.RichEmbed()
         .setColor('#FF0000')
@@ -531,21 +540,21 @@ if(n2.has(message.author.id))
         .setURL('https://deadbydaylight.gamepedia.com/Dead_by_Daylight_Wiki')
         .setThumbnail(client.user.avatarURL)
         .addField(prefix[message.guild.id]+'participo', 'Ingresas en un sorteo de un DLC Chapter a elección, sólo para usuarios Steam de Argentina.')
-        .addField(prefix[message.guild.id]+'discord', 'Obtendrás el link para añadir el bot a tu servidor de Discord.')
+        .addField(prefix[message.guild.id]+'discord', 'Para más info: **'+prefix[message.guild.id]+'ayuda discord**')
         .addField('NOTA:', 'Los paréntesis: **[]** no deben ser usados en los comandos, es simplemente para resaltar cómo se usa el comando.')
-        .addField(prefix[message.guild.id]+'calcular [Killer o Survivor]', 'Podrás calcular cuánto cuesta tener todas las perks de tu superviviente o asesino, el bot luego te preguntará la cantidad de perks que tengas para hacer el cálculo.')
-        .addField(prefix[message.guild.id]+'stats [Survivor o Killer] [URL Perfil Steam o Código de amigo]', 'Obtendrás las estadísticas de un jugador poniendo su Perfil de Steam y seleccionando si quieres ver las de Killer o Survivor.')
-        .addField(prefix[message.guild.id]+'nivel [Nivel Inicial] [Nivel Final]', 'Este comando calcula los puntos de sangre necesarios para comprar los niveles en la red de sangre que desees.')
-        .addField(prefix[message.guild.id]+'lobby', 'Aquí hay funciones como los comandos de arriba, pero se utilizan a través de reacciones, más fácil para la gente que no le gusta usar los comandos.')
-        .addField(prefix[message.guild.id]+'random [Survivor o Killer]', 'Generará y enviará por el canal una Build random de 4 perks, según lo que elijas, Killer o Survivor.')
-        .addField(prefix[message.guild.id]+'santuario', 'Informará sobre el santuario de los secretos actual y el valor de fragmentos iridiscentes de cada perk.')
+        .addField(prefix[message.guild.id]+'calcular [Killer o Survivor]', 'Para más info: **'+prefix[message.guild.id]+'ayuda calcular**')
+        .addField(prefix[message.guild.id]+'stats [Survivor o Killer] [URL Perfil Steam o Código de amigo]', 'Para más info: **'+prefix[message.guild.id]+'ayuda stats**')
+        .addField(prefix[message.guild.id]+'nivel [Nivel Inicial] [Nivel Final]', 'Para más info: **'+prefix[message.guild.id]+'ayuda nivel**')
+        .addField(prefix[message.guild.id]+'lobby', 'Para más info: **'+prefix[message.guild.id]+'ayuda lobby**')
+        .addField(prefix[message.guild.id]+'random [Survivor o Killer]', 'Para más info: **'+prefix[message.guild.id]+'ayuda random**')
+        .addField(prefix[message.guild.id]+'santuario', 'Para más info: **'+prefix[message.guild.id]+'ayuda santuario**')
         .addField(prefix[message.guild.id]+'ayuda admin', 'Mostrará los comandos que pueden ser utilizados por **administradores** para personalizar el bot.')
         .setTimestamp()
         .setFooter('La entidad - V0.7.0 - Beta Pública', client.user.avatarURL);
         message.channel.send(embedd)
         return;
       }
-      else
+      else if(texto == 'admin')
       {
         if(!message.member.permissions.has('ADMINISTRATOR')) return message.channel.send('El comando sólo puede ser por personas con permisos de Administrador.')
         const embedd = new Discord.RichEmbed()
@@ -558,7 +567,34 @@ if(n2.has(message.author.id))
         .addField(prefix[message.guild.id]+'canal #nombre', 'Sólo puede ser usado por **ADMINISTRADORES**, puedes selecccionar un canal para que los comandos sólo funcionen allí. Usa **/canal borrar** para poder usarlos en cualquier canal nuevamente.')
         .setTimestamp()
         .setFooter('La entidad - V0.7.0 - Beta Pública', client.user.avatarURL);
-        message.channel.send(embedd)
+        message.member.send(embedd)
+        return;
+      } else if(texto == 'discord')
+      {
+        const embedd = new Discord.RichEmbed()
+        .setColor('#FF0000')
+        .setTitle('🔰 '+prefix[message.guild.id]+'discord 🔰')
+        .setAuthor(message.member.user.tag, message.member.user.avatarURL)
+        .setURL('https://deadbydaylight.gamepedia.com/Dead_by_Daylight_Wiki')
+        .setThumbnail(client.user.avatarURL)
+        .addField('¿Para qué sirve?', 'Este comando te enviará el link para unir el bot al servidor que quieras y poder usarlo allí.')
+        .setTimestamp()
+        .setFooter('La entidad - V0.7.0 - Beta Pública', client.user.avatarURL);
+        message.member.send(embedd)
+        return;
+      } else if(texto == 'calcular')
+      {
+        const embedd = new Discord.RichEmbed()
+        .setColor('#FF0000')
+        .setTitle('🔰 '+prefix[message.guild.id]+'calcular [Killer o Survivor] 🔰')
+        .setAuthor(message.member.user.tag, message.member.user.avatarURL)
+        .setURL('https://deadbydaylight.gamepedia.com/Dead_by_Daylight_Wiki')
+        .setThumbnail(client.user.avatarURL)
+        .addField('¿Para qué sirve?', 'Este comando es para calcular cuántos __puntos de sangre__ son necesarios para comprar todas las habilidades de todos los personajes. Se te preguntará la cantidad de perks que tengas con un personaje, y en base a eso el bot calculará las faltantes y cuántos puntos de sangre te costaría.')
+        .addField('Ejemplo:', 'Si tengo a Meg Thomas sólo con sus 3 perks básicas, cada una a nivel 1 y quiero saber cuánto me costará obtener todas las perks de todos los supervivientes a nivel 3 deberé usar: **'+prefix[message.guild.id]+'calcular survivor** | Luego el bot me pedirá la cantidad de habilidades que tengo con Meg, y por último me dirá cuánto me costará obtener todas las perks.')
+        .setTimestamp()
+        .setFooter('La entidad - V0.7.0 - Beta Pública', client.user.avatarURL);
+        message.member.send(embedd)
         return;
       }
     }
@@ -3028,6 +3064,12 @@ function VerificarPrivado(buffer)
   result = 1;
   }
   return result;
+}
+
+function ReemplazarEspacio(texto)
+{
+  var str = texto.replace('_', ' ')
+  return str;
 }
 
 client.login(process.env.token);
