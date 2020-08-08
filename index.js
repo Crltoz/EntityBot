@@ -129,7 +129,7 @@ client.on("messageReactionAdd", (messageReaction, user) => {
                         .setURL('https://deadbydaylight.gamepedia.com/Dead_by_Daylight_Wiki')
                         .addField('ㅤ', '**► '+ObtenerPerkSurv(numero_perk_1)+'**\n**► '+ObtenerPerkSurv(numero_perk_2)+'**\n**► '+ObtenerPerkSurv(numero_perk_3)+'**\n**► '+ObtenerPerkSurv(numero_perk_4)+'**', true)
                         .setColor(0xFF0000)
-                    messageReaction.message.channel.send(embed)
+                        messageReaction.message.channel.send(embed).then(function(message) { message.channel.send(ObtenerIconPerkSurv(numero_perk_1)+' '+ObtenerIconPerkSurv(numero_perk_2)+' '+ObtenerIconPerkSurv(numero_perk_3)+' '+ObtenerIconPerkSurv(numero_perk_4)) })
                     return;
                   } else if(messageReaction.emoji == '3⃣')
                   {
@@ -179,7 +179,7 @@ client.on("messageReactionAdd", (messageReaction, user) => {
                         .setURL('https://deadbydaylight.gamepedia.com/Dead_by_Daylight_Wiki')
                         .addField('ㅤ', '**► '+ObtenerPerkKiller(numero_perk_1)+'**\n**► '+ObtenerPerkKiller(numero_perk_2)+'**\n**► '+ObtenerPerkKiller(numero_perk_3)+'**\n**► '+ObtenerPerkKiller(numero_perk_4)+'**', true)
                         .setColor(0xFF0000)
-                    messageReaction.message.channel.send(embed)
+                        messageReaction.message.channel.send(embed).then(function(message) { message.channel.send(ObtenerIconPerkKiller(numero_perk_1)+' '+ObtenerIconPerkKiller(numero_perk_2)+' '+ObtenerIconPerkKiller(numero_perk_3)+' '+ObtenerIconPerkKiller(numero_perk_4)) })
                     return;
                   } else if(messageReaction.emoji == '4⃣')
                   {
