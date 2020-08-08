@@ -981,6 +981,19 @@ if(n2.has(message.author.id))
                   };    
                     options2.agent = new https.Agent(options2)
                     const reqq1 = https.request(options2, (res) => {
+                      if(res.statusCode == 404)
+                      {
+                        const embedd = new Discord.RichEmbed()
+                          .setColor('#FF0000')
+                          .setTitle('Cuenta inválida.')
+                          .setAuthor(message.member.user.tag, message.member.user.avatarURL)
+                          .setThumbnail(client.user.avatarURL)
+                          .addField('Código de amigo incorrecto.', 'Has proporcionado un código de amigo inexistente por lo cual no existen estadísticas de esa cuenta. Vuelve a intentarlo con otro diferente.')
+                          .setTimestamp()
+                          .setFooter('La entidad', client.user.avatarURL)
+                          message.channel.send(embedd)
+                          return;
+                      }
                       if(res.statusCode != 201)
                       {
                           const embedd = new Discord.RichEmbed()
@@ -1308,6 +1321,19 @@ if(n2.has(message.author.id))
                         };    
                           options2.agent = new https.Agent(options2)
                           const reqq1 = https.request(options2, (res) => {
+                            if(res.statusCode == 404)
+                            {
+                              const embedd = new Discord.RichEmbed()
+                                .setColor('#FF0000')
+                                .setTitle('Cuenta inválida.')
+                                .setAuthor(message.member.user.tag, message.member.user.avatarURL)
+                                .setThumbnail(client.user.avatarURL)
+                                .addField('URL de Steam incorrecto.', 'Has proporcionado un URL de Steam inexistente por lo cual no existen estadísticas de esa cuenta. Vuelve a intentarlo con otro diferente.')
+                                .setTimestamp()
+                                .setFooter('La entidad', client.user.avatarURL)
+                                message.channel.send(embedd)
+                                return;
+                            }
                             if(res.statusCode != 201)
                             {
                                 const embedd = new Discord.RichEmbed()
