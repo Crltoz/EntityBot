@@ -1338,6 +1338,8 @@ if(n2.has(message.author.id))
                             }
                             if(res.statusCode != 201)
                             {
+                                console.log('statusCode:', res.statusCode);
+                                console.log('headers:', res.headers);
                                 const embedd = new Discord.RichEmbed()
                                 .setColor('#FF0000')
                                 .setTitle('No podemos agregar tu cuenta...')
