@@ -524,11 +524,6 @@ if(n2.has(message.author.id))
       return;
      }
 
-     if(command == 'prueba')
-     {
-       return message.channel.send(`TEXTO 1: ${texto} | Texto convertido: ${ReemplazarEspacio(texto)}`)
-     }
-
      if(command == 'ayuda')
      {
       if(!texto)
@@ -544,13 +539,13 @@ if(n2.has(message.author.id))
         .addField('NOTA:', 'Los paréntesis: **[]** no deben ser usados en los comandos, es simplemente para resaltar cómo se usa el comando.')
         .addField(prefix[message.guild.id]+'calcular [Killer o Survivor]', 'Para más info: **'+prefix[message.guild.id]+'ayuda calcular**')
         .addField(prefix[message.guild.id]+'stats [Survivor o Killer] [URL Perfil Steam o Código de amigo]', 'Para más info: **'+prefix[message.guild.id]+'ayuda stats**')
-        .addField(prefix[message.guild.id]+'nivel [Nivel Inicial] [Nivel Final]', 'Para más info: **'+prefix[message.guild.id]+'ayuda nivel**')
+        .addField(prefix[message.guild.id]+'nivel [Nivel Actual] [Nivel Deseado]', 'Para más info: **'+prefix[message.guild.id]+'ayuda nivel**')
         .addField(prefix[message.guild.id]+'lobby', 'Para más info: **'+prefix[message.guild.id]+'ayuda lobby**')
         .addField(prefix[message.guild.id]+'random [Survivor o Killer]', 'Para más info: **'+prefix[message.guild.id]+'ayuda random**')
-        .addField(prefix[message.guild.id]+'santuario', 'Para más info: **'+prefix[message.guild.id]+'ayuda santuario**')
+        .addField(prefix[message.guild.id]+'santuario', 'Te mostrará el santuario de los secretos actual del juego.')
         .addField(prefix[message.guild.id]+'ayuda admin', 'Mostrará los comandos que pueden ser utilizados por **administradores** para personalizar el bot.')
         .setTimestamp()
-        .setFooter('La entidad - V0.7.0 - Beta Pública', client.user.avatarURL);
+        .setFooter('La entidad - V0.7.5 - Beta Pública', client.user.avatarURL);
         message.channel.send(embedd)
         return;
       }
@@ -566,10 +561,11 @@ if(n2.has(message.author.id))
         .addField(prefix[message.guild.id]+'prefijo [Opción]', 'Reemplaza **Opción** por el prefijo de comandos que te gustaría usar. Default: **/** | Opciones: **!**, **#**, **%**, **&**, **/**, **.** y **-**')
         .addField(prefix[message.guild.id]+'canal #nombre', 'Sólo puede ser usado por **ADMINISTRADORES**, puedes selecccionar un canal para que los comandos sólo funcionen allí. Usa **/canal borrar** para poder usarlos en cualquier canal nuevamente.')
         .setTimestamp()
-        .setFooter('La entidad - V0.7.0 - Beta Pública', client.user.avatarURL);
+        .setFooter('La entidad - V0.7.5 - Beta Pública', client.user.avatarURL);
         message.member.send(embedd)
         return;
-      } else if(texto == 'discord')
+      } 
+      else if(texto == 'discord')
       {
         const embedd = new Discord.RichEmbed()
         .setColor('#FF0000')
@@ -579,10 +575,11 @@ if(n2.has(message.author.id))
         .setThumbnail(client.user.avatarURL)
         .addField('¿Para qué sirve?', 'Este comando te enviará el link para unir el bot al servidor que quieras y poder usarlo allí.')
         .setTimestamp()
-        .setFooter('La entidad - V0.7.0 - Beta Pública', client.user.avatarURL);
+        .setFooter('La entidad - V0.7.5 - Beta Pública', client.user.avatarURL);
         message.member.send(embedd)
         return;
-      } else if(texto == 'calcular')
+      } 
+      else if(texto == 'calcular')
       {
         const embedd = new Discord.RichEmbed()
         .setColor('#FF0000')
@@ -593,8 +590,89 @@ if(n2.has(message.author.id))
         .addField('¿Para qué sirve?', 'Este comando es para calcular cuántos __puntos de sangre__ son necesarios para comprar todas las habilidades de todos los personajes. Se te preguntará la cantidad de perks que tengas con un personaje, y en base a eso el bot calculará las faltantes y cuántos puntos de sangre te costaría.')
         .addField('Ejemplo:', 'Si tengo a Meg Thomas sólo con sus 3 perks básicas, cada una a nivel 1 y quiero saber cuánto me costará obtener todas las perks de todos los supervivientes a nivel 3 deberé usar: **'+prefix[message.guild.id]+'calcular survivor** | Luego el bot me pedirá la cantidad de habilidades que tengo con Meg, y por último me dirá cuánto me costará obtener todas las perks.')
         .setTimestamp()
-        .setFooter('La entidad - V0.7.0 - Beta Pública', client.user.avatarURL);
+        .setFooter('La entidad - V0.7.5 - Beta Pública', client.user.avatarURL);
         message.member.send(embedd)
+        return;
+      }
+      else if(texto == 'stats')
+      {
+        const embedd = new Discord.RichEmbed()
+        .setColor('#FF0000')
+        .setTitle('🔰 '+prefix[message.guild.id]+'stats [Killer o Survivor] [URL Perfil Steam o Código de amigo] 🔰')
+        .setAuthor(message.member.user.tag, message.member.user.avatarURL)
+        .setURL('https://deadbydaylight.gamepedia.com/Dead_by_Daylight_Wiki')
+        .setThumbnail(client.user.avatarURL)
+        .addField('¿Para qué sirve?', 'Podrás obtener las estadísticas de un jugador de Steam de Dead By Daylight, recuerda que debe estar en público todas las configuraciones de privacidad.')
+        .addField('Ejemplo:', 'Si quiero ver mis estadísticas de asesino usaré: **'+prefix[message.guild.id]+'stats killer steamcommunity.com/id/Crltoz/** | El link es el de mi perfil de Steam.')
+        .setTimestamp()
+        .setFooter('La entidad - V0.7.5 - Beta Pública', client.user.avatarURL);
+        message.member.send(embedd)
+        return;
+      }
+      else if(texto == 'nivel')
+      {
+        const embedd = new Discord.RichEmbed()
+        .setColor('#FF0000')
+        .setTitle('🔰 '+prefix[message.guild.id]+'nivel [Nivel Actual] [Nivel Deseado] 🔰')
+        .setAuthor(message.member.user.tag, message.member.user.avatarURL)
+        .setURL('https://deadbydaylight.gamepedia.com/Dead_by_Daylight_Wiki')
+        .setThumbnail(client.user.avatarURL)
+        .addField('¿Para qué sirve?', 'Calcula los puntos de sangre necesarios para comprar los niveles de la red de sangre que quieras.')
+        .addField('Ejemplo:', 'Si con Dwight estoy en nivel 5 y quiero llegar al 20 debo usar: **'+prefix[message.guild.id]+'nivel 5 20** | El bot me enviará toda la información de los puntos de sangre necesarios y la cantidad de niveles comprados.')
+        .setTimestamp()
+        .setFooter('La entidad - V0.7.5 - Beta Pública', client.user.avatarURL);
+        message.member.send(embedd)
+        return;
+      }
+      else if(texto == 'lobby')
+      {
+        const embedd = new Discord.RichEmbed()
+        .setColor('#FF0000')
+        .setTitle('🔰 '+prefix[message.guild.id]+'lobby 🔰')
+        .setAuthor(message.member.user.tag, message.member.user.avatarURL)
+        .setURL('https://deadbydaylight.gamepedia.com/Dead_by_Daylight_Wiki')
+        .setThumbnail(client.user.avatarURL)
+        .addField('¿Para qué sirve?', 'El lobby tiene funciones como la de los comandos, pero se utiliza a través de reacciones para que las personas que no les gusta usar comandos puedan usar otra alternativa.')
+        .setTimestamp()
+        .setFooter('La entidad - V0.7.5 - Beta Pública', client.user.avatarURL);
+        message.member.send(embedd)
+        return;
+      }
+      else if(texto == 'random')
+      {
+        const embedd = new Discord.RichEmbed()
+        .setColor('#FF0000')
+        .setTitle('🔰 '+prefix[message.guild.id]+'random [Survivor o Killer] 🔰')
+        .setAuthor(message.member.user.tag, message.member.user.avatarURL)
+        .setURL('https://deadbydaylight.gamepedia.com/Dead_by_Daylight_Wiki')
+        .setThumbnail(client.user.avatarURL)
+        .addField('¿Para qué sirve?', 'Este comando te dará un asesino o superviviente totalmente aleatorio, con una build de 4 perks al azar.')
+        .addField('Ejemplo:', 'Si quiero un superviviente random con 4 habilidades debo usar: **'+prefix[message.guild.id]+'random survivor** | El bot me enviará un superviviente random con 4 habilidades al azar.')
+        .setTimestamp()
+        .setFooter('La entidad - V0.7.5 - Beta Pública', client.user.avatarURL);
+        message.member.send(embedd)
+        return;
+      } else
+      {
+        const embedd = new Discord.RichEmbed()
+        .setColor('#FF0000')
+        .setTitle('🔰 Ayuda - Comandos 🔰')
+        .setAuthor(message.member.user.tag, message.member.user.avatarURL)
+        .setURL('https://deadbydaylight.gamepedia.com/Dead_by_Daylight_Wiki')
+        .setThumbnail(client.user.avatarURL)
+        .addField(prefix[message.guild.id]+'participo', 'Ingresas en un sorteo de un DLC Chapter a elección, sólo para usuarios Steam de Argentina.')
+        .addField(prefix[message.guild.id]+'discord', 'Para más info: **'+prefix[message.guild.id]+'ayuda discord**')
+        .addField('NOTA:', 'Los paréntesis: **[]** no deben ser usados en los comandos, es simplemente para resaltar cómo se usa el comando.')
+        .addField(prefix[message.guild.id]+'calcular [Killer o Survivor]', 'Para más info: **'+prefix[message.guild.id]+'ayuda calcular**')
+        .addField(prefix[message.guild.id]+'stats [Survivor o Killer] [URL Perfil Steam o Código de amigo]', 'Para más info: **'+prefix[message.guild.id]+'ayuda stats**')
+        .addField(prefix[message.guild.id]+'nivel [Nivel Actual] [Nivel Deseado]', 'Para más info: **'+prefix[message.guild.id]+'ayuda nivel**')
+        .addField(prefix[message.guild.id]+'lobby', 'Para más info: **'+prefix[message.guild.id]+'ayuda lobby**')
+        .addField(prefix[message.guild.id]+'random [Survivor o Killer]', 'Para más info: **'+prefix[message.guild.id]+'ayuda random**')
+        .addField(prefix[message.guild.id]+'santuario', 'Te mostrará el santuario de los secretos actual del juego.')
+        .addField(prefix[message.guild.id]+'ayuda admin', 'Mostrará los comandos que pueden ser utilizados por **administradores** para personalizar el bot.')
+        .setTimestamp()
+        .setFooter('La entidad - V0.7.5 - Beta Pública', client.user.avatarURL);
+        message.channel.send(embedd)
         return;
       }
     }
@@ -1348,7 +1426,7 @@ if(n2.has(message.author.id))
              .addField('5⃣ Invitación del Discord Oficial del bot.', 'Aquí podrás obtener el link para unir el bot a tu Server de Discord o soporte del mismo.')
              
              .setTimestamp()
-             .setFooter('V0.7.0 - Beta Pública', client.user.avatarURL);
+             .setFooter('V0.7.5 - Beta Pública', client.user.avatarURL);
              message.channel.send(lembed).then(function (message) {
                  message.react("1⃣")
                  setTimeout(() => {
@@ -3066,7 +3144,7 @@ function VerificarPrivado(buffer)
   return result;
 }
 
-function ReemplazarEspacio(texto)
+function RemplazarEspacio(texto)
 {
   var str = texto
   while(str.includes('_'))
