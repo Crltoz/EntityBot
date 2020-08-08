@@ -3068,9 +3068,10 @@ function VerificarPrivado(buffer)
 
 function ReemplazarEspacio(texto)
 {
+  var str = texto
   while(texto.includes('_'))
   {
-  var str = texto.replace('_', ' ')
+  str = texto.replace('_', ' ')
   }
   return str;
 }
