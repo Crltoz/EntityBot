@@ -551,7 +551,7 @@ if(n2.has(message.author.id))
       }
       else if(texto == 'admin')
       {
-        if(!message.member.permissions.has('ADMINISTRATOR')) return message.channel.send('El comando sólo puede ser por personas con permisos de Administrador.')
+        if(!message.member.permissions.has('ADMINISTRATOR')) return message.channel.send('el comando sólo puede ser usado por personas con permisos de Administrador.')
         const embedd = new Discord.RichEmbed()
         .setColor('#FF0000')
         .setTitle('🔰 Ayuda - Admins 🔰')
@@ -559,7 +559,7 @@ if(n2.has(message.author.id))
         .setURL('https://deadbydaylight.gamepedia.com/Dead_by_Daylight_Wiki')
         .setThumbnail(client.user.avatarURL)
         .addField(prefix[message.guild.id]+'prefijo [Opción]', 'Reemplaza **Opción** por el prefijo de comandos que te gustaría usar. Default: **/** | Opciones: **!**, **#**, **%**, **&**, **/**, **.** y **-**')
-        .addField(prefix[message.guild.id]+'canal #nombre', 'Sólo puede ser usado por **ADMINISTRADORES**, puedes selecccionar un canal para que los comandos sólo funcionen allí. Usa **/canal borrar** para poder usarlos en cualquier canal nuevamente.')
+        .addField(prefix[message.guild.id]+'canal #nombre', 'Sólo puede ser usado por **ADMINISTRADORES**, puedes selecccionar un canal para que los comandos sólo funcionen allí. Usa **'+prefix[message.guild.id]+'canal borrar** para poder usarlos en cualquier canal nuevamente.')
         .setTimestamp()
         .setFooter('La entidad - V0.7.5 - Beta Pública', client.user.avatarURL);
         message.member.send(embedd)
@@ -701,7 +701,7 @@ if(n2.has(message.author.id))
 
     if(command == 'prefijo')
     {
-      if(!message.member.permissions.has('ADMINISTRATOR')) return message.channel.send('El comando sólo puede ser por personas con permisos de Administrador.')
+      if(!message.member.permissions.has('ADMINISTRATOR')) return message.channel.send('el comando sólo puede ser usado por personas con permisos de Administrador.')
       if(!texto) return message.channel.send('Usa **'+prefix[message.guild.id]+'prefijo [Opción]** | Reemplaza **Opción** por el prefijo de comandos que te gustaría usar. Default: **/** | Opciones: **!**, **#**, **%**, **&**, **/**, **.** y **-**')
       if(texto != '!' && texto != '#' && texto != '%' && texto != '&' && texto != '/' && texto != '.' && texto != '-') return message.channel.send('Usa **/prefijo [Opción]** | Reemplaza **Opción** por el prefijo de comandos que te gustaría usar. Default: **/** | Opciones: **!**, **#**, **%**, **&**, **/**, **.** y **-**')
       con.query(`SELECT * FROM Servidores WHERE ID = ${message.guild.id}`, (err, rows) =>{
@@ -1402,8 +1402,8 @@ if(n2.has(message.author.id))
   }
      
      if (command == 'canal') {
-         if(!message.member.permissions.has('ADMINISTRATOR')) return message.channel.send('El comando sólo puede ser por personas con permisos de Administrador.')
-         if (!texto) return message.member.send('Usa: **'+prefix[message.guild.id]+'canal #Nombre** | Para setear un canal donde puedan usarse los comandos. Si deseas quitar la restriccion de canales usa **/canal borrar**.')
+         if(!message.member.permissions.has('ADMINISTRATOR')) return message.channel.send('el comando sólo puede ser usado por personas con permisos de Administrador.')
+         if (!texto) return message.member.send('Usa: **'+prefix[message.guild.id]+'canal #Nombre** | Para setear un canal donde puedan usarse los comandos. Si deseas quitar la restriccion de canales usa **'+prefix[message.guild.id]+'canal borrar**.')
          if (texto == 'borrar') {
              con.query(`SELECT * FROM Servidores WHERE ID = '${message.guild.id}'`, (err, rows) => {
                  if (err) throw err;
