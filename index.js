@@ -2584,11 +2584,11 @@ function ObtenerPerkKiller(numero)
     }
     case 61:
     {
-      return NombrePerk = 'Sobretencion'
+      return NombrePerk = 'Sobretension'
     }
     case 62:
     {
-      return NombrePerk = 'Supervicion'
+      return NombrePerk = 'Supervision'
     }
     case 63:
     {
