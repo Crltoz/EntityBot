@@ -732,8 +732,8 @@ if(n2.has(message.author.id))
     
      if (command == 'stats') {
        if(!texto) return message.channel.send('Usa: **'+prefix[message.guild.id]+'stats [Survivor o Killer] [URL Perfil Steam o Código de amigo]**')
-       if(args[0].toLowerCase() != 'killer' && args[0].toLowerCase() != 'survivor') return message.channel.send('Usa: **'+prefix[message.guild.id]+'stats [Survivor o Killer] [URL Perfil Steam]**')
-       if(!args[1]) return message.channel.send('Usa: **'+prefix[message.guild.id]+'stats [Survivor o Killer] [URL Perfil Steam]**')
+       if(args[0].toLowerCase() != 'killer' && args[0].toLowerCase() != 'survivor') return message.channel.send('Usa: **'+prefix[message.guild.id]+'stats [Survivor o Killer] [URL Perfil Steam o Código de amigo]**')
+       if(!args[1]) return message.channel.send('Usa: **'+prefix[message.guild.id]+'stats [Survivor o Killer] [URL Perfil Steam o Código de amigo]**')
        let text = args[1];
        if(!text.includes('steamcommunity.com/id/') && !text.includes('steamcommunity.com/profiles/')) 
        {
@@ -1588,11 +1588,11 @@ if(n2.has(message.author.id))
          return;
        } else
        {
-         message.member.send('Usa **/random [Survivor o Killer]** || Te retornará un survivor o killer aleatorio con 4 perks.').catch(function(err) { message.channel.send(message.member.user+' Activa tus mensajes privados para que el bot pueda informarte.') } );
+         message.member.send('Usa **'+prefix[message.guild.id]+'random [Survivor o Killer]** || Te retornará un survivor o killer aleatorio con 4 perks.').catch(function(err) { message.channel.send(message.member.user+' Activa tus mensajes privados para que el bot pueda informarte.') } );
          return;
        }
      }
-     message.member.send('El comando no existe. Usa **/ayuda** para ver todas las funciones y comandos.')
+     message.member.send('El comando no existe. Usa **'+prefix[message.guild.id]+'ayuda** para ver todas las funciones y comandos.')
 }
 
 });
