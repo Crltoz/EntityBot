@@ -34,7 +34,7 @@ const r2 = new Set();
 const n1 = {}
 const n2 = new Set();
 var actualizar = 1;
-
+var k = {}
 var db_config = {
     host: '185.201.10.94',
     user: 'u642668726_sh',
@@ -129,7 +129,7 @@ client.on("messageReactionAdd", (messageReaction, user) => {
                         .setURL('https://deadbydaylight.gamepedia.com/Dead_by_Daylight_Wiki')
                         .addField('ㅤ', '**► '+ObtenerPerkSurv(numero_perk_1)+'**\n**► '+ObtenerPerkSurv(numero_perk_2)+'**\n**► '+ObtenerPerkSurv(numero_perk_3)+'**\n**► '+ObtenerPerkSurv(numero_perk_4)+'**', true)
                         .setColor(0xFF0000)
-                        messageReaction.message.channel.send(embed).then(function(message) { message.channel.send(ObtenerIconPerkSurv(numero_perk_1)+' '+ObtenerIconPerkSurv(numero_perk_2)+' '+ObtenerIconPerkSurv(numero_perk_3)+' '+ObtenerIconPerkSurv(numero_perk_4)) })
+                        messageReaction.message.channel.send(embed).then(function(message) { message.channel.send(ObtenerIconPerk(numero_perk_1, 1)+' '+ObtenerIconPerk(numero_perk_2, 1)+' '+ObtenerIconPerk(numero_perk_3, 1)+' '+ObtenerIconPerk(numero_perk_4, 1)) })
                     return;
                   } else if(messageReaction.emoji == '3⃣')
                   {
@@ -179,7 +179,7 @@ client.on("messageReactionAdd", (messageReaction, user) => {
                         .setURL('https://deadbydaylight.gamepedia.com/Dead_by_Daylight_Wiki')
                         .addField('ㅤ', '**► '+ObtenerPerkKiller(numero_perk_1)+'**\n**► '+ObtenerPerkKiller(numero_perk_2)+'**\n**► '+ObtenerPerkKiller(numero_perk_3)+'**\n**► '+ObtenerPerkKiller(numero_perk_4)+'**', true)
                         .setColor(0xFF0000)
-                        messageReaction.message.channel.send(embed).then(function(message) { message.channel.send(ObtenerIconPerkKiller(numero_perk_1)+' '+ObtenerIconPerkKiller(numero_perk_2)+' '+ObtenerIconPerkKiller(numero_perk_3)+' '+ObtenerIconPerkKiller(numero_perk_4)) })
+                        messageReaction.message.channel.send(embed).then(function(message) { message.channel.send(ObtenerIconPerk(numero_perk_1, 0)+' '+ObtenerIconPerk(numero_perk_2, 0)+' '+ObtenerIconPerk(numero_perk_3, 0)+' '+ObtenerIconPerk(numero_perk_4, 0)) })
                     return;
                   } else if(messageReaction.emoji == '4⃣')
                   {
@@ -516,14 +516,22 @@ if(n2.has(message.author.id))
         let numerop2 = ObtenerNumeroPerk(perkk_2.toLowerCase())
         let numerop3 = ObtenerNumeroPerk(perkk_3.toLowerCase())
         let numerop4 = ObtenerNumeroPerk(perkk_4.toLowerCase())
+        let perkf1 = TraducirPerk(perkk_1.toLowerCase(), message.author.id)
+        let pr1 = k[message.author.id]
+        let perkf2 = TraducirPerk(perkk_2.toLowerCase(), message.author.id)
+        let pr2 = k[message.author.id]
+        let perkf3 = TraducirPerk(perkk_3.toLowerCase(), message.author.id)
+        let pr3 = k[message.author.id]
+        let perkf4 = TraducirPerk(perkk_4.toLowerCase(), message.author.id)
+        let pr4 = k[message.author.id]
         const embed = new Discord.RichEmbed()
       .setThumbnail(message.member.user.avatarURL)
       .setAuthor('| '+message.author.tag+' |', )
       .setTitle('🈴 Santuario de los secretos:')
       .setURL('https://deadbydaylight.gamepedia.com/Dead_by_Daylight_Wiki')
-      .addField('Habilidades:', '**► '+TraducirPerk(perkk_1.toLowerCase())+'** - <:frag_iri:739690491829813369>2000\n**► '+TraducirPerk(perkk_2.toLowerCase())+'** - <:frag_iri:739690491829813369>2000\n**► '+TraducirPerk(perkk_3.toLowerCase())+'** - <:frag_iri:739690491829813369>2000\n**► '+TraducirPerk(perkk_4.toLowerCase())+'** - <:frag_iri:739690491829813369>2000', true)
+      .addField('Habilidades:', '**► '+perkf1+'** - <:frag_iri:739690491829813369>2000\n**► '+perkf2+'** - <:frag_iri:739690491829813369>2000\n**► '+perkf3+'** - <:frag_iri:739690491829813369>2000\n**► '+perkf4+'** - <:frag_iri:739690491829813369>2000', true)
       .setColor(0xFF0000)
-      message.channel.send(embed).then(function(message) { message.channel.send(ObtenerIconPerkKiller(numerop1)+' '+ObtenerIconPerkSurv(numerop2)+' '+ObtenerIconPerkKiller(numerop3)+' '+ObtenerIconPerkSurv(numerop4)) })
+      message.channel.send(embed).then(function(message) { message.channel.send(ObtenerIconPerk(numerop1, pr1)+' '+ObtenerIconPerk(numerop2, pr2)+' '+ObtenerIconPerk(numerop3, pr3)+' '+ObtenerIconPerk(numerop4, pr4)) })
      })
       return;
      }
@@ -1533,7 +1541,7 @@ if(n2.has(message.author.id))
            .setURL('https://deadbydaylight.gamepedia.com/Dead_by_Daylight_Wiki')
            .addField('ㅤ', '**► '+ObtenerPerkSurv(numero_perk_1)+'**\n**► '+ObtenerPerkSurv(numero_perk_2)+'**\n**► '+ObtenerPerkSurv(numero_perk_3)+'**\n**► '+ObtenerPerkSurv(numero_perk_4)+'**', true)
            .setColor(0xFF0000)
-       message.channel.send(embed).then(function(message) { message.channel.send(ObtenerIconPerkSurv(numero_perk_1)+' '+ObtenerIconPerkSurv(numero_perk_2)+' '+ObtenerIconPerkSurv(numero_perk_3)+' '+ObtenerIconPerkSurv(numero_perk_4)) })
+       message.channel.send(embed).then(function(message) { message.channel.send(ObtenerIconPerk(numero_perk_1, 1)+' '+ObtenerIconPerk(numero_perk_2, 1)+' '+ObtenerIconPerk(numero_perk_3, 1)+' '+ObtenerIconPerk(numero_perk_4, 1)) })
        return;
        }
        else if(texto.toLowerCase() == 'killer')
@@ -1584,7 +1592,7 @@ if(n2.has(message.author.id))
              .setURL('https://deadbydaylight.gamepedia.com/Dead_by_Daylight_Wiki')
              .addField('ㅤ', '**► '+ObtenerPerkKiller(numero_perk_1)+'**\n**► '+ObtenerPerkKiller(numero_perk_2)+'**\n**► '+ObtenerPerkKiller(numero_perk_3)+'**\n**► '+ObtenerPerkKiller(numero_perk_4)+'**', true)
              .setColor(0xFF0000)
-         message.channel.send(embed).then(function(message) { message.channel.send(ObtenerIconPerkKiller(numero_perk_1)+' '+ObtenerIconPerkKiller(numero_perk_2)+' '+ObtenerIconPerkKiller(numero_perk_3)+' '+ObtenerIconPerkKiller(numero_perk_4)) })
+         message.channel.send(embed).then(function(message) { message.channel.send(ObtenerIconPerk(numero_perk_1, 0)+' '+ObtenerIconPerk(numero_perk_2, 0)+' '+ObtenerIconPerk(numero_perk_3, 0)+' '+ObtenerIconPerk(numero_perk_4, 0)) })
          return;
        } else
        {
@@ -2197,173 +2205,174 @@ function ObtenerPerkSurv(numero)
 }
 
 
-function ObtenerIconPerkSurv(numero)
+function ObtenerIconPerk(numero, s2)
 {
+    if(s2 == 1)
+    {
     var icon;
     switch(numero)
     {
-    case 0: return icon = '<:iconPerks_aceInTheHole:741712915408748546>'
-    case 1: return icon = '<:iconPerks_adrenaline:741712917484798073>'
-    case 2: return icon = '<:iconPerks_aftercare:741712926507008114>'
-    case 3: return icon = '<:iconPerks_alert:741712927823888414>'
-    case 4: return icon = '<:iconPerks_anyMeansNecessary:741712927827951677>'
-    case 5: return icon = '<:iconPerks_autodidact:741712926775181421>'
-    case 6: return icon = '<:iconPerks_babySitter:741712928293519440>'
-    case 7: return icon = '<:iconPerks_balancedLanding:741712924820766790>'
-    case 8: return icon = '<:iconPerks_betterTogether:741712928646103081>'
-    case 9: return icon = '<:iconPerks_bloodPact:741712927500927046>'
-    case 10: return icon = '<:iconPerks_boilOver:741712924539617343>'
-    case 11: return icon = '<:iconPerks_bond:741712926716461156>'
-    case 12: return icon = '<:iconPerks_borrowedTime:741712926498488401>'
-    case 13: return icon = '<:iconPerks_botanyKnowledge:741712925965680681>'
-    case 14: return icon = '<:iconPerks_breakdown:741712927563710484>'
-    case 15: return icon = '<:iconPerks_breakout:741712927748522115>'
-    case 16: return icon = '<:iconPerks_buckleUp:741712928784384060>'
-    case 17: return icon = '<:iconPerks_calmSpirit:741712928105037925>'
-    case 18: return icon = '<:iconPerks_camaraderie:741712928377667786>'
-    case 19: return icon = '<:iconPerks_danceWithMe:741712928545439784>'
-    case 20: return icon = '<:iconPerks_darkSense:741712926418927628>'
-    case 21: return icon = '<:iconPerks_DeadHard:741712927027101826>'
-    case 22: return icon = '<:iconPerks_decisiveStrike:741712926234247199>'
-    case 23: return icon = '<:iconPerks_dejaVu:741712927907774464>'
-    case 24: return icon = '<:iconPerks_deliverance:741712928876527746>'
-    case 25: return icon = '<:iconPerks_detectivesHunch:741712927706578945>'
-    case 26: return icon = '<:iconPerks_distortion:741712926473191537>'
-    case 27: return icon = '<:iconPerks_diversion:741712927597264986>'
-    case 28: return icon = '<:iconPerks_empathy:741712927601721365>'
-    case 29: return icon = '<:iconPerks_fixated:741713034870784040>'
-    case 30: return icon = '<:iconPerks_flipFlop:741713038310113281>'
-    case 31: return icon = '<:iconPerks_forThePeople:741713039434186855>'
-    case 32: return icon = '<:iconPerks_headOn:741713041191600187>'
-    case 33: return icon = '<:iconPerks_hope:741713038566096967>'
-    case 34: return icon = '<:iconPerks_innerStrength:741713041288200352>'
-    case 35: return icon = '<:iconPerks_ironWill:741713039501295728>'
-    case 36: return icon = '<:iconPerks_kindred:741713039207956500>'
-    case 37: return icon = '<:iconPerks_leader:741713037471252663>'
-    case 38: return icon = '<:iconPerks_leftBehind:741713040944398346>'
-    case 39: return icon = '<:iconPerks_lightweight:741713038419427409>'
-    case 40: return icon = '<:iconPerks_lithe:741713039929245887>'
-    case 41: return icon = '<:iconPerks_luckyBreak:741713039685845153>'
-    case 42: return icon = '<:iconPerks_mettleOfMan:741713040474505366>'
-    case 43: return icon = '<:iconPerks_NoMither:741713041233805393>'
-    case 44: return icon = '<:iconPerks_noOneLeftBehind:741713039358820532>'
-    case 45: return icon = '<:iconPerks_objectOfObsession:741713039077670922>'
-    case 46: return icon = '<:iconPerks_offTheRecord:741713040235561114>'
-    case 47: return icon = '<:iconPerks_openHanded:741713040130703382>'
-    case 48: return icon = '<:iconPerks_pharmacy:741713040214589461>'
-    case 49: return icon = '<:iconPerks_plunderersInstinct:741713040780558407>'
-    case 50: return icon = '<:iconPerks_poised:741713157919211611>'
-    case 51: return icon = '<:iconPerks_premonition:741713166320533664>'
-    case 52: return icon = '<:iconPerks_proveThyself:741713165334872156>'
-    case 53: return icon = '<:iconPerks_quickAndQuiet:741713164617384046>'
-    case 54: return icon = '<:iconPerks_redHerring:741713165644988457>'
-    case 55: return icon = '<:iconPerks_repressedAlliance:741713164718309398>'
-    case 56: return icon = '<:iconPerks_resilience:741713165393461349>'
-    case 57: return icon = '<:iconPerks_saboteur:741713165259243634>'
-    case 58: return icon = '<:iconPerks_secondWind:741713166064550018>'
-    case 59: return icon = '<:iconPerks_selfCare:741713166068613160>'
-    case 60: return icon = '<:iconPerks_slipperyMeat:741713164407668818>'
-    case 61: return icon = '<:iconPerks_smallGame:741713165569491066>'
-    case 62: return icon = '<:iconPerks_soleSurvivor:741713167222046770>'
-    case 63: return icon = '<:iconPerks_solidarity:741713166437974068>'
-    case 64: return icon = '<:iconPerks_soulGuard:741713166454751242>'
-    case 65: return icon = '<:iconPerks_spineChill:741713164734824550>'
-    case 66: return icon = '<:iconPerks_sprintBurst:741713166865793184>'
-    case 67: return icon = '<:iconPerks_stakeOut:741713168476405770>'
-    case 68: return icon = '<:iconPerks_streetwise:741713166727381009>'
-    case 69: return icon = '<:iconPerks_technician:741713167683682354>'
-    case 70: return icon = '<:iconPerks_tenacity:741713167826157592>'
-    case 71: return icon = '<:iconPerks_thisIsNotHappening:741713167058731098>'
-    case 72: return icon = '<:iconPerks_upTheAnte:741713166878244945>'
-    case 73: return icon = '<:iconPerks_unbreakable:741713167213658253>'
-    case 74: return icon = '<:iconPerks_urbanEvasion:741713167167782922>'
-    case 75: return icon = '<:iconPerks_vigil:741713040558522418>'
-    case 76: return icon = '<:iconPerks_wakeUp:741713167339487412>'
-    case 77: return icon = '<:iconPerks_wellMakeIt:741726257489641552>'
-    case 78: return icon = '<:iconPerks_WereGonnaLiveForever:741726258613977108>'
-    case 79: return icon = '<:iconPerks_windowsOfOpportunity:741726257968054315>'
+      case 0: return icon = '<:iconPerks_aceInTheHole:741712915408748546>'
+      case 1: return icon = '<:iconPerks_adrenaline:741712917484798073>'
+      case 2: return icon = '<:iconPerks_aftercare:741712926507008114>'
+      case 3: return icon = '<:iconPerks_alert:741712927823888414>'
+      case 4: return icon = '<:iconPerks_anyMeansNecessary:741712927827951677>'
+      case 5: return icon = '<:iconPerks_autodidact:741712926775181421>'
+      case 6: return icon = '<:iconPerks_babySitter:741712928293519440>'
+      case 7: return icon = '<:iconPerks_balancedLanding:741712924820766790>'
+      case 8: return icon = '<:iconPerks_betterTogether:741712928646103081>'
+      case 9: return icon = '<:iconPerks_bloodPact:741712927500927046>'
+      case 10: return icon = '<:iconPerks_boilOver:741712924539617343>'
+      case 11: return icon = '<:iconPerks_bond:741712926716461156>'
+      case 12: return icon = '<:iconPerks_borrowedTime:741712926498488401>'
+      case 13: return icon = '<:iconPerks_botanyKnowledge:741712925965680681>'
+      case 14: return icon = '<:iconPerks_breakdown:741712927563710484>'
+      case 15: return icon = '<:iconPerks_breakout:741712927748522115>'
+      case 16: return icon = '<:iconPerks_buckleUp:741712928784384060>'
+      case 17: return icon = '<:iconPerks_calmSpirit:741712928105037925>'
+      case 18: return icon = '<:iconPerks_camaraderie:741712928377667786>'
+      case 19: return icon = '<:iconPerks_danceWithMe:741712928545439784>'
+      case 20: return icon = '<:iconPerks_darkSense:741712926418927628>'
+      case 21: return icon = '<:iconPerks_DeadHard:741712927027101826>'
+      case 22: return icon = '<:iconPerks_decisiveStrike:741712926234247199>'
+      case 23: return icon = '<:iconPerks_dejaVu:741712927907774464>'
+      case 24: return icon = '<:iconPerks_deliverance:741712928876527746>'
+      case 25: return icon = '<:iconPerks_detectivesHunch:741712927706578945>'
+      case 26: return icon = '<:iconPerks_distortion:741712926473191537>'
+      case 27: return icon = '<:iconPerks_diversion:741712927597264986>'
+      case 28: return icon = '<:iconPerks_empathy:741712927601721365>'
+      case 29: return icon = '<:iconPerks_fixated:741713034870784040>'
+      case 30: return icon = '<:iconPerks_flipFlop:741713038310113281>'
+      case 31: return icon = '<:iconPerks_forThePeople:741713039434186855>'
+      case 32: return icon = '<:iconPerks_headOn:741713041191600187>'
+      case 33: return icon = '<:iconPerks_hope:741713038566096967>'
+      case 34: return icon = '<:iconPerks_innerStrength:741713041288200352>'
+      case 35: return icon = '<:iconPerks_ironWill:741713039501295728>'
+      case 36: return icon = '<:iconPerks_kindred:741713039207956500>'
+      case 37: return icon = '<:iconPerks_leader:741713037471252663>'
+      case 38: return icon = '<:iconPerks_leftBehind:741713040944398346>'
+      case 39: return icon = '<:iconPerks_lightweight:741713038419427409>'
+      case 40: return icon = '<:iconPerks_lithe:741713039929245887>'
+      case 41: return icon = '<:iconPerks_luckyBreak:741713039685845153>'
+      case 42: return icon = '<:iconPerks_mettleOfMan:741713040474505366>'
+      case 43: return icon = '<:iconPerks_NoMither:741713041233805393>'
+      case 44: return icon = '<:iconPerks_noOneLeftBehind:741713039358820532>'
+      case 45: return icon = '<:iconPerks_objectOfObsession:741713039077670922>'
+      case 46: return icon = '<:iconPerks_offTheRecord:741713040235561114>'
+      case 47: return icon = '<:iconPerks_openHanded:741713040130703382>'
+      case 48: return icon = '<:iconPerks_pharmacy:741713040214589461>'
+      case 49: return icon = '<:iconPerks_plunderersInstinct:741713040780558407>'
+      case 50: return icon = '<:iconPerks_poised:741713157919211611>'
+      case 51: return icon = '<:iconPerks_premonition:741713166320533664>'
+      case 52: return icon = '<:iconPerks_proveThyself:741713165334872156>'
+      case 53: return icon = '<:iconPerks_quickAndQuiet:741713164617384046>'
+      case 54: return icon = '<:iconPerks_redHerring:741713165644988457>'
+      case 55: return icon = '<:iconPerks_repressedAlliance:741713164718309398>'
+      case 56: return icon = '<:iconPerks_resilience:741713165393461349>'
+      case 57: return icon = '<:iconPerks_saboteur:741713165259243634>'
+      case 58: return icon = '<:iconPerks_secondWind:741713166064550018>'
+      case 59: return icon = '<:iconPerks_selfCare:741713166068613160>'
+      case 60: return icon = '<:iconPerks_slipperyMeat:741713164407668818>'
+      case 61: return icon = '<:iconPerks_smallGame:741713165569491066>'
+      case 62: return icon = '<:iconPerks_soleSurvivor:741713167222046770>'
+      case 63: return icon = '<:iconPerks_solidarity:741713166437974068>'
+      case 64: return icon = '<:iconPerks_soulGuard:741713166454751242>'
+      case 65: return icon = '<:iconPerks_spineChill:741713164734824550>'
+      case 66: return icon = '<:iconPerks_sprintBurst:741713166865793184>'
+      case 67: return icon = '<:iconPerks_stakeOut:741713168476405770>'
+      case 68: return icon = '<:iconPerks_streetwise:741713166727381009>'
+      case 69: return icon = '<:iconPerks_technician:741713167683682354>'
+      case 70: return icon = '<:iconPerks_tenacity:741713167826157592>'
+      case 71: return icon = '<:iconPerks_thisIsNotHappening:741713167058731098>'
+      case 72: return icon = '<:iconPerks_upTheAnte:741713166878244945>'
+      case 73: return icon = '<:iconPerks_unbreakable:741713167213658253>'
+      case 74: return icon = '<:iconPerks_urbanEvasion:741713167167782922>'
+      case 75: return icon = '<:iconPerks_vigil:741713040558522418>'
+      case 76: return icon = '<:iconPerks_wakeUp:741713167339487412>'
+      case 77: return icon = '<:iconPerks_wellMakeIt:741726257489641552>'
+      case 78: return icon = '<:iconPerks_WereGonnaLiveForever:741726258613977108>'
+      case 79: return icon = '<:iconPerks_windowsOfOpportunity:741726257968054315>'
     }
-}
-
-function ObtenerIconPerkKiller(numero)
-{
-  var icon;
-  switch(numero)
+  } else
   {
-    case 0: return icon = '<:iconPerks_aNursesCalling:741712926666260557>'
-    case 1: return icon = '<:iconPerks_agitation:741712927350063224>'
-    case 2: return icon = '<:iconPerks_bamboozle:741712928536789163>'
-    case 3: return icon = '<:iconPerks_BBQAndChili:741712928327336018>'
-    case 4: return icon = '<:iconPerks_BeastOfPrey:741712928000049215>'
-    case 5: return icon = '<:iconPerks_bitterMurmur:741712925491724309>'
-    case 6: return icon = '<:iconPerks_bloodEcho:741712928109232178>'
-    case 7: return icon = '<:iconPerks_bloodWarden:741712928960544778>'
-    case 8: return icon = '<:iconPerks_bloodhound:741712926028726302>'
-    case 9: return icon = '<:iconPerks_brutalStrength:741712927417040926>'
-    case 10: return icon = '<:iconPerks_corruptIntervention:741712928864207008>'
-    case 11: return icon = '<:iconPerks_coulrophobia:741712928604028960>'
-    case 12: return icon = '<:iconPerks_cruelConfinement:741712928759218216>'
-    case 13: return icon = '<:iconPerks_darkDevotion:741712929015070830>'
-    case 14: return icon = '<:iconPerks_deadManSwitch:741712928507428916>'
-    case 15: return icon = '<:iconPerks_deathbound:741712928087998594>'
-    case 16: return icon = '<:iconPerks_deerstalker:741712927328960562>'
-    case 17: return icon = '<:iconPerks_discordance:741712927043878964>'
-    case 18: return icon = '<:iconPerks_distressing:741712927999918181>'
-    case 19: return icon = '<:iconPerks_dyingLight:741712927765037206>'
-    case 20: return icon = '<:iconPerks_enduring:741713029728829484>'
-    case 21: return icon = '<:iconPerks_fireUp:741713030827737089>'
-    case 22: return icon = '<:iconPerks_forcedPenance:741713038561902653>'
-    case 23: return icon = '<:iconPerks_franklinsLoss:741713038838595594>'
-    case 24: return icon = '<:iconPerks_furtiveChase:741713041086742611>'
-    case 25: return icon = '<:iconPerks_gearHead:741713037592887326>'
-    case 26: return icon = '<:iconPerks_hangmansTrick:741713038054260736>'
-    case 27: return icon = '<:iconPerks_devourHope:741712927639470220>'
-    case 28: return icon = '<:iconPerks_hauntedGround:741713041334337577>'
-    case 29: return icon = '<:iconPerks_HuntressLullaby:741713040831152160>'
-    case 30: return icon = '<:iconPerks_noOneEscapesDeath:741713040508059749>'
-    case 31: return icon = '<:iconPerks_hexRetribution:741713041212833884>'
-    case 32: return icon = '<:iconPerks_ruin:741713167440150618>'
-    case 33: return icon = '<:iconPerks_theThirdSeal:741713167763243098>'
-    case 34: return icon = '<:iconPerks_thrillOfTheHunt:741713167826026506>'
-    case 35: return icon = '<:iconPerks_imAllEars:741713041338531841>'
-    case 36: return icon = '<:iconPerks_infectiousFright:741713040961175635>'
-    case 37: return icon = '<:iconPerks_insidious:741713038914355280>'
-    case 38: return icon = '<:iconPerks_ironGrasp:741713039241379930>'
-    case 39: return icon = '<:iconPerks_ironMaiden:741713041242194001>'
-    case 40: return icon = '<:iconPerks_knockOut:741713040474374145>'
-    case 41: return icon = '<:iconPerks_lightborn:741713040290087064>'
-    case 42: return icon = '<:iconPerks_madGrit:741713041472749739>'
-    case 43: return icon = '<:iconPerks_makeYourChoice:741713040067657738>'
-    case 44: return icon = '<:iconPerks_mindBreaker:741713041443520752>'
-    case 45: return icon = '<:iconPerks_monitorAndAbuse:741713041326080072>'
-    case 46: return icon = '<:iconPerks_monstrousShrine:741713039820324954>'
-    case 47: return icon = '<:iconPerks_nemesis:741713041535795230>'
-    case 48: return icon = '<:iconPerks_generatorOvercharge:741713040386424834>'
-    case 49: return icon = '<:iconPerks_overwhelmingPresence:741713039929245879>'
-    case 50: return icon = '<:iconPerks_playWithYourFood:741713041087004824>'
-    case 51: return icon = '<:iconPerks_popGoesTheWeasel:741713158447693918>'
-    case 52: return icon = '<:iconPerks_predator:741713162608443412>'
-    case 53: return icon = '<:iconPerks_hatred:741713041632002098>'
-    case 54: return icon = '<:iconPerks_rememberMe:741713166404157600>'
-    case 55: return icon = '<:iconPerks_saveTheBestForLast:741713167276834847>'
-    case 56: return icon = '<:iconPerks_shadowborn:741713166588969000>'
-    case 57: return icon = '<:iconPerks_sloppyButcher:741713165166968843>'
-    case 58: return icon = '<:iconPerks_spiesFromTheShadows:741713165120962591>'
-    case 59: return icon = '<:iconPerks_spiritFury:741713167729688737>'
-    case 60: return icon = '<:iconPerks_stridor:741713167654191165>'
-    case 61: return icon = '<:iconPerks_surge:741713168111501473>'
-    case 62: return icon = '<:iconPerks_surveillance:741713167821832192>'
-    case 63: return icon = '<:iconPerks_TerritorialImperative:741713167113257000>'
-    case 64: return icon = '<:iconPerks_tinkerer:741713166085652611>'
-    case 65: return icon = '<:iconPerks_thatanophobia:741713167079571526>'
-    case 66: return icon = '<:iconPerks_thrillingTremors:741713167838609541>'
-    case 67: return icon = '<:iconPerks_trailOfTorment:741713167515910196>'
-    case 68: return icon = '<:iconPerks_unnervingPresence:741713166878113947>'
-    case 69: return icon = '<:iconPerks_unrelenting:741713167607922751>'
-    case 70: return icon = '<:iconPerks_whispers:741726257615732828>'
-    case 71: return icon = '<:iconPerks_zanshinTactics:741726259121225858>'
+    switch(numero)
+    {
+      case 0: return icon = '<:iconPerks_aNursesCalling:741712926666260557>'
+      case 1: return icon = '<:iconPerks_agitation:741712927350063224>'
+      case 2: return icon = '<:iconPerks_bamboozle:741712928536789163>'
+      case 3: return icon = '<:iconPerks_BBQAndChili:741712928327336018>'
+      case 4: return icon = '<:iconPerks_BeastOfPrey:741712928000049215>'
+      case 5: return icon = '<:iconPerks_bitterMurmur:741712925491724309>'
+      case 6: return icon = '<:iconPerks_bloodEcho:741712928109232178>'
+      case 7: return icon = '<:iconPerks_bloodWarden:741712928960544778>'
+      case 8: return icon = '<:iconPerks_bloodhound:741712926028726302>'
+      case 9: return icon = '<:iconPerks_brutalStrength:741712927417040926>'
+      case 10: return icon = '<:iconPerks_corruptIntervention:741712928864207008>'
+      case 11: return icon = '<:iconPerks_coulrophobia:741712928604028960>'
+      case 12: return icon = '<:iconPerks_cruelConfinement:741712928759218216>'
+      case 13: return icon = '<:iconPerks_darkDevotion:741712929015070830>'
+      case 14: return icon = '<:iconPerks_deadManSwitch:741712928507428916>'
+      case 15: return icon = '<:iconPerks_deathbound:741712928087998594>'
+      case 16: return icon = '<:iconPerks_deerstalker:741712927328960562>'
+      case 17: return icon = '<:iconPerks_discordance:741712927043878964>'
+      case 18: return icon = '<:iconPerks_distressing:741712927999918181>'
+      case 19: return icon = '<:iconPerks_dyingLight:741712927765037206>'
+      case 20: return icon = '<:iconPerks_enduring:741713029728829484>'
+      case 21: return icon = '<:iconPerks_fireUp:741713030827737089>'
+      case 22: return icon = '<:iconPerks_forcedPenance:741713038561902653>'
+      case 23: return icon = '<:iconPerks_franklinsLoss:741713038838595594>'
+      case 24: return icon = '<:iconPerks_furtiveChase:741713041086742611>'
+      case 25: return icon = '<:iconPerks_gearHead:741713037592887326>'
+      case 26: return icon = '<:iconPerks_hangmansTrick:741713038054260736>'
+      case 27: return icon = '<:iconPerks_devourHope:741712927639470220>'
+      case 28: return icon = '<:iconPerks_hauntedGround:741713041334337577>'
+      case 29: return icon = '<:iconPerks_HuntressLullaby:741713040831152160>'
+      case 30: return icon = '<:iconPerks_noOneEscapesDeath:741713040508059749>'
+      case 31: return icon = '<:iconPerks_hexRetribution:741713041212833884>'
+      case 32: return icon = '<:iconPerks_ruin:741713167440150618>'
+      case 33: return icon = '<:iconPerks_theThirdSeal:741713167763243098>'
+      case 34: return icon = '<:iconPerks_thrillOfTheHunt:741713167826026506>'
+      case 35: return icon = '<:iconPerks_imAllEars:741713041338531841>'
+      case 36: return icon = '<:iconPerks_infectiousFright:741713040961175635>'
+      case 37: return icon = '<:iconPerks_insidious:741713038914355280>'
+      case 38: return icon = '<:iconPerks_ironGrasp:741713039241379930>'
+      case 39: return icon = '<:iconPerks_ironMaiden:741713041242194001>'
+      case 40: return icon = '<:iconPerks_knockOut:741713040474374145>'
+      case 41: return icon = '<:iconPerks_lightborn:741713040290087064>'
+      case 42: return icon = '<:iconPerks_madGrit:741713041472749739>'
+      case 43: return icon = '<:iconPerks_makeYourChoice:741713040067657738>'
+      case 44: return icon = '<:iconPerks_mindBreaker:741713041443520752>'
+      case 45: return icon = '<:iconPerks_monitorAndAbuse:741713041326080072>'
+      case 46: return icon = '<:iconPerks_monstrousShrine:741713039820324954>'
+      case 47: return icon = '<:iconPerks_nemesis:741713041535795230>'
+      case 48: return icon = '<:iconPerks_generatorOvercharge:741713040386424834>'
+      case 49: return icon = '<:iconPerks_overwhelmingPresence:741713039929245879>'
+      case 50: return icon = '<:iconPerks_playWithYourFood:741713041087004824>'
+      case 51: return icon = '<:iconPerks_popGoesTheWeasel:741713158447693918>'
+      case 52: return icon = '<:iconPerks_predator:741713162608443412>'
+      case 53: return icon = '<:iconPerks_hatred:741713041632002098>'
+      case 54: return icon = '<:iconPerks_rememberMe:741713166404157600>'
+      case 55: return icon = '<:iconPerks_saveTheBestForLast:741713167276834847>'
+      case 56: return icon = '<:iconPerks_shadowborn:741713166588969000>'
+      case 57: return icon = '<:iconPerks_sloppyButcher:741713165166968843>'
+      case 58: return icon = '<:iconPerks_spiesFromTheShadows:741713165120962591>'
+      case 59: return icon = '<:iconPerks_spiritFury:741713167729688737>'
+      case 60: return icon = '<:iconPerks_stridor:741713167654191165>'
+      case 61: return icon = '<:iconPerks_surge:741713168111501473>'
+      case 62: return icon = '<:iconPerks_surveillance:741713167821832192>'
+      case 63: return icon = '<:iconPerks_TerritorialImperative:741713167113257000>'
+      case 64: return icon = '<:iconPerks_tinkerer:741713166085652611>'
+      case 65: return icon = '<:iconPerks_thatanophobia:741713167079571526>'
+      case 66: return icon = '<:iconPerks_thrillingTremors:741713167838609541>'
+      case 67: return icon = '<:iconPerks_trailOfTorment:741713167515910196>'
+      case 68: return icon = '<:iconPerks_unnervingPresence:741713166878113947>'
+      case 69: return icon = '<:iconPerks_unrelenting:741713167607922751>'
+      case 70: return icon = '<:iconPerks_whispers:741726257615732828>'
+      case 71: return icon = '<:iconPerks_zanshinTactics:741726259121225858>'
+    }
   }
 }
+
 
 
 function SurvivorRandom(numero)
@@ -2801,8 +2810,9 @@ function ObtenerPerkKiller(numero)
   }
 }
 
-function TraducirPerk(variable)
+function TraducirPerk(variable, id)
 {
+  k[id] = 0
   //perks de killer
   if(variable == "nursecalling") return ObtenerPerkKiller(0)
   if(variable == "agitation") return ObtenerPerkKiller(1)
@@ -2877,6 +2887,7 @@ function TraducirPerk(variable)
   if(variable == "whispers") return ObtenerPerkKiller(70)
   if(variable == "zanshintactics") return ObtenerPerkKiller(71)
   //Perks de survivor
+  k[id] = 1
   if(variable == "ace_in_the_hole") return ObtenerPerkSurv(0)
   if(variable == "adrenaline") return ObtenerPerkSurv(1)
   if(variable == "aftercare") return ObtenerPerkSurv(2)
@@ -3456,7 +3467,7 @@ function VerificarSantuario()
               var perk_3_b = perk_3_a.slice(0, perk_3_a.indexOf('"'))
               var perk_4_a = perk_3_b.slice(perk_3_b.indexOf('id')+5)
               var perk_4_b = perk_4_a.slice(0, perk_4_a.indexOf('"'))
-              con.query(`DELETE * FROM santuario`)
+              con.query(`DELETE FROM santuario`)
               con.query(`INSERT INTO santuario (perk_1, perk_2, perk_3, perk_4) VALUES ('${perk_1_b}', '${perk_2_b}', '${perk_3_b}', '${perk_4_b}')`)
             })
           })
