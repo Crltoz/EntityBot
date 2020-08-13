@@ -2149,7 +2149,7 @@ function ObtenerPerkSurv(numero)
     }
     case 69:
     {
-      return NombrePerk = 'Esto no puede estar pasando'
+      return NombrePerk = 'Tenacidad'
       
     }
     case 70:
@@ -2159,7 +2159,7 @@ function ObtenerPerkSurv(numero)
     }
     case 71:
     {
-      return NombrePerk = 'Tenacidad'
+      return NombrePerk = 'Esto no puede estar pasando'
       
     }
     case 72:
