@@ -3460,12 +3460,15 @@ function VerificarSantuario()
             }).on('end', function () {
               var body2 = Buffer.concat(bodyChunks2);
               var perk_1_a = body2.slice(body2.indexOf('id')+5)
+              body2 = perk_1_a;
               var perk_1_b = perk_1_a.slice(0, perk_1_a.indexOf('"'))
-              var perk_2_a = perk_1_b.slice(perk_1_b.indexOf('id')+5)
+              var perk_2_a = body2.slice(body2.indexOf('id')+5)
+              body2 = perk_2_a;
               var perk_2_b = perk_2_a.slice(0, perk_2_a.indexOf('"'))
-              var perk_3_a = perk_2_b.slice(perk_2_b.indexOf('id')+5)
+              var perk_3_a = body2.slice(body2.indexOf('id')+5)
+              body2 = perk_3_a;
               var perk_3_b = perk_3_a.slice(0, perk_3_a.indexOf('"'))
-              var perk_4_a = perk_3_b.slice(perk_3_b.indexOf('id')+5)
+              var perk_4_a = body2.slice(body2.indexOf('id')+5)
               var perk_4_b = perk_4_a.slice(0, perk_4_a.indexOf('"'))
               con.query(`DELETE FROM santuario`)
               con.query(`INSERT INTO santuario (perk_1, perk_2, perk_3, perk_4) VALUES ('${perk_1_b}', '${perk_2_b}', '${perk_3_b}', '${perk_4_b}')`)
