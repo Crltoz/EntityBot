@@ -546,7 +546,7 @@ if(n2.has(message.author.id))
      if(command == 'msj')
      {
       const user = await client.fetchUser(args[0])
-      user.send('**Hola "+user.tag+"!** Has sido el ganador/a del sorteo del DLC Chapter a elección. El equipo de desarrollo del bot te ha mandado una solicitud de amistad: **Crltoz#0001**. Aceptalo para dar tu premio. Tienes 24 horas :D')
+      user.send('**Hola!** Has sido el ganador/a del sorteo del DLC Chapter a elección. El equipo de desarrollo del bot te ha mandado una solicitud de amistad: **Crltoz#0001**. Aceptalo para dar tu premio. Tienes 24 horas :D')
       /*const server = client.guilds.get('741382481017831536')
       console.log(server.name + server.ownerID)
       let defaultChannel = "";
