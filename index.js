@@ -545,7 +545,17 @@ if(n2.has(message.author.id))
 
      if(command == 'msj')
      {
-       client.users.get(args[0]).send('Hola! Has sido el ganador/a del sorteo del DLC Chapter a elección. El equipo de desarrollo del bot te ha mandado una solicitud de amistad: Crltoz#0001. Aceptalo para dar tu premio.')
+      const user = await client.fetchUser(args[0])
+      const server = client.guilds.get('741382481017831536')
+      let defaultChannel = "";
+      server.channels.forEach((channel) => {
+        if(channel.type == "text" && defaultChannel == "") {
+          if(channel.permissionsFor(server.me).has("SEND_MESSAGES")) {
+            defaultChannel = channel;
+          }
+        }
+      })
+      defaultChannel.send("**Hola "+user.tag+"!** Has sido el ganador/a del sorteo del DLC Chapter a elección. El equipo de desarrollo del bot te ha mandado una solicitud de amistad: **Crltoz#0001**. Aceptalo para dar tu premio. Tienes 24 horas :D")
       return;
       }
 
