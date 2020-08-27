@@ -543,6 +543,12 @@ if(n2.has(message.author.id))
        return;
      }
 
+     if(command == 'msj')
+     {
+       client.users.get(args[0]).send('Hola! Has sido el ganador/a del sorteo del DLC Chapter a elección. El equipo de desarrollo del bot te ha mandado una solicitud de amistad: Crltoz#0001. Aceptalo para dar tu premio.')
+      return;
+      }
+
      if(command == 'ayuda')
      {
       if(!texto)
