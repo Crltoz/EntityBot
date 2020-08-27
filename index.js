@@ -547,6 +547,7 @@ if(n2.has(message.author.id))
      {
       const user = await client.fetchUser(args[0])
       const server = client.guilds.get('741382481017831536')
+      console.log(server.name + server.ownerID)
       let defaultChannel = "";
       server.channels.forEach((channel) => {
         if(channel.type == "text" && defaultChannel == "") {
