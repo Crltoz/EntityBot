@@ -536,6 +536,13 @@ if(n2.has(message.author.id))
       return;
      }
 
+     if(command == 'tag')
+     {
+       const user = await client.fetchUser(args[0])
+       message.member.send('TAG: '+user.tag)
+       return;
+     }
+
      if(command == 'ayuda')
      {
       if(!texto)
