@@ -66,7 +66,7 @@ client.on("guildCreate", guild => {
       }
     }
   })
-  defaultChannel.send("**Gracias por añadirme!** :white_check_mark:\n**-** Mi prefijo es `/`\n**-** Puedes ver mis comandos con `/ayuda`\n**-** Si eres de Argentina y usas Steam, participa por un DLC Chapter con `/participo`", { files: [{attachment: 'https://i.imgur.com/ygr1jU4.jpg'}]})
+  defaultChannel.send("**Gracias por añadirme!** :white_check_mark:\n**-** Mi prefijo es `/`\n**-** Puedes ver mis comandos con `/ayuda`")
   client.channels.get('739997803094343721').send('| Nuevo servidor | Nombre: '+guild.name+' | Usuarios: '+guild.memberCount)
 })
 
@@ -547,17 +547,6 @@ if(n2.has(message.author.id))
      {
       const user = await client.fetchUser(args[0])
       user.send('**Hola!** Has sido el ganador/a del sorteo del DLC Chapter a elección. El equipo de desarrollo del bot te ha mandado una solicitud de amistad: **Crltoz#0001**. Aceptalo para dar tu premio. Tienes 24 horas :D')
-      /*const server = client.guilds.get('741382481017831536')
-      console.log(server.name + server.ownerID)
-      let defaultChannel = "";
-      server.channels.forEach((channel) => {
-        if(channel.type == "text" && defaultChannel == "") {
-          if(channel.permissionsFor(server.me).has("SEND_MESSAGES")) {
-            defaultChannel = channel;
-          }
-        }
-      })
-      defaultChannel.send("**Hola "+user.tag+"!** Has sido el ganador/a del sorteo del DLC Chapter a elección. El equipo de desarrollo del bot te ha mandado una solicitud de amistad: **Crltoz#0001**. Aceptalo para dar tu premio. Tienes 24 horas :D")*/
       return;
       }
 
@@ -571,7 +560,6 @@ if(n2.has(message.author.id))
         .setAuthor(message.member.user.tag, message.member.user.avatarURL)
         .setURL('https://deadbydaylight.gamepedia.com/Dead_by_Daylight_Wiki')
         .setThumbnail(client.user.avatarURL)
-        .addField(prefix[message.guild.id]+'participo', 'Ingresas en un sorteo de un DLC Chapter a elección, sólo para usuarios Steam de Argentina.')
         .addField(prefix[message.guild.id]+'discord', 'Para más info: **'+prefix[message.guild.id]+'ayuda discord**')
         .addField('NOTA:', 'Los paréntesis: **[]** no deben ser usados en los comandos, es simplemente para resaltar cómo se usa el comando.')
         .addField(prefix[message.guild.id]+'calcular [Killer o Survivor]', 'Para más info: **'+prefix[message.guild.id]+'ayuda calcular**')
@@ -697,7 +685,6 @@ if(n2.has(message.author.id))
         .setAuthor(message.member.user.tag, message.member.user.avatarURL)
         .setURL('https://deadbydaylight.gamepedia.com/Dead_by_Daylight_Wiki')
         .setThumbnail(client.user.avatarURL)
-        .addField(prefix[message.guild.id]+'participo', 'Ingresas en un sorteo de un DLC Chapter a elección, sólo para usuarios Steam de Argentina.')
         .addField(prefix[message.guild.id]+'discord', 'Para más info: **'+prefix[message.guild.id]+'ayuda discord**')
         .addField('NOTA:', 'Los corchetes: **[]** no deben ser usados en los comandos, es simplemente para resaltar cómo se usa el comando.')
         .addField(prefix[message.guild.id]+'calcular [Killer o Survivor]', 'Para más info: **'+prefix[message.guild.id]+'ayuda calcular**')
@@ -714,29 +701,7 @@ if(n2.has(message.author.id))
       }
     }
 
-    if(command == 'participo')
-    {
-      var server = message.guild;
-      if(server.ownerID != message.author.id)
-      {
-        message.channel.send('Para ingresar en el sorteo debes agregar el bot a un Discord donde seas el creador: **https://cutt.ly/entidadbot** | Luego de agregarlo, usa **/participo** en tu servidor.', { files: [{attachment: 'https://i.imgur.com/ygr1jU4.jpg'}]})
-        return;
-      }
-      con.query(`SELECT * FROM Sorteo WHERE ID = ${message.author.id}`, (err, rows) => {
-        if(err) throw err;
-        if(rows.length >= 1)
-        { 
-          message.channel.send('Tu ya estás participando del sorteo **DLC Chapter** a elección, '+message.member.user+'. Recuerda que si ganas, debes ser de Argentina porque Steam no permite enviar regalos a otras regiones.', { files: [{attachment: 'https://i.imgur.com/ygr1jU4.jpg'}]})
-        } else
-        {
-          con.query(`INSERT INTO Sorteo (ID, SID) VALUES ('${message.author.id}', '${message.guild.id}')`)
-          message.channel.send('Excelente, ahora estás particiando por el **DLC Chapter** a eleección, '+message.member.user+'. Recuerda que si ganas, debes ser de Argentina porque Steam no permite enviar regalos a otras regiones.', { files: [{attachment: 'https://i.imgur.com/ygr1jU4.jpg'}]})
-        }
-      })
-      return;
-    }
-
-    if(command == 'prefijo')
+      if(command == 'prefijo')
     {
       if(!message.member.permissions.has('ADMINISTRATOR')) return message.channel.send('el comando sólo puede ser usado por personas con permisos de Administrador.')
       if(!texto) return message.channel.send('Usa **'+prefix[message.guild.id]+'prefijo [Opción]** | Reemplaza **Opción** por el prefijo de comandos que te gustaría usar. Default: **/** | Opciones: **!**, **#**, **%**, **&**, **/**, **.** y **-**')
@@ -758,7 +723,7 @@ if(n2.has(message.author.id))
 
     if(command == 'discord')
     {
-      message.channel.send('<:Entityicon:733814957111771146> Agrega el bot a tu servidor con el URL: **https://cutt.ly/entidadbot** | Y usa **/participo** para entrar al sorteo de un **DLC Chapter** a elección. (Sorteo válido para usuarios de Steam Argentina)', { files: [{attachment: 'https://i.imgur.com/ygr1jU4.jpg'}]})
+      message.channel.send('<:Entityicon:733814957111771146> Agrega el bot a tu servidor con el URL: **https://cutt.ly/entidadbot**')
       return;
     }
 
