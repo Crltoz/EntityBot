@@ -2205,6 +2205,16 @@ if(command == 'help')
  {
  if(!message.member.permissions.has('ADMINISTRATOR')) return message.channel.send('El comando sólo puede ser usado por personas con permisos de Administrador. || The command can only be used by administrator users.')
    lenguaje[message.guild.id] = 0;
+   con.query(`SELECT * FROM Servidores WHERE ID = ${message.guild.id}`, (err, rows) => {
+    if(err) throw err;
+    if(rows.length >= 1)
+    {
+      con.query(`UPDATE Servidores SET lenguaje = 0 WHERE ID = ${message.guild.id}`)
+    } else
+    {
+      con.query(`INSERT INTO Servidores (ID, lenguaje) VALUES ('${message.guild.id}', '0')`)
+    }
+  })
    message.channel.send('Bien, el bot está configurado en español. Si desea volver a inglés use **'+prefix[message.guild.id]+'english**. Para consultar los comandos use **'+prefix[message.guild.id]+'ayuda**.')
    return;
    }
