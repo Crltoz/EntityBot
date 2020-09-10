@@ -1951,7 +1951,7 @@ client.on("message", async (message) => {
           .setURL('https://deadbydaylight.gamepedia.com/Dead_by_Daylight_Wiki')
           .addField('ㅤ', '**► '+ObtenerPerkKiller(numero_perk_1)+'**\n**► '+ObtenerPerkKiller(numero_perk_2)+'**\n**► '+ObtenerPerkKiller(numero_perk_3)+'**\n**► '+ObtenerPerkKiller(numero_perk_4)+'**', true)
           .setColor(0xFF0000)
-      message.channel.send(embed).then(function(message) { message.channel.send(ObtenerIconPerk(numero_perk_1, 0)+' '+ObtenerIconPerkKiller(numero_perk_2, 0)+' '+ObtenerIconPerkKiller(numero_perk_3, 0)+' '+ObtenerIconPerkKiller(numero_perk_4, 0)) })
+          message.channel.send(embed).then(function(message) { message.channel.send(ObtenerIconPerk(numero_perk_1, 0)+' '+ObtenerIconPerk(numero_perk_2, 0)+' '+ObtenerIconPerk(numero_perk_3, 0)+' '+ObtenerIconPerk(numero_perk_4, 0)) })
       return;
     } else
     {
