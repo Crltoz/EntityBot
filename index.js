@@ -1854,7 +1854,7 @@ client.on("message", async (message) => {
     if(!texto) return message.member.send('Usa **'+prefix[message.guild.id]+'random [Survivor o Killer]** || Te retornará un survivor o killer aleatorio con 4 perks.')
     if(texto.toLowerCase() == 'survivor')
     {
-    let numero = Math.floor(Math.random() * 23);
+    let numero = Math.floor(Math.random() * 22);
     let numero_perk_1 = Math.floor(Math.random() * 82);
     let numero_perk_2 = Math.floor(Math.random() * 82);
     if(numero_perk_2 == numero_perk_1)
@@ -1905,7 +1905,7 @@ client.on("message", async (message) => {
     }
     else if(texto.toLowerCase() == 'killer')
     {
-      let numero = Math.floor(Math.random() * 21);
+      let numero = Math.floor(Math.random() * 20);
       KillerRandom(numero);
       let numero_perk_1 = Math.floor(Math.random() * 74);
       let numero_perk_2 = Math.floor(Math.random() * 74);
@@ -3027,7 +3027,7 @@ if(command == 'random')
  }
  else if(texto.toLowerCase() == 'killer')
  {
-   let numero = Math.floor(Math.random() * 21);
+   let numero = Math.floor(Math.random() * 20);
    KillerRandom(numero);
    let numero_perk_1 = Math.floor(Math.random() * 74);
    let numero_perk_2 = Math.floor(Math.random() * 74);
