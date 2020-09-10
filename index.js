@@ -3850,7 +3850,6 @@ function SurvivorRandom(numero)
       break;
     }
   }
-  }
   return;
 }
 
