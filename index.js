@@ -4,11 +4,12 @@ const config = require("./config.json");
 var https = require('https');
 var http = require('http');
 var useragent = require('express-useragent')
+const version_bot = '0.8.5'
 const mysql = require("mysql");
 const { parse } = require("path");
 const { SSL_OP_NO_TLSv1_1 } = require("constants");
-const PerkSurv = 80;
-const PerkKill = 72;
+const PerkSurv = 83;
+const PerkKill = 75;
 const Niveles = 3;
 const p1 = new Set();
 const p2 = new Set();
@@ -936,7 +937,7 @@ client.on("message", async (message) => {
         .addField(prefix[message.guild.id]+'santuario', 'Te mostrará el santuario de los secretos actual del juego.')
         .addField(prefix[message.guild.id]+'ayuda admin', 'Mostrará los comandos que pueden ser utilizados por **administradores** para personalizar el bot.')
         .setTimestamp()
-        .setFooter('La entidad - V0.8.0 - Beta Pública', client.user.avatarURL);
+        .setFooter('La entidad - V' + version_bot + ' - Beta Pública', client.user.avatarURL);
         message.channel.send(embedd)
         return;
       }
@@ -952,7 +953,7 @@ client.on("message", async (message) => {
         .addField(prefix[message.guild.id]+'prefijo [Opción]', 'Reemplaza **Opción** por el prefijo de comandos que te gustaría usar. Default: **/** | Opciones: **!**, **#**, **%**, **&**, **/**, **.** y **-**')
         .addField(prefix[message.guild.id]+'canal #nombre', 'Sólo puede ser usado por **ADMINISTRADORES**, puedes selecccionar un canal para que los comandos sólo funcionen allí. Usa **'+prefix[message.guild.id]+'canal borrar** para poder usarlos en cualquier canal nuevamente.')
         .setTimestamp()
-        .setFooter('La entidad - V0.8.0 - Beta Pública', client.user.avatarURL);
+        .setFooter('La entidad - V' + version_bot + ' - Beta Pública', client.user.avatarURL);
         message.member.send(embedd)
         return;
       } 
@@ -966,7 +967,7 @@ client.on("message", async (message) => {
         .setThumbnail(client.user.avatarURL)
         .addField('¿Para qué sirve?', 'Este comando te enviará el link para unir el bot al servidor que quieras y poder usarlo allí.')
         .setTimestamp()
-        .setFooter('La entidad - V0.8.0 - Beta Pública', client.user.avatarURL);
+        .setFooter('La entidad - V' + version_bot + ' - Beta Pública', client.user.avatarURL);
         message.member.send(embedd)
         return;
       } 
@@ -981,7 +982,7 @@ client.on("message", async (message) => {
         .addField('¿Para qué sirve?', 'Este comando es para calcular cuántos __puntos de sangre__ son necesarios para comprar todas las habilidades de todos los personajes. Se te preguntará la cantidad de perks que tengas con un personaje, y en base a eso el bot calculará las faltantes y cuántos puntos de sangre te costaría.')
         .addField('Ejemplo:', 'Si tengo a Meg Thomas sólo con sus 3 perks básicas, cada una a nivel 1 y quiero saber cuánto me costará obtener todas las perks de todos los supervivientes a nivel 3 deberé usar: **'+prefix[message.guild.id]+'calcular survivor** | Luego el bot me pedirá la cantidad de habilidades que tengo con Meg, y por último me dirá cuánto me costará obtener todas las perks.')
         .setTimestamp()
-        .setFooter('La entidad - V0.8.0 - Beta Pública', client.user.avatarURL);
+        .setFooter('La entidad - V' + version_bot + ' - Beta Pública', client.user.avatarURL);
         message.member.send(embedd)
         return;
       }
@@ -996,7 +997,7 @@ client.on("message", async (message) => {
         .addField('¿Para qué sirve?', 'Podrás obtener las estadísticas de un jugador de Steam de Dead By Daylight, recuerda que debe estar en público todas las configuraciones de privacidad.')
         .addField('Ejemplo:', 'Si quiero ver mis estadísticas de asesino usaré: **'+prefix[message.guild.id]+'stats killer steamcommunity.com/id/Crltoz/** | El link es el de mi perfil de Steam.')
         .setTimestamp()
-        .setFooter('La entidad - V0.8.0 - Beta Pública', client.user.avatarURL);
+        .setFooter('La entidad - V' + version_bot + ' - Beta Pública', client.user.avatarURL);
         message.member.send(embedd)
         return;
       }
@@ -1011,7 +1012,7 @@ client.on("message", async (message) => {
         .addField('¿Para qué sirve?', 'Calcula los puntos de sangre necesarios para comprar los niveles de la red de sangre que quieras.')
         .addField('Ejemplo:', 'Si con Dwight estoy en nivel 5 y quiero llegar al 20 debo usar: **'+prefix[message.guild.id]+'nivel 5 20** | El bot me enviará toda la información de los puntos de sangre necesarios y la cantidad de niveles comprados.')
         .setTimestamp()
-        .setFooter('La entidad - V0.8.0 - Beta Pública', client.user.avatarURL);
+        .setFooter('La entidad - V' + version_bot + ' - Beta Pública', client.user.avatarURL);
         message.member.send(embedd)
         return;
       }
@@ -1025,7 +1026,7 @@ client.on("message", async (message) => {
         .setThumbnail(client.user.avatarURL)
         .addField('¿Para qué sirve?', 'El lobby tiene funciones como la de los comandos, pero se utiliza a través de reacciones para que las personas que no les gusta usar comandos puedan usar otra alternativa.')
         .setTimestamp()
-        .setFooter('La entidad - V0.8.0 - Beta Pública', client.user.avatarURL);
+        .setFooter('La entidad - V' + version_bot + ' - Beta Pública', client.user.avatarURL);
         message.member.send(embedd)
         return;
       }
@@ -1040,7 +1041,7 @@ client.on("message", async (message) => {
         .addField('¿Para qué sirve?', 'Este comando te dará un asesino o superviviente totalmente aleatorio, con una build de 4 perks al azar.')
         .addField('Ejemplo:', 'Si quiero un superviviente random con 4 habilidades debo usar: **'+prefix[message.guild.id]+'random survivor** | El bot me enviará un superviviente random con 4 habilidades al azar.')
         .setTimestamp()
-        .setFooter('La entidad - V0.8.0 - Beta Pública', client.user.avatarURL);
+        .setFooter('La entidad - V' + version_bot + ' - Beta Pública', client.user.avatarURL);
         message.member.send(embedd)
         return;
       } else
@@ -1062,7 +1063,7 @@ client.on("message", async (message) => {
         .addField(prefix[message.guild.id]+'santuario', 'Te mostrará el santuario de los secretos actual del juego.')
         .addField(prefix[message.guild.id]+'ayuda admin', 'Mostrará los comandos que pueden ser utilizados por **administradores** para personalizar el bot.')
         .setTimestamp()
-        .setFooter('La entidad - V0.8.0 - Beta Pública', client.user.avatarURL);
+        .setFooter('La entidad - V' + version_bot + ' - Beta Pública', client.user.avatarURL);
         message.channel.send(embedd)
         return;
       }
@@ -1825,7 +1826,7 @@ client.on("message", async (message) => {
              .addField('5⃣ Invitación del Discord Oficial del bot.', 'Aquí podrás obtener el link para unir el bot a tu Server de Discord o soporte del mismo.')
              
              .setTimestamp()
-             .setFooter('V0.8.0 - Beta Pública', client.user.avatarURL);
+             .setFooter('V' + version_bot + ' - Beta Pública', client.user.avatarURL);
              message.channel.send(lembed).then(function (message) {
                  message.react("1⃣")
                  setTimeout(() => {
@@ -1853,42 +1854,42 @@ client.on("message", async (message) => {
     if(!texto) return message.member.send('Usa **'+prefix[message.guild.id]+'random [Survivor o Killer]** || Te retornará un survivor o killer aleatorio con 4 perks.')
     if(texto.toLowerCase() == 'survivor')
     {
-    let numero = Math.floor(Math.random() * 21);
-    let numero_perk_1 = Math.floor(Math.random() * 79);
-    let numero_perk_2 = Math.floor(Math.random() * 79);
+    let numero = Math.floor(Math.random() * 22);
+    let numero_perk_1 = Math.floor(Math.random() * 82);
+    let numero_perk_2 = Math.floor(Math.random() * 82);
     if(numero_perk_2 == numero_perk_1)
     {
       while(numero_perk_2 == numero_perk_1)
       {
-        numero_perk_2 = Math.floor(Math.random() * 79);
+        numero_perk_2 = Math.floor(Math.random() * 82);
       }
     }
-    let numero_perk_3 = Math.floor(Math.random() * 79);
+    let numero_perk_3 = Math.floor(Math.random() * 82);
     if(numero_perk_3 == numero_perk_1 || numero_perk_3 == numero_perk_2)
     {
       while(numero_perk_3 == numero_perk_1)
       {
-        numero_perk_3 = Math.floor(Math.random() * 79);
+        numero_perk_3 = Math.floor(Math.random() * 82);
       }
       while(numero_perk_3 == numero_perk_2)
       {
-        numero_perk_3 = Math.floor(Math.random() * 79);
+        numero_perk_3 = Math.floor(Math.random() * 82);
       }
     }
-    let numero_perk_4 = Math.floor(Math.random() * 79);
+    let numero_perk_4 = Math.floor(Math.random() * 82);
     if(numero_perk_4 == numero_perk_1 || numero_perk_4 == numero_perk_2 || numero_perk_4 == numero_perk_3)
     {
       while(numero_perk_4 == numero_perk_1)
       {
-        numero_perk_4 = Math.floor(Math.random() * 79);
+        numero_perk_4 = Math.floor(Math.random() * 82);
       }
       while(numero_perk_4 == numero_perk_2)
       {
-        numero_perk_4 = Math.floor(Math.random() * 79);
+        numero_perk_4 = Math.floor(Math.random() * 82);
       }
       while(numero_perk_4 == numero_perk_3)
       {
-        numero_perk_4 = Math.floor(Math.random() * 79);
+        numero_perk_4 = Math.floor(Math.random() * 82);
       }
     }
     SurvivorRandom(numero);
@@ -1904,43 +1905,43 @@ client.on("message", async (message) => {
     }
     else if(texto.toLowerCase() == 'killer')
     {
-      let numero = Math.floor(Math.random() * 19);
+      let numero = Math.floor(Math.random() * 20);
       KillerRandom(numero);
-      let numero_perk_1 = Math.floor(Math.random() * 71);
-      let numero_perk_2 = Math.floor(Math.random() * 71);
+      let numero_perk_1 = Math.floor(Math.random() * 74);
+      let numero_perk_2 = Math.floor(Math.random() * 74);
       if(numero_perk_2 == numero_perk_1)
       {
         while(numero_perk_2 == numero_perk_1)
         {
-          numero_perk_2 = Math.floor(Math.random() * 71);
+          numero_perk_2 = Math.floor(Math.random() * 74);
         }
       }
-      let numero_perk_3 = Math.floor(Math.random() * 71);
+      let numero_perk_3 = Math.floor(Math.random() * 74);
       if(numero_perk_3 == numero_perk_1 || numero_perk_3 == numero_perk_2)
       {
         while(numero_perk_3 == numero_perk_1)
         {
-          numero_perk_3 = Math.floor(Math.random() * 71);
+          numero_perk_3 = Math.floor(Math.random() * 74);
         }
         while(numero_perk_3 == numero_perk_2)
         {
-          numero_perk_3 = Math.floor(Math.random() * 71);
+          numero_perk_3 = Math.floor(Math.random() * 74);
         }
       }
-      let numero_perk_4 = Math.floor(Math.random() * 71);
+      let numero_perk_4 = Math.floor(Math.random() * 74);
       if(numero_perk_4 == numero_perk_1 || numero_perk_4 == numero_perk_2 || numero_perk_4 == numero_perk_3)
       {
         while(numero_perk_4 == numero_perk_1)
         {
-          numero_perk_4 = Math.floor(Math.random() * 71);
+          numero_perk_4 = Math.floor(Math.random() * 74);
         }
         while(numero_perk_4 == numero_perk_2)
         {
-          numero_perk_4 = Math.floor(Math.random() * 71);
+          numero_perk_4 = Math.floor(Math.random() * 74);
         }
         while(numero_perk_4 == numero_perk_3)
         {
-          numero_perk_4 = Math.floor(Math.random() * 71);
+          numero_perk_4 = Math.floor(Math.random() * 74);
         }
       }
       const embed = new Discord.RichEmbed()
@@ -2043,7 +2044,7 @@ if(command == 'help')
      .addField(prefix[message.guild.id]+'shrine', 'It will show you the shrine of secrets that is current in the game.')
      .addField(prefix[message.guild.id]+'help admin', 'It will show you the commands that can only be use by **administrators** to customize the bot.')
      .setTimestamp()
-     .setFooter('Entity - V0.8.0 - Public Beta', client.user.avatarURL);
+     .setFooter('Entity - V' + version_bot + ' - Public Beta', client.user.avatarURL);
      message.channel.send(embedd)
      return;
    }
@@ -2059,7 +2060,7 @@ if(command == 'help')
      .addField(prefix[message.guild.id]+'Prefix [Option]', 'Replace **Option** with the prefix of your choice. Default: **/** | Options: **!**, **#**, **%**, **&**, **/**, **.** y **-**')
      .addField(prefix[message.guild.id]+'Channel #name', 'This only can be use by **ADMINISTRATOR** users. Just select a channel and the commands will only work there. Use'+prefix[message.guild.id]+'**canal borrar** and the commands will work in every channel.')
      .setTimestamp()
-     .setFooter('Entity - V0.8.0 - Public Beta', client.user.avatarURL);
+     .setFooter('Entity - V' + version_bot + ' - Public Beta', client.user.avatarURL);
      message.member.send(embedd)
      return;
    } 
@@ -2073,7 +2074,7 @@ if(command == 'help')
      .setThumbnail(client.user.avatarURL)
      .addField('What is it for?', 'This command will send you a link to join the bot to any discord server and use it there.')
      .setTimestamp()
-     .setFooter('Entity - V0.8.0 - Public Beta', client.user.avatarURL);
+     .setFooter('Entity - V' + version_bot + ' - Public Beta', client.user.avatarURL);
      message.member.send(embedd)
      return;
    } 
@@ -2088,7 +2089,7 @@ if(command == 'help')
      .addField('What is it for?', 'This command will calculate the amount of __Bloodpoints__ that you need to buy all the perks from a caracter. It will ask you how many perks of each level you have and the bot will calculate counting those perks you dont have and giving you the aproximate cost in Bloodpoints. ')
      .addField('For example:', 'If i have Meg Thomas only with his 3 teacheable perk, each one of them level 1 and i wanna know how many bloodpoints it will cost to buy all the perks availeable at level 3, just using: **'+prefix[message.guild.id]+'calculate survivor** | Then the bot will ask the amaount of perks that i have with Meg and then it will tell me how much it will cost.')
      .setTimestamp()
-     .setFooter('Entity - V0.8.0 - Public Beta', client.user.avatarURL);
+     .setFooter('Entity - V' + version_bot + ' - Public Beta', client.user.avatarURL);
      message.member.send(embedd)
      return;
    }
@@ -2103,7 +2104,7 @@ if(command == 'help')
      .addField('What is it for?', 'It will tell you specific stats of a Dead by Daylight Steam player, remember that the steam profile privacy config must be all public.')
      .addField('For example:', ' If i wanna see my killer stats i use: **'+prefix[message.guild.id]+'stats killer steamcommunity.com/id/Creepzstah** | This link is from my steam profile.')
      .setTimestamp()
-     .setFooter('Entity - V0.8.0 - Public Beta', client.user.avatarURL);
+     .setFooter('Entity - V' + version_bot + ' - Public Beta', client.user.avatarURL);
      message.member.send(embedd)
      return;
    }
@@ -2118,7 +2119,7 @@ if(command == 'help')
      .addField('What is it for?', 'It calculate the amaount of Bloodpoints to buy those levels of bloodweb you want.')
      .addField('For example:', 'You have Dwight level 5 and you wanna level it up to 20 just use: **'+prefix[message.guild.id]+'level 5 20** | The bot will tell you the amaunt of bloodpoints needed and how many levels you wanna buy.')
      .setTimestamp()
-     .setFooter('Entity - V0.8.0 - Public Beta', client.user.avatarURL);
+     .setFooter('Entity - V' + version_bot + ' - Public Beta', client.user.avatarURL);
      message.member.send(embedd)
      return;
    }
@@ -2132,7 +2133,7 @@ if(command == 'help')
      .setThumbnail(client.user.avatarURL)
      .addField('What is it for?', 'The lobby works like the commands, but using reactions for those users that doesnt like using commands.')
      .setTimestamp()
-     .setFooter('Entity - V0.8.0 - Public Beta', client.user.avatarURL);
+     .setFooter('Entity - V' + version_bot + ' - Public Beta', client.user.avatarURL);
      message.member.send(embedd)
      return;
    }
@@ -2147,7 +2148,7 @@ if(command == 'help')
      .addField('What is it for?', 'It will show you a random 4 perk build for a random killer or survivor.')
      .addField('For example:', 'If you want a random survivor 4 perk build just use: **'+prefix[message.guild.id]+'random survivor** | The bot will send a random survivor 4 perk build.')
      .setTimestamp()
-     .setFooter('Entity - V0.8.0 - Public Beta', client.user.avatarURL);
+     .setFooter('Entity - V' + version_bot + ' - Public Beta', client.user.avatarURL);
      message.member.send(embedd)
      return;
    } else
@@ -2168,7 +2169,7 @@ if(command == 'help')
      .addField(prefix[message.guild.id]+'shrine', 'It will show you the shrine of secrets that is current in the game.')
      .addField(prefix[message.guild.id]+'help admin', 'It will show you the commands that can only be use by **administrators** to customize the bot.')
      .setTimestamp()
-     .setFooter('Entity - V0.8.0 - Public Beta', client.user.avatarURL);
+     .setFooter('Entity - V' + version_bot + ' - Public Beta', client.user.avatarURL);
      message.channel.send(embedd)
      return;
    }
@@ -2947,7 +2948,7 @@ if(command == 'level')
           .addField('5⃣ Bot official discord invitation.', 'Here you will recieve the link to join the bot to a discord server or if you need support.')
           
           .setTimestamp()
-          .setFooter('Entity - V0.8.0 - Public Beta', client.user.avatarURL);
+          .setFooter('Entity - V' + version_bot + ' - Public Beta', client.user.avatarURL);
           message.channel.send(lembed).then(function (message) {
               message.react("1⃣")
               setTimeout(() => {
@@ -2975,42 +2976,42 @@ if(command == 'random')
  if(!texto) return message.member.send('Use **'+prefix[message.guild.id]+'random [Survivor or Killer]** || It will give you a random 4 perk build for a survivor or killer.')
  if(texto.toLowerCase() == 'survivor')
  {
- let numero = Math.floor(Math.random() * 21);
- let numero_perk_1 = Math.floor(Math.random() * 79);
- let numero_perk_2 = Math.floor(Math.random() * 79);
+ let numero = Math.floor(Math.random() * 22);
+ let numero_perk_1 = Math.floor(Math.random() * 82);
+ let numero_perk_2 = Math.floor(Math.random() * 82);
  if(numero_perk_2 == numero_perk_1)
  {
    while(numero_perk_2 == numero_perk_1)
    {
-     numero_perk_2 = Math.floor(Math.random() * 79);
+     numero_perk_2 = Math.floor(Math.random() * 82);
    }
  }
- let numero_perk_3 = Math.floor(Math.random() * 79);
+ let numero_perk_3 = Math.floor(Math.random() * 82);
  if(numero_perk_3 == numero_perk_1 || numero_perk_3 == numero_perk_2)
  {
    while(numero_perk_3 == numero_perk_1)
    {
-     numero_perk_3 = Math.floor(Math.random() * 79);
+     numero_perk_3 = Math.floor(Math.random() * 82);
    }
    while(numero_perk_3 == numero_perk_2)
    {
-     numero_perk_3 = Math.floor(Math.random() * 79);
+     numero_perk_3 = Math.floor(Math.random() * 82);
    }
  }
- let numero_perk_4 = Math.floor(Math.random() * 79);
+ let numero_perk_4 = Math.floor(Math.random() * 82);
  if(numero_perk_4 == numero_perk_1 || numero_perk_4 == numero_perk_2 || numero_perk_4 == numero_perk_3)
  {
    while(numero_perk_4 == numero_perk_1)
    {
-     numero_perk_4 = Math.floor(Math.random() * 79);
+     numero_perk_4 = Math.floor(Math.random() * 82);
    }
    while(numero_perk_4 == numero_perk_2)
    {
-     numero_perk_4 = Math.floor(Math.random() * 79);
+     numero_perk_4 = Math.floor(Math.random() * 82);
    }
    while(numero_perk_4 == numero_perk_3)
    {
-     numero_perk_4 = Math.floor(Math.random() * 79);
+     numero_perk_4 = Math.floor(Math.random() * 82);
    }
  }
  SurvivorRandom(numero);
@@ -3026,43 +3027,43 @@ if(command == 'random')
  }
  else if(texto.toLowerCase() == 'killer')
  {
-   let numero = Math.floor(Math.random() * 19);
+   let numero = Math.floor(Math.random() * 20);
    KillerRandom(numero);
-   let numero_perk_1 = Math.floor(Math.random() * 71);
-   let numero_perk_2 = Math.floor(Math.random() * 71);
+   let numero_perk_1 = Math.floor(Math.random() * 74);
+   let numero_perk_2 = Math.floor(Math.random() * 74);
    if(numero_perk_2 == numero_perk_1)
    {
      while(numero_perk_2 == numero_perk_1)
      {
-       numero_perk_2 = Math.floor(Math.random() * 71);
+       numero_perk_2 = Math.floor(Math.random() * 74);
      }
    }
-   let numero_perk_3 = Math.floor(Math.random() * 71);
+   let numero_perk_3 = Math.floor(Math.random() * 74);
    if(numero_perk_3 == numero_perk_1 || numero_perk_3 == numero_perk_2)
    {
      while(numero_perk_3 == numero_perk_1)
      {
-       numero_perk_3 = Math.floor(Math.random() * 71);
+       numero_perk_3 = Math.floor(Math.random() * 74);
      }
      while(numero_perk_3 == numero_perk_2)
      {
-       numero_perk_3 = Math.floor(Math.random() * 71);
+       numero_perk_3 = Math.floor(Math.random() * 74);
      }
    }
-   let numero_perk_4 = Math.floor(Math.random() * 71);
+   let numero_perk_4 = Math.floor(Math.random() * 74);
    if(numero_perk_4 == numero_perk_1 || numero_perk_4 == numero_perk_2 || numero_perk_4 == numero_perk_3)
    {
      while(numero_perk_4 == numero_perk_1)
      {
-       numero_perk_4 = Math.floor(Math.random() * 71);
+       numero_perk_4 = Math.floor(Math.random() * 74);
      }
      while(numero_perk_4 == numero_perk_2)
      {
-       numero_perk_4 = Math.floor(Math.random() * 71);
+       numero_perk_4 = Math.floor(Math.random() * 74);
      }
      while(numero_perk_4 == numero_perk_3)
      {
-       numero_perk_4 = Math.floor(Math.random() * 71);
+       numero_perk_4 = Math.floor(Math.random() * 74);
      }
    }
    const embed = new Discord.RichEmbed()
@@ -3296,6 +3297,12 @@ function KillerRandom(numero)
     {
       NombrePersonaje = 'The Executioner/El Verdugo'
       ImagenPersonaje = 'https://gamepedia.cursecdn.com/deadbydaylight_gamepedia_en/a/a1/WK_charSelect_portrait.png'
+      break;
+    }
+    case 20: 
+    {
+      NombrePersonaje = 'The Blight/El Deterioro'
+      ImagenPersonaje = 'https://deadbydaylight.gamepedia.com/File:YK_BL_charSelect_portrait.png'
       break;
     }
   }
@@ -3684,6 +3691,18 @@ function ObtenerPerkSurv(numero)
     {
       return NombrePerk = 'Oportunidades'
     }
+    case 80:
+    {
+      return NombrePerk = 'Medidas desesperadas'
+    }
+    case 81:
+    {
+      return NombrePerk = 'Visión del futuro'
+    }
+    case 82:
+    {
+      return NombrePerk = 'Construcción durarera'
+    }
   }
 }
 
@@ -3824,6 +3843,13 @@ function SurvivorRandom(numero)
       ImagenPersonaje = 'https://gamepedia.cursecdn.com/deadbydaylight_gamepedia_en/5/5c/WS_charSelect_portrait.png'
       break;
     }
+    case 22: 
+    {
+      NombrePersonaje = 'Felix Richter'
+      ImagenPersonaje = 'https://deadbydaylight.gamepedia.com/File:YS_FR_charSelect_portrait.png'
+      break;
+    }
+  }
   }
   return;
 }
@@ -3915,6 +3941,9 @@ function ObtenerIconPerk(numero, s2)
       case 77: return icon = '<:iconPerks_wellMakeIt:741726257489641552>'
       case 78: return icon = '<:iconPerks_WereGonnaLiveForever:741726258613977108>'
       case 79: return icon = '<:iconPerks_windowsOfOpportunity:741726257968054315>'
+      case 80: return icon = '<:iconPerks_desperateMeasures:753423002103840868>'
+      case 81: return icon = '<:iconPerks_visionary:753423002586185910>'
+      case 82: return icon = '<:iconPerks_builtToLast:753423000149164032>'
     }
   } else
   {
@@ -3992,6 +4021,9 @@ function ObtenerIconPerk(numero, s2)
       case 69: return icon = '<:iconPerks_unrelenting:741713167607922751>'
       case 70: return icon = '<:iconPerks_whispers:741726257615732828>'
       case 71: return icon = '<:iconPerks_zanshinTactics:741726259121225858>'
+      case 72: return icon = '<:iconPerks_hexUndying:753423003500544031>'
+      case 73: return icon = '<:iconPerks_dragonsGrip:753423004012118056>'
+      case 74: return icon = '<:iconPerks_hexBloodFavor:753423003659927802>'
     }
   }
 }
@@ -4288,6 +4320,18 @@ function ObtenerPerkKiller(numero)
     {
       return NombrePerk = 'Tacticas de Zanshin'
     }
+    case 72:
+    {
+      return NombrePerk = 'Maleficio: Inmortal'
+    }
+    case 73:
+    {
+      return NombrePerk = 'Agarre del Dragón'
+    }
+    case 74:
+    {
+      return NombrePerk = 'Maleficio: Favor de Sangre'
+    }
   }
 }
 function TraducirPerk(variable, id)
@@ -4366,6 +4410,9 @@ function TraducirPerk(variable, id)
   if(variable == "unrelenting") return ObtenerPerkKiller(69)
   if(variable == "whispers") return ObtenerPerkKiller(70)
   if(variable == "zanshintactics") return ObtenerPerkKiller(71)
+  if(variable == "hexundying") return ObtenerPerkKiller(72)
+  if(variable == "dragonsgrip") return ObtenerPerkKiller(73)
+  if(variable == "hexbloodfavor") return ObtenerPerkKiller(74)
   //Perks de survivor
   k[id] = 1
   if(variable == "ace_in_the_hole") return ObtenerPerkSurv(0)
@@ -4448,6 +4495,9 @@ function TraducirPerk(variable, id)
   if(variable == "wellmakeit") return ObtenerPerkSurv(77)
   if(variable == "weregonnaliveforever") return ObtenerPerkSurv(78)
   if(variable == "windowsofopportunity") return ObtenerPerkSurv(79)
+  if(variable == "desperatemeasures") return ObtenerPerkSurv(80)
+  if(variable == "visionary") return ObtenerPerkSurv(81)
+  if(variable == "builttolast") return ObtenerPerkSurv(82)
   return;
 }
 
@@ -4891,6 +4941,10 @@ function ObtenerNumeroPerk(variable)
   if(variable == "unrelenting") return 69
   if(variable == "whispers") return 70
   if(variable == "zanshintactics") return 71
+  if(variable == "hexundying") return 72
+  if(variable == "dragonsgrip") return 73
+  if(variable == "hexbloodfavor") return 74
+
   //Perks de survivor
   if(variable == "ace_in_the_hole") return 0
   if(variable == "adrenaline") return 1
@@ -4972,6 +5026,9 @@ function ObtenerNumeroPerk(variable)
   if(variable == "wellmakeit") return 77
   if(variable == "weregonnaliveforever") return 78
   if(variable == "windowsofopportunity") return 79
+  if(variable == "desperatemeasures") return 80
+  if(variable == "visionary") return 81
+  if(variable == "builttolast") return 82
   return;
 }
 
@@ -5356,6 +5413,18 @@ function ObtenerPerkSurv_ING(numero)
     {
       return NombrePerk = 'Windows of Opportunity'
     }
+    case 80:
+    {
+      return NombrePerk = 'Desperate Measures'
+    }
+    case 81:
+    {
+      return NombrePerk = 'Visionary'
+    }
+    case 82:
+    {
+      return NombrePerk = 'Built to Last'
+    }
   }
 }
 
@@ -5650,6 +5719,18 @@ function ObtenerPerkKiller_ING(numero)
     case 71:
     {
       return NombrePerk = 'Zanshin Tactics'
+    }
+    case 72:
+    {
+      return NombrePerk = 'Hex: Undying'
+    }
+    case 73:
+    {
+      return NombrePerk = `Dragon's Grip`
+    }
+    case 74:
+    {
+      return NombrePerk = 'Hex: Blood Favour'
     }
   }
 }
