@@ -1854,7 +1854,7 @@ client.on("message", async (message) => {
     if(!texto) return message.member.send('Usa **'+prefix[message.guild.id]+'random [Survivor o Killer]** || Te retornará un survivor o killer aleatorio con 4 perks.')
     if(texto.toLowerCase() == 'survivor')
     {
-    let numero = Math.floor(Math.random() * 22);
+    let numero = Math.floor(Math.random() * 23);
     let numero_perk_1 = Math.floor(Math.random() * 82);
     let numero_perk_2 = Math.floor(Math.random() * 82);
     if(numero_perk_2 == numero_perk_1)
@@ -1900,12 +1900,12 @@ client.on("message", async (message) => {
         .setURL('https://deadbydaylight.gamepedia.com/Dead_by_Daylight_Wiki')
         .addField('ㅤ', '**► '+ObtenerPerkSurv(numero_perk_1)+'**\n**► '+ObtenerPerkSurv(numero_perk_2)+'**\n**► '+ObtenerPerkSurv(numero_perk_3)+'**\n**► '+ObtenerPerkSurv(numero_perk_4)+'**', true)
         .setColor(0xFF0000)
-    message.channel.send(embed).then(function(message) { message.channel.send(ObtenerIconPerk(numero_perk_1, 1)+' '+ObtenerIconPerk(numero_perk_2, 0)+' '+ObtenerIconPerk(numero_perk_3, 0)+' '+ObtenerIconPerk(numero_perk_4, 0)) })
+    message.channel.send(embed).then(function(message) { message.channel.send(ObtenerIconPerk(numero_perk_1, 1)+' '+ObtenerIconPerk(numero_perk_2, 1)+' '+ObtenerIconPerk(numero_perk_3, 1)+' '+ObtenerIconPerk(numero_perk_4, 1)) })
     return;
     }
     else if(texto.toLowerCase() == 'killer')
     {
-      let numero = Math.floor(Math.random() * 20);
+      let numero = Math.floor(Math.random() * 21);
       KillerRandom(numero);
       let numero_perk_1 = Math.floor(Math.random() * 74);
       let numero_perk_2 = Math.floor(Math.random() * 74);
@@ -1951,7 +1951,7 @@ client.on("message", async (message) => {
           .setURL('https://deadbydaylight.gamepedia.com/Dead_by_Daylight_Wiki')
           .addField('ㅤ', '**► '+ObtenerPerkKiller(numero_perk_1)+'**\n**► '+ObtenerPerkKiller(numero_perk_2)+'**\n**► '+ObtenerPerkKiller(numero_perk_3)+'**\n**► '+ObtenerPerkKiller(numero_perk_4)+'**', true)
           .setColor(0xFF0000)
-      message.channel.send(embed).then(function(message) { message.channel.send(ObtenerIconPerk(numero_perk_1, 0)+' '+ObtenerIconPerkKiller(numero_perk_2)+' '+ObtenerIconPerkKiller(numero_perk_3)+' '+ObtenerIconPerkKiller(numero_perk_4)) })
+      message.channel.send(embed).then(function(message) { message.channel.send(ObtenerIconPerk(numero_perk_1, 0)+' '+ObtenerIconPerkKiller(numero_perk_2, 0)+' '+ObtenerIconPerkKiller(numero_perk_3, 0)+' '+ObtenerIconPerkKiller(numero_perk_4, 0)) })
       return;
     } else
     {
@@ -3027,7 +3027,7 @@ if(command == 'random')
  }
  else if(texto.toLowerCase() == 'killer')
  {
-   let numero = Math.floor(Math.random() * 20);
+   let numero = Math.floor(Math.random() * 21);
    KillerRandom(numero);
    let numero_perk_1 = Math.floor(Math.random() * 74);
    let numero_perk_2 = Math.floor(Math.random() * 74);
@@ -3073,7 +3073,7 @@ if(command == 'random')
        .setURL('https://deadbydaylight.gamepedia.com/Dead_by_Daylight_Wiki')
        .addField('ㅤ', '**► '+ObtenerPerkKiller_ING(numero_perk_1)+'**\n**► '+ObtenerPerkKiller_ING(numero_perk_2)+'**\n**► '+ObtenerPerkKiller_ING(numero_perk_3)+'**\n**► '+ObtenerPerkKiller_ING(numero_perk_4)+'**', true)
        .setColor(0xFF0000)
-   message.channel.send(embed).then(function(message) { message.channel.send(ObtenerIconPerk(numero_perk_1, 1)+' '+ObtenerIconPerk(numero_perk_2, 0)+' '+ObtenerIconPerk(numero_perk_3, 0)+' '+ObtenerIconPerk(numero_perk_4, 0)) } )
+   message.channel.send(embed).then(function(message) { message.channel.send(ObtenerIconPerk(numero_perk_1, 0)+' '+ObtenerIconPerk(numero_perk_2, 0)+' '+ObtenerIconPerk(numero_perk_3, 0)+' '+ObtenerIconPerk(numero_perk_4, 0)) } )
    return;
  } else
  {
