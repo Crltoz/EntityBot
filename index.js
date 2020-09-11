@@ -3846,7 +3846,7 @@ function SurvivorRandom(numero)
     case 22: 
     {
       NombrePersonaje = 'Felix Richter'
-      ImagenPersonaje = 'https://deadbydaylight.gamepedia.com/File:YS_FR_charSelect_portrait.png'
+      ImagenPersonaje = 'https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/0/08/YS_FR_charSelect_portrait.png'
       break;
     }
   }
