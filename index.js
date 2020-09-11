@@ -96,6 +96,7 @@ client.on("messageReactionAdd", (messageReaction, user) => {
                     {
                       while(numero_perk_2 == numero_perk_1)
                       {
+                        console.log('Loop Linea 99')
                         numero_perk_2 = Math.floor(Math.random() * 79);
                       }
                     }
@@ -104,10 +105,12 @@ client.on("messageReactionAdd", (messageReaction, user) => {
                     {
                       while(numero_perk_3 == numero_perk_1)
                       {
+                        console.log('Loop Linea 108')
                         numero_perk_3 = Math.floor(Math.random() * 79);
                       }
                       while(numero_perk_3 == numero_perk_2)
                       {
+                        console.log('Loop Linea 113')
                         numero_perk_3 = Math.floor(Math.random() * 79);
                       }
                     }
@@ -116,14 +119,17 @@ client.on("messageReactionAdd", (messageReaction, user) => {
                     {
                       while(numero_perk_4 == numero_perk_1)
                       {
+                        console.log('Loop Linea 122')
                         numero_perk_4 = Math.floor(Math.random() * 79);
                       }
                       while(numero_perk_4 == numero_perk_2)
                       {
+                        console.log('Loop Linea 127')
                         numero_perk_4 = Math.floor(Math.random() * 79);
                       }
                       while(numero_perk_4 == numero_perk_3)
                       {
+                        console.log('Loop Linea 132')
                         numero_perk_4 = Math.floor(Math.random() * 79);
                       }
                     }
@@ -147,6 +153,7 @@ client.on("messageReactionAdd", (messageReaction, user) => {
                     {
                       while(numero_perk_2 == numero_perk_1)
                       {
+                        console.log('Loop Linea 156')
                         numero_perk_2 = Math.floor(Math.random() * 71);
                       }
                     }
@@ -155,10 +162,12 @@ client.on("messageReactionAdd", (messageReaction, user) => {
                     {
                       while(numero_perk_3 == numero_perk_1)
                       {
+                        console.log('Loop Linea 165')
                         numero_perk_3 = Math.floor(Math.random() * 71);
                       }
                       while(numero_perk_3 == numero_perk_2)
                       {
+                        console.log('Loop Linea 170')
                         numero_perk_3 = Math.floor(Math.random() * 71);
                       }
                     }
@@ -167,14 +176,17 @@ client.on("messageReactionAdd", (messageReaction, user) => {
                     {
                       while(numero_perk_4 == numero_perk_1)
                       {
+                        console.log('Loop Linea 179')
                         numero_perk_4 = Math.floor(Math.random() * 71);
                       }
                       while(numero_perk_4 == numero_perk_2)
                       {
+                        console.log('Loop Linea 184')
                         numero_perk_4 = Math.floor(Math.random() * 71);
                       }
                       while(numero_perk_4 == numero_perk_3)
                       {
+                        console.log('Loop Linea 189')
                         numero_perk_4 = Math.floor(Math.random() * 71);
                       }
                     }
@@ -220,6 +232,7 @@ client.on("messageReactionAdd", (messageReaction, user) => {
                     {
                       while(numero_perk_2 == numero_perk_1)
                       {
+                        console.log('Loop Linea 235')
                         numero_perk_2 = Math.floor(Math.random() * 79);
                       }
                     }
@@ -228,10 +241,12 @@ client.on("messageReactionAdd", (messageReaction, user) => {
                     {
                       while(numero_perk_3 == numero_perk_1)
                       {
+                        console.log('Loop Linea 244')
                         numero_perk_3 = Math.floor(Math.random() * 79);
                       }
                       while(numero_perk_3 == numero_perk_2)
                       {
+                        console.log('Loop Linea 249')
                         numero_perk_3 = Math.floor(Math.random() * 79);
                       }
                     }
@@ -240,14 +255,17 @@ client.on("messageReactionAdd", (messageReaction, user) => {
                     {
                       while(numero_perk_4 == numero_perk_1)
                       {
+                        console.log('Loop Linea 258')
                         numero_perk_4 = Math.floor(Math.random() * 79);
                       }
                       while(numero_perk_4 == numero_perk_2)
                       {
+                        console.log('Loop Linea 263')
                         numero_perk_4 = Math.floor(Math.random() * 79);
                       }
                       while(numero_perk_4 == numero_perk_3)
                       {
+                        console.log('Loop Linea 268')
                         numero_perk_4 = Math.floor(Math.random() * 79);
                       }
                     }
@@ -271,6 +289,7 @@ client.on("messageReactionAdd", (messageReaction, user) => {
                     {
                       while(numero_perk_2 == numero_perk_1)
                       {
+                        console.log('Loop Linea 292')
                         numero_perk_2 = Math.floor(Math.random() * 71);
                       }
                     }
@@ -279,10 +298,12 @@ client.on("messageReactionAdd", (messageReaction, user) => {
                     {
                       while(numero_perk_3 == numero_perk_1)
                       {
+                        console.log('Loop Linea 301')
                         numero_perk_3 = Math.floor(Math.random() * 71);
                       }
                       while(numero_perk_3 == numero_perk_2)
                       {
+                        console.log('Loop Linea 306')
                         numero_perk_3 = Math.floor(Math.random() * 71);
                       }
                     }
@@ -291,14 +312,17 @@ client.on("messageReactionAdd", (messageReaction, user) => {
                     {
                       while(numero_perk_4 == numero_perk_1)
                       {
+                        console.log('Loop Linea 315')
                         numero_perk_4 = Math.floor(Math.random() * 71);
                       }
                       while(numero_perk_4 == numero_perk_2)
                       {
+                        console.log('Loop Linea 320')
                         numero_perk_4 = Math.floor(Math.random() * 71);
                       }
                       while(numero_perk_4 == numero_perk_3)
                       {
+                        console.log('Loop Linea 325')
                         numero_perk_4 = Math.floor(Math.random() * 71);
                       }
                     }
@@ -1861,6 +1885,7 @@ client.on("message", async (message) => {
     {
       while(numero_perk_2 == numero_perk_1)
       {
+        console.log('Loop Linea 1888')
         numero_perk_2 = Math.floor(Math.random() * 82);
       }
     }
@@ -1869,10 +1894,12 @@ client.on("message", async (message) => {
     {
       while(numero_perk_3 == numero_perk_1)
       {
+        console.log('Loop Linea 1897')
         numero_perk_3 = Math.floor(Math.random() * 82);
       }
       while(numero_perk_3 == numero_perk_2)
       {
+        console.log('Loop Linea 1902')
         numero_perk_3 = Math.floor(Math.random() * 82);
       }
     }
@@ -1881,14 +1908,17 @@ client.on("message", async (message) => {
     {
       while(numero_perk_4 == numero_perk_1)
       {
+        console.log('Loop Linea 1911')
         numero_perk_4 = Math.floor(Math.random() * 82);
       }
       while(numero_perk_4 == numero_perk_2)
       {
+        console.log('Loop Linea 1916')
         numero_perk_4 = Math.floor(Math.random() * 82);
       }
       while(numero_perk_4 == numero_perk_3)
       {
+        console.log('Loop Linea 1921')
         numero_perk_4 = Math.floor(Math.random() * 82);
       }
     }
@@ -1913,6 +1943,7 @@ client.on("message", async (message) => {
       {
         while(numero_perk_2 == numero_perk_1)
         {
+          console.log('Loop Linea 1946')
           numero_perk_2 = Math.floor(Math.random() * 74);
         }
       }
@@ -1921,10 +1952,12 @@ client.on("message", async (message) => {
       {
         while(numero_perk_3 == numero_perk_1)
         {
+          console.log('Loop Linea 1955')
           numero_perk_3 = Math.floor(Math.random() * 74);
         }
         while(numero_perk_3 == numero_perk_2)
         {
+          console.log('Loop Linea 1960')
           numero_perk_3 = Math.floor(Math.random() * 74);
         }
       }
@@ -1933,14 +1966,17 @@ client.on("message", async (message) => {
       {
         while(numero_perk_4 == numero_perk_1)
         {
+          console.log('Loop Linea 1969')
           numero_perk_4 = Math.floor(Math.random() * 74);
         }
         while(numero_perk_4 == numero_perk_2)
         {
+          console.log('Loop Linea 1974')
           numero_perk_4 = Math.floor(Math.random() * 74);
         }
         while(numero_perk_4 == numero_perk_3)
         {
+          console.log('Loop Linea 1979')
           numero_perk_4 = Math.floor(Math.random() * 74);
         }
       }
@@ -2983,6 +3019,7 @@ if(command == 'random')
  {
    while(numero_perk_2 == numero_perk_1)
    {
+    console.log('Loop Linea 3022')
      numero_perk_2 = Math.floor(Math.random() * 82);
    }
  }
@@ -2991,10 +3028,12 @@ if(command == 'random')
  {
    while(numero_perk_3 == numero_perk_1)
    {
+    console.log('Loop Linea 3031')
      numero_perk_3 = Math.floor(Math.random() * 82);
    }
    while(numero_perk_3 == numero_perk_2)
    {
+    console.log('Loop Linea 3036')
      numero_perk_3 = Math.floor(Math.random() * 82);
    }
  }
@@ -3003,14 +3042,17 @@ if(command == 'random')
  {
    while(numero_perk_4 == numero_perk_1)
    {
+    console.log('Loop Linea 3045')
      numero_perk_4 = Math.floor(Math.random() * 82);
    }
    while(numero_perk_4 == numero_perk_2)
    {
+    console.log('Loop Linea 3050')
      numero_perk_4 = Math.floor(Math.random() * 82);
    }
    while(numero_perk_4 == numero_perk_3)
    {
+    console.log('Loop Linea 3055')
      numero_perk_4 = Math.floor(Math.random() * 82);
    }
  }
@@ -3035,6 +3077,7 @@ if(command == 'random')
    {
      while(numero_perk_2 == numero_perk_1)
      {
+      console.log('Loop Linea 3080')
        numero_perk_2 = Math.floor(Math.random() * 74);
      }
    }
@@ -3043,10 +3086,12 @@ if(command == 'random')
    {
      while(numero_perk_3 == numero_perk_1)
      {
+      console.log('Loop Linea 3089')
        numero_perk_3 = Math.floor(Math.random() * 74);
      }
      while(numero_perk_3 == numero_perk_2)
      {
+      console.log('Loop Linea 3094')
        numero_perk_3 = Math.floor(Math.random() * 74);
      }
    }
@@ -3055,14 +3100,17 @@ if(command == 'random')
    {
      while(numero_perk_4 == numero_perk_1)
      {
+      console.log('Loop Linea 3103')
        numero_perk_4 = Math.floor(Math.random() * 74);
      }
      while(numero_perk_4 == numero_perk_2)
      {
+      console.log('Loop Linea 3108')
        numero_perk_4 = Math.floor(Math.random() * 74);
      }
      while(numero_perk_4 == numero_perk_3)
      {
+      console.log('Loop Linea 3113')
        numero_perk_4 = Math.floor(Math.random() * 74);
      }
    }
@@ -3093,6 +3141,7 @@ function ObtenerValor(nivel, Deseado, id)
   var total = 0;
   for(let x = nivel; x<=Deseado; x++)
   {
+    console.log('Loop Line 3096')
     if(x == Deseado) break;
     LC[id] = LC[id]+1;
     if(x >= 1 && x <= 9) total = total+12000;
@@ -3111,6 +3160,7 @@ function ObtenerNP(nivel, id)
   let x = nivel;
   while(DBC[id] != 0)
   {
+    console.log('Loop Linea 3163')
       LC[id] = LC[id]+1;
       if(x >= 1 && x <= 9)
       {
@@ -4780,6 +4830,7 @@ function handleDisconnect() {
                 if (rows.length >= 1) {
                     servers = rows.length;
                     for (var x = 0; x < servers; x++) {
+                        console.log('Loop Line 4784')
                         let cidd = rows[x].cid;
                         let IDD = rows[x].ID;
                         let prefixx = rows[x].prefix
@@ -6033,6 +6084,7 @@ function RemplazarEspacio(texto)
   var str = texto
   while(str.includes('_'))
   {
+  console.log('Loop Line 6038')
   str = str.replace('_', ' ')
   }
   return str;
