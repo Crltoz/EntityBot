@@ -3014,7 +3014,7 @@ if(command == 'random')
      numero_perk_4 = Math.floor(Math.random() * 82);
    }
  }
- SurvivorRandom(numero);
+ SurvivorRandom(22);
  const embed = new Discord.RichEmbed()
      .setThumbnail(ImagenPersonaje)
      .setAuthor('| '+NombrePersonaje+' |', ImagenPersonaje)
