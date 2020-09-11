@@ -3141,7 +3141,7 @@ function ObtenerValor(nivel, Deseado, id)
   var total = 0;
   for(let x = nivel; x<=Deseado; x++)
   {
-    console.log('Loop Line 3096')
+    console.log('Loop Line 3144')
     if(x == Deseado) break;
     LC[id] = LC[id]+1;
     if(x >= 1 && x <= 9) total = total+12000;
@@ -4830,7 +4830,7 @@ function handleDisconnect() {
                 if (rows.length >= 1) {
                     servers = rows.length;
                     for (var x = 0; x < servers; x++) {
-                        console.log('Loop Line 4784')
+                        console.log('Loop Line 6833')
                         let cidd = rows[x].cid;
                         let IDD = rows[x].ID;
                         let prefixx = rows[x].prefix
@@ -6084,7 +6084,7 @@ function RemplazarEspacio(texto)
   var str = texto
   while(str.includes('_'))
   {
-  console.log('Loop Line 6038')
+  console.log('Loop Line 6087')
   str = str.replace('_', ' ')
   }
   return str;
