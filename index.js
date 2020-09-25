@@ -11,6 +11,8 @@ const { SSL_OP_NO_TLSv1_1 } = require("constants");
 const PerkSurv = 83;
 const PerkKill = 75;
 const Niveles = 3;
+
+
 const p1 = new Set();
 const p2 = new Set();
 const p3 = new Set();
@@ -58,6 +60,8 @@ client.on("ready", () => {
       }
   } );
 });
+
+
 
 client.on("guildCreate", guild => {
   
@@ -1460,6 +1464,7 @@ client.on("message", async (message) => {
                   bodyChunks.push(chunk);
               }).on('end', function () {
                   var body = Buffer.concat(bodyChunks);
+                  console.log(`Stats esprofile: ${esprofile}`)
                   if(isEmptyObject(body) && esprofile == 0) return message.channel.send('La cuenta de Steam es inválida, recuerda que debe ser pública.')
                   if(esprofile == 0)
                   {
