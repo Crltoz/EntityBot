@@ -1453,7 +1453,7 @@ client.on("message", async (message) => {
               }
             }
 
-          let options = {++
+          let options = {
             host: 'api.steampowered.com',
             path: '/ISteamUser/ResolveVanityURL/v0001/?key=DF0A08E817CCE67F129D35FFFB14901A&vanityurl='+rid_1,
             headers: { 'User-Agent': 'EntityBot/0.6.5' }
