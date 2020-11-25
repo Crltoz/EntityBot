@@ -4536,8 +4536,8 @@ function TraducirPerk(variable, id)
   if(variable == "sprint_burst") return ObtenerPerkSurv(66)
   if(variable == "stakeout") return ObtenerPerkSurv(67)
   if(variable == "streetwise") return ObtenerPerkSurv(68)
-  if(variable == "technician") return ObtenerPerkSurv(69)
-  if(variable == "tenacity") return ObtenerPerkSurv(70)
+  if(variable == "tenacity") return ObtenerPerkSurv(69)
+  if(variable == "technician") return ObtenerPerkSurv(70)
   if(variable == "this_is_not_happening") return ObtenerPerkSurv(71)
   if(variable == "up_the_ante") return ObtenerPerkSurv(72)
   if(variable == "unbreakable") return ObtenerPerkSurv(73)
@@ -5068,8 +5068,8 @@ function ObtenerNumeroPerk(variable)
   if(variable == "sprint_burst") return 66
   if(variable == "stakeout") return 67
   if(variable == "streetwise") return 68
-  if(variable == "technician") return 69
-  if(variable == "tenacity") return 70
+  if(variable == "tenacity") return 69
+  if(variable == "technician") return 70
   if(variable == "this_is_not_happening") return 71
   if(variable == "up_the_ante") return 72
   if(variable == "unbreakable") return 73
