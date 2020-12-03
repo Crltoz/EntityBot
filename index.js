@@ -8,9 +8,11 @@ const version_bot = '0.8.5'
 const mysql = require("mysql");
 const { parse } = require("path");
 const { SSL_OP_NO_TLSv1_1 } = require("constants");
-const PerkSurv = 83;
-const PerkKill = 75;
+const PerkSurv = 86;
+const PerkKill = 78;
 const Niveles = 3;
+const Survivors = 24;
+const Killers = 22;
 
 
 const p1 = new Set();
@@ -93,48 +95,48 @@ client.on("messageReactionAdd", (messageReaction, user) => {
                     messageReaction.message.channel.send('Envía por aquí el nivel inicial de la red de sangre en el que estás, '+user.tag)
                   } else if(messageReaction.emoji == '2⃣')
                   {
-                    let numero = Math.floor(Math.random() * 21);
-                    let numero_perk_1 = Math.floor(Math.random() * 79);
-                    let numero_perk_2 = Math.floor(Math.random() * 79);
+                    let numero = Math.floor(Math.random() * Survivors);
+                    let numero_perk_1 = Math.floor(Math.random() * PerkSurv);
+                    let numero_perk_2 = Math.floor(Math.random() * PerkSurv);
                     if(numero_perk_2 == numero_perk_1)
                     {
                       while(numero_perk_2 == numero_perk_1)
                       {
                         console.log('Loop Linea 99')
-                        numero_perk_2 = Math.floor(Math.random() * 79);
+                        numero_perk_2 = Math.floor(Math.random() * PerkSurv);
                       }
                     }
-                    let numero_perk_3 = Math.floor(Math.random() * 79);
+                    let numero_perk_3 = Math.floor(Math.random() * PerkSurv);
                     if(numero_perk_3 == numero_perk_1 || numero_perk_3 == numero_perk_2)
                     {
                       while(numero_perk_3 == numero_perk_1)
                       {
                         console.log('Loop Linea 108')
-                        numero_perk_3 = Math.floor(Math.random() * 79);
+                        numero_perk_3 = Math.floor(Math.random() * PerkSurv);
                       }
                       while(numero_perk_3 == numero_perk_2)
                       {
                         console.log('Loop Linea 113')
-                        numero_perk_3 = Math.floor(Math.random() * 79);
+                        numero_perk_3 = Math.floor(Math.random() * PerkSurv);
                       }
                     }
-                    let numero_perk_4 = Math.floor(Math.random() * 79);
+                    let numero_perk_4 = Math.floor(Math.random() * PerkSurv);
                     if(numero_perk_4 == numero_perk_1 || numero_perk_4 == numero_perk_2 || numero_perk_4 == numero_perk_3)
                     {
                       while(numero_perk_4 == numero_perk_1)
                       {
                         console.log('Loop Linea 122')
-                        numero_perk_4 = Math.floor(Math.random() * 79);
+                        numero_perk_4 = Math.floor(Math.random() * PerkSurv);
                       }
                       while(numero_perk_4 == numero_perk_2)
                       {
                         console.log('Loop Linea 127')
-                        numero_perk_4 = Math.floor(Math.random() * 79);
+                        numero_perk_4 = Math.floor(Math.random() * PerkSurv);
                       }
                       while(numero_perk_4 == numero_perk_3)
                       {
                         console.log('Loop Linea 132')
-                        numero_perk_4 = Math.floor(Math.random() * 79);
+                        numero_perk_4 = Math.floor(Math.random() * PerkSurv);
                       }
                     }
                     SurvivorRandom(numero);
@@ -149,49 +151,49 @@ client.on("messageReactionAdd", (messageReaction, user) => {
                     return;
                   } else if(messageReaction.emoji == '3⃣')
                   {
-                    let numero = Math.floor(Math.random() * 19);
+                    let numero = Math.floor(Math.random() * Killers);
                     KillerRandom(numero);
-                    let numero_perk_1 = Math.floor(Math.random() * 71);
-                    let numero_perk_2 = Math.floor(Math.random() * 71);
+                    let numero_perk_1 = Math.floor(Math.random() * PerkKill);
+                    let numero_perk_2 = Math.floor(Math.random() * PerkKill);
                     if(numero_perk_2 == numero_perk_1)
                     {
                       while(numero_perk_2 == numero_perk_1)
                       {
                         console.log('Loop Linea 156')
-                        numero_perk_2 = Math.floor(Math.random() * 71);
+                        numero_perk_2 = Math.floor(Math.random() * PerkKill);
                       }
                     }
-                    let numero_perk_3 = Math.floor(Math.random() * 71);
+                    let numero_perk_3 = Math.floor(Math.random() * PerkKill);
                     if(numero_perk_3 == numero_perk_1 || numero_perk_3 == numero_perk_2)
                     {
                       while(numero_perk_3 == numero_perk_1)
                       {
                         console.log('Loop Linea 165')
-                        numero_perk_3 = Math.floor(Math.random() * 71);
+                        numero_perk_3 = Math.floor(Math.random() * PerkKill);
                       }
                       while(numero_perk_3 == numero_perk_2)
                       {
                         console.log('Loop Linea 170')
-                        numero_perk_3 = Math.floor(Math.random() * 71);
+                        numero_perk_3 = Math.floor(Math.random() * PerkKill);
                       }
                     }
-                    let numero_perk_4 = Math.floor(Math.random() * 71);
+                    let numero_perk_4 = Math.floor(Math.random() * PerkKill);
                     if(numero_perk_4 == numero_perk_1 || numero_perk_4 == numero_perk_2 || numero_perk_4 == numero_perk_3)
                     {
                       while(numero_perk_4 == numero_perk_1)
                       {
                         console.log('Loop Linea 179')
-                        numero_perk_4 = Math.floor(Math.random() * 71);
+                        numero_perk_4 = Math.floor(Math.random() * PerkKill);
                       }
                       while(numero_perk_4 == numero_perk_2)
                       {
                         console.log('Loop Linea 184')
-                        numero_perk_4 = Math.floor(Math.random() * 71);
+                        numero_perk_4 = Math.floor(Math.random() * PerkKill);
                       }
                       while(numero_perk_4 == numero_perk_3)
                       {
                         console.log('Loop Linea 189')
-                        numero_perk_4 = Math.floor(Math.random() * 71);
+                        numero_perk_4 = Math.floor(Math.random() * PerkKill);
                       }
                     }
                     const embed = new Discord.RichEmbed()
@@ -229,48 +231,48 @@ client.on("messageReactionAdd", (messageReaction, user) => {
                     messageReaction.message.channel.send('Send the initial level that your bloodweb is, '+user.tag)
                   } else if(messageReaction.emoji == '2⃣')
                   {
-                    let numero = Math.floor(Math.random() * 21);
-                    let numero_perk_1 = Math.floor(Math.random() * 79);
-                    let numero_perk_2 = Math.floor(Math.random() * 79);
+                    let numero = Math.floor(Math.random() * Survivors);
+                    let numero_perk_1 = Math.floor(Math.random() * PerkSurv);
+                    let numero_perk_2 = Math.floor(Math.random() * PerkSurv);
                     if(numero_perk_2 == numero_perk_1)
                     {
                       while(numero_perk_2 == numero_perk_1)
                       {
                         console.log('Loop Linea 235')
-                        numero_perk_2 = Math.floor(Math.random() * 79);
+                        numero_perk_2 = Math.floor(Math.random() * PerkSurv);
                       }
                     }
-                    let numero_perk_3 = Math.floor(Math.random() * 79);
+                    let numero_perk_3 = Math.floor(Math.random() * PerkSurv);
                     if(numero_perk_3 == numero_perk_1 || numero_perk_3 == numero_perk_2)
                     {
                       while(numero_perk_3 == numero_perk_1)
                       {
                         console.log('Loop Linea 244')
-                        numero_perk_3 = Math.floor(Math.random() * 79);
+                        numero_perk_3 = Math.floor(Math.random() * PerkSurv);
                       }
                       while(numero_perk_3 == numero_perk_2)
                       {
                         console.log('Loop Linea 249')
-                        numero_perk_3 = Math.floor(Math.random() * 79);
+                        numero_perk_3 = Math.floor(Math.random() * PerkSurv);
                       }
                     }
-                    let numero_perk_4 = Math.floor(Math.random() * 79);
+                    let numero_perk_4 = Math.floor(Math.random() * PerkSurv);
                     if(numero_perk_4 == numero_perk_1 || numero_perk_4 == numero_perk_2 || numero_perk_4 == numero_perk_3)
                     {
                       while(numero_perk_4 == numero_perk_1)
                       {
                         console.log('Loop Linea 258')
-                        numero_perk_4 = Math.floor(Math.random() * 79);
+                        numero_perk_4 = Math.floor(Math.random() * PerkSurv);
                       }
                       while(numero_perk_4 == numero_perk_2)
                       {
                         console.log('Loop Linea 263')
-                        numero_perk_4 = Math.floor(Math.random() * 79);
+                        numero_perk_4 = Math.floor(Math.random() * PerkSurv);
                       }
                       while(numero_perk_4 == numero_perk_3)
                       {
                         console.log('Loop Linea 268')
-                        numero_perk_4 = Math.floor(Math.random() * 79);
+                        numero_perk_4 = Math.floor(Math.random() * PerkSurv);
                       }
                     }
                     SurvivorRandom(numero);
@@ -285,49 +287,49 @@ client.on("messageReactionAdd", (messageReaction, user) => {
                     return;
                   } else if(messageReaction.emoji == '3⃣')
                   {
-                    let numero = Math.floor(Math.random() * 19);
+                    let numero = Math.floor(Math.random() * Killers);
                     KillerRandom(numero);
-                    let numero_perk_1 = Math.floor(Math.random() * 71);
-                    let numero_perk_2 = Math.floor(Math.random() * 71);
+                    let numero_perk_1 = Math.floor(Math.random() * PerkKill);
+                    let numero_perk_2 = Math.floor(Math.random() * PerkKill);
                     if(numero_perk_2 == numero_perk_1)
                     {
                       while(numero_perk_2 == numero_perk_1)
                       {
                         console.log('Loop Linea 292')
-                        numero_perk_2 = Math.floor(Math.random() * 71);
+                        numero_perk_2 = Math.floor(Math.random() * PerkKill);
                       }
                     }
-                    let numero_perk_3 = Math.floor(Math.random() * 71);
+                    let numero_perk_3 = Math.floor(Math.random() * PerkKill);
                     if(numero_perk_3 == numero_perk_1 || numero_perk_3 == numero_perk_2)
                     {
                       while(numero_perk_3 == numero_perk_1)
                       {
                         console.log('Loop Linea 301')
-                        numero_perk_3 = Math.floor(Math.random() * 71);
+                        numero_perk_3 = Math.floor(Math.random() * PerkKill);
                       }
                       while(numero_perk_3 == numero_perk_2)
                       {
                         console.log('Loop Linea 306')
-                        numero_perk_3 = Math.floor(Math.random() * 71);
+                        numero_perk_3 = Math.floor(Math.random() * PerkKill);
                       }
                     }
-                    let numero_perk_4 = Math.floor(Math.random() * 71);
+                    let numero_perk_4 = Math.floor(Math.random() * PerkKill);
                     if(numero_perk_4 == numero_perk_1 || numero_perk_4 == numero_perk_2 || numero_perk_4 == numero_perk_3)
                     {
                       while(numero_perk_4 == numero_perk_1)
                       {
                         console.log('Loop Linea 315')
-                        numero_perk_4 = Math.floor(Math.random() * 71);
+                        numero_perk_4 = Math.floor(Math.random() * PerkKill);
                       }
                       while(numero_perk_4 == numero_perk_2)
                       {
                         console.log('Loop Linea 320')
-                        numero_perk_4 = Math.floor(Math.random() * 71);
+                        numero_perk_4 = Math.floor(Math.random() * PerkKill);
                       }
                       while(numero_perk_4 == numero_perk_3)
                       {
                         console.log('Loop Linea 325')
-                        numero_perk_4 = Math.floor(Math.random() * 71);
+                        numero_perk_4 = Math.floor(Math.random() * PerkKill);
                       }
                     }
                     const embed = new Discord.RichEmbed()
@@ -1881,48 +1883,48 @@ client.on("message", async (message) => {
     if(!texto) return message.member.send('Usa **'+prefix[message.guild.id]+'random [Survivor o Killer]** || Te retornará un survivor o killer aleatorio con 4 perks.')
     if(texto.toLowerCase() == 'survivor')
     {
-    let numero = Math.floor(Math.random() * 22);
-    let numero_perk_1 = Math.floor(Math.random() * 82);
-    let numero_perk_2 = Math.floor(Math.random() * 82);
+    let numero = Math.floor(Math.random() * 24);
+    let numero_perk_1 = Math.floor(Math.random() * PerkSurv);
+    let numero_perk_2 = Math.floor(Math.random() * PerkSurv);
     if(numero_perk_2 == numero_perk_1)
     {
       while(numero_perk_2 == numero_perk_1)
       {
         console.log('Loop Linea 1888')
-        numero_perk_2 = Math.floor(Math.random() * 82);
+        numero_perk_2 = Math.floor(Math.random() * PerkSurv);
       }
     }
-    let numero_perk_3 = Math.floor(Math.random() * 82);
+    let numero_perk_3 = Math.floor(Math.random() * PerkSurv);
     if(numero_perk_3 == numero_perk_1 || numero_perk_3 == numero_perk_2)
     {
       while(numero_perk_3 == numero_perk_1)
       {
         console.log('Loop Linea 1897')
-        numero_perk_3 = Math.floor(Math.random() * 82);
+        numero_perk_3 = Math.floor(Math.random() * PerkSurv);
       }
       while(numero_perk_3 == numero_perk_2)
       {
         console.log('Loop Linea 1902')
-        numero_perk_3 = Math.floor(Math.random() * 82);
+        numero_perk_3 = Math.floor(Math.random() * PerkSurv);
       }
     }
-    let numero_perk_4 = Math.floor(Math.random() * 82);
+    let numero_perk_4 = Math.floor(Math.random() * PerkSurv);
     if(numero_perk_4 == numero_perk_1 || numero_perk_4 == numero_perk_2 || numero_perk_4 == numero_perk_3)
     {
       while(numero_perk_4 == numero_perk_1)
       {
         console.log('Loop Linea 1911')
-        numero_perk_4 = Math.floor(Math.random() * 82);
+        numero_perk_4 = Math.floor(Math.random() * PerkSurv);
       }
       while(numero_perk_4 == numero_perk_2)
       {
         console.log('Loop Linea 1916')
-        numero_perk_4 = Math.floor(Math.random() * 82);
+        numero_perk_4 = Math.floor(Math.random() * PerkSurv);
       }
       while(numero_perk_4 == numero_perk_3)
       {
         console.log('Loop Linea 1921')
-        numero_perk_4 = Math.floor(Math.random() * 82);
+        numero_perk_4 = Math.floor(Math.random() * PerkSurv);
       }
     }
     SurvivorRandom(numero);
@@ -1938,49 +1940,49 @@ client.on("message", async (message) => {
     }
     else if(texto.toLowerCase() == 'killer')
     {
-      let numero = Math.floor(Math.random() * 20);
+      let numero = Math.floor(Math.random() * 22);
       KillerRandom(numero);
-      let numero_perk_1 = Math.floor(Math.random() * 74);
-      let numero_perk_2 = Math.floor(Math.random() * 74);
+      let numero_perk_1 = Math.floor(Math.random() * PerkKill);
+      let numero_perk_2 = Math.floor(Math.random() * PerkKill);
       if(numero_perk_2 == numero_perk_1)
       {
         while(numero_perk_2 == numero_perk_1)
         {
           console.log('Loop Linea 1946')
-          numero_perk_2 = Math.floor(Math.random() * 74);
+          numero_perk_2 = Math.floor(Math.random() * PerkKill);
         }
       }
-      let numero_perk_3 = Math.floor(Math.random() * 74);
+      let numero_perk_3 = Math.floor(Math.random() * PerkKill);
       if(numero_perk_3 == numero_perk_1 || numero_perk_3 == numero_perk_2)
       {
         while(numero_perk_3 == numero_perk_1)
         {
           console.log('Loop Linea 1955')
-          numero_perk_3 = Math.floor(Math.random() * 74);
+          numero_perk_3 = Math.floor(Math.random() * PerkKill);
         }
         while(numero_perk_3 == numero_perk_2)
         {
           console.log('Loop Linea 1960')
-          numero_perk_3 = Math.floor(Math.random() * 74);
+          numero_perk_3 = Math.floor(Math.random() * PerkKill);
         }
       }
-      let numero_perk_4 = Math.floor(Math.random() * 74);
+      let numero_perk_4 = Math.floor(Math.random() * PerkKill);
       if(numero_perk_4 == numero_perk_1 || numero_perk_4 == numero_perk_2 || numero_perk_4 == numero_perk_3)
       {
         while(numero_perk_4 == numero_perk_1)
         {
           console.log('Loop Linea 1969')
-          numero_perk_4 = Math.floor(Math.random() * 74);
+          numero_perk_4 = Math.floor(Math.random() * PerkKill);
         }
         while(numero_perk_4 == numero_perk_2)
         {
           console.log('Loop Linea 1974')
-          numero_perk_4 = Math.floor(Math.random() * 74);
+          numero_perk_4 = Math.floor(Math.random() * PerkKill);
         }
         while(numero_perk_4 == numero_perk_3)
         {
           console.log('Loop Linea 1979')
-          numero_perk_4 = Math.floor(Math.random() * 74);
+          numero_perk_4 = Math.floor(Math.random() * PerkKill);
         }
       }
       const embed = new Discord.RichEmbed()
@@ -2039,24 +2041,33 @@ if(command == 'calculate')
      let perkk_2 = rows[0].perk_2
      let perkk_3 = rows[0].perk_3
      let perkk_4 = rows[0].perk_4
+     let pk1, pk2, pk3, pk4;
      let numerop1 = ObtenerNumeroPerk(perkk_1.toLowerCase())
         let numerop2 = ObtenerNumeroPerk(perkk_2.toLowerCase())
         let numerop3 = ObtenerNumeroPerk(perkk_3.toLowerCase())
         let numerop4 = ObtenerNumeroPerk(perkk_4.toLowerCase())
         let perkf1 = TraducirPerk(perkk_1.toLowerCase(), message.author.id)
         let pr1 = k[message.author.id]
+        if(pr1 == 0) pk1 = ObtenerPerkKiller_ING(numerop1)
+        if(pr1 == 1) pk1 = ObtenerPerkSurv_ING(numerop1)
         let perkf2 = TraducirPerk(perkk_2.toLowerCase(), message.author.id)
         let pr2 = k[message.author.id]
+        if(pr2 == 0) pk2 = ObtenerPerkKiller_ING(numerop2)
+        if(pr2 == 1) pk2 = ObtenerPerkSurv_ING(numerop2)
         let perkf3 = TraducirPerk(perkk_3.toLowerCase(), message.author.id)
         let pr3 = k[message.author.id]
+        if(pr3 == 0) pk3 = ObtenerPerkKiller_ING(numerop3)
+        if(pr3 == 1) pk3 = ObtenerPerkSurv_ING(numerop3)
         let perkf4 = TraducirPerk(perkk_4.toLowerCase(), message.author.id)
         let pr4 = k[message.author.id]
+        if(pr4 == 0) pk4 = ObtenerPerkKiller_ING(numerop4)
+        if(pr4 == 1) pk4 = ObtenerPerkSurv_ING(numerop4)
      const embed = new Discord.RichEmbed()
    .setThumbnail(message.member.user.avatarURL)
    .setAuthor('| '+message.author.tag+' |', )
    .setTitle('🈴 Shrine of Secrets:')
    .setURL('https://deadbydaylight.gamepedia.com/Dead_by_Daylight_Wiki')
-   .addField('Perks:', '**► '+RemplazarEspacio(perkk_1)+'** - <:frag_iri:739690491829813369>2000\n**► '+RemplazarEspacio(perkk_2)+'** - <:frag_iri:739690491829813369>2000\n**► '+RemplazarEspacio(perkk_3)+'** - <:frag_iri:739690491829813369>2000\n**► '+RemplazarEspacio(perkk_4)+'** - <:frag_iri:739690491829813369>2000', true)
+   .addField('Perks:', '**► '+pk1+'** - <:frag_iri:739690491829813369>2000\n**► '+pk2+'** - <:frag_iri:739690491829813369>2000\n**► '+pk3+'** - <:frag_iri:739690491829813369>2000\n**► '+pk4+'** - <:frag_iri:739690491829813369>2000', true)
    .setColor(0xFF0000)
    message.channel.send(embed).then(function(message) { message.channel.send(ObtenerIconPerk(numerop1, pr1)+' '+ObtenerIconPerk(numerop2, pr2)+' '+ObtenerIconPerk(numerop3, pr3)+' '+ObtenerIconPerk(numerop4, pr4)) })
    })
@@ -3015,48 +3026,48 @@ if(command == 'random')
  if(!texto) return message.member.send('Use **'+prefix[message.guild.id]+'random [Survivor or Killer]** || It will give you a random 4 perk build for a survivor or killer.')
  if(texto.toLowerCase() == 'survivor')
  {
- let numero = Math.floor(Math.random() * 22);
- let numero_perk_1 = Math.floor(Math.random() * 82);
- let numero_perk_2 = Math.floor(Math.random() * 82);
+ let numero = Math.floor(Math.random() * 24);
+ let numero_perk_1 = Math.floor(Math.random() * PerkSurv);
+ let numero_perk_2 = Math.floor(Math.random() * PerkSurv);
  if(numero_perk_2 == numero_perk_1)
  {
    while(numero_perk_2 == numero_perk_1)
    {
     console.log('Loop Linea 3022')
-     numero_perk_2 = Math.floor(Math.random() * 82);
+     numero_perk_2 = Math.floor(Math.random() * PerkSurv);
    }
  }
- let numero_perk_3 = Math.floor(Math.random() * 82);
+ let numero_perk_3 = Math.floor(Math.random() * PerkSurv);
  if(numero_perk_3 == numero_perk_1 || numero_perk_3 == numero_perk_2)
  {
    while(numero_perk_3 == numero_perk_1)
    {
     console.log('Loop Linea 3031')
-     numero_perk_3 = Math.floor(Math.random() * 82);
+     numero_perk_3 = Math.floor(Math.random() * PerkSurv);
    }
    while(numero_perk_3 == numero_perk_2)
    {
     console.log('Loop Linea 3036')
-     numero_perk_3 = Math.floor(Math.random() * 82);
+     numero_perk_3 = Math.floor(Math.random() * PerkSurv);
    }
  }
- let numero_perk_4 = Math.floor(Math.random() * 82);
+ let numero_perk_4 = Math.floor(Math.random() * PerkSurv);
  if(numero_perk_4 == numero_perk_1 || numero_perk_4 == numero_perk_2 || numero_perk_4 == numero_perk_3)
  {
    while(numero_perk_4 == numero_perk_1)
    {
     console.log('Loop Linea 3045')
-     numero_perk_4 = Math.floor(Math.random() * 82);
+     numero_perk_4 = Math.floor(Math.random() * PerkSurv);
    }
    while(numero_perk_4 == numero_perk_2)
    {
     console.log('Loop Linea 3050')
-     numero_perk_4 = Math.floor(Math.random() * 82);
+     numero_perk_4 = Math.floor(Math.random() * PerkSurv);
    }
    while(numero_perk_4 == numero_perk_3)
    {
     console.log('Loop Linea 3055')
-     numero_perk_4 = Math.floor(Math.random() * 82);
+     numero_perk_4 = Math.floor(Math.random() * PerkSurv);
    }
  }
  SurvivorRandom(numero);
@@ -3072,49 +3083,49 @@ if(command == 'random')
  }
  else if(texto.toLowerCase() == 'killer')
  {
-   let numero = Math.floor(Math.random() * 20);
+   let numero = Math.floor(Math.random() * 22);
    KillerRandom(numero);
-   let numero_perk_1 = Math.floor(Math.random() * 74);
-   let numero_perk_2 = Math.floor(Math.random() * 74);
+   let numero_perk_1 = Math.floor(Math.random() * PerkKill);
+   let numero_perk_2 = Math.floor(Math.random() * PerkKill);
    if(numero_perk_2 == numero_perk_1)
    {
      while(numero_perk_2 == numero_perk_1)
      {
       console.log('Loop Linea 3080')
-       numero_perk_2 = Math.floor(Math.random() * 74);
+       numero_perk_2 = Math.floor(Math.random() * PerkKill);
      }
    }
-   let numero_perk_3 = Math.floor(Math.random() * 74);
+   let numero_perk_3 = Math.floor(Math.random() * PerkKill);
    if(numero_perk_3 == numero_perk_1 || numero_perk_3 == numero_perk_2)
    {
      while(numero_perk_3 == numero_perk_1)
      {
       console.log('Loop Linea 3089')
-       numero_perk_3 = Math.floor(Math.random() * 74);
+       numero_perk_3 = Math.floor(Math.random() * PerkKill);
      }
      while(numero_perk_3 == numero_perk_2)
      {
       console.log('Loop Linea 3094')
-       numero_perk_3 = Math.floor(Math.random() * 74);
+       numero_perk_3 = Math.floor(Math.random() * PerkKill);
      }
    }
-   let numero_perk_4 = Math.floor(Math.random() * 74);
+   let numero_perk_4 = Math.floor(Math.random() * PerkKill);
    if(numero_perk_4 == numero_perk_1 || numero_perk_4 == numero_perk_2 || numero_perk_4 == numero_perk_3)
    {
      while(numero_perk_4 == numero_perk_1)
      {
       console.log('Loop Linea 3103')
-       numero_perk_4 = Math.floor(Math.random() * 74);
+       numero_perk_4 = Math.floor(Math.random() * PerkKill);
      }
      while(numero_perk_4 == numero_perk_2)
      {
       console.log('Loop Linea 3108')
-       numero_perk_4 = Math.floor(Math.random() * 74);
+       numero_perk_4 = Math.floor(Math.random() * PerkKill);
      }
      while(numero_perk_4 == numero_perk_3)
      {
       console.log('Loop Linea 3113')
-       numero_perk_4 = Math.floor(Math.random() * 74);
+       numero_perk_4 = Math.floor(Math.random() * PerkKill);
      }
    }
    const embed = new Discord.RichEmbed()
@@ -3355,7 +3366,13 @@ function KillerRandom(numero)
     case 20: 
     {
       NombrePersonaje = 'The Blight/El Deterioro'
-      ImagenPersonaje = 'https://deadbydaylight.gamepedia.com/File:YK_BL_charSelect_portrait.png'
+      ImagenPersonaje = 'https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/0/0b/K21_charSelect_portrait.png'
+      break;
+    }
+    case 21: 
+    {
+      NombrePersonaje = 'The Twins/Los Mellizos'
+      ImagenPersonaje = 'https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/0/03/K22_charSelect_portrait.png'
       break;
     }
   }
@@ -3756,6 +3773,18 @@ function ObtenerPerkSurv(numero)
     {
       return NombrePerk = 'Construcción durarera'
     }
+    case 83:
+    {
+      return NombrePerk = 'Evaluación'
+    }
+    case 84:
+    {
+      return NombrePerk = 'Engaño'
+    }
+    case 85:
+    {
+      return NombrePerk = 'Lucha Intensa'
+    }
   }
 }
 
@@ -3902,6 +3931,14 @@ function SurvivorRandom(numero)
       ImagenPersonaje = 'https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/0/08/YS_FR_charSelect_portrait.png'
       break;
     }
+    case 23: 
+    {
+      NombrePersonaje = 'Élodie Rakoto'
+      ImagenPersonaje = 'https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/4/45/S24_charSelect_portrait.png'
+      break;
+    }
+
+
   }
   return;
 }
@@ -4384,6 +4421,18 @@ function ObtenerPerkKiller(numero)
     {
       return NombrePerk = 'Maleficio: Favor de Sangre'
     }
+    case 75:
+    {
+      return NombrePerk = 'Acaparadora'
+    }
+    case 76:
+    {
+      return NombrePerk = 'Opresión'
+    }
+    case 77:
+    {
+      return NombrePerk = 'Golpe de Gracia'
+    }
   }
 }
 function TraducirPerk(variable, id)
@@ -4465,6 +4514,9 @@ function TraducirPerk(variable, id)
   if(variable == "hexundying") return ObtenerPerkKiller(72)
   if(variable == "dragonsgrip") return ObtenerPerkKiller(73)
   if(variable == "hexbloodfavor") return ObtenerPerkKiller(74)
+  if(variable == 'k22p01') return ObtenerPerkKiller(75)
+  if(variable == 'k22p02') return ObtenerPerkKiller(76)
+  if(variable == 'K22p03') return ObtenerPerkKiller(77)
   //Perks de survivor
   k[id] = 1
   if(variable == "ace_in_the_hole") return ObtenerPerkSurv(0)
@@ -4550,6 +4602,9 @@ function TraducirPerk(variable, id)
   if(variable == "desperatemeasures") return ObtenerPerkSurv(80)
   if(variable == "visionary") return ObtenerPerkSurv(81)
   if(variable == "builttolast") return ObtenerPerkSurv(82)
+  if(variable == "s24p01") return ObtenerPerkSurv(83)
+  if(variable == "s24p02") return ObtenerPerkSurv(84)
+  if(variable == "s24p03") return ObtenerPerkSurv(85)
   return;
 }
 
@@ -4997,6 +5052,9 @@ function ObtenerNumeroPerk(variable)
   if(variable == "hexundying") return 72
   if(variable == "dragonsgrip") return 73
   if(variable == "hexbloodfavor") return 74
+  if(variable == "k22p01") return 74
+  if(variable == "k22p02") return 75
+  if(variable == "k22p03") return 76
 
   //Perks de survivor
   if(variable == "ace_in_the_hole") return 0
@@ -5082,6 +5140,9 @@ function ObtenerNumeroPerk(variable)
   if(variable == "desperatemeasures") return 80
   if(variable == "visionary") return 81
   if(variable == "builttolast") return 82
+  if(variable == "s24p01") return 83
+  if(variable == "s24p02") return 84
+  if(variable == "s24p03") return 85
   return;
 }
 
@@ -5478,6 +5539,18 @@ function ObtenerPerkSurv_ING(numero)
     {
       return NombrePerk = 'Built to Last'
     }
+    case 83:
+    {
+      return NombrePerk = 'Appraisal'
+    }
+    case 84:
+    {
+      return NombrePerk = 'Deception'
+    }
+    case 85:
+    {
+      return NombrePerk = 'Power Struggle'
+    }
   }
 }
 
@@ -5784,6 +5857,18 @@ function ObtenerPerkKiller_ING(numero)
     case 74:
     {
       return NombrePerk = 'Hex: Blood Favour'
+    }
+    case 75:
+    {
+      return NombrePerk = 'Hoarder'
+    }
+    case 76:
+    {
+      return NombrePerk = 'Oppression'
+    }
+    case 77:
+    {
+      return NombrePerk = 'Coup de Grâce'
     }
   }
 }
