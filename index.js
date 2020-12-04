@@ -4032,7 +4032,10 @@ function ObtenerIconPerk(numero, s2)
       case 79: return icon = '<:iconPerks_windowsOfOpportunity:741726257968054315>'
       case 80: return icon = '<:iconPerks_desperateMeasures:753423002103840868>'
       case 81: return icon = '<:iconPerks_visionary:753423002586185910>'
-      case 82: return icon = '<:iconPerks_builtToLast:753423000149164032>'
+      case 82: return icon = '<:iconPerks_appraisal:784561401451642940>'
+      case 83: return icon = '<:iconPerks_builtToLast:753423000149164032>'
+      case 84: return icon = '<:iconPerks_deception:784561401485721600>'
+      case 85: return icon = '<:iconPerks_powerStruggle:784561402043695114>'
     }
   } else
   {
@@ -4113,6 +4116,9 @@ function ObtenerIconPerk(numero, s2)
       case 72: return icon = '<:iconPerks_hexUndying:753423003500544031>'
       case 73: return icon = '<:iconPerks_dragonsGrip:753423004012118056>'
       case 74: return icon = '<:iconPerks_hexBloodFavor:753423003659927802>'
+      case 75: return icon = '<:iconPerks_Hoarder:784561401938968636>'
+      case 76: return icon = '<:iconPerks_Oppression:784561401326207006>'
+      case 77: return icon = '<:iconPerks_coupDeGrace:784561400944656384>'
     }
   }
 }
