@@ -4032,8 +4032,8 @@ function ObtenerIconPerk(numero, s2)
       case 79: return icon = '<:iconPerks_windowsOfOpportunity:741726257968054315>'
       case 80: return icon = '<:iconPerks_desperateMeasures:753423002103840868>'
       case 81: return icon = '<:iconPerks_visionary:753423002586185910>'
-      case 82: return icon = '<:iconPerks_appraisal:784561401451642940>'
-      case 83: return icon = '<:iconPerks_builtToLast:753423000149164032>'
+      case 82: return icon = '<:iconPerks_builtToLast:753423000149164032>'
+      case 83: return icon = '<:iconPerks_appraisal:784561401451642940>'
       case 84: return icon = '<:iconPerks_deception:784561401485721600>'
       case 85: return icon = '<:iconPerks_powerStruggle:784561402043695114>'
     }
