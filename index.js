@@ -5088,7 +5088,7 @@ function ObtenerNumeroPerk(variable)
   if(variable == "decisivestrike") return 22
   if(variable == "deja_vu") return 23
   if(variable == "deliverance") return 24
-  if(variable == "detectives_hunch") return 25
+  if(variable == "detectiveshunch") return 25
   if(variable == "distortion") return 26
   if(variable == "diversion") return 27
   if(variable == "empathy") return 28
