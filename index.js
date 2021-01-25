@@ -1125,6 +1125,7 @@ client.on("message", async (message) => {
 
     
      if (command == 'stats') {
+       return message.author.send('Actualmente la web de stats está deshabilitada. Intente de nuevo más tarde.')
        if(!texto) return message.channel.send('Usa: **'+prefix[message.guild.id]+'stats [Survivor o Killer] [URL Perfil Steam o Código de amigo]**')
        if(args[0].toLowerCase() != 'killer' && args[0].toLowerCase() != 'survivor') return message.channel.send('Usa: **/stats [Survivor o Killer] [URL Perfil Steam]**')
        if(!args[1]) return message.channel.send('Usa: **'+prefix[message.guild.id]+'stats [Survivor o Killer] [URL Perfil Steam]**')
@@ -1136,7 +1137,7 @@ client.on("message", async (message) => {
         let sid_2 = args[1];
         con.query(`SELECT * FROM EntityUsers WHERE SID = '${sid_2}'`, (err, rows) =>
         {
-              if(err) throw err;
+            if(err) throw err;
             if(rows.length >= 1)
             {
             let k_rank = rows[0].killer_rank_1
@@ -1343,7 +1344,9 @@ client.on("message", async (message) => {
               var options = {
                 host: 'dbd.onteh.net.au',
                 path: '/api/playerstats?steamid='+sid_2,
-                headers: { 'User-Agent': 'EntityBot/0.6.5' }
+                headers: { 
+                  'User-Agent': 'EntityBot/0.6.5',
+                }
               }     
               var req1 = https.get(options, function (res) {
               var bodyChunks3 = [];
@@ -2271,6 +2274,7 @@ if(command == 'help')
    }
 
   if (command == 'stats') {
+    return message.author.send('Currently the stats webside is unavaiable. Please try again later.')
     if(!texto) return message.channel.send('Use: **'+prefix[message.guild.id]+'stats [Survivor or Killer] [Steam profile URL or Steam friend code]**')
     if(args[0].toLowerCase() != 'killer' && args[0].toLowerCase() != 'survivor') return message.channel.send('Use: **/stats [Survivor or Killer] [Steam profile URL]**')
     if(!args[1]) return message.channel.send('Use: **'+prefix[message.guild.id]+'stats [Survivor or Killer] [Steam profile URL]**')
