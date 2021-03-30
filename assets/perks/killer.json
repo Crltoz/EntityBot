@@ -1,0 +1,496 @@
+{
+    "perks": [
+        {
+            "nameEs": "Vocacion de enfermera",
+            "nameEn": "A Nurses Calling",
+            "emoji": "<:iconPerks_aNursesCalling:741712926666260557>",
+            "id": "nursecalling"
+        },
+        {
+            "nameEs": "Agitacion",
+            "nameEn": "Agitation",
+            "emoji": "<:iconPerks_agitation:741712927350063224>",
+            "id": "agitation"
+        },
+        {
+            "nameEs": "Desconcierto",
+            "nameEn": "Bamboozle",
+            "emoji": "<:iconPerks_bamboozle:741712928536789163>",
+            "id": "bamboozle"
+        },
+        {
+            "nameEs": "Barbacoa y chile",
+            "nameEn": "Barbecue & Chilli",
+            "emoji": "<:iconPerks_BBQAndChili:741712928327336018>",
+            "id": "bbqandchilli"
+        },
+        {
+            "nameEs": "Bestia de presa",
+            "nameEn": "Beast of Prey",
+            "emoji": "<:iconPerks_BeastOfPrey:741712928000049215>",
+            "id": "beastofprey"
+        },
+        {
+            "nameEs": "Murmullo amargo",
+            "nameEn": "Bitter Murmur",
+            "emoji": "<:iconPerks_bitterMurmur:741712925491724309>",
+            "id": "bitter_murmur"
+        },
+        {
+            "nameEs": "Eco sangriento",
+            "nameEn": "Blood Echo",
+            "emoji": "<:iconPerks_bloodEcho:741712928109232178>",
+            "id": "bloodecho"
+        },
+        {
+            "nameEs": "Guardian de sangre",
+            "nameEn": "Blood Warden",
+            "emoji": "<:iconPerks_bloodWarden:741712928960544778>",
+            "id": "bloodwarden"
+        },
+        {
+            "nameEs": "Sabueso de sangre",
+            "nameEn": "Bloodhound",
+            "emoji": "<:iconPerks_bloodhound:741712926028726302>",
+            "id": "bloodhound"
+        },
+        {
+            "nameEs": "Fuerza brutal",
+            "nameEn": "Brutal Strength",
+            "emoji": "<:iconPerks_brutalStrength:741712927417040926>",
+            "id": "brutal_strength"
+        },
+        {
+            "nameEs": "Intervencion corrupta",
+            "nameEn": "Corrupt Intervention",
+            "emoji": "<:iconPerks_corruptIntervention:741712928864207008>",
+            "id": "corruptintervention"
+        },
+        {
+            "nameEs": "Coulrophobia",
+            "nameEn": "Coulrophobia",
+            "emoji": "<:iconPerks_coulrophobia:741712928604028960>",
+            "id": "coulrophobia"
+        },
+        {
+            "nameEs": "Restriccion cruel",
+            "nameEn": "Cruel Limits",
+            "emoji": "<:iconPerks_cruelConfinement:741712928759218216>",
+            "id": "cruelconfinement"
+        },
+        {
+            "nameEs": "Devocion oscura",
+            "nameEn": "Dark Devotion",
+            "emoji": "<:iconPerks_darkDevotion:741712929015070830>",
+            "id": "darkdevotion"
+        },
+        {
+            "nameEs": "Interruptor del hombre muerto",
+            "nameEn": "Dead Mans Switch",
+            "emoji": "<:iconPerks_deadManSwitch:741712928507428916>",
+            "id": "deadmansswitch"
+        },
+        {
+            "nameEs": "Vinculo mortal",
+            "nameEn": "Deathbound",
+            "emoji": "<:iconPerks_deathbound:741712928087998594>",
+            "id": "deathbound"
+        },
+        {
+            "nameEs": "Acechador de ciervos",
+            "nameEn": "Deerstalker",
+            "emoji": "<:iconPerks_deerstalker:741712927328960562>",
+            "id": "deerstalker"
+        },
+        {
+            "nameEs": "Discordancia",
+            "nameEn": "Discordance",
+            "emoji": "<:iconPerks_discordance:741712927043878964>",
+            "id": "discordance"
+        },
+        {
+            "nameEs": "Desasociego",
+            "nameEn": "Distressing",
+            "emoji": "<:iconPerks_distressing:741712927999918181>",
+            "id": "distressing"
+        },
+        {
+            "nameEs": "Luz que agoniza",
+            "nameEn": "Dying Light",
+            "emoji": "<:iconPerks_dyingLight:741712927765037206>",
+            "id": "dying_light"
+        },
+        {
+            "nameEs": "Resistente",
+            "nameEn": "Enduring",
+            "emoji": "<:iconPerks_enduring:741713029728829484>",
+            "id": "enduring"
+        },
+        {
+            "nameEs": "Enfurecimiento",
+            "nameEn": "Fire Up",
+            "emoji": "<:iconPerks_fireUp:741713030827737089>",
+            "id": "fireup"
+        },
+        {
+            "nameEs": "Imposicion de penitencia",
+            "nameEn": "Forced Penance",
+            "emoji": "<:iconPerks_forcedPenance:741713038561902653>",
+            "id": "forcedpenance"
+        },
+        {
+            "nameEs": "Muerte de franklin",
+            "nameEn": "Franklins Demise",
+            "emoji": "<:iconPerks_franklinsLoss:741713038838595594>",
+            "id": "franklinsloss"
+        },
+        {
+            "nameEs": "Persecucion furtiva",
+            "nameEn": "Furtive Chase",
+            "emoji": "<:iconPerks_furtiveChase:741713041086742611>",
+            "id": "furtive_chase"
+        },
+        {
+            "nameEs": "Oido para la maquinaria",
+            "nameEn": "Gearhead",
+            "emoji": "<:iconPerks_gearHead:741713037592887326>",
+            "id": "gearhead"
+        },
+        {
+            "nameEs": "Truco del verdugo",
+            "nameEn": "Hangmans Trick",
+            "emoji": "<:iconPerks_hangmansTrick:741713038054260736>",
+            "id": "hangmanstrick"
+        },
+        {
+            "nameEs": "Maleficio: Devoradora de esperanza",
+            "nameEn": "Hex: Devour Hope",
+            "emoji": "<:iconPerks_devourHope:741712927639470220>",
+            "id": "hex_devour_hope"
+        },
+        {
+            "nameEs": "Maleficio: Tierra embrujada",
+            "nameEn": "Hex: Haunted Ground",
+            "emoji": "<:iconPerks_hauntedGround:741713041334337577>",
+            "id": "hex_hauntedground"
+        },
+        {
+            "nameEs": "Maleficio: Nana de cazadora",
+            "nameEn": "Hex: Huntress Lullaby",
+            "emoji": "<:iconPerks_HuntressLullaby:741713040831152160>",
+            "id": "hex_huntresslullaby"
+        },
+        {
+            "nameEs": "Maleficio: Nadie escapa de la muerte",
+            "nameEn": "Hex: No One Escapes Death",
+            "emoji": "<:iconPerks_noOneEscapesDeath:741713040508059749>",
+            "id": "no_one_escapes_death"
+        },
+        {
+            "nameEs": "Maleficio: Represalias",
+            "nameEn": "Hex: Retribution",
+            "emoji": "<:iconPerks_hexRetribution:741713041212833884>",
+            "id": "hexretribution"
+        },
+        {
+            "nameEs": "Maleficio: Ruina",
+            "nameEn": "Hex: Ruin",
+            "emoji": "<:iconPerks_ruin:741713167440150618>",
+            "id": "hex_ruin"
+        },
+        {
+            "nameEs": "Maleficio: El tercer sello",
+            "nameEn": "Hex: The Third Seal",
+            "emoji": "<:iconPerks_theThirdSeal:741713167763243098>",
+            "id": "hex_the_third_seal"
+        },
+        {
+            "nameEs": "Maleficio: La emocion de la caza",
+            "nameEn": "Hex: Thrill of the Hunt",
+            "emoji": "<:iconPerks_thrillOfTheHunt:741713167826026506>",
+            "id": "hex_thrill_of_the_hunt"
+        },
+        {
+            "nameEs": "Soy todo oidos",
+            "nameEn": "Im All Ears",
+            "emoji": "<:iconPerks_imAllEars:741713041338531841>",
+            "id": "imallears"
+        },
+        {
+            "nameEs": "Terror contagioso",
+            "nameEn": "Infectious Fright",
+            "emoji": "<:iconPerks_infectiousFright:741713040961175635>",
+            "id": "infectiousfright"
+        },
+        {
+            "nameEs": "Insidia",
+            "nameEn": "Insidious",
+            "emoji": "<:iconPerks_insidious:741713038914355280>",
+            "id": "insidious"
+        },
+        {
+            "nameEs": "Apreton de hierro",
+            "nameEn": "Iron Grasp",
+            "emoji": "<:iconPerks_ironGrasp:741713039241379930>",
+            "id": "iron_grasp"
+        },
+        {
+            "nameEs": "Doncella de hierro",
+            "nameEn": "Iron Maiden",
+            "emoji": "<:iconPerks_ironMaiden:741713041242194001>",
+            "id": "ironmaiden"
+        },
+        {
+            "nameEs": "Noqueo",
+            "nameEn": "Knock Out",
+            "emoji": "<:iconPerks_knockOut:741713040474374145>",
+            "id": "knockout"
+        },
+        {
+            "nameEs": "Hijo de la luz",
+            "nameEn": "Lightborn",
+            "emoji": "<:iconPerks_lightborn:741713040290087064>",
+            "id": "lightborn"
+        },
+        {
+            "nameEs": "Furia ciega",
+            "nameEn": "Mad Grit",
+            "emoji": "<:iconPerks_madGrit:741713041472749739>",
+            "id": "madgrit"
+        },
+        {
+            "nameEs": "Toma una decicion",
+            "nameEn": "Make Your Choice",
+            "emoji": "<:iconPerks_makeYourChoice:741713040067657738>",
+            "id": "makeyourchoice"
+        },
+        {
+            "nameEs": "Quebrantamentes",
+            "nameEn": "Mindbreaker",
+            "emoji": "<:iconPerks_mindBreaker:741713041443520752>",
+            "id": "mindbreaker"
+        },
+        {
+            "nameEs": "Monitorizacion y abuso",
+            "nameEn": "Monitor & Abuse",
+            "emoji": "<:iconPerks_monitorAndAbuse:741713041326080072>",
+            "id": "monitorandabuse"
+        },
+        {
+            "nameEs": "Santuario monstruoso",
+            "nameEn": "Monstrous Shrine",
+            "emoji": "<:iconPerks_monstrousShrine:741713039820324954>",
+            "id": "monstrous_shrine"
+        },
+        {
+            "nameEs": "Nemesis",
+            "nameEn": "Nemesis",
+            "emoji": "<:iconPerks_nemesis:741713041535795230>",
+            "id": "nemesis"
+        },
+        {
+            "nameEs": "Sobrecarga",
+            "nameEn": "Overcharge",
+            "emoji": "<:iconPerks_generatorOvercharge:741713040386424834>",
+            "id": "overcharge"
+        },
+        {
+            "nameEs": "Presencia abrumadora",
+            "nameEn": "Overwhelming Presence",
+            "emoji": "<:iconPerks_overwhelmingPresence:741713039929245879>",
+            "id": "overwhelmingpresence"
+        },
+        {
+            "nameEs": "Jugar con la comida",
+            "nameEn": "Play with Your Food",
+            "emoji": "<:iconPerks_playWithYourFood:741713041087004824>",
+            "id": "play_with_your_food"
+        },
+        {
+            "nameEs": "Pim, Pam, Pum",
+            "nameEn": "Pop Goes the Weasel",
+            "emoji": "<:iconPerks_popGoesTheWeasel:741713158447693918>",
+            "id": "pop_goes_the_weasel"
+        },
+        {
+            "nameEs": "nombrePerk2",
+            "nameEn": "nombreEnPerk",
+            "emoji": "emojiID2",
+            "id": "australianID2"
+        },
+        {
+            "nameEs": "Depredacion",
+            "nameEn": "Predator",
+            "emoji": "<:iconPerks_predator:741713162608443412>",
+            "id": "predator"
+        },
+        {
+            "nameEs": "Rencor",
+            "nameEn": "Rancor",
+            "emoji": "<:iconPerks_hatred:741713041632002098>",
+            "id": "rancor"
+        },
+        {
+            "nameEs": "Recuerdame",
+            "nameEn": "Remember Me",
+            "emoji": "<:iconPerks_rememberMe:741713166404157600>",
+            "id": "rememberme"
+        },
+        {
+            "nameEs": "Lo mejor para el final",
+            "nameEn": "Save the Best for Last",
+            "emoji": "<:iconPerks_saveTheBestForLast:741713167276834847>",
+            "id": "save_the_best_for_last"
+        },
+        {
+            "nameEs": "Hijo de las sombras",
+            "nameEn": "Shadowborn",
+            "emoji": "<:iconPerks_shadowborn:741713166588969000>",
+            "id": "shadowborn"
+        },
+        {
+            "nameEs": "Carnicero chapucero",
+            "nameEn": "Sloppy Butcher",
+            "emoji": "<:iconPerks_sloppyButcher:741713165166968843>",
+            "id": "sloppy_butcher"
+        },
+        {
+            "nameEs": "Espias de las sombras",
+            "nameEn": "Spies from the Shadows",
+            "emoji": "<:iconPerks_spiesFromTheShadows:741713165120962591>",
+            "id": "spies_from_the_shadows"
+        },
+        {
+            "nameEs": "Furia espiritual",
+            "nameEn": "Spirit Fury",
+            "emoji": "<:iconPerks_spiritFury:741713167729688737>",
+            "id": "spiritfury"
+        },
+        {
+            "nameEs": "Aliento",
+            "nameEn": "Stridor",
+            "emoji": "<:iconPerks_stridor:741713167654191165>",
+            "id": "stridor"
+        },
+        {
+            "nameEs": "Sobretencion",
+            "nameEn": "Surge",
+            "emoji": "<:iconPerks_surge:741713168111501473>",
+            "id": "surge"
+        },
+        {
+            "nameEs": "Supervicion",
+            "nameEn": "Surveillance",
+            "emoji": "<:iconPerks_surveillance:741713167821832192>",
+            "id": "surveillance"
+        },
+        {
+            "nameEs": "Instinto territorial",
+            "nameEn": "Territorial Imperative",
+            "emoji": "<:iconPerks_TerritorialImperative:741713167113257000>",
+            "id": "territorialimperative"
+        },
+        {
+            "nameEs": "Manitas",
+            "nameEn": "Tinkerer",
+            "emoji": "<:iconPerks_tinkerer:741713166085652611>",
+            "id": "tinkerer"
+        },
+        {
+            "nameEs": "Tanatofobia",
+            "nameEn": "Thanatophobia",
+            "emoji": "<:iconPerks_thatanophobia:741713167079571526>",
+            "id": "thanatophobia"
+        },
+        {
+            "nameEs": "Temblores trepidantes",
+            "nameEn": "Thrilling Tremors",
+            "emoji": "<:iconPerks_thrillingTremors:741713167838609541>",
+            "id": "thrillingtremors"
+        },
+        {
+            "nameEs": "Rastro de tormento",
+            "nameEn": "Trail of Torment",
+            "emoji": "<:iconPerks_trailOfTorment:741713167515910196>",
+            "id": "trailoftorment"
+        },
+        {
+            "nameEs": "Presencia perturbadora",
+            "nameEn": "Unnerving Presence",
+            "emoji": "<:iconPerks_unnervingPresence:741713166878113947>",
+            "id": "unnerving_presence"
+        },
+        {
+            "nameEs": "Implacable",
+            "nameEn": "Unrelenting",
+            "emoji": "<:iconPerks_unrelenting:741713167607922751>",
+            "id": "unrelenting"
+        },
+        {
+            "nameEs": "Murmullos",
+            "nameEn": "Whispers",
+            "emoji": "<:iconPerks_whispers:741726257615732828>",
+            "id": "whispers"
+        },
+        {
+            "nameEs": "Tacticas de zanshin",
+            "nameEn": "Zanshin Tactics",
+            "emoji": "<:iconPerks_zanshinTactics:741726259121225858>",
+            "id": "zanshintactics"
+        },
+        {
+            "nameEs": "Maleficio: Inmortal",
+            "nameEn": "Hex: Undying",
+            "emoji": "<:iconPerks_hexUndying:753423003500544031>",
+            "id": "hexundying"
+        },
+        {
+            "nameEs": "Agarre del dragon",
+            "nameEn": "Dragon's Grip",
+            "emoji": "<:iconPerks_dragonsGrip:753423004012118056>",
+            "id": "dragonsgrip"
+        },
+        {
+            "nameEs": "Maleficio: Favor de sangre",
+            "nameEn": "Hex: Blood Favour",
+            "emoji": "<:iconPerks_hexBloodFavor:753423003659927802>",
+            "id": "hexbloodfavor"
+        },
+        {
+            "nameEs": "Acaparadora",
+            "nameEn": "Hoarder",
+            "emoji": "<:iconPerks_Hoarder:784561401938968636>",
+            "id": "k22p01"
+        },
+        {
+            "nameEs": "Opresion",
+            "nameEn": "Oppression",
+            "emoji": "<:iconPerks_Oppression:784561401326207006>",
+            "id": "k22p02"
+        },
+        {
+            "nameEs": "Golpe de gracia",
+            "nameEn": "Coup de Grâce",
+            "emoji": "<:iconPerks_coupDeGrace:784561400944656384>",
+            "id": "k22p03"
+        },
+        {
+            "nameEs": "Deslumbrado",
+            "nameEn": "Starstruck",
+            "emoji": "<:iconPerks_Starstruck:826562717531504722>",
+            "id": "k23p01"
+        },
+        {
+            "nameEs": "Maleficio: Control de masas",
+            "nameEn": "Hex: Crowd Control",
+            "emoji": "<:iconPerks_HexCrowdControl:826562717258612817>",
+            "id": "k23p02"
+        },
+        {
+            "nameEs": "Sin escapatoria",
+            "nameEn": "No Way Out",
+            "emoji": "<:iconPerks_NoWayOut:826562717560209468>",
+            "id": "k23p03"
+        }
+    ]
+}
