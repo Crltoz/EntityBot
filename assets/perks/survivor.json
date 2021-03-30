@@ -1,538 +1,538 @@
 {
     "perks": [
-    {
-    "nameEs": "As en la manga",
-    "nameEn": "Ace in the Hole",
-    "emoji": "<:iconPerks_aceInTheHole:741712915408748546>",
-    "id": "ace_in_the_hole"
-    },
-    {
-    "nameEs": "Adrenalina",
-    "nameEn": "Adrenaline",
-    "emoji": "<:iconPerks_adrenaline:741712917484798073>",
-    "id": "adrenaline"
-    },
-    {
-    "nameEs": "Postratamiento",
-    "nameEn": "Aftercare",
-    "emoji": "<:iconPerks_aftercare:741712926507008114>",
-    "id": "aftercare"
-    },
-    {
-    "nameEs": "Alerta",
-    "nameEn": "Alert",
-    "emoji": "<:iconPerks_alert:741712927823888414>",
-    "id": "alert"
-    },
-    {
-    "nameEs": "Cueste lo que cueste",
-    "nameEn": "Any Means Necessary",
-    "emoji": "<:iconPerks_anyMeansNecessary:741712927827951677>",
-    "id": "anymeansnecessary"
-    },
-    {
-    "nameEs": "Autodidacta",
-    "nameEn": "Autodidact",
-    "emoji": "<:iconPerks_autodidact:741712926775181421>",
-    "id": "autodidact"
-    },
-    {
-    "nameEs": "Canguro",
-    "nameEn": "Babysitter",
-    "emoji": "<:iconPerks_babySitter:741712928293519440>",
-    "id": "babysitter"
-    },
-    {
-    "nameEs": "Caida equilibrada",
-    "nameEn": "Balanced Landing",
-    "emoji": "<:iconPerks_balancedLanding:741712924820766790>",
-    "id": "balanced_landing"
-    },
-    {
-    "nameEs": "Mejor juntos",
-    "nameEn": "Better Together",
-    "emoji": "<:iconPerks_betterTogether:741712928646103081>",
-    "id": "bettertogether"
-    },
-    {
-    "nameEs": "Pacto de sangre",
-    "nameEn": "Blood Pact",
-    "emoji": "<:iconPerks_bloodPact:741712927500927046>",
-    "id": "bloodpact"
-    },
-    {
-    "nameEs": "Arrebato",
-    "nameEn": "Boil Over",
-    "emoji": "<:iconPerks_boilOver:741712924539617343>",
-    "id": "boilover"
-    },
-    {
-    "nameEs": "Vinculo",
-    "nameEn": "Bond",
-    "emoji": "<:iconPerks_bond:741712926716461156>",
-    "id": "bond"
-    },
-    {
-    "nameEs": "Tiempo prestado",
-    "nameEn": "Borrowed Time",
-    "emoji": "<:iconPerks_borrowedTime:741712926498488401>",
-    "id": "borrowedtime"
-    },
-    {
-    "nameEs": "Conocimientos de botanica",
-    "nameEn": "Botany Knowledge",
-    "emoji": "<:iconPerks_botanyKnowledge:741712925965680681>",
-    "id": "botany_knowledge"
-    },
-    {
-    "nameEs": "Ruptura",
-    "nameEn": "Breakdown",
-    "emoji": "<:iconPerks_breakdown:741712927563710484>",
-    "id": "breakdown"
-    },
-    {
-    "nameEs": "Fuga",
-    "nameEn": "Breakout",
-    "emoji": "<:iconPerks_breakout:741712927748522115>",
-    "id": "breakout"
-    },
-    {
-    "nameEs": "Sujetate",
-    "nameEn": "Buckle Up",
-    "emoji": "<:iconPerks_buckleUp:741712928784384060>",
-    "id": "buckleup"
-    },
-    {
-    "nameEs": "Espiritu calmado",
-    "nameEn": "Calm Spirit",
-    "emoji": "<:iconPerks_calmSpirit:741712928105037925>",
-    "id": "calm_spirit"
-    },
-    {
-    "nameEs": "Camaraderia",
-    "nameEn": "Camaraderie",
-    "emoji": "<:iconPerks_camaraderie:741712928377667786>",
-    "id": "camaraderie"
-    },
-    {
-    "nameEs": "Baila conmigo",
-    "nameEn": "Dance With Me",
-    "emoji": "<:iconPerks_danceWithMe:741712928545439784>",
-    "id": "dance_with_me"
-    },
-    {
-    "nameEs": "Percepcion oscura",
-    "nameEn": "Dark Sense",
-    "emoji": "<:iconPerks_darkSense:741712926418927628>",
-    "id": "dark_sense"
-    },
-    {
-    "nameEs": "Fajador",
-    "nameEn": "Dead Hard",
-    "emoji": "<:iconPerks_DeadHard:741712927027101826>",
-    "id": "deadhard"
-    },
-    {
-    "nameEs": "Golpe decisivo",
-    "nameEn": "Decisive Strike",
-    "emoji": "<:iconPerks_decisiveStrike:741712926234247199>",
-    "id": "decisivestrike"
-    },
-    {
-    "nameEs": "Déjà Vu",
-    "nameEn": "Déjà Vu",
-    "emoji": "<:iconPerks_dejaVu:741712927907774464>",
-    "id": "deja_vu"
-    },
-    {
-    "nameEs": "Liberacion",
-    "nameEn": "Deliverance",
-    "emoji": "<:iconPerks_deliverance:741712928876527746>",
-    "id": "deliverance"
-    },
-    {
-    "nameEs": "Corazonada",
-    "nameEn": "Detective's Hunch",
-    "emoji": "<:iconPerks_detectivesHunch:741712927706578945>",
-    "id": "detectiveshunch"
-    },
-    {
-    "nameEs": "Distorsion",
-    "nameEn": "Distortion",
-    "emoji": "<:iconPerks_distortion:741712926473191537>",
-    "id": "distortion"
-    },
-    {
-    "nameEs": "Distraccion",
-    "nameEn": "Diversion",
-    "emoji": "<:iconPerks_diversion:741712927597264986>",
-    "id": "diversion"
-    },
-    {
-    "nameEs": "Empatia",
-    "nameEn": "Empathy",
-    "emoji": "<:iconPerks_empathy:741712927601721365>",
-    "id": "empathy"
-    },
-    {
-    "nameEs": "Fijacion",
-    "nameEn": "Fixated",
-    "emoji": "<:iconPerks_fixated:741713034870784040>",
-    "id": "fixated"
-    },
-    {
-    "nameEs": "Hasta otra",
-    "nameEn": "Flip-Flop",
-    "emoji": "<:iconPerks_flipFlop:741713038310113281>",
-    "id": "flipflop"
-    },
-    {
-    "nameEs": "Por los demas",
-    "nameEn": "For the People",
-    "emoji": "<:iconPerks_forThePeople:741713039434186855>",
-    "id": "forthepeople"
-    },
-    {
-    "nameEs": "De frente",
-    "nameEn": "Head On",
-    "emoji": "<:iconPerks_headOn:741713041191600187>",
-    "id": "headon"
-    },
-    {
-    "nameEs": "Esperanza",
-    "nameEn": "Hope",
-    "emoji": "<:iconPerks_hope:741713038566096967>",
-    "id": "hope"
-    },
-    {
-    "nameEs": "Fuerza interior",
-    "nameEn": "Inner Strength",
-    "emoji": "<:iconPerks_innerStrength:741713041288200352>",
-    "id": "innerstrength"
-    },
-    {
-    "nameEs": "Voluntad de hierro",
-    "nameEn": "Iron Will",
-    "emoji": "<:iconPerks_ironWill:741713039501295728>",
-    "id": "iron_will"
-    },
-    {
-    "nameEs": "Familia",
-    "nameEn": "Kindred",
-    "emoji": "<:iconPerks_kindred:741713039207956500>",
-    "id": "kindred"
-    },
-    {
-    "nameEs": "Lider",
-    "nameEn": "Leader",
-    "emoji": "<:iconPerks_leader:741713037471252663>",
-    "id": "leader"
-    },
-    {
-    "nameEs": "Abandonado a tu suerte",
-    "nameEn": "Left Behind",
-    "emoji": "<:iconPerks_leftBehind:741713040944398346>",
-    "id": "left_behind"
-    },
-    {
-    "nameEs": "De pies ligeros",
-    "nameEn": "Lightweight",
-    "emoji": "<:iconPerks_lightweight:741713038419427409>",
-    "id": "lightweight"
-    },
-    {
-    "nameEs": "Agilidad",
-    "nameEn": "Lithe",
-    "emoji": "<:iconPerks_lithe:741713039929245887>",
-    "id": "lithe"
-    },
-    {
-    "nameEs": "Golpe de suerte",
-    "nameEn": "Lucky Break",
-    "emoji": "<:iconPerks_luckyBreak:741713039685845153>",
-    "id": "luckybreak"
-    },
-    {
-    "nameEs": "El temple del hombre",
-    "nameEn": "Mettle of Man",
-    "emoji": "<:iconPerks_mettleOfMan:741713040474505366>",
-    "id": "mettleofman"
-    },
-    {
-    "nameEs": "Me la pela",
-    "nameEn": "No Mither",
-    "emoji": "<:iconPerks_NoMither:741713041233805393>",
-    "id": "nomither"
-    },
-    {
-    "nameEs": "Nadie se queda atras",
-    "nameEn": "No One Left Behind",
-    "emoji": "<:iconPerks_noOneLeftBehind:741713039358820532>",
-    "id": "no_one_left_behind"
-    },
-    {
-    "nameEs": "Obejto de obsesion",
-    "nameEn": "Object of Obsession",
-    "emoji": "<:iconPerks_objectOfObsession:741713039077670922>",
-    "id": "objectofobsession"
-    },
-    {
-    "nameEs": "Extraoficial",
-    "nameEn": "Off the Record",
-    "emoji": "<:iconPerks_offTheRecord:741713040235561114>",
-    "id": "offtherecord"
-    },
-    {
-    "nameEs": "A mano descubierta",
-    "nameEn": "Open-Handed",
-    "emoji": "<:iconPerks_openHanded:741713040130703382>",
-    "id": "open_handed"
-    },
-    {
-    "nameEs": "Farmacia",
-    "nameEn": "Pharmacy",
-    "emoji": "<:iconPerks_pharmacy:741713040214589461>",
-    "id": "pharmacy"
-    },
-    {
-    "nameEs": "Instinto de saqueador",
-    "nameEn": "Plunderers Instinct",
-    "emoji": "<:iconPerks_plunderersInstinct:741713040780558407>",
-    "id": "plunderers_instinct"
-    },
-    {
-    "nameEs": "Serenidad",
-    "nameEn": "Poised",
-    "emoji": "<:iconPerks_poised:741713157919211611>",
-    "id": "poised"
-    },
-    {
-    "nameEs": "Premonicion",
-    "nameEn": "Premonition",
-    "emoji": "<:iconPerks_premonition:741713166320533664>",
-    "id": "premonition"
-    },
-    {
-    "nameEs": "Demuestra lo que vales",
-    "nameEn": "Prove Thyself",
-    "emoji": "<:iconPerks_proveThyself:741713165334872156>",
-    "id": "prove_thyself"
-    },
-    {
-    "nameEs": "Velocidad silenciosa",
-    "nameEn": "Quick & Quiet",
-    "emoji": "<:iconPerks_quickAndQuiet:741713164617384046>",
-    "id": "quickquiet"
-    },
-    {
-    "nameEs": "Bulo",
-    "nameEn": "Red Herring",
-    "emoji": "<:iconPerks_redHerring:741713165644988457>",
-    "id": "redherring"
-    },
-    {
-    "nameEs": "Supresion de alianza",
-    "nameEn": "Repressed Alliance",
-    "emoji": "<:iconPerks_repressedAlliance:741713164718309398>",
-    "id": "repressedalliance"
-    },
-    {
-    "nameEs": "Resiliencia",
-    "nameEn": "Resilience",
-    "emoji": "<:iconPerks_resilience:741713165393461349>",
-    "id": "resilience"
-    },
-    {
-    "nameEs": "Sabotear",
-    "nameEn": "Saboteur",
-    "emoji": "<:iconPerks_saboteur:741713165259243634>",
-    "id": "saboteur"
-    },
-    {
-    "nameEs": "Segundo aliento",
-    "nameEn": "Second Wind",
-    "emoji": "<:iconPerks_secondWind:741713166064550018>",
-    "id": "secondwind"
-    },
-    {
-    "nameEs": "Autocuracion",
-    "nameEn": "Self-Care",
-    "emoji": "<:iconPerks_selfCare:741713166068613160>",
-    "id": "self_care"
-    },
-    {
-    "nameEs": "Carne resbaladiza",
-    "nameEn": "Slippery Meat",
-    "emoji": "<:iconPerks_slipperyMeat:741713164407668818>",
-    "id": "slippery_meat"
-    },
-    {
-    "nameEs": "Caza menor",
-    "nameEn": "Small Game",
-    "emoji": "<:iconPerks_smallGame:741713165569491066>",
-    "id": "small_game"
-    },
-    {
-    "nameEs": "Solo quedo yo",
-    "nameEn": "Sole Survivor",
-    "emoji": "<:iconPerks_soleSurvivor:741713167222046770>",
-    "id": "solesurvivor"
-    },
-    {
-    "nameEs": "Solidaridad",
-    "nameEn": "Solidarity",
-    "emoji": "<:iconPerks_solidarity:741713166437974068>",
-    "id": "solidarity"
-    },
-    {
-    "nameEs": "Salvaguarda de alma",
-    "nameEn": "Soul Guard",
-    "emoji": "<:iconPerks_soulGuard:741713166454751242>",
-    "id": "soulguard"
-    },
-    {
-    "nameEs": "Escalofrios",
-    "nameEn": "Spine Chill",
-    "emoji": "<:iconPerks_spineChill:741713164734824550>",
-    "id": "spine_chill"
-    },
-    {
-    "nameEs": "Esprint",
-    "nameEn": "Sprint Burst",
-    "emoji": "<:iconPerks_sprintBurst:741713166865793184>",
-    "id": "sprint_burst"
-    },
-    {
-    "nameEs": "Bajo vigilancia",
-    "nameEn": "Stake Out",
-    "emoji": "<:iconPerks_stakeOut:741713168476405770>",
-    "id": "stakeout"
-    },
-    {
-    "nameEs": "Con calle",
-    "nameEn": "Streetwise",
-    "emoji": "<:iconPerks_streetwise:741713166727381009>",
-    "id": "streetwise"
-    },
-    {
-    "nameEs": "Esto no puede estar pasando",
-    "nameEn": "This Is Not Happening",
-    "emoji": "<:iconPerks_thisIsNotHappening:741713167058731098>",
-    "id": "this_is_not_happening"
-    },
-    {
-    "nameEs": "Pericia tecnica",
-    "nameEn": "Technician",
-    "emoji": "<:iconPerks_tenacity:741713167826157592>",
-    "id": "technician"
-    },
-    {
-    "nameEs": "Tenacidad",
-    "nameEn": "Tenacity",
-    "emoji": "<:iconPerks_upTheAnte:741713166878244945>",
-    "id": "tenacity"
-    },
-    {
-    "nameEs": "Subir las apuestas",
-    "nameEn": "Up the Ante",
-    "emoji": "<:iconPerks_upTheAnte:741713166878244945>",
-    "id": "up_the_ante"
-    },
-    {
-    "nameEs": "Inquebrantable",
-    "nameEn": "Unbreakable",
-    "emoji": "<:iconPerks_unbreakable:741713167213658253>",
-    "id": "unbreakable"
-    },
-    {
-    "nameEs": "Evasion urbana",
-    "nameEn": "Urban Evasion",
-    "emoji": "<:iconPerks_urbanEvasion:741713167167782922>",
-    "id": "urban_evasion"
-    },
-    {
-    "nameEs": "Vigilia",
-    "nameEn": "Vigil",
-    "emoji": "<:iconPerks_vigil:741713040558522418>",
-    "id": "vigil"
-    },
-    {
-    "nameEs": "Despierta!",
-    "nameEn": "Wake Up!",
-    "emoji": "<:iconPerks_wakeUp:741713167339487412>",
-    "id": "wakeup"
-    },
-    {
-    "nameEs": "Lo conseguiremos",
-    "nameEn": "Well Make It",
-    "emoji": "<:iconPerks_wellMakeIt:741726257489641552>",
-    "id": "wellmakeit"
-    },
-    {
-    "nameEs": "Vamos a vivir para siempre",
-    "nameEn": "Were Gonna Live Forever",
-    "emoji": "<:iconPerks_WereGonnaLiveForever:741726258613977108>",
-    "id": "weregonnaliveforever"
-    },
-    {
-    "nameEs": "Oportunidades",
-    "nameEn": "Windows of Opportunity",
-    "emoji": "<:iconPerks_windowsOfOpportunity:741726257968054315>",
-    "id": "windowsofopportunity"
-    },
-    {
-    "nameEs": "Medidas desesperadas",
-    "nameEn": "Desperate Measures",
-    "emoji": "<:iconPerks_desperateMeasures:753423002103840868>",
-    "id": "desperatemeasures"
-    },
-    {
-    "nameEs": "Visionario",
-    "nameEn": "Visionary",
-    "emoji": "<:iconPerks_visionary:753423002586185910>",
-    "id": "visionary"
-    },
-    {
-    "nameEs": "Construido para perdurar",
-    "nameEn": "Built to Last",
-    "emoji": "<:iconPerks_builtToLast:753423000149164032>",
-    "id": "builttolast"
-    },
-    {
-    "nameEs": "Evaluacion",
-    "nameEn": "Appraisal",
-    "emoji": "<:iconPerks_appraisal:784561401451642940>",
-    "id": "s24p01"
-    },
-    {
-    "nameEs": "Engaño",
-    "nameEn": "Deception",
-    "emoji": "<:iconPerks_deception:784561401485721600>",
-    "id": "s24p02"
-    },
-    {
-    "nameEs": "Lucha intensa",
-    "nameEn": "Power Struggle",
-    "emoji": "<:iconPerks_powerStruggle:784561402043695114>",
-    "id": "s24p03"
-    },
-    {
-        "nameEs": "Primera línea",
-        "nameEn": "Fast Track",
-        "emoji": "asd", 
-        "id": "asd"
-    },
-    {
-        "nameEs": "Éxito aplastante",
-        "nameEn": "Smash Hit",
-        "emoji": "asd", 
-        "id": "asd"
-    },
-    {
-        "nameEs": "Autoconservación",
-        "nameEn": "Self-Preservation",
-        "emoji": "asd", 
-        "id": "asd"
-    }
+        {
+            "nameEs": "As en la manga",
+            "nameEn": "Ace in the Hole",
+            "emoji": "<:iconPerks_aceInTheHole:741712915408748546>",
+            "id": "ace_in_the_hole"
+        },
+        {
+            "nameEs": "Adrenalina",
+            "nameEn": "Adrenaline",
+            "emoji": "<:iconPerks_adrenaline:741712917484798073>",
+            "id": "adrenaline"
+        },
+        {
+            "nameEs": "Postratamiento",
+            "nameEn": "Aftercare",
+            "emoji": "<:iconPerks_aftercare:741712926507008114>",
+            "id": "aftercare"
+        },
+        {
+            "nameEs": "Alerta",
+            "nameEn": "Alert",
+            "emoji": "<:iconPerks_alert:741712927823888414>",
+            "id": "alert"
+        },
+        {
+            "nameEs": "Cueste lo que cueste",
+            "nameEn": "Any Means Necessary",
+            "emoji": "<:iconPerks_anyMeansNecessary:741712927827951677>",
+            "id": "anymeansnecessary"
+        },
+        {
+            "nameEs": "Autodidacta",
+            "nameEn": "Autodidact",
+            "emoji": "<:iconPerks_autodidact:741712926775181421>",
+            "id": "autodidact"
+        },
+        {
+            "nameEs": "Canguro",
+            "nameEn": "Babysitter",
+            "emoji": "<:iconPerks_babySitter:741712928293519440>",
+            "id": "babysitter"
+        },
+        {
+            "nameEs": "Caida equilibrada",
+            "nameEn": "Balanced Landing",
+            "emoji": "<:iconPerks_balancedLanding:741712924820766790>",
+            "id": "balanced_landing"
+        },
+        {
+            "nameEs": "Mejor juntos",
+            "nameEn": "Better Together",
+            "emoji": "<:iconPerks_betterTogether:741712928646103081>",
+            "id": "bettertogether"
+        },
+        {
+            "nameEs": "Pacto de sangre",
+            "nameEn": "Blood Pact",
+            "emoji": "<:iconPerks_bloodPact:741712927500927046>",
+            "id": "bloodpact"
+        },
+        {
+            "nameEs": "Arrebato",
+            "nameEn": "Boil Over",
+            "emoji": "<:iconPerks_boilOver:741712924539617343>",
+            "id": "boilover"
+        },
+        {
+            "nameEs": "Vinculo",
+            "nameEn": "Bond",
+            "emoji": "<:iconPerks_bond:741712926716461156>",
+            "id": "bond"
+        },
+        {
+            "nameEs": "Tiempo prestado",
+            "nameEn": "Borrowed Time",
+            "emoji": "<:iconPerks_borrowedTime:741712926498488401>",
+            "id": "borrowedtime"
+        },
+        {
+            "nameEs": "Conocimientos de botanica",
+            "nameEn": "Botany Knowledge",
+            "emoji": "<:iconPerks_botanyKnowledge:741712925965680681>",
+            "id": "botany_knowledge"
+        },
+        {
+            "nameEs": "Ruptura",
+            "nameEn": "Breakdown",
+            "emoji": "<:iconPerks_breakdown:741712927563710484>",
+            "id": "breakdown"
+        },
+        {
+            "nameEs": "Fuga",
+            "nameEn": "Breakout",
+            "emoji": "<:iconPerks_breakout:741712927748522115>",
+            "id": "breakout"
+        },
+        {
+            "nameEs": "Sujetate",
+            "nameEn": "Buckle Up",
+            "emoji": "<:iconPerks_buckleUp:741712928784384060>",
+            "id": "buckleup"
+        },
+        {
+            "nameEs": "Espiritu calmado",
+            "nameEn": "Calm Spirit",
+            "emoji": "<:iconPerks_calmSpirit:741712928105037925>",
+            "id": "calm_spirit"
+        },
+        {
+            "nameEs": "Camaraderia",
+            "nameEn": "Camaraderie",
+            "emoji": "<:iconPerks_camaraderie:741712928377667786>",
+            "id": "camaraderie"
+        },
+        {
+            "nameEs": "Baila conmigo",
+            "nameEn": "Dance With Me",
+            "emoji": "<:iconPerks_danceWithMe:741712928545439784>",
+            "id": "dance_with_me"
+        },
+        {
+            "nameEs": "Percepcion oscura",
+            "nameEn": "Dark Sense",
+            "emoji": "<:iconPerks_darkSense:741712926418927628>",
+            "id": "dark_sense"
+        },
+        {
+            "nameEs": "Fajador",
+            "nameEn": "Dead Hard",
+            "emoji": "<:iconPerks_DeadHard:741712927027101826>",
+            "id": "deadhard"
+        },
+        {
+            "nameEs": "Golpe decisivo",
+            "nameEn": "Decisive Strike",
+            "emoji": "<:iconPerks_decisiveStrike:741712926234247199>",
+            "id": "decisivestrike"
+        },
+        {
+            "nameEs": "Déjà Vu",
+            "nameEn": "Déjà Vu",
+            "emoji": "<:iconPerks_dejaVu:741712927907774464>",
+            "id": "deja_vu"
+        },
+        {
+            "nameEs": "Liberacion",
+            "nameEn": "Deliverance",
+            "emoji": "<:iconPerks_deliverance:741712928876527746>",
+            "id": "deliverance"
+        },
+        {
+            "nameEs": "Corazonada",
+            "nameEn": "Detective's Hunch",
+            "emoji": "<:iconPerks_detectivesHunch:741712927706578945>",
+            "id": "detectiveshunch"
+        },
+        {
+            "nameEs": "Distorsion",
+            "nameEn": "Distortion",
+            "emoji": "<:iconPerks_distortion:741712926473191537>",
+            "id": "distortion"
+        },
+        {
+            "nameEs": "Distraccion",
+            "nameEn": "Diversion",
+            "emoji": "<:iconPerks_diversion:741712927597264986>",
+            "id": "diversion"
+        },
+        {
+            "nameEs": "Empatia",
+            "nameEn": "Empathy",
+            "emoji": "<:iconPerks_empathy:741712927601721365>",
+            "id": "empathy"
+        },
+        {
+            "nameEs": "Fijacion",
+            "nameEn": "Fixated",
+            "emoji": "<:iconPerks_fixated:741713034870784040>",
+            "id": "fixated"
+        },
+        {
+            "nameEs": "Hasta otra",
+            "nameEn": "Flip-Flop",
+            "emoji": "<:iconPerks_flipFlop:741713038310113281>",
+            "id": "flipflop"
+        },
+        {
+            "nameEs": "Por los demas",
+            "nameEn": "For the People",
+            "emoji": "<:iconPerks_forThePeople:741713039434186855>",
+            "id": "forthepeople"
+        },
+        {
+            "nameEs": "De frente",
+            "nameEn": "Head On",
+            "emoji": "<:iconPerks_headOn:741713041191600187>",
+            "id": "headon"
+        },
+        {
+            "nameEs": "Esperanza",
+            "nameEn": "Hope",
+            "emoji": "<:iconPerks_hope:741713038566096967>",
+            "id": "hope"
+        },
+        {
+            "nameEs": "Fuerza interior",
+            "nameEn": "Inner Strength",
+            "emoji": "<:iconPerks_innerStrength:741713041288200352>",
+            "id": "innerstrength"
+        },
+        {
+            "nameEs": "Voluntad de hierro",
+            "nameEn": "Iron Will",
+            "emoji": "<:iconPerks_ironWill:741713039501295728>",
+            "id": "iron_will"
+        },
+        {
+            "nameEs": "Familia",
+            "nameEn": "Kindred",
+            "emoji": "<:iconPerks_kindred:741713039207956500>",
+            "id": "kindred"
+        },
+        {
+            "nameEs": "Lider",
+            "nameEn": "Leader",
+            "emoji": "<:iconPerks_leader:741713037471252663>",
+            "id": "leader"
+        },
+        {
+            "nameEs": "Abandonado a tu suerte",
+            "nameEn": "Left Behind",
+            "emoji": "<:iconPerks_leftBehind:741713040944398346>",
+            "id": "left_behind"
+        },
+        {
+            "nameEs": "De pies ligeros",
+            "nameEn": "Lightweight",
+            "emoji": "<:iconPerks_lightweight:741713038419427409>",
+            "id": "lightweight"
+        },
+        {
+            "nameEs": "Agilidad",
+            "nameEn": "Lithe",
+            "emoji": "<:iconPerks_lithe:741713039929245887>",
+            "id": "lithe"
+        },
+        {
+            "nameEs": "Golpe de suerte",
+            "nameEn": "Lucky Break",
+            "emoji": "<:iconPerks_luckyBreak:741713039685845153>",
+            "id": "luckybreak"
+        },
+        {
+            "nameEs": "El temple del hombre",
+            "nameEn": "Mettle of Man",
+            "emoji": "<:iconPerks_mettleOfMan:741713040474505366>",
+            "id": "mettleofman"
+        },
+        {
+            "nameEs": "Me la pela",
+            "nameEn": "No Mither",
+            "emoji": "<:iconPerks_NoMither:741713041233805393>",
+            "id": "nomither"
+        },
+        {
+            "nameEs": "Nadie se queda atras",
+            "nameEn": "No One Left Behind",
+            "emoji": "<:iconPerks_noOneLeftBehind:741713039358820532>",
+            "id": "no_one_left_behind"
+        },
+        {
+            "nameEs": "Obejto de obsesion",
+            "nameEn": "Object of Obsession",
+            "emoji": "<:iconPerks_objectOfObsession:741713039077670922>",
+            "id": "objectofobsession"
+        },
+        {
+            "nameEs": "Extraoficial",
+            "nameEn": "Off the Record",
+            "emoji": "<:iconPerks_offTheRecord:741713040235561114>",
+            "id": "offtherecord"
+        },
+        {
+            "nameEs": "A mano descubierta",
+            "nameEn": "Open-Handed",
+            "emoji": "<:iconPerks_openHanded:741713040130703382>",
+            "id": "open_handed"
+        },
+        {
+            "nameEs": "Farmacia",
+            "nameEn": "Pharmacy",
+            "emoji": "<:iconPerks_pharmacy:741713040214589461>",
+            "id": "pharmacy"
+        },
+        {
+            "nameEs": "Instinto de saqueador",
+            "nameEn": "Plunderers Instinct",
+            "emoji": "<:iconPerks_plunderersInstinct:741713040780558407>",
+            "id": "plunderers_instinct"
+        },
+        {
+            "nameEs": "Serenidad",
+            "nameEn": "Poised",
+            "emoji": "<:iconPerks_poised:741713157919211611>",
+            "id": "poised"
+        },
+        {
+            "nameEs": "Premonicion",
+            "nameEn": "Premonition",
+            "emoji": "<:iconPerks_premonition:741713166320533664>",
+            "id": "premonition"
+        },
+        {
+            "nameEs": "Demuestra lo que vales",
+            "nameEn": "Prove Thyself",
+            "emoji": "<:iconPerks_proveThyself:741713165334872156>",
+            "id": "prove_thyself"
+        },
+        {
+            "nameEs": "Velocidad silenciosa",
+            "nameEn": "Quick & Quiet",
+            "emoji": "<:iconPerks_quickAndQuiet:741713164617384046>",
+            "id": "quickquiet"
+        },
+        {
+            "nameEs": "Bulo",
+            "nameEn": "Red Herring",
+            "emoji": "<:iconPerks_redHerring:741713165644988457>",
+            "id": "redherring"
+        },
+        {
+            "nameEs": "Supresion de alianza",
+            "nameEn": "Repressed Alliance",
+            "emoji": "<:iconPerks_repressedAlliance:741713164718309398>",
+            "id": "repressedalliance"
+        },
+        {
+            "nameEs": "Resiliencia",
+            "nameEn": "Resilience",
+            "emoji": "<:iconPerks_resilience:741713165393461349>",
+            "id": "resilience"
+        },
+        {
+            "nameEs": "Sabotear",
+            "nameEn": "Saboteur",
+            "emoji": "<:iconPerks_saboteur:741713165259243634>",
+            "id": "saboteur"
+        },
+        {
+            "nameEs": "Segundo aliento",
+            "nameEn": "Second Wind",
+            "emoji": "<:iconPerks_secondWind:741713166064550018>",
+            "id": "secondwind"
+        },
+        {
+            "nameEs": "Autocuracion",
+            "nameEn": "Self-Care",
+            "emoji": "<:iconPerks_selfCare:741713166068613160>",
+            "id": "self_care"
+        },
+        {
+            "nameEs": "Carne resbaladiza",
+            "nameEn": "Slippery Meat",
+            "emoji": "<:iconPerks_slipperyMeat:741713164407668818>",
+            "id": "slippery_meat"
+        },
+        {
+            "nameEs": "Caza menor",
+            "nameEn": "Small Game",
+            "emoji": "<:iconPerks_smallGame:741713165569491066>",
+            "id": "small_game"
+        },
+        {
+            "nameEs": "Solo quedo yo",
+            "nameEn": "Sole Survivor",
+            "emoji": "<:iconPerks_soleSurvivor:741713167222046770>",
+            "id": "solesurvivor"
+        },
+        {
+            "nameEs": "Solidaridad",
+            "nameEn": "Solidarity",
+            "emoji": "<:iconPerks_solidarity:741713166437974068>",
+            "id": "solidarity"
+        },
+        {
+            "nameEs": "Salvaguarda de alma",
+            "nameEn": "Soul Guard",
+            "emoji": "<:iconPerks_soulGuard:741713166454751242>",
+            "id": "soulguard"
+        },
+        {
+            "nameEs": "Escalofrios",
+            "nameEn": "Spine Chill",
+            "emoji": "<:iconPerks_spineChill:741713164734824550>",
+            "id": "spine_chill"
+        },
+        {
+            "nameEs": "Esprint",
+            "nameEn": "Sprint Burst",
+            "emoji": "<:iconPerks_sprintBurst:741713166865793184>",
+            "id": "sprint_burst"
+        },
+        {
+            "nameEs": "Bajo vigilancia",
+            "nameEn": "Stake Out",
+            "emoji": "<:iconPerks_stakeOut:741713168476405770>",
+            "id": "stakeout"
+        },
+        {
+            "nameEs": "Con calle",
+            "nameEn": "Streetwise",
+            "emoji": "<:iconPerks_streetwise:741713166727381009>",
+            "id": "streetwise"
+        },
+        {
+            "nameEs": "Esto no puede estar pasando",
+            "nameEn": "This Is Not Happening",
+            "emoji": "<:iconPerks_thisIsNotHappening:741713167058731098>",
+            "id": "this_is_not_happening"
+        },
+        {
+            "nameEs": "Pericia tecnica",
+            "nameEn": "Technician",
+            "emoji": "<:iconPerks_tenacity:741713167826157592>",
+            "id": "technician"
+        },
+        {
+            "nameEs": "Tenacidad",
+            "nameEn": "Tenacity",
+            "emoji": "<:iconPerks_upTheAnte:741713166878244945>",
+            "id": "tenacity"
+        },
+        {
+            "nameEs": "Subir las apuestas",
+            "nameEn": "Up the Ante",
+            "emoji": "<:iconPerks_upTheAnte:741713166878244945>",
+            "id": "up_the_ante"
+        },
+        {
+            "nameEs": "Inquebrantable",
+            "nameEn": "Unbreakable",
+            "emoji": "<:iconPerks_unbreakable:741713167213658253>",
+            "id": "unbreakable"
+        },
+        {
+            "nameEs": "Evasion urbana",
+            "nameEn": "Urban Evasion",
+            "emoji": "<:iconPerks_urbanEvasion:741713167167782922>",
+            "id": "urban_evasion"
+        },
+        {
+            "nameEs": "Vigilia",
+            "nameEn": "Vigil",
+            "emoji": "<:iconPerks_vigil:741713040558522418>",
+            "id": "vigil"
+        },
+        {
+            "nameEs": "Despierta!",
+            "nameEn": "Wake Up!",
+            "emoji": "<:iconPerks_wakeUp:741713167339487412>",
+            "id": "wakeup"
+        },
+        {
+            "nameEs": "Lo conseguiremos",
+            "nameEn": "Well Make It",
+            "emoji": "<:iconPerks_wellMakeIt:741726257489641552>",
+            "id": "wellmakeit"
+        },
+        {
+            "nameEs": "Vamos a vivir para siempre",
+            "nameEn": "Were Gonna Live Forever",
+            "emoji": "<:iconPerks_WereGonnaLiveForever:741726258613977108>",
+            "id": "weregonnaliveforever"
+        },
+        {
+            "nameEs": "Oportunidades",
+            "nameEn": "Windows of Opportunity",
+            "emoji": "<:iconPerks_windowsOfOpportunity:741726257968054315>",
+            "id": "windowsofopportunity"
+        },
+        {
+            "nameEs": "Medidas desesperadas",
+            "nameEn": "Desperate Measures",
+            "emoji": "<:iconPerks_desperateMeasures:753423002103840868>",
+            "id": "desperatemeasures"
+        },
+        {
+            "nameEs": "Visionario",
+            "nameEn": "Visionary",
+            "emoji": "<:iconPerks_visionary:753423002586185910>",
+            "id": "visionary"
+        },
+        {
+            "nameEs": "Construido para perdurar",
+            "nameEn": "Built to Last",
+            "emoji": "<:iconPerks_builtToLast:753423000149164032>",
+            "id": "builttolast"
+        },
+        {
+            "nameEs": "Evaluacion",
+            "nameEn": "Appraisal",
+            "emoji": "<:iconPerks_appraisal:784561401451642940>",
+            "id": "s24p01"
+        },
+        {
+            "nameEs": "Engaño",
+            "nameEn": "Deception",
+            "emoji": "<:iconPerks_deception:784561401485721600>",
+            "id": "s24p02"
+        },
+        {
+            "nameEs": "Lucha intensa",
+            "nameEn": "Power Struggle",
+            "emoji": "<:iconPerks_powerStruggle:784561402043695114>",
+            "id": "s24p03"
+        },
+        {
+            "nameEs": "Primera línea",
+            "nameEn": "Fast Track",
+            "emoji": "<:iconPerks_FastTrack:826562715966767124>",
+            "id": "s25p01"
+        },
+        {
+            "nameEs": "Éxito aplastante",
+            "nameEn": "Smash Hit",
+            "emoji": "<:iconPerks_SmashHit:826562717296885781>",
+            "id": "s25p02"
+        },
+        {
+            "nameEs": "Autoconservación",
+            "nameEn": "Self-Preservation",
+            "emoji": "<:iconPerks_SelfPreservation:826562717674242068>",
+            "id": "s25p03"
+        }
     ]
 }
