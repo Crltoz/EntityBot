@@ -1,0 +1,119 @@
+{
+    "killers": [
+        {
+            "nameEs": "El Trampero",
+            "nameEn": "The Trapper",
+            "link": "https://gamepedia.cursecdn.com/deadbydaylight_gamepedia_en/2/20/AK_TR_charSelect_portrait.png"
+        },
+        {
+            "nameEs": "El Espectro",
+            "nameEn": "The Wraith",
+            "link": "https://gamepedia.cursecdn.com/deadbydaylight_gamepedia_en/6/6e/AK_WR_charSelect_portrait.png"
+        },
+        {
+            "nameEs": "El Pueblerino",
+            "nameEn": "The Hillbilly",
+            "link": "https://gamepedia.cursecdn.com/deadbydaylight_gamepedia_en/e/e5/AK_HI_charSelect_portrait.png"
+        },
+        {
+            "nameEs": "La Enfermera",
+            "nameEn": "The Nurse",
+            "link": "https://gamepedia.cursecdn.com/deadbydaylight_gamepedia_en/0/01/BK_NU_charSelect_portrait.png"
+        },
+        {
+            "nameEs": "La Forma",
+            "nameEn": "The Shape",
+            "link": "https://gamepedia.cursecdn.com/deadbydaylight_gamepedia_en/e/ec/CK_SH_charSelect_portrait.png"
+        },
+        {
+            "nameEs": "La Bruja",
+            "nameEn": "The Hag",
+            "link": "https://gamepedia.cursecdn.com/deadbydaylight_gamepedia_en/f/f9/DK_HA_charSelect_portrait.png"
+        },
+        {
+            "nameEs": "El Doctor",
+            "nameEn": "The Doctor",
+            "link": "https://gamepedia.cursecdn.com/deadbydaylight_gamepedia_en/1/1c/IK_DO_charSelect_portrait.png"
+        },
+        {
+            "nameEs": "La Cazadora",
+            "nameEn": "The Huntress",
+            "link": "https://gamepedia.cursecdn.com/deadbydaylight_gamepedia_en/d/d1/JK_HU_charSelect_portrait.png"
+        },
+        {
+            "nameEs": "El Canibal",
+            "nameEn": "The Cannibal",
+            "link": "https://gamepedia.cursecdn.com/deadbydaylight_gamepedia_en/a/ae/JK_CA_charSelect_portrait.png"
+        },
+        {
+            "nameEs": "La Pesadilla",
+            "nameEn": "The Nightmare",
+            "link": "https://gamepedia.cursecdn.com/deadbydaylight_gamepedia_en/f/fe/EK_NI_charSelect_portrait.png"
+        },
+        {
+            "nameEs": "La Cerda",
+            "nameEn": "The Pig",
+            "link": "https://gamepedia.cursecdn.com/deadbydaylight_gamepedia_en/0/00/FK_PI_charSelect_portrait.png"
+        },
+        {
+            "nameEs": "El Payaso",
+            "nameEn": "The Clown",
+            "link": "https://gamepedia.cursecdn.com/deadbydaylight_gamepedia_en/1/1b/GK_CL_charSelect_portrait.png"
+        },
+        {
+            "nameEs": "La Espiritu",
+            "nameEn": "The Spirit",
+            "link": "https://gamepedia.cursecdn.com/deadbydaylight_gamepedia_en/8/87/HK_SP_charSelect_portrait.png"
+        },
+        {
+            "nameEs": "La Legion",
+            "nameEn": "The Legion",
+            "link": "https://gamepedia.cursecdn.com/deadbydaylight_gamepedia_en/3/37/KK_LE_charSelect_portrait.png"
+        },
+        {
+            "nameEs": "La Plaga",
+            "nameEn": "The Plague",
+            "link": "https://gamepedia.cursecdn.com/deadbydaylight_gamepedia_en/5/5b/MK_PL_charSelect_portrait.png"
+        },
+        {
+            "nameEs": "Ghost Face",
+            "nameEn": "The Ghost Face",
+            "link": "https://gamepedia.cursecdn.com/deadbydaylight_gamepedia_en/3/38/OK_GH_charSelect_portrait.png"
+        },
+        {
+            "nameEs": "Demogorgon",
+            "nameEn": "The Demogorgon",
+            "link": "https://gamepedia.cursecdn.com/deadbydaylight_gamepedia_en/2/24/QK_DE_charSelect_portrait.png"
+        },
+        {
+            "nameEs": "Oni",
+            "nameEn": "The Oni",
+            "link": "https://gamepedia.cursecdn.com/deadbydaylight_gamepedia_en/4/44/SK_ON_charSelect_portrait.png"
+        },
+        {
+            "nameEs": "El Arponero",
+            "nameEn": "The Deathslinger",
+            "link": "https://gamepedia.cursecdn.com/deadbydaylight_gamepedia_en/2/2e/UK_DE_charSelect_portrait.png"
+        },
+        {
+            "nameEs": "El Verdugo",
+            "nameEn": "The Executioner",
+            "link": "https://gamepedia.cursecdn.com/deadbydaylight_gamepedia_en/a/a1/WK_charSelect_portrait.png"
+        },
+        {
+            "nameEs": "El Deterioro",
+            "nameEn": "The Blight",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/0/0b/K21_charSelect_portrait.png"
+        },
+        {
+            "nameEs": "Los Mellizos",
+            "nameEn": "The Twins",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/0/03/K22_charSelect_portrait.png"
+        },
+        {
+            "nameEs": "El Traicionero",
+            "nameEn": "Ji-Woon Hak",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/3/3e/K23_charSelect_portrait.png"
+        }
+    ]
+}
