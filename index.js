@@ -2042,4 +2042,4 @@ function getSteamProfile(steamid, channelid, userid, serverid, isSurv, language)
   })
 }
 
-client.login('NzQxNTE2NjE0MzM5Mzk1NjA2.Xy4tKQ.XfZC8iyNc4cPnPp_ehS7qGV1VqA');
+client.login(process.env.token);
