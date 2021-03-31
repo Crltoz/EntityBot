@@ -665,7 +665,8 @@ client.on("message", async (message) => {
           var perk2 = getPerkIndexByID(rows[0].perk_2)
           var perk3 = getPerkIndexByID(rows[0].perk_3)
           var perk4 = getPerkIndexByID(rows[0].perk_4)
-          const embed = new Discord.RichEmbed()
+          setTimeout(() => {
+            const embed = new Discord.RichEmbed()
             .setThumbnail(message.member.user.avatarURL)
             .setAuthor('| ' + message.author.tag + ' |',)
             .setTitle('🈴 Santuario de los secretos:')
@@ -673,6 +674,7 @@ client.on("message", async (message) => {
             .addField('Habilidades:', '**► ' + getPerkName(perk1.index, perk1.isSurv, 0) + '** - <:frag_iri:739690491829813369>2000\n**► ' + getPerkName(perk2.index, perk2.isSurv, 0) + '** - <:frag_iri:739690491829813369>2000\n**► ' + getPerkName(perk3.index, perk3.isSurv, 0) + '** - <:frag_iri:739690491829813369>2000\n**► ' + getPerkName(perk4.index, perk4.isSurv, 0) + '** - <:frag_iri:739690491829813369>2000', true)
             .setColor(0xFF0000)
           message.channel.send(embed).then(function (message) { message.channel.send(getPerkIcon(perk1.index, perk1.isSurv) + ' ' + getPerkIcon(perk2.index, perk2.isSurv) + ' ' + getPerkIcon(perk3.index, perk3.isSurv) + ' ' + getPerkIcon(perk4.index, perk4.isSurv)) })
+          }, 1000);
         })
         return;
       }
