@@ -659,13 +659,17 @@ client.on("message", async (message) => {
       }
 
       if (command == 'santuario') {
-        con.query(`SELECT * FROM santuario`, (err, rows) => {
+        con.query(`SELECT * FROM santuario`, async (err, rows) => {
           if (err) throw err;
           var perk1 = await getPerkIndexByID(rows[0].perk_1)
           var perk2 = await getPerkIndexByID(rows[0].perk_2)
           var perk3 = await getPerkIndexByID(rows[0].perk_3)
           var perk4 = await getPerkIndexByID(rows[0].perk_4)
-          console.log(`${perk1.index} | ${perk2.index} | ${perk3.index} | ${perk4.index}`)
+          if(!isValidPerk(perk1.index) || !isValidPerk(perk2.index) || !isValidPerk(perk3.index) || !isValidPerk(perk4.index)){
+            console.log(`Invalid perks in shrine: ${perk1.index} (${rows[0].perk_1}) | ${perk2.index} (${rows[0].perk_2}) | ${perk3.index} (${rows[0].perk_3}) | ${perk4.index} (${rows[0].perk_4})`)
+            message.channel.send("Actualmente no podemos mostrar esta información, por favor reportalo en nuestro Discord en la sección de bugs: https://discord.gg/T6rEERg")
+            return
+          }
           const embed = new Discord.RichEmbed()
             .setThumbnail(message.member.user.avatarURL)
             .setAuthor('| ' + message.author.tag + ' |',)
@@ -1018,22 +1022,25 @@ client.on("message", async (message) => {
       }
 
       if (command == 'shrine') {
-        con.query(`SELECT * FROM santuario`, (err, rows) => {
+        con.query(`SELECT * FROM santuario`, async (err, rows) => {
           if (err) throw err;
-          var perk1 = getPerkIndexByID(rows[0].perk_1)
-          var perk2 = getPerkIndexByID(rows[0].perk_2)
-          var perk3 = getPerkIndexByID(rows[0].perk_3)
-          var perk4 = getPerkIndexByID(rows[0].perk_4)
-          setTimeout(() => {
-            const embed = new Discord.RichEmbed()
-              .setThumbnail(message.member.user.avatarURL)
-              .setAuthor('| ' + message.author.tag + ' |',)
-              .setTitle('🈴 Shrine of Secrets:')
-              .setURL('https://deadbydaylight.gamepedia.com/Dead_by_Daylight_Wiki')
-              .addField('Perks:', '**► ' + getPerkName(perk1.index, perk1.isSurv, 1) + '** - <:frag_iri:739690491829813369>2000\n**► ' + getPerkName(perk2.index, perk2.isSurv, 1) + '** - <:frag_iri:739690491829813369>2000\n**► ' + getPerkName(perk3.index, perk3.isSurv, 1) + '** - <:frag_iri:739690491829813369>2000\n**► ' + getPerkName(perk4.index, perk4.isSurv, 1) + '** - <:frag_iri:739690491829813369>2000', true)
-              .setColor(0xFF0000)
-            message.channel.send(embed).then(function (message) { message.channel.send(getPerkIcon(perk1.index, perk1.isSurv) + ' ' + getPerkIcon(perk2.index, perk2.isSurv) + ' ' + getPerkIcon(perk3.index, perk3.isSurv) + ' ' + getPerkIcon(perk4.index, perk4.isSurv)) })
-          }, 1000);
+          var perk1 = await getPerkIndexByID(rows[0].perk_1)
+          var perk2 = await getPerkIndexByID(rows[0].perk_2)
+          var perk3 = await getPerkIndexByID(rows[0].perk_3)
+          var perk4 = await getPerkIndexByID(rows[0].perk_4)
+          if(!isValidPerk(perk1.index) || !isValidPerk(perk2.index) || !isValidPerk(perk3.index) || !isValidPerk(perk4.index)){
+            console.log(`Invalid perks in shrine: ${perk1.index} (${rows[0].perk_1}) | ${perk2.index} (${rows[0].perk_2}) | ${perk3.index} (${rows[0].perk_3}) | ${perk4.index} (${rows[0].perk_4})`)
+            message.channel.send("We are currently unable to display this information, please report it on our Discord in the bugs section: https://discord.gg/T6rEERg")
+            return
+          }
+          const embed = new Discord.RichEmbed()
+            .setThumbnail(message.member.user.avatarURL)
+            .setAuthor('| ' + message.author.tag + ' |',)
+            .setTitle('🈴 Shrine of Secrets:')
+            .setURL('https://deadbydaylight.gamepedia.com/Dead_by_Daylight_Wiki')
+            .addField('Perks:', '**► ' + getPerkName(perk1.index, perk1.isSurv, 1) + '** - <:frag_iri:739690491829813369>2000\n**► ' + getPerkName(perk2.index, perk2.isSurv, 1) + '** - <:frag_iri:739690491829813369>2000\n**► ' + getPerkName(perk3.index, perk3.isSurv, 1) + '** - <:frag_iri:739690491829813369>2000\n**► ' + getPerkName(perk4.index, perk4.isSurv, 1) + '** - <:frag_iri:739690491829813369>2000', true)
+            .setColor(0xFF0000)
+          message.channel.send(embed).then(function (message) { message.channel.send(getPerkIcon(perk1.index, perk1.isSurv) + ' ' + getPerkIcon(perk2.index, perk2.isSurv) + ' ' + getPerkIcon(perk3.index, perk3.isSurv) + ' ' + getPerkIcon(perk4.index, perk4.isSurv)) })
         })
         return;
       }
@@ -1885,6 +1892,17 @@ async function getPerkIndexByID(id) {
     isSurv: isSurv,
     index: index
   };
+}
+
+/**
+ * @param {Int8Array} index - Perk index from JSON file.
+ * @description Return true if perk is valid, else, false.
+ */
+function isValidPerk(index){
+  if(index == -1) return false
+  if(index === undefined) return false
+  if(index === null) return false
+  return true
 }
 
 /**
