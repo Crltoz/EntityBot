@@ -661,12 +661,12 @@ client.on("message", async (message) => {
       if (command == 'santuario') {
         con.query(`SELECT * FROM santuario`, (err, rows) => {
           if (err) throw err;
-          var perk1 = getPerkIndexByID(rows[0].perk_1)
-          var perk2 = getPerkIndexByID(rows[0].perk_2)
-          var perk3 = getPerkIndexByID(rows[0].perk_3)
-          var perk4 = getPerkIndexByID(rows[0].perk_4)
-          setTimeout(() => {
-            const embed = new Discord.RichEmbed()
+          var perk1 = await getPerkIndexByID(rows[0].perk_1)
+          var perk2 = await getPerkIndexByID(rows[0].perk_2)
+          var perk3 = await getPerkIndexByID(rows[0].perk_3)
+          var perk4 = await getPerkIndexByID(rows[0].perk_4)
+          console.log(`${perk1.index} | ${perk2.index} | ${perk3.index} | ${perk4.index}`)
+          const embed = new Discord.RichEmbed()
             .setThumbnail(message.member.user.avatarURL)
             .setAuthor('| ' + message.author.tag + ' |',)
             .setTitle('🈴 Santuario de los secretos:')
@@ -674,7 +674,6 @@ client.on("message", async (message) => {
             .addField('Habilidades:', '**► ' + getPerkName(perk1.index, perk1.isSurv, 0) + '** - <:frag_iri:739690491829813369>2000\n**► ' + getPerkName(perk2.index, perk2.isSurv, 0) + '** - <:frag_iri:739690491829813369>2000\n**► ' + getPerkName(perk3.index, perk3.isSurv, 0) + '** - <:frag_iri:739690491829813369>2000\n**► ' + getPerkName(perk4.index, perk4.isSurv, 0) + '** - <:frag_iri:739690491829813369>2000', true)
             .setColor(0xFF0000)
           message.channel.send(embed).then(function (message) { message.channel.send(getPerkIcon(perk1.index, perk1.isSurv) + ' ' + getPerkIcon(perk2.index, perk2.isSurv) + ' ' + getPerkIcon(perk3.index, perk3.isSurv) + ' ' + getPerkIcon(perk4.index, perk4.isSurv)) })
-          }, 1000);
         })
         return;
       }
@@ -1864,7 +1863,7 @@ function loadCharacters() {
  * @param {String} id - Perk ID from Australian Site.
  * @description Get perk index from ID.
  */
-function getPerkIndexByID(id) {
+async function getPerkIndexByID(id) {
   var index = -1;
   var isSurv = false
   for (let x = 0; x < getLength(survivorPerks); x++) {
@@ -1882,12 +1881,10 @@ function getPerkIndexByID(id) {
       }
     }
   }
-  setTimeout(() => {
-    return {
-      isSurv: isSurv,
-      index: index
-    };
-  }, 500);
+  return {
+    isSurv: isSurv,
+    index: index
+  };
 }
 
 /**
