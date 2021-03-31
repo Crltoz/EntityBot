@@ -1880,10 +1880,12 @@ function getPerkIndexByID(id) {
       }
     }
   }
-  return {
-    isSurv: isSurv,
-    index: index
-  };
+  setTimeout(() => {
+    return {
+      isSurv: isSurv,
+      index: index
+    };
+  }, 500);
 }
 
 /**
