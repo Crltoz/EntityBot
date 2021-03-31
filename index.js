@@ -993,7 +993,7 @@ client.on("message", async (message) => {
         return;
       }
 
-      message.member.send('El comando no existe. Usa **/ayuda** para ver todas las funciones y comandos.')
+      message.member.send('El comando no existe. Usa '+ prefix[message.guild.id] +'**ayuda** para ver todas las funciones y comandos.')
     } else {
       if (cid[message.guild.id] != null && message.channel.id != cid[message.guild.id]) {
         const disc = client.channels.get(cid[message.guild.id]);
@@ -1893,6 +1893,7 @@ function getPerkIndexByID(id) {
  * @description Get perk name from index.
  */
 function getPerkName(index, isSurv, language) {
+  console.log(`index: ${index} | isSurv: ${isSurv} | language ${language}`)
   if (isSurv) {
     if (language == 0) return survivorPerks[index].nameEs
     else return survivorPerks[index].nameEn
