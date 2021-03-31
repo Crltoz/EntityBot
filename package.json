@@ -1,13 +1,13 @@
 {
-  "name": "BotD",
+  "name": "DeadByDaylight Bot.",
   "version": "1.0.0",
-  "description": "Bot para Samphub.",
+  "description": "Bot con funciones para Dead By Daylight. ¡Disfrutalo!",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
-  "author": "CarlosMorelo",
+  "author": "Crltoz#0001, Creepzster#7467, Rosper#4718 & Zander (Iván)#1979",
   "license": "ISC",
   "dependencies": {
     "@discordjs/uws": "^10.149.0",
