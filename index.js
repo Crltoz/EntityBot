@@ -1731,7 +1731,7 @@ function verifyShrine() {
         var body2 = Buffer.concat(bodyChunks2);
         body2 = JSON.parse(body2)
         con.query(`DELETE FROM santuario`)
-        con.query(`INSERT INTO santuario (perk_1, perk_2, perk_3, perk_4) VALUES ('${body2.perks[0].id}', '${body2.perks[1].id}', '${body2.perks[2].id}', '${body2.perks[3].id}')`)
+        con.query(`INSERT INTO santuario (perk_1, perk_2, perk_3, perk_4) VALUES ('${body2.perks[0].id.toLowerCase()}', '${body2.perks[1].id.toLowerCase()}', '${body2.perks[2].id.toLowerCase()}', '${body2.perks[3].id.toLowerCase()}')`)
       })
     })
     return;
