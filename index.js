@@ -4,13 +4,14 @@ const client = new Discord.Client();
 const bigNumber = require("bignumber.js")
 var https = require('https');
 var http = require('http');
-const version_bot = '0.8.6'
+const version_bot = '0.9.0'
 const mysql = require("mysql");
 const fs = require('fs');
 const { parse } = require("path");
 const { SSL_OP_NO_TLSv1_1 } = require("constants");
 const { kill } = require("process");
 const { version } = require("os");
+const { post } = require("snekfetch");
 
 
 /* Global objects for perks and characters info */
@@ -985,7 +986,7 @@ client.on("message", async (message) => {
         var isSurv, nCharacter, nPerk;
         if (texto.toLowerCase() == 'survivor') isSurv = true
         else if (texto.toLowerCase() == 'killer') isSurv = false
-        else message.member.send('Usa **/random [Survivor o Killer]** || Te retornará un survivor o killer aleatorio con 4 perks.').catch(function (err) { message.channel.send(message.member.user + ' Activa tus mensajes privados para que el bot pueda informarte.') });
+        else return message.member.send('Usa **/random [Survivor o Killer]** || Te retornará un survivor o killer aleatorio con 4 perks.').catch(function (err) { message.channel.send(message.member.user + ' Activa tus mensajes privados para que el bot pueda informarte.') });
         if (isSurv) {
           nCharacter = Math.floor(Math.random() * getLength(survivors));
           nPerk = getRandomNumber(getLength(survivorPerks))
@@ -1361,7 +1362,7 @@ client.on("message", async (message) => {
         var isSurv, nCharacter, nPerk;
         if (texto.toLowerCase() == 'survivor') isSurv = true
         else if (texto.toLowerCase() == 'killer') isSurv = false
-        else message.member.send('Use **'+prefix[message.guild.id]+'random [Survivor or Killer]** || It will give you a random 4 perk build for a survivor or killer.')
+        else return message.member.send('Use **'+prefix[message.guild.id]+'random [Survivor or Killer]** || It will give you a random 4 perk build for a survivor or killer.')
         if (isSurv) {
           nCharacter = Math.floor(Math.random() * getLength(survivors));
           nPerk = getRandomNumber(getLength(survivorPerks))
@@ -1568,7 +1569,7 @@ function sendEmbedStats(channel, isSurv, data_steam, data_dbd, language) {
 
 
 /**
- * @param {Int8Array} type - 1 = Update in progress | 2 = Account Private.
+ * @param {Int8Array} type - 1 = Update in progress | 2 = Account Private. | 3 = Unknown error.
  * @param {ObjectConstructor} user - User object.
  * @param {BigInt64Array} channel - Channel ID to send embed.
  * @param {Int8Array} language - 0 = spanish | 1 = english.
@@ -1602,6 +1603,18 @@ function sendEmbedError(type, user, channel, language) {
           .setFooter('La entidad', client.user.avatarURL);
         client.channels.get(channel).send(embedd)
       }
+      case 3: {
+        const embedd = new Discord.RichEmbed()
+          .setColor('#FF0000')
+          .setTitle('No podemos agregar tu cuenta...')
+          .setAuthor(message.member.user.tag, message.member.user.avatarURL)
+          .setThumbnail(client.user.avatarURL)
+          .addField('Tenemos problemas con la web.', 'Actualmente, por muchas peticiones, la web no nos permite postear cuentas, por lo que deberás hacerlo apretando el botón de abajo y pegando tu link de perfil. Luego de ponerla ya podrás ver tus **/stats** por aquí sin problema.')
+          .addField('Agregar cuenta:', '[Haz click aquí](https://dbd.onteh.net.au)')
+          .setTimestamp()
+          .setFooter('La entidad', client.user.avatarURL)
+          client.channels.get(channel).send(embedd)
+      }
     }
   } else {
     switch (type) {
@@ -1630,8 +1643,47 @@ function sendEmbedError(type, user, channel, language) {
           .setFooter('Entity', client.user.avatarURL);
         client.channels.get(channel).send(embedd)
       }
+      case 3: {
+        const embedd = new Discord.RichEmbed()
+          .setColor('#FF0000')
+          .setTitle("We can't add your account ...")
+          .setAuthor(message.member.user.tag, message.member.user.avatarURL)
+          .setThumbnail(client.user.avatarURL)
+          .addField('There are problems with the web.', 'Currently, due to many requests, the web does not allow us to post accounts, so you must do it by pressing the button below and pasting your profile link. After putting it in, you will be able to see your **stats** around here without problem.')
+          .addField('Add account:', '[Click here](https://dbd.onteh.net.au)')
+          .setTimestamp()
+          .setFooter('Entity', client.user.avatarURL)
+          client.channels.get(channel).send(embedd)
+      }
     }
   }
+  return
+}
+
+
+/**
+ * @param {BigInt64Array} steamid - Steam ID to get DBD Stats.
+ * @param {BigInt64Array} channelid - Channel ID to send info.
+ * @param {Int8Array} language - 0 = spanish | 1 = english
+ * @description - Post stats to Australian Website.
+ */
+function postStats(steamid, channelid, user, language) {
+  var options = {
+    host: "dbd.onteh.net.au",
+    path: "/api/playerstats?steamid=" + steamid,
+    method: 'POST',
+    headers: {'User-Agent': 'EntityBot/'+version_bot}
+  };
+  let req = https.request(options, function (res) {
+    if(res.statusCode != 201){
+      console.log(`ERROR POST: ${res.statusCode} | ${res.statusMessage}`)
+      sendEmbedError(3, user, channelid, language)
+    } else {
+      if(language == 0) user.send("La cuenta de Steam está en la cola para ser agregada ya que no estaba registrada, recuerda que puede tardar hasta 1 hora.")
+      else user.send("The Steam account is in the queue to be added since it was not registered, remember that it can take up to 1 hour.")
+    }
+  })
+  req.end()
   return
 }
 
@@ -1647,7 +1699,8 @@ function sendEmbedError(type, user, channel, language) {
 function getStats(data_steam, channelid, user, steamid, isSurv, language) {
   var options = {
     host: "dbd.onteh.net.au",
-    path: "/api/playerstats?steamid=" + steamid
+    path: "/api/playerstats?steamid=" + steamid,
+    headers: {'User-Agent': 'EntityBot/'+version_bot}
   };
   https.get(options, function (res) {
     var bodyChunks_ = [];
@@ -1656,10 +1709,9 @@ function getStats(data_steam, channelid, user, steamid, isSurv, language) {
     }).on('end', function () {
       var body = Buffer.concat(bodyChunks_);
       body = JSON.parse(body)
-      if (isEmptyObject(body)) return sendEmbedError(2, user, channelid, language)
-      if (body.killer_rank == 20 && body.killed == 0 && body.sacrificed == 0 && body.bloodpoints == 0) {
-        sendEmbedError(1, user, channelid, language)
-      } else sendEmbedStats(channelid, isSurv, data_steam, body, language)
+      if (isEmptyObject(body)) postStats(steamid, channelid, user, language)
+      else if (body.killer_rank == 20 && body.killed == 0 && body.sacrificed == 0 && body.bloodpoints == 0) sendEmbedError(1, user, channelid, language)
+      else sendEmbedStats(channelid, isSurv, data_steam, body, language) 
       return;
     })
   })
