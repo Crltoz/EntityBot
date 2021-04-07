@@ -577,7 +577,6 @@ client.on("message", async (message) => {
   var jejox = args.shift();
   const command = jejox.toLowerCase();
   let texto = args.join(" ");
-  const usa = new Date();
 
   if (prefix[message.guild.id] == null) prefix[message.guild.id] = '/';
   if (lenguaje[message.guild.id] == null) lenguaje[message.guild.id] = 0;
@@ -1662,7 +1661,7 @@ function sendEmbedError(type, user, channel, language) {
 
 
 /**
- * @param {BigInt64Array} steamid - Steam ID to get DBD Stats.
+ * @param {BigInt64Array} steamid - Steam ID to POST DBD Stats.
  * @param {BigInt64Array} channelid - Channel ID to send info.
  * @param {Int8Array} language - 0 = spanish | 1 = english
  * @description - Post stats to Australian Website.
