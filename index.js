@@ -1395,7 +1395,6 @@ function ObtenerValor(nivel, Deseado, id) {
 }
 
 function ObtenerNP(nivel, id) {
-  let v = 0;
   var total = 0;
   let x = nivel;
   while (DBC[id] != 0) {
