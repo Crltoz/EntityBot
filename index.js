@@ -62,10 +62,10 @@ var actualizar = 1;
 
 /* MySQL config */
 var db_config = {
-  host: '185.201.10.94',
-  user: 'u642668726_sh',
-  password: 'y`SBzagH',
-  database: 'u642668726_shsv'
+  host: process.env.host,
+  user: process.env.user,
+  password: process.env.password,
+  database: process.env.database
 }
 var con;
 
@@ -577,7 +577,6 @@ client.on("message", async (message) => {
   var jejox = args.shift();
   const command = jejox.toLowerCase();
   let texto = args.join(" ");
-  const usa = new Date();
 
   if (prefix[message.guild.id] == null) prefix[message.guild.id] = '/';
   if (lenguaje[message.guild.id] == null) lenguaje[message.guild.id] = 0;
@@ -1396,7 +1395,6 @@ function ObtenerValor(nivel, Deseado, id) {
 }
 
 function ObtenerNP(nivel, id) {
-  let v = 0;
   var total = 0;
   let x = nivel;
   while (DBC[id] != 0) {
@@ -1662,7 +1660,7 @@ function sendEmbedError(type, user, channel, language) {
 
 
 /**
- * @param {BigInt64Array} steamid - Steam ID to get DBD Stats.
+ * @param {BigInt64Array} steamid - Steam ID to POST DBD Stats.
  * @param {BigInt64Array} channelid - Channel ID to send info.
  * @param {Int8Array} language - 0 = spanish | 1 = english
  * @description - Post stats to Australian Website.
