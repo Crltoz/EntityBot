@@ -78,7 +78,7 @@ client.on("ready", () => {
   client.user.setPresence({
     status: "online",
     game: {
-      name: 'La muerte no es un escape.',
+      name: '/help | /ayuda',
       type: "PLAYING"
     }
   });
