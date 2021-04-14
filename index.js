@@ -62,10 +62,10 @@ var actualizar = 1;
 
 /* MySQL config */
 var db_config = {
-  host: '185.201.10.94',
-  user: 'u642668726_sh',
-  password: 'y`SBzagH',
-  database: 'u642668726_shsv'
+  host: process.env.host,
+  user: process.env.user,
+  password: process.env.password,
+  database: process.env.database
 }
 var con;
 
