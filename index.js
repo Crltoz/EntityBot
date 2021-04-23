@@ -7,11 +7,7 @@ var http = require('http');
 const version_bot = '0.9.0'
 const mysql = require("mysql");
 const fs = require('fs');
-const { parse } = require("path");
-const { SSL_OP_NO_TLSv1_1 } = require("constants");
-const { kill } = require("process");
-const { version } = require("os");
-const { post } = require("snekfetch");
+const Canvas = require('canvas')
 
 
 /* Global objects for perks and characters info */
