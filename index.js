@@ -13,12 +13,18 @@ const { kill } = require("process");
 const { version } = require("os");
 const { post } = require("snekfetch");
 
+// Image generator
+const background_killer = "assets/Visuals/Background/random_killer.jpg"
+const background_survivor = "assets/Visuals/Background/random_killer.jpg"
+const font = "./assets/Font/BRUTTALL.ttf"
+Canvas.registerFont(font, { family: "dbd" })
 
 /* Global objects for perks and characters info */
 var survivorPerks = {}
 var killerPerks = {}
 var survivors = {}
 var killers = {}
+
 
 
 /* Const levels */
@@ -116,14 +122,12 @@ client.on("messageReactionAdd", (messageReaction, user) => {
         } else if (messageReaction.emoji == '2⃣') {
           let nCharacter = Math.floor(Math.random() * getLength(survivors));
           let nPerk = getRandomNumber(getLength(survivorPerks))
-          const embed = createRandomEmbed(nCharacter, nPerk.n1, nPerk.n2, nPerk.n3, nPerk.n4, true, lenguaje[messageReaction.message.guild.id])
-          messageReaction.message.channel.send(embed).then(function (message) { message.channel.send(getPerkIcon(nPerk.n1, true) + ' ' + getPerkIcon(nPerk.n2, true) + ' ' + getPerkIcon(nPerk.n3, true) + ' ' + getPerkIcon(nPerk.n4, true)) })
+          createRandomBuild(message, nCharacter, nPerk.n1, nPerk.n2, nPerk.n3, nPerk.n4, true, lenguaje[messageReaction.message.guild.id])
           return;
         } else if (messageReaction.emoji == '3⃣') {
           let nCharacter = Math.floor(Math.random() * getLength(killers));
           let nPerk = getRandomNumber(getLength(killerPerks))
-          const embed = createRandomEmbed(nCharacter, nPerk.n1, nPerk.n2, nPerk.n3, nPerk.n4, false, lenguaje[messageReaction.message.guild.id])
-          messageReaction.message.channel.send(embed).then(function (message) { message.channel.send(getPerkIcon(nPerk.n1, false) + ' ' + getPerkIcon(nPerk.n2, false) + ' ' + getPerkIcon(nPerk.n3, false) + ' ' + getPerkIcon(nPerk.n4, false)) })
+          createRandomBuild(message, nCharacter, nPerk.n1, nPerk.n2, nPerk.n3, nPerk.n4, false, lenguaje[messageReaction.message.guild.id])
           return;
         } else if (messageReaction.emoji == '4⃣') {
           r2.add(user.id)
@@ -146,14 +150,12 @@ client.on("messageReactionAdd", (messageReaction, user) => {
         } else if (messageReaction.emoji == '2⃣') {
           let nCharacter = Math.floor(Math.random() * getLength(survivors));
           let nPerk = getRandomNumber(getLength(survivorPerks))
-          const embed = createRandomEmbed(nCharacter, nPerk.n1, nPerk.n2, nPerk.n3, nPerk.n4, true, lenguaje[messageReaction.message.guild.id])
-          messageReaction.message.channel.send(embed).then(function (message) { message.channel.send(getPerkIcon(nPerk.n1, true) + ' ' + getPerkIcon(nPerk.n2, true) + ' ' + getPerkIcon(nPerk.n3, true) + ' ' + getPerkIcon(nPerk.n4, true)) })
+          createRandomBuild(message, nCharacter, nPerk.n1, nPerk.n2, nPerk.n3, nPerk.n4, true, lenguaje[messageReaction.message.guild.id])
           return;
         } else if (messageReaction.emoji == '3⃣') {
           let nCharacter = Math.floor(Math.random() * getLength(killers));
           let nPerk = getRandomNumber(getLength(killerPerks))
-          const embed = createRandomEmbed(nCharacter, nPerk.n1, nPerk.n2, nPerk.n3, nPerk.n4, false, lenguaje[messageReaction.message.guild.id])
-          messageReaction.message.channel.send(embed).then(function (message) { message.channel.send(getPerkIcon(nPerk.n1, false) + ' ' + getPerkIcon(nPerk.n2, false) + ' ' + getPerkIcon(nPerk.n3, false) + ' ' + getPerkIcon(nPerk.n4, false)) })
+          createRandomBuild(message, nCharacter, nPerk.n1, nPerk.n2, nPerk.n3, nPerk.n4, false, lenguaje[messageReaction.message.guild.id])
           return;
         } else if (messageReaction.emoji == '4⃣') {
           r2.add(user.id)
@@ -993,8 +995,7 @@ client.on("message", async (message) => {
           nCharacter = Math.floor(Math.random() * getLength(killers));
           nPerk = getRandomNumber(getLength(killerPerks))
         }
-        const embed = createRandomEmbed(nCharacter, nPerk.n1, nPerk.n2, nPerk.n3, nPerk.n4, isSurv, lenguaje[message.guild.id])
-        message.channel.send(embed).then(function (message) { message.channel.send(getPerkIcon(nPerk.n1, isSurv) + ' ' + getPerkIcon(nPerk.n2, isSurv) + ' ' + getPerkIcon(nPerk.n3, isSurv) + ' ' + getPerkIcon(nPerk.n4, isSurv)) })
+        createRandomBuild(message, nCharacter, nPerk.n1, nPerk.n2, nPerk.n3, nPerk.n4, isSurv, lenguaje[message.guild.id])
         return;
       }
 
@@ -1369,8 +1370,7 @@ client.on("message", async (message) => {
           nCharacter = Math.floor(Math.random() * getLength(killers));
           nPerk = getRandomNumber(getLength(killerPerks))
         }
-        const embed = createRandomEmbed(nCharacter, nPerk.n1, nPerk.n2, nPerk.n3, nPerk.n4, isSurv, lenguaje[message.guild.id])
-        message.channel.send(embed).then(function (message) { message.channel.send(getPerkIcon(nPerk.n1, isSurv) + ' ' + getPerkIcon(nPerk.n2, isSurv) + ' ' + getPerkIcon(nPerk.n3, isSurv) + ' ' + getPerkIcon(nPerk.n4, isSurv)) })
+        createRandomBuild(message, nCharacter, nPerk.n1, nPerk.n2, nPerk.n3, nPerk.n4, isSurv, lenguaje[message.guild.id])
         return;
       }
 
@@ -2047,16 +2047,66 @@ function getRandomNumber(max) {
  * @param {Int8Array} language - 0 = Spanish | 1 = English 
  * @description Get embed with random build and character.
  */
-function createRandomEmbed(numberCharacter, numberPerk1, numberPerk2, numberPerk3, numberPerk4, isSurv, language) {
-  const embed = new Discord.RichEmbed()
-    .setThumbnail(isSurv == true ? survivors[numberCharacter].link : killers[numberCharacter].link)
-    .setTitle('Perks:')
-    .setURL('https://deadbydaylight.gamepedia.com/Dead_by_Daylight_Wiki')
-    .addField('ㅤ', '**► ' + getPerkName(numberPerk1, isSurv, language) + '**\n**► ' + getPerkName(numberPerk2, isSurv, language) + '**\n**► ' + getPerkName(numberPerk3, isSurv, language) + '**\n**► ' + getPerkName(numberPerk4, isSurv, language) + '**', true)
-    .setColor(0xFF0000)
-  if (language == 0) embed.setAuthor(isSurv == true ? survivors[numberCharacter].name : killers[numberCharacter].nameEs, isSurv == true ? survivors[numberCharacter].link : killers[numberCharacter].link)
-  else embed.setAuthor('| ' + isSurv == true ? survivors[numberCharacter].name : killers[numberCharacter].nameEn + ' |', isSurv == true ? survivors[numberCharacter].link : killers[numberCharacter].link)
-  return embed
+async function createRandomBuild(message, numberCharacter, numberPerk1, numberPerk2, numberPerk3, numberPerk4, isSurv, language) {
+  if(isSurv){
+    const canvas = Canvas.createCanvas(1738, 1114);
+      const ctx = canvas.getContext('2d');
+      let fontSize = 20
+      const background = await Canvas.loadImage(background_survivor);
+      ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
+
+      ctx.strokeStyle = '#74037b';
+      ctx.strokeRect(0, 0, canvas.width, canvas.height);
+
+      ctx.font = '101px "dbd"';
+      ctx.fillStyle = '#ffffff';
+      ctx.fillText(survivors[numberCharacter].name, calculateCenter(survivors[numberCharacter].name.length, fontSize), 207);
+      const avatar = await Canvas.loadImage(killers[0].link);
+      ctx.drawImage(avatar, 1045, 227, 447, 619);
+      let perkImageName = [getImageName(numberPerk1, isSurv), getImageName(numberPerk2, isSurv), getImageName(numberPerk3, isSurv), getImageName(numberPerk4, isSurv)]
+      const perkImage_1 = await getImage(perkImageName[0], isSurv)
+      const perkImage_2 = await getImage(perkImageName[1], isSurv)
+      const perkImage_3 = await getImage(perkImageName[2], isSurv)
+      const perkImage_4 = await getImage(perkImageName[3], isSurv)
+      ctx.drawImage(perkImage_1, 302, 234, 256, 256);
+      ctx.drawImage(perkImage_2, 116, 429, 256, 256);
+      ctx.drawImage(perkImage_3, 493, 429, 256, 256);
+      ctx.drawImage(perkImage_4, 303, 605, 256, 256);
+
+      const attachment = new Discord.MessageAttachment(canvas.toBuffer(), 'survivor-random.png');
+      if(language == 0) message.channel.send(`**PERKS:**\n1⃣: ${survivorPerks[numberPerk1].nameEs}\n2⃣: ${survivorPerks[numberPerk2].nameEs}\n3⃣: ${survivorPerks[numberPerk3].nameEs}\n4⃣: ${survivorPerks[numberPerk4].nameEs}`, attachment)
+      else message.channel.send(`**PERKS:**\n1⃣: ${survivorPerks[numberPerk1].nameEn}\n2⃣: ${survivorPerks[numberPerk2].nameEn}\n3⃣: ${survivorPerks[numberPerk3].nameEn}\n4⃣: ${survivorPerks[numberPerk4].nameEn}`, attachment)
+  } else {
+    const canvas = Canvas.createCanvas(1738, 1114);
+      const ctx = canvas.getContext('2d');
+      let fontSize = 20
+      const background = await Canvas.loadImage(background_killer);
+      ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
+
+      ctx.strokeStyle = '#74037b';
+      ctx.strokeRect(0, 0, canvas.width, canvas.height);
+
+      ctx.font = '101px "dbd"';
+      ctx.fillStyle = '#ffffff';
+      let string = language == 0 ? killers[numberCharacter].nameEs:killers[numberCharacter].nameEn
+      ctx.fillText(string, calculateCenter(string.length, fontSize), 207);
+      const avatar = await Canvas.loadImage(killers[0].link);
+      ctx.drawImage(avatar, 1045, 227, 447, 619);
+      let perkImageName = [getImageName(numberPerk1, isSurv), getImageName(numberPerk2, isSurv), getImageName(numberPerk3, isSurv), getImageName(numberPerk4, isSurv)]
+      const perkImage_1 = await getImage(perkImageName[0], isSurv)
+      const perkImage_2 = await getImage(perkImageName[1], isSurv)
+      const perkImage_3 = await getImage(perkImageName[2], isSurv)
+      const perkImage_4 = await getImage(perkImageName[3], isSurv)
+      ctx.drawImage(perkImage_1, 302, 234, 256, 256);
+      ctx.drawImage(perkImage_2, 116, 429, 256, 256);
+      ctx.drawImage(perkImage_3, 493, 429, 256, 256);
+      ctx.drawImage(perkImage_4, 303, 605, 256, 256);
+
+      const attachment = new Discord.MessageAttachment(canvas.toBuffer(), 'killer-random.png');
+      if(language == 0) message.channel.send(`**PERKS:**\n1⃣: ${survivorPerks[numberPerk1].nameEs}\n2⃣: ${survivorPerks[numberPerk2].nameEs}\n3⃣: ${survivorPerks[numberPerk3].nameEs}\n4⃣: ${survivorPerks[numberPerk4].nameEs}`, attachment)
+      else message.channel.send(`**PERKS:**\n1⃣: ${survivorPerks[numberPerk1].nameEn}\n2⃣: ${survivorPerks[numberPerk2].nameEn}\n3⃣: ${survivorPerks[numberPerk3].nameEn}\n4⃣: ${survivorPerks[numberPerk4].nameEn}`, attachment)
+  }
+  return
 }
 
 /**
@@ -2110,6 +2160,27 @@ function getSteamProfile(steamid, channelid, userid, serverid, isSurv, language)
       getStats(body, channelid, user, steamid, isSurv, language)
     })
   })
+}
+
+async function getImage(name, isSurv)
+{
+  let object;
+  if(isSurv) object = Canvas.loadImage("./assets/Visuals/Perks/Survivors/"+name)
+  else object = Canvas.loadImage("./assets/Visuals/Perks/Killers/"+name)
+  return object
+}
+
+function calculateCenter(letters, fontSize){
+  const posX = 1267;
+  return posX-(letters*fontSize)
+}
+
+function getImageName(index, isSurv){
+  let text;
+  if(isSurv) text = survivorPerks[index].emoji
+  else text = killerPerks[index].emoji
+  text = text.slice(2, text.indexOf(":", 2))
+  return text+".png"
 }
 
 client.login(process.env.token);
