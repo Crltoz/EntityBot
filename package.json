@@ -7,7 +7,7 @@
   "author": "Crltoz#0001, Creepzster#7467, Rosper#4718 & Zander#1979",
   "license": "ISC",
   "engines": {
-    "node": "12.19.0",
+    "node": "13.3.0",
     "npm": "6.14.8"
   },
   "dependencies": {
