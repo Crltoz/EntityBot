@@ -2050,9 +2050,9 @@ function getRandomNumber(max) {
  */
 async function createRandomBuild(message, numberCharacter, numberPerk1, numberPerk2, numberPerk3, numberPerk4, isSurv, language) {
   if(isSurv){
-    const canvas = Canvas.createCanvas(1738, 1114);
+    const canvas = Canvas.createCanvas(1579, 1114);
       const ctx = canvas.getContext('2d');
-      let fontSize = 20
+      let fontSize = 21
       const background = await Canvas.loadImage(background_survivor);
       ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
 
@@ -2078,9 +2078,9 @@ async function createRandomBuild(message, numberCharacter, numberPerk1, numberPe
       if(language == 0) message.channel.send(`**PERKS:**\n1⃣: ${survivorPerks[numberPerk1].nameEs}\n2⃣: ${survivorPerks[numberPerk2].nameEs}\n3⃣: ${survivorPerks[numberPerk3].nameEs}\n4⃣: ${survivorPerks[numberPerk4].nameEs}`, attachment)
       else message.channel.send(`**PERKS:**\n1⃣: ${survivorPerks[numberPerk1].nameEn}\n2⃣: ${survivorPerks[numberPerk2].nameEn}\n3⃣: ${survivorPerks[numberPerk3].nameEn}\n4⃣: ${survivorPerks[numberPerk4].nameEn}`, attachment)
   } else {
-    const canvas = Canvas.createCanvas(1738, 1114);
+    const canvas = Canvas.createCanvas(1579, 1114);
       const ctx = canvas.getContext('2d');
-      let fontSize = 20
+      let fontSize = 21
       const background = await Canvas.loadImage(background_killer);
       ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
 
