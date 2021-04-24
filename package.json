@@ -7,15 +7,13 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
-  "author": "Crltoz#0001, Creepzster#7467, Rosper#4718 & Zander (Iván)#1979",
+  "author": "Crltoz#0001, Creepzster#7467, Rosper#4718 & Zander#1979",
   "license": "ISC",
   "dependencies": {
-    "@discordjs/uws": "^10.149.0",
     "bignumber.js": "^9.0.1",
     "canvas": "^2.7.0",
     "constants": "0.0.2",
     "discord.js": "^12.5.3",
-    "express-useragent": "^1.0.15",
     "fs": "0.0.1-security",
     "http": "0.0.1-security",
     "mysql": "^2.18.1",
