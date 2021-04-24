@@ -10,7 +10,7 @@
   "author": "Crltoz#0001, Creepzster#7467, Rosper#4718 & Zander#1979",
   "license": "ISC",
   "dependencies": {
-    "bignumber.js": "^9.0.1",
+    "bignumber": "^9.0.1",
     "canvas": "^2.7.0",
     "constants": "0.0.2",
     "discord.js": "^12.5.3",
