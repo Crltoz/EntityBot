@@ -687,7 +687,7 @@ client.on("message", async (message) => {
             .setTitle('🔰 Ayuda - Comandos 🔰')
             .setAuthor(message.member.user.tag, message.member.user.avatarURL)
             .setURL('https://deadbydaylight.gamepedia.com/Dead_by_Daylight_Wiki')
-            .setThumbnail(client.user.avatarURL)
+            .setThumbnail(client.user.avatarURL())
             .addField(prefix[message.guild.id] + 'discord', 'Para más info: **' + prefix[message.guild.id] + 'ayuda discord**')
             .addField('NOTA:', 'Los paréntesis: **[]** no deben ser usados en los comandos, es simplemente para resaltar cómo se usa el comando.')
             .addField(prefix[message.guild.id] + 'calcular [Killer o Survivor]', 'Para más info: **' + prefix[message.guild.id] + 'ayuda calcular**')
@@ -698,7 +698,7 @@ client.on("message", async (message) => {
             .addField(prefix[message.guild.id] + 'santuario', 'Te mostrará el santuario de los secretos actual del juego.')
             .addField(prefix[message.guild.id] + 'ayuda admin', 'Mostrará los comandos que pueden ser utilizados por **administradores** para personalizar el bot.')
             .setTimestamp()
-            .setFooter('La entidad - V' + version_bot + ' - Beta Pública', client.user.avatarURL);
+            .setFooter('La entidad - V' + version_bot + ' - Beta Pública', client.user.avatarURL());
           message.channel.send(embedd)
           return;
         }
@@ -709,11 +709,11 @@ client.on("message", async (message) => {
             .setTitle('🔰 Ayuda - Admins 🔰')
             .setAuthor(message.member.user.tag, message.member.user.avatarURL)
             .setURL('https://deadbydaylight.gamepedia.com/Dead_by_Daylight_Wiki')
-            .setThumbnail(client.user.avatarURL)
+            .setThumbnail(client.user.avatarURL())
             .addField(prefix[message.guild.id] + 'prefijo [Opción]', 'Reemplaza **Opción** por el prefijo de comandos que te gustaría usar. Default: **/** | Opciones: **!**, **#**, **%**, **&**, **/**, **.** y **-**')
             .addField(prefix[message.guild.id] + 'canal #nombre', 'Sólo puede ser usado por **ADMINISTRADORES**, puedes selecccionar un canal para que los comandos sólo funcionen allí. Usa **' + prefix[message.guild.id] + 'canal borrar** para poder usarlos en cualquier canal nuevamente.')
             .setTimestamp()
-            .setFooter('La entidad - V' + version_bot + ' - Beta Pública', client.user.avatarURL);
+            .setFooter('La entidad - V' + version_bot + ' - Beta Pública', client.user.avatarURL());
           message.member.send(embedd)
           return;
         }
@@ -723,10 +723,10 @@ client.on("message", async (message) => {
             .setTitle('🔰 ' + prefix[message.guild.id] + 'discord 🔰')
             .setAuthor(message.member.user.tag, message.member.user.avatarURL)
             .setURL('https://deadbydaylight.gamepedia.com/Dead_by_Daylight_Wiki')
-            .setThumbnail(client.user.avatarURL)
+            .setThumbnail(client.user.avatarURL())
             .addField('¿Para qué sirve?', 'Este comando te enviará el link para unir el bot al servidor que quieras y poder usarlo allí.')
             .setTimestamp()
-            .setFooter('La entidad - V' + version_bot + ' - Beta Pública', client.user.avatarURL);
+            .setFooter('La entidad - V' + version_bot + ' - Beta Pública', client.user.avatarURL());
           message.member.send(embedd)
           return;
         }
@@ -736,11 +736,11 @@ client.on("message", async (message) => {
             .setTitle('🔰 ' + prefix[message.guild.id] + 'calcular [Killer o Survivor] 🔰')
             .setAuthor(message.member.user.tag, message.member.user.avatarURL)
             .setURL('https://deadbydaylight.gamepedia.com/Dead_by_Daylight_Wiki')
-            .setThumbnail(client.user.avatarURL)
+            .setThumbnail(client.user.avatarURL())
             .addField('¿Para qué sirve?', 'Este comando es para calcular cuántos __puntos de sangre__ son necesarios para comprar todas las habilidades de todos los personajes. Se te preguntará la cantidad de perks que tengas con un personaje, y en base a eso el bot calculará las faltantes y cuántos puntos de sangre te costaría.')
             .addField('Ejemplo:', 'Si tengo a Meg Thomas sólo con sus 3 perks básicas, cada una a nivel 1 y quiero saber cuánto me costará obtener todas las perks de todos los supervivientes a nivel 3 deberé usar: **' + prefix[message.guild.id] + 'calcular survivor** | Luego el bot me pedirá la cantidad de habilidades que tengo con Meg, y por último me dirá cuánto me costará obtener todas las perks.')
             .setTimestamp()
-            .setFooter('La entidad - V' + version_bot + ' - Beta Pública', client.user.avatarURL);
+            .setFooter('La entidad - V' + version_bot + ' - Beta Pública', client.user.avatarURL());
           message.member.send(embedd)
           return;
         }
@@ -750,11 +750,11 @@ client.on("message", async (message) => {
             .setTitle('🔰 ' + prefix[message.guild.id] + 'stats [Killer o Survivor] [URL Perfil Steam o Código de amigo] 🔰')
             .setAuthor(message.member.user.tag, message.member.user.avatarURL)
             .setURL('https://deadbydaylight.gamepedia.com/Dead_by_Daylight_Wiki')
-            .setThumbnail(client.user.avatarURL)
+            .setThumbnail(client.user.avatarURL())
             .addField('¿Para qué sirve?', 'Podrás obtener las estadísticas de un jugador de Steam de Dead By Daylight, recuerda que debe estar en público todas las configuraciones de privacidad.')
             .addField('Ejemplo:', 'Si quiero ver mis estadísticas de asesino usaré: **' + prefix[message.guild.id] + 'stats killer steamcommunity.com/id/Crltoz/** | El link es el de mi perfil de Steam.')
             .setTimestamp()
-            .setFooter('La entidad - V' + version_bot + ' - Beta Pública', client.user.avatarURL);
+            .setFooter('La entidad - V' + version_bot + ' - Beta Pública', client.user.avatarURL());
           message.member.send(embedd)
           return;
         }
@@ -764,11 +764,11 @@ client.on("message", async (message) => {
             .setTitle('🔰 ' + prefix[message.guild.id] + 'nivel [Nivel Actual] [Nivel Deseado] 🔰')
             .setAuthor(message.member.user.tag, message.member.user.avatarURL)
             .setURL('https://deadbydaylight.gamepedia.com/Dead_by_Daylight_Wiki')
-            .setThumbnail(client.user.avatarURL)
+            .setThumbnail(client.user.avatarURL())
             .addField('¿Para qué sirve?', 'Calcula los puntos de sangre necesarios para comprar los niveles de la red de sangre que quieras.')
             .addField('Ejemplo:', 'Si con Dwight estoy en nivel 5 y quiero llegar al 20 debo usar: **' + prefix[message.guild.id] + 'nivel 5 20** | El bot me enviará toda la información de los puntos de sangre necesarios y la cantidad de niveles comprados.')
             .setTimestamp()
-            .setFooter('La entidad - V' + version_bot + ' - Beta Pública', client.user.avatarURL);
+            .setFooter('La entidad - V' + version_bot + ' - Beta Pública', client.user.avatarURL());
           message.member.send(embedd)
           return;
         }
@@ -778,10 +778,10 @@ client.on("message", async (message) => {
             .setTitle('🔰 ' + prefix[message.guild.id] + 'lobby 🔰')
             .setAuthor(message.member.user.tag, message.member.user.avatarURL)
             .setURL('https://deadbydaylight.gamepedia.com/Dead_by_Daylight_Wiki')
-            .setThumbnail(client.user.avatarURL)
+            .setThumbnail(client.user.avatarURL())
             .addField('¿Para qué sirve?', 'El lobby tiene funciones como la de los comandos, pero se utiliza a través de reacciones para que las personas que no les gusta usar comandos puedan usar otra alternativa.')
             .setTimestamp()
-            .setFooter('La entidad - V' + version_bot + ' - Beta Pública', client.user.avatarURL);
+            .setFooter('La entidad - V' + version_bot + ' - Beta Pública', client.user.avatarURL());
           message.member.send(embedd)
           return;
         }
@@ -791,11 +791,11 @@ client.on("message", async (message) => {
             .setTitle('🔰 ' + prefix[message.guild.id] + 'random [Survivor o Killer] 🔰')
             .setAuthor(message.member.user.tag, message.member.user.avatarURL)
             .setURL('https://deadbydaylight.gamepedia.com/Dead_by_Daylight_Wiki')
-            .setThumbnail(client.user.avatarURL)
+            .setThumbnail(client.user.avatarURL())
             .addField('¿Para qué sirve?', 'Este comando te dará un asesino o superviviente totalmente aleatorio, con una build de 4 perks al azar.')
             .addField('Ejemplo:', 'Si quiero un superviviente random con 4 habilidades debo usar: **' + prefix[message.guild.id] + 'random survivor** | El bot me enviará un superviviente random con 4 habilidades al azar.')
             .setTimestamp()
-            .setFooter('La entidad - V' + version_bot + ' - Beta Pública', client.user.avatarURL);
+            .setFooter('La entidad - V' + version_bot + ' - Beta Pública', client.user.avatarURL());
           message.member.send(embedd)
           return;
         } else {
@@ -804,7 +804,7 @@ client.on("message", async (message) => {
             .setTitle('🔰 Ayuda - Comandos 🔰')
             .setAuthor(message.member.user.tag, message.member.user.avatarURL)
             .setURL('https://deadbydaylight.gamepedia.com/Dead_by_Daylight_Wiki')
-            .setThumbnail(client.user.avatarURL)
+            .setThumbnail(client.user.avatarURL())
             .addField(prefix[message.guild.id] + 'discord', 'Para más info: **' + prefix[message.guild.id] + 'ayuda discord**')
             .addField('NOTA:', 'Los paréntesis: **[]** no deben ser usados en los comandos, es simplemente para resaltar cómo se usa el comando.')
             .addField(prefix[message.guild.id] + 'calcular [Killer o Survivor]', 'Para más info: **' + prefix[message.guild.id] + 'ayuda calcular**')
@@ -815,7 +815,7 @@ client.on("message", async (message) => {
             .addField(prefix[message.guild.id] + 'santuario', 'Te mostrará el santuario de los secretos actual del juego.')
             .addField(prefix[message.guild.id] + 'ayuda admin', 'Mostrará los comandos que pueden ser utilizados por **administradores** para personalizar el bot.')
             .setTimestamp()
-            .setFooter('La entidad - V' + version_bot + ' - Beta Pública', client.user.avatarURL);
+            .setFooter('La entidad - V' + version_bot + ' - Beta Pública', client.user.avatarURL());
           message.channel.send(embedd)
           return;
         }
@@ -952,9 +952,9 @@ client.on("message", async (message) => {
           .setColor('#FF0000')
           .setTitle('🔰 Lobby 🔰')
           .setURL('https://deadbydaylight.gamepedia.com/Dead_by_Daylight_Wiki')
-          .setAuthor('Entidad', client.user.avatarURL)
+          .setAuthor('Entidad', client.user.avatarURL())
           .setDescription('Selecciona el emoji de reacción para activar una función:')
-          .setThumbnail(client.user.avatarURL)
+          .setThumbnail(client.user.avatarURL())
           .addBlankField()
           .addField('1⃣ Calcular puntos de sangre de nivel a nivel.', 'Selecciona el nivel que tienes con tu personaje y al que quieres llegar, y te diré los puntos de sangre necesarios.')
           .addField('2⃣ Survivor random con 4 perks.', 'Te asignaré un survivor random con 4 perks.')
@@ -963,7 +963,7 @@ client.on("message", async (message) => {
           .addField('5⃣ Invitación del Discord Oficial del bot.', 'Aquí podrás obtener el link para unir el bot a tu Server de Discord o soporte del mismo.')
 
           .setTimestamp()
-          .setFooter('V' + version_bot + ' - Beta Pública', client.user.avatarURL);
+          .setFooter('V' + version_bot + ' - Beta Pública', client.user.avatarURL());
         message.channel.send(lembed).then(async function (message) {
           await message.react("1⃣")
           await message.react("2⃣")
@@ -1049,7 +1049,7 @@ client.on("message", async (message) => {
             .setTitle('🔰 Help - Commands 🔰')
             .setAuthor(message.member.user.tag, message.member.user.avatarURL)
             .setURL('https://deadbydaylight.gamepedia.com/Dead_by_Daylight_Wiki')
-            .setThumbnail(client.user.avatarURL)
+            .setThumbnail(client.user.avatarURL())
             .addField(prefix[message.guild.id] + 'discord', 'More info: **' + prefix[message.guild.id] + 'help discord**')
             .addField('BTW:', 'Brackets **[]** should not be used, only use spacebar between words.')
             .addField(prefix[message.guild.id] + 'calculate [Killer or Survivor]', 'More info: **' + prefix[message.guild.id] + 'help calculate**')
@@ -1060,7 +1060,7 @@ client.on("message", async (message) => {
             .addField(prefix[message.guild.id] + 'shrine', 'It will show you the shrine of secrets that is current in the game.')
             .addField(prefix[message.guild.id] + 'help admin', 'It will show you the commands that can only be use by **administrators** to customize the bot.')
             .setTimestamp()
-            .setFooter('Entity - V' + version_bot + ' - Public Beta', client.user.avatarURL);
+            .setFooter('Entity - V' + version_bot + ' - Public Beta', client.user.avatarURL());
           message.channel.send(embedd)
           return;
         }
@@ -1071,11 +1071,11 @@ client.on("message", async (message) => {
             .setTitle('🔰 Help - Admins 🔰')
             .setAuthor(message.member.user.tag, message.member.user.avatarURL)
             .setURL('https://deadbydaylight.gamepedia.com/Dead_by_Daylight_Wiki')
-            .setThumbnail(client.user.avatarURL)
+            .setThumbnail(client.user.avatarURL())
             .addField(prefix[message.guild.id] + 'Prefix [Option]', 'Replace **Option** with the prefix of your choice. Default: **/** | Options: **!**, **#**, **%**, **&**, **/**, **.** y **-**')
             .addField(prefix[message.guild.id] + 'Channel #name', 'This only can be use by **ADMINISTRATOR** users. Just select a channel and the commands will only work there. Use' + prefix[message.guild.id] + '**canal borrar** and the commands will work in every channel.')
             .setTimestamp()
-            .setFooter('Entity - V' + version_bot + ' - Public Beta', client.user.avatarURL);
+            .setFooter('Entity - V' + version_bot + ' - Public Beta', client.user.avatarURL());
           message.member.send(embedd)
           return;
         }
@@ -1085,10 +1085,10 @@ client.on("message", async (message) => {
             .setTitle('🔰 ' + prefix[message.guild.id] + 'discord 🔰')
             .setAuthor(message.member.user.tag, message.member.user.avatarURL)
             .setURL('https://deadbydaylight.gamepedia.com/Dead_by_Daylight_Wiki')
-            .setThumbnail(client.user.avatarURL)
+            .setThumbnail(client.user.avatarURL())
             .addField('What is it for?', 'This command will send you a link to join the bot to any discord server and use it there.')
             .setTimestamp()
-            .setFooter('Entity - V' + version_bot + ' - Public Beta', client.user.avatarURL);
+            .setFooter('Entity - V' + version_bot + ' - Public Beta', client.user.avatarURL());
           message.member.send(embedd)
           return;
         }
@@ -1098,11 +1098,11 @@ client.on("message", async (message) => {
             .setTitle('🔰 ' + prefix[message.guild.id] + 'calculate [Killer or Survivor] 🔰')
             .setAuthor(message.member.user.tag, message.member.user.avatarURL)
             .setURL('https://deadbydaylight.gamepedia.com/Dead_by_Daylight_Wiki')
-            .setThumbnail(client.user.avatarURL)
+            .setThumbnail(client.user.avatarURL())
             .addField('What is it for?', 'This command will calculate the amount of __Bloodpoints__ that you need to buy all the perks from a caracter. It will ask you how many perks of each level you have and the bot will calculate counting those perks you dont have and giving you the aproximate cost in Bloodpoints. ')
             .addField('For example:', 'If i have Meg Thomas only with his 3 teacheable perk, each one of them level 1 and i wanna know how many bloodpoints it will cost to buy all the perks availeable at level 3, just using: **' + prefix[message.guild.id] + 'calculate survivor** | Then the bot will ask the amaount of perks that i have with Meg and then it will tell me how much it will cost.')
             .setTimestamp()
-            .setFooter('Entity - V' + version_bot + ' - Public Beta', client.user.avatarURL);
+            .setFooter('Entity - V' + version_bot + ' - Public Beta', client.user.avatarURL());
           message.member.send(embedd)
           return;
         }
@@ -1112,11 +1112,11 @@ client.on("message", async (message) => {
             .setTitle('🔰 ' + prefix[message.guild.id] + 'stats [Killer or Survivor] [Steam profile URL or Steam friend code] 🔰')
             .setAuthor(message.member.user.tag, message.member.user.avatarURL)
             .setURL('https://deadbydaylight.gamepedia.com/Dead_by_Daylight_Wiki')
-            .setThumbnail(client.user.avatarURL)
+            .setThumbnail(client.user.avatarURL())
             .addField('What is it for?', 'It will tell you specific stats of a Dead by Daylight Steam player, remember that the steam profile privacy config must be all public.')
             .addField('For example:', ' If i wanna see my killer stats i use: **' + prefix[message.guild.id] + 'stats killer steamcommunity.com/id/Creepzstah** | This link is from my steam profile.')
             .setTimestamp()
-            .setFooter('Entity - V' + version_bot + ' - Public Beta', client.user.avatarURL);
+            .setFooter('Entity - V' + version_bot + ' - Public Beta', client.user.avatarURL());
           message.member.send(embedd)
           return;
         }
@@ -1126,11 +1126,11 @@ client.on("message", async (message) => {
             .setTitle('🔰 ' + prefix[message.guild.id] + 'level [Current Level] [Level wanted] 🔰')
             .setAuthor(message.member.user.tag, message.member.user.avatarURL)
             .setURL('https://deadbydaylight.gamepedia.com/Dead_by_Daylight_Wiki')
-            .setThumbnail(client.user.avatarURL)
+            .setThumbnail(client.user.avatarURL())
             .addField('What is it for?', 'It calculate the amaount of Bloodpoints to buy those levels of bloodweb you want.')
             .addField('For example:', 'You have Dwight level 5 and you wanna level it up to 20 just use: **' + prefix[message.guild.id] + 'level 5 20** | The bot will tell you the amaunt of bloodpoints needed and how many levels you wanna buy.')
             .setTimestamp()
-            .setFooter('Entity - V' + version_bot + ' - Public Beta', client.user.avatarURL);
+            .setFooter('Entity - V' + version_bot + ' - Public Beta', client.user.avatarURL());
           message.member.send(embedd)
           return;
         }
@@ -1140,10 +1140,10 @@ client.on("message", async (message) => {
             .setTitle('🔰 ' + prefix[message.guild.id] + 'lobby 🔰')
             .setAuthor(message.member.user.tag, message.member.user.avatarURL)
             .setURL('https://deadbydaylight.gamepedia.com/Dead_by_Daylight_Wiki')
-            .setThumbnail(client.user.avatarURL)
+            .setThumbnail(client.user.avatarURL())
             .addField('What is it for?', 'The lobby works like the commands, but using reactions for those users that doesnt like using commands.')
             .setTimestamp()
-            .setFooter('Entity - V' + version_bot + ' - Public Beta', client.user.avatarURL);
+            .setFooter('Entity - V' + version_bot + ' - Public Beta', client.user.avatarURL());
           message.member.send(embedd)
           return;
         }
@@ -1153,11 +1153,11 @@ client.on("message", async (message) => {
             .setTitle('🔰 ' + prefix[message.guild.id] + 'random [Survivor or Killer] 🔰')
             .setAuthor(message.member.user.tag, message.member.user.avatarURL)
             .setURL('https://deadbydaylight.gamepedia.com/Dead_by_Daylight_Wiki')
-            .setThumbnail(client.user.avatarURL)
+            .setThumbnail(client.user.avatarURL())
             .addField('What is it for?', 'It will show you a random 4 perk build for a random killer or survivor.')
             .addField('For example:', 'If you want a random survivor 4 perk build just use: **' + prefix[message.guild.id] + 'random survivor** | The bot will send a random survivor 4 perk build.')
             .setTimestamp()
-            .setFooter('Entity - V' + version_bot + ' - Public Beta', client.user.avatarURL);
+            .setFooter('Entity - V' + version_bot + ' - Public Beta', client.user.avatarURL());
           message.member.send(embedd)
           return;
         } else {
@@ -1166,7 +1166,7 @@ client.on("message", async (message) => {
             .setTitle('🔰 Help - Commands 🔰')
             .setAuthor(message.member.user.tag, message.member.user.avatarURL)
             .setURL('https://deadbydaylight.gamepedia.com/Dead_by_Daylight_Wiki')
-            .setThumbnail(client.user.avatarURL)
+            .setThumbnail(client.user.avatarURL())
             .addField(prefix[message.guild.id] + 'discord', 'More info: **' + prefix[message.guild.id] + 'help discord**')
             .addField('BTW:', 'Brackets **[]** should not be used, only use spacebar between words.')
             .addField(prefix[message.guild.id] + 'calculate [Killer or Survivor]', 'More info: **' + prefix[message.guild.id] + 'help calculate**')
@@ -1177,7 +1177,7 @@ client.on("message", async (message) => {
             .addField(prefix[message.guild.id] + 'shrine', 'It will show you the shrine of secrets that is current in the game.')
             .addField(prefix[message.guild.id] + 'help admin', 'It will show you the commands that can only be use by **administrators** to customize the bot.')
             .setTimestamp()
-            .setFooter('Entity - V' + version_bot + ' - Public Beta', client.user.avatarURL);
+            .setFooter('Entity - V' + version_bot + ' - Public Beta', client.user.avatarURL());
           message.channel.send(embedd)
           return;
         }
@@ -1329,9 +1329,9 @@ client.on("message", async (message) => {
           .setColor('#FF0000')
           .setTitle('🔰 Lobby 🔰')
           .setURL('https://deadbydaylight.gamepedia.com/Dead_by_Daylight_Wiki')
-          .setAuthor('Entity', client.user.avatarURL)
+          .setAuthor('Entity', client.user.avatarURL())
           .setDescription('Select the reaction emoji to activate a function:')
-          .setThumbnail(client.user.avatarURL)
+          .setThumbnail(client.user.avatarURL())
           .addBlankField()
           .addField('1⃣ Calculate bloodpoints from a certain level to another.', 'Select the current level you have with a certain character and the level wanted, then it will show you the amount of bloodpoints needed.')
           .addField('2⃣ Random survivor 4 perk build.', 'It will show you a random survivor with 4 random perks.')
@@ -1339,7 +1339,7 @@ client.on("message", async (message) => {
           .addField('4⃣ It will calculate the amount of Bloodpoints that you need to buy all the perks from a caracter.', 'It will ask you how many perks of each level you have and the bot will calculate counting those perks you dont have.')
           .addField('5⃣ Bot official discord invitation.', 'Here you will recieve the link to join the bot to a discord server or if you need support.')
           .setTimestamp()
-          .setFooter('Entity - V' + version_bot + ' - Public Beta', client.user.avatarURL);
+          .setFooter('Entity - V' + version_bot + ' - Public Beta', client.user.avatarURL());
         message.channel.send(lembed).then(async function (message) {
           await message.react("1⃣")
           await message.react("2⃣")
@@ -1481,7 +1481,7 @@ function sendEmbedStats(channel, isSurv, data_steam, data_dbd, language) {
         .addField('<:Icons_Hatch:739182106751664168> Trampillas cerradas:', data_dbd.hatchesclosed, true)
         .addField('<:icons_totem:739182106282033272> Supervivientes interrumpidos en totems:', data_dbd.survivorsinterruptedcleansingtotem, true)
         .setTimestamp()
-        .setFooter('La entidad', client.user.avatarURL);
+        .setFooter('La entidad', client.user.avatarURL());
       client.channels.get(channel).send(embedd)
     } else {
       const embedd = new Discord.MessageEmbed()
@@ -1505,7 +1505,7 @@ function sendEmbedStats(channel, isSurv, data_steam, data_dbd, language) {
         .addField('<:Icons_Hatch:739182106751664168> Hatches closed:', data_dbd.hatchesclosed, true)
         .addField('<:icons_totem:739182106282033272> Survivors interrupted cleasing totems:', data_dbd.survivorsinterruptedcleansingtotem, true)
         .setTimestamp()
-        .setFooter('Entity', client.user.avatarURL);
+        .setFooter('Entity', client.user.avatarURL());
       client.channels.get(channel).send(embedd)
     }
   } else {
@@ -1531,7 +1531,7 @@ function sendEmbedStats(channel, isSurv, data_steam, data_dbd, language) {
         .addField('Puertas abiertas:', data_dbd.exitgatesopened, true)
         .addField('<:Icons_cofre:739182106651131957> Cofres abiertos:', data_dbd.mysteryboxesopened, true)
         .setTimestamp()
-        .setFooter('La entidad', client.user.avatarURL)
+        .setFooter('La entidad', client.user.avatarURL())
       client.channels.get(channel).send(embedd)
     } else {
       const embedd = new Discord.MessageEmbed()
@@ -1555,7 +1555,7 @@ function sendEmbedStats(channel, isSurv, data_steam, data_dbd, language) {
         .addField('Exit gates opened:', data_dbd.exitgatesopened, true)
         .addField('<:Icons_cofre:739182106651131957> Mystery boxes opened:', data_dbd.mysteryboxesopened, true)
         .setTimestamp()
-        .setFooter('Entity', client.user.avatarURL)
+        .setFooter('Entity', client.user.avatarURL())
       client.channels.get(channel).send(embedd)
     }
   }
@@ -1580,7 +1580,7 @@ function sendEmbedError(type, user, channel, language) {
           .setThumbnail(user.user.avatarURL)
           .addField('¿Hay algún problema?', 'Parece ser que tu cuenta estuvo en privado anteriormente, aunque no tienes de qué preocuparte. ¡Ya está siendo actualizada! Prueba cada **10** minutos obtener tus estadísticas.')
           .setTimestamp()
-          .setFooter('La entidad', client.user.avatarURL);
+          .setFooter('La entidad', client.user.avatarURL());
         client.channels.get(channel).send(embedd)
       }
       case 2: {
@@ -1594,7 +1594,7 @@ function sendEmbedError(type, user, channel, language) {
           .addField('Si siempre tuviste todo en público y no funciona:', 'Revisa esta imagen y asegurate de tener todo en orden.')
           .setTimestamp()
           .setImage('https://cdn.discordapp.com/attachments/738848207328772237/739269462510796800/unknown.png')
-          .setFooter('La entidad', client.user.avatarURL);
+          .setFooter('La entidad', client.user.avatarURL());
         client.channels.get(channel).send(embedd)
       }
       case 3: {
@@ -1602,11 +1602,11 @@ function sendEmbedError(type, user, channel, language) {
           .setColor('#FF0000')
           .setTitle('No podemos agregar tu cuenta...')
           .setAuthor(message.member.user.tag, message.member.user.avatarURL)
-          .setThumbnail(client.user.avatarURL)
+          .setThumbnail(client.user.avatarURL())
           .addField('Tenemos problemas con la web.', 'Actualmente, por muchas peticiones, la web no nos permite postear cuentas, por lo que deberás hacerlo apretando el botón de abajo y pegando tu link de perfil. Luego de ponerla ya podrás ver tus **/stats** por aquí sin problema.')
           .addField('Agregar cuenta:', '[Haz click aquí](https://dbd.onteh.net.au)')
           .setTimestamp()
-          .setFooter('La entidad', client.user.avatarURL)
+          .setFooter('La entidad', client.user.avatarURL())
           client.channels.get(channel).send(embedd)
       }
     }
@@ -1620,7 +1620,7 @@ function sendEmbedError(type, user, channel, language) {
           .setThumbnail(user.user.avatarURL)
           .addField('Is there any problem?', 'Seems like your account was private previously, but dont worry. Your account is being updated! Try again every **10** minutes to get your statistics.')
           .setTimestamp()
-          .setFooter('Entity', client.user.avatarURL);
+          .setFooter('Entity', client.user.avatarURL());
         client.channels.get(channel).send(embedd)
       }
       case 2: {
@@ -1634,7 +1634,7 @@ function sendEmbedError(type, user, channel, language) {
           .addField('If your profile always has been public and still doesnt work:', 'Check this image and make sure you have everything in order')
           .setTimestamp()
           .setImage('https://cdn.discordapp.com/attachments/738848207328772237/739269462510796800/unknown.png')
-          .setFooter('Entity', client.user.avatarURL);
+          .setFooter('Entity', client.user.avatarURL());
         client.channels.get(channel).send(embedd)
       }
       case 3: {
@@ -1642,11 +1642,11 @@ function sendEmbedError(type, user, channel, language) {
           .setColor('#FF0000')
           .setTitle("We can't add your account ...")
           .setAuthor(message.member.user.tag, message.member.user.avatarURL)
-          .setThumbnail(client.user.avatarURL)
+          .setThumbnail(client.user.avatarURL())
           .addField('There are problems with the web.', 'Currently, due to many requests, the web does not allow us to post accounts, so you must do it by pressing the button below and pasting your profile link. After putting it in, you will be able to see your **stats** around here without problem.')
           .addField('Add account:', '[Click here](https://dbd.onteh.net.au)')
           .setTimestamp()
-          .setFooter('Entity', client.user.avatarURL)
+          .setFooter('Entity', client.user.avatarURL())
           client.channels.get(channel).send(embedd)
       }
     }
