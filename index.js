@@ -7,12 +7,16 @@ var http = require('http');
 const version_bot = '0.9.0'
 const mysql = require("mysql");
 const fs = require('fs');
+<<<<<<< HEAD
 const Canvas = require("canvas")
 const { parse } = require("path");
 const { SSL_OP_NO_TLSv1_1 } = require("constants");
 const { kill } = require("process");
 const { version } = require("os");
 const { post } = require("snekfetch");
+=======
+const Canvas = require('canvas')
+>>>>>>> master
 
 // Image generator
 const background_killer = "assets/Visuals/Background/random_killer.jpg"
