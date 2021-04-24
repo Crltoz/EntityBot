@@ -193,8 +193,8 @@ client.on("message", async (message) => {
       } else return message.channel.send(message.author.tag + ', envía por aquí "**survivor**" o "**killer**" para calcular el valor de todas las perks del que elijas.')
     }
     if (r1.has(message.author.id)) {
-      if (message.content > 50 || message.content < 1 || message.content > 50) return message.member.send('El nivel debe ser entre 1 y 50, ' + message.author.tag).catch(function (err) { message.channel.send(message.member.user + ' Activa tus mensajes privados para que el bot pueda informarte.') });
-      if (message.content % 1 != '0') return message.member.send('El nivel no puede tener comas.').catch(function (err) { message.channel.send(message.member.user + ' Activa tus mensajes privados para que el bot pueda informarte.') });
+      if (message.content > 50 || message.content < 1 || message.content > 50) return message.member.send('El nivel debe ser entre 1 y 50, ' + message.author.tag).catch(function (err) { message.channel.send(message.member.user.toString()+ ' Activa tus mensajes privados para que el bot pueda informarte.') });
+      if (message.content % 1 != '0') return message.member.send('El nivel no puede tener comas.').catch(function (err) { message.channel.send(message.member.user.toString()+ ' Activa tus mensajes privados para que el bot pueda informarte.') });
       r1.delete(message.author.id)
       n1[message.author.id] = message.content
       message.channel.send('Envía el nivel que quieres obtener en la red de sangre.')
@@ -204,12 +204,12 @@ client.on("message", async (message) => {
 
     if (n2.has(message.author.id)) {
       n2.delete(message.author.id)
-      if (parseInt(message.content) > 50 || parseInt(message.content) < 1 || parseInt(message.content) > 50) return message.member.send('El nivel debe ser entre 1 y 50.').catch(function (err) { message.channel.send(message.member.user + ' Activa tus mensajes privados para que el bot pueda informarte.') });
-      if (parseInt(message.content) % 1 != '0') return message.member.send('El nivel no puede tener comas.').catch(function (err) { message.channel.send(message.member.user + ' Activa tus mensajes privados para que el bot pueda informarte.') });
-      if (parseInt(message.content) < n1[message.author.id]) return message.member.send('El nivel deseado no puede ser menor al inicial.').catch(function (err) { message.channel.send(message.member.user + ' Activa tus mensajes privados para que el bot pueda informarte.') });
+      if (parseInt(message.content) > 50 || parseInt(message.content) < 1 || parseInt(message.content) > 50) return message.member.send('El nivel debe ser entre 1 y 50.').catch(function (err) { message.channel.send(message.member.user.toString()+ ' Activa tus mensajes privados para que el bot pueda informarte.') });
+      if (parseInt(message.content) % 1 != '0') return message.member.send('El nivel no puede tener comas.').catch(function (err) { message.channel.send(message.member.user.toString()+ ' Activa tus mensajes privados para que el bot pueda informarte.') });
+      if (parseInt(message.content) < n1[message.author.id]) return message.member.send('El nivel deseado no puede ser menor al inicial.').catch(function (err) { message.channel.send(message.member.user.toString()+ ' Activa tus mensajes privados para que el bot pueda informarte.') });
       LC[message.author.id] = 0;
       let sangre = ObtenerValor(parseInt(n1[message.author.id]), parseInt(message.content), message.author.id)
-      const embed = new Discord.RichEmbed()
+      const embed = new Discord.MessageEmbed()
         .setThumbnail(message.member.user.avatarURL)
         .setAuthor(message.member.displayName + '#' + message.member.user.discriminator, message.member.user.avatarURL)
         .setTitle('| Subir Nivel |')
@@ -227,11 +227,11 @@ client.on("message", async (message) => {
     if (p1.has(message.author.id)) {
       if (message.content % 1 != '0') {
         p1.delete(message.author.id)
-        message.member.send('El numero no puede tener comas, el calcular se ha cancelado.').catch(function (err) { message.channel.send(message.member.user + ' Activa tus mensajes privados para que el bot pueda informarte.') });
+        message.member.send('El numero no puede tener comas, el calcular se ha cancelado.').catch(function (err) { message.channel.send(message.member.user.toString()+ ' Activa tus mensajes privados para que el bot pueda informarte.') });
         return;
       }
-      if (parseInt(message.content) * 3 >= getLength(killerPerks) * 3) return message.member.send('No puedes tener todas o más perks de las existentes.').catch(function (err) { message.channel.send(message.member.user + ' Activa tus mensajes privados para que el bot pueda informarte.') });
-      if (parseInt(message.content) < 0) return message.member.send('No puedes tener menos de 0 perks.').catch(function (err) { message.channel.send(message.member.user + ' Activa tus mensajes privados para que el bot pueda informarte.') });
+      if (parseInt(message.content) * 3 >= getLength(killerPerks) * 3) return message.member.send('No puedes tener todas o más perks de las existentes.').catch(function (err) { message.channel.send(message.member.user.toString()+ ' Activa tus mensajes privados para que el bot pueda informarte.') });
+      if (parseInt(message.content) < 0) return message.member.send('No puedes tener menos de 0 perks.').catch(function (err) { message.channel.send(message.member.user.toString()+ ' Activa tus mensajes privados para que el bot pueda informarte.') });
       p1.delete(message.author.id)
       perks3[message.author.id] = message.content;
       p2.add(message.author.id)
@@ -243,12 +243,12 @@ client.on("message", async (message) => {
     if (p2.has(message.author.id)) {
       if (message.content % 1 != '0') {
         p2.delete(message.author.id)
-        message.member.send('El numero no puede tener comas, el calcular se ha cancelado.').catch(function (err) { message.channel.send(message.member.user + ' Activa tus mensajes privados para que el bot pueda informarte.') });
+        message.member.send('El numero no puede tener comas, el calcular se ha cancelado.').catch(function (err) { message.channel.send(message.member.user.toString()+ ' Activa tus mensajes privados para que el bot pueda informarte.') });
         return;
       }
-      if (parseInt(message.content) * 2 >= getLength(killerPerks) * 3) return message.member.send('No puedes tener todas o más perks de las existentes.').catch(function (err) { message.channel.send(message.member.user + ' Activa tus mensajes privados para que el bot pueda informarte.') });
-      if (parseInt(message.content) < 0) return message.member.send('No puedes tener menos de 0 perks.').catch(function (err) { message.channel.send(message.member.user + ' Activa tus mensajes privados para que el bot pueda informarte.') });
-      if (perks3[message.author.id] * 3 + parseInt(message.content) * 2 >= getLength(killerPerks) * 3) return message.member.send('No puedes tener todas o más perks de las existentes.').catch(function (err) { message.channel.send(message.member.user + ' Activa tus mensajes privados para que el bot pueda informarte.') });
+      if (parseInt(message.content) * 2 >= getLength(killerPerks) * 3) return message.member.send('No puedes tener todas o más perks de las existentes.').catch(function (err) { message.channel.send(message.member.user.toString()+ ' Activa tus mensajes privados para que el bot pueda informarte.') });
+      if (parseInt(message.content) < 0) return message.member.send('No puedes tener menos de 0 perks.').catch(function (err) { message.channel.send(message.member.user.toString()+ ' Activa tus mensajes privados para que el bot pueda informarte.') });
+      if (perks3[message.author.id] * 3 + parseInt(message.content) * 2 >= getLength(killerPerks) * 3) return message.member.send('No puedes tener todas o más perks de las existentes.').catch(function (err) { message.channel.send(message.member.user.toString()+ ' Activa tus mensajes privados para que el bot pueda informarte.') });
       p2.delete(message.author.id)
       perks2[message.author.id] = message.content;
       if (message.member) message.channel.send('Ingresa cuántas perks a nivel 1 tienes, ' + message.member.user)
@@ -260,12 +260,12 @@ client.on("message", async (message) => {
     if (p3.has(message.author.id)) {
       if (message.content % 1 != '0') {
         p3.delete(message.author.id)
-        message.member.send('El numero no puede tener comas, el calcular se ha cancelado.').catch(function (err) { message.channel.send(message.member.user + ' Activa tus mensajes privados para que el bot pueda informarte.') });
+        message.member.send('El numero no puede tener comas, el calcular se ha cancelado.').catch(function (err) { message.channel.send(message.member.user.toString()+ ' Activa tus mensajes privados para que el bot pueda informarte.') });
         return;
       }
-      if (parseInt(message.content) >= getLength(killerPerks) * 3) return message.member.send('No puedes tener todas o más perks de las existentes.').catch(function (err) { message.channel.send(message.member.user + ' Activa tus mensajes privados para que el bot pueda informarte.') });
-      if (parseInt(message.content) < 0) return message.member.send('No puedes tener menos de 0 perks.').catch(function (err) { message.channel.send(message.member.user + ' Activa tus mensajes privados para que el bot pueda informarte.') });
-      if (perks3[message.author.id] * 3 + perks2[message.author.id] * 2 + parseInt(message.content) >= getLength(killerPerks) * 3) return message.member.send('No puedes tener todas o más perks de las existentes.').catch(function (err) { message.channel.send(message.member.user + ' Activa tus mensajes privados para que el bot pueda informarte.') });
+      if (parseInt(message.content) >= getLength(killerPerks) * 3) return message.member.send('No puedes tener todas o más perks de las existentes.').catch(function (err) { message.channel.send(message.member.user.toString()+ ' Activa tus mensajes privados para que el bot pueda informarte.') });
+      if (parseInt(message.content) < 0) return message.member.send('No puedes tener menos de 0 perks.').catch(function (err) { message.channel.send(message.member.user.toString()+ ' Activa tus mensajes privados para que el bot pueda informarte.') });
+      if (perks3[message.author.id] * 3 + perks2[message.author.id] * 2 + parseInt(message.content) >= getLength(killerPerks) * 3) return message.member.send('No puedes tener todas o más perks de las existentes.').catch(function (err) { message.channel.send(message.member.user.toString()+ ' Activa tus mensajes privados para que el bot pueda informarte.') });
       p3.delete(message.author.id)
       perks1[message.author.id] = message.content;
       if (message.member) message.channel.send('Ingresa a qué nivel estás con tu personaje, ' + message.member.user)
@@ -277,16 +277,16 @@ client.on("message", async (message) => {
     if (p4.has(message.author.id)) {
       if (message.content % 1 != '0') {
         p4.delete(message.author.id)
-        message.member.send('El numero no puede tener comas, el calcular se ha cancelado.').catch(function (err) { message.channel.send(message.member.user + ' Activa tus mensajes privados para que el bot pueda informarte.') });
+        message.member.send('El numero no puede tener comas, el calcular se ha cancelado.').catch(function (err) { message.channel.send(message.member.user.toString()+ ' Activa tus mensajes privados para que el bot pueda informarte.') });
         return;
       }
-      if (parseInt(message.content) > 50 || parseInt(message.content) < 1) return message.member.send('Nivel inválido.').catch(function (err) { message.channel.send(message.member.user + ' Activa tus mensajes privados para que el bot pueda informarte.') });
+      if (parseInt(message.content) > 50 || parseInt(message.content) < 1) return message.member.send('Nivel inválido.').catch(function (err) { message.channel.send(message.member.user.toString()+ ' Activa tus mensajes privados para que el bot pueda informarte.') });
       p4.delete(message.author.id)
       NivelPJ[message.author.id] = parseInt(message.content);
       let necesitaperks = getLength(killerPerks) * Niveles - (3 * perks3[message.author.id]) - (2 * perks2[message.author.id]) - perks1[message.author.id];
       DBC[message.author.id] = necesitaperks;
       let NivelValor = ObtenerNP(NivelPJ[message.author.id], message.author.id)
-      const embed = new Discord.RichEmbed()
+      const embed = new Discord.MessageEmbed()
         .setThumbnail(message.member.user.avatarURL)
         .setAuthor(message.member.displayName + '#' + message.member.user.discriminator, message.member.user.avatarURL)
         .setTitle('| Comprar todas las Perks de Killer |')
@@ -301,11 +301,11 @@ client.on("message", async (message) => {
     if (ps1.has(message.author.id)) {
       if (message.content % 1 != '0') {
         ps1.delete(message.author.id)
-        message.member.send('El numero no puede tener comas, el calcular se ha cancelado.').catch(function (err) { message.channel.send(message.member.user + ' Activa tus mensajes privados para que el bot pueda informarte.') });
+        message.member.send('El numero no puede tener comas, el calcular se ha cancelado.').catch(function (err) { message.channel.send(message.member.user.toString()+ ' Activa tus mensajes privados para que el bot pueda informarte.') });
         return;
       }
-      if (parseInt(message.content) * 3 >= getLength(survivorPerks) * 3) return message.author.send('No puedes tener todas o más perks de las existentes.').catch(function (err) { message.channel.send(message.member.user + ' Activa tus mensajes privados para que el bot pueda informarte.') });
-      if (parseInt(message.content) < 0) return message.member.send('No puedes tener menos de 0 perks.').catch(function (err) { message.channel.send(message.member.user + ' Activa tus mensajes privados para que el bot pueda informarte.') });
+      if (parseInt(message.content) * 3 >= getLength(survivorPerks) * 3) return message.author.send('No puedes tener todas o más perks de las existentes.').catch(function (err) { message.channel.send(message.member.user.toString()+ ' Activa tus mensajes privados para que el bot pueda informarte.') });
+      if (parseInt(message.content) < 0) return message.member.send('No puedes tener menos de 0 perks.').catch(function (err) { message.channel.send(message.member.user.toString()+ ' Activa tus mensajes privados para que el bot pueda informarte.') });
       ps1.delete(message.author.id)
       perks3[message.author.id] = message.content;
       ps2.add(message.author.id)
@@ -317,12 +317,12 @@ client.on("message", async (message) => {
     if (ps2.has(message.author.id)) {
       if (message.content % 1 != '0') {
         ps2.delete(message.author.id)
-        message.member.send('El numero no puede tener comas, el calcular se ha cancelado.').catch(function (err) { message.channel.send(message.member.user + ' Activa tus mensajes privados para que el bot pueda informarte.') });
+        message.member.send('El numero no puede tener comas, el calcular se ha cancelado.').catch(function (err) { message.channel.send(message.member.user.toString()+ ' Activa tus mensajes privados para que el bot pueda informarte.') });
         return;
       }
-      if (parseInt(message.content) * 2 >= getLength(survivorPerks) * 3) return message.member.send('No puedes tener todas o más perks de las existentes.').catch(function (err) { message.channel.send(message.member.user + ' Activa tus mensajes privados para que el bot pueda informarte.') });
-      if (parseInt(message.content) < 0) return message.member.send('No puedes tener menos de 0 perks.').catch(function (err) { message.channel.send(message.member.user + ' Activa tus mensajes privados para que el bot pueda informarte.') });
-      if (perks3[message.author.id] * 3 + parseInt(message.content) * 2 >= getLength(survivorPerks) * 3) return message.member.send('No puedes tener todas o más perks de las existentes.').catch(function (err) { message.channel.send(message.member.user + ' Activa tus mensajes privados para que el bot pueda informarte.') });
+      if (parseInt(message.content) * 2 >= getLength(survivorPerks) * 3) return message.member.send('No puedes tener todas o más perks de las existentes.').catch(function (err) { message.channel.send(message.member.user.toString()+ ' Activa tus mensajes privados para que el bot pueda informarte.') });
+      if (parseInt(message.content) < 0) return message.member.send('No puedes tener menos de 0 perks.').catch(function (err) { message.channel.send(message.member.user.toString()+ ' Activa tus mensajes privados para que el bot pueda informarte.') });
+      if (perks3[message.author.id] * 3 + parseInt(message.content) * 2 >= getLength(survivorPerks) * 3) return message.member.send('No puedes tener todas o más perks de las existentes.').catch(function (err) { message.channel.send(message.member.user.toString()+ ' Activa tus mensajes privados para que el bot pueda informarte.') });
       ps2.delete(message.author.id)
       perks2[message.author.id] = message.content;
       if (message.member) message.channel.send('Ingresa cuántas perks a nivel 1 tienes, ' + message.member.user)
@@ -334,12 +334,12 @@ client.on("message", async (message) => {
     if (ps3.has(message.author.id)) {
       if (message.content % 1 != '0') {
         ps3.delete(message.author.id)
-        message.author.send('El numero no puede tener comas, el calcular se ha cancelado.').catch(function (err) { message.channel.send(message.member.user + ' Activa tus mensajes privados para que el bot pueda informarte.') });
+        message.author.send('El numero no puede tener comas, el calcular se ha cancelado.').catch(function (err) { message.channel.send(message.member.user.toString()+ ' Activa tus mensajes privados para que el bot pueda informarte.') });
         return;
       }
-      if (parseInt(message.content) >= getLength(survivorPerks) * 3) return message.member.send('No puedes tener todas o más perks de las existentes.').catch(function (err) { message.channel.send(message.member.user + ' Activa tus mensajes privados para que el bot pueda informarte.') });
-      if (parseInt(message.content) < 0) return message.member.send('No puedes tener menos de 0 perks.').catch(function (err) { message.channel.send(message.member.user + ' Activa tus mensajes privados para que el bot pueda informarte.') });
-      if (perks3[message.author.id] * 3 + perks2[message.author.id] * 2 + parseInt(message.content) >= getLength(survivorPerks) * 3) return message.member.send('No puedes tener todas o más perks de las existentes.').catch(function (err) { message.channel.send(message.member.user + ' Activa tus mensajes privados para que el bot pueda informarte.') });
+      if (parseInt(message.content) >= getLength(survivorPerks) * 3) return message.member.send('No puedes tener todas o más perks de las existentes.').catch(function (err) { message.channel.send(message.member.user.toString()+ ' Activa tus mensajes privados para que el bot pueda informarte.') });
+      if (parseInt(message.content) < 0) return message.member.send('No puedes tener menos de 0 perks.').catch(function (err) { message.channel.send(message.member.user.toString()+ ' Activa tus mensajes privados para que el bot pueda informarte.') });
+      if (perks3[message.author.id] * 3 + perks2[message.author.id] * 2 + parseInt(message.content) >= getLength(survivorPerks) * 3) return message.member.send('No puedes tener todas o más perks de las existentes.').catch(function (err) { message.channel.send(message.member.user.toString()+ ' Activa tus mensajes privados para que el bot pueda informarte.') });
       ps3.delete(message.author.id)
       perks1[message.author.id] = message.content;
       if (message.member) message.channel.send('Ingresa a qué nivel estás con tu personaje, ' + message.member.user)
@@ -351,16 +351,16 @@ client.on("message", async (message) => {
     if (ps4.has(message.author.id)) {
       if (message.content % 1 != '0') {
         ps4.delete(message.author.id)
-        message.member.send('El numero no puede tener comas, el calcular se ha cancelado.').catch(function (err) { message.channel.send(message.member.user + ' Activa tus mensajes privados para que el bot pueda informarte.') });
+        message.member.send('El numero no puede tener comas, el calcular se ha cancelado.').catch(function (err) { message.channel.send(message.member.user.toString()+ ' Activa tus mensajes privados para que el bot pueda informarte.') });
         return;
       }
-      if (parseInt(message.content) > 50 || parseInt(message.content) < 1) return message.member.send('Nivel inválido.').catch(function (err) { message.channel.send(message.member.user + ' Activa tus mensajes privados para que el bot pueda informarte.') });
+      if (parseInt(message.content) > 50 || parseInt(message.content) < 1) return message.member.send('Nivel inválido.').catch(function (err) { message.channel.send(message.member.user.toString()+ ' Activa tus mensajes privados para que el bot pueda informarte.') });
       ps4.delete(message.author.id)
       NivelPJ[message.author.id] = parseInt(message.content);
       let necesitaperks = getLength(survivorPerks) * Niveles - (3 * perks3[message.author.id]) - (2 * perks2[message.author.id]) - perks1[message.author.id];
       DBC[message.author.id] = necesitaperks;
       let NivelValor = ObtenerNP(NivelPJ[message.author.id], message.author.id)
-      const embed = new Discord.RichEmbed()
+      const embed = new Discord.MessageEmbed()
         .setThumbnail(message.member.user.avatarURL)
         .setAuthor(message.member.user.username + '#' + message.member.user.discriminator, message.member.user.avatarURL)
         .setTitle('| Comprar todas las Perks de Survivor |')
@@ -391,8 +391,8 @@ client.on("message", async (message) => {
       } else return message.channel.send(message.author.tag + ', send this way "**survivor**" or "**killer**" to calculate the value of all the perks that you enter.')
     }
     if (r1.has(message.author.id)) {
-      if (message.content > 50 || message.content < 1 || message.content > 50) return message.member.send('The level must be between 1 and 50, ' + message.author.tag).catch(function (err) { message.channel.send(message.member.user + ' Activate your private messagges so the bot can inform you.') });
-      if (message.content % 1 != '0') return message.member.send('Level can not contain commas.').catch(function (err) { message.channel.send(message.member.user + '  Activate your private messagges so the bot can inform you.') });
+      if (message.content > 50 || message.content < 1 || message.content > 50) return message.member.send('The level must be between 1 and 50, ' + message.author.tag).catch(function (err) { message.channel.send(message.member.user.toString()+ ' Activate your private messagges so the bot can inform you.') });
+      if (message.content % 1 != '0') return message.member.send('Level can not contain commas.').catch(function (err) { message.channel.send(message.member.user.toString()+ '  Activate your private messagges so the bot can inform you.') });
       r1.delete(message.author.id)
       n1[message.author.id] = message.content
       message.channel.send('Enter the level that you want from the bloodweb, ' + message.author.tag)
@@ -402,12 +402,12 @@ client.on("message", async (message) => {
 
     if (n2.has(message.author.id)) {
       n2.delete(message.author.id)
-      if (parseInt(message.content) > 50 || parseInt(message.content) < 1 || parseInt(message.content) > 50) return message.member.send('The level must be between 1 and 50,').catch(function (err) { message.channel.send(message.member.user + ' Activate your private messagges so the bot can inform you.') });
-      if (parseInt(message.content) % 1 != '0') return message.member.send('Level can not contain commas.').catch(function (err) { message.channel.send(message.member.user + ' Activate your private messagges so the bot can inform you.') });
-      if (parseInt(message.content) < n1[message.author.id]) return message.member.send('The level wanted can not be less than the initial level.').catch(function (err) { message.channel.send(message.member.user + ' Activate your private messagges so the bot can inform you.') });
+      if (parseInt(message.content) > 50 || parseInt(message.content) < 1 || parseInt(message.content) > 50) return message.member.send('The level must be between 1 and 50,').catch(function (err) { message.channel.send(message.member.user.toString()+ ' Activate your private messagges so the bot can inform you.') });
+      if (parseInt(message.content) % 1 != '0') return message.member.send('Level can not contain commas.').catch(function (err) { message.channel.send(message.member.user.toString()+ ' Activate your private messagges so the bot can inform you.') });
+      if (parseInt(message.content) < n1[message.author.id]) return message.member.send('The level wanted can not be less than the initial level.').catch(function (err) { message.channel.send(message.member.user.toString()+ ' Activate your private messagges so the bot can inform you.') });
       LC[message.author.id] = 0;
       let sangre = ObtenerValor(parseInt(n1[message.author.id]), parseInt(message.content), message.author.id)
-      const embed = new Discord.RichEmbed()
+      const embed = new Discord.MessageEmbed()
         .setThumbnail(message.member.user.avatarURL)
         .setAuthor(message.member.displayName + '#' + message.member.user.discriminator, message.member.user.avatarURL)
         .setTitle('| Level Up |')
@@ -425,11 +425,11 @@ client.on("message", async (message) => {
     if (p1.has(message.author.id)) {
       if (message.content % 1 != '0') {
         p1.delete(message.author.id)
-        message.member.send('The level can not contain dots, the calculate funtion was canceled.').catch(function (err) { message.channel.send(message.member.user + ' Activate your private messagges so the bot can inform you.') });
+        message.member.send('The level can not contain dots, the calculate funtion was canceled.').catch(function (err) { message.channel.send(message.member.user.toString()+ ' Activate your private messagges so the bot can inform you.') });
         return;
       }
-      if (parseInt(message.content) * 3 >= getLength(killerPerks) * 3) return message.member.send('You can not have all or more than the existant perks.').catch(function (err) { message.channel.send(message.member.user + ' Activate your private messagges so the bot can inform you.') });
-      if (parseInt(message.content) < 0) return message.member.send('You can not have less than 0 perks.').catch(function (err) { message.channel.send(message.member.user + ' Activate your private messagges so the bot can inform you.') });
+      if (parseInt(message.content) * 3 >= getLength(killerPerks) * 3) return message.member.send('You can not have all or more than the existant perks.').catch(function (err) { message.channel.send(message.member.user.toString()+ ' Activate your private messagges so the bot can inform you.') });
+      if (parseInt(message.content) < 0) return message.member.send('You can not have less than 0 perks.').catch(function (err) { message.channel.send(message.member.user.toString()+ ' Activate your private messagges so the bot can inform you.') });
       p1.delete(message.author.id)
       perks3[message.author.id] = message.content;
       p2.add(message.author.id)
@@ -441,12 +441,12 @@ client.on("message", async (message) => {
     if (p2.has(message.author.id)) {
       if (message.content % 1 != '0') {
         p2.delete(message.author.id)
-        message.member.send('The level can not contain dots, the calculate funtion was canceled.').catch(function (err) { message.channel.send(message.member.user + ' Activate your private messagges so the bot can inform you.') });
+        message.member.send('The level can not contain dots, the calculate funtion was canceled.').catch(function (err) { message.channel.send(message.member.user.toString()+ ' Activate your private messagges so the bot can inform you.') });
         return;
       }
-      if (parseInt(message.content) * 2 >= getLength(killerPerks) * 3) return message.member.send('You can not have all or more than the existant perks.').catch(function (err) { message.channel.send(message.member.user + 'Activate your private messagges so the bot can inform you.') });
-      if (parseInt(message.content) < 0) return message.member.send('You can not have less than 0 perks.').catch(function (err) { message.channel.send(message.member.user + ' Activate your private messagges so the bot can inform you.') });
-      if (perks3[message.author.id] * 3 + parseInt(message.content) * 2 >= getLength(killerPerks) * 3) return message.member.send('You can not have all or more than the existant perks.').catch(function (err) { message.channel.send(message.member.user + ' Activate your private messagges so the bot can inform you.') });
+      if (parseInt(message.content) * 2 >= getLength(killerPerks) * 3) return message.member.send('You can not have all or more than the existant perks.').catch(function (err) { message.channel.send(message.member.user.toString()+ 'Activate your private messagges so the bot can inform you.') });
+      if (parseInt(message.content) < 0) return message.member.send('You can not have less than 0 perks.').catch(function (err) { message.channel.send(message.member.user.toString()+ ' Activate your private messagges so the bot can inform you.') });
+      if (perks3[message.author.id] * 3 + parseInt(message.content) * 2 >= getLength(killerPerks) * 3) return message.member.send('You can not have all or more than the existant perks.').catch(function (err) { message.channel.send(message.member.user.toString()+ ' Activate your private messagges so the bot can inform you.') });
       p2.delete(message.author.id)
       perks2[message.author.id] = message.content;
       if (message.member) message.channel.send('Enter how many level 1 perks you have, ' + message.member.user)
@@ -458,12 +458,12 @@ client.on("message", async (message) => {
     if (p3.has(message.author.id)) {
       if (message.content % 1 != '0') {
         p3.delete(message.author.id)
-        message.member.send('The number can not contain dots, the calculate function was canceled.').catch(function (err) { message.channel.send(message.member.user + ' Activate your private messagges so the bot can inform you.') });
+        message.member.send('The number can not contain dots, the calculate function was canceled.').catch(function (err) { message.channel.send(message.member.user.toString()+ ' Activate your private messagges so the bot can inform you.') });
         return;
       }
-      if (parseInt(message.content) >= getLength(killerPerks) * 3) return message.member.send('You can not have all or more than the existant perks.').catch(function (err) { message.channel.send(message.member.user + ' Activate your private messagges so the bot can inform you.') });
-      if (parseInt(message.content) < 0) return message.member.send('No puedes tener menos de 0 perks.').catch(function (err) { message.channel.send(message.member.user + ' Activate your private messagges so the bot can inform you.') });
-      if (perks3[message.author.id] * 3 + perks2[message.author.id] * 2 + parseInt(message.content) >= getLength(killerPerks) * 3) return message.member.send('You can not have all or more than the existant perks.').catch(function (err) { message.channel.send(message.member.user + ' Activate your private messagges so the bot can inform you.') });
+      if (parseInt(message.content) >= getLength(killerPerks) * 3) return message.member.send('You can not have all or more than the existant perks.').catch(function (err) { message.channel.send(message.member.user.toString()+ ' Activate your private messagges so the bot can inform you.') });
+      if (parseInt(message.content) < 0) return message.member.send('No puedes tener menos de 0 perks.').catch(function (err) { message.channel.send(message.member.user.toString()+ ' Activate your private messagges so the bot can inform you.') });
+      if (perks3[message.author.id] * 3 + perks2[message.author.id] * 2 + parseInt(message.content) >= getLength(killerPerks) * 3) return message.member.send('You can not have all or more than the existant perks.').catch(function (err) { message.channel.send(message.member.user.toString()+ ' Activate your private messagges so the bot can inform you.') });
       p3.delete(message.author.id)
       perks1[message.author.id] = message.content;
       if (message.member) message.channel.send('Enter the level your character is, ' + message.member.user)
@@ -475,16 +475,16 @@ client.on("message", async (message) => {
     if (p4.has(message.author.id)) {
       if (message.content % 1 != '0') {
         p4.delete(message.author.id)
-        message.member.send('The number can not contain dots, the calculate function was canceled.').catch(function (err) { message.channel.send(message.member.user + ' Activate your private messagges so the bot can inform you.') });
+        message.member.send('The number can not contain dots, the calculate function was canceled.').catch(function (err) { message.channel.send(message.member.user.toString()+ ' Activate your private messagges so the bot can inform you.') });
         return;
       }
-      if (parseInt(message.content) > 50 || parseInt(message.content) < 1) return message.member.send('Nivel inválido.').catch(function (err) { message.channel.send(message.member.user + ' Activate your private messagges so the bot can inform you.') });
+      if (parseInt(message.content) > 50 || parseInt(message.content) < 1) return message.member.send('Nivel inválido.').catch(function (err) { message.channel.send(message.member.user.toString()+ ' Activate your private messagges so the bot can inform you.') });
       p4.delete(message.author.id)
       NivelPJ[message.author.id] = parseInt(message.content);
       let necesitaperks = getLength(killerPerks) * Niveles - (3 * perks3[message.author.id]) - (2 * perks2[message.author.id]) - perks1[message.author.id];
       DBC[message.author.id] = necesitaperks;
       let NivelValor = ObtenerNP(NivelPJ[message.author.id], message.author.id)
-      const embed = new Discord.RichEmbed()
+      const embed = new Discord.MessageEmbed()
         .setThumbnail(message.member.user.avatarURL)
         .setAuthor(message.member.displayName + '#' + message.member.user.discriminator, message.member.user.avatarURL)
         .setTitle('| Buy all the killer perks |')
@@ -499,11 +499,11 @@ client.on("message", async (message) => {
     if (ps1.has(message.author.id)) {
       if (message.content % 1 != '0') {
         ps1.delete(message.author.id)
-        message.member.send('The number can not contain dots, the calculate function was canceled.').catch(function (err) { message.channel.send(message.member.user + ' Activate your private messagges so the bot can inform you.') });
+        message.member.send('The number can not contain dots, the calculate function was canceled.').catch(function (err) { message.channel.send(message.member.user.toString()+ ' Activate your private messagges so the bot can inform you.') });
         return;
       }
-      if (parseInt(message.content) * 3 >= getLength(survivorPerks) * 3) return message.member.send('You can not have all or more than the existant perks.').catch(function (err) { message.channel.send(message.member.user + 'Activate your private messagges so the bot can inform you.') });
-      if (parseInt(message.content) < 0) return message.member.send('You can not have less than 0 perks.').catch(function (err) { message.channel.send(message.member.user + ' Activate your private messagges so the bot can inform you.') });
+      if (parseInt(message.content) * 3 >= getLength(survivorPerks) * 3) return message.member.send('You can not have all or more than the existant perks.').catch(function (err) { message.channel.send(message.member.user.toString()+ 'Activate your private messagges so the bot can inform you.') });
+      if (parseInt(message.content) < 0) return message.member.send('You can not have less than 0 perks.').catch(function (err) { message.channel.send(message.member.user.toString()+ ' Activate your private messagges so the bot can inform you.') });
       ps1.delete(message.author.id)
       perks3[message.author.id] = message.content;
       ps2.add(message.author.id)
@@ -515,12 +515,12 @@ client.on("message", async (message) => {
     if (ps2.has(message.author.id)) {
       if (message.content % 1 != '0') {
         ps2.delete(message.author.id)
-        message.member.send('The number can not contain dots, the calculate function was canceled.').catch(function (err) { message.channel.send(message.member.user + ' Activate your private messagges so the bot can inform you.') });
+        message.member.send('The number can not contain dots, the calculate function was canceled.').catch(function (err) { message.channel.send(message.member.user.toString()+ ' Activate your private messagges so the bot can inform you.') });
         return;
       }
-      if (parseInt(message.content) * 2 >= getLength(survivorPerks) * 3) return message.member.send('You can not have all or more than the existant perks.').catch(function (err) { message.channel.send(message.member.user + ' Activate your private messagges so the bot can inform you.') });
-      if (parseInt(message.content) < 0) return message.member.send('You can not have less than 0 perks.').catch(function (err) { message.channel.send(message.member.user + ' Activate your private messagges so the bot can inform you.') });
-      if (perks3[message.author.id] * 3 + parseInt(message.content) * 2 >= getLength(survivorPerks) * 3) return message.member.send('You can not have all or more than the existant perks.').catch(function (err) { message.channel.send(message.member.user + ' Activate your private messagges so the bot can inform you.') });
+      if (parseInt(message.content) * 2 >= getLength(survivorPerks) * 3) return message.member.send('You can not have all or more than the existant perks.').catch(function (err) { message.channel.send(message.member.user.toString()+ ' Activate your private messagges so the bot can inform you.') });
+      if (parseInt(message.content) < 0) return message.member.send('You can not have less than 0 perks.').catch(function (err) { message.channel.send(message.member.user.toString()+ ' Activate your private messagges so the bot can inform you.') });
+      if (perks3[message.author.id] * 3 + parseInt(message.content) * 2 >= getLength(survivorPerks) * 3) return message.member.send('You can not have all or more than the existant perks.').catch(function (err) { message.channel.send(message.member.user.toString()+ ' Activate your private messagges so the bot can inform you.') });
       ps2.delete(message.author.id)
       perks2[message.author.id] = message.content;
       if (message.member) message.channel.send('Enter how many level 1 perks you have, ' + message.member.user)
@@ -532,12 +532,12 @@ client.on("message", async (message) => {
     if (ps3.has(message.author.id)) {
       if (message.content % 1 != '0') {
         ps3.delete(message.author.id)
-        message.member.send('The number can not contain dots, the calculate function was canceled.').catch(function (err) { message.channel.send(message.member.user + ' Activate your private messagges so the bot can inform you.') });
+        message.member.send('The number can not contain dots, the calculate function was canceled.').catch(function (err) { message.channel.send(message.member.user.toString()+ ' Activate your private messagges so the bot can inform you.') });
         return;
       }
-      if (parseInt(message.content) >= getLength(survivorPerks) * 3) return message.member.send('You can not have all or more than the existant perks.').catch(function (err) { message.channel.send(message.member.user + ' Activate your private messagges so the bot can inform you.') });
-      if (parseInt(message.content) < 0) return message.member.send('You can not have less than 0 perks.').catch(function (err) { message.channel.send(message.member.user + ' Activate your private messagges so the bot can inform you.') });
-      if (perks3[message.author.id] * 3 + perks2[message.author.id] * 2 + parseInt(message.content) >= getLength(survivorPerks) * 3) return message.member.send('You can not have all or more than the existant perks.').catch(function (err) { message.channel.send(message.member.user + ' Activate your private messagges so the bot can inform you.') });
+      if (parseInt(message.content) >= getLength(survivorPerks) * 3) return message.member.send('You can not have all or more than the existant perks.').catch(function (err) { message.channel.send(message.member.user.toString()+ ' Activate your private messagges so the bot can inform you.') });
+      if (parseInt(message.content) < 0) return message.member.send('You can not have less than 0 perks.').catch(function (err) { message.channel.send(message.member.user.toString()+ ' Activate your private messagges so the bot can inform you.') });
+      if (perks3[message.author.id] * 3 + perks2[message.author.id] * 2 + parseInt(message.content) >= getLength(survivorPerks) * 3) return message.member.send('You can not have all or more than the existant perks.').catch(function (err) { message.channel.send(message.member.user.toString()+ ' Activate your private messagges so the bot can inform you.') });
       ps3.delete(message.author.id)
       perks1[message.author.id] = message.content;
       if (message.member) message.channel.send('Enter the level your character is, ' + message.member.user)
@@ -549,16 +549,16 @@ client.on("message", async (message) => {
     if (ps4.has(message.author.id)) {
       if (message.content % 1 != '0') {
         ps4.delete(message.author.id)
-        message.member.send('The number can not contain dots, the calculate function was canceled.').catch(function (err) { message.channel.send(message.member.user + ' Activate your private messagges so the bot can inform you.') });
+        message.member.send('The number can not contain dots, the calculate function was canceled.').catch(function (err) { message.channel.send(message.member.user.toString()+ ' Activate your private messagges so the bot can inform you.') });
         return;
       }
-      if (parseInt(message.content) > 50 || parseInt(message.content) < 1) return message.member.send('Nivel inválido.').catch(function (err) { message.channel.send(message.member.user + ' Activate your private messagges so the bot can inform you.') });
+      if (parseInt(message.content) > 50 || parseInt(message.content) < 1) return message.member.send('Nivel inválido.').catch(function (err) { message.channel.send(message.member.user.toString()+ ' Activate your private messagges so the bot can inform you.') });
       ps4.delete(message.author.id)
       NivelPJ[message.author.id] = parseInt(message.content);
       let necesitaperks = getLength(survivorPerks) * Niveles - (3 * perks3[message.author.id]) - (2 * perks2[message.author.id]) - perks1[message.author.id];
       DBC[message.author.id] = necesitaperks;
       let NivelValor = ObtenerNP(NivelPJ[message.author.id], message.author.id)
-      const embed = new Discord.RichEmbed()
+      const embed = new Discord.MessageEmbed()
         .setThumbnail(message.member.user.avatarURL)
         .setAuthor(message.member.user.username + '#' + message.member.user.discriminator, message.member.user.avatarURL)
         .setTitle('| Buy all the survivor perks |')
@@ -591,11 +591,11 @@ client.on("message", async (message) => {
       if (p4.has(message.author.id)) p4.delete(message.author.id)
 
       if (command == 'calcular') {
-        if (!texto) return message.member.send('Usa: **' + prefix[message.guild.id] + 'calcular [Opción]** | Opciones: Killer o Survivor | Comando para obtener puntos de sangre necesarios para comprar todas las perks desde el nivel que estés.').catch(function (err) { message.channel.send(message.member.user + ' Activa tus mensajes privados para que el bot pueda informarte.') });
-        if (p1.has(message.author.id)) return message.member.send('Ya tienes una solicitud abierta.').catch(function (err) { message.channel.send(message.member.user + ' Activa tus mensajes privados para que el bot pueda informarte.') });
+        if (!texto) return message.member.send('Usa: **' + prefix[message.guild.id] + 'calcular [Opción]** | Opciones: Killer o Survivor | Comando para obtener puntos de sangre necesarios para comprar todas las perks desde el nivel que estés.').catch(function (err) { message.channel.send(message.member.user.toString()+ ' Activa tus mensajes privados para que el bot pueda informarte.') });
+        if (p1.has(message.author.id)) return message.member.send('Ya tienes una solicitud abierta.').catch(function (err) { message.channel.send(message.member.user.toString()+ ' Activa tus mensajes privados para que el bot pueda informarte.') });
         if (texto.toLowerCase() == 'killer') p1.add(message.author.id)
         else if (texto.toLowerCase() == 'survivor') ps1.add(message.author.id)
-        else return message.member.send('Usa: **' + prefix[message.guild.id] + 'calcular [Opción]** | Opciones: Killer o Survivor | Comando para obtener puntos de sangre necesarios para comprar todas las perks desde el nivel que estés.').catch(function (err) { message.channel.send(message.member.user + ' Activa tus mensajes privados para que el bot pueda informarte.') });
+        else return message.member.send('Usa: **' + prefix[message.guild.id] + 'calcular [Opción]** | Opciones: Killer o Survivor | Comando para obtener puntos de sangre necesarios para comprar todas las perks desde el nivel que estés.').catch(function (err) { message.channel.send(message.member.user.toString()+ ' Activa tus mensajes privados para que el bot pueda informarte.') });
         LC[message.author.id] = 0;
         message.channel.send('Ingresa cuántas perks a nivel 3 tienes, ' + message.member.user)
         return;
@@ -668,7 +668,7 @@ client.on("message", async (message) => {
             message.channel.send("Actualmente no podemos mostrar esta información, por favor reportalo en nuestro Discord en la sección de bugs: https://discord.gg/T6rEERg")
             return
           }
-          const embed = new Discord.RichEmbed()
+          const embed = new Discord.MessageEmbed()
             .setThumbnail(message.member.user.avatarURL)
             .setAuthor('| ' + message.author.tag + ' |',)
             .setTitle('🈴 Santuario de los secretos:')
@@ -682,7 +682,7 @@ client.on("message", async (message) => {
 
       if (command == 'ayuda') {
         if (!texto) {
-          const embedd = new Discord.RichEmbed()
+          const embedd = new Discord.MessageEmbed()
             .setColor('#FF0000')
             .setTitle('🔰 Ayuda - Comandos 🔰')
             .setAuthor(message.member.user.tag, message.member.user.avatarURL)
@@ -704,7 +704,7 @@ client.on("message", async (message) => {
         }
         else if (texto == 'admin') {
           if (!message.member.permissions.has('ADMINISTRATOR')) return message.channel.send('El comando sólo puede ser usado por personas con permisos de Administrador.')
-          const embedd = new Discord.RichEmbed()
+          const embedd = new Discord.MessageEmbed()
             .setColor('#FF0000')
             .setTitle('🔰 Ayuda - Admins 🔰')
             .setAuthor(message.member.user.tag, message.member.user.avatarURL)
@@ -718,7 +718,7 @@ client.on("message", async (message) => {
           return;
         }
         else if (texto == 'discord') {
-          const embedd = new Discord.RichEmbed()
+          const embedd = new Discord.MessageEmbed()
             .setColor('#FF0000')
             .setTitle('🔰 ' + prefix[message.guild.id] + 'discord 🔰')
             .setAuthor(message.member.user.tag, message.member.user.avatarURL)
@@ -731,7 +731,7 @@ client.on("message", async (message) => {
           return;
         }
         else if (texto == 'calcular') {
-          const embedd = new Discord.RichEmbed()
+          const embedd = new Discord.MessageEmbed()
             .setColor('#FF0000')
             .setTitle('🔰 ' + prefix[message.guild.id] + 'calcular [Killer o Survivor] 🔰')
             .setAuthor(message.member.user.tag, message.member.user.avatarURL)
@@ -745,7 +745,7 @@ client.on("message", async (message) => {
           return;
         }
         else if (texto == 'stats') {
-          const embedd = new Discord.RichEmbed()
+          const embedd = new Discord.MessageEmbed()
             .setColor('#FF0000')
             .setTitle('🔰 ' + prefix[message.guild.id] + 'stats [Killer o Survivor] [URL Perfil Steam o Código de amigo] 🔰')
             .setAuthor(message.member.user.tag, message.member.user.avatarURL)
@@ -759,7 +759,7 @@ client.on("message", async (message) => {
           return;
         }
         else if (texto == 'nivel') {
-          const embedd = new Discord.RichEmbed()
+          const embedd = new Discord.MessageEmbed()
             .setColor('#FF0000')
             .setTitle('🔰 ' + prefix[message.guild.id] + 'nivel [Nivel Actual] [Nivel Deseado] 🔰')
             .setAuthor(message.member.user.tag, message.member.user.avatarURL)
@@ -773,7 +773,7 @@ client.on("message", async (message) => {
           return;
         }
         else if (texto == 'lobby') {
-          const embedd = new Discord.RichEmbed()
+          const embedd = new Discord.MessageEmbed()
             .setColor('#FF0000')
             .setTitle('🔰 ' + prefix[message.guild.id] + 'lobby 🔰')
             .setAuthor(message.member.user.tag, message.member.user.avatarURL)
@@ -786,7 +786,7 @@ client.on("message", async (message) => {
           return;
         }
         else if (texto == 'random') {
-          const embedd = new Discord.RichEmbed()
+          const embedd = new Discord.MessageEmbed()
             .setColor('#FF0000')
             .setTitle('🔰 ' + prefix[message.guild.id] + 'random [Survivor o Killer] 🔰')
             .setAuthor(message.member.user.tag, message.member.user.avatarURL)
@@ -799,7 +799,7 @@ client.on("message", async (message) => {
           message.member.send(embedd)
           return;
         } else {
-          const embedd = new Discord.RichEmbed()
+          const embedd = new Discord.MessageEmbed()
             .setColor('#FF0000')
             .setTitle('🔰 Ayuda - Comandos 🔰')
             .setAuthor(message.member.user.tag, message.member.user.avatarURL)
@@ -891,13 +891,13 @@ client.on("message", async (message) => {
       }
 
       if (command == 'nivel') {
-        if (!texto) return message.member.send('Ingresa: **' + prefix[message.guild.id] + 'nivel [Nivel Actual] [Nivel Deseado]** | Te dirá la cantidad de puntos de sangre necesaria para llegar a ese nivel.').catch(function (err) { message.channel.send(message.member.user + ' Activa tus mensajes privados para que el bot pueda informarte.') });
-        if (parseInt(args[0]) >= parseInt(args[1])) return message.member.send('El nivel deseado no puede ser mayor o igual al que tenes.').catch(function (err) { message.channel.send(message.member.user + ' Activa tus mensajes privados para que el bot pueda informarte.') });
-        if (parseInt(args[1]) > 50 || parseInt(args[0]) < 1 || parseInt(args[0]) > 50) return message.member.send('El nivel iniciado debe ser entre 1 y 49, y el nivel deseado entre 1 y 50.').catch(function (err) { message.channel.send(message.member.user + ' Activa tus mensajes privados para que el bot pueda informarte.') });
-        if (parseInt(args[1]) % 1 != '0' || parseInt(args[0]) % 1 != '0') return message.member.send('El nivel no puede tener comas.').catch(function (err) { message.channel.send(message.member.user + ' Activa tus mensajes privados para que el bot pueda informarte.') });
+        if (!texto) return message.member.send('Ingresa: **' + prefix[message.guild.id] + 'nivel [Nivel Actual] [Nivel Deseado]** | Te dirá la cantidad de puntos de sangre necesaria para llegar a ese nivel.').catch(function (err) { message.channel.send(message.member.user.toString()+ ' Activa tus mensajes privados para que el bot pueda informarte.') });
+        if (parseInt(args[0]) >= parseInt(args[1])) return message.member.send('El nivel deseado no puede ser mayor o igual al que tenes.').catch(function (err) { message.channel.send(message.member.user.toString()+ ' Activa tus mensajes privados para que el bot pueda informarte.') });
+        if (parseInt(args[1]) > 50 || parseInt(args[0]) < 1 || parseInt(args[0]) > 50) return message.member.send('El nivel iniciado debe ser entre 1 y 49, y el nivel deseado entre 1 y 50.').catch(function (err) { message.channel.send(message.member.user.toString()+ ' Activa tus mensajes privados para que el bot pueda informarte.') });
+        if (parseInt(args[1]) % 1 != '0' || parseInt(args[0]) % 1 != '0') return message.member.send('El nivel no puede tener comas.').catch(function (err) { message.channel.send(message.member.user.toString()+ ' Activa tus mensajes privados para que el bot pueda informarte.') });
         LC[message.author.id] = 0;
         let sangre = ObtenerValor(parseInt(args[0]), parseInt(args[1]), message.author.id)
-        const embed = new Discord.RichEmbed()
+        const embed = new Discord.MessageEmbed()
           .setThumbnail(message.member.user.avatarURL)
           .setAuthor(message.member.displayName + '#' + message.member.user.discriminator, message.member.user.avatarURL)
           .setTitle('| Subir Nivel |')
@@ -946,9 +946,9 @@ client.on("message", async (message) => {
       }
 
       if (command == 'lobby') {
-        if (lobby_set.has(message.author.id)) return message.channel.send(message.member.user + ', has usado el lobby hace menos de 20 segundos.')
+        if (lobby_set.has(message.author.id)) return message.channel.send(message.member.user.toString()+ ', has usado el lobby hace menos de 20 segundos.')
         lobby_set.add(message.author.id)
-        const lembed = new Discord.RichEmbed()
+        const lembed = new Discord.MessageEmbed()
           .setColor('#FF0000')
           .setTitle('🔰 Lobby 🔰')
           .setURL('https://deadbydaylight.gamepedia.com/Dead_by_Daylight_Wiki')
@@ -983,7 +983,7 @@ client.on("message", async (message) => {
         var isSurv, nCharacter, nPerk;
         if (texto.toLowerCase() == 'survivor') isSurv = true
         else if (texto.toLowerCase() == 'killer') isSurv = false
-        else return message.member.send('Usa **/random [Survivor o Killer]** || Te retornará un survivor o killer aleatorio con 4 perks.').catch(function (err) { message.channel.send(message.member.user + ' Activa tus mensajes privados para que el bot pueda informarte.') });
+        else return message.member.send('Usa **/random [Survivor o Killer]** || Te retornará un survivor o killer aleatorio con 4 perks.').catch(function (err) { message.channel.send(message.member.user.toString()+ ' Activa tus mensajes privados para que el bot pueda informarte.') });
         if (isSurv) {
           nCharacter = Math.floor(Math.random() * getLength(survivors));
           nPerk = getRandomNumber(getLength(survivorPerks))
@@ -1008,11 +1008,11 @@ client.on("message", async (message) => {
       if (p4.has(message.author.id)) p4.delete(message.author.id)
 
       if (command == 'calculate') {
-        if (!texto) return message.member.send('Use: **' + prefix[message.guild.id] + 'calculate [Option]** | Options: Killer or Survivor | This command tells you the amount of bloodpoints that you need to buy all the perks from the level you are.').catch(function (err) { message.channel.send(message.member.user + ' Activate your private messagges so the bot can inform you.') });
-        if (p1.has(message.author.id)) return message.member.send('Ya tienes una solicitud abierta.').catch(function (err) { message.channel.send(message.member.user + ' Activa tus mensajes privados para que el bot pueda informarte.') });
+        if (!texto) return message.member.send('Use: **' + prefix[message.guild.id] + 'calculate [Option]** | Options: Killer or Survivor | This command tells you the amount of bloodpoints that you need to buy all the perks from the level you are.').catch(function (err) { message.channel.send(message.member.user.toString()+ ' Activate your private messagges so the bot can inform you.') });
+        if (p1.has(message.author.id)) return message.member.send('Ya tienes una solicitud abierta.').catch(function (err) { message.channel.send(message.member.user.toString()+ ' Activa tus mensajes privados para que el bot pueda informarte.') });
         if (texto.toLowerCase() == 'killer') p1.add(message.author.id)
         else if (texto.toLowerCase() == 'survivor') ps1.add(message.author.id)
-        else return message.member.send('Use: **' + prefix[message.guild.id] + 'calculate [Option]** | Options: Killer or Survivor | This command tells you the amount of bloodpoints that you need to buy all the perks from the level you are.').catch(function (err) { message.channel.send(message.member.user + ' Activate your private messagges so the bot can inform you.') });
+        else return message.member.send('Use: **' + prefix[message.guild.id] + 'calculate [Option]** | Options: Killer or Survivor | This command tells you the amount of bloodpoints that you need to buy all the perks from the level you are.').catch(function (err) { message.channel.send(message.member.user.toString()+ ' Activate your private messagges so the bot can inform you.') });
         LC[message.author.id] = 0;
         message.channel.send('Enter how many level 3 perks you have, ' + message.member.user)
         return;
@@ -1030,7 +1030,7 @@ client.on("message", async (message) => {
             message.channel.send("We are currently unable to display this information, please report it on our Discord in the bugs section: https://discord.gg/T6rEERg")
             return
           }
-          const embed = new Discord.RichEmbed()
+          const embed = new Discord.MessageEmbed()
             .setThumbnail(message.member.user.avatarURL)
             .setAuthor('| ' + message.author.tag + ' |',)
             .setTitle('🈴 Shrine of Secrets:')
@@ -1044,7 +1044,7 @@ client.on("message", async (message) => {
 
       if (command == 'help') {
         if (!texto) {
-          const embedd = new Discord.RichEmbed()
+          const embedd = new Discord.MessageEmbed()
             .setColor('#FF0000')
             .setTitle('🔰 Help - Commands 🔰')
             .setAuthor(message.member.user.tag, message.member.user.avatarURL)
@@ -1066,7 +1066,7 @@ client.on("message", async (message) => {
         }
         else if (texto == 'admin') {
           if (!message.member.permissions.has('ADMINISTRATOR')) return message.channel.send('This command is only availiable for administrator users.')
-          const embedd = new Discord.RichEmbed()
+          const embedd = new Discord.MessageEmbed()
             .setColor('#FF0000')
             .setTitle('🔰 Help - Admins 🔰')
             .setAuthor(message.member.user.tag, message.member.user.avatarURL)
@@ -1080,7 +1080,7 @@ client.on("message", async (message) => {
           return;
         }
         else if (texto == 'discord') {
-          const embedd = new Discord.RichEmbed()
+          const embedd = new Discord.MessageEmbed()
             .setColor('#FF0000')
             .setTitle('🔰 ' + prefix[message.guild.id] + 'discord 🔰')
             .setAuthor(message.member.user.tag, message.member.user.avatarURL)
@@ -1093,7 +1093,7 @@ client.on("message", async (message) => {
           return;
         }
         else if (texto == 'calculate') {
-          const embedd = new Discord.RichEmbed()
+          const embedd = new Discord.MessageEmbed()
             .setColor('#FF0000')
             .setTitle('🔰 ' + prefix[message.guild.id] + 'calculate [Killer or Survivor] 🔰')
             .setAuthor(message.member.user.tag, message.member.user.avatarURL)
@@ -1107,7 +1107,7 @@ client.on("message", async (message) => {
           return;
         }
         else if (texto == 'stats') {
-          const embedd = new Discord.RichEmbed()
+          const embedd = new Discord.MessageEmbed()
             .setColor('#FF0000')
             .setTitle('🔰 ' + prefix[message.guild.id] + 'stats [Killer or Survivor] [Steam profile URL or Steam friend code] 🔰')
             .setAuthor(message.member.user.tag, message.member.user.avatarURL)
@@ -1121,7 +1121,7 @@ client.on("message", async (message) => {
           return;
         }
         else if (texto == 'level') {
-          const embedd = new Discord.RichEmbed()
+          const embedd = new Discord.MessageEmbed()
             .setColor('#FF0000')
             .setTitle('🔰 ' + prefix[message.guild.id] + 'level [Current Level] [Level wanted] 🔰')
             .setAuthor(message.member.user.tag, message.member.user.avatarURL)
@@ -1135,7 +1135,7 @@ client.on("message", async (message) => {
           return;
         }
         else if (texto == 'lobby') {
-          const embedd = new Discord.RichEmbed()
+          const embedd = new Discord.MessageEmbed()
             .setColor('#FF0000')
             .setTitle('🔰 ' + prefix[message.guild.id] + 'lobby 🔰')
             .setAuthor(message.member.user.tag, message.member.user.avatarURL)
@@ -1148,7 +1148,7 @@ client.on("message", async (message) => {
           return;
         }
         else if (texto == 'random') {
-          const embedd = new Discord.RichEmbed()
+          const embedd = new Discord.MessageEmbed()
             .setColor('#FF0000')
             .setTitle('🔰 ' + prefix[message.guild.id] + 'random [Survivor or Killer] 🔰')
             .setAuthor(message.member.user.tag, message.member.user.avatarURL)
@@ -1161,7 +1161,7 @@ client.on("message", async (message) => {
           message.member.send(embedd)
           return;
         } else {
-          const embedd = new Discord.RichEmbed()
+          const embedd = new Discord.MessageEmbed()
             .setColor('#FF0000')
             .setTitle('🔰 Help - Commands 🔰')
             .setAuthor(message.member.user.tag, message.member.user.avatarURL)
@@ -1268,13 +1268,13 @@ client.on("message", async (message) => {
       }
 
       if (command == 'level') {
-        if (!texto) return message.member.send('Enter: **' + prefix[message.guild.id] + 'level [Current Level] [Level wanted]** | It will tell you the amount of bloodpoints needed to reach that level.').catch(function (err) { message.channel.send(message.member.user + ' Activate your private messagges so the bot can inform you.') });
-        if (parseInt(args[0]) >= parseInt(args[1])) return message.member.send('The wanted level can not be higher that the current level.').catch(function (err) { message.channel.send(message.member.user + ' Activate your private messagges so the bot can inform you.') });
-        if (parseInt(args[1]) > 50 || parseInt(args[0]) < 1 || parseInt(args[0]) > 50) return message.member.send('The current level must be between 1 and 49 and the wanted level must be between 1 and 50.').catch(function (err) { message.channel.send(message.member.user + '  Activate your private messagges so the bot can inform you.') });
-        if (parseInt(args[1]) % 1 != '0' || parseInt(args[0]) % 1 != '0') return message.member.send('Level can not contain commas').catch(function (err) { message.channel.send(message.member.user + ' Activate your private messagges so the bot can inform you.') });
+        if (!texto) return message.member.send('Enter: **' + prefix[message.guild.id] + 'level [Current Level] [Level wanted]** | It will tell you the amount of bloodpoints needed to reach that level.').catch(function (err) { message.channel.send(message.member.user.toString()+ ' Activate your private messagges so the bot can inform you.') });
+        if (parseInt(args[0]) >= parseInt(args[1])) return message.member.send('The wanted level can not be higher that the current level.').catch(function (err) { message.channel.send(message.member.user.toString()+ ' Activate your private messagges so the bot can inform you.') });
+        if (parseInt(args[1]) > 50 || parseInt(args[0]) < 1 || parseInt(args[0]) > 50) return message.member.send('The current level must be between 1 and 49 and the wanted level must be between 1 and 50.').catch(function (err) { message.channel.send(message.member.user.toString()+ '  Activate your private messagges so the bot can inform you.') });
+        if (parseInt(args[1]) % 1 != '0' || parseInt(args[0]) % 1 != '0') return message.member.send('Level can not contain commas').catch(function (err) { message.channel.send(message.member.user.toString()+ ' Activate your private messagges so the bot can inform you.') });
         LC[message.author.id] = 0;
         let sangre = ObtenerValor(parseInt(args[0]), parseInt(args[1]), message.author.id)
-        const embed = new Discord.RichEmbed()
+        const embed = new Discord.MessageEmbed()
           .setThumbnail(message.member.user.avatarURL)
           .setAuthor(message.member.displayName + '#' + message.member.user.discriminator, message.member.user.avatarURL)
           .setTitle('| Level Up |')
@@ -1323,9 +1323,9 @@ client.on("message", async (message) => {
       }
 
       if (command == 'lobby') {
-        if (lobby_set.has(message.author.id)) return message.channel.send(message.member.user + ', You used the lobby less than 20 seconds ago.')
+        if (lobby_set.has(message.author.id)) return message.channel.send(message.member.user.toString()+ ', You used the lobby less than 20 seconds ago.')
         lobby_set.add(message.author.id)
-        const lembed = new Discord.RichEmbed()
+        const lembed = new Discord.MessageEmbed()
           .setColor('#FF0000')
           .setTitle('🔰 Lobby 🔰')
           .setURL('https://deadbydaylight.gamepedia.com/Dead_by_Daylight_Wiki')
@@ -1460,7 +1460,7 @@ function ObtenerNP(nivel, id) {
 function sendEmbedStats(channel, isSurv, data_steam, data_dbd, language) {
   if (!isSurv) {
     if (language == 0) {
-      const embedd = new Discord.RichEmbed()
+      const embedd = new Discord.MessageEmbed()
         .setColor('#FF0000')
         .setTitle('Estadisticas de Asesino de ' + data_steam.response.players[0].personaname)
         .setAuthor(data_steam.response.players[0].personaname, data_steam.response.players[0].avatar)
@@ -1484,7 +1484,7 @@ function sendEmbedStats(channel, isSurv, data_steam, data_dbd, language) {
         .setFooter('La entidad', client.user.avatarURL);
       client.channels.get(channel).send(embedd)
     } else {
-      const embedd = new Discord.RichEmbed()
+      const embedd = new Discord.MessageEmbed()
         .setColor('#FF0000')
         .setTitle('Killer stats from ' + data_steam.response.players[0].personaname)
         .setAuthor(data_steam.response.players[0].personaname, data_steam.response.players[0].avatar)
@@ -1510,7 +1510,7 @@ function sendEmbedStats(channel, isSurv, data_steam, data_dbd, language) {
     }
   } else {
     if (language == 0) {
-      const embedd = new Discord.RichEmbed()
+      const embedd = new Discord.MessageEmbed()
         .setColor('#FF0000')
         .setTitle('Estadísticas de Superviviente de ' + data_steam.response.players[0].personaname)
         .setAuthor(data_steam.response.players[0].personaname, data_steam.response.players[0].avatar)
@@ -1534,7 +1534,7 @@ function sendEmbedStats(channel, isSurv, data_steam, data_dbd, language) {
         .setFooter('La entidad', client.user.avatarURL)
       client.channels.get(channel).send(embedd)
     } else {
-      const embedd = new Discord.RichEmbed()
+      const embedd = new Discord.MessageEmbed()
         .setColor('#FF0000')
         .setTitle('Survivor stats from ' + data_steam.response.players[0].personaname)
         .setAuthor(data_steam.response.players[0].personaname, data_steam.response.players[0].avatar)
@@ -1573,7 +1573,7 @@ function sendEmbedError(type, user, channel, language) {
   if (language == 0) {
     switch (type) {
       case 1: {
-        const embedd = new Discord.RichEmbed()
+        const embedd = new Discord.MessageEmbed()
           .setColor('#FF0000')
           .setTitle('Cuenta en actualización...')
           .setAuthor(user.user.tag, user.user.avatarURL)
@@ -1584,7 +1584,7 @@ function sendEmbedError(type, user, channel, language) {
         client.channels.get(channel).send(embedd)
       }
       case 2: {
-        const embedd = new Discord.RichEmbed()
+        const embedd = new Discord.MessageEmbed()
           .setColor('#FF0000')
           .setTitle('¡Ups! Esto es vergonzoso...')
           .setAuthor(user.user.tag, user.user.avatarURL)
@@ -1598,7 +1598,7 @@ function sendEmbedError(type, user, channel, language) {
         client.channels.get(channel).send(embedd)
       }
       case 3: {
-        const embedd = new Discord.RichEmbed()
+        const embedd = new Discord.MessageEmbed()
           .setColor('#FF0000')
           .setTitle('No podemos agregar tu cuenta...')
           .setAuthor(message.member.user.tag, message.member.user.avatarURL)
@@ -1613,7 +1613,7 @@ function sendEmbedError(type, user, channel, language) {
   } else {
     switch (type) {
       case 1: {
-        const embedd = new Discord.RichEmbed()
+        const embedd = new Discord.MessageEmbed()
           .setColor('#FF0000')
           .setTitle('Your account is being updated...')
           .setAuthor(user.user.tag, user.user.avatarURL)
@@ -1624,7 +1624,7 @@ function sendEmbedError(type, user, channel, language) {
         client.channels.get(channel).send(embedd)
       }
       case 2: {
-        const embedd = new Discord.RichEmbed()
+        const embedd = new Discord.MessageEmbed()
           .setColor('#FF0000')
           .setTitle('¡Ups! This is embarrassing...')
           .setAuthor(message.member.user.tag, message.member.user.avatarURL)
@@ -1638,7 +1638,7 @@ function sendEmbedError(type, user, channel, language) {
         client.channels.get(channel).send(embedd)
       }
       case 3: {
-        const embedd = new Discord.RichEmbed()
+        const embedd = new Discord.MessageEmbed()
           .setColor('#FF0000')
           .setTitle("We can't add your account ...")
           .setAuthor(message.member.user.tag, message.member.user.avatarURL)
