@@ -7,6 +7,7 @@ var http = require('http');
 const version_bot = '0.9.0'
 const mysql = require("mysql");
 const fs = require('fs');
+const Canvas = require("canvas")
 const { parse } = require("path");
 const { SSL_OP_NO_TLSv1_1 } = require("constants");
 const { kill } = require("process");
@@ -15,7 +16,7 @@ const { post } = require("snekfetch");
 
 // Image generator
 const background_killer = "assets/Visuals/Background/random_killer.jpg"
-const background_survivor = "assets/Visuals/Background/random_killer.jpg"
+const background_survivor = "assets/Visuals/Background/random_survivor.jpg"
 const font = "./assets/Font/BRUTTALL.ttf"
 Canvas.registerFont(font, { family: "dbd" })
 
@@ -68,10 +69,10 @@ var actualizar = 1;
 
 /* MySQL config */
 var db_config = {
-  host: process.env.host,
-  user: process.env.user,
-  password: process.env.password,
-  database: process.env.database
+  host: "us-cdbr-east-03.cleardb.com",
+  user: "b3871aaea07c5c",
+  password: "fcf57272",
+  database: "heroku_b8badce9b197ade"
 }
 var con;
 
@@ -2004,7 +2005,7 @@ function getRandomNumber(max) {
     }
   }
   let n3 = Math.floor(Math.random() * max);
-  if (n3 == n1 || n3 == n1) {
+  if (n3 == n1 || n3 == n2) {
     while (n3 == n1) {
       console.log('Loop Linea 3774')
       n3 = Math.floor(Math.random() * max);
@@ -2061,7 +2062,7 @@ async function createRandomBuild(message, numberCharacter, numberPerk1, numberPe
       ctx.font = '101px "dbd"';
       ctx.fillStyle = '#ffffff';
       ctx.fillText(survivors[numberCharacter].name, calculateCenter(survivors[numberCharacter].name.length, fontSize), 207);
-      const avatar = await Canvas.loadImage(killers[0].link);
+      const avatar = await Canvas.loadImage(survivors[numberCharacter].link);
       ctx.drawImage(avatar, 1045, 227, 447, 619);
       let perkImageName = [getImageName(numberPerk1, isSurv), getImageName(numberPerk2, isSurv), getImageName(numberPerk3, isSurv), getImageName(numberPerk4, isSurv)]
       const perkImage_1 = await getImage(perkImageName[0], isSurv)
@@ -2090,7 +2091,7 @@ async function createRandomBuild(message, numberCharacter, numberPerk1, numberPe
       ctx.fillStyle = '#ffffff';
       let string = language == 0 ? killers[numberCharacter].nameEs:killers[numberCharacter].nameEn
       ctx.fillText(string, calculateCenter(string.length, fontSize), 207);
-      const avatar = await Canvas.loadImage(killers[0].link);
+      const avatar = await Canvas.loadImage(killers[numberCharacter].link);
       ctx.drawImage(avatar, 1045, 227, 447, 619);
       let perkImageName = [getImageName(numberPerk1, isSurv), getImageName(numberPerk2, isSurv), getImageName(numberPerk3, isSurv), getImageName(numberPerk4, isSurv)]
       const perkImage_1 = await getImage(perkImageName[0], isSurv)
@@ -2103,8 +2104,8 @@ async function createRandomBuild(message, numberCharacter, numberPerk1, numberPe
       ctx.drawImage(perkImage_4, 303, 605, 256, 256);
 
       const attachment = new Discord.MessageAttachment(canvas.toBuffer(), 'killer-random.png');
-      if(language == 0) message.channel.send(`**PERKS:**\n1⃣: ${survivorPerks[numberPerk1].nameEs}\n2⃣: ${survivorPerks[numberPerk2].nameEs}\n3⃣: ${survivorPerks[numberPerk3].nameEs}\n4⃣: ${survivorPerks[numberPerk4].nameEs}`, attachment)
-      else message.channel.send(`**PERKS:**\n1⃣: ${survivorPerks[numberPerk1].nameEn}\n2⃣: ${survivorPerks[numberPerk2].nameEn}\n3⃣: ${survivorPerks[numberPerk3].nameEn}\n4⃣: ${survivorPerks[numberPerk4].nameEn}`, attachment)
+      if(language == 0) message.channel.send(`**PERKS:**\n1⃣: ${killerPerks[numberPerk1].nameEs}\n2⃣: ${killerPerks[numberPerk2].nameEs}\n3⃣: ${killerPerks[numberPerk3].nameEs}\n4⃣: ${killerPerks[numberPerk4].nameEs}`, attachment)
+      else message.channel.send(`**PERKS:**\n1⃣: ${killerPerks[numberPerk1].nameEn}\n2⃣: ${killerPerks[numberPerk2].nameEn}\n3⃣: ${killerPerks[numberPerk3].nameEn}\n4⃣: ${killerPerks[numberPerk4].nameEn}`, attachment)
   }
   return
 }
@@ -2183,4 +2184,4 @@ function getImageName(index, isSurv){
   return text+".png"
 }
 
-client.login(process.env.token);
+client.login("NzI0NzAyNzYwMzU1NzU4MjM1.XvECWQ.XhJKHaD9n2pXN2gFeR25PezJkps");
