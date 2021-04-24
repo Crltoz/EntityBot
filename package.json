@@ -6,6 +6,10 @@
   "keywords": [],
   "author": "Crltoz#0001, Creepzster#7467, Rosper#4718 & Zander#1979",
   "license": "ISC",
+  "engines": {
+    "node": "12.19.0",
+    "npm": "6.14.8"
+  },
   "dependencies": {
     "bignumber": "^9.0.1",
     "canvas": "^2.7.0",
