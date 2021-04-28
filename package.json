@@ -1,21 +1,20 @@
 {
-  "name": "DeadByDaylight Bot.",
+  "name": "dbd-bot.",
   "version": "1.0.0",
   "description": "Bot con funciones para Dead By Daylight. ¡Disfrutalo!",
   "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "keywords": [],
-  "author": "Crltoz#0001, Creepzster#7467, Rosper#4718 & Zander (Iván)#1979",
+  "author": "Crltoz#0001, Creepzster#7467, Rosper#4718 & Zander#1979",
   "license": "ISC",
+  "engines": {
+    "node": "13.3.0",
+    "npm": "6.14.8"
+  },
   "dependencies": {
-    "@discordjs/uws": "^10.149.0",
     "bignumber.js": "^9.0.1",
     "canvas": "^2.7.0",
     "constants": "0.0.2",
     "discord.js": "^12.5.3",
-    "express-useragent": "^1.0.15",
     "fs": "0.0.1-security",
     "http": "0.0.1-security",
     "mysql": "^2.18.1",
@@ -25,7 +24,6 @@
     "path": "^0.12.7",
     "process": "^0.11.10",
     "query-string": "^6.13.1",
-    "request": "^2.88.2",
     "require": "^2.4.20",
     "snekfetch": "^4.0.4",
     "superagent": "^5.3.1",
