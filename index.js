@@ -64,10 +64,10 @@ var actualizar = 1;
 
 /* MySQL config */
 var db_config = {
-  host: "us-cdbr-east-03.cleardb.com",
-  user: "b3871aaea07c5c",
-  password: "fcf57272",
-  database: "heroku_b8badce9b197ade"
+  host: process.env.host,
+  user: process.env.user,
+  password: process.env.password,
+  database: process.env.database
 }
 var con;
 
@@ -626,7 +626,7 @@ client.on("message", async (message) => {
             name: "SACA_LA_MANO.jpg"
           }]
         });
-        message.channel.send('Estoy actualmente en **' + client.guilds.size + '** servidores.')
+        message.channel.send('Estoy actualmente en **' + client.guilds.cache.size + '** servidores.')
         return;
       }
 
@@ -2179,4 +2179,4 @@ function getImageName(index, isSurv){
   return text+".png"
 }
 
-client.login("NzI0NzAyNzYwMzU1NzU4MjM1.XvECWQ.XhJKHaD9n2pXN2gFeR25PezJkps");
+client.login(process.env.token);
