@@ -2136,7 +2136,7 @@ function steamID_64(steamId32) {
  * @description - First part for get user stats from Australian Website.
  */
 function getSteamProfile(steamid, channelid, userid, serverid, isSurv, language) {
-  var server = client.guilds.get(serverid)
+  var server = client.guilds.cache.get(serverid)
   var user = server.members.get(userid)
   var options = {
     host: 'api.steampowered.com',
