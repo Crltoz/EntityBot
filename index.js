@@ -642,7 +642,7 @@ client.on("message", async (message) => {
           path: '/api/shrine',
           headers: { 'User-Agent': 'EntityBot/' + version_bot }
         };
-        https.cache.get(options, function (res) {
+        https.get(options, function (res) {
           var bodyChunks2 = [];
           res.on('data', function (chunk) {
             bodyChunks2.push(chunk);
@@ -874,7 +874,7 @@ client.on("message", async (message) => {
             path: '/ISteamUser/ResolveVanityURL/v0001/?key=DF0A08E817CCE67F129D35FFFB14901A&vanityurl=' + text,
             headers: { 'User-Agent': 'EntityBot/' + version_bot }
           };
-          http.cache.get(options, function (res) {
+          http.get(options, function (res) {
             var bodyChunks_ = [];
             res.on('data', function (chunk) {
               bodyChunks_.push(chunk);
@@ -1251,7 +1251,7 @@ client.on("message", async (message) => {
             path: '/ISteamUser/ResolveVanityURL/v0001/?key=DF0A08E817CCE67F129D35FFFB14901A&vanityurl=' + text,
             headers: { 'User-Agent': 'EntityBot/' + version_bot }
           };
-          http.cache.get(options, function (res) {
+          http.get(options, function (res) {
             var bodyChunks_ = [];
             res.on('data', function (chunk) {
               bodyChunks_.push(chunk);
@@ -1696,7 +1696,7 @@ function getStats(data_steam, channelid, user, steamid, isSurv, language) {
     path: "/api/playerstats?steamid=" + steamid,
     headers: {'User-Agent': 'EntityBot/'+version_bot}
   };
-  https.cache.get(options, function (res) {
+  https.get(options, function (res) {
     var bodyChunks_ = [];
     res.on('data', function (chunk) {
       bodyChunks_.push(chunk);
@@ -1765,7 +1765,7 @@ function handleDisconnect() {
  */
 function verifyShrine() {
   const time = new Date();
-  if (time.toUTCString().toLowerCase().includes('wed') && time.cache.getUTCHours() == '0' && time.cache.getUTCMinutes() == '1' && actualizar == '1') {
+  if (time.toUTCString().toLowerCase().includes('wed') && time.cache.getUTCHours() == '0' && time.getUTCMinutes() == '1' && actualizar == '1') {
     actualizar = 0;
     setTimeout(() => {
       actualizar = 1;
@@ -1775,7 +1775,7 @@ function verifyShrine() {
       path: '/api/shrine',
       headers: { 'User-Agent': 'EntityBot/' + version_bot }
     };
-    https.cache.get(options, function (res) {
+    https.get(options, function (res) {
       var bodyChunks2 = [];
       res.on('data', function (chunk) {
         bodyChunks2.push(chunk);
@@ -1817,7 +1817,7 @@ function twoDigits(d) {
 }
 
 Date.prototype.toMysqlFormat = function () {
-  return this.cache.getUTCFullYear() + "-" + twoDigits(1 + this.cache.getUTCMonth()) + "-" + twoDigits(this.cache.getUTCDate()) + " " + twoDigits(this.cache.getUTCHours()) + ":" + twoDigits(this.cache.getUTCMinutes()) + ":" + twoDigits(this.cache.getUTCSeconds());
+  return this.getUTCFullYear() + "-" + twoDigits(1 + this.getUTCMonth()) + "-" + twoDigits(this.getUTCDate()) + " " + twoDigits(this.getUTCHours()) + ":" + twoDigits(this.getUTCMinutes()) + ":" + twoDigits(this.getUTCSeconds());
 };
 
 /**
@@ -2046,7 +2046,7 @@ function getRandomNumber(max) {
 async function createRandomBuild(message, numberCharacter, numberPerk1, numberPerk2, numberPerk3, numberPerk4, isSurv, language) {
   if(isSurv){
     const canvas = Canvas.createCanvas(1579, 1114);
-      const ctx = canvas.cache.getContext('2d');
+      const ctx = canvas.getContext('2d');
       let fontSize = 21
       const background = await Canvas.loadImage(background_survivor);
       ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
@@ -2074,7 +2074,7 @@ async function createRandomBuild(message, numberCharacter, numberPerk1, numberPe
       else message.channel.send(`**PERKS:**\n1⃣: ${survivorPerks[numberPerk1].nameEn}\n2⃣: ${survivorPerks[numberPerk2].nameEn}\n3⃣: ${survivorPerks[numberPerk3].nameEn}\n4⃣: ${survivorPerks[numberPerk4].nameEn}`, attachment)
   } else {
     const canvas = Canvas.createCanvas(1579, 1114);
-      const ctx = canvas.cache.getContext('2d');
+      const ctx = canvas.getContext('2d');
       let fontSize = 21
       const background = await Canvas.loadImage(background_killer);
       ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
@@ -2143,7 +2143,7 @@ function getSteamProfile(steamid, channelid, userid, serverid, isSurv, language)
     path: '/ISteamUser/GetPlayerSummaries/v0002/?key=DF0A08E817CCE67F129D35FFFB14901A&steamids=' + steamid,
     headers: { 'User-Agent': 'EntityBot/' + version_bot }
   };
-  http.cache.get(options, function (res) {
+  http.get(options, function (res) {
     var bodyChunks_ = [];
     res.on('data', function (chunk) {
       bodyChunks_.push(chunk);
