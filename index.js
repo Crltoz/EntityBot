@@ -100,7 +100,7 @@ client.on("guildCreate", guild => {
   })
   lenguaje[guild.id] = 0
   defaultChannel.send("**Gracias por añadirme!** :white_check_mark:\n**-** Mi prefijo es `/`\n**-** Puedes ver mis comandos con `/ayuda`\n**-** Change the bot language with `/english`")
-  client.channels.get('739997803094343721').send('| Nuevo servidor | Nombre: ' + guild.name + ' | Usuarios: ' + guild.memberCount)
+  client.channels.cache.get('739997803094343721').send('| Nuevo servidor | Nombre: ' + guild.name + ' | Usuarios: ' + guild.memberCount)
 })
 
 
@@ -581,7 +581,7 @@ client.on("message", async (message) => {
   if (message.content.startsWith(prefix[message.guild.id])) {
     if (lenguaje[message.guild.id] == 0) {
       if (cid[message.guild.id] != null && message.channel.id != cid[message.guild.id]) {
-        const disc = client.channels.get(cid[message.guild.id]);
+        const disc = client.channels.cache.get(cid[message.guild.id]);
         message.channel.send('Las utilidades del bot solo pueden ser usadas en el canal de: ' + disc)
         return;
       }
@@ -642,7 +642,7 @@ client.on("message", async (message) => {
           path: '/api/shrine',
           headers: { 'User-Agent': 'EntityBot/' + version_bot }
         };
-        https.get(options, function (res) {
+        https.cache.get(options, function (res) {
           var bodyChunks2 = [];
           res.on('data', function (chunk) {
             bodyChunks2.push(chunk);
@@ -874,7 +874,7 @@ client.on("message", async (message) => {
             path: '/ISteamUser/ResolveVanityURL/v0001/?key=DF0A08E817CCE67F129D35FFFB14901A&vanityurl=' + text,
             headers: { 'User-Agent': 'EntityBot/' + version_bot }
           };
-          http.get(options, function (res) {
+          http.cache.get(options, function (res) {
             var bodyChunks_ = [];
             res.on('data', function (chunk) {
               bodyChunks_.push(chunk);
@@ -940,7 +940,7 @@ client.on("message", async (message) => {
           }
         })
         cid[message.guild.id] = channel_id;
-        let canal = client.channels.get(channel_id)
+        let canal = client.channels.cache.get(channel_id)
         message.channel.send('A partir de ahora los comandos sólo funcionarán en: ' + canal)
         return;
       }
@@ -998,7 +998,7 @@ client.on("message", async (message) => {
       message.member.send('El comando no existe. Usa '+ prefix[message.guild.id] +'**ayuda** para ver todas las funciones y comandos.')
     } else {
       if (cid[message.guild.id] != null && message.channel.id != cid[message.guild.id]) {
-        const disc = client.channels.get(cid[message.guild.id]);
+        const disc = client.channels.cache.get(cid[message.guild.id]);
         message.channel.send('The bot utilities can only be used in the channel:' + disc)
         return;
       }
@@ -1251,7 +1251,7 @@ client.on("message", async (message) => {
             path: '/ISteamUser/ResolveVanityURL/v0001/?key=DF0A08E817CCE67F129D35FFFB14901A&vanityurl=' + text,
             headers: { 'User-Agent': 'EntityBot/' + version_bot }
           };
-          http.get(options, function (res) {
+          http.cache.get(options, function (res) {
             var bodyChunks_ = [];
             res.on('data', function (chunk) {
               bodyChunks_.push(chunk);
@@ -1317,7 +1317,7 @@ client.on("message", async (message) => {
           }
         })
         cid[message.guild.id] = channel_id;
-        let canal = client.channels.get(channel_id)
+        let canal = client.channels.cache.get(channel_id)
         message.channel.send('From now on the commans will work in: ' + canal)
         return;
       }
@@ -1482,7 +1482,7 @@ function sendEmbedStats(channel, isSurv, data_steam, data_dbd, language) {
         .addField('<:icons_totem:739182106282033272> Supervivientes interrumpidos en totems:', data_dbd.survivorsinterruptedcleansingtotem, true)
         .setTimestamp()
         .setFooter('La entidad', client.user.avatarURL());
-      client.channels.get(channel).send(embedd)
+      client.channels.cache.get(channel).send(embedd)
     } else {
       const embedd = new Discord.MessageEmbed()
         .setColor('#FF0000')
@@ -1506,7 +1506,7 @@ function sendEmbedStats(channel, isSurv, data_steam, data_dbd, language) {
         .addField('<:icons_totem:739182106282033272> Survivors interrupted cleasing totems:', data_dbd.survivorsinterruptedcleansingtotem, true)
         .setTimestamp()
         .setFooter('Entity', client.user.avatarURL());
-      client.channels.get(channel).send(embedd)
+      client.channels.cache.get(channel).send(embedd)
     }
   } else {
     if (language == 0) {
@@ -1532,7 +1532,7 @@ function sendEmbedStats(channel, isSurv, data_steam, data_dbd, language) {
         .addField('<:Icons_cofre:739182106651131957> Cofres abiertos:', data_dbd.mysteryboxesopened, true)
         .setTimestamp()
         .setFooter('La entidad', client.user.avatarURL())
-      client.channels.get(channel).send(embedd)
+      client.channels.cache.get(channel).send(embedd)
     } else {
       const embedd = new Discord.MessageEmbed()
         .setColor('#FF0000')
@@ -1556,7 +1556,7 @@ function sendEmbedStats(channel, isSurv, data_steam, data_dbd, language) {
         .addField('<:Icons_cofre:739182106651131957> Mystery boxes opened:', data_dbd.mysteryboxesopened, true)
         .setTimestamp()
         .setFooter('Entity', client.user.avatarURL())
-      client.channels.get(channel).send(embedd)
+      client.channels.cache.get(channel).send(embedd)
     }
   }
 }
@@ -1581,7 +1581,7 @@ function sendEmbedError(type, user, channel, language) {
           .addField('¿Hay algún problema?', 'Parece ser que tu cuenta estuvo en privado anteriormente, aunque no tienes de qué preocuparte. ¡Ya está siendo actualizada! Prueba cada **10** minutos obtener tus estadísticas.')
           .setTimestamp()
           .setFooter('La entidad', client.user.avatarURL());
-        client.channels.get(channel).send(embedd)
+        client.channels.cache.get(channel).send(embedd)
       }
       case 2: {
         const embedd = new Discord.MessageEmbed()
@@ -1595,7 +1595,7 @@ function sendEmbedError(type, user, channel, language) {
           .setTimestamp()
           .setImage('https://cdn.discordapp.com/attachments/738848207328772237/739269462510796800/unknown.png')
           .setFooter('La entidad', client.user.avatarURL());
-        client.channels.get(channel).send(embedd)
+        client.channels.cache.get(channel).send(embedd)
       }
       case 3: {
         const embedd = new Discord.MessageEmbed()
@@ -1607,7 +1607,7 @@ function sendEmbedError(type, user, channel, language) {
           .addField('Agregar cuenta:', '[Haz click aquí](https://dbd.onteh.net.au)')
           .setTimestamp()
           .setFooter('La entidad', client.user.avatarURL())
-          client.channels.get(channel).send(embedd)
+          client.channels.cache.get(channel).send(embedd)
       }
     }
   } else {
@@ -1621,7 +1621,7 @@ function sendEmbedError(type, user, channel, language) {
           .addField('Is there any problem?', 'Seems like your account was private previously, but dont worry. Your account is being updated! Try again every **10** minutes to get your statistics.')
           .setTimestamp()
           .setFooter('Entity', client.user.avatarURL());
-        client.channels.get(channel).send(embedd)
+        client.channels.cache.get(channel).send(embedd)
       }
       case 2: {
         const embedd = new Discord.MessageEmbed()
@@ -1635,7 +1635,7 @@ function sendEmbedError(type, user, channel, language) {
           .setTimestamp()
           .setImage('https://cdn.discordapp.com/attachments/738848207328772237/739269462510796800/unknown.png')
           .setFooter('Entity', client.user.avatarURL());
-        client.channels.get(channel).send(embedd)
+        client.channels.cache.get(channel).send(embedd)
       }
       case 3: {
         const embedd = new Discord.MessageEmbed()
@@ -1647,7 +1647,7 @@ function sendEmbedError(type, user, channel, language) {
           .addField('Add account:', '[Click here](https://dbd.onteh.net.au)')
           .setTimestamp()
           .setFooter('Entity', client.user.avatarURL())
-          client.channels.get(channel).send(embedd)
+          client.channels.cache.get(channel).send(embedd)
       }
     }
   }
@@ -1696,7 +1696,7 @@ function getStats(data_steam, channelid, user, steamid, isSurv, language) {
     path: "/api/playerstats?steamid=" + steamid,
     headers: {'User-Agent': 'EntityBot/'+version_bot}
   };
-  https.get(options, function (res) {
+  https.cache.get(options, function (res) {
     var bodyChunks_ = [];
     res.on('data', function (chunk) {
       bodyChunks_.push(chunk);
@@ -1765,7 +1765,7 @@ function handleDisconnect() {
  */
 function verifyShrine() {
   const time = new Date();
-  if (time.toUTCString().toLowerCase().includes('wed') && time.getUTCHours() == '0' && time.getUTCMinutes() == '1' && actualizar == '1') {
+  if (time.toUTCString().toLowerCase().includes('wed') && time.cache.getUTCHours() == '0' && time.cache.getUTCMinutes() == '1' && actualizar == '1') {
     actualizar = 0;
     setTimeout(() => {
       actualizar = 1;
@@ -1775,7 +1775,7 @@ function verifyShrine() {
       path: '/api/shrine',
       headers: { 'User-Agent': 'EntityBot/' + version_bot }
     };
-    https.get(options, function (res) {
+    https.cache.get(options, function (res) {
       var bodyChunks2 = [];
       res.on('data', function (chunk) {
         bodyChunks2.push(chunk);
@@ -1817,7 +1817,7 @@ function twoDigits(d) {
 }
 
 Date.prototype.toMysqlFormat = function () {
-  return this.getUTCFullYear() + "-" + twoDigits(1 + this.getUTCMonth()) + "-" + twoDigits(this.getUTCDate()) + " " + twoDigits(this.getUTCHours()) + ":" + twoDigits(this.getUTCMinutes()) + ":" + twoDigits(this.getUTCSeconds());
+  return this.cache.getUTCFullYear() + "-" + twoDigits(1 + this.cache.getUTCMonth()) + "-" + twoDigits(this.cache.getUTCDate()) + " " + twoDigits(this.cache.getUTCHours()) + ":" + twoDigits(this.cache.getUTCMinutes()) + ":" + twoDigits(this.cache.getUTCSeconds());
 };
 
 /**
@@ -2046,7 +2046,7 @@ function getRandomNumber(max) {
 async function createRandomBuild(message, numberCharacter, numberPerk1, numberPerk2, numberPerk3, numberPerk4, isSurv, language) {
   if(isSurv){
     const canvas = Canvas.createCanvas(1579, 1114);
-      const ctx = canvas.getContext('2d');
+      const ctx = canvas.cache.getContext('2d');
       let fontSize = 21
       const background = await Canvas.loadImage(background_survivor);
       ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
@@ -2074,7 +2074,7 @@ async function createRandomBuild(message, numberCharacter, numberPerk1, numberPe
       else message.channel.send(`**PERKS:**\n1⃣: ${survivorPerks[numberPerk1].nameEn}\n2⃣: ${survivorPerks[numberPerk2].nameEn}\n3⃣: ${survivorPerks[numberPerk3].nameEn}\n4⃣: ${survivorPerks[numberPerk4].nameEn}`, attachment)
   } else {
     const canvas = Canvas.createCanvas(1579, 1114);
-      const ctx = canvas.getContext('2d');
+      const ctx = canvas.cache.getContext('2d');
       let fontSize = 21
       const background = await Canvas.loadImage(background_killer);
       ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
@@ -2136,14 +2136,14 @@ function steamID_64(steamId32) {
  * @description - First part for get user stats from Australian Website.
  */
 function getSteamProfile(steamid, channelid, userid, serverid, isSurv, language) {
-  var server = client.guilds.cache.get(serverid)
-  var user = server.members.get(userid)
+  var server = client.guilds.cache.get(serverid) 
+  var user = server.members.cache.get(userid)
   var options = {
     host: 'api.steampowered.com',
     path: '/ISteamUser/GetPlayerSummaries/v0002/?key=DF0A08E817CCE67F129D35FFFB14901A&steamids=' + steamid,
     headers: { 'User-Agent': 'EntityBot/' + version_bot }
   };
-  http.get(options, function (res) {
+  http.cache.get(options, function (res) {
     var bodyChunks_ = [];
     res.on('data', function (chunk) {
       bodyChunks_.push(chunk);
