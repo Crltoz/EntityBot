@@ -1462,6 +1462,7 @@ function ObtenerNP(nivel, id) {
  * @description - Send embed stats with all info.
  */
 function sendEmbedStats(channel, isSurv, data_steam, data_dbd, language) {
+  console.log(`sendEmbedStats: isSurv: ${isSurv} - datastemName: ${data_steam.response.players[0].personaname} - datadbd bloodpoints: ${data_dbd.bloodpoints} - language: ${language}`)
   if (!isSurv) {
     if (language == 0) {
       const embedd = new Discord.MessageEmbed()
@@ -1559,6 +1560,7 @@ function sendEmbedStats(channel, isSurv, data_steam, data_dbd, language) {
       client.channels.cache.get(channel).send(embedd)
     }
   }
+  return
 }
 
 
@@ -1570,6 +1572,7 @@ function sendEmbedStats(channel, isSurv, data_steam, data_dbd, language) {
  * @description - Send embed error with information.
  */
 function sendEmbedError(type, user, channel, language) {
+  console.log(`sendEmbedError: type: ${type} - language: ${language}`)
   if (language == 0) {
     switch (type) {
       case 1: {
@@ -1703,14 +1706,12 @@ function getStats(data_steam, channelid, user, steamid, isSurv, language) {
     }).on('end', function () {
       var body = Buffer.concat(bodyChunks_);
       console.log(`australian site code: ${res.statusCode}`)
-      if (isEmptyObject(body)) return postStats(steamid, channelid, user, language)
       if(res.statusCode == 200 || res.statusCode == 201) {
       body = JSON.parse(body)
       if (body.killer_rank == 20 && body.killed == 0 && body.sacrificed == 0 && body.bloodpoints == 0) sendEmbedError(1, user, channelid, language)
       else sendEmbedStats(channelid, isSurv, data_steam, body, language) 
       return;
-      } else return message.author.send('Ocurrió un error al intentar encontrar tu cuenta,.')
-    })
+      } else return postStats(steamid, channelid, user, language)
   })
 }
 
