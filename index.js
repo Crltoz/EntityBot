@@ -2155,13 +2155,14 @@ function getSteamProfile(steamid, channelid, userid, serverid, isSurv, language)
       var body = Buffer.concat(bodyChunks_);
       if (body.includes("<html><head><title>Bad Request</title>")) return user.send("Perfil de steam no encontrado.")
       if (isEmptyObject(body)) return user.send("Perfil de steam no encontrado.")
-      console.log(`status: ${res.statusCode}`)
       if (res.statusCode == 200 || res.statusCode == 201) {
         body = JSON.parse(body)
         if (body.response && body.response.players && body.response.players[0].profilestate) {
+          console.log(`profile state here: ${JSON.stringify(body.response.players[0])}`)
           if (body.response.players[0].profilestate != 1) return user.send("El perfil ingresado no está en 'público'.")
           getStats(body, channelid, user, steamid, isSurv, language)
         }
+        console.log(`not state here: ${JSON.stringify(body)}`)
       }
     })
   })
