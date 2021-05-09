@@ -2140,7 +2140,7 @@ function steamID_64(steamId32) {
  * @description - First part for get user stats from Australian Website.
  */
 function getSteamProfile(steamid, channelid, userid, serverid, isSurv, language) {
-  var server = client.guilds.cache.get(serverid) 
+  var server = client.guilds.cache.get(serverid)
   var user = server.members.cache.get(userid)
   var options = {
     host: 'api.steampowered.com',
@@ -2156,10 +2156,12 @@ function getSteamProfile(steamid, channelid, userid, serverid, isSurv, language)
       if (body.includes("<html><head><title>Bad Request</title>")) return user.send("Perfil de steam no encontrado.")
       if (isEmptyObject(body)) return user.send("Perfil de steam no encontrado.")
       console.log(`status: ${res.statusCode}`)
-      if(res.statusCode == 200 || res.statusCode == 201) {
-      body = JSON.parse(body)
-      if (body.response.players[0].profilestate != 1) return user.send("El perfil ingresado no está en 'público'.")
-      getStats(body, channelid, user, steamid, isSurv, language)
+      if (res.statusCode == 200 || res.statusCode == 201) {
+        body = JSON.parse(body)
+        if (body.response && body.response.players && body.response.players[0].profilestate) {
+          if (body.response.players[0].profilestate != 1) return user.send("El perfil ingresado no está en 'público'.")
+          getStats(body, channelid, user, steamid, isSurv, language)
+        }
       }
     })
   })
