@@ -648,9 +648,11 @@ client.on("message", async (message) => {
             bodyChunks2.push(chunk);
           }).on('end', function () {
             var body2 = Buffer.concat(bodyChunks2);
-            body2 = JSON.parse(body2)
-            con.query(`DELETE FROM santuario`)
-            con.query(`INSERT INTO santuario (perk_1, perk_2, perk_3, perk_4) VALUES ('${body2.perks[0].id.toLowerCase()}', '${body2.perks[1].id.toLowerCase()}', '${body2.perks[2].id.toLowerCase()}', '${body2.perks[3].id.toLowerCase()}')`)
+            if(res.statusCode == 200 || res.statusCode == 201) {
+              body2 = JSON.parse(body2)
+              con.query(`DELETE FROM santuario`)
+              con.query(`INSERT INTO santuario (perk_1, perk_2, perk_3, perk_4) VALUES ('${body2.perks[0].id.toLowerCase()}', '${body2.perks[1].id.toLowerCase()}', '${body2.perks[2].id.toLowerCase()}', '${body2.perks[3].id.toLowerCase()}')`)
+            }
           })
         })
         return;
@@ -880,10 +882,12 @@ client.on("message", async (message) => {
               bodyChunks_.push(chunk);
             }).on('end', function () {
               var body3 = Buffer.concat(bodyChunks_);
+              if(res.statusCode == 200 || res.statusCode == 201) {
               body3 = JSON.parse(body3)
               if (isEmptyObject(body3)) return message.author.send("URL de perfil inválido.")
               if (body3.response.success != 1) return message.author.send("URL de perfil inválido.")
               getSteamProfile(body3.response.steamid, message.channel.id, message.author.id, message.guild.id, isSurv, 0)
+              } else return message.author.send("URL de perfil inválido.")
             })
           })
           return
@@ -1256,10 +1260,12 @@ client.on("message", async (message) => {
               bodyChunks_.push(chunk);
             }).on('end', function () {
               var body3 = Buffer.concat(bodyChunks_);
+              if(res.statusCode == 200 || res.statusCode == 201) {
               body3 = JSON.parse(body3)
               if (isEmptyObject(body3)) return message.author.send("Invalid URL Profile.")
               if (body3.response.success != 1) return message.author.send("Invalid URL Profile.")
               getSteamProfile(body3.response.steamid, message.channel.id, message.author.id, message.guild.id, isSurv, 0)
+              } else return message.author.send("Invalid URL Profile.")
             })
           })
           return
@@ -1696,11 +1702,13 @@ function getStats(data_steam, channelid, user, steamid, isSurv, language) {
       bodyChunks_.push(chunk);
     }).on('end', function () {
       var body = Buffer.concat(bodyChunks_);
+      if(res.statusCode == 200 || res.statusCode == 201) {
       body = JSON.parse(body)
       if (isEmptyObject(body)) postStats(steamid, channelid, user, language)
       else if (body.killer_rank == 20 && body.killed == 0 && body.sacrificed == 0 && body.bloodpoints == 0) sendEmbedError(1, user, channelid, language)
       else sendEmbedStats(channelid, isSurv, data_steam, body, language) 
       return;
+      } else return
     })
   })
 }
@@ -1775,9 +1783,11 @@ function verifyShrine() {
         bodyChunks2.push(chunk);
       }).on('end', function () {
         var body2 = Buffer.concat(bodyChunks2);
+        if(res.statusCode == 200 || res.statusCode == 201) {
         body2 = JSON.parse(body2)
         con.query(`DELETE FROM santuario`)
         con.query(`INSERT INTO santuario (perk_1, perk_2, perk_3, perk_4) VALUES ('${body2.perks[0].id.toLowerCase()}', '${body2.perks[1].id.toLowerCase()}', '${body2.perks[2].id.toLowerCase()}', '${body2.perks[3].id.toLowerCase()}')`)
+        }
       })
     })
     return;
@@ -2145,9 +2155,12 @@ function getSteamProfile(steamid, channelid, userid, serverid, isSurv, language)
       var body = Buffer.concat(bodyChunks_);
       if (body.includes("<html><head><title>Bad Request</title>")) return user.send("Perfil de steam no encontrado.")
       if (isEmptyObject(body)) return user.send("Perfil de steam no encontrado.")
+      console.log(`status: ${res.statusCode}`)
+      if(res.statusCode == 200 || res.statusCode == 201) {
       body = JSON.parse(body)
       if (body.response.players[0].profilestate != 1) return user.send("El perfil ingresado no está en 'público'.")
       getStats(body, channelid, user, steamid, isSurv, language)
+      }
     })
   })
 }
