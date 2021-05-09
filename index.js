@@ -1702,13 +1702,14 @@ function getStats(data_steam, channelid, user, steamid, isSurv, language) {
       bodyChunks_.push(chunk);
     }).on('end', function () {
       var body = Buffer.concat(bodyChunks_);
+      console.log(`australian site code: ${res.statusCode}`)
+      if (isEmptyObject(body)) return postStats(steamid, channelid, user, language)
       if(res.statusCode == 200 || res.statusCode == 201) {
       body = JSON.parse(body)
-      if (isEmptyObject(body)) postStats(steamid, channelid, user, language)
-      else if (body.killer_rank == 20 && body.killed == 0 && body.sacrificed == 0 && body.bloodpoints == 0) sendEmbedError(1, user, channelid, language)
+      if (body.killer_rank == 20 && body.killed == 0 && body.sacrificed == 0 && body.bloodpoints == 0) sendEmbedError(1, user, channelid, language)
       else sendEmbedStats(channelid, isSurv, data_steam, body, language) 
       return;
-      } else return
+      } else return message.author.send('Ocurrió un error al intentar encontrar tu cuenta,.')
     })
   })
 }
@@ -2158,12 +2159,11 @@ function getSteamProfile(steamid, channelid, userid, serverid, isSurv, language)
       if (res.statusCode == 200 || res.statusCode == 201) {
         body = JSON.parse(body)
         if (body.response && body.response.players && body.response.players[0].profilestate) {
-          console.log(`profile state here: ${JSON.stringify(body.response.players[0])}`)
           if (body.response.players[0].profilestate != 1) return user.send("El perfil ingresado no está en 'público'.")
           getStats(body, channelid, user, steamid, isSurv, language)
-        }
-        console.log(`not state here: ${JSON.stringify(body)}`)
-      }
+          return
+        } else return message.author.send("Tu perfil de steam no pudo ser encontrado.")
+      } else return message.author.send("Tu perfil de steam no pudo ser encontrado.")
     })
   })
 }
