@@ -1697,7 +1697,7 @@ function getStats(data_steam, channelid, user, steamid, isSurv, language) {
   var options = {
     host: "dbd.onteh.net.au",
     path: "/api/playerstats?steamid=" + steamid,
-    headers: {'User-Agent': 'EntityBot/'+version_bot}
+    headers: { 'User-Agent': 'EntityBot/' + version_bot }
   };
   https.get(options, function (res) {
     var bodyChunks_ = [];
@@ -1706,12 +1706,13 @@ function getStats(data_steam, channelid, user, steamid, isSurv, language) {
     }).on('end', function () {
       var body = Buffer.concat(bodyChunks_);
       console.log(`australian site code: ${res.statusCode}`)
-      if(res.statusCode == 200 || res.statusCode == 201) {
-      body = JSON.parse(body)
-      if (body.killer_rank == 20 && body.killed == 0 && body.sacrificed == 0 && body.bloodpoints == 0) sendEmbedError(1, user, channelid, language)
-      else sendEmbedStats(channelid, isSurv, data_steam, body, language) 
-      return;
+      if (res.statusCode == 200 || res.statusCode == 201) {
+        body = JSON.parse(body)
+        if (body.killer_rank == 20 && body.killed == 0 && body.sacrificed == 0 && body.bloodpoints == 0) sendEmbedError(1, user, channelid, language)
+        else sendEmbedStats(channelid, isSurv, data_steam, body, language)
+        return;
       } else return postStats(steamid, channelid, user, language)
+    })
   })
 }
 
