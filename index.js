@@ -864,7 +864,7 @@ client.on("message", async (message) => {
         }
         else if (text.includes('steamcommunity.com/profiles/')) {
           //Perfil con SteamID64.
-          let steamid = text.slice(text.indexOf("profiles/")+10, text.length)
+          let steamid = text.slice(text.indexOf("profiles/")+9, text.length)
           steamid = steamid.replace("/", "")
           getSteamProfile(steamid, message.channel.id, message.author.id, message.guild.id, isSurv, 0)
           return
