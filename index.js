@@ -864,13 +864,15 @@ client.on("message", async (message) => {
         }
         else if (text.includes('steamcommunity.com/profiles/')) {
           //Perfil con SteamID64.
-          let steamid = text.slice(28, text.length)
+          let steamid = text.slice(text.indexOf("profiles/")+10, text.length)
+          steamid = steamid.replace("/", "")
           getSteamProfile(steamid, message.channel.id, message.author.id, message.guild.id, isSurv, 0)
           return
         }
         else if (text.includes('steamcommunity.com/id/')) {
           //Perfil con Vanityurl.
           text = text.slice(text.indexOf("/id/") + 4, text.length)
+          text = text.replace("/", "")
           var options = {
             host: 'api.steampowered.com',
             path: '/ISteamUser/ResolveVanityURL/v0001/?key=DF0A08E817CCE67F129D35FFFB14901A&vanityurl=' + text,
