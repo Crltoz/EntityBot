@@ -1772,7 +1772,7 @@ function handleDisconnect() {
  */
 function verifyShrine() {
   const time = new Date();
-  if (time.toUTCString().toLowerCase().includes('wed') && time.cache.getUTCHours() == '0' && time.getUTCMinutes() == '1' && actualizar == '1') {
+  if (time.toUTCString().toLowerCase().includes('wed') && time.getUTCHours() == '0' && time.getUTCMinutes() == '1' && actualizar == '1') {
     actualizar = 0;
     setTimeout(() => {
       actualizar = 1;
@@ -1831,7 +1831,7 @@ Date.prototype.toMysqlFormat = function () {
 
 /**
  * @param {ArrayBuffer} buffer - Buffer with information
- * @description Return if steam account is private.
+ * @description Return if steam account is private. DEPRECATED.
  */
 function verifyPrivate(buffer) {
   var state_1 = buffer.slice(buffer.indexOf('"state"') + 9)
