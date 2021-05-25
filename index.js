@@ -624,8 +624,10 @@ client.on("message", async (message) => {
             name: "SACA_LA_MANO.jpg"
           }]
         });
-        message.channel.send('Estoy actualmente en **' + client.guilds.cache.size + '** servidores.')
-        message.channel.send('Y **'+client.users.cache.size+'** usuarios tienen acceso a mis funcionalidades.')
+        let users = await client.users.cache.size
+        let servers = await client.guilds.cache.size
+        message.channel.send('Estoy actualmente en **' + servers + '** servidores.')
+        message.channel.send('Y **'+users+'** usuarios tienen acceso a mis funcionalidades.')
         return;
       }
 
