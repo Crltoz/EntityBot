@@ -21,8 +21,6 @@ var killerPerks = {}
 var survivors = {}
 var killers = {}
 
-
-
 /* Const levels */
 const Niveles = 3;
 
@@ -627,6 +625,7 @@ client.on("message", async (message) => {
           }]
         });
         message.channel.send('Estoy actualmente en **' + client.guilds.cache.size + '** servidores.')
+        message.channel.send('Y **'+client.users.cache.size+'** usuarios tienen acceso a mis funcionalidades.')
         return;
       }
 
