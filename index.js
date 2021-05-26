@@ -1363,7 +1363,7 @@ client.on("message", async (message) => {
   }
 });
 
-function createLevelImage(message, initialLevel, targetLevel, bloodpoints, language) {
+async function createLevelImage(message, initialLevel, targetLevel, bloodpoints, language) {
   const canvas = Canvas.createCanvas(541, 447);
     const ctx = canvas.getContext('2d');
     let fontSize = 10
