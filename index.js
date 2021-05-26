@@ -2071,7 +2071,7 @@ async function createRandomBuild(message, numberCharacter, numberPerk1, numberPe
 
       ctx.font = '101px "dbd"';
       ctx.fillStyle = '#ffffff';
-      ctx.fillText(survivors[numberCharacter].name, calculateCenter(survivors[numberCharacter].name.length, fontSize), 207);
+      ctx.fillText(survivors[numberCharacter].name, calculateCenter(1267, survivors[numberCharacter].name.length, fontSize), 207);
       const avatar = await Canvas.loadImage(survivors[numberCharacter].link);
       ctx.drawImage(avatar, 1045, 227, 447, 619);
       let perkImageName = [getImageName(numberPerk1, isSurv), getImageName(numberPerk2, isSurv), getImageName(numberPerk3, isSurv), getImageName(numberPerk4, isSurv)]
@@ -2100,7 +2100,7 @@ async function createRandomBuild(message, numberCharacter, numberPerk1, numberPe
       ctx.font = '101px "dbd"';
       ctx.fillStyle = '#ffffff';
       let string = language == 0 ? killers[numberCharacter].nameEs:killers[numberCharacter].nameEn
-      ctx.fillText(string, calculateCenter(string.length, fontSize), 207);
+      ctx.fillText(string, calculateCenter(1267, string.length, fontSize), 207);
       const avatar = await Canvas.loadImage(killers[numberCharacter].link);
       ctx.drawImage(avatar, 1045, 227, 447, 619);
       let perkImageName = [getImageName(numberPerk1, isSurv), getImageName(numberPerk2, isSurv), getImageName(numberPerk3, isSurv), getImageName(numberPerk4, isSurv)]
@@ -2186,9 +2186,8 @@ async function getImage(name, isSurv)
   return object
 }
 
-function calculateCenter(letters, fontSize){
-  const posX = 1267;
-  return posX-(letters*fontSize)
+function calculateCenter(x, letters, fontSize){
+  return x-(letters*fontSize)
 }
 
 function getImageName(index, isSurv){
