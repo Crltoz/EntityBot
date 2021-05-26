@@ -12,6 +12,7 @@ const Canvas = require("canvas")
 // Image generator
 const background_killer = "assets/Visuals/Background/random_killer.jpg"
 const background_survivor = "assets/Visuals/Background/random_survivor.jpg"
+const background_level = "assets/Visuals/Background/level.jpg"
 const font = "./assets/Font/BRUTTALL.ttf"
 Canvas.registerFont(font, { family: "dbd" })
 
@@ -906,18 +907,7 @@ client.on("message", async (message) => {
         if (parseInt(args[1]) % 1 != '0' || parseInt(args[0]) % 1 != '0') return message.member.send('El nivel no puede tener comas.').catch(function (err) { message.channel.send(message.member.user.toString()+ ' Activa tus mensajes privados para que el bot pueda informarte.') });
         LC[message.author.id] = 0;
         let sangre = ObtenerValor(parseInt(args[0]), parseInt(args[1]), message.author.id)
-        const embed = new Discord.MessageEmbed()
-          .setThumbnail(message.member.user.avatarURL())
-          .setAuthor(message.member.displayName + '#' + message.member.user.discriminator, message.member.user.avatarURL())
-          .setTitle('| Subir Nivel |')
-          .setURL('https://deadbydaylight.gamepedia.com/Dead_by_Daylight_Wiki')
-          .addField('Puntos de Sangre necesarios <:bp:724724401333076071>', '**' + Coma(sangre) + '**', true)
-          .addField('Niveles comprados', '**' + LC[message.author.id] + '**', true)
-          .addField('ㅤ', 'ㅤ')
-          .addField('Nivel Inicial', '**' + args[0] + '**', true)
-          .addField('Nivel Final', '**' + args[1] + '**', true)
-          .setColor(0xFF0000)
-        message.channel.send({ embed });
+        createLevelImage(message, args[0], args[1], sangre, lenguaje[message.guild.id])
         return;
       }
 
@@ -1284,18 +1274,7 @@ client.on("message", async (message) => {
         if (parseInt(args[1]) % 1 != '0' || parseInt(args[0]) % 1 != '0') return message.member.send('Level can not contain commas').catch(function (err) { message.channel.send(message.member.user.toString()+ ' Activate your private messagges so the bot can inform you.') });
         LC[message.author.id] = 0;
         let sangre = ObtenerValor(parseInt(args[0]), parseInt(args[1]), message.author.id)
-        const embed = new Discord.MessageEmbed()
-          .setThumbnail(message.member.user.avatarURL())
-          .setAuthor(message.member.displayName + '#' + message.member.user.discriminator, message.member.user.avatarURL())
-          .setTitle('| Level Up |')
-          .setURL('https://deadbydaylight.gamepedia.com/Dead_by_Daylight_Wiki')
-          .addField('Bloodpoints <:bp:724724401333076071>', '**' + Coma(sangre) + '**', true)
-          .addField('Levels bought', '**' + LC[message.author.id] + '**', true)
-          .addField('ㅤ', 'ㅤ')
-          .addField('Start Level', '**' + args[0] + '**', true)
-          .addField('Final Level', '**' + args[1] + '**', true)
-          .setColor(0xFF0000)
-        message.channel.send({ embed });
+        createLevelImage(message, args[0], args[1], sangre, lenguaje[message.guild.id])
         return;
       }
 
@@ -1383,6 +1362,30 @@ client.on("message", async (message) => {
     }
   }
 });
+
+function createLevelImage(message, initialLevel, targetLevel, bloodpoints, language) {
+  const canvas = Canvas.createCanvas(541, 447);
+    const ctx = canvas.getContext('2d');
+    let fontSize = 10
+    const background = await Canvas.loadImage(background_level);
+    ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
+
+    ctx.strokeStyle = '#74037b';
+    ctx.strokeRect(0, 0, canvas.width, canvas.height);
+
+    // Slightly smaller text placed above the member's display name
+    ctx.font = '50px "dbd"';
+    ctx.fillStyle = '#ffffff';
+    let levelHeader = language == 0 ? "Nivel" : "Level"
+  
+    ctx.fillText(levelHeader, calculateCenter(270, levelHeader.length, fontSize), 75);
+    ctx.fillText(initialLevel, calculateCenter(113, initialLevel.toString().length, fontSize), 210);
+    ctx.fillText(targetLevel, calculateCenter(419, targetLevel.toString().length, fontSize), 213);
+    ctx.fillText(Coma(bloodpoints), calculateCenter(290, bloodpoints.toString().length, fontSize), 355);
+
+    const attachment = new Discord.MessageAttachment(canvas.toBuffer(), 'calculate-image.png');
+    message.channel.send('‎      ‏‏‎', attachment)
+}
 
 function ObtenerValor(nivel, Deseado, id) {
   var total = 0;
