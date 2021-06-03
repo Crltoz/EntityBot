@@ -12,6 +12,7 @@ const Canvas = require("canvas")
 // Image generator
 const background_killer = "assets/Visuals/Background/random_killer.jpg"
 const background_survivor = "assets/Visuals/Background/random_survivor.jpg"
+const background_level = "assets/Visuals/Background/level.jpg"
 const font = "./assets/Font/BRUTTALL.ttf"
 Canvas.registerFont(font, { family: "dbd" })
 
@@ -20,8 +21,6 @@ var survivorPerks = {}
 var killerPerks = {}
 var survivors = {}
 var killers = {}
-
-
 
 /* Const levels */
 const Niveles = 3;
@@ -91,7 +90,7 @@ client.on("ready", () => {
 client.on("guildCreate", guild => {
 
   let defaultChannel = "";
-  guild.channels.forEach((channel) => {
+  guild.channels.cache.forEach((channel) => {
     if (channel.type == "text" && defaultChannel == "") {
       if (channel.permissionsFor(guild.me).has("SEND_MESSAGES")) {
         defaultChannel = channel;
@@ -100,7 +99,7 @@ client.on("guildCreate", guild => {
   })
   lenguaje[guild.id] = 0
   defaultChannel.send("**Gracias por añadirme!** :white_check_mark:\n**-** Mi prefijo es `/`\n**-** Puedes ver mis comandos con `/ayuda`\n**-** Change the bot language with `/english`")
-  client.channels.get('739997803094343721').send('| Nuevo servidor | Nombre: ' + guild.name + ' | Usuarios: ' + guild.memberCount)
+  client.channels.cache.get('739997803094343721').send('| Nuevo servidor | Nombre: ' + guild.name + ' | Usuarios: ' + guild.memberCount)
 })
 
 
@@ -210,8 +209,8 @@ client.on("message", async (message) => {
       LC[message.author.id] = 0;
       let sangre = ObtenerValor(parseInt(n1[message.author.id]), parseInt(message.content), message.author.id)
       const embed = new Discord.MessageEmbed()
-        .setThumbnail(message.member.user.avatarURL)
-        .setAuthor(message.member.displayName + '#' + message.member.user.discriminator, message.member.user.avatarURL)
+        .setThumbnail(message.member.user.avatarURL())
+        .setAuthor(message.member.displayName + '#' + message.member.user.discriminator, message.member.user.avatarURL())
         .setTitle('| Subir Nivel |')
         .setURL('https://deadbydaylight.gamepedia.com/Dead_by_Daylight_Wiki')
         .addField('Puntos de Sangre necesarios <:bp:724724401333076071>', '**' + Coma(sangre) + '**', true)
@@ -287,8 +286,8 @@ client.on("message", async (message) => {
       DBC[message.author.id] = necesitaperks;
       let NivelValor = ObtenerNP(NivelPJ[message.author.id], message.author.id)
       const embed = new Discord.MessageEmbed()
-        .setThumbnail(message.member.user.avatarURL)
-        .setAuthor(message.member.displayName + '#' + message.member.user.discriminator, message.member.user.avatarURL)
+        .setThumbnail(message.member.user.avatarURL())
+        .setAuthor(message.member.displayName + '#' + message.member.user.discriminator, message.member.user.avatarURL())
         .setTitle('| Comprar todas las Perks de Killer |')
         .setURL('https://deadbydaylight.gamepedia.com/Dead_by_Daylight_Wiki')
         .addField('Puntos de Sangre necesarios <:bp:724724401333076071>', '**' + Coma(NivelValor) + '**', true)
@@ -361,8 +360,8 @@ client.on("message", async (message) => {
       DBC[message.author.id] = necesitaperks;
       let NivelValor = ObtenerNP(NivelPJ[message.author.id], message.author.id)
       const embed = new Discord.MessageEmbed()
-        .setThumbnail(message.member.user.avatarURL)
-        .setAuthor(message.member.user.username + '#' + message.member.user.discriminator, message.member.user.avatarURL)
+        .setThumbnail(message.member.user.avatarURL())
+        .setAuthor(message.member.user.username + '#' + message.member.user.discriminator, message.member.user.avatarURL())
         .setTitle('| Comprar todas las Perks de Survivor |')
         .setURL('https://deadbydaylight.gamepedia.com/Dead_by_Daylight_Wiki')
         .addField('Puntos de Sangre necesarios <:bp:724724401333076071>', '**' + Coma(NivelValor) + '**', true)
@@ -408,8 +407,8 @@ client.on("message", async (message) => {
       LC[message.author.id] = 0;
       let sangre = ObtenerValor(parseInt(n1[message.author.id]), parseInt(message.content), message.author.id)
       const embed = new Discord.MessageEmbed()
-        .setThumbnail(message.member.user.avatarURL)
-        .setAuthor(message.member.displayName + '#' + message.member.user.discriminator, message.member.user.avatarURL)
+        .setThumbnail(message.member.user.avatarURL())
+        .setAuthor(message.member.displayName + '#' + message.member.user.discriminator, message.member.user.avatarURL())
         .setTitle('| Level Up |')
         .setURL('https://deadbydaylight.gamepedia.com/Dead_by_Daylight_Wiki')
         .addField('Bloodpoints needed <:bp:724724401333076071>', '**' + Coma(sangre) + '**', true)
@@ -485,8 +484,8 @@ client.on("message", async (message) => {
       DBC[message.author.id] = necesitaperks;
       let NivelValor = ObtenerNP(NivelPJ[message.author.id], message.author.id)
       const embed = new Discord.MessageEmbed()
-        .setThumbnail(message.member.user.avatarURL)
-        .setAuthor(message.member.displayName + '#' + message.member.user.discriminator, message.member.user.avatarURL)
+        .setThumbnail(message.member.user.avatarURL())
+        .setAuthor(message.member.displayName + '#' + message.member.user.discriminator, message.member.user.avatarURL())
         .setTitle('| Buy all the killer perks |')
         .setURL('https://deadbydaylight.gamepedia.com/Dead_by_Daylight_Wiki')
         .addField('Bloodpoints needed <:bp:724724401333076071>', '**' + Coma(NivelValor) + '**', true)
@@ -559,8 +558,8 @@ client.on("message", async (message) => {
       DBC[message.author.id] = necesitaperks;
       let NivelValor = ObtenerNP(NivelPJ[message.author.id], message.author.id)
       const embed = new Discord.MessageEmbed()
-        .setThumbnail(message.member.user.avatarURL)
-        .setAuthor(message.member.user.username + '#' + message.member.user.discriminator, message.member.user.avatarURL)
+        .setThumbnail(message.member.user.avatarURL())
+        .setAuthor(message.member.user.username + '#' + message.member.user.discriminator, message.member.user.avatarURL())
         .setTitle('| Buy all the survivor perks |')
         .setURL('https://deadbydaylight.gamepedia.com/Dead_by_Daylight_Wiki')
         .addField('Bloodpoints needed <:bp:724724401333076071>', '**' + Coma(NivelValor) + '**', true)
@@ -581,7 +580,7 @@ client.on("message", async (message) => {
   if (message.content.startsWith(prefix[message.guild.id])) {
     if (lenguaje[message.guild.id] == 0) {
       if (cid[message.guild.id] != null && message.channel.id != cid[message.guild.id]) {
-        const disc = client.channels.get(cid[message.guild.id]);
+        const disc = client.channels.cache.get(cid[message.guild.id]);
         message.channel.send('Las utilidades del bot solo pueden ser usadas en el canal de: ' + disc)
         return;
       }
@@ -626,7 +625,12 @@ client.on("message", async (message) => {
             name: "SACA_LA_MANO.jpg"
           }]
         });
+        let users = 0;
+        client.guilds.cache.forEach((guild) => {
+          users += guild.memberCount
+        });
         message.channel.send('Estoy actualmente en **' + client.guilds.cache.size + '** servidores.')
+        message.channel.send('Y **' + users + '** usuarios tienen acceso a mis funcionalidades.')
         return;
       }
 
@@ -648,9 +652,11 @@ client.on("message", async (message) => {
             bodyChunks2.push(chunk);
           }).on('end', function () {
             var body2 = Buffer.concat(bodyChunks2);
-            body2 = JSON.parse(body2)
-            con.query(`DELETE FROM santuario`)
-            con.query(`INSERT INTO santuario (perk_1, perk_2, perk_3, perk_4) VALUES ('${body2.perks[0].id.toLowerCase()}', '${body2.perks[1].id.toLowerCase()}', '${body2.perks[2].id.toLowerCase()}', '${body2.perks[3].id.toLowerCase()}')`)
+            if(res.statusCode == 200 || res.statusCode == 201) {
+              body2 = JSON.parse(body2)
+              con.query(`DELETE FROM santuario`)
+              con.query(`INSERT INTO santuario (perk_1, perk_2, perk_3, perk_4) VALUES ('${body2.perks[0].id.toLowerCase()}', '${body2.perks[1].id.toLowerCase()}', '${body2.perks[2].id.toLowerCase()}', '${body2.perks[3].id.toLowerCase()}')`)
+            }
           })
         })
         return;
@@ -669,7 +675,7 @@ client.on("message", async (message) => {
             return
           }
           const embed = new Discord.MessageEmbed()
-            .setThumbnail(message.member.user.avatarURL)
+            .setThumbnail(message.member.user.avatarURL())
             .setAuthor('| ' + message.author.tag + ' |',)
             .setTitle('🈴 Santuario de los secretos:')
             .setURL('https://deadbydaylight.gamepedia.com/Dead_by_Daylight_Wiki')
@@ -685,7 +691,7 @@ client.on("message", async (message) => {
           const embedd = new Discord.MessageEmbed()
             .setColor('#FF0000')
             .setTitle('🔰 Ayuda - Comandos 🔰')
-            .setAuthor(message.member.user.tag, message.member.user.avatarURL)
+            .setAuthor(message.member.user.tag, message.member.user.avatarURL())
             .setURL('https://deadbydaylight.gamepedia.com/Dead_by_Daylight_Wiki')
             .setThumbnail(client.user.avatarURL())
             .addField(prefix[message.guild.id] + 'discord', 'Para más info: **' + prefix[message.guild.id] + 'ayuda discord**')
@@ -707,7 +713,7 @@ client.on("message", async (message) => {
           const embedd = new Discord.MessageEmbed()
             .setColor('#FF0000')
             .setTitle('🔰 Ayuda - Admins 🔰')
-            .setAuthor(message.member.user.tag, message.member.user.avatarURL)
+            .setAuthor(message.member.user.tag, message.member.user.avatarURL())
             .setURL('https://deadbydaylight.gamepedia.com/Dead_by_Daylight_Wiki')
             .setThumbnail(client.user.avatarURL())
             .addField(prefix[message.guild.id] + 'prefijo [Opción]', 'Reemplaza **Opción** por el prefijo de comandos que te gustaría usar. Default: **/** | Opciones: **!**, **#**, **%**, **&**, **/**, **.** y **-**')
@@ -721,7 +727,7 @@ client.on("message", async (message) => {
           const embedd = new Discord.MessageEmbed()
             .setColor('#FF0000')
             .setTitle('🔰 ' + prefix[message.guild.id] + 'discord 🔰')
-            .setAuthor(message.member.user.tag, message.member.user.avatarURL)
+            .setAuthor(message.member.user.tag, message.member.user.avatarURL())
             .setURL('https://deadbydaylight.gamepedia.com/Dead_by_Daylight_Wiki')
             .setThumbnail(client.user.avatarURL())
             .addField('¿Para qué sirve?', 'Este comando te enviará el link para unir el bot al servidor que quieras y poder usarlo allí.')
@@ -734,7 +740,7 @@ client.on("message", async (message) => {
           const embedd = new Discord.MessageEmbed()
             .setColor('#FF0000')
             .setTitle('🔰 ' + prefix[message.guild.id] + 'calcular [Killer o Survivor] 🔰')
-            .setAuthor(message.member.user.tag, message.member.user.avatarURL)
+            .setAuthor(message.member.user.tag, message.member.user.avatarURL())
             .setURL('https://deadbydaylight.gamepedia.com/Dead_by_Daylight_Wiki')
             .setThumbnail(client.user.avatarURL())
             .addField('¿Para qué sirve?', 'Este comando es para calcular cuántos __puntos de sangre__ son necesarios para comprar todas las habilidades de todos los personajes. Se te preguntará la cantidad de perks que tengas con un personaje, y en base a eso el bot calculará las faltantes y cuántos puntos de sangre te costaría.')
@@ -748,7 +754,7 @@ client.on("message", async (message) => {
           const embedd = new Discord.MessageEmbed()
             .setColor('#FF0000')
             .setTitle('🔰 ' + prefix[message.guild.id] + 'stats [Killer o Survivor] [URL Perfil Steam o Código de amigo] 🔰')
-            .setAuthor(message.member.user.tag, message.member.user.avatarURL)
+            .setAuthor(message.member.user.tag, message.member.user.avatarURL())
             .setURL('https://deadbydaylight.gamepedia.com/Dead_by_Daylight_Wiki')
             .setThumbnail(client.user.avatarURL())
             .addField('¿Para qué sirve?', 'Podrás obtener las estadísticas de un jugador de Steam de Dead By Daylight, recuerda que debe estar en público todas las configuraciones de privacidad.')
@@ -762,7 +768,7 @@ client.on("message", async (message) => {
           const embedd = new Discord.MessageEmbed()
             .setColor('#FF0000')
             .setTitle('🔰 ' + prefix[message.guild.id] + 'nivel [Nivel Actual] [Nivel Deseado] 🔰')
-            .setAuthor(message.member.user.tag, message.member.user.avatarURL)
+            .setAuthor(message.member.user.tag, message.member.user.avatarURL())
             .setURL('https://deadbydaylight.gamepedia.com/Dead_by_Daylight_Wiki')
             .setThumbnail(client.user.avatarURL())
             .addField('¿Para qué sirve?', 'Calcula los puntos de sangre necesarios para comprar los niveles de la red de sangre que quieras.')
@@ -776,7 +782,7 @@ client.on("message", async (message) => {
           const embedd = new Discord.MessageEmbed()
             .setColor('#FF0000')
             .setTitle('🔰 ' + prefix[message.guild.id] + 'lobby 🔰')
-            .setAuthor(message.member.user.tag, message.member.user.avatarURL)
+            .setAuthor(message.member.user.tag, message.member.user.avatarURL())
             .setURL('https://deadbydaylight.gamepedia.com/Dead_by_Daylight_Wiki')
             .setThumbnail(client.user.avatarURL())
             .addField('¿Para qué sirve?', 'El lobby tiene funciones como la de los comandos, pero se utiliza a través de reacciones para que las personas que no les gusta usar comandos puedan usar otra alternativa.')
@@ -789,7 +795,7 @@ client.on("message", async (message) => {
           const embedd = new Discord.MessageEmbed()
             .setColor('#FF0000')
             .setTitle('🔰 ' + prefix[message.guild.id] + 'random [Survivor o Killer] 🔰')
-            .setAuthor(message.member.user.tag, message.member.user.avatarURL)
+            .setAuthor(message.member.user.tag, message.member.user.avatarURL())
             .setURL('https://deadbydaylight.gamepedia.com/Dead_by_Daylight_Wiki')
             .setThumbnail(client.user.avatarURL())
             .addField('¿Para qué sirve?', 'Este comando te dará un asesino o superviviente totalmente aleatorio, con una build de 4 perks al azar.')
@@ -802,7 +808,7 @@ client.on("message", async (message) => {
           const embedd = new Discord.MessageEmbed()
             .setColor('#FF0000')
             .setTitle('🔰 Ayuda - Comandos 🔰')
-            .setAuthor(message.member.user.tag, message.member.user.avatarURL)
+            .setAuthor(message.member.user.tag, message.member.user.avatarURL())
             .setURL('https://deadbydaylight.gamepedia.com/Dead_by_Daylight_Wiki')
             .setThumbnail(client.user.avatarURL())
             .addField(prefix[message.guild.id] + 'discord', 'Para más info: **' + prefix[message.guild.id] + 'ayuda discord**')
@@ -830,7 +836,7 @@ client.on("message", async (message) => {
           if (rows.length >= 1) {
             con.query(`UPDATE Servidores SET Prefix = '${texto}' WHERE ID = ${message.guild.id}`)
           } else {
-            con.query(`INSERT INTO Servidores (ID, cid, Prefijo) VALUES ('${message.guild.id}', 'null', '${texto}')`)
+            con.query(`INSERT INTO Servidores (ID, cid, prefix) VALUES ('${message.guild.id}', 'null', '${texto}')`)
           }
         })
         prefix[message.guild.id] = texto;
@@ -862,13 +868,15 @@ client.on("message", async (message) => {
         }
         else if (text.includes('steamcommunity.com/profiles/')) {
           //Perfil con SteamID64.
-          let steamid = text.slice(28, text.length)
+          let steamid = text.slice(text.indexOf("profiles/")+9, text.length)
+          steamid = steamid.replace("/", "")
           getSteamProfile(steamid, message.channel.id, message.author.id, message.guild.id, isSurv, 0)
           return
         }
         else if (text.includes('steamcommunity.com/id/')) {
           //Perfil con Vanityurl.
           text = text.slice(text.indexOf("/id/") + 4, text.length)
+          text = text.replace("/", "")
           var options = {
             host: 'api.steampowered.com',
             path: '/ISteamUser/ResolveVanityURL/v0001/?key=DF0A08E817CCE67F129D35FFFB14901A&vanityurl=' + text,
@@ -880,10 +888,12 @@ client.on("message", async (message) => {
               bodyChunks_.push(chunk);
             }).on('end', function () {
               var body3 = Buffer.concat(bodyChunks_);
+              if(res.statusCode == 200 || res.statusCode == 201) {
               body3 = JSON.parse(body3)
               if (isEmptyObject(body3)) return message.author.send("URL de perfil inválido.")
               if (body3.response.success != 1) return message.author.send("URL de perfil inválido.")
               getSteamProfile(body3.response.steamid, message.channel.id, message.author.id, message.guild.id, isSurv, 0)
+              } else return message.author.send("URL de perfil inválido.")
             })
           })
           return
@@ -897,18 +907,7 @@ client.on("message", async (message) => {
         if (parseInt(args[1]) % 1 != '0' || parseInt(args[0]) % 1 != '0') return message.member.send('El nivel no puede tener comas.').catch(function (err) { message.channel.send(message.member.user.toString()+ ' Activa tus mensajes privados para que el bot pueda informarte.') });
         LC[message.author.id] = 0;
         let sangre = ObtenerValor(parseInt(args[0]), parseInt(args[1]), message.author.id)
-        const embed = new Discord.MessageEmbed()
-          .setThumbnail(message.member.user.avatarURL)
-          .setAuthor(message.member.displayName + '#' + message.member.user.discriminator, message.member.user.avatarURL)
-          .setTitle('| Subir Nivel |')
-          .setURL('https://deadbydaylight.gamepedia.com/Dead_by_Daylight_Wiki')
-          .addField('Puntos de Sangre necesarios <:bp:724724401333076071>', '**' + Coma(sangre) + '**', true)
-          .addField('Niveles comprados', '**' + LC[message.author.id] + '**', true)
-          .addField('ㅤ', 'ㅤ')
-          .addField('Nivel Inicial', '**' + args[0] + '**', true)
-          .addField('Nivel Final', '**' + args[1] + '**', true)
-          .setColor(0xFF0000)
-        message.channel.send({ embed });
+        createLevelImage(message, args[0], args[1], sangre, lenguaje[message.guild.id])
         return;
       }
 
@@ -940,7 +939,7 @@ client.on("message", async (message) => {
           }
         })
         cid[message.guild.id] = channel_id;
-        let canal = client.channels.get(channel_id)
+        let canal = client.channels.cache.get(channel_id)
         message.channel.send('A partir de ahora los comandos sólo funcionarán en: ' + canal)
         return;
       }
@@ -955,7 +954,6 @@ client.on("message", async (message) => {
           .setAuthor('Entidad', client.user.avatarURL())
           .setDescription('Selecciona el emoji de reacción para activar una función:')
           .setThumbnail(client.user.avatarURL())
-          .addBlankField()
           .addField('1⃣ Calcular puntos de sangre de nivel a nivel.', 'Selecciona el nivel que tienes con tu personaje y al que quieres llegar, y te diré los puntos de sangre necesarios.')
           .addField('2⃣ Survivor random con 4 perks.', 'Te asignaré un survivor random con 4 perks.')
           .addField('3⃣ Killer random con 4 perks.', 'Te asignaré un killer random con 4 perks.')
@@ -998,7 +996,7 @@ client.on("message", async (message) => {
       message.member.send('El comando no existe. Usa '+ prefix[message.guild.id] +'**ayuda** para ver todas las funciones y comandos.')
     } else {
       if (cid[message.guild.id] != null && message.channel.id != cid[message.guild.id]) {
-        const disc = client.channels.get(cid[message.guild.id]);
+        const disc = client.channels.cache.get(cid[message.guild.id]);
         message.channel.send('The bot utilities can only be used in the channel:' + disc)
         return;
       }
@@ -1031,7 +1029,7 @@ client.on("message", async (message) => {
             return
           }
           const embed = new Discord.MessageEmbed()
-            .setThumbnail(message.member.user.avatarURL)
+            .setThumbnail(message.member.user.avatarURL())
             .setAuthor('| ' + message.author.tag + ' |',)
             .setTitle('🈴 Shrine of Secrets:')
             .setURL('https://deadbydaylight.gamepedia.com/Dead_by_Daylight_Wiki')
@@ -1047,7 +1045,7 @@ client.on("message", async (message) => {
           const embedd = new Discord.MessageEmbed()
             .setColor('#FF0000')
             .setTitle('🔰 Help - Commands 🔰')
-            .setAuthor(message.member.user.tag, message.member.user.avatarURL)
+            .setAuthor(message.member.user.tag, message.member.user.avatarURL())
             .setURL('https://deadbydaylight.gamepedia.com/Dead_by_Daylight_Wiki')
             .setThumbnail(client.user.avatarURL())
             .addField(prefix[message.guild.id] + 'discord', 'More info: **' + prefix[message.guild.id] + 'help discord**')
@@ -1069,7 +1067,7 @@ client.on("message", async (message) => {
           const embedd = new Discord.MessageEmbed()
             .setColor('#FF0000')
             .setTitle('🔰 Help - Admins 🔰')
-            .setAuthor(message.member.user.tag, message.member.user.avatarURL)
+            .setAuthor(message.member.user.tag, message.member.user.avatarURL())
             .setURL('https://deadbydaylight.gamepedia.com/Dead_by_Daylight_Wiki')
             .setThumbnail(client.user.avatarURL())
             .addField(prefix[message.guild.id] + 'Prefix [Option]', 'Replace **Option** with the prefix of your choice. Default: **/** | Options: **!**, **#**, **%**, **&**, **/**, **.** y **-**')
@@ -1083,7 +1081,7 @@ client.on("message", async (message) => {
           const embedd = new Discord.MessageEmbed()
             .setColor('#FF0000')
             .setTitle('🔰 ' + prefix[message.guild.id] + 'discord 🔰')
-            .setAuthor(message.member.user.tag, message.member.user.avatarURL)
+            .setAuthor(message.member.user.tag, message.member.user.avatarURL())
             .setURL('https://deadbydaylight.gamepedia.com/Dead_by_Daylight_Wiki')
             .setThumbnail(client.user.avatarURL())
             .addField('What is it for?', 'This command will send you a link to join the bot to any discord server and use it there.')
@@ -1096,7 +1094,7 @@ client.on("message", async (message) => {
           const embedd = new Discord.MessageEmbed()
             .setColor('#FF0000')
             .setTitle('🔰 ' + prefix[message.guild.id] + 'calculate [Killer or Survivor] 🔰')
-            .setAuthor(message.member.user.tag, message.member.user.avatarURL)
+            .setAuthor(message.member.user.tag, message.member.user.avatarURL())
             .setURL('https://deadbydaylight.gamepedia.com/Dead_by_Daylight_Wiki')
             .setThumbnail(client.user.avatarURL())
             .addField('What is it for?', 'This command will calculate the amount of __Bloodpoints__ that you need to buy all the perks from a caracter. It will ask you how many perks of each level you have and the bot will calculate counting those perks you dont have and giving you the aproximate cost in Bloodpoints. ')
@@ -1110,7 +1108,7 @@ client.on("message", async (message) => {
           const embedd = new Discord.MessageEmbed()
             .setColor('#FF0000')
             .setTitle('🔰 ' + prefix[message.guild.id] + 'stats [Killer or Survivor] [Steam profile URL or Steam friend code] 🔰')
-            .setAuthor(message.member.user.tag, message.member.user.avatarURL)
+            .setAuthor(message.member.user.tag, message.member.user.avatarURL())
             .setURL('https://deadbydaylight.gamepedia.com/Dead_by_Daylight_Wiki')
             .setThumbnail(client.user.avatarURL())
             .addField('What is it for?', 'It will tell you specific stats of a Dead by Daylight Steam player, remember that the steam profile privacy config must be all public.')
@@ -1124,7 +1122,7 @@ client.on("message", async (message) => {
           const embedd = new Discord.MessageEmbed()
             .setColor('#FF0000')
             .setTitle('🔰 ' + prefix[message.guild.id] + 'level [Current Level] [Level wanted] 🔰')
-            .setAuthor(message.member.user.tag, message.member.user.avatarURL)
+            .setAuthor(message.member.user.tag, message.member.user.avatarURL())
             .setURL('https://deadbydaylight.gamepedia.com/Dead_by_Daylight_Wiki')
             .setThumbnail(client.user.avatarURL())
             .addField('What is it for?', 'It calculate the amaount of Bloodpoints to buy those levels of bloodweb you want.')
@@ -1138,7 +1136,7 @@ client.on("message", async (message) => {
           const embedd = new Discord.MessageEmbed()
             .setColor('#FF0000')
             .setTitle('🔰 ' + prefix[message.guild.id] + 'lobby 🔰')
-            .setAuthor(message.member.user.tag, message.member.user.avatarURL)
+            .setAuthor(message.member.user.tag, message.member.user.avatarURL())
             .setURL('https://deadbydaylight.gamepedia.com/Dead_by_Daylight_Wiki')
             .setThumbnail(client.user.avatarURL())
             .addField('What is it for?', 'The lobby works like the commands, but using reactions for those users that doesnt like using commands.')
@@ -1151,7 +1149,7 @@ client.on("message", async (message) => {
           const embedd = new Discord.MessageEmbed()
             .setColor('#FF0000')
             .setTitle('🔰 ' + prefix[message.guild.id] + 'random [Survivor or Killer] 🔰')
-            .setAuthor(message.member.user.tag, message.member.user.avatarURL)
+            .setAuthor(message.member.user.tag, message.member.user.avatarURL())
             .setURL('https://deadbydaylight.gamepedia.com/Dead_by_Daylight_Wiki')
             .setThumbnail(client.user.avatarURL())
             .addField('What is it for?', 'It will show you a random 4 perk build for a random killer or survivor.')
@@ -1164,7 +1162,7 @@ client.on("message", async (message) => {
           const embedd = new Discord.MessageEmbed()
             .setColor('#FF0000')
             .setTitle('🔰 Help - Commands 🔰')
-            .setAuthor(message.member.user.tag, message.member.user.avatarURL)
+            .setAuthor(message.member.user.tag, message.member.user.avatarURL())
             .setURL('https://deadbydaylight.gamepedia.com/Dead_by_Daylight_Wiki')
             .setThumbnail(client.user.avatarURL())
             .addField(prefix[message.guild.id] + 'discord', 'More info: **' + prefix[message.guild.id] + 'help discord**')
@@ -1192,7 +1190,7 @@ client.on("message", async (message) => {
           if (rows.length >= 1) {
             con.query(`UPDATE Servidores SET Prefix = '${texto}' WHERE ID = ${message.guild.id}`)
           } else {
-            con.query(`INSERT INTO Servidores (ID, cid, Prefijo) VALUES ('${message.guild.id}', 'null', '${texto}')`)
+            con.query(`INSERT INTO Servidores (ID, cid, prefix) VALUES ('${message.guild.id}', 'null', '${texto}')`)
           }
         })
         prefix[message.guild.id] = texto;
@@ -1257,10 +1255,12 @@ client.on("message", async (message) => {
               bodyChunks_.push(chunk);
             }).on('end', function () {
               var body3 = Buffer.concat(bodyChunks_);
+              if(res.statusCode == 200 || res.statusCode == 201) {
               body3 = JSON.parse(body3)
               if (isEmptyObject(body3)) return message.author.send("Invalid URL Profile.")
               if (body3.response.success != 1) return message.author.send("Invalid URL Profile.")
               getSteamProfile(body3.response.steamid, message.channel.id, message.author.id, message.guild.id, isSurv, 0)
+              } else return message.author.send("Invalid URL Profile.")
             })
           })
           return
@@ -1274,18 +1274,7 @@ client.on("message", async (message) => {
         if (parseInt(args[1]) % 1 != '0' || parseInt(args[0]) % 1 != '0') return message.member.send('Level can not contain commas').catch(function (err) { message.channel.send(message.member.user.toString()+ ' Activate your private messagges so the bot can inform you.') });
         LC[message.author.id] = 0;
         let sangre = ObtenerValor(parseInt(args[0]), parseInt(args[1]), message.author.id)
-        const embed = new Discord.MessageEmbed()
-          .setThumbnail(message.member.user.avatarURL)
-          .setAuthor(message.member.displayName + '#' + message.member.user.discriminator, message.member.user.avatarURL)
-          .setTitle('| Level Up |')
-          .setURL('https://deadbydaylight.gamepedia.com/Dead_by_Daylight_Wiki')
-          .addField('Bloodpoints <:bp:724724401333076071>', '**' + Coma(sangre) + '**', true)
-          .addField('Levels bought', '**' + LC[message.author.id] + '**', true)
-          .addField('ㅤ', 'ㅤ')
-          .addField('Start Level', '**' + args[0] + '**', true)
-          .addField('Final Level', '**' + args[1] + '**', true)
-          .setColor(0xFF0000)
-        message.channel.send({ embed });
+        createLevelImage(message, args[0], args[1], sangre, lenguaje[message.guild.id])
         return;
       }
 
@@ -1317,7 +1306,7 @@ client.on("message", async (message) => {
           }
         })
         cid[message.guild.id] = channel_id;
-        let canal = client.channels.get(channel_id)
+        let canal = client.channels.cache.get(channel_id)
         message.channel.send('From now on the commans will work in: ' + canal)
         return;
       }
@@ -1332,7 +1321,6 @@ client.on("message", async (message) => {
           .setAuthor('Entity', client.user.avatarURL())
           .setDescription('Select the reaction emoji to activate a function:')
           .setThumbnail(client.user.avatarURL())
-          .addBlankField()
           .addField('1⃣ Calculate bloodpoints from a certain level to another.', 'Select the current level you have with a certain character and the level wanted, then it will show you the amount of bloodpoints needed.')
           .addField('2⃣ Random survivor 4 perk build.', 'It will show you a random survivor with 4 random perks.')
           .addField('3⃣ Random killer 4 perk build.', 'It will show you a random killer with 4 random perks.')
@@ -1374,6 +1362,30 @@ client.on("message", async (message) => {
     }
   }
 });
+
+async function createLevelImage(message, initialLevel, targetLevel, bloodpoints, language) {
+  const canvas = Canvas.createCanvas(541, 447);
+    const ctx = canvas.getContext('2d');
+    let fontSize = 10
+    const background = await Canvas.loadImage(background_level);
+    ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
+
+    ctx.strokeStyle = '#74037b';
+    ctx.strokeRect(0, 0, canvas.width, canvas.height);
+
+    // Slightly smaller text placed above the member's display name
+    ctx.font = '50px "dbd"';
+    ctx.fillStyle = '#ffffff';
+    let levelHeader = language == 0 ? "Nivel" : "Level"
+  
+    ctx.fillText(levelHeader, calculateCenter(270, levelHeader.length, fontSize), 75);
+    ctx.fillText(initialLevel, calculateCenter(113, initialLevel.toString().length, fontSize), 210);
+    ctx.fillText(targetLevel, calculateCenter(419, targetLevel.toString().length, fontSize), 213);
+    ctx.fillText(Coma(bloodpoints), calculateCenter(290, bloodpoints.toString().length, fontSize), 355);
+
+    const attachment = new Discord.MessageAttachment(canvas.toBuffer(), 'calculate-image.png');
+    message.channel.send('‎      ‏‏‎', attachment)
+}
 
 function ObtenerValor(nivel, Deseado, id) {
   var total = 0;
@@ -1458,6 +1470,7 @@ function ObtenerNP(nivel, id) {
  * @description - Send embed stats with all info.
  */
 function sendEmbedStats(channel, isSurv, data_steam, data_dbd, language) {
+  console.log(`sendEmbedStats: isSurv: ${isSurv} - datastemName: ${data_steam.response.players[0].personaname} - datadbd bloodpoints: ${data_dbd.bloodpoints} - language: ${language}`)
   if (!isSurv) {
     if (language == 0) {
       const embedd = new Discord.MessageEmbed()
@@ -1467,7 +1480,6 @@ function sendEmbedStats(channel, isSurv, data_steam, data_dbd, language) {
         .setThumbnail('https://i.imgur.com/y4KRvLf.png')
         .addField('<:bp:724724401333076071> Puntos de sangre totales:', Coma(data_dbd.bloodpoints), true)
         .addField('Horas de juego:', Math.round(data_dbd.playtime / 60), true)
-        .addBlankField()
         .addField('Rango:', data_dbd.killer_rank, true)
         .addField('Partidas perfectas:', data_dbd.killer_perfectgames, true)
         .addField('<:Icons_killer:739182105870991410> Asesinatos con Mori:', data_dbd.killed, true)
@@ -1482,7 +1494,7 @@ function sendEmbedStats(channel, isSurv, data_steam, data_dbd, language) {
         .addField('<:icons_totem:739182106282033272> Supervivientes interrumpidos en totems:', data_dbd.survivorsinterruptedcleansingtotem, true)
         .setTimestamp()
         .setFooter('La entidad', client.user.avatarURL());
-      client.channels.get(channel).send(embedd)
+      client.channels.cache.get(channel).send(embedd)
     } else {
       const embedd = new Discord.MessageEmbed()
         .setColor('#FF0000')
@@ -1491,7 +1503,6 @@ function sendEmbedStats(channel, isSurv, data_steam, data_dbd, language) {
         .setThumbnail('https://i.imgur.com/y4KRvLf.png')
         .addField('<:bp:724724401333076071> Bloodpoints:', Coma(data_dbd.bloodpoints), true)
         .addField('In-game hours:', Math.round(data_dbd.playtime / 60), true)
-        .addBlankField()
         .addField('Rank:', data_dbd.killer_rank, true)
         .addField('Perfect games:', data_dbd.killer_perfectgames, true)
         .addField('<:Icons_killer:739182105870991410> Mori kills:', data_dbd.killed, true)
@@ -1506,7 +1517,7 @@ function sendEmbedStats(channel, isSurv, data_steam, data_dbd, language) {
         .addField('<:icons_totem:739182106282033272> Survivors interrupted cleasing totems:', data_dbd.survivorsinterruptedcleansingtotem, true)
         .setTimestamp()
         .setFooter('Entity', client.user.avatarURL());
-      client.channels.get(channel).send(embedd)
+      client.channels.cache.get(channel).send(embedd)
     }
   } else {
     if (language == 0) {
@@ -1517,7 +1528,6 @@ function sendEmbedStats(channel, isSurv, data_steam, data_dbd, language) {
         .setThumbnail('https://i.imgur.com/DG6fm1A.png')
         .addField('<:bp:724724401333076071> Puntos de sangre totales:', Coma(data_dbd.bloodpoints), true)
         .addField('Horas de juego:', Math.round(data_dbd.playtime / 60), true)
-        .addBlankField()
         .addField('Rango:', data_dbd.survivor_rank, true)
         .addField('<:icons_perfect:739182106139295915> Partidas perfectas:', data_dbd.survivor_perfectgames, true)
         .addField('<:Icons_Gen:739182107095466014> Generadores reparados:', data_dbd.gensrepaired, true)
@@ -1532,7 +1542,7 @@ function sendEmbedStats(channel, isSurv, data_steam, data_dbd, language) {
         .addField('<:Icons_cofre:739182106651131957> Cofres abiertos:', data_dbd.mysteryboxesopened, true)
         .setTimestamp()
         .setFooter('La entidad', client.user.avatarURL())
-      client.channels.get(channel).send(embedd)
+      client.channels.cache.get(channel).send(embedd)
     } else {
       const embedd = new Discord.MessageEmbed()
         .setColor('#FF0000')
@@ -1541,7 +1551,6 @@ function sendEmbedStats(channel, isSurv, data_steam, data_dbd, language) {
         .setThumbnail('https://i.imgur.com/DG6fm1A.png')
         .addField('<:bp:724724401333076071> Bloodpoints:', Coma(data_dbd.bloodpoints), true)
         .addField('In-game hours:', Math.round(data_dbd.playtime / 60), true)
-        .addBlankField()
         .addField('Rank:', data_dbd.survivor_rank, true)
         .addField('<:icons_perfect:739182106139295915> Perfect games:', data_dbd.survivor_perfectgames, true)
         .addField('<:Icons_Gen:739182107095466014> Gens repaired:', data_dbd.gensrepaired_2, true)
@@ -1556,9 +1565,10 @@ function sendEmbedStats(channel, isSurv, data_steam, data_dbd, language) {
         .addField('<:Icons_cofre:739182106651131957> Mystery boxes opened:', data_dbd.mysteryboxesopened, true)
         .setTimestamp()
         .setFooter('Entity', client.user.avatarURL())
-      client.channels.get(channel).send(embedd)
+      client.channels.cache.get(channel).send(embedd)
     }
   }
+  return
 }
 
 
@@ -1570,44 +1580,45 @@ function sendEmbedStats(channel, isSurv, data_steam, data_dbd, language) {
  * @description - Send embed error with information.
  */
 function sendEmbedError(type, user, channel, language) {
+  console.log(`sendEmbedError: type: ${type} - language: ${language}`)
   if (language == 0) {
     switch (type) {
       case 1: {
         const embedd = new Discord.MessageEmbed()
           .setColor('#FF0000')
           .setTitle('Cuenta en actualización...')
-          .setAuthor(user.user.tag, user.user.avatarURL)
-          .setThumbnail(user.user.avatarURL)
+          .setAuthor(user.user.tag, user.user.avatarURL())
+          .setThumbnail(user.user.avatarURL())
           .addField('¿Hay algún problema?', 'Parece ser que tu cuenta estuvo en privado anteriormente, aunque no tienes de qué preocuparte. ¡Ya está siendo actualizada! Prueba cada **10** minutos obtener tus estadísticas.')
           .setTimestamp()
           .setFooter('La entidad', client.user.avatarURL());
-        client.channels.get(channel).send(embedd)
+        client.channels.cache.get(channel).send(embedd)
       }
       case 2: {
         const embedd = new Discord.MessageEmbed()
           .setColor('#FF0000')
           .setTitle('¡Ups! Esto es vergonzoso...')
-          .setAuthor(user.user.tag, user.user.avatarURL)
-          .setThumbnail(user.user.avatarURL)
+          .setAuthor(user.user.tag, user.user.avatarURL())
+          .setThumbnail(user.user.avatarURL())
           .addField('Al parecer tu cuenta está en privada.', 'Recuerda tener todas las opciones de privacidad en público.')
           .addField('¿Ya cambiaste todas tus configuraciones a público y sigues sin aparecer?', 'Normalmente al pasar tu perfil a público, puede tardar desde 24 a 48 horas en actualizar tus datos la web (ajeno a nosotros).')
           .addField('Si siempre tuviste todo en público y no funciona:', 'Revisa esta imagen y asegurate de tener todo en orden.')
           .setTimestamp()
           .setImage('https://cdn.discordapp.com/attachments/738848207328772237/739269462510796800/unknown.png')
           .setFooter('La entidad', client.user.avatarURL());
-        client.channels.get(channel).send(embedd)
+        client.channels.cache.get(channel).send(embedd)
       }
       case 3: {
         const embedd = new Discord.MessageEmbed()
           .setColor('#FF0000')
           .setTitle('No podemos agregar tu cuenta...')
-          .setAuthor(message.member.user.tag, message.member.user.avatarURL)
+          .setAuthor(user.user.tag, user.user.avatarURL())
           .setThumbnail(client.user.avatarURL())
           .addField('Tenemos problemas con la web.', 'Actualmente, por muchas peticiones, la web no nos permite postear cuentas, por lo que deberás hacerlo apretando el botón de abajo y pegando tu link de perfil. Luego de ponerla ya podrás ver tus **/stats** por aquí sin problema.')
           .addField('Agregar cuenta:', '[Haz click aquí](https://dbd.onteh.net.au)')
           .setTimestamp()
           .setFooter('La entidad', client.user.avatarURL())
-          client.channels.get(channel).send(embedd)
+          client.channels.cache.get(channel).send(embedd)
       }
     }
   } else {
@@ -1616,38 +1627,38 @@ function sendEmbedError(type, user, channel, language) {
         const embedd = new Discord.MessageEmbed()
           .setColor('#FF0000')
           .setTitle('Your account is being updated...')
-          .setAuthor(user.user.tag, user.user.avatarURL)
-          .setThumbnail(user.user.avatarURL)
+          .setAuthor(user.user.tag, user.user.avatarURL())
+          .setThumbnail(user.user.avatarURL())
           .addField('Is there any problem?', 'Seems like your account was private previously, but dont worry. Your account is being updated! Try again every **10** minutes to get your statistics.')
           .setTimestamp()
           .setFooter('Entity', client.user.avatarURL());
-        client.channels.get(channel).send(embedd)
+        client.channels.cache.get(channel).send(embedd)
       }
       case 2: {
         const embedd = new Discord.MessageEmbed()
           .setColor('#FF0000')
           .setTitle('¡Ups! This is embarrassing...')
-          .setAuthor(message.member.user.tag, message.member.user.avatarURL)
-          .setThumbnail(message.member.user.avatarURL)
+          .setAuthor(user.user.tag, user.user.avatarURL())
+          .setThumbnail(message.member.user.avatarURL())
           .addField('Seems like your steam account is private.', 'Remember switching all privacy options to public.')
           .addField('Already changed all the privacy confing and still doesnt work?', 'Usually when switching the privacy confing to public might take between 24 to 48 hours to refresh the data from the web (Not in our hands).')
           .addField('If your profile always has been public and still doesnt work:', 'Check this image and make sure you have everything in order')
           .setTimestamp()
           .setImage('https://cdn.discordapp.com/attachments/738848207328772237/739269462510796800/unknown.png')
           .setFooter('Entity', client.user.avatarURL());
-        client.channels.get(channel).send(embedd)
+        client.channels.cache.get(channel).send(embedd)
       }
       case 3: {
         const embedd = new Discord.MessageEmbed()
           .setColor('#FF0000')
           .setTitle("We can't add your account ...")
-          .setAuthor(message.member.user.tag, message.member.user.avatarURL)
+          .setAuthor(user.user.tag, user.user.avatarURL())
           .setThumbnail(client.user.avatarURL())
           .addField('There are problems with the web.', 'Currently, due to many requests, the web does not allow us to post accounts, so you must do it by pressing the button below and pasting your profile link. After putting it in, you will be able to see your **stats** around here without problem.')
           .addField('Add account:', '[Click here](https://dbd.onteh.net.au)')
           .setTimestamp()
           .setFooter('Entity', client.user.avatarURL())
-          client.channels.get(channel).send(embedd)
+          client.channels.cache.get(channel).send(embedd)
       }
     }
   }
@@ -1694,7 +1705,7 @@ function getStats(data_steam, channelid, user, steamid, isSurv, language) {
   var options = {
     host: "dbd.onteh.net.au",
     path: "/api/playerstats?steamid=" + steamid,
-    headers: {'User-Agent': 'EntityBot/'+version_bot}
+    headers: { 'User-Agent': 'EntityBot/' + version_bot }
   };
   https.get(options, function (res) {
     var bodyChunks_ = [];
@@ -1702,11 +1713,13 @@ function getStats(data_steam, channelid, user, steamid, isSurv, language) {
       bodyChunks_.push(chunk);
     }).on('end', function () {
       var body = Buffer.concat(bodyChunks_);
-      body = JSON.parse(body)
-      if (isEmptyObject(body)) postStats(steamid, channelid, user, language)
-      else if (body.killer_rank == 20 && body.killed == 0 && body.sacrificed == 0 && body.bloodpoints == 0) sendEmbedError(1, user, channelid, language)
-      else sendEmbedStats(channelid, isSurv, data_steam, body, language) 
-      return;
+      console.log(`australian site code: ${res.statusCode}`)
+      if (res.statusCode == 200 || res.statusCode == 201) {
+        body = JSON.parse(body)
+        if (body.killer_rank == 20 && body.killed == 0 && body.sacrificed == 0 && body.bloodpoints == 0) sendEmbedError(1, user, channelid, language)
+        else sendEmbedStats(channelid, isSurv, data_steam, body, language)
+        return;
+      } else return postStats(steamid, channelid, user, language)
     })
   })
 }
@@ -1781,9 +1794,11 @@ function verifyShrine() {
         bodyChunks2.push(chunk);
       }).on('end', function () {
         var body2 = Buffer.concat(bodyChunks2);
+        if(res.statusCode == 200 || res.statusCode == 201) {
         body2 = JSON.parse(body2)
         con.query(`DELETE FROM santuario`)
         con.query(`INSERT INTO santuario (perk_1, perk_2, perk_3, perk_4) VALUES ('${body2.perks[0].id.toLowerCase()}', '${body2.perks[1].id.toLowerCase()}', '${body2.perks[2].id.toLowerCase()}', '${body2.perks[3].id.toLowerCase()}')`)
+        }
       })
     })
     return;
@@ -1822,7 +1837,7 @@ Date.prototype.toMysqlFormat = function () {
 
 /**
  * @param {ArrayBuffer} buffer - Buffer with information
- * @description Return if steam account is private.
+ * @description Return if steam account is private. DEPRECATED.
  */
 function verifyPrivate(buffer) {
   var state_1 = buffer.slice(buffer.indexOf('"state"') + 9)
@@ -2056,7 +2071,7 @@ async function createRandomBuild(message, numberCharacter, numberPerk1, numberPe
 
       ctx.font = '101px "dbd"';
       ctx.fillStyle = '#ffffff';
-      ctx.fillText(survivors[numberCharacter].name, calculateCenter(survivors[numberCharacter].name.length, fontSize), 207);
+      ctx.fillText(survivors[numberCharacter].name, calculateCenter(1267, survivors[numberCharacter].name.length, fontSize), 207);
       const avatar = await Canvas.loadImage(survivors[numberCharacter].link);
       ctx.drawImage(avatar, 1045, 227, 447, 619);
       let perkImageName = [getImageName(numberPerk1, isSurv), getImageName(numberPerk2, isSurv), getImageName(numberPerk3, isSurv), getImageName(numberPerk4, isSurv)]
@@ -2085,7 +2100,7 @@ async function createRandomBuild(message, numberCharacter, numberPerk1, numberPe
       ctx.font = '101px "dbd"';
       ctx.fillStyle = '#ffffff';
       let string = language == 0 ? killers[numberCharacter].nameEs:killers[numberCharacter].nameEn
-      ctx.fillText(string, calculateCenter(string.length, fontSize), 207);
+      ctx.fillText(string, calculateCenter(1267, string.length, fontSize), 207);
       const avatar = await Canvas.loadImage(killers[numberCharacter].link);
       ctx.drawImage(avatar, 1045, 227, 447, 619);
       let perkImageName = [getImageName(numberPerk1, isSurv), getImageName(numberPerk2, isSurv), getImageName(numberPerk3, isSurv), getImageName(numberPerk4, isSurv)]
@@ -2136,8 +2151,8 @@ function steamID_64(steamId32) {
  * @description - First part for get user stats from Australian Website.
  */
 function getSteamProfile(steamid, channelid, userid, serverid, isSurv, language) {
-  var server = client.guilds.get(serverid)
-  var user = server.members.get(userid)
+  var server = client.guilds.cache.get(serverid)
+  var user = server.members.cache.get(userid)
   var options = {
     host: 'api.steampowered.com',
     path: '/ISteamUser/GetPlayerSummaries/v0002/?key=DF0A08E817CCE67F129D35FFFB14901A&steamids=' + steamid,
@@ -2151,9 +2166,14 @@ function getSteamProfile(steamid, channelid, userid, serverid, isSurv, language)
       var body = Buffer.concat(bodyChunks_);
       if (body.includes("<html><head><title>Bad Request</title>")) return user.send("Perfil de steam no encontrado.")
       if (isEmptyObject(body)) return user.send("Perfil de steam no encontrado.")
-      body = JSON.parse(body)
-      if (body.response.players[0].profilestate != 1) return user.send("El perfil ingresado no está en 'público'.")
-      getStats(body, channelid, user, steamid, isSurv, language)
+      if (res.statusCode == 200 || res.statusCode == 201) {
+        body = JSON.parse(body)
+        if (body.response && body.response.players && body.response.players[0].profilestate) {
+          if (body.response.players[0].profilestate != 1) return user.send("El perfil ingresado no está en 'público'.")
+          getStats(body, channelid, user, steamid, isSurv, language)
+          return
+        } else return message.author.send("Tu perfil de steam no pudo ser encontrado.")
+      } else return message.author.send("Tu perfil de steam no pudo ser encontrado.")
     })
   })
 }
@@ -2166,9 +2186,8 @@ async function getImage(name, isSurv)
   return object
 }
 
-function calculateCenter(letters, fontSize){
-  const posX = 1267;
-  return posX-(letters*fontSize)
+function calculateCenter(x, letters, fontSize){
+  return x-(letters*fontSize)
 }
 
 function getImageName(index, isSurv){
