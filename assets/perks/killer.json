@@ -148,7 +148,7 @@
             "nameEs": "Persecucion furtiva",
             "nameEn": "Furtive Chase",
             "emoji": "<:iconPerks_furtiveChase:741713041086742611>",
-            "id": "furtive_chase"
+            "id": "furtivechase"
         },
         {
             "nameEs": "Oido para la maquinaria",
@@ -311,12 +311,6 @@
             "nameEn": "Pop Goes the Weasel",
             "emoji": "<:iconPerks_popGoesTheWeasel:741713158447693918>",
             "id": "pop_goes_the_weasel"
-        },
-        {
-            "nameEs": "nombrePerk2",
-            "nameEn": "nombreEnPerk",
-            "emoji": "emojiID2",
-            "id": "australianID2"
         },
         {
             "nameEs": "Depredacion",
