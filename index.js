@@ -1705,23 +1705,25 @@ function sendEmbedError(type, user, channel, language) {
  * @description - Post stats to Australian Website.
  */
 function postStats(steamid, channelid, user, language) {
-  var options = {
-    host: "dbd.onteh.net.au",
-    path: "/api/playerstats?steamid=" + steamid,
-    method: 'POST',
-    headers: {'User-Agent': 'EntityBot/version'}
-  };
-  let req = https.request(options, function (res) {
-    if(res.statusCode != 201){
-      console.log(`ERROR POST: ${res.statusCode} | message: ${res.statusMessage} | headers: ${JSON.stringify(res.headers)} | steamid: ${steamid}`)
-      sendEmbedError(3, user, channelid, language)
-    } else {
-      console.log(`SUCESS POST: ${res.statusCode} | steamid: ${steamid}`)
-      if(language == 0) user.send("La cuenta de Steam está en la cola para ser agregada ya que no estaba registrada, recuerda que puede tardar hasta 1 hora.")
-      else user.send("The Steam account is in the queue to be added since it was not registered, remember that it can take up to 1 hour.")
-    }
-  })
-  req.end()
+  setTimeout(() => {
+    var options = {
+      host: "dbd.onteh.net.au",
+      path: "/api/playerstats?steamid=" + steamid,
+      method: 'POST',
+      headers: {'User-Agent': 'EntityBot/'+version_bot}
+    };
+    let req = https.request(options, function (res) {
+      if(res.statusCode != 201){
+        console.log(`ERROR POST: ${res.statusCode} | message: ${res.statusMessage} | headers: ${JSON.stringify(res.headers)} | steamid: ${steamid}`)
+        sendEmbedError(3, user, channelid, language)
+      } else {
+        console.log(`SUCESS POST: ${res.statusCode} | steamid: ${steamid}`)
+        if(language == 0) user.send("La cuenta de Steam está en la cola para ser agregada ya que no estaba registrada, recuerda que puede tardar hasta 1 hora.")
+        else user.send("The Steam account is in the queue to be added since it was not registered, remember that it can take up to 1 hour.")
+      }
+    })
+    req.end()
+  }, 15000);
   return
 }
 
