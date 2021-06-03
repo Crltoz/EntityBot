@@ -75,7 +75,7 @@ var con;
 
 client.on("ready", () => {
   console.log("El bot esta cargando sistemas, base de datos.");
-  //handleDisconnect();
+  handleDisconnect();
   loadPerks()
   loadCharacters()
   loadRules()
@@ -2238,4 +2238,4 @@ function getImageName(index, isSurv){
   return text+".png"
 }
 
-client.login('Nzg5MzE1ODUxMTE4ODM3NzYw.X9wRqw.HePFFhksTAbD0UBsj6p-Eb8ywSE');
+client.login(process.env.token);
