@@ -1713,7 +1713,7 @@ function postStats(steamid, channelid, user, language) {
   };
   let req = https.request(options, function (res) {
     if(res.statusCode != 201){
-      console.log(`ERROR POST: ${res.statusCode} | message: ${res.statusMessage} | headers: ${res.headers} | steamid: ${steamid}`)
+      console.log(`ERROR POST: ${res.statusCode} | message: ${res.statusMessage} | headers: ${JSON.stringify(res.headers)} | steamid: ${steamid}`)
       sendEmbedError(3, user, channelid, language)
     } else {
       console.log(`SUCESS POST: ${res.statusCode} | steamid: ${steamid}`)
