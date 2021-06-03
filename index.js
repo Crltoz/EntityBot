@@ -1709,7 +1709,7 @@ function postStats(steamid, channelid, user, language) {
     host: "dbd.onteh.net.au",
     path: "/api/playerstats?steamid=" + steamid,
     method: 'POST',
-    headers: {'User-Agent': 'EntityBot/'+version_bot}
+    headers: {'User-Agent': 'EntityBot/version'}
   };
   let req = https.request(options, function (res) {
     if(res.statusCode != 201){
