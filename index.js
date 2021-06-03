@@ -1712,7 +1712,7 @@ function postStats(steamid, channelid, user, language) {
       method: 'POST',
       headers: {'User-Agent': 'EntityBot/'+version_bot}
     };
-    let req = https.request(options, function (res) {
+    let req = http.request(options, function (res) {
       if(res.statusCode != 201){
         console.log(`ERROR POST: ${res.statusCode} | message: ${res.statusMessage} | headers: ${JSON.stringify(res.headers)} | steamid: ${steamid}`)
         sendEmbedError(3, user, channelid, language)
