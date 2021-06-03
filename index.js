@@ -1619,6 +1619,7 @@ function sendEmbedError(type, user, channel, language) {
           .setTimestamp()
           .setFooter('La entidad', client.user.avatarURL());
         client.channels.cache.get(channel).send(embedd)
+        break;
       }
       case 2: {
         const embedd = new Discord.MessageEmbed()
@@ -1633,6 +1634,7 @@ function sendEmbedError(type, user, channel, language) {
           .setImage('https://cdn.discordapp.com/attachments/738848207328772237/739269462510796800/unknown.png')
           .setFooter('La entidad', client.user.avatarURL());
         client.channels.cache.get(channel).send(embedd)
+        break;
       }
       case 3: {
         const embedd = new Discord.MessageEmbed()
@@ -1645,6 +1647,7 @@ function sendEmbedError(type, user, channel, language) {
           .setTimestamp()
           .setFooter('La entidad', client.user.avatarURL())
           client.channels.cache.get(channel).send(embedd)
+          break;
       }
     }
   } else {
@@ -1659,6 +1662,7 @@ function sendEmbedError(type, user, channel, language) {
           .setTimestamp()
           .setFooter('Entity', client.user.avatarURL());
         client.channels.cache.get(channel).send(embedd)
+        break;
       }
       case 2: {
         const embedd = new Discord.MessageEmbed()
@@ -1673,6 +1677,7 @@ function sendEmbedError(type, user, channel, language) {
           .setImage('https://cdn.discordapp.com/attachments/738848207328772237/739269462510796800/unknown.png')
           .setFooter('Entity', client.user.avatarURL());
         client.channels.cache.get(channel).send(embedd)
+        break;
       }
       case 3: {
         const embedd = new Discord.MessageEmbed()
@@ -1685,6 +1690,7 @@ function sendEmbedError(type, user, channel, language) {
           .setTimestamp()
           .setFooter('Entity', client.user.avatarURL())
           client.channels.cache.get(channel).send(embedd)
+          break;
       }
     }
   }
@@ -1707,9 +1713,10 @@ function postStats(steamid, channelid, user, language) {
   };
   let req = https.request(options, function (res) {
     if(res.statusCode != 201){
-      console.log(`ERROR POST: ${res.statusCode} | ${res.statusMessage}`)
+      console.log(`ERROR POST: ${res.statusCode} | message: ${res.statusMessage} | headers: ${res.headers} | steamid: ${steamid}`)
       sendEmbedError(3, user, channelid, language)
     } else {
+      console.log(`SUCESS POST: ${res.statusCode} | steamid: ${steamid}`)
       if(language == 0) user.send("La cuenta de Steam está en la cola para ser agregada ya que no estaba registrada, recuerda que puede tardar hasta 1 hora.")
       else user.send("The Steam account is in the queue to be added since it was not registered, remember that it can take up to 1 hour.")
     }
