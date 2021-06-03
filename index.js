@@ -21,6 +21,8 @@ var survivorPerks = {}
 var killerPerks = {}
 var survivors = {}
 var killers = {}
+var rulesEsp = []
+var rulesEng = []
 
 /* Const levels */
 const Niveles = 3;
@@ -76,6 +78,7 @@ client.on("ready", () => {
   handleDisconnect();
   loadPerks()
   loadCharacters()
+  loadRules()
   client.user.setPresence({
     status: "online",
     game: {
@@ -993,6 +996,18 @@ client.on("message", async (message) => {
         return;
       }
 
+      if (command == 'reglas') {
+        let randomNum = Math.floor(Math.random() * rulesEsp.length + 1)
+        message.channel.send('> '+ rulesEsp[randomNum], {
+          files: [
+            {
+              attachment:'https://i.imgur.com/I4LhmO8.png', 
+              name: 'Survivor_rule_book_for_killers.jpg'
+            }
+          ]
+        })
+        return
+      }
       message.member.send('El comando no existe. Usa '+ prefix[message.guild.id] +'**ayuda** para ver todas las funciones y comandos.')
     } else {
       if (cid[message.guild.id] != null && message.channel.id != cid[message.guild.id]) {
@@ -1218,7 +1233,18 @@ client.on("message", async (message) => {
         message.channel.send('Bien, el bot está configurado en español. Si desea volver a inglés use **' + prefix[message.guild.id] + 'english**. Para consultar los comandos use **' + prefix[message.guild.id] + 'ayuda**.')
         return;
       }
-
+      if (command == 'rules') {
+        let randomNum = Math.floor(Math.random() * rulesEng.length + 1)
+        message.channel.send('> '+ rulesEng[randomNum], {
+          files: [
+            {
+              attachment:'https://i.imgur.com/I4LhmO8.png', 
+              name: 'Survivor_rule_book_for_killers.jpg'
+            }
+          ]
+        })
+        return
+      }
       if (command == 'stats') {
         if (!texto) return message.channel.send('Use: **'+prefix[message.guild.id]+'stats [Survivor or Killer] [Steam profile URL or Steam friend code]**')
         if (args[0].toLowerCase() != 'killer' && args[0].toLowerCase() != 'survivor') return message.channel.send('Use: **/stats [Survivor or Killer] [Steam profile URL]**')
@@ -1924,6 +1950,20 @@ function loadCharacters() {
       return;
     });
   }, 1500);
+  return
+}
+
+function loadRules() {
+  fs.readFile('assets/rules/en.json', 'utf8', function (err, data) {
+      if (err) return console.log(err)
+      const msg = JSON.parse(data)
+      rulesEng = msg.rules
+  })
+  fs.readFile('assets/rules/es.json', 'utf8', function (err, data) {
+      if (err) return console.log(err)
+      const msg = JSON.parse(data)
+      rulesEsp = msg.rules
+  })
   return
 }
 
