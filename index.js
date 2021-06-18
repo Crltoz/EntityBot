@@ -4,7 +4,7 @@ const client = new Discord.Client();
 const bigNumber = require("bignumber.js")
 var https = require('https');
 var http = require('http');
-const version_bot = '0.9.5'
+const version_bot = '0.9.7'
 const mysql = require("mysql");
 const fs = require('fs');
 const Canvas = require("canvas")
@@ -195,8 +195,8 @@ client.on("message", async (message) => {
       } else return message.channel.send(message.author.tag + ', envía por aquí "**survivor**" o "**killer**" para calcular el valor de todas las perks del que elijas.')
     }
     if (r1.has(message.author.id)) {
-      if (message.content > 50 || message.content < 1 || message.content > 50) return message.member.send('El nivel debe ser entre 1 y 50, ' + message.author.tag).catch(function (err) { message.channel.send(message.member.user.toString()+ ' Activa tus mensajes privados para que el bot pueda informarte.') });
-      if (message.content % 1 != '0') return message.member.send('El nivel no puede tener comas.').catch(function (err) { message.channel.send(message.member.user.toString()+ ' Activa tus mensajes privados para que el bot pueda informarte.') });
+      if (message.content > 50 || message.content < 1 || message.content > 50) return message.member.send('El nivel debe ser entre 1 y 50, ' + message.author.tag).catch(function (err) { message.channel.send(message.member.user.toString() + ' Activa tus mensajes privados para que el bot pueda informarte.') });
+      if (message.content % 1 != '0') return message.member.send('El nivel no puede tener comas.').catch(function (err) { message.channel.send(message.member.user.toString() + ' Activa tus mensajes privados para que el bot pueda informarte.') });
       r1.delete(message.author.id)
       n1[message.author.id] = message.content
       message.channel.send('Envía el nivel que quieres obtener en la red de sangre.')
@@ -206,9 +206,9 @@ client.on("message", async (message) => {
 
     if (n2.has(message.author.id)) {
       n2.delete(message.author.id)
-      if (parseInt(message.content) > 50 || parseInt(message.content) < 1 || parseInt(message.content) > 50) return message.member.send('El nivel debe ser entre 1 y 50.').catch(function (err) { message.channel.send(message.member.user.toString()+ ' Activa tus mensajes privados para que el bot pueda informarte.') });
-      if (parseInt(message.content) % 1 != '0') return message.member.send('El nivel no puede tener comas.').catch(function (err) { message.channel.send(message.member.user.toString()+ ' Activa tus mensajes privados para que el bot pueda informarte.') });
-      if (parseInt(message.content) < n1[message.author.id]) return message.member.send('El nivel deseado no puede ser menor al inicial.').catch(function (err) { message.channel.send(message.member.user.toString()+ ' Activa tus mensajes privados para que el bot pueda informarte.') });
+      if (parseInt(message.content) > 50 || parseInt(message.content) < 1 || parseInt(message.content) > 50) return message.member.send('El nivel debe ser entre 1 y 50.').catch(function (err) { message.channel.send(message.member.user.toString() + ' Activa tus mensajes privados para que el bot pueda informarte.') });
+      if (parseInt(message.content) % 1 != '0') return message.member.send('El nivel no puede tener comas.').catch(function (err) { message.channel.send(message.member.user.toString() + ' Activa tus mensajes privados para que el bot pueda informarte.') });
+      if (parseInt(message.content) < n1[message.author.id]) return message.member.send('El nivel deseado no puede ser menor al inicial.').catch(function (err) { message.channel.send(message.member.user.toString() + ' Activa tus mensajes privados para que el bot pueda informarte.') });
       LC[message.author.id] = 0;
       let sangre = ObtenerValor(parseInt(n1[message.author.id]), parseInt(message.content), message.author.id)
       const embed = new Discord.MessageEmbed()
@@ -229,11 +229,11 @@ client.on("message", async (message) => {
     if (p1.has(message.author.id)) {
       if (message.content % 1 != '0') {
         p1.delete(message.author.id)
-        message.member.send('El numero no puede tener comas, el calcular se ha cancelado.').catch(function (err) { message.channel.send(message.member.user.toString()+ ' Activa tus mensajes privados para que el bot pueda informarte.') });
+        message.member.send('El numero no puede tener comas, el calcular se ha cancelado.').catch(function (err) { message.channel.send(message.member.user.toString() + ' Activa tus mensajes privados para que el bot pueda informarte.') });
         return;
       }
-      if (parseInt(message.content) * 3 >= getLength(killerPerks) * 3) return message.member.send('No puedes tener todas o más perks de las existentes.').catch(function (err) { message.channel.send(message.member.user.toString()+ ' Activa tus mensajes privados para que el bot pueda informarte.') });
-      if (parseInt(message.content) < 0) return message.member.send('No puedes tener menos de 0 perks.').catch(function (err) { message.channel.send(message.member.user.toString()+ ' Activa tus mensajes privados para que el bot pueda informarte.') });
+      if (parseInt(message.content) * 3 >= getLength(killerPerks) * 3) return message.member.send('No puedes tener todas o más perks de las existentes.').catch(function (err) { message.channel.send(message.member.user.toString() + ' Activa tus mensajes privados para que el bot pueda informarte.') });
+      if (parseInt(message.content) < 0) return message.member.send('No puedes tener menos de 0 perks.').catch(function (err) { message.channel.send(message.member.user.toString() + ' Activa tus mensajes privados para que el bot pueda informarte.') });
       p1.delete(message.author.id)
       perks3[message.author.id] = message.content;
       p2.add(message.author.id)
@@ -245,12 +245,12 @@ client.on("message", async (message) => {
     if (p2.has(message.author.id)) {
       if (message.content % 1 != '0') {
         p2.delete(message.author.id)
-        message.member.send('El numero no puede tener comas, el calcular se ha cancelado.').catch(function (err) { message.channel.send(message.member.user.toString()+ ' Activa tus mensajes privados para que el bot pueda informarte.') });
+        message.member.send('El numero no puede tener comas, el calcular se ha cancelado.').catch(function (err) { message.channel.send(message.member.user.toString() + ' Activa tus mensajes privados para que el bot pueda informarte.') });
         return;
       }
-      if (parseInt(message.content) * 2 >= getLength(killerPerks) * 3) return message.member.send('No puedes tener todas o más perks de las existentes.').catch(function (err) { message.channel.send(message.member.user.toString()+ ' Activa tus mensajes privados para que el bot pueda informarte.') });
-      if (parseInt(message.content) < 0) return message.member.send('No puedes tener menos de 0 perks.').catch(function (err) { message.channel.send(message.member.user.toString()+ ' Activa tus mensajes privados para que el bot pueda informarte.') });
-      if (perks3[message.author.id] * 3 + parseInt(message.content) * 2 >= getLength(killerPerks) * 3) return message.member.send('No puedes tener todas o más perks de las existentes.').catch(function (err) { message.channel.send(message.member.user.toString()+ ' Activa tus mensajes privados para que el bot pueda informarte.') });
+      if (parseInt(message.content) * 2 >= getLength(killerPerks) * 3) return message.member.send('No puedes tener todas o más perks de las existentes.').catch(function (err) { message.channel.send(message.member.user.toString() + ' Activa tus mensajes privados para que el bot pueda informarte.') });
+      if (parseInt(message.content) < 0) return message.member.send('No puedes tener menos de 0 perks.').catch(function (err) { message.channel.send(message.member.user.toString() + ' Activa tus mensajes privados para que el bot pueda informarte.') });
+      if (perks3[message.author.id] * 3 + parseInt(message.content) * 2 >= getLength(killerPerks) * 3) return message.member.send('No puedes tener todas o más perks de las existentes.').catch(function (err) { message.channel.send(message.member.user.toString() + ' Activa tus mensajes privados para que el bot pueda informarte.') });
       p2.delete(message.author.id)
       perks2[message.author.id] = message.content;
       if (message.member) message.channel.send('Ingresa cuántas perks a nivel 1 tienes, ' + message.member.user)
@@ -262,12 +262,12 @@ client.on("message", async (message) => {
     if (p3.has(message.author.id)) {
       if (message.content % 1 != '0') {
         p3.delete(message.author.id)
-        message.member.send('El numero no puede tener comas, el calcular se ha cancelado.').catch(function (err) { message.channel.send(message.member.user.toString()+ ' Activa tus mensajes privados para que el bot pueda informarte.') });
+        message.member.send('El numero no puede tener comas, el calcular se ha cancelado.').catch(function (err) { message.channel.send(message.member.user.toString() + ' Activa tus mensajes privados para que el bot pueda informarte.') });
         return;
       }
-      if (parseInt(message.content) >= getLength(killerPerks) * 3) return message.member.send('No puedes tener todas o más perks de las existentes.').catch(function (err) { message.channel.send(message.member.user.toString()+ ' Activa tus mensajes privados para que el bot pueda informarte.') });
-      if (parseInt(message.content) < 0) return message.member.send('No puedes tener menos de 0 perks.').catch(function (err) { message.channel.send(message.member.user.toString()+ ' Activa tus mensajes privados para que el bot pueda informarte.') });
-      if (perks3[message.author.id] * 3 + perks2[message.author.id] * 2 + parseInt(message.content) >= getLength(killerPerks) * 3) return message.member.send('No puedes tener todas o más perks de las existentes.').catch(function (err) { message.channel.send(message.member.user.toString()+ ' Activa tus mensajes privados para que el bot pueda informarte.') });
+      if (parseInt(message.content) >= getLength(killerPerks) * 3) return message.member.send('No puedes tener todas o más perks de las existentes.').catch(function (err) { message.channel.send(message.member.user.toString() + ' Activa tus mensajes privados para que el bot pueda informarte.') });
+      if (parseInt(message.content) < 0) return message.member.send('No puedes tener menos de 0 perks.').catch(function (err) { message.channel.send(message.member.user.toString() + ' Activa tus mensajes privados para que el bot pueda informarte.') });
+      if (perks3[message.author.id] * 3 + perks2[message.author.id] * 2 + parseInt(message.content) >= getLength(killerPerks) * 3) return message.member.send('No puedes tener todas o más perks de las existentes.').catch(function (err) { message.channel.send(message.member.user.toString() + ' Activa tus mensajes privados para que el bot pueda informarte.') });
       p3.delete(message.author.id)
       perks1[message.author.id] = message.content;
       if (message.member) message.channel.send('Ingresa a qué nivel estás con tu personaje, ' + message.member.user)
@@ -279,10 +279,10 @@ client.on("message", async (message) => {
     if (p4.has(message.author.id)) {
       if (message.content % 1 != '0') {
         p4.delete(message.author.id)
-        message.member.send('El numero no puede tener comas, el calcular se ha cancelado.').catch(function (err) { message.channel.send(message.member.user.toString()+ ' Activa tus mensajes privados para que el bot pueda informarte.') });
+        message.member.send('El numero no puede tener comas, el calcular se ha cancelado.').catch(function (err) { message.channel.send(message.member.user.toString() + ' Activa tus mensajes privados para que el bot pueda informarte.') });
         return;
       }
-      if (parseInt(message.content) > 50 || parseInt(message.content) < 1) return message.member.send('Nivel inválido.').catch(function (err) { message.channel.send(message.member.user.toString()+ ' Activa tus mensajes privados para que el bot pueda informarte.') });
+      if (parseInt(message.content) > 50 || parseInt(message.content) < 1) return message.member.send('Nivel inválido.').catch(function (err) { message.channel.send(message.member.user.toString() + ' Activa tus mensajes privados para que el bot pueda informarte.') });
       p4.delete(message.author.id)
       NivelPJ[message.author.id] = parseInt(message.content);
       let necesitaperks = getLength(killerPerks) * Niveles - (3 * perks3[message.author.id]) - (2 * perks2[message.author.id]) - perks1[message.author.id];
@@ -303,11 +303,11 @@ client.on("message", async (message) => {
     if (ps1.has(message.author.id)) {
       if (message.content % 1 != '0') {
         ps1.delete(message.author.id)
-        message.member.send('El numero no puede tener comas, el calcular se ha cancelado.').catch(function (err) { message.channel.send(message.member.user.toString()+ ' Activa tus mensajes privados para que el bot pueda informarte.') });
+        message.member.send('El numero no puede tener comas, el calcular se ha cancelado.').catch(function (err) { message.channel.send(message.member.user.toString() + ' Activa tus mensajes privados para que el bot pueda informarte.') });
         return;
       }
-      if (parseInt(message.content) * 3 >= getLength(survivorPerks) * 3) return message.author.send('No puedes tener todas o más perks de las existentes.').catch(function (err) { message.channel.send(message.member.user.toString()+ ' Activa tus mensajes privados para que el bot pueda informarte.') });
-      if (parseInt(message.content) < 0) return message.member.send('No puedes tener menos de 0 perks.').catch(function (err) { message.channel.send(message.member.user.toString()+ ' Activa tus mensajes privados para que el bot pueda informarte.') });
+      if (parseInt(message.content) * 3 >= getLength(survivorPerks) * 3) return message.author.send('No puedes tener todas o más perks de las existentes.').catch(function (err) { message.channel.send(message.member.user.toString() + ' Activa tus mensajes privados para que el bot pueda informarte.') });
+      if (parseInt(message.content) < 0) return message.member.send('No puedes tener menos de 0 perks.').catch(function (err) { message.channel.send(message.member.user.toString() + ' Activa tus mensajes privados para que el bot pueda informarte.') });
       ps1.delete(message.author.id)
       perks3[message.author.id] = message.content;
       ps2.add(message.author.id)
@@ -319,12 +319,12 @@ client.on("message", async (message) => {
     if (ps2.has(message.author.id)) {
       if (message.content % 1 != '0') {
         ps2.delete(message.author.id)
-        message.member.send('El numero no puede tener comas, el calcular se ha cancelado.').catch(function (err) { message.channel.send(message.member.user.toString()+ ' Activa tus mensajes privados para que el bot pueda informarte.') });
+        message.member.send('El numero no puede tener comas, el calcular se ha cancelado.').catch(function (err) { message.channel.send(message.member.user.toString() + ' Activa tus mensajes privados para que el bot pueda informarte.') });
         return;
       }
-      if (parseInt(message.content) * 2 >= getLength(survivorPerks) * 3) return message.member.send('No puedes tener todas o más perks de las existentes.').catch(function (err) { message.channel.send(message.member.user.toString()+ ' Activa tus mensajes privados para que el bot pueda informarte.') });
-      if (parseInt(message.content) < 0) return message.member.send('No puedes tener menos de 0 perks.').catch(function (err) { message.channel.send(message.member.user.toString()+ ' Activa tus mensajes privados para que el bot pueda informarte.') });
-      if (perks3[message.author.id] * 3 + parseInt(message.content) * 2 >= getLength(survivorPerks) * 3) return message.member.send('No puedes tener todas o más perks de las existentes.').catch(function (err) { message.channel.send(message.member.user.toString()+ ' Activa tus mensajes privados para que el bot pueda informarte.') });
+      if (parseInt(message.content) * 2 >= getLength(survivorPerks) * 3) return message.member.send('No puedes tener todas o más perks de las existentes.').catch(function (err) { message.channel.send(message.member.user.toString() + ' Activa tus mensajes privados para que el bot pueda informarte.') });
+      if (parseInt(message.content) < 0) return message.member.send('No puedes tener menos de 0 perks.').catch(function (err) { message.channel.send(message.member.user.toString() + ' Activa tus mensajes privados para que el bot pueda informarte.') });
+      if (perks3[message.author.id] * 3 + parseInt(message.content) * 2 >= getLength(survivorPerks) * 3) return message.member.send('No puedes tener todas o más perks de las existentes.').catch(function (err) { message.channel.send(message.member.user.toString() + ' Activa tus mensajes privados para que el bot pueda informarte.') });
       ps2.delete(message.author.id)
       perks2[message.author.id] = message.content;
       if (message.member) message.channel.send('Ingresa cuántas perks a nivel 1 tienes, ' + message.member.user)
@@ -336,12 +336,12 @@ client.on("message", async (message) => {
     if (ps3.has(message.author.id)) {
       if (message.content % 1 != '0') {
         ps3.delete(message.author.id)
-        message.author.send('El numero no puede tener comas, el calcular se ha cancelado.').catch(function (err) { message.channel.send(message.member.user.toString()+ ' Activa tus mensajes privados para que el bot pueda informarte.') });
+        message.author.send('El numero no puede tener comas, el calcular se ha cancelado.').catch(function (err) { message.channel.send(message.member.user.toString() + ' Activa tus mensajes privados para que el bot pueda informarte.') });
         return;
       }
-      if (parseInt(message.content) >= getLength(survivorPerks) * 3) return message.member.send('No puedes tener todas o más perks de las existentes.').catch(function (err) { message.channel.send(message.member.user.toString()+ ' Activa tus mensajes privados para que el bot pueda informarte.') });
-      if (parseInt(message.content) < 0) return message.member.send('No puedes tener menos de 0 perks.').catch(function (err) { message.channel.send(message.member.user.toString()+ ' Activa tus mensajes privados para que el bot pueda informarte.') });
-      if (perks3[message.author.id] * 3 + perks2[message.author.id] * 2 + parseInt(message.content) >= getLength(survivorPerks) * 3) return message.member.send('No puedes tener todas o más perks de las existentes.').catch(function (err) { message.channel.send(message.member.user.toString()+ ' Activa tus mensajes privados para que el bot pueda informarte.') });
+      if (parseInt(message.content) >= getLength(survivorPerks) * 3) return message.member.send('No puedes tener todas o más perks de las existentes.').catch(function (err) { message.channel.send(message.member.user.toString() + ' Activa tus mensajes privados para que el bot pueda informarte.') });
+      if (parseInt(message.content) < 0) return message.member.send('No puedes tener menos de 0 perks.').catch(function (err) { message.channel.send(message.member.user.toString() + ' Activa tus mensajes privados para que el bot pueda informarte.') });
+      if (perks3[message.author.id] * 3 + perks2[message.author.id] * 2 + parseInt(message.content) >= getLength(survivorPerks) * 3) return message.member.send('No puedes tener todas o más perks de las existentes.').catch(function (err) { message.channel.send(message.member.user.toString() + ' Activa tus mensajes privados para que el bot pueda informarte.') });
       ps3.delete(message.author.id)
       perks1[message.author.id] = message.content;
       if (message.member) message.channel.send('Ingresa a qué nivel estás con tu personaje, ' + message.member.user)
@@ -353,10 +353,10 @@ client.on("message", async (message) => {
     if (ps4.has(message.author.id)) {
       if (message.content % 1 != '0') {
         ps4.delete(message.author.id)
-        message.member.send('El numero no puede tener comas, el calcular se ha cancelado.').catch(function (err) { message.channel.send(message.member.user.toString()+ ' Activa tus mensajes privados para que el bot pueda informarte.') });
+        message.member.send('El numero no puede tener comas, el calcular se ha cancelado.').catch(function (err) { message.channel.send(message.member.user.toString() + ' Activa tus mensajes privados para que el bot pueda informarte.') });
         return;
       }
-      if (parseInt(message.content) > 50 || parseInt(message.content) < 1) return message.member.send('Nivel inválido.').catch(function (err) { message.channel.send(message.member.user.toString()+ ' Activa tus mensajes privados para que el bot pueda informarte.') });
+      if (parseInt(message.content) > 50 || parseInt(message.content) < 1) return message.member.send('Nivel inválido.').catch(function (err) { message.channel.send(message.member.user.toString() + ' Activa tus mensajes privados para que el bot pueda informarte.') });
       ps4.delete(message.author.id)
       NivelPJ[message.author.id] = parseInt(message.content);
       let necesitaperks = getLength(survivorPerks) * Niveles - (3 * perks3[message.author.id]) - (2 * perks2[message.author.id]) - perks1[message.author.id];
@@ -393,8 +393,8 @@ client.on("message", async (message) => {
       } else return message.channel.send(message.author.tag + ', send this way "**survivor**" or "**killer**" to calculate the value of all the perks that you enter.')
     }
     if (r1.has(message.author.id)) {
-      if (message.content > 50 || message.content < 1 || message.content > 50) return message.member.send('The level must be between 1 and 50, ' + message.author.tag).catch(function (err) { message.channel.send(message.member.user.toString()+ ' Activate your private messagges so the bot can inform you.') });
-      if (message.content % 1 != '0') return message.member.send('Level can not contain commas.').catch(function (err) { message.channel.send(message.member.user.toString()+ '  Activate your private messagges so the bot can inform you.') });
+      if (message.content > 50 || message.content < 1 || message.content > 50) return message.member.send('The level must be between 1 and 50, ' + message.author.tag).catch(function (err) { message.channel.send(message.member.user.toString() + ' Activate your private messagges so the bot can inform you.') });
+      if (message.content % 1 != '0') return message.member.send('Level can not contain commas.').catch(function (err) { message.channel.send(message.member.user.toString() + '  Activate your private messagges so the bot can inform you.') });
       r1.delete(message.author.id)
       n1[message.author.id] = message.content
       message.channel.send('Enter the level that you want from the bloodweb, ' + message.author.tag)
@@ -404,9 +404,9 @@ client.on("message", async (message) => {
 
     if (n2.has(message.author.id)) {
       n2.delete(message.author.id)
-      if (parseInt(message.content) > 50 || parseInt(message.content) < 1 || parseInt(message.content) > 50) return message.member.send('The level must be between 1 and 50,').catch(function (err) { message.channel.send(message.member.user.toString()+ ' Activate your private messagges so the bot can inform you.') });
-      if (parseInt(message.content) % 1 != '0') return message.member.send('Level can not contain commas.').catch(function (err) { message.channel.send(message.member.user.toString()+ ' Activate your private messagges so the bot can inform you.') });
-      if (parseInt(message.content) < n1[message.author.id]) return message.member.send('The level wanted can not be less than the initial level.').catch(function (err) { message.channel.send(message.member.user.toString()+ ' Activate your private messagges so the bot can inform you.') });
+      if (parseInt(message.content) > 50 || parseInt(message.content) < 1 || parseInt(message.content) > 50) return message.member.send('The level must be between 1 and 50,').catch(function (err) { message.channel.send(message.member.user.toString() + ' Activate your private messagges so the bot can inform you.') });
+      if (parseInt(message.content) % 1 != '0') return message.member.send('Level can not contain commas.').catch(function (err) { message.channel.send(message.member.user.toString() + ' Activate your private messagges so the bot can inform you.') });
+      if (parseInt(message.content) < n1[message.author.id]) return message.member.send('The level wanted can not be less than the initial level.').catch(function (err) { message.channel.send(message.member.user.toString() + ' Activate your private messagges so the bot can inform you.') });
       LC[message.author.id] = 0;
       let sangre = ObtenerValor(parseInt(n1[message.author.id]), parseInt(message.content), message.author.id)
       const embed = new Discord.MessageEmbed()
@@ -427,11 +427,11 @@ client.on("message", async (message) => {
     if (p1.has(message.author.id)) {
       if (message.content % 1 != '0') {
         p1.delete(message.author.id)
-        message.member.send('The level can not contain dots, the calculate funtion was canceled.').catch(function (err) { message.channel.send(message.member.user.toString()+ ' Activate your private messagges so the bot can inform you.') });
+        message.member.send('The level can not contain dots, the calculate funtion was canceled.').catch(function (err) { message.channel.send(message.member.user.toString() + ' Activate your private messagges so the bot can inform you.') });
         return;
       }
-      if (parseInt(message.content) * 3 >= getLength(killerPerks) * 3) return message.member.send('You can not have all or more than the existant perks.').catch(function (err) { message.channel.send(message.member.user.toString()+ ' Activate your private messagges so the bot can inform you.') });
-      if (parseInt(message.content) < 0) return message.member.send('You can not have less than 0 perks.').catch(function (err) { message.channel.send(message.member.user.toString()+ ' Activate your private messagges so the bot can inform you.') });
+      if (parseInt(message.content) * 3 >= getLength(killerPerks) * 3) return message.member.send('You can not have all or more than the existant perks.').catch(function (err) { message.channel.send(message.member.user.toString() + ' Activate your private messagges so the bot can inform you.') });
+      if (parseInt(message.content) < 0) return message.member.send('You can not have less than 0 perks.').catch(function (err) { message.channel.send(message.member.user.toString() + ' Activate your private messagges so the bot can inform you.') });
       p1.delete(message.author.id)
       perks3[message.author.id] = message.content;
       p2.add(message.author.id)
@@ -443,12 +443,12 @@ client.on("message", async (message) => {
     if (p2.has(message.author.id)) {
       if (message.content % 1 != '0') {
         p2.delete(message.author.id)
-        message.member.send('The level can not contain dots, the calculate funtion was canceled.').catch(function (err) { message.channel.send(message.member.user.toString()+ ' Activate your private messagges so the bot can inform you.') });
+        message.member.send('The level can not contain dots, the calculate funtion was canceled.').catch(function (err) { message.channel.send(message.member.user.toString() + ' Activate your private messagges so the bot can inform you.') });
         return;
       }
-      if (parseInt(message.content) * 2 >= getLength(killerPerks) * 3) return message.member.send('You can not have all or more than the existant perks.').catch(function (err) { message.channel.send(message.member.user.toString()+ 'Activate your private messagges so the bot can inform you.') });
-      if (parseInt(message.content) < 0) return message.member.send('You can not have less than 0 perks.').catch(function (err) { message.channel.send(message.member.user.toString()+ ' Activate your private messagges so the bot can inform you.') });
-      if (perks3[message.author.id] * 3 + parseInt(message.content) * 2 >= getLength(killerPerks) * 3) return message.member.send('You can not have all or more than the existant perks.').catch(function (err) { message.channel.send(message.member.user.toString()+ ' Activate your private messagges so the bot can inform you.') });
+      if (parseInt(message.content) * 2 >= getLength(killerPerks) * 3) return message.member.send('You can not have all or more than the existant perks.').catch(function (err) { message.channel.send(message.member.user.toString() + 'Activate your private messagges so the bot can inform you.') });
+      if (parseInt(message.content) < 0) return message.member.send('You can not have less than 0 perks.').catch(function (err) { message.channel.send(message.member.user.toString() + ' Activate your private messagges so the bot can inform you.') });
+      if (perks3[message.author.id] * 3 + parseInt(message.content) * 2 >= getLength(killerPerks) * 3) return message.member.send('You can not have all or more than the existant perks.').catch(function (err) { message.channel.send(message.member.user.toString() + ' Activate your private messagges so the bot can inform you.') });
       p2.delete(message.author.id)
       perks2[message.author.id] = message.content;
       if (message.member) message.channel.send('Enter how many level 1 perks you have, ' + message.member.user)
@@ -460,12 +460,12 @@ client.on("message", async (message) => {
     if (p3.has(message.author.id)) {
       if (message.content % 1 != '0') {
         p3.delete(message.author.id)
-        message.member.send('The number can not contain dots, the calculate function was canceled.').catch(function (err) { message.channel.send(message.member.user.toString()+ ' Activate your private messagges so the bot can inform you.') });
+        message.member.send('The number can not contain dots, the calculate function was canceled.').catch(function (err) { message.channel.send(message.member.user.toString() + ' Activate your private messagges so the bot can inform you.') });
         return;
       }
-      if (parseInt(message.content) >= getLength(killerPerks) * 3) return message.member.send('You can not have all or more than the existant perks.').catch(function (err) { message.channel.send(message.member.user.toString()+ ' Activate your private messagges so the bot can inform you.') });
-      if (parseInt(message.content) < 0) return message.member.send('No puedes tener menos de 0 perks.').catch(function (err) { message.channel.send(message.member.user.toString()+ ' Activate your private messagges so the bot can inform you.') });
-      if (perks3[message.author.id] * 3 + perks2[message.author.id] * 2 + parseInt(message.content) >= getLength(killerPerks) * 3) return message.member.send('You can not have all or more than the existant perks.').catch(function (err) { message.channel.send(message.member.user.toString()+ ' Activate your private messagges so the bot can inform you.') });
+      if (parseInt(message.content) >= getLength(killerPerks) * 3) return message.member.send('You can not have all or more than the existant perks.').catch(function (err) { message.channel.send(message.member.user.toString() + ' Activate your private messagges so the bot can inform you.') });
+      if (parseInt(message.content) < 0) return message.member.send('No puedes tener menos de 0 perks.').catch(function (err) { message.channel.send(message.member.user.toString() + ' Activate your private messagges so the bot can inform you.') });
+      if (perks3[message.author.id] * 3 + perks2[message.author.id] * 2 + parseInt(message.content) >= getLength(killerPerks) * 3) return message.member.send('You can not have all or more than the existant perks.').catch(function (err) { message.channel.send(message.member.user.toString() + ' Activate your private messagges so the bot can inform you.') });
       p3.delete(message.author.id)
       perks1[message.author.id] = message.content;
       if (message.member) message.channel.send('Enter the level your character is, ' + message.member.user)
@@ -477,10 +477,10 @@ client.on("message", async (message) => {
     if (p4.has(message.author.id)) {
       if (message.content % 1 != '0') {
         p4.delete(message.author.id)
-        message.member.send('The number can not contain dots, the calculate function was canceled.').catch(function (err) { message.channel.send(message.member.user.toString()+ ' Activate your private messagges so the bot can inform you.') });
+        message.member.send('The number can not contain dots, the calculate function was canceled.').catch(function (err) { message.channel.send(message.member.user.toString() + ' Activate your private messagges so the bot can inform you.') });
         return;
       }
-      if (parseInt(message.content) > 50 || parseInt(message.content) < 1) return message.member.send('Nivel inválido.').catch(function (err) { message.channel.send(message.member.user.toString()+ ' Activate your private messagges so the bot can inform you.') });
+      if (parseInt(message.content) > 50 || parseInt(message.content) < 1) return message.member.send('Nivel inválido.').catch(function (err) { message.channel.send(message.member.user.toString() + ' Activate your private messagges so the bot can inform you.') });
       p4.delete(message.author.id)
       NivelPJ[message.author.id] = parseInt(message.content);
       let necesitaperks = getLength(killerPerks) * Niveles - (3 * perks3[message.author.id]) - (2 * perks2[message.author.id]) - perks1[message.author.id];
@@ -501,11 +501,11 @@ client.on("message", async (message) => {
     if (ps1.has(message.author.id)) {
       if (message.content % 1 != '0') {
         ps1.delete(message.author.id)
-        message.member.send('The number can not contain dots, the calculate function was canceled.').catch(function (err) { message.channel.send(message.member.user.toString()+ ' Activate your private messagges so the bot can inform you.') });
+        message.member.send('The number can not contain dots, the calculate function was canceled.').catch(function (err) { message.channel.send(message.member.user.toString() + ' Activate your private messagges so the bot can inform you.') });
         return;
       }
-      if (parseInt(message.content) * 3 >= getLength(survivorPerks) * 3) return message.member.send('You can not have all or more than the existant perks.').catch(function (err) { message.channel.send(message.member.user.toString()+ 'Activate your private messagges so the bot can inform you.') });
-      if (parseInt(message.content) < 0) return message.member.send('You can not have less than 0 perks.').catch(function (err) { message.channel.send(message.member.user.toString()+ ' Activate your private messagges so the bot can inform you.') });
+      if (parseInt(message.content) * 3 >= getLength(survivorPerks) * 3) return message.member.send('You can not have all or more than the existant perks.').catch(function (err) { message.channel.send(message.member.user.toString() + 'Activate your private messagges so the bot can inform you.') });
+      if (parseInt(message.content) < 0) return message.member.send('You can not have less than 0 perks.').catch(function (err) { message.channel.send(message.member.user.toString() + ' Activate your private messagges so the bot can inform you.') });
       ps1.delete(message.author.id)
       perks3[message.author.id] = message.content;
       ps2.add(message.author.id)
@@ -517,12 +517,12 @@ client.on("message", async (message) => {
     if (ps2.has(message.author.id)) {
       if (message.content % 1 != '0') {
         ps2.delete(message.author.id)
-        message.member.send('The number can not contain dots, the calculate function was canceled.').catch(function (err) { message.channel.send(message.member.user.toString()+ ' Activate your private messagges so the bot can inform you.') });
+        message.member.send('The number can not contain dots, the calculate function was canceled.').catch(function (err) { message.channel.send(message.member.user.toString() + ' Activate your private messagges so the bot can inform you.') });
         return;
       }
-      if (parseInt(message.content) * 2 >= getLength(survivorPerks) * 3) return message.member.send('You can not have all or more than the existant perks.').catch(function (err) { message.channel.send(message.member.user.toString()+ ' Activate your private messagges so the bot can inform you.') });
-      if (parseInt(message.content) < 0) return message.member.send('You can not have less than 0 perks.').catch(function (err) { message.channel.send(message.member.user.toString()+ ' Activate your private messagges so the bot can inform you.') });
-      if (perks3[message.author.id] * 3 + parseInt(message.content) * 2 >= getLength(survivorPerks) * 3) return message.member.send('You can not have all or more than the existant perks.').catch(function (err) { message.channel.send(message.member.user.toString()+ ' Activate your private messagges so the bot can inform you.') });
+      if (parseInt(message.content) * 2 >= getLength(survivorPerks) * 3) return message.member.send('You can not have all or more than the existant perks.').catch(function (err) { message.channel.send(message.member.user.toString() + ' Activate your private messagges so the bot can inform you.') });
+      if (parseInt(message.content) < 0) return message.member.send('You can not have less than 0 perks.').catch(function (err) { message.channel.send(message.member.user.toString() + ' Activate your private messagges so the bot can inform you.') });
+      if (perks3[message.author.id] * 3 + parseInt(message.content) * 2 >= getLength(survivorPerks) * 3) return message.member.send('You can not have all or more than the existant perks.').catch(function (err) { message.channel.send(message.member.user.toString() + ' Activate your private messagges so the bot can inform you.') });
       ps2.delete(message.author.id)
       perks2[message.author.id] = message.content;
       if (message.member) message.channel.send('Enter how many level 1 perks you have, ' + message.member.user)
@@ -534,12 +534,12 @@ client.on("message", async (message) => {
     if (ps3.has(message.author.id)) {
       if (message.content % 1 != '0') {
         ps3.delete(message.author.id)
-        message.member.send('The number can not contain dots, the calculate function was canceled.').catch(function (err) { message.channel.send(message.member.user.toString()+ ' Activate your private messagges so the bot can inform you.') });
+        message.member.send('The number can not contain dots, the calculate function was canceled.').catch(function (err) { message.channel.send(message.member.user.toString() + ' Activate your private messagges so the bot can inform you.') });
         return;
       }
-      if (parseInt(message.content) >= getLength(survivorPerks) * 3) return message.member.send('You can not have all or more than the existant perks.').catch(function (err) { message.channel.send(message.member.user.toString()+ ' Activate your private messagges so the bot can inform you.') });
-      if (parseInt(message.content) < 0) return message.member.send('You can not have less than 0 perks.').catch(function (err) { message.channel.send(message.member.user.toString()+ ' Activate your private messagges so the bot can inform you.') });
-      if (perks3[message.author.id] * 3 + perks2[message.author.id] * 2 + parseInt(message.content) >= getLength(survivorPerks) * 3) return message.member.send('You can not have all or more than the existant perks.').catch(function (err) { message.channel.send(message.member.user.toString()+ ' Activate your private messagges so the bot can inform you.') });
+      if (parseInt(message.content) >= getLength(survivorPerks) * 3) return message.member.send('You can not have all or more than the existant perks.').catch(function (err) { message.channel.send(message.member.user.toString() + ' Activate your private messagges so the bot can inform you.') });
+      if (parseInt(message.content) < 0) return message.member.send('You can not have less than 0 perks.').catch(function (err) { message.channel.send(message.member.user.toString() + ' Activate your private messagges so the bot can inform you.') });
+      if (perks3[message.author.id] * 3 + perks2[message.author.id] * 2 + parseInt(message.content) >= getLength(survivorPerks) * 3) return message.member.send('You can not have all or more than the existant perks.').catch(function (err) { message.channel.send(message.member.user.toString() + ' Activate your private messagges so the bot can inform you.') });
       ps3.delete(message.author.id)
       perks1[message.author.id] = message.content;
       if (message.member) message.channel.send('Enter the level your character is, ' + message.member.user)
@@ -551,10 +551,10 @@ client.on("message", async (message) => {
     if (ps4.has(message.author.id)) {
       if (message.content % 1 != '0') {
         ps4.delete(message.author.id)
-        message.member.send('The number can not contain dots, the calculate function was canceled.').catch(function (err) { message.channel.send(message.member.user.toString()+ ' Activate your private messagges so the bot can inform you.') });
+        message.member.send('The number can not contain dots, the calculate function was canceled.').catch(function (err) { message.channel.send(message.member.user.toString() + ' Activate your private messagges so the bot can inform you.') });
         return;
       }
-      if (parseInt(message.content) > 50 || parseInt(message.content) < 1) return message.member.send('Nivel inválido.').catch(function (err) { message.channel.send(message.member.user.toString()+ ' Activate your private messagges so the bot can inform you.') });
+      if (parseInt(message.content) > 50 || parseInt(message.content) < 1) return message.member.send('Nivel inválido.').catch(function (err) { message.channel.send(message.member.user.toString() + ' Activate your private messagges so the bot can inform you.') });
       ps4.delete(message.author.id)
       NivelPJ[message.author.id] = parseInt(message.content);
       let necesitaperks = getLength(survivorPerks) * Niveles - (3 * perks3[message.author.id]) - (2 * perks2[message.author.id]) - perks1[message.author.id];
@@ -593,11 +593,11 @@ client.on("message", async (message) => {
       if (p4.has(message.author.id)) p4.delete(message.author.id)
 
       if (command == 'calcular') {
-        if (!texto) return message.member.send('Usa: **' + prefix[message.guild.id] + 'calcular [Opción]** | Opciones: Killer o Survivor | Comando para obtener puntos de sangre necesarios para comprar todas las perks desde el nivel que estés.').catch(function (err) { message.channel.send(message.member.user.toString()+ ' Activa tus mensajes privados para que el bot pueda informarte.') });
-        if (p1.has(message.author.id)) return message.member.send('Ya tienes una solicitud abierta.').catch(function (err) { message.channel.send(message.member.user.toString()+ ' Activa tus mensajes privados para que el bot pueda informarte.') });
+        if (!texto) return message.member.send('Usa: **' + prefix[message.guild.id] + 'calcular [Opción]** | Opciones: Killer o Survivor | Comando para obtener puntos de sangre necesarios para comprar todas las perks desde el nivel que estés.').catch(function (err) { message.channel.send(message.member.user.toString() + ' Activa tus mensajes privados para que el bot pueda informarte.') });
+        if (p1.has(message.author.id)) return message.member.send('Ya tienes una solicitud abierta.').catch(function (err) { message.channel.send(message.member.user.toString() + ' Activa tus mensajes privados para que el bot pueda informarte.') });
         if (texto.toLowerCase() == 'killer') p1.add(message.author.id)
         else if (texto.toLowerCase() == 'survivor') ps1.add(message.author.id)
-        else return message.member.send('Usa: **' + prefix[message.guild.id] + 'calcular [Opción]** | Opciones: Killer o Survivor | Comando para obtener puntos de sangre necesarios para comprar todas las perks desde el nivel que estés.').catch(function (err) { message.channel.send(message.member.user.toString()+ ' Activa tus mensajes privados para que el bot pueda informarte.') });
+        else return message.member.send('Usa: **' + prefix[message.guild.id] + 'calcular [Opción]** | Opciones: Killer o Survivor | Comando para obtener puntos de sangre necesarios para comprar todas las perks desde el nivel que estés.').catch(function (err) { message.channel.send(message.member.user.toString() + ' Activa tus mensajes privados para que el bot pueda informarte.') });
         LC[message.author.id] = 0;
         message.channel.send('Ingresa cuántas perks a nivel 3 tienes, ' + message.member.user)
         return;
@@ -655,7 +655,8 @@ client.on("message", async (message) => {
             bodyChunks2.push(chunk);
           }).on('end', function () {
             var body2 = Buffer.concat(bodyChunks2);
-            if(res.statusCode == 200 || res.statusCode == 201) {
+            if (res.statusCode == 200 || res.statusCode == 201) {
+              console.log(`parsing ${JSON.stringify(body2)}`)
               body2 = JSON.parse(body2)
               con.query(`DELETE FROM santuario`)
               con.query(`INSERT INTO santuario (perk_1, perk_2, perk_3, perk_4) VALUES ('${body2.perks[0].id.toLowerCase()}', '${body2.perks[1].id.toLowerCase()}', '${body2.perks[2].id.toLowerCase()}', '${body2.perks[3].id.toLowerCase()}')`)
@@ -672,7 +673,7 @@ client.on("message", async (message) => {
           var perk2 = await getPerkIndexByID(rows[0].perk_2)
           var perk3 = await getPerkIndexByID(rows[0].perk_3)
           var perk4 = await getPerkIndexByID(rows[0].perk_4)
-          if(!isValidPerk(perk1.index) || !isValidPerk(perk2.index) || !isValidPerk(perk3.index) || !isValidPerk(perk4.index)){
+          if (!isValidPerk(perk1.index) || !isValidPerk(perk2.index) || !isValidPerk(perk3.index) || !isValidPerk(perk4.index)) {
             console.log(`Invalid perks in shrine: ${perk1.index} (${rows[0].perk_1}) | ${perk2.index} (${rows[0].perk_2}) | ${perk3.index} (${rows[0].perk_3}) | ${perk4.index} (${rows[0].perk_4})`)
             message.channel.send("Actualmente no podemos mostrar esta información, por favor reportalo en nuestro Discord en la sección de bugs: https://discord.gg/T6rEERg")
             return
@@ -871,7 +872,7 @@ client.on("message", async (message) => {
         }
         else if (text.includes('steamcommunity.com/profiles/')) {
           //Perfil con SteamID64.
-          let steamid = text.slice(text.indexOf("profiles/")+9, text.length)
+          let steamid = text.slice(text.indexOf("profiles/") + 9, text.length)
           steamid = steamid.replace("/", "")
           getSteamProfile(steamid, message.channel.id, message.author.id, message.guild.id, isSurv, 0)
           return
@@ -891,11 +892,11 @@ client.on("message", async (message) => {
               bodyChunks_.push(chunk);
             }).on('end', function () {
               var body3 = Buffer.concat(bodyChunks_);
-              if(res.statusCode == 200 || res.statusCode == 201) {
-              body3 = JSON.parse(body3)
-              if (isEmptyObject(body3)) return message.author.send("URL de perfil inválido.")
-              if (body3.response.success != 1) return message.author.send("URL de perfil inválido.")
-              getSteamProfile(body3.response.steamid, message.channel.id, message.author.id, message.guild.id, isSurv, 0)
+              if (res.statusCode == 200 || res.statusCode == 201) {
+                body3 = JSON.parse(body3)
+                if (isEmptyObject(body3)) return message.author.send("URL de perfil inválido.")
+                if (body3.response.success != 1) return message.author.send("URL de perfil inválido.")
+                getSteamProfile(body3.response.steamid, message.channel.id, message.author.id, message.guild.id, isSurv, 0)
               } else return message.author.send("URL de perfil inválido.")
             })
           })
@@ -904,10 +905,10 @@ client.on("message", async (message) => {
       }
 
       if (command == 'nivel') {
-        if (!texto) return message.member.send('Ingresa: **' + prefix[message.guild.id] + 'nivel [Nivel Actual] [Nivel Deseado]** | Te dirá la cantidad de puntos de sangre necesaria para llegar a ese nivel.').catch(function (err) { message.channel.send(message.member.user.toString()+ ' Activa tus mensajes privados para que el bot pueda informarte.') });
-        if (parseInt(args[0]) >= parseInt(args[1])) return message.member.send('El nivel deseado no puede ser mayor o igual al que tenes.').catch(function (err) { message.channel.send(message.member.user.toString()+ ' Activa tus mensajes privados para que el bot pueda informarte.') });
-        if (parseInt(args[1]) > 50 || parseInt(args[0]) < 1 || parseInt(args[0]) > 50) return message.member.send('El nivel iniciado debe ser entre 1 y 49, y el nivel deseado entre 1 y 50.').catch(function (err) { message.channel.send(message.member.user.toString()+ ' Activa tus mensajes privados para que el bot pueda informarte.') });
-        if (parseInt(args[1]) % 1 != '0' || parseInt(args[0]) % 1 != '0') return message.member.send('El nivel no puede tener comas.').catch(function (err) { message.channel.send(message.member.user.toString()+ ' Activa tus mensajes privados para que el bot pueda informarte.') });
+        if (!texto) return message.member.send('Ingresa: **' + prefix[message.guild.id] + 'nivel [Nivel Actual] [Nivel Deseado]** | Te dirá la cantidad de puntos de sangre necesaria para llegar a ese nivel.').catch(function (err) { message.channel.send(message.member.user.toString() + ' Activa tus mensajes privados para que el bot pueda informarte.') });
+        if (parseInt(args[0]) >= parseInt(args[1])) return message.member.send('El nivel deseado no puede ser mayor o igual al que tenes.').catch(function (err) { message.channel.send(message.member.user.toString() + ' Activa tus mensajes privados para que el bot pueda informarte.') });
+        if (parseInt(args[1]) > 50 || parseInt(args[0]) < 1 || parseInt(args[0]) > 50) return message.member.send('El nivel iniciado debe ser entre 1 y 49, y el nivel deseado entre 1 y 50.').catch(function (err) { message.channel.send(message.member.user.toString() + ' Activa tus mensajes privados para que el bot pueda informarte.') });
+        if (parseInt(args[1]) % 1 != '0' || parseInt(args[0]) % 1 != '0') return message.member.send('El nivel no puede tener comas.').catch(function (err) { message.channel.send(message.member.user.toString() + ' Activa tus mensajes privados para que el bot pueda informarte.') });
         LC[message.author.id] = 0;
         let sangre = ObtenerValor(parseInt(args[0]), parseInt(args[1]), message.author.id)
         createLevelImage(message, args[0], args[1], sangre, lenguaje[message.guild.id])
@@ -948,7 +949,7 @@ client.on("message", async (message) => {
       }
 
       if (command == 'lobby') {
-        if (lobby_set.has(message.author.id)) return message.channel.send(message.member.user.toString()+ ', has usado el lobby hace menos de 20 segundos.')
+        if (lobby_set.has(message.author.id)) return message.channel.send(message.member.user.toString() + ', has usado el lobby hace menos de 20 segundos.')
         lobby_set.add(message.author.id)
         const lembed = new Discord.MessageEmbed()
           .setColor('#FF0000')
@@ -984,7 +985,7 @@ client.on("message", async (message) => {
         var isSurv, nCharacter, nPerk;
         if (texto.toLowerCase() == 'survivor') isSurv = true
         else if (texto.toLowerCase() == 'killer') isSurv = false
-        else return message.member.send('Usa **/random [Survivor o Killer]** || Te retornará un survivor o killer aleatorio con 4 perks.').catch(function (err) { message.channel.send(message.member.user.toString()+ ' Activa tus mensajes privados para que el bot pueda informarte.') });
+        else return message.member.send('Usa **/random [Survivor o Killer]** || Te retornará un survivor o killer aleatorio con 4 perks.').catch(function (err) { message.channel.send(message.member.user.toString() + ' Activa tus mensajes privados para que el bot pueda informarte.') });
         if (isSurv) {
           nCharacter = Math.floor(Math.random() * getLength(survivors));
           nPerk = getRandomNumber(getLength(survivorPerks))
@@ -998,17 +999,17 @@ client.on("message", async (message) => {
 
       if (command == 'reglas') {
         let randomNum = Math.floor(Math.random() * rulesEsp.length + 1)
-        message.channel.send('> '+ rulesEsp[randomNum], {
+        message.channel.send('> ' + rulesEsp[randomNum], {
           files: [
             {
-              attachment:'https://i.imgur.com/I4LhmO8.png', 
+              attachment: 'https://i.imgur.com/I4LhmO8.png',
               name: 'Survivor_rule_book_for_killers.jpg'
             }
           ]
         })
         return
       }
-      message.member.send('El comando no existe. Usa '+ prefix[message.guild.id] +'**ayuda** para ver todas las funciones y comandos.')
+      message.member.send('El comando no existe. Usa ' + prefix[message.guild.id] + '**ayuda** para ver todas las funciones y comandos.')
     } else {
       if (cid[message.guild.id] != null && message.channel.id != cid[message.guild.id]) {
         const disc = client.channels.cache.get(cid[message.guild.id]);
@@ -1021,11 +1022,11 @@ client.on("message", async (message) => {
       if (p4.has(message.author.id)) p4.delete(message.author.id)
 
       if (command == 'calculate') {
-        if (!texto) return message.member.send('Use: **' + prefix[message.guild.id] + 'calculate [Option]** | Options: Killer or Survivor | This command tells you the amount of bloodpoints that you need to buy all the perks from the level you are.').catch(function (err) { message.channel.send(message.member.user.toString()+ ' Activate your private messagges so the bot can inform you.') });
-        if (p1.has(message.author.id)) return message.member.send('Ya tienes una solicitud abierta.').catch(function (err) { message.channel.send(message.member.user.toString()+ ' Activa tus mensajes privados para que el bot pueda informarte.') });
+        if (!texto) return message.member.send('Use: **' + prefix[message.guild.id] + 'calculate [Option]** | Options: Killer or Survivor | This command tells you the amount of bloodpoints that you need to buy all the perks from the level you are.').catch(function (err) { message.channel.send(message.member.user.toString() + ' Activate your private messagges so the bot can inform you.') });
+        if (p1.has(message.author.id)) return message.member.send('Ya tienes una solicitud abierta.').catch(function (err) { message.channel.send(message.member.user.toString() + ' Activa tus mensajes privados para que el bot pueda informarte.') });
         if (texto.toLowerCase() == 'killer') p1.add(message.author.id)
         else if (texto.toLowerCase() == 'survivor') ps1.add(message.author.id)
-        else return message.member.send('Use: **' + prefix[message.guild.id] + 'calculate [Option]** | Options: Killer or Survivor | This command tells you the amount of bloodpoints that you need to buy all the perks from the level you are.').catch(function (err) { message.channel.send(message.member.user.toString()+ ' Activate your private messagges so the bot can inform you.') });
+        else return message.member.send('Use: **' + prefix[message.guild.id] + 'calculate [Option]** | Options: Killer or Survivor | This command tells you the amount of bloodpoints that you need to buy all the perks from the level you are.').catch(function (err) { message.channel.send(message.member.user.toString() + ' Activate your private messagges so the bot can inform you.') });
         LC[message.author.id] = 0;
         message.channel.send('Enter how many level 3 perks you have, ' + message.member.user)
         return;
@@ -1038,7 +1039,7 @@ client.on("message", async (message) => {
           var perk2 = await getPerkIndexByID(rows[0].perk_2)
           var perk3 = await getPerkIndexByID(rows[0].perk_3)
           var perk4 = await getPerkIndexByID(rows[0].perk_4)
-          if(!isValidPerk(perk1.index) || !isValidPerk(perk2.index) || !isValidPerk(perk3.index) || !isValidPerk(perk4.index)){
+          if (!isValidPerk(perk1.index) || !isValidPerk(perk2.index) || !isValidPerk(perk3.index) || !isValidPerk(perk4.index)) {
             console.log(`Invalid perks in shrine: ${perk1.index} (${rows[0].perk_1}) | ${perk2.index} (${rows[0].perk_2}) | ${perk3.index} (${rows[0].perk_3}) | ${perk4.index} (${rows[0].perk_4})`)
             message.channel.send("We are currently unable to display this information, please report it on our Discord in the bugs section: https://discord.gg/T6rEERg")
             return
@@ -1235,10 +1236,10 @@ client.on("message", async (message) => {
       }
       if (command == 'rules') {
         let randomNum = Math.floor(Math.random() * rulesEng.length + 1)
-        message.channel.send('> '+ rulesEng[randomNum], {
+        message.channel.send('> ' + rulesEng[randomNum], {
           files: [
             {
-              attachment:'https://i.imgur.com/I4LhmO8.png', 
+              attachment: 'https://i.imgur.com/I4LhmO8.png',
               name: 'Survivor_rule_book_for_killers.jpg'
             }
           ]
@@ -1246,7 +1247,7 @@ client.on("message", async (message) => {
         return
       }
       if (command == 'stats') {
-        if (!texto) return message.channel.send('Use: **'+prefix[message.guild.id]+'stats [Survivor or Killer] [Steam profile URL or Steam friend code]**')
+        if (!texto) return message.channel.send('Use: **' + prefix[message.guild.id] + 'stats [Survivor or Killer] [Steam profile URL or Steam friend code]**')
         if (args[0].toLowerCase() != 'killer' && args[0].toLowerCase() != 'survivor') return message.channel.send('Use: **/stats [Survivor or Killer] [Steam profile URL]**')
         var isSurv;
         if (args[0].toLowerCase() == 'survivor') isSurv = true
@@ -1255,8 +1256,8 @@ client.on("message", async (message) => {
         let text = args[1];
         //Perfil con SteamID32
         if (!text.includes('steamcommunity.com/id/') && !text.includes('steamcommunity.com/profiles/')) {
-          if (isNaN(args[1])) return message.channel.send('Steam profile URL or friend code is not correct, '+message.member.user)
-          if (args[1].length < 8) return message.channel.send('Steam friend code is not correct, '+message.member.user)
+          if (isNaN(args[1])) return message.channel.send('Steam profile URL or friend code is not correct, ' + message.member.user)
+          if (args[1].length < 8) return message.channel.send('Steam friend code is not correct, ' + message.member.user)
           let steamid = steamID_64(args[1])
           getSteamProfile(steamid, message.channel.id, message.author.id, message.guild.id, isSurv, 0)
           return
@@ -1281,23 +1282,23 @@ client.on("message", async (message) => {
               bodyChunks_.push(chunk);
             }).on('end', function () {
               var body3 = Buffer.concat(bodyChunks_);
-              if(res.statusCode == 200 || res.statusCode == 201) {
-              body3 = JSON.parse(body3)
-              if (isEmptyObject(body3)) return message.author.send("Invalid URL Profile.")
-              if (body3.response.success != 1) return message.author.send("Invalid URL Profile.")
-              getSteamProfile(body3.response.steamid, message.channel.id, message.author.id, message.guild.id, isSurv, 0)
+              if (res.statusCode == 200 || res.statusCode == 201) {
+                body3 = JSON.parse(body3)
+                if (isEmptyObject(body3)) return message.author.send("Invalid URL Profile.")
+                if (body3.response.success != 1) return message.author.send("Invalid URL Profile.")
+                getSteamProfile(body3.response.steamid, message.channel.id, message.author.id, message.guild.id, isSurv, 0)
               } else return message.author.send("Invalid URL Profile.")
             })
           })
           return
-        } else return message.channel.send('Use: **'+prefix[message.guild.id]+'stats [Survivor or Killer] [Steam profile URL or Steam friend code]**')
+        } else return message.channel.send('Use: **' + prefix[message.guild.id] + 'stats [Survivor or Killer] [Steam profile URL or Steam friend code]**')
       }
 
       if (command == 'level') {
-        if (!texto) return message.member.send('Enter: **' + prefix[message.guild.id] + 'level [Current Level] [Level wanted]** | It will tell you the amount of bloodpoints needed to reach that level.').catch(function (err) { message.channel.send(message.member.user.toString()+ ' Activate your private messagges so the bot can inform you.') });
-        if (parseInt(args[0]) >= parseInt(args[1])) return message.member.send('The wanted level can not be higher that the current level.').catch(function (err) { message.channel.send(message.member.user.toString()+ ' Activate your private messagges so the bot can inform you.') });
-        if (parseInt(args[1]) > 50 || parseInt(args[0]) < 1 || parseInt(args[0]) > 50) return message.member.send('The current level must be between 1 and 49 and the wanted level must be between 1 and 50.').catch(function (err) { message.channel.send(message.member.user.toString()+ '  Activate your private messagges so the bot can inform you.') });
-        if (parseInt(args[1]) % 1 != '0' || parseInt(args[0]) % 1 != '0') return message.member.send('Level can not contain commas').catch(function (err) { message.channel.send(message.member.user.toString()+ ' Activate your private messagges so the bot can inform you.') });
+        if (!texto) return message.member.send('Enter: **' + prefix[message.guild.id] + 'level [Current Level] [Level wanted]** | It will tell you the amount of bloodpoints needed to reach that level.').catch(function (err) { message.channel.send(message.member.user.toString() + ' Activate your private messagges so the bot can inform you.') });
+        if (parseInt(args[0]) >= parseInt(args[1])) return message.member.send('The wanted level can not be higher that the current level.').catch(function (err) { message.channel.send(message.member.user.toString() + ' Activate your private messagges so the bot can inform you.') });
+        if (parseInt(args[1]) > 50 || parseInt(args[0]) < 1 || parseInt(args[0]) > 50) return message.member.send('The current level must be between 1 and 49 and the wanted level must be between 1 and 50.').catch(function (err) { message.channel.send(message.member.user.toString() + '  Activate your private messagges so the bot can inform you.') });
+        if (parseInt(args[1]) % 1 != '0' || parseInt(args[0]) % 1 != '0') return message.member.send('Level can not contain commas').catch(function (err) { message.channel.send(message.member.user.toString() + ' Activate your private messagges so the bot can inform you.') });
         LC[message.author.id] = 0;
         let sangre = ObtenerValor(parseInt(args[0]), parseInt(args[1]), message.author.id)
         createLevelImage(message, args[0], args[1], sangre, lenguaje[message.guild.id])
@@ -1338,7 +1339,7 @@ client.on("message", async (message) => {
       }
 
       if (command == 'lobby') {
-        if (lobby_set.has(message.author.id)) return message.channel.send(message.member.user.toString()+ ', You used the lobby less than 20 seconds ago.')
+        if (lobby_set.has(message.author.id)) return message.channel.send(message.member.user.toString() + ', You used the lobby less than 20 seconds ago.')
         lobby_set.add(message.author.id)
         const lembed = new Discord.MessageEmbed()
           .setColor('#FF0000')
@@ -1368,11 +1369,11 @@ client.on("message", async (message) => {
       }
 
       if (command == 'random') {
-        if (!texto) return message.member.send('Use **'+prefix[message.guild.id]+'random [Survivor or Killer]** || It will give you a random 4 perk build for a survivor or killer.')
+        if (!texto) return message.member.send('Use **' + prefix[message.guild.id] + 'random [Survivor or Killer]** || It will give you a random 4 perk build for a survivor or killer.')
         var isSurv, nCharacter, nPerk;
         if (texto.toLowerCase() == 'survivor') isSurv = true
         else if (texto.toLowerCase() == 'killer') isSurv = false
-        else return message.member.send('Use **'+prefix[message.guild.id]+'random [Survivor or Killer]** || It will give you a random 4 perk build for a survivor or killer.')
+        else return message.member.send('Use **' + prefix[message.guild.id] + 'random [Survivor or Killer]** || It will give you a random 4 perk build for a survivor or killer.')
         if (isSurv) {
           nCharacter = Math.floor(Math.random() * getLength(survivors));
           nPerk = getRandomNumber(getLength(survivorPerks))
@@ -1391,26 +1392,26 @@ client.on("message", async (message) => {
 
 async function createLevelImage(message, initialLevel, targetLevel, bloodpoints, language) {
   const canvas = Canvas.createCanvas(541, 447);
-    const ctx = canvas.getContext('2d');
-    let fontSize = 10
-    const background = await Canvas.loadImage(background_level);
-    ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
+  const ctx = canvas.getContext('2d');
+  let fontSize = 10
+  const background = await Canvas.loadImage(background_level);
+  ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
 
-    ctx.strokeStyle = '#74037b';
-    ctx.strokeRect(0, 0, canvas.width, canvas.height);
+  ctx.strokeStyle = '#74037b';
+  ctx.strokeRect(0, 0, canvas.width, canvas.height);
 
-    // Slightly smaller text placed above the member's display name
-    ctx.font = '50px "dbd"';
-    ctx.fillStyle = '#ffffff';
-    let levelHeader = language == 0 ? "Nivel" : "Level"
-  
-    ctx.fillText(levelHeader, calculateCenter(270, levelHeader.length, fontSize), 75);
-    ctx.fillText(initialLevel, calculateCenter(113, initialLevel.toString().length, fontSize), 210);
-    ctx.fillText(targetLevel, calculateCenter(419, targetLevel.toString().length, fontSize), 213);
-    ctx.fillText(Coma(bloodpoints), calculateCenter(290, bloodpoints.toString().length, fontSize), 355);
+  // Slightly smaller text placed above the member's display name
+  ctx.font = '50px "dbd"';
+  ctx.fillStyle = '#ffffff';
+  let levelHeader = language == 0 ? "Nivel" : "Level"
 
-    const attachment = new Discord.MessageAttachment(canvas.toBuffer(), 'calculate-image.png');
-    message.channel.send('‎      ‏‏‎', attachment)
+  ctx.fillText(levelHeader, calculateCenter(270, levelHeader.length, fontSize), 75);
+  ctx.fillText(initialLevel, calculateCenter(113, initialLevel.toString().length, fontSize), 210);
+  ctx.fillText(targetLevel, calculateCenter(419, targetLevel.toString().length, fontSize), 213);
+  ctx.fillText(Coma(bloodpoints), calculateCenter(290, bloodpoints.toString().length, fontSize), 355);
+
+  const attachment = new Discord.MessageAttachment(canvas.toBuffer(), 'calculate-image.png');
+  message.channel.send('‎      ‏‏‎', attachment)
 }
 
 function ObtenerValor(nivel, Deseado, id) {
@@ -1619,6 +1620,7 @@ function sendEmbedError(type, user, channel, language) {
           .setTimestamp()
           .setFooter('La entidad', client.user.avatarURL());
         client.channels.cache.get(channel).send(embedd)
+        break;
       }
       case 2: {
         const embedd = new Discord.MessageEmbed()
@@ -1633,6 +1635,7 @@ function sendEmbedError(type, user, channel, language) {
           .setImage('https://cdn.discordapp.com/attachments/738848207328772237/739269462510796800/unknown.png')
           .setFooter('La entidad', client.user.avatarURL());
         client.channels.cache.get(channel).send(embedd)
+        break;
       }
       case 3: {
         const embedd = new Discord.MessageEmbed()
@@ -1644,7 +1647,8 @@ function sendEmbedError(type, user, channel, language) {
           .addField('Agregar cuenta:', '[Haz click aquí](https://dbd.onteh.net.au)')
           .setTimestamp()
           .setFooter('La entidad', client.user.avatarURL())
-          client.channels.cache.get(channel).send(embedd)
+        client.channels.cache.get(channel).send(embedd)
+        break;
       }
     }
   } else {
@@ -1659,6 +1663,7 @@ function sendEmbedError(type, user, channel, language) {
           .setTimestamp()
           .setFooter('Entity', client.user.avatarURL());
         client.channels.cache.get(channel).send(embedd)
+        break;
       }
       case 2: {
         const embedd = new Discord.MessageEmbed()
@@ -1673,6 +1678,7 @@ function sendEmbedError(type, user, channel, language) {
           .setImage('https://cdn.discordapp.com/attachments/738848207328772237/739269462510796800/unknown.png')
           .setFooter('Entity', client.user.avatarURL());
         client.channels.cache.get(channel).send(embedd)
+        break;
       }
       case 3: {
         const embedd = new Discord.MessageEmbed()
@@ -1684,7 +1690,8 @@ function sendEmbedError(type, user, channel, language) {
           .addField('Add account:', '[Click here](https://dbd.onteh.net.au)')
           .setTimestamp()
           .setFooter('Entity', client.user.avatarURL())
-          client.channels.cache.get(channel).send(embedd)
+        client.channels.cache.get(channel).send(embedd)
+        break;
       }
     }
   }
@@ -1703,14 +1710,15 @@ function postStats(steamid, channelid, user, language) {
     host: "dbd.onteh.net.au",
     path: "/api/playerstats?steamid=" + steamid,
     method: 'POST',
-    headers: {'User-Agent': 'EntityBot/'+version_bot}
+    headers: { 'User-Agent': 'EntityBot/' + version_bot }
   };
   let req = https.request(options, function (res) {
-    if(res.statusCode != 201){
-      console.log(`ERROR POST: ${res.statusCode} | ${res.statusMessage}`)
+    if (res.statusCode != 201) {
+      console.log(`ERROR POST: ${res.statusCode} | message: ${res.statusMessage} | headers: ${JSON.stringify(res.headers)} | steamid: ${steamid}`)
       sendEmbedError(3, user, channelid, language)
     } else {
-      if(language == 0) user.send("La cuenta de Steam está en la cola para ser agregada ya que no estaba registrada, recuerda que puede tardar hasta 1 hora.")
+      console.log(`SUCESS POST: ${res.statusCode} | steamid: ${steamid}`)
+      if (language == 0) user.send("La cuenta de Steam está en la cola para ser agregada ya que no estaba registrada, recuerda que puede tardar hasta 1 hora.")
       else user.send("The Steam account is in the queue to be added since it was not registered, remember that it can take up to 1 hour.")
     }
   })
@@ -1820,10 +1828,11 @@ function verifyShrine() {
         bodyChunks2.push(chunk);
       }).on('end', function () {
         var body2 = Buffer.concat(bodyChunks2);
-        if(res.statusCode == 200 || res.statusCode == 201) {
-        body2 = JSON.parse(body2)
-        con.query(`DELETE FROM santuario`)
-        con.query(`INSERT INTO santuario (perk_1, perk_2, perk_3, perk_4) VALUES ('${body2.perks[0].id.toLowerCase()}', '${body2.perks[1].id.toLowerCase()}', '${body2.perks[2].id.toLowerCase()}', '${body2.perks[3].id.toLowerCase()}')`)
+        if (res.statusCode == 200 || res.statusCode == 201) {
+          console.log(`parsing ${JSON.stringify(body2)}`)
+          body2 = JSON.parse(body2)
+          con.query(`DELETE FROM santuario`)
+          con.query(`INSERT INTO santuario (perk_1, perk_2, perk_3, perk_4) VALUES ('${body2.perks[0].id.toLowerCase()}', '${body2.perks[1].id.toLowerCase()}', '${body2.perks[2].id.toLowerCase()}', '${body2.perks[3].id.toLowerCase()}')`)
         }
       })
     })
@@ -1955,14 +1964,14 @@ function loadCharacters() {
 
 function loadRules() {
   fs.readFile('assets/rules/en.json', 'utf8', function (err, data) {
-      if (err) return console.log(err)
-      const msg = JSON.parse(data)
-      rulesEng = msg.rules
+    if (err) return console.log(err)
+    const msg = JSON.parse(data)
+    rulesEng = msg.rules
   })
   fs.readFile('assets/rules/es.json', 'utf8', function (err, data) {
-      if (err) return console.log(err)
-      const msg = JSON.parse(data)
-      rulesEsp = msg.rules
+    if (err) return console.log(err)
+    const msg = JSON.parse(data)
+    rulesEsp = msg.rules
   })
   return
 }
@@ -1999,10 +2008,10 @@ async function getPerkIndexByID(id) {
  * @param {Int8Array} index - Perk index from JSON file.
  * @description Return true if perk is valid, else, false.
  */
-function isValidPerk(index){
-  if(index == -1) return false
-  if(index === undefined) return false
-  if(index === null) return false
+function isValidPerk(index) {
+  if (index == -1) return false
+  if (index === undefined) return false
+  if (index === null) return false
   return true
 }
 
@@ -2099,63 +2108,63 @@ function getRandomNumber(max) {
  * @description Get embed with random build and character.
  */
 async function createRandomBuild(message, numberCharacter, numberPerk1, numberPerk2, numberPerk3, numberPerk4, isSurv, language) {
-  if(isSurv){
+  if (isSurv) {
     const canvas = Canvas.createCanvas(1579, 1114);
-      const ctx = canvas.getContext('2d');
-      let fontSize = 21
-      const background = await Canvas.loadImage(background_survivor);
-      ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
+    const ctx = canvas.getContext('2d');
+    let fontSize = 21
+    const background = await Canvas.loadImage(background_survivor);
+    ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
 
-      ctx.strokeStyle = '#74037b';
-      ctx.strokeRect(0, 0, canvas.width, canvas.height);
+    ctx.strokeStyle = '#74037b';
+    ctx.strokeRect(0, 0, canvas.width, canvas.height);
 
-      ctx.font = '101px "dbd"';
-      ctx.fillStyle = '#ffffff';
-      ctx.fillText(survivors[numberCharacter].name, calculateCenter(1267, survivors[numberCharacter].name.length, fontSize), 207);
-      const avatar = await Canvas.loadImage(survivors[numberCharacter].link);
-      ctx.drawImage(avatar, 1045, 227, 447, 619);
-      let perkImageName = [getImageName(numberPerk1, isSurv), getImageName(numberPerk2, isSurv), getImageName(numberPerk3, isSurv), getImageName(numberPerk4, isSurv)]
-      const perkImage_1 = await getImage(perkImageName[0], isSurv)
-      const perkImage_2 = await getImage(perkImageName[1], isSurv)
-      const perkImage_3 = await getImage(perkImageName[2], isSurv)
-      const perkImage_4 = await getImage(perkImageName[3], isSurv)
-      ctx.drawImage(perkImage_1, 302, 234, 256, 256);
-      ctx.drawImage(perkImage_2, 116, 429, 256, 256);
-      ctx.drawImage(perkImage_3, 493, 429, 256, 256);
-      ctx.drawImage(perkImage_4, 303, 605, 256, 256);
+    ctx.font = '101px "dbd"';
+    ctx.fillStyle = '#ffffff';
+    ctx.fillText(survivors[numberCharacter].name, calculateCenter(1267, survivors[numberCharacter].name.length, fontSize), 207);
+    const avatar = await Canvas.loadImage(survivors[numberCharacter].link);
+    ctx.drawImage(avatar, 1045, 227, 447, 619);
+    let perkImageName = [getImageName(numberPerk1, isSurv), getImageName(numberPerk2, isSurv), getImageName(numberPerk3, isSurv), getImageName(numberPerk4, isSurv)]
+    const perkImage_1 = await getImage(perkImageName[0], isSurv)
+    const perkImage_2 = await getImage(perkImageName[1], isSurv)
+    const perkImage_3 = await getImage(perkImageName[2], isSurv)
+    const perkImage_4 = await getImage(perkImageName[3], isSurv)
+    ctx.drawImage(perkImage_1, 302, 234, 256, 256);
+    ctx.drawImage(perkImage_2, 116, 429, 256, 256);
+    ctx.drawImage(perkImage_3, 493, 429, 256, 256);
+    ctx.drawImage(perkImage_4, 303, 605, 256, 256);
 
-      const attachment = new Discord.MessageAttachment(canvas.toBuffer(), 'survivor-random.png');
-      if(language == 0) message.channel.send(`**PERKS:**\n1⃣: ${survivorPerks[numberPerk1].nameEs}\n2⃣: ${survivorPerks[numberPerk2].nameEs}\n3⃣: ${survivorPerks[numberPerk3].nameEs}\n4⃣: ${survivorPerks[numberPerk4].nameEs}`, attachment)
-      else message.channel.send(`**PERKS:**\n1⃣: ${survivorPerks[numberPerk1].nameEn}\n2⃣: ${survivorPerks[numberPerk2].nameEn}\n3⃣: ${survivorPerks[numberPerk3].nameEn}\n4⃣: ${survivorPerks[numberPerk4].nameEn}`, attachment)
+    const attachment = new Discord.MessageAttachment(canvas.toBuffer(), 'survivor-random.png');
+    if (language == 0) message.channel.send(`**PERKS:**\n1⃣: ${survivorPerks[numberPerk1].nameEs}\n2⃣: ${survivorPerks[numberPerk2].nameEs}\n3⃣: ${survivorPerks[numberPerk3].nameEs}\n4⃣: ${survivorPerks[numberPerk4].nameEs}`, attachment)
+    else message.channel.send(`**PERKS:**\n1⃣: ${survivorPerks[numberPerk1].nameEn}\n2⃣: ${survivorPerks[numberPerk2].nameEn}\n3⃣: ${survivorPerks[numberPerk3].nameEn}\n4⃣: ${survivorPerks[numberPerk4].nameEn}`, attachment)
   } else {
     const canvas = Canvas.createCanvas(1579, 1114);
-      const ctx = canvas.getContext('2d');
-      let fontSize = 21
-      const background = await Canvas.loadImage(background_killer);
-      ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
+    const ctx = canvas.getContext('2d');
+    let fontSize = 21
+    const background = await Canvas.loadImage(background_killer);
+    ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
 
-      ctx.strokeStyle = '#74037b';
-      ctx.strokeRect(0, 0, canvas.width, canvas.height);
+    ctx.strokeStyle = '#74037b';
+    ctx.strokeRect(0, 0, canvas.width, canvas.height);
 
-      ctx.font = '101px "dbd"';
-      ctx.fillStyle = '#ffffff';
-      let string = language == 0 ? killers[numberCharacter].nameEs:killers[numberCharacter].nameEn
-      ctx.fillText(string, calculateCenter(1267, string.length, fontSize), 207);
-      const avatar = await Canvas.loadImage(killers[numberCharacter].link);
-      ctx.drawImage(avatar, 1045, 227, 447, 619);
-      let perkImageName = [getImageName(numberPerk1, isSurv), getImageName(numberPerk2, isSurv), getImageName(numberPerk3, isSurv), getImageName(numberPerk4, isSurv)]
-      const perkImage_1 = await getImage(perkImageName[0], isSurv)
-      const perkImage_2 = await getImage(perkImageName[1], isSurv)
-      const perkImage_3 = await getImage(perkImageName[2], isSurv)
-      const perkImage_4 = await getImage(perkImageName[3], isSurv)
-      ctx.drawImage(perkImage_1, 302, 234, 256, 256);
-      ctx.drawImage(perkImage_2, 116, 429, 256, 256);
-      ctx.drawImage(perkImage_3, 493, 429, 256, 256);
-      ctx.drawImage(perkImage_4, 303, 605, 256, 256);
+    ctx.font = '101px "dbd"';
+    ctx.fillStyle = '#ffffff';
+    let string = language == 0 ? killers[numberCharacter].nameEs : killers[numberCharacter].nameEn
+    ctx.fillText(string, calculateCenter(1267, string.length, fontSize), 207);
+    const avatar = await Canvas.loadImage(killers[numberCharacter].link);
+    ctx.drawImage(avatar, 1045, 227, 447, 619);
+    let perkImageName = [getImageName(numberPerk1, isSurv), getImageName(numberPerk2, isSurv), getImageName(numberPerk3, isSurv), getImageName(numberPerk4, isSurv)]
+    const perkImage_1 = await getImage(perkImageName[0], isSurv)
+    const perkImage_2 = await getImage(perkImageName[1], isSurv)
+    const perkImage_3 = await getImage(perkImageName[2], isSurv)
+    const perkImage_4 = await getImage(perkImageName[3], isSurv)
+    ctx.drawImage(perkImage_1, 302, 234, 256, 256);
+    ctx.drawImage(perkImage_2, 116, 429, 256, 256);
+    ctx.drawImage(perkImage_3, 493, 429, 256, 256);
+    ctx.drawImage(perkImage_4, 303, 605, 256, 256);
 
-      const attachment = new Discord.MessageAttachment(canvas.toBuffer(), 'killer-random.png');
-      if(language == 0) message.channel.send(`**PERKS:**\n1⃣: ${killerPerks[numberPerk1].nameEs}\n2⃣: ${killerPerks[numberPerk2].nameEs}\n3⃣: ${killerPerks[numberPerk3].nameEs}\n4⃣: ${killerPerks[numberPerk4].nameEs}`, attachment)
-      else message.channel.send(`**PERKS:**\n1⃣: ${killerPerks[numberPerk1].nameEn}\n2⃣: ${killerPerks[numberPerk2].nameEn}\n3⃣: ${killerPerks[numberPerk3].nameEn}\n4⃣: ${killerPerks[numberPerk4].nameEn}`, attachment)
+    const attachment = new Discord.MessageAttachment(canvas.toBuffer(), 'killer-random.png');
+    if (language == 0) message.channel.send(`**PERKS:**\n1⃣: ${killerPerks[numberPerk1].nameEs}\n2⃣: ${killerPerks[numberPerk2].nameEs}\n3⃣: ${killerPerks[numberPerk3].nameEs}\n4⃣: ${killerPerks[numberPerk4].nameEs}`, attachment)
+    else message.channel.send(`**PERKS:**\n1⃣: ${killerPerks[numberPerk1].nameEn}\n2⃣: ${killerPerks[numberPerk2].nameEn}\n3⃣: ${killerPerks[numberPerk3].nameEn}\n4⃣: ${killerPerks[numberPerk4].nameEn}`, attachment)
   }
   return
 }
@@ -2218,24 +2227,23 @@ function getSteamProfile(steamid, channelid, userid, serverid, isSurv, language)
   })
 }
 
-async function getImage(name, isSurv)
-{
+async function getImage(name, isSurv) {
   let object;
-  if(isSurv) object = Canvas.loadImage("./assets/Visuals/Perks/Survivors/"+name)
-  else object = Canvas.loadImage("./assets/Visuals/Perks/Killers/"+name)
+  if (isSurv) object = Canvas.loadImage("./assets/Visuals/Perks/Survivors/" + name)
+  else object = Canvas.loadImage("./assets/Visuals/Perks/Killers/" + name)
   return object
 }
 
-function calculateCenter(x, letters, fontSize){
-  return x-(letters*fontSize)
+function calculateCenter(x, letters, fontSize) {
+  return x - (letters * fontSize)
 }
 
-function getImageName(index, isSurv){
+function getImageName(index, isSurv) {
   let text;
-  if(isSurv) text = survivorPerks[index].emoji
+  if (isSurv) text = survivorPerks[index].emoji
   else text = killerPerks[index].emoji
   text = text.slice(2, text.indexOf(":", 2))
-  return text+".png"
+  return text + ".png"
 }
 
 client.login(process.env.token);
