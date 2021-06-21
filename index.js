@@ -663,7 +663,7 @@ client.on("message", async (message) => {
             message.channel.send("Actualmente no podemos mostrar esta información, por favor reportalo en nuestro Discord en la sección de bugs: https://discord.gg/T6rEERg")
             return
           }
-          sendShrine(perk1, perk2, perk3, perk4, perksShard, message.channel, lenguaje)
+          sendShrine(perk1, perk2, perk3, perk4, perksShard, message.channel, lenguaje[message.guild.id])
         })
         return;
       }
@@ -1024,7 +1024,7 @@ client.on("message", async (message) => {
             message.channel.send("Actualmente no podemos mostrar esta información, por favor reportalo en nuestro Discord en la sección de bugs: https://discord.gg/T6rEERg")
             return
           }
-          sendShrine(perk1, perk2, perk3, perk4, perksShard, message.channel, lenguaje)
+          sendShrine(perk1, perk2, perk3, perk4, perksShard, message.channel, lenguaje[message.guild.id])
         })
         return;
       }
@@ -2227,9 +2227,9 @@ async function sendShrine(perk1, perk2, perk3, perk4, shards, channel, language)
   ctx.strokeRect(0, 0, canvas.width, canvas.height);
   const attachment = new Discord.MessageAttachment(canvas.toBuffer(), 'shrine-image.png');
   if (language == 0) {
-    channel.send(`🈴 Santuario:\n1⃣ ${perkImageName[0].nameEs} - <:frag_iri:739690491829813369> ${shards[0]}\n2⃣ ${perkImageName[1].nameEs} - <:frag_iri:739690491829813369> ${shards[1]}\n3⃣ ${perkImageName[2].nameEs} - <:frag_iri:739690491829813369> ${shards[2]}\n4⃣ ${perkImageName[3].nameEs} - <:frag_iri:739690491829813369> ${shards[3]}`, attachment)
+    channel.send(`🈴 **Santuario:**\n1⃣ ${getPerkName(perk1.index, perk1.isSurv)} - <:frag_iri:739690491829813369> ${shards[0]}\n2⃣ ${getPerkName(perk2.index, perk2.isSurv)} - <:frag_iri:739690491829813369> ${shards[1]}\n3⃣ ${getPerkName(perk3.index, perk3.isSurv)} - <:frag_iri:739690491829813369> ${shards[2]}\n4⃣ ${getPerkName(perk4.index, perk4.isSurv)} - <:frag_iri:739690491829813369> ${shards[3]}`, attachment)
   } else {
-    channel.send(`🈴 Shrine:\n1⃣ ${perkImageName[0].nameEn} - <:frag_iri:739690491829813369> ${shards[0]}\n2⃣ ${perkImageName[1].nameEn} - <:frag_iri:739690491829813369> ${shards[1]}\n3⃣ ${perkImageName[2].nameEn} - <:frag_iri:739690491829813369> ${shards[2]}\n4⃣ ${perkImageName[3].nameEn} - <:frag_iri:739690491829813369> ${shards[3]}`, attachment)
+    channel.send(`🈴 **Shrine:**\n1⃣ ${perkImageName[0].nameEn} - <:frag_iri:739690491829813369> ${shards[0]}\n2⃣ ${perkImageName[1].nameEn} - <:frag_iri:739690491829813369> ${shards[1]}\n3⃣ ${perkImageName[2].nameEn} - <:frag_iri:739690491829813369> ${shards[2]}\n4⃣ ${perkImageName[3].nameEn} - <:frag_iri:739690491829813369> ${shards[3]}`, attachment)
   }
 }
 
