@@ -13,6 +13,7 @@ const Canvas = require("canvas")
 const background_killer = "assets/Visuals/Background/random_killer.jpg"
 const background_survivor = "assets/Visuals/Background/random_survivor.jpg"
 const background_level = "assets/Visuals/Background/level.jpg"
+const background_shrine = "assets/Visuals/Background/shrine.jpg"
 const font = "./assets/Font/BRUTTALL.ttf"
 Canvas.registerFont(font, { family: "dbd" })
 
@@ -644,48 +645,25 @@ client.on("message", async (message) => {
             name: "SACA_LA_MANO.jpg"
           }]
         });
-        let options = {
-          host: 'dbd.onteh.net.au',
-          path: '/api/shrine',
-          headers: { 'User-Agent': 'EntityBot/' + version_bot }
-        };
-        https.get(options, function (res) {
-          var bodyChunks2 = [];
-          res.on('data', function (chunk) {
-            bodyChunks2.push(chunk);
-          }).on('end', function () {
-            var body2 = Buffer.concat(bodyChunks2);
-            if (res.statusCode == 200 || res.statusCode == 201) {
-              console.log(`parsing ${JSON.stringify(body2)}`)
-              body2 = JSON.parse(body2)
-              con.query(`DELETE FROM santuario`)
-              con.query(`INSERT INTO santuario (perk_1, perk_2, perk_3, perk_4) VALUES ('${body2.perks[0].id.toLowerCase()}', '${body2.perks[1].id.toLowerCase()}', '${body2.perks[2].id.toLowerCase()}', '${body2.perks[3].id.toLowerCase()}')`)
-            }
-          })
-        })
+        verifyShrine()
         return;
       }
 
       if (command == 'santuario') {
         con.query(`SELECT * FROM santuario`, async (err, rows) => {
           if (err) throw err;
-          var perk1 = await getPerkIndexByID(rows[0].perk_1)
-          var perk2 = await getPerkIndexByID(rows[0].perk_2)
-          var perk3 = await getPerkIndexByID(rows[0].perk_3)
-          var perk4 = await getPerkIndexByID(rows[0].perk_4)
+          let perksName = [rows[0].perk_1.split(":")[0], rows[1].perk_1.split(":")[0], rows[2].perk_1.split(":")[0], rows[3].perk_1.split(":")[0]]
+          let perksShard = [rows[0].perk_1.split(":")[1], rows[1].perk_1.split(":")[1], rows[2].perk_1.split(":")[1], rows[3].perk_1.split(":")[1]]
+          var perk1 = await getPerkIndexByID(perksName[0])
+          var perk2 = await getPerkIndexByID(perksName[1])
+          var perk3 = await getPerkIndexByID(perksName[2])
+          var perk4 = await getPerkIndexByID(perksName[3])
           if (!isValidPerk(perk1.index) || !isValidPerk(perk2.index) || !isValidPerk(perk3.index) || !isValidPerk(perk4.index)) {
             console.log(`Invalid perks in shrine: ${perk1.index} (${rows[0].perk_1}) | ${perk2.index} (${rows[0].perk_2}) | ${perk3.index} (${rows[0].perk_3}) | ${perk4.index} (${rows[0].perk_4})`)
             message.channel.send("Actualmente no podemos mostrar esta información, por favor reportalo en nuestro Discord en la sección de bugs: https://discord.gg/T6rEERg")
             return
           }
-          const embed = new Discord.MessageEmbed()
-            .setThumbnail(message.member.user.avatarURL())
-            .setAuthor('| ' + message.author.tag + ' |',)
-            .setTitle('🈴 Santuario de los secretos:')
-            .setURL('https://deadbydaylight.gamepedia.com/Dead_by_Daylight_Wiki')
-            .addField('Habilidades:', '**► ' + getPerkName(perk1.index, perk1.isSurv, 0) + '** - <:frag_iri:739690491829813369>2000\n**► ' + getPerkName(perk2.index, perk2.isSurv, 0) + '** - <:frag_iri:739690491829813369>2000\n**► ' + getPerkName(perk3.index, perk3.isSurv, 0) + '** - <:frag_iri:739690491829813369>2000\n**► ' + getPerkName(perk4.index, perk4.isSurv, 0) + '** - <:frag_iri:739690491829813369>2000', true)
-            .setColor(0xFF0000)
-          message.channel.send(embed).then(function (message) { message.channel.send(getPerkIcon(perk1.index, perk1.isSurv) + ' ' + getPerkIcon(perk2.index, perk2.isSurv) + ' ' + getPerkIcon(perk3.index, perk3.isSurv) + ' ' + getPerkIcon(perk4.index, perk4.isSurv)) })
+          sendShrine(perk1, perk2, perk3, perk4, perksShard, message.channel, lenguaje)
         })
         return;
       }
@@ -1035,23 +1013,18 @@ client.on("message", async (message) => {
       if (command == 'shrine') {
         con.query(`SELECT * FROM santuario`, async (err, rows) => {
           if (err) throw err;
-          var perk1 = await getPerkIndexByID(rows[0].perk_1)
-          var perk2 = await getPerkIndexByID(rows[0].perk_2)
-          var perk3 = await getPerkIndexByID(rows[0].perk_3)
-          var perk4 = await getPerkIndexByID(rows[0].perk_4)
+          let perksName = [rows[0].perk_1.split(":")[0], rows[1].perk_1.split(":")[0], rows[2].perk_1.split(":")[0], rows[3].perk_1.split(":")[0]]
+          let perksShard = [rows[0].perk_1.split(":")[1], rows[1].perk_1.split(":")[1], rows[2].perk_1.split(":")[1], rows[3].perk_1.split(":")[1]]
+          var perk1 = await getPerkIndexByID(perksName[0])
+          var perk2 = await getPerkIndexByID(perksName[1])
+          var perk3 = await getPerkIndexByID(perksName[2])
+          var perk4 = await getPerkIndexByID(perksName[3])
           if (!isValidPerk(perk1.index) || !isValidPerk(perk2.index) || !isValidPerk(perk3.index) || !isValidPerk(perk4.index)) {
             console.log(`Invalid perks in shrine: ${perk1.index} (${rows[0].perk_1}) | ${perk2.index} (${rows[0].perk_2}) | ${perk3.index} (${rows[0].perk_3}) | ${perk4.index} (${rows[0].perk_4})`)
-            message.channel.send("We are currently unable to display this information, please report it on our Discord in the bugs section: https://discord.gg/T6rEERg")
+            message.channel.send("Actualmente no podemos mostrar esta información, por favor reportalo en nuestro Discord en la sección de bugs: https://discord.gg/T6rEERg")
             return
           }
-          const embed = new Discord.MessageEmbed()
-            .setThumbnail(message.member.user.avatarURL())
-            .setAuthor('| ' + message.author.tag + ' |',)
-            .setTitle('🈴 Shrine of Secrets:')
-            .setURL('https://deadbydaylight.gamepedia.com/Dead_by_Daylight_Wiki')
-            .addField('Perks:', '**► ' + getPerkName(perk1.index, perk1.isSurv, 1) + '** - <:frag_iri:739690491829813369>2000\n**► ' + getPerkName(perk2.index, perk2.isSurv, 1) + '** - <:frag_iri:739690491829813369>2000\n**► ' + getPerkName(perk3.index, perk3.isSurv, 1) + '** - <:frag_iri:739690491829813369>2000\n**► ' + getPerkName(perk4.index, perk4.isSurv, 1) + '** - <:frag_iri:739690491829813369>2000', true)
-            .setColor(0xFF0000)
-          message.channel.send(embed).then(function (message) { message.channel.send(getPerkIcon(perk1.index, perk1.isSurv) + ' ' + getPerkIcon(perk2.index, perk2.isSurv) + ' ' + getPerkIcon(perk3.index, perk3.isSurv) + ' ' + getPerkIcon(perk4.index, perk4.isSurv)) })
+          sendShrine(perk1, perk2, perk3, perk4, perksShard, message.channel, lenguaje)
         })
         return;
       }
@@ -1832,7 +1805,7 @@ function verifyShrine() {
           console.log(`parsing ${JSON.stringify(body2)}`)
           body2 = JSON.parse(body2)
           con.query(`DELETE FROM santuario`)
-          con.query(`INSERT INTO santuario (perk_1, perk_2, perk_3, perk_4) VALUES ('${body2.perks[0].id.toLowerCase()}', '${body2.perks[1].id.toLowerCase()}', '${body2.perks[2].id.toLowerCase()}', '${body2.perks[3].id.toLowerCase()}')`)
+          con.query(`INSERT INTO santuario (perk_1, perk_2, perk_3, perk_4) VALUES ('${body2.perks[0].id.toLowerCase()}:${body2.perks[0].shards}', '${body2.perks[1].id.toLowerCase()}:${body2.perks[1].shards}', '${body2.perks[2].id.toLowerCase()}:${body2.perks[2].shards}', '${body2.perks[3].id.toLowerCase()}:${body2.perks[3].shards}')`)
         }
       })
     })
@@ -2225,6 +2198,30 @@ function getSteamProfile(steamid, channelid, userid, serverid, isSurv, language)
       } else return message.author.send("Tu perfil de steam no pudo ser encontrado.")
     })
   })
+}
+
+async function sendShrine(perk1, perk2, perk3, perk4, shards, channel, language) {
+  const canvas = Canvas.createCanvas(1163, 664);
+  const ctx = canvas.getContext('2d');
+  const background = await Canvas.loadImage(background_shrine);
+  ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
+
+  let perkImageName = [getImageName(perk1.index, perk1.isSurv), getImageName(perk2.index, perk2.isSurv), getImageName(perk3.index, perk3.isSurv), getImageName(perk4.index, perk4.isSurv)]
+  const perkImage_1 = await getImage(perkImageName[0], perk1.isSurv)
+  const perkImage_2 = await getImage(perkImageName[1], perk2.isSurv)
+  const perkImage_3 = await getImage(perkImageName[2], perk3.isSurv)
+  const perkImage_4 = await getImage(perkImageName[3], perk4.isSurv)
+  ctx.drawImage(perkImage_1, 454, 3.5, 256, 256);
+  ctx.drawImage(perkImage_2, 280, 177, 256, 256);
+  ctx.drawImage(perkImage_3, 626, 177, 256, 256);
+  ctx.drawImage(perkImage_4, 454, 355, 256, 256);
+  ctx.strokeRect(0, 0, canvas.width, canvas.height);
+  const attachment = new Discord.MessageAttachment(canvas.toBuffer(), 'shrine-image.png');
+  if (language == 0) {
+    channel.send(`🈴 Santuario:\n1⃣ ${perkImageName[0].nameEs} - <:frag_iri:739690491829813369> ${shards[0]}\n2⃣ ${perkImageName[1].nameEs} - <:frag_iri:739690491829813369> ${shards[1]}\n3⃣ ${perkImageName[2].nameEs} - <:frag_iri:739690491829813369> ${shards[2]}\n4⃣ ${perkImageName[3].nameEs} - <:frag_iri:739690491829813369> ${shards[3]}`, attachment)
+  } else {
+    channel.send(`🈴 Shrine:\n1⃣ ${perkImageName[0].nameEn} - <:frag_iri:739690491829813369> ${shards[0]}\n2⃣ ${perkImageName[1].nameEn} - <:frag_iri:739690491829813369> ${shards[1]}\n3⃣ ${perkImageName[2].nameEn} - <:frag_iri:739690491829813369> ${shards[2]}\n4⃣ ${perkImageName[3].nameEn} - <:frag_iri:739690491829813369> ${shards[3]}`, attachment)
+  }
 }
 
 async function getImage(name, isSurv) {

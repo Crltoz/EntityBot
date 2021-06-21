@@ -533,6 +533,42 @@
             "nameEn": "Self-Preservation",
             "emoji": "<:iconPerks_Self-Preservation:826562717674242068>",
             "id": "s25p03"
+        },
+        {
+            "nameEs": "Contrafuerza",
+            "nameEn": "Counterforce",
+            "emoji": "<:iconPerks_Counterforce:>",
+            "id": "s26p01"
+        },
+        {
+            "nameEs": "Resurgimiento",
+            "nameEn": "Resurgence",
+            "emoji": "<:iconPerks_Resurgence:>",
+            "id": "s26p02"
+        },
+        {
+            "nameEs": "Mina explosiva",
+            "nameEn": "Blast Mine",
+            "emoji": "<:iconPerks_blastMine:>",
+            "id": "s26p03"
+        },
+        {
+            "nameEs": "De tripas corazon",
+            "nameEn": "Bite the Bullet",
+            "emoji": "<:iconPerks_BiteTheBullet:>",
+            "id": "s27p01"
+        },
+        {
+            "nameEs": "Granada aturdidora",
+            "nameEn": "Flashbang",
+            "emoji": "<:iconPerks_Flashbang:>",
+            "id": "s27p02"
+        },
+        {
+            "nameEs": "Espiritu de novato",
+            "nameEn": "Rookie Spirit",
+            "emoji": "<:iconPerks_RookieSpirit:>",
+            "id": "s27p03"
         }
     ]
 }
