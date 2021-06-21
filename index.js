@@ -645,15 +645,15 @@ client.on("message", async (message) => {
             name: "SACA_LA_MANO.jpg"
           }]
         });
-        verifyShrine()
+        verifyShrine(true)
         return;
       }
 
       if (command == 'santuario') {
         con.query(`SELECT * FROM santuario`, async (err, rows) => {
           if (err) throw err;
-          let perksName = [rows[0].perk_1.split(":")[0], rows[1].perk_1.split(":")[0], rows[2].perk_1.split(":")[0], rows[3].perk_1.split(":")[0]]
-          let perksShard = [rows[0].perk_1.split(":")[1], rows[1].perk_1.split(":")[1], rows[2].perk_1.split(":")[1], rows[3].perk_1.split(":")[1]]
+          let perksName = [rows[0].perk_1.split(":")[0], rows[0].perk_2.split(":")[0], rows[0].perk_3.split(":")[0], rows[0].perk_4.split(":")[0]]
+          let perksShard = [rows[0].perk_1.split(":")[1], rows[0].perk_2.split(":")[1], rows[0].perk_3.split(":")[1], rows[0].perk_4.split(":")[1]]
           var perk1 = await getPerkIndexByID(perksName[0])
           var perk2 = await getPerkIndexByID(perksName[1])
           var perk3 = await getPerkIndexByID(perksName[2])
@@ -1783,13 +1783,36 @@ function handleDisconnect() {
 /**
  * @description Update shrine.
  */
-function verifyShrine() {
+function verifyShrine(force = false) {
   const time = new Date();
-  if (time.toUTCString().toLowerCase().includes('wed') && time.getUTCHours() == '0' && time.getUTCMinutes() == '1' && actualizar == '1') {
-    actualizar = 0;
-    setTimeout(() => {
-      actualizar = 1;
-    }, 120000)
+  if (!force) {
+    if (time.toUTCString().toLowerCase().includes('wed') && time.getUTCHours() == '0' && time.getUTCMinutes() == '1' && actualizar == '1') {
+      actualizar = 0;
+      setTimeout(() => {
+        actualizar = 1;
+      }, 120000)
+      let options = {
+        host: 'dbd.onteh.net.au',
+        path: '/api/shrine',
+        headers: { 'User-Agent': 'EntityBot/' + version_bot }
+      };
+      https.get(options, function (res) {
+        var bodyChunks2 = [];
+        res.on('data', function (chunk) {
+          bodyChunks2.push(chunk);
+        }).on('end', function () {
+          var body2 = Buffer.concat(bodyChunks2);
+          if (res.statusCode == 200 || res.statusCode == 201) {
+            console.log(`parsing ${JSON.stringify(body2)}`)
+            body2 = JSON.parse(body2)
+            con.query(`DELETE FROM santuario`)
+            con.query(`INSERT INTO santuario (perk_1, perk_2, perk_3, perk_4) VALUES ('${body2.perks[0].id.toLowerCase()}:${body2.perks[0].shards}', '${body2.perks[1].id.toLowerCase()}:${body2.perks[1].shards}', '${body2.perks[2].id.toLowerCase()}:${body2.perks[2].shards}', '${body2.perks[3].id.toLowerCase()}:${body2.perks[3].shards}')`)
+          }
+        })
+      })
+      return;
+    }
+  } else {
     let options = {
       host: 'dbd.onteh.net.au',
       path: '/api/shrine',
@@ -1809,7 +1832,6 @@ function verifyShrine() {
         }
       })
     })
-    return;
   }
 }
 
