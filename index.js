@@ -1010,7 +1010,7 @@ client.on("message", async (message) => {
         return;
       }
 
-      if (command == 'santuario') {
+      if (command == 'shrine') {
         con.query(`SELECT * FROM santuario`, async (err, rows) => {
           if (err) throw err;
           let perksName = [rows[0].perk_1.split(":")[0], rows[0].perk_2.split(":")[0], rows[0].perk_3.split(":")[0], rows[0].perk_4.split(":")[0]]
