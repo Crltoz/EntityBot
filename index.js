@@ -1785,8 +1785,7 @@ function handleDisconnect() {
  */
 function verifyShrine(force = false) {
   const time = new Date();
-  if (!force) {
-    if (time.toUTCString().toLowerCase().includes('wed') && time.getUTCHours() == '0' && time.getUTCMinutes() == '1' && actualizar == '1') {
+    if (time.toUTCString().toLowerCase().includes('wed') && time.getUTCHours() == '0' && time.getUTCMinutes() == '1' && actualizar == '1' || force) {
       actualizar = 0;
       setTimeout(() => {
         actualizar = 1;
@@ -1803,36 +1802,15 @@ function verifyShrine(force = false) {
         }).on('end', function () {
           var body2 = Buffer.concat(bodyChunks2);
           if (res.statusCode == 200 || res.statusCode == 201) {
-            console.log(`parsing ${JSON.stringify(body2)}`)
-            body2 = JSON.parse(body2)
+            console.log(`parsing ${JSON.stringify(body2)} || ${body2.toString()} || ${body2}`)
+            var parsed = JSON.parse(body2)
             con.query(`DELETE FROM santuario`)
-            con.query(`INSERT INTO santuario (perk_1, perk_2, perk_3, perk_4) VALUES ('${body2.perks[0].id.toLowerCase()}:${body2.perks[0].shards}', '${body2.perks[1].id.toLowerCase()}:${body2.perks[1].shards}', '${body2.perks[2].id.toLowerCase()}:${body2.perks[2].shards}', '${body2.perks[3].id.toLowerCase()}:${body2.perks[3].shards}')`)
+            con.query(`INSERT INTO santuario (perk_1, perk_2, perk_3, perk_4) VALUES ('${parsed.perks[0].id.toLowerCase()}:${parsed.perks[0].shards}', '${parsed.perks[1].id.toLowerCase()}:${parsed.perks[1].shards}', '${parsed.perks[2].id.toLowerCase()}:${parsed.perks[2].shards}', '${parsed.perks[3].id.toLowerCase()}:${parsed.perks[3].shards}')`)
           }
         })
       })
       return;
     }
-  } else {
-    let options = {
-      host: 'dbd.onteh.net.au',
-      path: '/api/shrine',
-      headers: { 'User-Agent': 'EntityBot/' + version_bot }
-    };
-    https.get(options, function (res) {
-      var bodyChunks2 = [];
-      res.on('data', function (chunk) {
-        bodyChunks2.push(chunk);
-      }).on('end', function () {
-        var body2 = Buffer.concat(bodyChunks2);
-        if (res.statusCode == 200 || res.statusCode == 201) {
-          console.log(`parsing ${JSON.stringify(body2)}`)
-          body2 = JSON.parse(body2)
-          con.query(`DELETE FROM santuario`)
-          con.query(`INSERT INTO santuario (perk_1, perk_2, perk_3, perk_4) VALUES ('${body2.perks[0].id.toLowerCase()}:${body2.perks[0].shards}', '${body2.perks[1].id.toLowerCase()}:${body2.perks[1].shards}', '${body2.perks[2].id.toLowerCase()}:${body2.perks[2].shards}', '${body2.perks[3].id.toLowerCase()}:${body2.perks[3].shards}')`)
-        }
-      })
-    })
-  }
 }
 
 /**
