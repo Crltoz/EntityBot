@@ -1010,18 +1010,18 @@ client.on("message", async (message) => {
         return;
       }
 
-      if (command == 'shrine') {
+      if (command == 'santuario') {
         con.query(`SELECT * FROM santuario`, async (err, rows) => {
           if (err) throw err;
-          let perksName = [rows[0].perk_1.split(":")[0], rows[1].perk_1.split(":")[0], rows[2].perk_1.split(":")[0], rows[3].perk_1.split(":")[0]]
-          let perksShard = [rows[0].perk_1.split(":")[1], rows[1].perk_1.split(":")[1], rows[2].perk_1.split(":")[1], rows[3].perk_1.split(":")[1]]
+          let perksName = [rows[0].perk_1.split(":")[0], rows[0].perk_2.split(":")[0], rows[0].perk_3.split(":")[0], rows[0].perk_4.split(":")[0]]
+          let perksShard = [rows[0].perk_1.split(":")[1], rows[0].perk_2.split(":")[1], rows[0].perk_3.split(":")[1], rows[0].perk_4.split(":")[1]]
           var perk1 = await getPerkIndexByID(perksName[0])
           var perk2 = await getPerkIndexByID(perksName[1])
           var perk3 = await getPerkIndexByID(perksName[2])
           var perk4 = await getPerkIndexByID(perksName[3])
           if (!isValidPerk(perk1.index) || !isValidPerk(perk2.index) || !isValidPerk(perk3.index) || !isValidPerk(perk4.index)) {
             console.log(`Invalid perks in shrine: ${perk1.index} (${rows[0].perk_1}) | ${perk2.index} (${rows[0].perk_2}) | ${perk3.index} (${rows[0].perk_3}) | ${perk4.index} (${rows[0].perk_4})`)
-            message.channel.send("Actualmente no podemos mostrar esta información, por favor reportalo en nuestro Discord en la sección de bugs: https://discord.gg/T6rEERg")
+            message.channel.send("We are currently unable to display this information, please report it on our Discord in the bugs section: https://discord.gg/T6rEERg")
             return
           }
           sendShrine(perk1, perk2, perk3, perk4, perksShard, message.channel, lenguaje[message.guild.id])
@@ -2229,7 +2229,7 @@ async function sendShrine(perk1, perk2, perk3, perk4, shards, channel, language)
   if (language == 0) {
     channel.send(`🈴 **Santuario:**\n1⃣ ${getPerkName(perk1.index, perk1.isSurv, language)} - <:frag_iri:739690491829813369> ${shards[0]}\n2⃣ ${getPerkName(perk2.index, perk2.isSurv, language)} - <:frag_iri:739690491829813369> ${shards[1]}\n3⃣ ${getPerkName(perk3.index, perk3.isSurv, language)} - <:frag_iri:739690491829813369> ${shards[2]}\n4⃣ ${getPerkName(perk4.index, perk4.isSurv, language)} - <:frag_iri:739690491829813369> ${shards[3]}`, attachment)
   } else {
-    channel.send(`🈴 **Shrine:**\n1⃣ ${getPerkName(perk1.index, perk1.isSurv, language)} - <:frag_iri:739690491829813369> ${shards[0]}\n2⃣ ${getPerkName(perk2.index, perk2.isSurv, language)} - <:frag_iri:739690491829813369> ${shards[1]}\n3⃣ ${getPerkName(perk3.index, perk3.isSurv, language)} - <:frag_iri:739690491829813369> ${shards[2]}\n4⃣ ${getPerkName(perk4.index, perk4.isSurv, language)} - <:frag_iri:739690491829813369> ${shards[3]}`, attachment)
+    channel.send(`🈴 **Santuario:**\n1⃣ ${getPerkName(perk1.index, perk1.isSurv, language)} - <:frag_iri:739690491829813369> ${shards[0]}\n2⃣ ${getPerkName(perk2.index, perk2.isSurv, language)} - <:frag_iri:739690491829813369> ${shards[1]}\n3⃣ ${getPerkName(perk3.index, perk3.isSurv, language)} - <:frag_iri:739690491829813369> ${shards[2]}\n4⃣ ${getPerkName(perk4.index, perk4.isSurv, language)} - <:frag_iri:739690491829813369> ${shards[3]}`, attachment)
   }
 }
 
