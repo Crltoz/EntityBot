@@ -1788,7 +1788,7 @@ function verifyShrine(force = false) {
         actualizar = 1;
       }, 120000)
       let options = {
-        host: 'https://dbd.onteh.net.au',
+        host: 'dbd.onteh.net.au',
         path: '/api/shrine',
         headers: { 'User-Agent': 'EntityBot/' + version_bot }
       };
