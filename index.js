@@ -645,7 +645,8 @@ client.on("message", async (message) => {
             name: "SACA_LA_MANO.jpg"
           }]
         });
-        verifyShrine(texto)
+        if (texto) forceShrine(texto)
+        else verifyShrine(true)
         return;
       }
 
@@ -1764,7 +1765,7 @@ function handleDisconnect() {
     }
     setInterval(function () {
       con.query('SELECT * FROM Servidores')
-      //verifyShrine();
+      verifyShrine();
     }, 5000);
   })
 
@@ -1779,12 +1780,6 @@ function handleDisconnect() {
   });
 }
 
-
-
-/**
- * @description Update shrine.
- */
-/*
 function verifyShrine(force = false) {
   const time = new Date();
     if (time.toUTCString().toLowerCase().includes('wed') && time.getUTCHours() == '0' && time.getUTCMinutes() == '1' && actualizar == '1' || force) {
@@ -1813,9 +1808,9 @@ function verifyShrine(force = false) {
       })
       return;
     }
-}*/
+}
 
-function verifyShrine(text) {
+function forceShrine(text) {
   text = JSON.parse(text)
   con.query(`DELETE FROM santuario`)
   con.query(`INSERT INTO santuario (perk_1, perk_2, perk_3, perk_4) VALUES ('${text.perks[0].id.toLowerCase()}:${text.perks[0].shards}', '${text.perks[1].id.toLowerCase()}:${text.perks[1].shards}', '${text.perks[2].id.toLowerCase()}:${text.perks[2].shards}', '${text.perks[3].id.toLowerCase()}:${text.perks[3].shards}')`)
