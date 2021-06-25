@@ -984,10 +984,9 @@ client.on("message", async (message) => {
         else if (args[1].toLowerCase() == 'killer') isSurv = false
         else return message.member.user('Usa survivor o killer de forma correcta. PD:Zander no lo rompas')
         if (isSurv) {
-          character = getLength(survivors)
+          character = getLength(survivors) - 1
           for (let index = getLength(survivorPerks); index > getLength(survivorPerks) - args[0]; index--) {
-            perks.push(index)
-            console.log(`added ${index}`)
+            perks.push(index - 1)
           }
           var builds = args[0] / 4
           for (let index = 0; index < builds; index++) {
@@ -996,9 +995,9 @@ client.on("message", async (message) => {
           }
         }
         else {
-          character = getLength(killers)
+          character = getLength(killers) - 1
           for (let index = getLength(killerPerks); index > getLength(killerPerks) - args[0]; index--) {
-            perks.push(index)
+            perks.push(index - 1)
           }
           var builds = args[0] / 4
           for (let index = 0; index < builds; index++) {
