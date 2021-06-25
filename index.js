@@ -2132,6 +2132,7 @@ async function createRandomBuild(message, numberCharacter, numberPerk1, numberPe
     ctx.fillText(survivors[numberCharacter].name, calculateCenter(1267, survivors[numberCharacter].name.length, fontSize), 207);
     const avatar = await Canvas.loadImage(survivors[numberCharacter].link);
     ctx.drawImage(avatar, 1045, 227, 447, 619);
+    console.log(`perks: ${numberPerk1} || ${numberPerk2} || ${numberPerk3} || ${numberPerk4}`)
     let perkImageName = [getImageName(numberPerk1, isSurv), getImageName(numberPerk2, isSurv), getImageName(numberPerk3, isSurv), getImageName(numberPerk4, isSurv)]
     const perkImage_1 = await getImage(perkImageName[0], isSurv)
     const perkImage_2 = await getImage(perkImageName[1], isSurv)
