@@ -978,7 +978,7 @@ client.on("message", async (message) => {
 
       if (command == 'tperks') {
         var isSurv, perks = [], character
-        if (!texto) return message.member.send('Usa '+ prefix[message.guild.id] +'tperks [Numero de perks a mostrar] [Survivor o Killer]')
+        if (!texto) return message.member.send('Usa ' + prefix[message.guild.id] + 'tperks [Numero de perks a mostrar] [Survivor o Killer]')
         if (args[0] % 4 != 0) return message.member.send('Usa numeros multiplos de 4. Como la tienen a tu hermana')
         if (args[1].toLowerCase() == 'survivor') isSurv = true
         else if (args[1].toLowerCase() == 'killer') isSurv = false
@@ -987,12 +987,13 @@ client.on("message", async (message) => {
           character = getLength(survivors)
           for (let index = getLength(survivorPerks); index > getLength(survivorPerks) - args[1]; index--) {
             perks.push(index)
+            console.log(`added ${index}`)
           }
           var builds = args[0] / 4
-        for (let index = 0; index < builds; index++) {
-          createRandomBuild(message, character - index, perks[0], perks[1], perks[2], perks[3], isSurv, lenguaje[message.guild.id])
-          perks.slice(0, perks.length-4)
-        }
+          for (let index = 0; index < builds; index++) {
+            createRandomBuild(message, character - index, perks[perks.length], perks[perks.length - 1], perks[perks.length - 2], perks[perks.length - 3], isSurv, lenguaje[message.guild.id])
+            perks.slice(0, perks.length - 4)
+          }
         }
         else {
           character = getLength(killers)
@@ -1000,10 +1001,10 @@ client.on("message", async (message) => {
             perks.push(index)
           }
           var builds = args[0] / 4
-        for (let index = 0; index < builds; index++) {
-          createRandomBuild(message, character - index, perks[0], perks[1], perks[2], perks[3], isSurv, lenguaje[message.guild.id])
-          perks.slice(0, perks.length-4)
-        }
+          for (let index = 0; index < builds; index++) {
+            createRandomBuild(message, character - index, perks[perks.length], perks[perks.length - 1], perks[perks.length - 2], perks[perks.length - 3], isSurv, lenguaje[message.guild.id])
+            perks.slice(0, perks.length - 4)
+          }
         }
         return
       }
@@ -1814,32 +1815,32 @@ function handleDisconnect() {
 
 function verifyShrine(force = false) {
   const time = new Date();
-    if (time.toUTCString().toLowerCase().includes('wed') && time.getUTCHours() == '0' && time.getUTCMinutes() == '1' && actualizar == '1' || force) {
-      actualizar = 0;
-      setTimeout(() => {
-        actualizar = 1;
-      }, 120000)
-      let options = {
-        host: 'dbd.onteh.net.au',
-        path: '/api/shrine',
-        headers: { 'User-Agent': 'EntityBot/' + version_bot }
-      };
-      https.get(options, function (res) {
-        var bodyChunks2 = [];
-        res.on('data', function (chunk) {
-          bodyChunks2.push(chunk);
-        }).on('end', function () {
-          var body2 = Buffer.concat(bodyChunks2);
-          if (res.statusCode == 200 || res.statusCode == 201) {
-            console.log(`parsing ${JSON.stringify(body2)} || ${body2.toString()} || ${body2}`)
-            var parsed = JSON.parse(body2)
-            con.query(`DELETE FROM santuario`)
-            con.query(`INSERT INTO santuario (perk_1, perk_2, perk_3, perk_4) VALUES ('${parsed.perks[0].id.toLowerCase()}:${parsed.perks[0].shards}', '${parsed.perks[1].id.toLowerCase()}:${parsed.perks[1].shards}', '${parsed.perks[2].id.toLowerCase()}:${parsed.perks[2].shards}', '${parsed.perks[3].id.toLowerCase()}:${parsed.perks[3].shards}')`)
-          }
-        })
+  if (time.toUTCString().toLowerCase().includes('wed') && time.getUTCHours() == '0' && time.getUTCMinutes() == '1' && actualizar == '1' || force) {
+    actualizar = 0;
+    setTimeout(() => {
+      actualizar = 1;
+    }, 120000)
+    let options = {
+      host: 'dbd.onteh.net.au',
+      path: '/api/shrine',
+      headers: { 'User-Agent': 'EntityBot/' + version_bot }
+    };
+    https.get(options, function (res) {
+      var bodyChunks2 = [];
+      res.on('data', function (chunk) {
+        bodyChunks2.push(chunk);
+      }).on('end', function () {
+        var body2 = Buffer.concat(bodyChunks2);
+        if (res.statusCode == 200 || res.statusCode == 201) {
+          console.log(`parsing ${JSON.stringify(body2)} || ${body2.toString()} || ${body2}`)
+          var parsed = JSON.parse(body2)
+          con.query(`DELETE FROM santuario`)
+          con.query(`INSERT INTO santuario (perk_1, perk_2, perk_3, perk_4) VALUES ('${parsed.perks[0].id.toLowerCase()}:${parsed.perks[0].shards}', '${parsed.perks[1].id.toLowerCase()}:${parsed.perks[1].shards}', '${parsed.perks[2].id.toLowerCase()}:${parsed.perks[2].shards}', '${parsed.perks[3].id.toLowerCase()}:${parsed.perks[3].shards}')`)
+        }
       })
-      return;
-    }
+    })
+    return;
+  }
 }
 
 function forceShrine(text) {
