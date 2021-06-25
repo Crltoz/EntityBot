@@ -489,19 +489,19 @@
         {
             "nameEs": "Acecho letal",
             "nameEn": "Lethal Pursuer",
-            "emoji": "iconPerks_lethalPursuer",
+            "emoji": "<:iconPerks_lethalPursuer:>",
             "id": "k24p01"
         },
         {
             "nameEs": "Histeria",
             "nameEn": "Hysteria",
-            "emoji": "iconPerks_hysteria",
+            "emoji": "<:iconPerks_hysteria:>",
             "id": "k24p02"
         },
         {
             "nameEs": "Erupcion",
             "nameEn": "Eruption",
-            "emoji": "iconPerks_eruption",
+            "emoji": "<:iconPerks_eruption:>",
             "id": "k24p03"
         }
     ]
