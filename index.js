@@ -991,7 +991,7 @@ client.on("message", async (message) => {
           var builds = args[0] / 4
         for (let index = 0; index < builds; index++) {
           createRandomBuild(message, character - index, perks[0], perks[1], perks[2], perks[3], isSurv, lenguaje[message.guild.id])
-          perks.length -= 4
+          perks.slice(0, perks.length-4)
         }
         }
         else {
@@ -1002,7 +1002,7 @@ client.on("message", async (message) => {
           var builds = args[0] / 4
         for (let index = 0; index < builds; index++) {
           createRandomBuild(message, character - index, perks[0], perks[1], perks[2], perks[3], isSurv, lenguaje[message.guild.id])
-          perks.length -= 4
+          perks.slice(0, perks.length-4)
         }
         }
         return
