@@ -988,17 +988,22 @@ client.on("message", async (message) => {
           for (let index = getLength(survivorPerks); index > getLength(survivorPerks) - args[1]; index--) {
             perks.push(index)
           }
+          var builds = args[0] / 4
+        for (let index = 0; index < builds; index++) {
+          createRandomBuild(message, character - index, perks[0], perks[1], perks[2], perks[3], isSurv, lenguaje[message.guild.id])
+          perks.length -= 4
+        }
         }
         else {
           character = getLength(killers)
           for (let index = getLength(killerPerks); index > getLength(killerPerks) - args[1]; index--) {
             perks.push(index)
           }
-        }
-        var builds = args[0] / 4
+          var builds = args[0] / 4
         for (let index = 0; index < builds; index++) {
           createRandomBuild(message, character - index, perks[0], perks[1], perks[2], perks[3], isSurv, lenguaje[message.guild.id])
           perks.length -= 4
+        }
         }
         return
       }
