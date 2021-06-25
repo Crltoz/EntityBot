@@ -976,7 +976,7 @@ client.on("message", async (message) => {
         return;
       }
 
-      if (command == 'tperks'){
+      if (command == 'tperks') {
         var isSurv, perks = [], character
         if (!texto) return message.member.send('Usa '+ prefix[message.guild.id] +'tperks [Numero de perks a mostrar] [Survivor o Killer]')
         if (args[0] % 4 != 0) return message.member.send('Usa numeros multiplos de 4. Como la tienen a tu hermana')
@@ -997,9 +997,10 @@ client.on("message", async (message) => {
         }
         var builds = args[0] / 4
         for (let index = 0; index < builds; index++) {
-          createRandomBuild(message, character - index, perks[index], perks[index + 1], perks[index + 2], perks[index + 3], isSurv, lenguaje[message.guild.id])
+          createRandomBuild(message, character - index, perks[0], perks[1], perks[2], perks[3], isSurv, lenguaje[message.guild.id])
           perks.length -= 4
         }
+        return
       }
 
       if (command == 'reglas') {
