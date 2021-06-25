@@ -645,7 +645,8 @@ client.on("message", async (message) => {
             name: "SACA_LA_MANO.jpg"
           }]
         });
-        verifyShrine(true)
+        if (texto) forceShrine(texto)
+        else verifyShrine(true)
         return;
       }
 
@@ -663,7 +664,7 @@ client.on("message", async (message) => {
             message.channel.send("Actualmente no podemos mostrar esta información, por favor reportalo en nuestro Discord en la sección de bugs: https://discord.gg/T6rEERg")
             return
           }
-          sendShrine(perk1, perk2, perk3, perk4, perksShard, message.channel, lenguaje)
+          sendShrine(perk1, perk2, perk3, perk4, perksShard, message.channel, lenguaje[message.guild.id])
         })
         return;
       }
@@ -1013,18 +1014,18 @@ client.on("message", async (message) => {
       if (command == 'shrine') {
         con.query(`SELECT * FROM santuario`, async (err, rows) => {
           if (err) throw err;
-          let perksName = [rows[0].perk_1.split(":")[0], rows[1].perk_1.split(":")[0], rows[2].perk_1.split(":")[0], rows[3].perk_1.split(":")[0]]
-          let perksShard = [rows[0].perk_1.split(":")[1], rows[1].perk_1.split(":")[1], rows[2].perk_1.split(":")[1], rows[3].perk_1.split(":")[1]]
+          let perksName = [rows[0].perk_1.split(":")[0], rows[0].perk_2.split(":")[0], rows[0].perk_3.split(":")[0], rows[0].perk_4.split(":")[0]]
+          let perksShard = [rows[0].perk_1.split(":")[1], rows[0].perk_2.split(":")[1], rows[0].perk_3.split(":")[1], rows[0].perk_4.split(":")[1]]
           var perk1 = await getPerkIndexByID(perksName[0])
           var perk2 = await getPerkIndexByID(perksName[1])
           var perk3 = await getPerkIndexByID(perksName[2])
           var perk4 = await getPerkIndexByID(perksName[3])
           if (!isValidPerk(perk1.index) || !isValidPerk(perk2.index) || !isValidPerk(perk3.index) || !isValidPerk(perk4.index)) {
             console.log(`Invalid perks in shrine: ${perk1.index} (${rows[0].perk_1}) | ${perk2.index} (${rows[0].perk_2}) | ${perk3.index} (${rows[0].perk_3}) | ${perk4.index} (${rows[0].perk_4})`)
-            message.channel.send("Actualmente no podemos mostrar esta información, por favor reportalo en nuestro Discord en la sección de bugs: https://discord.gg/T6rEERg")
+            message.channel.send("We are currently unable to display this information, please report it on our Discord in the bugs section: https://discord.gg/T6rEERg")
             return
           }
-          sendShrine(perk1, perk2, perk3, perk4, perksShard, message.channel, lenguaje)
+          sendShrine(perk1, perk2, perk3, perk4, perksShard, message.channel, lenguaje[message.guild.id])
         })
         return;
       }
@@ -1779,14 +1780,9 @@ function handleDisconnect() {
   });
 }
 
-
-/**
- * @description Update shrine.
- */
 function verifyShrine(force = false) {
   const time = new Date();
-  if (!force) {
-    if (time.toUTCString().toLowerCase().includes('wed') && time.getUTCHours() == '0' && time.getUTCMinutes() == '1' && actualizar == '1') {
+    if (time.toUTCString().toLowerCase().includes('wed') && time.getUTCHours() == '0' && time.getUTCMinutes() == '1' && actualizar == '1' || force) {
       actualizar = 0;
       setTimeout(() => {
         actualizar = 1;
@@ -1803,36 +1799,22 @@ function verifyShrine(force = false) {
         }).on('end', function () {
           var body2 = Buffer.concat(bodyChunks2);
           if (res.statusCode == 200 || res.statusCode == 201) {
-            console.log(`parsing ${JSON.stringify(body2)}`)
-            body2 = JSON.parse(body2)
+            console.log(`parsing ${JSON.stringify(body2)} || ${body2.toString()} || ${body2}`)
+            var parsed = JSON.parse(body2)
             con.query(`DELETE FROM santuario`)
-            con.query(`INSERT INTO santuario (perk_1, perk_2, perk_3, perk_4) VALUES ('${body2.perks[0].id.toLowerCase()}:${body2.perks[0].shards}', '${body2.perks[1].id.toLowerCase()}:${body2.perks[1].shards}', '${body2.perks[2].id.toLowerCase()}:${body2.perks[2].shards}', '${body2.perks[3].id.toLowerCase()}:${body2.perks[3].shards}')`)
+            con.query(`INSERT INTO santuario (perk_1, perk_2, perk_3, perk_4) VALUES ('${parsed.perks[0].id.toLowerCase()}:${parsed.perks[0].shards}', '${parsed.perks[1].id.toLowerCase()}:${parsed.perks[1].shards}', '${parsed.perks[2].id.toLowerCase()}:${parsed.perks[2].shards}', '${parsed.perks[3].id.toLowerCase()}:${parsed.perks[3].shards}')`)
           }
         })
       })
       return;
     }
-  } else {
-    let options = {
-      host: 'dbd.onteh.net.au',
-      path: '/api/shrine',
-      headers: { 'User-Agent': 'EntityBot/' + version_bot }
-    };
-    https.get(options, function (res) {
-      var bodyChunks2 = [];
-      res.on('data', function (chunk) {
-        bodyChunks2.push(chunk);
-      }).on('end', function () {
-        var body2 = Buffer.concat(bodyChunks2);
-        if (res.statusCode == 200 || res.statusCode == 201) {
-          console.log(`parsing ${JSON.stringify(body2)}`)
-          body2 = JSON.parse(body2)
-          con.query(`DELETE FROM santuario`)
-          con.query(`INSERT INTO santuario (perk_1, perk_2, perk_3, perk_4) VALUES ('${body2.perks[0].id.toLowerCase()}:${body2.perks[0].shards}', '${body2.perks[1].id.toLowerCase()}:${body2.perks[1].shards}', '${body2.perks[2].id.toLowerCase()}:${body2.perks[2].shards}', '${body2.perks[3].id.toLowerCase()}:${body2.perks[3].shards}')`)
-        }
-      })
-    })
-  }
+}
+
+function forceShrine(text) {
+  text = JSON.parse(text)
+  con.query(`DELETE FROM santuario`)
+  con.query(`INSERT INTO santuario (perk_1, perk_2, perk_3, perk_4) VALUES ('${text.perks[0].id.toLowerCase()}:${text.perks[0].shards}', '${text.perks[1].id.toLowerCase()}:${text.perks[1].shards}', '${text.perks[2].id.toLowerCase()}:${text.perks[2].shards}', '${text.perks[3].id.toLowerCase()}:${text.perks[3].shards}')`)
+  return
 }
 
 /**
@@ -2240,9 +2222,9 @@ async function sendShrine(perk1, perk2, perk3, perk4, shards, channel, language)
   ctx.strokeRect(0, 0, canvas.width, canvas.height);
   const attachment = new Discord.MessageAttachment(canvas.toBuffer(), 'shrine-image.png');
   if (language == 0) {
-    channel.send(`🈴 Santuario:\n1⃣ ${perkImageName[0].nameEs} - <:frag_iri:739690491829813369> ${shards[0]}\n2⃣ ${perkImageName[1].nameEs} - <:frag_iri:739690491829813369> ${shards[1]}\n3⃣ ${perkImageName[2].nameEs} - <:frag_iri:739690491829813369> ${shards[2]}\n4⃣ ${perkImageName[3].nameEs} - <:frag_iri:739690491829813369> ${shards[3]}`, attachment)
+    channel.send(`🈴 **Santuario:**\n1⃣ ${getPerkName(perk1.index, perk1.isSurv, language)} - <:frag_iri:739690491829813369> ${shards[0]}\n2⃣ ${getPerkName(perk2.index, perk2.isSurv, language)} - <:frag_iri:739690491829813369> ${shards[1]}\n3⃣ ${getPerkName(perk3.index, perk3.isSurv, language)} - <:frag_iri:739690491829813369> ${shards[2]}\n4⃣ ${getPerkName(perk4.index, perk4.isSurv, language)} - <:frag_iri:739690491829813369> ${shards[3]}`, attachment)
   } else {
-    channel.send(`🈴 Shrine:\n1⃣ ${perkImageName[0].nameEn} - <:frag_iri:739690491829813369> ${shards[0]}\n2⃣ ${perkImageName[1].nameEn} - <:frag_iri:739690491829813369> ${shards[1]}\n3⃣ ${perkImageName[2].nameEn} - <:frag_iri:739690491829813369> ${shards[2]}\n4⃣ ${perkImageName[3].nameEn} - <:frag_iri:739690491829813369> ${shards[3]}`, attachment)
+    channel.send(`🈴 **Santuario:**\n1⃣ ${getPerkName(perk1.index, perk1.isSurv, language)} - <:frag_iri:739690491829813369> ${shards[0]}\n2⃣ ${getPerkName(perk2.index, perk2.isSurv, language)} - <:frag_iri:739690491829813369> ${shards[1]}\n3⃣ ${getPerkName(perk3.index, perk3.isSurv, language)} - <:frag_iri:739690491829813369> ${shards[2]}\n4⃣ ${getPerkName(perk4.index, perk4.isSurv, language)} - <:frag_iri:739690491829813369> ${shards[3]}`, attachment)
   }
 }
 
