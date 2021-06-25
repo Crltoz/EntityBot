@@ -990,7 +990,7 @@ client.on("message", async (message) => {
           }
           var builds = args[0] / 4
           for (let index = 0; index < builds; index++) {
-            createRandomBuild(message, character - index, perks[perks.length], perks[perks.length - 1], perks[perks.length - 2], perks[perks.length - 3], isSurv, lenguaje[message.guild.id])
+            createRandomBuild(message, character - index, perks[perks.length - 1], perks[perks.length - 2], perks[perks.length - 3], perks[perks.length - 4], isSurv, lenguaje[message.guild.id])
             perks.slice(0, perks.length - 4)
           }
         }
@@ -1001,7 +1001,7 @@ client.on("message", async (message) => {
           }
           var builds = args[0] / 4
           for (let index = 0; index < builds; index++) {
-            createRandomBuild(message, character - index, perks[perks.length], perks[perks.length - 1], perks[perks.length - 2], perks[perks.length - 3], isSurv, lenguaje[message.guild.id])
+            createRandomBuild(message, character - index, perks[perks.length - 1], perks[perks.length - 2], perks[perks.length - 3], perks[perks.length - 4], isSurv, lenguaje[message.guild.id])
             perks.slice(0, perks.length - 4)
           }
         }
@@ -1781,7 +1781,6 @@ function handleDisconnect() {
         if (rows.length >= 1) {
           servers = rows.length;
           for (var x = 0; x < servers; x++) {
-            console.log('Loop Line 6833')
             let cidd = rows[x].cid;
             let IDD = rows[x].ID;
             let prefixx = rows[x].prefix
@@ -2132,7 +2131,6 @@ async function createRandomBuild(message, numberCharacter, numberPerk1, numberPe
     ctx.fillText(survivors[numberCharacter].name, calculateCenter(1267, survivors[numberCharacter].name.length, fontSize), 207);
     const avatar = await Canvas.loadImage(survivors[numberCharacter].link);
     ctx.drawImage(avatar, 1045, 227, 447, 619);
-    console.log(`perks: ${numberPerk1} || ${numberPerk2} || ${numberPerk3} || ${numberPerk4}`)
     let perkImageName = [getImageName(numberPerk1, isSurv), getImageName(numberPerk2, isSurv), getImageName(numberPerk3, isSurv), getImageName(numberPerk4, isSurv)]
     const perkImage_1 = await getImage(perkImageName[0], isSurv)
     const perkImage_2 = await getImage(perkImageName[1], isSurv)
