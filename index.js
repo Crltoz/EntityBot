@@ -976,6 +976,32 @@ client.on("message", async (message) => {
         return;
       }
 
+      if (command == 'tperks'){
+        var isSurv, perks = [], character
+        if (!texto) return message.member.send('Usa '+ prefix[message.guild.id] +'tperks [Numero de perks a mostrar] [Survivor o Killer]')
+        if (args[0] % 4 != 0) return message.member.send('Usa numeros multiplos de 4. Como la tienen a tu hermana')
+        if (args[1].toLowerCase() == 'survivor') isSurv = true
+        else if (args[1].toLowerCase() == 'killer') isSurv = false
+        else return message.member.user('Usa survivor o killer de forma correcta. PD:Zander no lo rompas')
+        if (isSurv) {
+          character = getLength(survivors)
+          for (let index = getLength(survivorPerks); index > getLength(survivorPerks) - args[1]; index--) {
+            perks.push(index)
+          }
+        }
+        else {
+          character = getLength(killers)
+          for (let index = getLength(killerPerks); index > getLength(killerPerks) - args[1]; index--) {
+            perks.push(index)
+          }
+        }
+        var builds = args[0] / 4
+        for (let index = 0; index < builds; index++) {
+          createRandomBuild(message, character - index, perks[index], perks[index + 1], perks[index + 2], perks[index + 3], isSurv, lenguaje[message.guild.id])
+          perks.length -= 4
+        }
+      }
+
       if (command == 'reglas') {
         let randomNum = Math.floor(Math.random() * rulesEsp.length + 1)
         message.channel.send('> ' + rulesEsp[randomNum], {
