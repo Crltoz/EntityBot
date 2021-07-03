@@ -1992,7 +1992,7 @@ async function getPerkIndexByID(id) {
   var index = -1;
   var isSurv = false
   for (let x = 0; x < getLength(survivorPerks); x++) {
-    if (id.includes(survivorPerks[x].id)) {
+    if (id == survivorPerks[x].id) {
       isSurv = true
       index = x;
       break;
@@ -2000,7 +2000,7 @@ async function getPerkIndexByID(id) {
   }
   if (index == -1) {
     for (let x = 0; x < getLength(killerPerks); x++) {
-      if (id.includes(killerPerks[x].id)) {
+      if (id == killerPerks[x].id) {
         index = x;
         break;
       }
