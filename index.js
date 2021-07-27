@@ -591,7 +591,7 @@ client.on("message", async (message) => {
 
       if (command == 'ayuda') {
         if (!texto) {
-          createHelpMessage();
+          createHelpMessage(message);
           return;
         }
         else if (texto == 'admin') {
