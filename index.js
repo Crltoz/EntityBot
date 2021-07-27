@@ -338,17 +338,9 @@ client.on("message", async (message) => {
       if (parseInt(message.content) < n1[message.author.id]) return message.member.send('The level wanted can not be less than the initial level.').catch(function (err) { message.channel.send(message.member.user.toString() + ' Activate your private messagges so the bot can inform you.') });
       LC[message.author.id] = 0;
       let sangre = ObtenerValor(parseInt(n1[message.author.id]), parseInt(message.content), message.author.id)
-      const embed = new Discord.MessageEmbed()
-        .setThumbnail(message.member.user.avatarURL())
-        .setAuthor(message.member.displayName + '#' + message.member.user.discriminator, message.member.user.avatarURL())
-        .setTitle('| Level Up |')
-        .setURL('https://deadbydaylight.gamepedia.com/Dead_by_Daylight_Wiki')
-        .addField('Bloodpoints needed <:bp:724724401333076071>', '**' + Coma(sangre) + '**', true)
-        .addField('Levels bought', '**' + LC[message.author.id] + '**', true)
-        .addField('ㅤ', 'ㅤ')
-        .addField('Initial level', '**' + n1[message.author.id] + '**', true)
-        .addField('Final level', '**' + message.content + '**', true)
-        .setColor(0xFF0000)
+      let initialLevel = parseInt(n1[message.author.id]);
+      let finalLevel = parseInt(message.content);
+      createLevelImage(message, initialLevel, finalLevel, sangre, lenguaje[message.guild.id])
       message.channel.send({ embed });
       return;
     }
@@ -1352,7 +1344,7 @@ client.on('clickMenu', async (menu) => {
         await menu.reply.think()
         r1.add(menu.clicker.id)
         if (lenguaje[menu.message.guild.id] == 0) menu.reply.edit('Envía por aquí el nivel inicial de la red de sangre en el que estás, ' + menu.clicker.user.tag)
-        else menu.reply.edit('Envía por aquí el nivel inicial de la red de sangre en el que estás, ' + menu.clicker.user.tag)
+        else menu.reply.edit('Enter the level that you want from the bloodweb, ' + menu.clicker.user.tag)
         break;
       }
       case "randomSurvivor": {
