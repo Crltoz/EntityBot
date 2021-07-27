@@ -6,7 +6,7 @@ disbut(client);
 const bigNumber = require("bignumber.js")
 var https = require('https');
 var http = require('http');
-const version_bot = '0.9.8'
+const version_bot = '0.9.10'
 const mysql = require("mysql");
 const fs = require('fs');
 const Canvas = require("canvas");
