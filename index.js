@@ -1,13 +1,15 @@
 ﻿/* Requeries for functions */
 const Discord = require("discord.js");
 const client = new Discord.Client();
+const disbut = require("discord-buttons");
+disbut(client);
 const bigNumber = require("bignumber.js")
 var https = require('https');
 var http = require('http');
-const version_bot = '0.9.7'
+const version_bot = '0.9.8'
 const mysql = require("mysql");
 const fs = require('fs');
-const Canvas = require("canvas")
+const Canvas = require("canvas");
 
 // Image generator
 const background_killer = "assets/Visuals/Background/random_killer.jpg"
@@ -106,71 +108,6 @@ client.on("guildCreate", guild => {
   client.channels.cache.get('739997803094343721').send('| Nuevo servidor | Nombre: ' + guild.name + ' | Usuarios: ' + guild.memberCount)
 })
 
-
-
-client.on("messageReactionAdd", (messageReaction, user) => {
-
-  /* Reacciones de lobby en ESPAÑOL. */
-  if (messageReaction.emoji == '1⃣' || messageReaction.emoji == '2⃣' || messageReaction.emoji == '3⃣' || messageReaction.emoji == '4⃣') {
-    if (lenguaje[messageReaction.message.guild.id] == 0) {
-      if (lobby_set.has(user.id)) {
-        lobby_set.delete(user.id)
-        if (messageReaction.emoji == '1⃣') {
-          r1.add(user.id)
-          messageReaction.message.channel.send('Envía por aquí el nivel inicial de la red de sangre en el que estás, ' + user.tag)
-        } else if (messageReaction.emoji == '2⃣') {
-          let nCharacter = Math.floor(Math.random() * getLength(survivors));
-          let nPerk = getRandomNumber(getLength(survivorPerks))
-          createRandomBuild(message, nCharacter, nPerk.n1, nPerk.n2, nPerk.n3, nPerk.n4, true, lenguaje[messageReaction.message.guild.id])
-          return;
-        } else if (messageReaction.emoji == '3⃣') {
-          let nCharacter = Math.floor(Math.random() * getLength(killers));
-          let nPerk = getRandomNumber(getLength(killerPerks))
-          createRandomBuild(message, nCharacter, nPerk.n1, nPerk.n2, nPerk.n3, nPerk.n4, false, lenguaje[messageReaction.message.guild.id])
-          return;
-        } else if (messageReaction.emoji == '4⃣') {
-          r2.add(user.id)
-          messageReaction.message.channel.send(user.tag + ', envía por aquí "**survivor**" o "**killer**" para calcular el valor de todas las perks del que elijas, ' + messageReaction.message.member.user)
-          return;
-        }
-        else if (messageReaction.emoji == '5⃣') {
-          messageReaction.message.channel.send('<:Entityicon:733814957111771146> En nuestro Discord podrás obtener el bot para tu servidor, y soporte. Link: https://discord.gg/6eBRcRK')
-          return;
-        }
-      }
-    }
-    /* Reacciones de lobby en INGLÉS. */
-    else {
-      if (lobby_set.has(user.id)) {
-        lobby_set.delete(user.id)
-        if (messageReaction.emoji == '1⃣') {
-          r1.add(user.id)
-          messageReaction.message.channel.send('Send the initial level that your bloodweb is, ' + user.tag)
-        } else if (messageReaction.emoji == '2⃣') {
-          let nCharacter = Math.floor(Math.random() * getLength(survivors));
-          let nPerk = getRandomNumber(getLength(survivorPerks))
-          createRandomBuild(message, nCharacter, nPerk.n1, nPerk.n2, nPerk.n3, nPerk.n4, true, lenguaje[messageReaction.message.guild.id])
-          return;
-        } else if (messageReaction.emoji == '3⃣') {
-          let nCharacter = Math.floor(Math.random() * getLength(killers));
-          let nPerk = getRandomNumber(getLength(killerPerks))
-          createRandomBuild(message, nCharacter, nPerk.n1, nPerk.n2, nPerk.n3, nPerk.n4, false, lenguaje[messageReaction.message.guild.id])
-          return;
-        } else if (messageReaction.emoji == '4⃣') {
-          r2.add(user.id)
-          messageReaction.message.channel.send(user.tag + ', send "**survivor**" or "**killer**" to calculate the value of all the perks of the one you choose, ' + messageReaction.message.member.user)
-          return;
-        }
-        else if (messageReaction.emoji == '5⃣') {
-          messageReaction.message.channel.send('<:Entityicon:733814957111771146> On our discord server you can obtain the bot for your own discord server and also support. Link: https://discord.gg/6eBRcRK')
-          return;
-        }
-      }
-    }
-    return;
-  }
-})
-
 client.on("message", async (message) => {
 
   if (message.author.bot) return;
@@ -211,19 +148,10 @@ client.on("message", async (message) => {
       if (parseInt(message.content) % 1 != '0') return message.member.send('El nivel no puede tener comas.').catch(function (err) { message.channel.send(message.member.user.toString() + ' Activa tus mensajes privados para que el bot pueda informarte.') });
       if (parseInt(message.content) < n1[message.author.id]) return message.member.send('El nivel deseado no puede ser menor al inicial.').catch(function (err) { message.channel.send(message.member.user.toString() + ' Activa tus mensajes privados para que el bot pueda informarte.') });
       LC[message.author.id] = 0;
-      let sangre = ObtenerValor(parseInt(n1[message.author.id]), parseInt(message.content), message.author.id)
-      const embed = new Discord.MessageEmbed()
-        .setThumbnail(message.member.user.avatarURL())
-        .setAuthor(message.member.displayName + '#' + message.member.user.discriminator, message.member.user.avatarURL())
-        .setTitle('| Subir Nivel |')
-        .setURL('https://deadbydaylight.gamepedia.com/Dead_by_Daylight_Wiki')
-        .addField('Puntos de Sangre necesarios <:bp:724724401333076071>', '**' + Coma(sangre) + '**', true)
-        .addField('Niveles comprados', '**' + LC[message.author.id] + '**', true)
-        .addField('ㅤ', 'ㅤ')
-        .addField('Nivel Inicial', '**' + n1[message.author.id] + '**', true)
-        .addField('Nivel Final', '**' + message.content + '**', true)
-        .setColor(0xFF0000)
-      message.channel.send({ embed });
+      let initialLevel = parseInt(n1[message.author.id]);
+      let finalLevel = parseInt(message.content);
+      let sangre = ObtenerValor(initialLevel, finalLevel, message.author.id)
+      createLevelImage(message, initialLevel, finalLevel, sangre, lenguaje[message.guild.id])
       return;
     }
 
@@ -671,24 +599,7 @@ client.on("message", async (message) => {
 
       if (command == 'ayuda') {
         if (!texto) {
-          const embedd = new Discord.MessageEmbed()
-            .setColor('#FF0000')
-            .setTitle('🔰 Ayuda - Comandos 🔰')
-            .setAuthor(message.member.user.tag, message.member.user.avatarURL())
-            .setURL('https://deadbydaylight.gamepedia.com/Dead_by_Daylight_Wiki')
-            .setThumbnail(client.user.avatarURL())
-            .addField(prefix[message.guild.id] + 'discord', 'Para más info: **' + prefix[message.guild.id] + 'ayuda discord**')
-            .addField('NOTA:', 'Los paréntesis: **[]** no deben ser usados en los comandos, es simplemente para resaltar cómo se usa el comando.')
-            .addField(prefix[message.guild.id] + 'calcular [Killer o Survivor]', 'Para más info: **' + prefix[message.guild.id] + 'ayuda calcular**')
-            .addField(prefix[message.guild.id] + 'stats [Survivor o Killer] [URL Perfil Steam o Código de amigo]', 'Para más info: **' + prefix[message.guild.id] + 'ayuda stats**')
-            .addField(prefix[message.guild.id] + 'nivel [Nivel Actual] [Nivel Deseado]', 'Para más info: **' + prefix[message.guild.id] + 'ayuda nivel**')
-            .addField(prefix[message.guild.id] + 'lobby', 'Para más info: **' + prefix[message.guild.id] + 'ayuda lobby**')
-            .addField(prefix[message.guild.id] + 'random [Survivor o Killer]', 'Para más info: **' + prefix[message.guild.id] + 'ayuda random**')
-            .addField(prefix[message.guild.id] + 'santuario', 'Te mostrará el santuario de los secretos actual del juego.')
-            .addField(prefix[message.guild.id] + 'ayuda admin', 'Mostrará los comandos que pueden ser utilizados por **administradores** para personalizar el bot.')
-            .setTimestamp()
-            .setFooter('La entidad - V' + version_bot + ' - Beta Pública', client.user.avatarURL());
-          message.channel.send(embedd)
+          createHelpMessage();
           return;
         }
         else if (texto == 'admin') {
@@ -930,28 +841,55 @@ client.on("message", async (message) => {
       if (command == 'lobby') {
         if (lobby_set.has(message.author.id)) return message.channel.send(message.member.user.toString() + ', has usado el lobby hace menos de 20 segundos.')
         lobby_set.add(message.author.id)
+        let menu_options = []
+
+        menu_options[0] = new disbut.MessageMenuOption()
+          .setLabel("Comprar niveles")
+          .setEmoji('1⃣')
+          .setValue('calculateBloodpoints')
+          .setDescription('Calcular puntos de sangre para comprar niveles.');
+
+        menu_options[1] = new disbut.MessageMenuOption()
+          .setLabel("Random (superviviente)")
+          .setEmoji('2⃣')
+          .setValue('randomSurvivor')
+          .setDescription('Build con 4 perks y un superviviente random.');
+
+        menu_options[2] = new disbut.MessageMenuOption()
+          .setLabel("Random (asesino)")
+          .setEmoji('3⃣')
+          .setValue('randomKiller')
+          .setDescription('Build con 4 perks y un asesino random.');
+
+        menu_options[3] = new disbut.MessageMenuOption()
+          .setLabel("Ver ayuda")
+          .setEmoji('4⃣')
+          .setValue('help')
+          .setDescription('Ver todos los comandos y funciones del bot.');
+
+        menu_options[4] = new disbut.MessageMenuOption()
+          .setLabel("Invitación del bot")
+          .setEmoji('5⃣')
+          .setValue('discord')
+          .setDescription('Link de invitación para unirme a un Discord.');
+
+        let menu = new disbut.MessageMenu()
+          .setID('lobbyMenu')
+          .setPlaceholder('➡ Opciones')
+          .setMaxValues(1)
+          .setMinValues(1)
+          .addOptions(menu_options);
+
         const lembed = new Discord.MessageEmbed()
           .setColor('#FF0000')
           .setTitle('🔰 Lobby 🔰')
           .setURL('https://deadbydaylight.gamepedia.com/Dead_by_Daylight_Wiki')
           .setAuthor('Entidad', client.user.avatarURL())
-          .setDescription('Selecciona el emoji de reacción para activar una función:')
+          .setDescription('Selecciona la opción que quieras utilizar en el menú:')
           .setThumbnail(client.user.avatarURL())
-          .addField('1⃣ Calcular puntos de sangre de nivel a nivel.', 'Selecciona el nivel que tienes con tu personaje y al que quieres llegar, y te diré los puntos de sangre necesarios.')
-          .addField('2⃣ Survivor random con 4 perks.', 'Te asignaré un survivor random con 4 perks.')
-          .addField('3⃣ Killer random con 4 perks.', 'Te asignaré un killer random con 4 perks.')
-          .addField('4⃣ Calcular puntos de sangre para obtener todas las perks.', 'Se calcula los puntos de sangre necesarios para comprar todas las perks de todos los personajes según las que ya tengas.')
-          .addField('5⃣ Invitación del Discord Oficial del bot.', 'Aquí podrás obtener el link para unir el bot a tu Server de Discord o soporte del mismo.')
-
           .setTimestamp()
           .setFooter('V' + version_bot + ' - Beta Pública', client.user.avatarURL());
-        message.channel.send(lembed).then(async function (message) {
-          await message.react("1⃣")
-          await message.react("2⃣")
-          await message.react("3⃣")
-          await message.react("4⃣")
-          await message.react("5⃣")
-        })
+        message.channel.send(lembed, menu)
         setTimeout(() => {
           lobby_set.delete(message.author.id)
         }, 120000);
@@ -1064,24 +1002,7 @@ client.on("message", async (message) => {
 
       if (command == 'help') {
         if (!texto) {
-          const embedd = new Discord.MessageEmbed()
-            .setColor('#FF0000')
-            .setTitle('🔰 Help - Commands 🔰')
-            .setAuthor(message.member.user.tag, message.member.user.avatarURL())
-            .setURL('https://deadbydaylight.gamepedia.com/Dead_by_Daylight_Wiki')
-            .setThumbnail(client.user.avatarURL())
-            .addField(prefix[message.guild.id] + 'discord', 'More info: **' + prefix[message.guild.id] + 'help discord**')
-            .addField('BTW:', 'Brackets **[]** should not be used, only use spacebar between words.')
-            .addField(prefix[message.guild.id] + 'calculate [Killer or Survivor]', 'More info: **' + prefix[message.guild.id] + 'help calculate**')
-            .addField(prefix[message.guild.id] + 'stats [Survivor or Killer] [Steam profile URL or Steam friend code]', 'More info: **' + prefix[message.guild.id] + 'help stats**')
-            .addField(prefix[message.guild.id] + 'level [Current Level] [Level wanted]', 'More info: **' + prefix[message.guild.id] + 'help level**')
-            .addField(prefix[message.guild.id] + 'lobby', 'More info: **' + prefix[message.guild.id] + 'help lobby**')
-            .addField(prefix[message.guild.id] + 'random [Survivor or Killer]', 'More info: **' + prefix[message.guild.id] + 'help random**')
-            .addField(prefix[message.guild.id] + 'shrine', 'It will show you the shrine of secrets that is current in the game.')
-            .addField(prefix[message.guild.id] + 'help admin', 'It will show you the commands that can only be use by **administrators** to customize the bot.')
-            .setTimestamp()
-            .setFooter('Entity - V' + version_bot + ' - Public Beta', client.user.avatarURL());
-          message.channel.send(embedd)
+          createHelpMessage(message)
           return;
         }
         else if (texto == 'admin') {
@@ -1347,27 +1268,55 @@ client.on("message", async (message) => {
       if (command == 'lobby') {
         if (lobby_set.has(message.author.id)) return message.channel.send(message.member.user.toString() + ', You used the lobby less than 20 seconds ago.')
         lobby_set.add(message.author.id)
+        let menu_options = []
+
+        menu_options[0] = new disbut.MessageMenuOption()
+          .setLabel("Buy bloodweb levels")
+          .setEmoji('1⃣')
+          .setValue('calculateBloodpoints')
+          .setDescription('Calculate bloodpoints to buy levels.');
+
+        menu_options[1] = new disbut.MessageMenuOption()
+          .setLabel("Random survivor")
+          .setEmoji('2⃣')
+          .setValue('randomSurvivor')
+          .setDescription('Build with 4 perks and survivor random.');
+
+        menu_options[2] = new disbut.MessageMenuOption()
+          .setLabel("Random killer")
+          .setEmoji('3⃣')
+          .setValue('randomKiller')
+          .setDescription('Build with 4 perks and killer random.');
+
+        menu_options[3] = new disbut.MessageMenuOption()
+          .setLabel("Help")
+          .setEmoji('4⃣')
+          .setValue('help')
+          .setDescription('See all commands and functions.');
+
+        menu_options[4] = new disbut.MessageMenuOption()
+          .setLabel("Bot invitation")
+          .setEmoji('5⃣')
+          .setValue('discord')
+          .setDescription('Link to invite bot to your own discord server.');
+
+        let menu = new disbut.MessageMenu()
+          .setID('lobbyMenu')
+          .setPlaceholder('➡ Options')
+          .setMaxValues(1)
+          .setMinValues(1)
+          .addOptions(menu_options);
+
         const lembed = new Discord.MessageEmbed()
           .setColor('#FF0000')
           .setTitle('🔰 Lobby 🔰')
           .setURL('https://deadbydaylight.gamepedia.com/Dead_by_Daylight_Wiki')
           .setAuthor('Entity', client.user.avatarURL())
-          .setDescription('Select the reaction emoji to activate a function:')
+          .setDescription('Select the option in the menu:')
           .setThumbnail(client.user.avatarURL())
-          .addField('1⃣ Calculate bloodpoints from a certain level to another.', 'Select the current level you have with a certain character and the level wanted, then it will show you the amount of bloodpoints needed.')
-          .addField('2⃣ Random survivor 4 perk build.', 'It will show you a random survivor with 4 random perks.')
-          .addField('3⃣ Random killer 4 perk build.', 'It will show you a random killer with 4 random perks.')
-          .addField('4⃣ It will calculate the amount of Bloodpoints that you need to buy all the perks from a caracter.', 'It will ask you how many perks of each level you have and the bot will calculate counting those perks you dont have.')
-          .addField('5⃣ Bot official discord invitation.', 'Here you will recieve the link to join the bot to a discord server or if you need support.')
           .setTimestamp()
-          .setFooter('Entity - V' + version_bot + ' - Public Beta', client.user.avatarURL());
-        message.channel.send(lembed).then(async function (message) {
-          await message.react("1⃣")
-          await message.react("2⃣")
-          await message.react("3⃣")
-          await message.react("4⃣")
-          await message.react("5⃣")
-        })
+          .setFooter('V' + version_bot + ' - Public Beta', client.user.avatarURL());
+        message.channel.send(lembed, menu)
         setTimeout(() => {
           lobby_set.delete(message.author.id)
         }, 120000);
@@ -1392,6 +1341,48 @@ client.on("message", async (message) => {
       }
 
       message.member.send('The command doesnt exists. Use **' + prefix[message.guild.id] + 'help** to see all the funtions and commands')
+    }
+  }
+});
+
+client.on('clickMenu', async (menu) => {
+  if (menu.id == "lobbyMenu") {
+    switch (menu.values[0]) {
+      case "calculateBloodpoints": {
+        await menu.reply.think()
+        r1.add(menu.clicker.id)
+        if (lenguaje[menu.message.guild.id] == 0) menu.reply.edit('Envía por aquí el nivel inicial de la red de sangre en el que estás, ' + menu.clicker.user.tag)
+        else menu.reply.edit('Envía por aquí el nivel inicial de la red de sangre en el que estás, ' + menu.clicker.user.tag)
+        break;
+      }
+      case "randomSurvivor": {
+        await menu.reply.think()
+        let nCharacter = Math.floor(Math.random() * getLength(survivors));
+        let nPerk = getRandomNumber(getLength(survivorPerks))
+        let think = menu.reply
+        createRandomBuild(menu.message, nCharacter, nPerk.n1, nPerk.n2, nPerk.n3, nPerk.n4, true, lenguaje[menu.message.guild.id], think)
+        break;
+      }
+      case "randomKiller": {
+        await menu.reply.think()
+        let think = menu.reply
+        let nCharacter = Math.floor(Math.random() * getLength(killers));
+        let nPerk = getRandomNumber(getLength(killerPerks))
+        createRandomBuild(menu.message, nCharacter, nPerk.n1, nPerk.n2, nPerk.n3, nPerk.n4, false, lenguaje[menu.message.guild.id], think)
+        break;
+      }
+      case "help": {
+        await menu.reply.think()
+        createHelpMessage(menu.message, menu.reply);
+        break;
+      }
+
+      case "discord": {
+        await menu.reply.think()
+        if (lenguaje[menu.message.guild.id] == 0) menu.reply.edit('<:Entityicon:733814957111771146> Añade el bot en tu propio servidor de Discord: **https://cutt.ly/entidadbot** ')
+        else menu.reply.edit('<:Entityicon:733814957111771146> Add the bot to your discord server here: **https://cutt.ly/entidadbot** ')
+        break;
+      }
     }
   }
 });
@@ -2012,6 +2003,51 @@ async function getPerkIndexByID(id) {
   };
 }
 
+function createHelpMessage(message, think = null) {
+  if (lenguaje[message.guild.id] == 0) {
+    const embedd = new Discord.MessageEmbed()
+      .setColor('#FF0000')
+      .setTitle('🔰 Ayuda - Comandos 🔰')
+      .setAuthor(message.member.user.tag, message.member.user.avatarURL())
+      .setURL('https://deadbydaylight.gamepedia.com/Dead_by_Daylight_Wiki')
+      .setThumbnail(client.user.avatarURL())
+      .addField(prefix[message.guild.id] + 'discord', 'Para más info: **' + prefix[message.guild.id] + 'ayuda discord**')
+      .addField('NOTA:', 'Los paréntesis: **[]** no deben ser usados en los comandos, es simplemente para resaltar cómo se usa el comando.')
+      .addField(prefix[message.guild.id] + 'calcular [Killer o Survivor]', 'Para más info: **' + prefix[message.guild.id] + 'ayuda calcular**')
+      .addField(prefix[message.guild.id] + 'stats [Survivor o Killer] [URL Perfil Steam o Código de amigo]', 'Para más info: **' + prefix[message.guild.id] + 'ayuda stats**')
+      .addField(prefix[message.guild.id] + 'nivel [Nivel Actual] [Nivel Deseado]', 'Para más info: **' + prefix[message.guild.id] + 'ayuda nivel**')
+      .addField(prefix[message.guild.id] + 'lobby', 'Para más info: **' + prefix[message.guild.id] + 'ayuda lobby**')
+      .addField(prefix[message.guild.id] + 'random [Survivor o Killer]', 'Para más info: **' + prefix[message.guild.id] + 'ayuda random**')
+      .addField(prefix[message.guild.id] + 'santuario', 'Te mostrará el santuario de los secretos actual del juego.')
+      .addField(prefix[message.guild.id] + 'ayuda admin', 'Mostrará los comandos que pueden ser utilizados por **administradores** para personalizar el bot.')
+      .setTimestamp()
+      .setFooter('La entidad - V' + version_bot + ' - Beta Pública', client.user.avatarURL());
+    if (!think) message.channel.send(embedd)
+    else think.edit(embedd)
+  } else {
+    const embedd = new Discord.MessageEmbed()
+      .setColor('#FF0000')
+      .setTitle('🔰 Help - Commands 🔰')
+      .setAuthor(message.member.user.tag, message.member.user.avatarURL())
+      .setURL('https://deadbydaylight.gamepedia.com/Dead_by_Daylight_Wiki')
+      .setThumbnail(client.user.avatarURL())
+      .addField(prefix[message.guild.id] + 'discord', 'More info: **' + prefix[message.guild.id] + 'help discord**')
+      .addField('BTW:', 'Brackets **[]** should not be used, only use spacebar between words.')
+      .addField(prefix[message.guild.id] + 'calculate [Killer or Survivor]', 'More info: **' + prefix[message.guild.id] + 'help calculate**')
+      .addField(prefix[message.guild.id] + 'stats [Survivor or Killer] [Steam profile URL or Steam friend code]', 'More info: **' + prefix[message.guild.id] + 'help stats**')
+      .addField(prefix[message.guild.id] + 'level [Current Level] [Level wanted]', 'More info: **' + prefix[message.guild.id] + 'help level**')
+      .addField(prefix[message.guild.id] + 'lobby', 'More info: **' + prefix[message.guild.id] + 'help lobby**')
+      .addField(prefix[message.guild.id] + 'random [Survivor or Killer]', 'More info: **' + prefix[message.guild.id] + 'help random**')
+      .addField(prefix[message.guild.id] + 'shrine', 'It will show you the shrine of secrets that is current in the game.')
+      .addField(prefix[message.guild.id] + 'help admin', 'It will show you the commands that can only be use by **administrators** to customize the bot.')
+      .setTimestamp()
+      .setFooter('Entity - V' + version_bot + ' - Public Beta', client.user.avatarURL());
+    if (!think) message.channel.send(embedd)
+    else think.edit(embedd)
+  }
+  return;
+}
+
 /**
  * @param {Int8Array} index - Perk index from JSON file.
  * @description Return true if perk is valid, else, false.
@@ -2115,7 +2151,7 @@ function getRandomNumber(max) {
  * @param {Int8Array} language - 0 = Spanish | 1 = English 
  * @description Get embed with random build and character.
  */
-async function createRandomBuild(message, numberCharacter, numberPerk1, numberPerk2, numberPerk3, numberPerk4, isSurv, language) {
+async function createRandomBuild(message, numberCharacter, numberPerk1, numberPerk2, numberPerk3, numberPerk4, isSurv, language, think = null) {
   if (isSurv) {
     const canvas = Canvas.createCanvas(1579, 1114);
     const ctx = canvas.getContext('2d');
@@ -2142,8 +2178,14 @@ async function createRandomBuild(message, numberCharacter, numberPerk1, numberPe
     ctx.drawImage(perkImage_4, 303, 605, 256, 256);
 
     const attachment = new Discord.MessageAttachment(canvas.toBuffer(), 'survivor-random.png');
-    if (language == 0) message.channel.send(`**PERKS:**\n1⃣: ${survivorPerks[numberPerk1].nameEs}\n2⃣: ${survivorPerks[numberPerk2].nameEs}\n3⃣: ${survivorPerks[numberPerk3].nameEs}\n4⃣: ${survivorPerks[numberPerk4].nameEs}`, attachment)
-    else message.channel.send(`**PERKS:**\n1⃣: ${survivorPerks[numberPerk1].nameEn}\n2⃣: ${survivorPerks[numberPerk2].nameEn}\n3⃣: ${survivorPerks[numberPerk3].nameEn}\n4⃣: ${survivorPerks[numberPerk4].nameEn}`, attachment)
+
+    if (language == 0) {
+      if (!think) message.channel.send(`**PERKS:**\n1⃣: ${survivorPerks[numberPerk1].nameEs}\n2⃣: ${survivorPerks[numberPerk2].nameEs}\n3⃣: ${survivorPerks[numberPerk3].nameEs}\n4⃣: ${survivorPerks[numberPerk4].nameEs}`, attachment)
+      else think.edit(`**PERKS:**\n1⃣: ${survivorPerks[numberPerk1].nameEs}\n2⃣: ${survivorPerks[numberPerk2].nameEs}\n3⃣: ${survivorPerks[numberPerk3].nameEs}\n4⃣: ${survivorPerks[numberPerk4].nameEs}`, attachment)
+    } else {
+      if (!think) message.channel.send(`**PERKS:**\n1⃣: ${survivorPerks[numberPerk1].nameEn}\n2⃣: ${survivorPerks[numberPerk2].nameEn}\n3⃣: ${survivorPerks[numberPerk3].nameEn}\n4⃣: ${survivorPerks[numberPerk4].nameEn}`, attachment)
+      else think.edit(`**PERKS:**\n1⃣: ${survivorPerks[numberPerk1].nameEn}\n2⃣: ${survivorPerks[numberPerk2].nameEn}\n3⃣: ${survivorPerks[numberPerk3].nameEn}\n4⃣: ${survivorPerks[numberPerk4].nameEn}`, attachment)
+    }
   } else {
     const canvas = Canvas.createCanvas(1579, 1114);
     const ctx = canvas.getContext('2d');
@@ -2171,8 +2213,13 @@ async function createRandomBuild(message, numberCharacter, numberPerk1, numberPe
     ctx.drawImage(perkImage_4, 303, 605, 256, 256);
 
     const attachment = new Discord.MessageAttachment(canvas.toBuffer(), 'killer-random.png');
-    if (language == 0) message.channel.send(`**PERKS:**\n1⃣: ${killerPerks[numberPerk1].nameEs}\n2⃣: ${killerPerks[numberPerk2].nameEs}\n3⃣: ${killerPerks[numberPerk3].nameEs}\n4⃣: ${killerPerks[numberPerk4].nameEs}`, attachment)
-    else message.channel.send(`**PERKS:**\n1⃣: ${killerPerks[numberPerk1].nameEn}\n2⃣: ${killerPerks[numberPerk2].nameEn}\n3⃣: ${killerPerks[numberPerk3].nameEn}\n4⃣: ${killerPerks[numberPerk4].nameEn}`, attachment)
+    if (language == 0) {
+      if (!think) message.channel.send(`**PERKS:**\n1⃣: ${killerPerks[numberPerk1].nameEs}\n2⃣: ${killerPerks[numberPerk2].nameEs}\n3⃣: ${killerPerks[numberPerk3].nameEs}\n4⃣: ${killerPerks[numberPerk4].nameEs}`, attachment)
+      else think.edit(`**PERKS:**\n1⃣: ${killerPerks[numberPerk1].nameEs}\n2⃣: ${killerPerks[numberPerk2].nameEs}\n3⃣: ${killerPerks[numberPerk3].nameEs}\n4⃣: ${killerPerks[numberPerk4].nameEs}`, attachment)
+    } else {
+      if (!think) message.channel.send(`**PERKS:**\n1⃣: ${killerPerks[numberPerk1].nameEn}\n2⃣: ${killerPerks[numberPerk2].nameEn}\n3⃣: ${killerPerks[numberPerk3].nameEn}\n4⃣: ${killerPerks[numberPerk4].nameEn}`, attachment)
+      else think.edit(`**PERKS:**\n1⃣: ${killerPerks[numberPerk1].nameEn}\n2⃣: ${killerPerks[numberPerk2].nameEn}\n3⃣: ${killerPerks[numberPerk3].nameEn}\n4⃣: ${killerPerks[numberPerk4].nameEn}`, attachment)
+    }
   }
   return
 }
