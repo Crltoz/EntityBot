@@ -892,7 +892,7 @@ client.on("message", async (message) => {
         message.channel.send(lembed, menu)
         setTimeout(() => {
           lobby_set.delete(message.author.id)
-        }, 120000);
+        }, 20000);
         return;
       }
 
@@ -1319,7 +1319,7 @@ client.on("message", async (message) => {
         message.channel.send(lembed, menu)
         setTimeout(() => {
           lobby_set.delete(message.author.id)
-        }, 120000);
+        }, 20000);
         return;
       }
 
