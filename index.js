@@ -502,6 +502,16 @@ client.on("message", async (message) => {
   if (prefix[message.guild.id] == null) prefix[message.guild.id] = '/';
   if (lenguaje[message.guild.id] == null) lenguaje[message.guild.id] = 0;
   if (message.content.startsWith(prefix[message.guild.id])) {
+
+    if (lenguaje[message.guild.id] == 0) {
+      con.query(`UPDATE language SET count = count + 1 WHERE name = 'spanish'`);
+    } else {
+      con.query(`UPDATE language SET count = count + 1 WHERE name = 'english'`);
+    }
+
+    console.log(`${message.author.tag} command: ${message.content}`)
+
+
     if (lenguaje[message.guild.id] == 0) {
       if (cid[message.guild.id] != null && message.channel.id != cid[message.guild.id]) {
         const disc = client.channels.cache.get(cid[message.guild.id]);
