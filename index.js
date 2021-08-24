@@ -504,9 +504,9 @@ client.on("message", async (message) => {
   if (message.content.startsWith(prefix[message.guild.id])) {
 
     if (lenguaje[message.guild.id] == 0) {
-      con.query(`UPDATE commands SET count = count + 1 WHERE name = 'spanish'`);
+      con.query(`UPDATE commands SET count = count + 1 WHERE language = 'spanish'`);
     } else {
-      con.query(`UPDATE commands SET count = count + 1 WHERE name = 'english'`);
+      con.query(`UPDATE commands SET count = count + 1 WHERE language = 'english'`);
     }
 
     console.log(`${message.author.tag} command: ${message.content}`)
