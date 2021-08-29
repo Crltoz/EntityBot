@@ -741,7 +741,7 @@ client.on("message", async (message) => {
       }
 
       if (command == 'discord') {
-        message.channel.send('<:Entityicon:733814957111771146> Agrega el bot a tu servidor con el URL: **https://cutt.ly/entidadbot**')
+        message.channel.send('<:Entityicon:881447186896916500> Agrega el bot a tu servidor con el URL: **https://cutt.ly/entidadbot**')
         return;
       }
 
@@ -1144,7 +1144,7 @@ client.on("message", async (message) => {
       }
 
       if (command == 'discord') {
-        message.channel.send('<:Entityicon:733814957111771146> Add the bot to your discord server here: **https://cutt.ly/entidadbot** ')
+        message.channel.send('<:Entityicon:881447186896916500> Add the bot to your discord server here: **https://cutt.ly/entidadbot** ')
         return;
       }
 
@@ -1381,8 +1381,8 @@ client.on('clickMenu', async (menu) => {
 
       case "discord": {
         await menu.reply.think()
-        if (lenguaje[menu.message.guild.id] == 0) menu.reply.edit('<:Entityicon:733814957111771146> Añade el bot en tu propio servidor de Discord: **https://cutt.ly/entidadbot** ')
-        else menu.reply.edit('<:Entityicon:733814957111771146> Add the bot to your discord server here: **https://cutt.ly/entidadbot** ')
+        if (lenguaje[menu.message.guild.id] == 0) menu.reply.edit('<:Entityicon:881447186896916500> Añade el bot en tu propio servidor de Discord: **https://cutt.ly/entidadbot** ')
+        else menu.reply.edit('<:Entityicon:881447186896916500> Add the bot to your discord server here: **https://cutt.ly/entidadbot** ')
         break;
       }
     }
