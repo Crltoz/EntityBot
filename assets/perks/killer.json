@@ -503,6 +503,24 @@
             "nameEn": "Eruption",
             "emoji": "<:iconPerks_eruption:>",
             "id": "k24p03"
+        },
+        {
+            "nameEs": "Candado",
+            "nameEn": "Deadlock",
+            "emoji": "<:iconPerks_deadlock:>",
+            "id": "k25p01"
+        },
+        {
+            "nameEs": "Maleficio: Juguete",
+            "nameEn": "Hex: Plaything",
+            "emoji": "<:iconPerks_hexPlaything:>",
+            "id": "k25p02"
+        },
+        {
+            "nameEs": "Gancho Flagelante: Obsequio Doloroso",
+            "nameEn": "Scourge Hook: Gift of Pain",
+            "emoji": "<:iconPerks_scourgeHookGiftOfPain:>",
+            "id": "k25p03"
         }
     ]
 }
