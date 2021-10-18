@@ -84,7 +84,7 @@ client.on("ready", () => {
   loadRules()
   client.user.setPresence({
     status: "online",
-    game: {
+    activity: {
       name: '/help | /ayuda',
       type: "PLAYING"
     }
