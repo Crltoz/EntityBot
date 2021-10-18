@@ -590,7 +590,7 @@ client.on("message", async (message) => {
         con.query(`SELECT * FROM commands`, (err, rows) => {
           if (err) throw err;
           if (rows.length) {
-            message.channel.send(`Comandos usados:\n**${rows[0].language}**: **${rows[0].count}\n**${rows[1].language}**: **${rows[1].count}**`);
+            message.channel.send(`Comandos usados:\n**${rows[0].language}**: **${rows[0].count}**\n**${rows[1].language}**: **${rows[1].count}**`);
           }
         });
         return
