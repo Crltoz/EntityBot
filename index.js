@@ -580,6 +580,22 @@ client.on("message", async (message) => {
         return;
       }
 
+      if (command == 'cmdcount') {
+        if (message.author.id != '277506787261939712' && message.author.id != '313496742156959745' && message.author.id != '389320439932911626' && message.author.id != '169818091281186816') return message.member.send('SACA LA MANO DE AHÍ CARAJO', {
+          files: [{
+            attachment: 'https://i.ytimg.com/vi/7A6FricobFA/hqdefault.jpg',
+            name: "SACA_LA_MANO.jpg"
+          }]
+        });
+        con.query(`SELECT * FROM commands`, (err, rows) => {
+          if (err) throw err;
+          if (rows.length) {
+            message.channel.send(`Comandos usados:\n**${rows[0].language}**: **${rows[0].count}\n**${rows[1].language}**: **${rows[1].count}**`);
+          }
+        });
+        return
+      }
+
       if (command == 'santuario') {
         con.query(`SELECT * FROM santuario`, async (err, rows) => {
           if (err) throw err;
@@ -1416,7 +1432,6 @@ async function createLevelImage(message, initialLevel, targetLevel, bloodpoints,
 function ObtenerValor(nivel, Deseado, id) {
   var total = 0;
   for (let x = nivel; x <= Deseado; x++) {
-    console.log('Loop Line 2636')
     if (x == Deseado) break;
     LC[id] = LC[id] + 1;
     if (x >= 1 && x <= 9) total = total + 12000;
@@ -1432,7 +1447,6 @@ function ObtenerNP(nivel, id) {
   var total = 0;
   let x = nivel;
   while (DBC[id] != 0) {
-    console.log('Loop Linea 3163')
     LC[id] = LC[id] + 1;
     if (x >= 1 && x <= 9) {
       total = total + 12000;
@@ -1606,7 +1620,6 @@ function sendEmbedStats(channel, isSurv, data_steam, data_dbd, language) {
  * @description - Send embed error with information.
  */
 function sendEmbedError(type, user, channel, language) {
-  console.log(`sendEmbedError: type: ${type} - language: ${language}`)
   if (language == 0) {
     switch (type) {
       case 1: {
@@ -1714,7 +1727,7 @@ function postStats(steamid, channelid, user, language) {
   let req = https.request(options, function (res) {
     if (res.statusCode != 201) {
       console.log(`ERROR POST: ${res.statusCode} | message: ${res.statusMessage} | headers: ${JSON.stringify(res.headers)} | steamid: ${steamid}`)
-      sendEmbedError(3, user, channelid, language)
+      sendEmbedError(2, user, channelid, language)
     } else {
       console.log(`SUCESS POST: ${res.statusCode} | steamid: ${steamid}`)
       if (language == 0) user.send("La cuenta de Steam está en la cola para ser agregada ya que no estaba registrada, recuerda que puede tardar hasta 1 hora.")
@@ -1890,7 +1903,6 @@ function verifyPrivate(buffer) {
 function replaceSpace(text) {
   var str = texto
   while (str.includes('_')) {
-    console.log('Loop Line 6087')
     str = str.replace('_', ' ')
   }
   return str;
@@ -2105,33 +2117,27 @@ function getRandomNumber(max) {
   let n2 = Math.floor(Math.random() * max);
   if (n2 == n1) {
     while (n2 == n1) {
-      console.log(`Loop Linea 3767 | ${n1} | ${n2}`)
       n2 = Math.floor(Math.random() * max);
     }
   }
   let n3 = Math.floor(Math.random() * max);
   if (n3 == n1 || n3 == n2) {
     while (n3 == n1) {
-      console.log('Loop Linea 3774')
       n3 = Math.floor(Math.random() * max);
     }
     while (n3 == n2) {
-      console.log('Loop Linea 3778')
       n3 = Math.floor(Math.random() * max);
     }
   }
   let n4 = Math.floor(Math.random() * max);
   if (n4 == n1 || n4 == n2 || n4 == n3) {
     while (n4 == n1) {
-      console.log('Loop Linea 3785')
       n4 = Math.floor(Math.random() * max);
     }
     while (n4 == n2) {
-      console.log('Loop Linea 3790')
       n4 = Math.floor(Math.random() * max);
     }
     while (n4 == n3) {
-      console.log('Loop Linea 3794')
       n4 = Math.floor(Math.random() * max);
     }
   }
