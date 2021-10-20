@@ -514,8 +514,7 @@ client.on("message", async (message) => {
 
     if (lenguaje[message.guild.id] == 0) {
       if (cid[message.guild.id] != null && message.channel.id != cid[message.guild.id]) {
-        const disc = client.channels.cache.get(cid[message.guild.id]);
-        message.channel.send('Las utilidades del bot solo pueden ser usadas en el canal de: ' + disc)
+        message.channel.send(`Las utilidades del bot solo pueden ser usadas en el canal de: <#${cid[message.guild.id]}>`)
         return;
       }
       if (p1.has(message.author.id)) p1.delete(message.author.id)
@@ -979,8 +978,7 @@ client.on("message", async (message) => {
       message.member.send('El comando no existe. Usa ' + prefix[message.guild.id] + '**ayuda** para ver todas las funciones y comandos.')
     } else {
       if (cid[message.guild.id] != null && message.channel.id != cid[message.guild.id]) {
-        const disc = client.channels.cache.get(cid[message.guild.id]);
-        message.channel.send('The bot utilities can only be used in the channel:' + disc)
+        message.channel.send(`The bot utilities can only be used in the channel: <#${cid[message.guild.id]}>`)
         return;
       }
       if (p1.has(message.author.id)) p1.delete(message.author.id)
