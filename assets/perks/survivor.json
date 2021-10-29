@@ -573,19 +573,19 @@
         {
             "nameEs": "Clarividencia",
             "nameEn": "Clairvoyance",
-            "emoji": "<:IconPerks_clairvoyance:>",
+            "emoji": "<:iconPerks_clairvoyance:>",
             "id": "s28p01"
         },
         {
             "nameEs": "Bendicion: Circulo de curacion",
             "nameEn": "Boon: Circle of Healing",
-            "emoji": "<:IconPerks_boonCircleOfHealing:>",
+            "emoji": "<:iconPerks_boonCircleOfHealing:>",
             "id": "s28p02"
         },
         {
             "nameEs": "Bendicion: Paso sombrio",
             "nameEn": "Boon: Shadow Step",
-            "emoji": "<:IconPerks_boonShadowStep:>",
+            "emoji": "<:iconPerks_boonShadowStep:>",
             "id": "s28p03"
         }
     ]
