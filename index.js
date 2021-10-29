@@ -2313,6 +2313,7 @@ async function sendShrine(perk1, perk2, perk3, perk4, shards, channel, language)
 }
 
 async function getImage(name, isSurv) {
+  console.log(`getImage: ${name} - isSurv: ${isSurv}`)
   let object;
   if (isSurv) object = Canvas.loadImage("./assets/Visuals/Perks/Survivors/" + name)
   else object = Canvas.loadImage("./assets/Visuals/Perks/Killers/" + name)
