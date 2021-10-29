@@ -569,6 +569,24 @@
             "nameEn": "Rookie Spirit",
             "emoji": "<:iconPerks_RookieSpirit:>",
             "id": "s27p03"
+        },
+        {
+            "nameEs": "Clarividencia",
+            "nameEn": "Clairvoyance",
+            "emoji": "<:IconPerks_clairvoyance:>",
+            "id": "s28p01"
+        },
+        {
+            "nameEs": "Bendicion: Circulo de curacion",
+            "nameEn": "Boon: Circle of Healing",
+            "emoji": "<:IconPerks_boonCircleOfHealing:>",
+            "id": "s28p02"
+        },
+        {
+            "nameEs": "Bendicion: Paso sombrio",
+            "nameEn": "Boon: Shadow Step",
+            "emoji": "<:IconPerks_boonShadowStep:>",
+            "id": "s28p03"
         }
     ]
 }
