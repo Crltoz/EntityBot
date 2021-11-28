@@ -774,14 +774,14 @@ client.on("message", async (message) => {
           if (isNaN(args[1])) return message.channel.send('El código de amigo o el URL de perfil de Steam es incorrecto, ' + message.member.user)
           if (args[1].length < 8) return message.channel.send('El código de amigo es incorrecto, ' + message.member.user)
           let steamid = steamID_64(args[1])
-          getSteamProfile(steamid, message.channel.id, message.author.id, message.guild.id, isSurv, 0)
+          getSteamProfile(steamid, message.channel.id, message.author.id, message.guild.id, isSurv, lenguaje[message.guild.id])
           return
         }
         else if (text.includes('steamcommunity.com/profiles/')) {
           //Perfil con SteamID64.
           let steamid = text.slice(text.indexOf("profiles/") + 9, text.length)
           steamid = steamid.replace("/", "")
-          getSteamProfile(steamid, message.channel.id, message.author.id, message.guild.id, isSurv, 0)
+          getSteamProfile(steamid, message.channel.id, message.author.id, message.guild.id, isSurv, lenguaje[message.guild.id])
           return
         }
         else if (text.includes('steamcommunity.com/id/')) {
@@ -803,7 +803,7 @@ client.on("message", async (message) => {
                 body3 = JSON.parse(body3)
                 if (isEmptyObject(body3)) return message.author.send("URL de perfil inválido.")
                 if (body3.response.success != 1) return message.author.send("URL de perfil inválido.")
-                getSteamProfile(body3.response.steamid, message.channel.id, message.author.id, message.guild.id, isSurv, 0)
+                getSteamProfile(body3.response.steamid, message.channel.id, message.author.id, message.guild.id, isSurv, lenguaje[message.guild.id])
               } else return message.author.send("URL de perfil inválido.")
             })
           })
@@ -1203,13 +1203,13 @@ client.on("message", async (message) => {
           if (isNaN(args[1])) return message.channel.send('Steam profile URL or friend code is not correct, ' + message.member.user)
           if (args[1].length < 8) return message.channel.send('Steam friend code is not correct, ' + message.member.user)
           let steamid = steamID_64(args[1])
-          getSteamProfile(steamid, message.channel.id, message.author.id, message.guild.id, isSurv, 0)
+          getSteamProfile(steamid, message.channel.id, message.author.id, message.guild.id, isSurv, lenguaje[message.guild.id])
           return
         }
         else if (text.includes('steamcommunity.com/profiles/')) {
           //Perfil con SteamID64.
           let steamid = text.slice(28, text.length)
-          getSteamProfile(steamid, message.channel.id, message.author.id, message.guild.id, isSurv, 0)
+          getSteamProfile(steamid, message.channel.id, message.author.id, message.guild.id, isSurv, lenguaje[message.guild.id])
           return
         }
         else if (text.includes('steamcommunity.com/id/')) {
@@ -1231,7 +1231,7 @@ client.on("message", async (message) => {
                 body3 = JSON.parse(body3)
                 if (isEmptyObject(body3)) return message.author.send("Invalid URL Profile.")
                 if (body3.response.success != 1) return message.author.send("Invalid URL Profile.")
-                getSteamProfile(body3.response.steamid, message.channel.id, message.author.id, message.guild.id, isSurv, 0)
+                getSteamProfile(body3.response.steamid, message.channel.id, message.author.id, message.guild.id, isSurv, lenguaje[message.guild.id])
               } else return message.author.send("Invalid URL Profile.")
             })
           })
