@@ -1511,6 +1511,7 @@ function ObtenerNP(nivel, id) {
  */
 function sendEmbedStats(channel, isSurv, data_steam, data_dbd, language) {
   console.log(`sendEmbedStats: isSurv: ${isSurv} - datastemName: ${data_steam.response.players[0].personaname} - datadbd bloodpoints: ${data_dbd.bloodpoints} - language: ${language}`)
+  console.log(`debug data_dbd: ${JSON.stringify(data_dbd)}`);
   if (!isSurv) {
     if (language == 0) {
       const embedd = new Discord.MessageEmbed()
