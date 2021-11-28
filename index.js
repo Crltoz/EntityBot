@@ -1189,6 +1189,7 @@ client.on("message", async (message) => {
         })
         return
       }
+
       if (command == 'stats') {
         if (!texto) return message.channel.send('Use: **' + prefix[message.guild.id] + 'stats [Survivor or Killer] [Steam profile URL or Steam friend code]**')
         if (args[0].toLowerCase() != 'killer' && args[0].toLowerCase() != 'survivor') return message.channel.send('Use: **/stats [Survivor or Killer] [Steam profile URL]**')
@@ -1214,6 +1215,7 @@ client.on("message", async (message) => {
         else if (text.includes('steamcommunity.com/id/')) {
           //Perfil con Vanityurl.
           text = text.slice(text.indexOf("/id/") + 4, text.length)
+          text = text.replace("/", "")
           var options = {
             host: 'api.steampowered.com',
             path: '/ISteamUser/ResolveVanityURL/v0001/?key=DF0A08E817CCE67F129D35FFFB14901A&vanityurl=' + text,
