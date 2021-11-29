@@ -86,10 +86,10 @@ let actualizar = 1;
 
 /* MySQL config */
 let db_config = {
-  host: "us-cdbr-east-03.cleardb.com",
-  user: "b3871aaea07c5c",
-  password: "fcf57272",
-  database: "heroku_b8badce9b197ade"
+  host: process.env.host,
+  user: process.env.user,
+  password: process.env.password,
+  database: process.env.database
 }
 let con;
 
@@ -2415,4 +2415,4 @@ async function loadImages() {
   carryImage = await Canvas.loadImage("./assets/Visuals/icons/carry.png");
 }
 
-client.login("NzQxNTE2NjE0MzM5Mzk1NjA2.Xy4tKQ.XfZC8iyNc4cPnPp_ehS7qGV1VqA");
+client.login(process.env.token);
