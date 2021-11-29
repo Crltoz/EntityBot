@@ -138,14 +138,14 @@ client.on("message", async (message) => {
       if (message.content.toLowerCase().includes('killer')) {
         r2.delete(message.author.id)
         LC[message.author.id] = 0;
-        if (message.member) message.channel.send('Ingresa cuántas perks a nivel 3 tienes, ' + message.member.user)
+        if (message.member) message.channel.send('Ingresa cuántas perks a nivel 3 tienes, ' + message.author.tag)
         else message.channel.send('Ingresa cuántas perks a nivel 3 tienes, ' + message.author.tag)
         p1.add(message.author.id)
         return;
       } else if (message.content.toLowerCase().includes('survivor')) {
         r2.delete(message.author.id)
         LC[message.author.id] = 0;
-        if (message.member) message.channel.send('Ingresa cuántas perks a nivel 3 tienes, ' + message.member.user)
+        if (message.member) message.channel.send('Ingresa cuántas perks a nivel 3 tienes, ' + message.author.tag)
         else message.channel.send('Ingresa cuántas perks a nivel 3 tienes, ' + message.author.tag)
         ps1.add(message.author.id)
         return;
@@ -185,7 +185,7 @@ client.on("message", async (message) => {
       p1.delete(message.author.id)
       perks3[message.author.id] = message.content;
       p2.add(message.author.id)
-      if (message.member) message.channel.send('Ingresa cuántas perks a nivel 2 tienes, ' + message.member.user)
+      if (message.member) message.channel.send('Ingresa cuántas perks a nivel 2 tienes, ' + message.author.tag)
       else message.channel.send('Ingresa cuántas perks a nivel 2 tienes, ' + message.author.tag)
       return;
     }
@@ -201,7 +201,7 @@ client.on("message", async (message) => {
       if (perks3[message.author.id] * 3 + parseInt(message.content) * 2 >= getLength(killerPerks) * 3) return message.member.send('No puedes tener todas o más perks de las existentes.').catch(function (err) { message.channel.send(message.member.user.toString() + ' Activa tus mensajes privados para que el bot pueda informarte.') });
       p2.delete(message.author.id)
       perks2[message.author.id] = message.content;
-      if (message.member) message.channel.send('Ingresa cuántas perks a nivel 1 tienes, ' + message.member.user)
+      if (message.member) message.channel.send('Ingresa cuántas perks a nivel 1 tienes, ' + message.author.tag)
       else message.channel.send('Ingresa cuántas perks a nivel 1 tienes, ' + message.author.tag)
       p3.add(message.author.id)
       return;
@@ -218,7 +218,7 @@ client.on("message", async (message) => {
       if (perks3[message.author.id] * 3 + perks2[message.author.id] * 2 + parseInt(message.content) >= getLength(killerPerks) * 3) return message.member.send('No puedes tener todas o más perks de las existentes.').catch(function (err) { message.channel.send(message.member.user.toString() + ' Activa tus mensajes privados para que el bot pueda informarte.') });
       p3.delete(message.author.id)
       perks1[message.author.id] = message.content;
-      if (message.member) message.channel.send('Ingresa a qué nivel estás con tu personaje, ' + message.member.user)
+      if (message.member) message.channel.send('Ingresa a qué nivel estás con tu personaje, ' + message.author.tag)
       else message.channel.send('Ingresa a qué nivel estás con tu personaje, ' + message.author.tag)
       p4.add(message.author.id)
       return;
@@ -259,7 +259,7 @@ client.on("message", async (message) => {
       ps1.delete(message.author.id)
       perks3[message.author.id] = message.content;
       ps2.add(message.author.id)
-      if (message.member) message.channel.send('Ingresa cuántas perks a nivel 2 tienes, ' + message.member.user)
+      if (message.member) message.channel.send('Ingresa cuántas perks a nivel 2 tienes, ' + message.author.tag)
       else message.channel.send('Ingresa cuántas perks a nivel 2 tienes, ' + message.author.tag)
       return;
     }
@@ -275,7 +275,7 @@ client.on("message", async (message) => {
       if (perks3[message.author.id] * 3 + parseInt(message.content) * 2 >= getLength(survivorPerks) * 3) return message.member.send('No puedes tener todas o más perks de las existentes.').catch(function (err) { message.channel.send(message.member.user.toString() + ' Activa tus mensajes privados para que el bot pueda informarte.') });
       ps2.delete(message.author.id)
       perks2[message.author.id] = message.content;
-      if (message.member) message.channel.send('Ingresa cuántas perks a nivel 1 tienes, ' + message.member.user)
+      if (message.member) message.channel.send('Ingresa cuántas perks a nivel 1 tienes, ' + message.author.tag)
       else message.channel.send('Ingresa cuántas perks a nivel 1 tienes, ' + message.author.tag)
       ps3.add(message.author.id)
       return;
@@ -292,7 +292,7 @@ client.on("message", async (message) => {
       if (perks3[message.author.id] * 3 + perks2[message.author.id] * 2 + parseInt(message.content) >= getLength(survivorPerks) * 3) return message.member.send('No puedes tener todas o más perks de las existentes.').catch(function (err) { message.channel.send(message.member.user.toString() + ' Activa tus mensajes privados para que el bot pueda informarte.') });
       ps3.delete(message.author.id)
       perks1[message.author.id] = message.content;
-      if (message.member) message.channel.send('Ingresa a qué nivel estás con tu personaje, ' + message.member.user)
+      if (message.member) message.channel.send('Ingresa a qué nivel estás con tu personaje, ' + message.author.tag)
       else message.channel.send('Ingresa a qué nivel estás contu personaje, ' + message.author.tag)
       ps4.add(message.author.id)
       return;
@@ -327,14 +327,14 @@ client.on("message", async (message) => {
       if (message.content.toLowerCase().includes('killer')) {
         r2.delete(message.author.id)
         LC[message.author.id] = 0;
-        if (message.member) message.channel.send('Enter how many level 3 perks you have, ' + message.member.user)
+        if (message.member) message.channel.send('Enter how many level 3 perks you have, ' + message.author.tag)
         else message.channel.send('Enter how many level 3 perks you have, ' + message.author.tag)
         p1.add(message.author.id)
         return;
       } else if (message.content.toLowerCase().includes('survivor')) {
         r2.delete(message.author.id)
         LC[message.author.id] = 0;
-        if (message.member) message.channel.send('Enter how many level 3 perks you have, ' + message.member.user)
+        if (message.member) message.channel.send('Enter how many level 3 perks you have, ' + message.author.tag)
         else message.channel.send('Enter how many level 3 perks you have, ' + message.author.tag)
         ps1.add(message.author.id)
         return;
@@ -375,7 +375,7 @@ client.on("message", async (message) => {
       p1.delete(message.author.id)
       perks3[message.author.id] = message.content;
       p2.add(message.author.id)
-      if (message.member) message.channel.send('Enter how many level 2 perks you have, ' + message.member.user)
+      if (message.member) message.channel.send('Enter how many level 2 perks you have, ' + message.author.tag)
       else message.channel.send('Enter how many level 2 perks you have, ' + message.author.tag)
       return;
     }
@@ -391,7 +391,7 @@ client.on("message", async (message) => {
       if (perks3[message.author.id] * 3 + parseInt(message.content) * 2 >= getLength(killerPerks) * 3) return message.member.send('You can not have all or more than the existant perks.').catch(function (err) { message.channel.send(message.member.user.toString() + ' Activate your private messagges so the bot can inform you.') });
       p2.delete(message.author.id)
       perks2[message.author.id] = message.content;
-      if (message.member) message.channel.send('Enter how many level 1 perks you have, ' + message.member.user)
+      if (message.member) message.channel.send('Enter how many level 1 perks you have, ' + message.author.tag)
       else message.channel.send('Enter how many level 1 perks you have, ' + message.author.tag)
       p3.add(message.author.id)
       return;
@@ -408,7 +408,7 @@ client.on("message", async (message) => {
       if (perks3[message.author.id] * 3 + perks2[message.author.id] * 2 + parseInt(message.content) >= getLength(killerPerks) * 3) return message.member.send('You can not have all or more than the existant perks.').catch(function (err) { message.channel.send(message.member.user.toString() + ' Activate your private messagges so the bot can inform you.') });
       p3.delete(message.author.id)
       perks1[message.author.id] = message.content;
-      if (message.member) message.channel.send('Enter the level your character is, ' + message.member.user)
+      if (message.member) message.channel.send('Enter the level your character is, ' + message.author.tag)
       else message.channel.send('Enter the level your character is, ' + message.author.tag)
       p4.add(message.author.id)
       return;
@@ -449,7 +449,7 @@ client.on("message", async (message) => {
       ps1.delete(message.author.id)
       perks3[message.author.id] = message.content;
       ps2.add(message.author.id)
-      if (message.member) message.channel.send('Enter how many level 2 perks you have, ' + message.member.user)
+      if (message.member) message.channel.send('Enter how many level 2 perks you have, ' + message.author.tag)
       else message.channel.send('Enter how many level 2 perks you have, ' + message.author.tag)
       return;
     }
@@ -465,7 +465,7 @@ client.on("message", async (message) => {
       if (perks3[message.author.id] * 3 + parseInt(message.content) * 2 >= getLength(survivorPerks) * 3) return message.member.send('You can not have all or more than the existant perks.').catch(function (err) { message.channel.send(message.member.user.toString() + ' Activate your private messagges so the bot can inform you.') });
       ps2.delete(message.author.id)
       perks2[message.author.id] = message.content;
-      if (message.member) message.channel.send('Enter how many level 1 perks you have, ' + message.member.user)
+      if (message.member) message.channel.send('Enter how many level 1 perks you have, ' + message.author.tag)
       else message.channel.send('Enter how many level 1 perks you have, ' + message.author.tag)
       ps3.add(message.author.id)
       return;
@@ -482,7 +482,7 @@ client.on("message", async (message) => {
       if (perks3[message.author.id] * 3 + perks2[message.author.id] * 2 + parseInt(message.content) >= getLength(survivorPerks) * 3) return message.member.send('You can not have all or more than the existant perks.').catch(function (err) { message.channel.send(message.member.user.toString() + ' Activate your private messagges so the bot can inform you.') });
       ps3.delete(message.author.id)
       perks1[message.author.id] = message.content;
-      if (message.member) message.channel.send('Enter the level your character is, ' + message.member.user)
+      if (message.member) message.channel.send('Enter the level your character is, ' + message.author.tag)
       else message.channel.send('Enter the level your character is, ' + message.author.tag)
       ps4.add(message.author.id)
       return;
@@ -549,7 +549,7 @@ client.on("message", async (message) => {
         else if (texto.toLowerCase() == 'survivor') ps1.add(message.author.id)
         else return message.member.send('Usa: **' + prefix[message.guild.id] + 'calcular [Opción]** | Opciones: Killer o Survivor | Comando para obtener puntos de sangre necesarios para comprar todas las perks desde el nivel que estés.').catch(function (err) { message.channel.send(message.member.user.toString() + ' Activa tus mensajes privados para que el bot pueda informarte.') });
         LC[message.author.id] = 0;
-        message.channel.send('Ingresa cuántas perks a nivel 3 tienes, ' + message.member.user)
+        message.channel.send('Ingresa cuántas perks a nivel 3 tienes, ' + message.author.tag)
         return;
       }
 
@@ -790,8 +790,8 @@ client.on("message", async (message) => {
         let text = args[1];
         //Perfil con SteamID32
         if (!text.includes('steamcommunity.com/id/') && !text.includes('steamcommunity.com/profiles/')) {
-          if (isNaN(args[1])) return message.channel.send('El código de amigo o el URL de perfil de Steam es incorrecto, ' + message.member.user)
-          if (args[1].length < 8) return message.channel.send('El código de amigo es incorrecto, ' + message.member.user)
+          if (isNaN(args[1])) return message.channel.send('El código de amigo o el URL de perfil de Steam es incorrecto, ' + message.author.tag)
+          if (args[1].length < 8) return message.channel.send('El código de amigo es incorrecto, ' + message.author.tag)
           let steamid = steamID_64(args[1])
           getSteamProfile(steamid, message.channel.id, message.author.id, message.guild.id, isSurv, lenguaje[message.guild.id])
           return
@@ -1011,7 +1011,7 @@ client.on("message", async (message) => {
         else if (texto.toLowerCase() == 'survivor') ps1.add(message.author.id)
         else return message.member.send('Use: **' + prefix[message.guild.id] + 'calculate [Option]** | Options: Killer or Survivor | This command tells you the amount of bloodpoints that you need to buy all the perks from the level you are.').catch(function (err) { message.channel.send(message.member.user.toString() + ' Activate your private messagges so the bot can inform you.') });
         LC[message.author.id] = 0;
-        message.channel.send('Enter how many level 3 perks you have, ' + message.member.user)
+        message.channel.send('Enter how many level 3 perks you have, ' + message.author.tag)
         return;
       }
 
@@ -1218,8 +1218,8 @@ client.on("message", async (message) => {
         let text = args[1];
         //Perfil con SteamID32
         if (!text.includes('steamcommunity.com/id/') && !text.includes('steamcommunity.com/profiles/')) {
-          if (isNaN(args[1])) return message.channel.send('Steam profile URL or friend code is not correct, ' + message.member.user)
-          if (args[1].length < 8) return message.channel.send('Steam friend code is not correct, ' + message.member.user)
+          if (isNaN(args[1])) return message.channel.send('Steam profile URL or friend code is not correct, ' + message.author.tag)
+          if (args[1].length < 8) return message.channel.send('Steam friend code is not correct, ' + message.author.tag)
           let steamid = steamID_64(args[1])
           getSteamProfile(steamid, message.channel.id, message.author.id, message.guild.id, isSurv, lenguaje[message.guild.id])
           return
@@ -1570,9 +1570,9 @@ async function sendEmbedStats(channel, isSurv, data_steam, data_dbd, language) {
     ctx.drawImage(perfectGamesImage, 25, 630, 64, 64);
     ctx.fillText(texts.stats.perfectGames[language] + data_dbd.killer_perfectgames, 100, 680);
 
-    // Stuns
+    // Full load out
     ctx.drawImage(paletImage, 25, 730, 64, 64);
-    ctx.fillText(texts.stats.stuns[language] + data_dbd.shocked, 100, 780);
+    ctx.fillText(texts.stats.killerFullLoadout[language] + data_dbd.killer_fullloadout, 100, 780);
 
     // Gens damaged
     ctx.drawImage(genDamagedImage, 25, 830, 64, 64);

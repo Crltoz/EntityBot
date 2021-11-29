@@ -28,9 +28,9 @@
             "Partidas perfectas: ",
             "Perfect games: "
         ],
-        "stuns": [
-            "Aturdimientos: ",
-            "Shocks: "
+        "killerFullLoadout": [
+            "Equipamiento completo: ",
+            "Full loadout: "
         ],
         "gensDamaged": [
             "Motores golpeados: ",
