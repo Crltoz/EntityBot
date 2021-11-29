@@ -4,28 +4,46 @@ const client = new Discord.Client();
 const disbut = require("discord-buttons");
 disbut(client);
 const bigNumber = require("bignumber.js")
-var https = require('https');
-var http = require('http');
-const version_bot = '0.9.11'
+let https = require('https');
+let http = require('http');
+const version_bot = '1.0.0'
 const mysql = require("mysql");
 const fs = require('fs');
 const Canvas = require("canvas");
 
-// Image generator
-const background_killer = "assets/Visuals/Background/random_killer.jpg"
-const background_survivor = "assets/Visuals/Background/random_survivor.jpg"
-const background_level = "assets/Visuals/Background/level.jpg"
-const background_shrine = "assets/Visuals/Background/shrine.jpg"
+// data
+const texts = require("./src/data/texts.json");
+const errors = require("./src/data/errors.json");
+
+// Images
+let backgroundStatsKiller;
+let backgroundKiller;
+let backgroundSurvivor;
+let backgroundLevel;
+let backgroundShrine;
+let backgroundStatsSurvivor;
+let killerImage;
+let survivorImage;
+let bpImage;
+let killsImage;
+let sacrificedImage;
+let sacrificedObsessionsImage;
+let perfectGamesImage;
+let paletImage;
+let genDamagedImage;
+
+
+
 const font = "./assets/Font/BRUTTALL.ttf"
 Canvas.registerFont(font, { family: "dbd" })
 
 /* Global objects for perks and characters info */
-var survivorPerks = {}
-var killerPerks = {}
-var survivors = {}
-var killers = {}
-var rulesEsp = []
-var rulesEng = []
+let survivorPerks = {}
+let killerPerks = {}
+let survivors = {}
+let killers = {}
+let rulesEsp = []
+let rulesEng = []
 
 /* Const levels */
 const Niveles = 3;
@@ -44,18 +62,18 @@ const ps4 = new Set();
 const convert = new bigNumber('76561197960265728');
 
 /* Command functions */
-var perks3 = {}
-var perks2 = {}
-var perks1 = {}
-var NivelPJ = {}
-var DBC = {}
-var LC = {}
+let perks3 = {}
+let perks2 = {}
+let perks1 = {}
+let NivelPJ = {}
+let DBC = {}
+let LC = {}
 
 
 /* Server config */
-var cid = {}
-var prefix = {}
-var lenguaje = {}
+let cid = {}
+let prefix = {}
+let lenguaje = {}
 const lobby_set = new Set();
 
 
@@ -64,24 +82,25 @@ const r1 = new Set();
 const r2 = new Set();
 const n1 = {}
 const n2 = new Set();
-var actualizar = 1;
+let actualizar = 1;
 
 /* MySQL config */
-var db_config = {
-  host: process.env.host,
-  user: process.env.user,
-  password: process.env.password,
-  database: process.env.database
+let db_config = {
+  host: "us-cdbr-east-03.cleardb.com",
+  user: "b3871aaea07c5c",
+  password: "fcf57272",
+  database: "heroku_b8badce9b197ade"
 }
-var con;
+let con;
 
 
-client.on("ready", () => {
+client.on("ready", async () => {
   console.log("El bot esta cargando sistemas, base de datos.");
   handleDisconnect();
-  loadPerks()
-  loadCharacters()
-  loadRules()
+  loadPerks();
+  loadCharacters();
+  loadRules();
+  await loadImages();
   client.user.setPresence({
     status: "online",
     activity: {
@@ -495,7 +514,7 @@ client.on("message", async (message) => {
   }
 
   const args = message.content.slice(1).trim().split(/ +/g);
-  var jejox = args.shift();
+  let jejox = args.shift();
   const command = jejox.toLowerCase();
   let texto = args.join(" ");
 
@@ -513,7 +532,8 @@ client.on("message", async (message) => {
 
 
     if (lenguaje[message.guild.id] == 0) {
-      if (cid[message.guild.id] != null && message.channel.id != cid[message.guild.id]) {
+      let channel = client.guilds.cache.get(message.guild.id).channels.cache.get(cid[message.guild.id]);
+      if (channel && channel.id != message.channel.id) {
         message.channel.send(`Las utilidades del bot solo pueden ser usadas en el canal de: <#${cid[message.guild.id]}>`)
         return;
       }
@@ -600,10 +620,10 @@ client.on("message", async (message) => {
           if (err) throw err;
           let perksName = [rows[0].perk_1.split(":")[0], rows[0].perk_2.split(":")[0], rows[0].perk_3.split(":")[0], rows[0].perk_4.split(":")[0]]
           let perksShard = [rows[0].perk_1.split(":")[1], rows[0].perk_2.split(":")[1], rows[0].perk_3.split(":")[1], rows[0].perk_4.split(":")[1]]
-          var perk1 = await getPerkIndexByID(perksName[0])
-          var perk2 = await getPerkIndexByID(perksName[1])
-          var perk3 = await getPerkIndexByID(perksName[2])
-          var perk4 = await getPerkIndexByID(perksName[3])
+          let perk1 = await getPerkIndexByID(perksName[0])
+          let perk2 = await getPerkIndexByID(perksName[1])
+          let perk3 = await getPerkIndexByID(perksName[2])
+          let perk4 = await getPerkIndexByID(perksName[3])
           if (!isValidPerk(perk1.index) || !isValidPerk(perk2.index) || !isValidPerk(perk3.index) || !isValidPerk(perk4.index)) {
             console.log(`Invalid perks in shrine: ${perk1.index} (${rows[0].perk_1}) | ${perk2.index} (${rows[0].perk_2}) | ${perk3.index} (${rows[0].perk_3}) | ${perk4.index} (${rows[0].perk_4})`)
             message.channel.send("Actualmente no podemos mostrar esta información, por favor reportalo en nuestro Discord en la sección de bugs: https://discord.gg/T6rEERg")
@@ -760,11 +780,10 @@ client.on("message", async (message) => {
         return;
       }
 
-
       if (command == 'stats') {
         if (!texto) return message.channel.send('Usa: **' + prefix[message.guild.id] + 'stats [Survivor o Killer] [URL Perfil Steam o Código de amigo]**')
         if (args[0].toLowerCase() != 'killer' && args[0].toLowerCase() != 'survivor') return message.channel.send('Usa: **/stats [Survivor o Killer] [URL Perfil Steam]**')
-        var isSurv;
+        let isSurv;
         if (args[0].toLowerCase() == 'survivor') isSurv = true
         else if (args[0].toLowerCase() == 'killer') isSurv = false
         if (!args[1]) return message.channel.send('Usa: **' + prefix[message.guild.id] + 'stats [Survivor o Killer] [URL Perfil Steam]**')
@@ -788,17 +807,17 @@ client.on("message", async (message) => {
           //Perfil con Vanityurl.
           text = text.slice(text.indexOf("/id/") + 4, text.length)
           text = text.replace("/", "")
-          var options = {
+          let options = {
             host: 'api.steampowered.com',
             path: '/ISteamUser/ResolveVanityURL/v0001/?key=DF0A08E817CCE67F129D35FFFB14901A&vanityurl=' + text,
             headers: { 'User-Agent': 'EntityBot/' + version_bot }
           };
           http.get(options, function (res) {
-            var bodyChunks_ = [];
+            let bodyChunks_ = [];
             res.on('data', function (chunk) {
               bodyChunks_.push(chunk);
             }).on('end', function () {
-              var body3 = Buffer.concat(bodyChunks_);
+              let body3 = Buffer.concat(bodyChunks_);
               if (res.statusCode == 200 || res.statusCode == 201) {
                 body3 = JSON.parse(body3)
                 if (isEmptyObject(body3)) return message.author.send("URL de perfil inválido.")
@@ -850,8 +869,7 @@ client.on("message", async (message) => {
           }
         })
         cid[message.guild.id] = channel_id;
-        let canal = client.channels.cache.get(channel_id)
-        message.channel.send('A partir de ahora los comandos sólo funcionarán en: ' + canal)
+        message.channel.send(`A partir de ahora los comandos sólo funcionarán en: <#${channel_id}>`)
         return;
       }
 
@@ -916,7 +934,7 @@ client.on("message", async (message) => {
 
       if (command == 'random') {
         if (!texto) return message.member.send('Usa **' + prefix[message.guild.id] + 'random [Survivor o Killer]** || Te retornará un survivor o killer aleatorio con 4 perks.')
-        var isSurv, nCharacter, nPerk;
+        let isSurv, nCharacter, nPerk;
         if (texto.toLowerCase() == 'survivor') isSurv = true
         else if (texto.toLowerCase() == 'killer') isSurv = false
         else return message.member.send('Usa **/random [Survivor o Killer]** || Te retornará un survivor o killer aleatorio con 4 perks.').catch(function (err) { message.channel.send(message.member.user.toString() + ' Activa tus mensajes privados para que el bot pueda informarte.') });
@@ -932,7 +950,7 @@ client.on("message", async (message) => {
       }
 
       if (command == 'tperks') {
-        var isSurv, perks = [], character
+        let isSurv, perks = [], character
         if (!texto) return message.member.send('Usa ' + prefix[message.guild.id] + 'tperks [Numero de perks a mostrar] [Survivor o Killer]')
         if (args[0] % 4 != 0) return message.member.send('Usa numeros multiplos de 4. Como la tienen a tu hermana')
         if (args[1].toLowerCase() == 'survivor') isSurv = true
@@ -943,7 +961,7 @@ client.on("message", async (message) => {
           for (let index = getLength(survivorPerks); index > getLength(survivorPerks) - args[0]; index--) {
             perks.push(index - 1)
           }
-          var builds = args[0] / 4
+          let builds = args[0] / 4
           for (let index = 0; index < builds; index++) {
             createRandomBuild(message, character - index, perks[perks.length - 1], perks[perks.length - 2], perks[perks.length - 3], perks[perks.length - 4], isSurv, lenguaje[message.guild.id])
             perks = perks.slice(0, perks.length - 4)
@@ -954,7 +972,7 @@ client.on("message", async (message) => {
           for (let index = getLength(killerPerks); index > getLength(killerPerks) - args[0]; index--) {
             perks.push(index - 1)
           }
-          var builds = args[0] / 4
+          let builds = args[0] / 4
           for (let index = 0; index < builds; index++) {
             createRandomBuild(message, character - index, perks[perks.length - 1], perks[perks.length - 2], perks[perks.length - 3], perks[perks.length - 4], isSurv, lenguaje[message.guild.id])
             perks = perks.slice(0, perks.length - 4)
@@ -1002,10 +1020,10 @@ client.on("message", async (message) => {
           if (err) throw err;
           let perksName = [rows[0].perk_1.split(":")[0], rows[0].perk_2.split(":")[0], rows[0].perk_3.split(":")[0], rows[0].perk_4.split(":")[0]]
           let perksShard = [rows[0].perk_1.split(":")[1], rows[0].perk_2.split(":")[1], rows[0].perk_3.split(":")[1], rows[0].perk_4.split(":")[1]]
-          var perk1 = await getPerkIndexByID(perksName[0])
-          var perk2 = await getPerkIndexByID(perksName[1])
-          var perk3 = await getPerkIndexByID(perksName[2])
-          var perk4 = await getPerkIndexByID(perksName[3])
+          let perk1 = await getPerkIndexByID(perksName[0])
+          let perk2 = await getPerkIndexByID(perksName[1])
+          let perk3 = await getPerkIndexByID(perksName[2])
+          let perk4 = await getPerkIndexByID(perksName[3])
           if (!isValidPerk(perk1.index) || !isValidPerk(perk2.index) || !isValidPerk(perk3.index) || !isValidPerk(perk4.index)) {
             console.log(`Invalid perks in shrine: ${perk1.index} (${rows[0].perk_1}) | ${perk2.index} (${rows[0].perk_2}) | ${perk3.index} (${rows[0].perk_3}) | ${perk4.index} (${rows[0].perk_4})`)
             message.channel.send("We are currently unable to display this information, please report it on our Discord in the bugs section: https://discord.gg/T6rEERg")
@@ -1193,7 +1211,7 @@ client.on("message", async (message) => {
       if (command == 'stats') {
         if (!texto) return message.channel.send('Use: **' + prefix[message.guild.id] + 'stats [Survivor or Killer] [Steam profile URL or Steam friend code]**')
         if (args[0].toLowerCase() != 'killer' && args[0].toLowerCase() != 'survivor') return message.channel.send('Use: **/stats [Survivor or Killer] [Steam profile URL]**')
-        var isSurv;
+        let isSurv;
         if (args[0].toLowerCase() == 'survivor') isSurv = true
         else if (args[0].toLowerCase() == 'killer') isSurv = false
         if (!args[1]) return message.channel.send('Usa: **' + prefix[message.guild.id] + 'stats [Survivor o Killer] [URL Perfil Steam]**')
@@ -1216,17 +1234,17 @@ client.on("message", async (message) => {
           //Perfil con Vanityurl.
           text = text.slice(text.indexOf("/id/") + 4, text.length)
           text = text.replace("/", "")
-          var options = {
+          let options = {
             host: 'api.steampowered.com',
             path: '/ISteamUser/ResolveVanityURL/v0001/?key=DF0A08E817CCE67F129D35FFFB14901A&vanityurl=' + text,
             headers: { 'User-Agent': 'EntityBot/' + version_bot }
           };
           http.get(options, function (res) {
-            var bodyChunks_ = [];
+            let bodyChunks_ = [];
             res.on('data', function (chunk) {
               bodyChunks_.push(chunk);
             }).on('end', function () {
-              var body3 = Buffer.concat(bodyChunks_);
+              let body3 = Buffer.concat(bodyChunks_);
               if (res.statusCode == 200 || res.statusCode == 201) {
                 body3 = JSON.parse(body3)
                 if (isEmptyObject(body3)) return message.author.send("Invalid URL Profile.")
@@ -1343,7 +1361,7 @@ client.on("message", async (message) => {
 
       if (command == 'random') {
         if (!texto) return message.member.send('Use **' + prefix[message.guild.id] + 'random [Survivor or Killer]** || It will give you a random 4 perk build for a survivor or killer.')
-        var isSurv, nCharacter, nPerk;
+        let isSurv, nCharacter, nPerk;
         if (texto.toLowerCase() == 'survivor') isSurv = true
         else if (texto.toLowerCase() == 'killer') isSurv = false
         else return message.member.send('Use **' + prefix[message.guild.id] + 'random [Survivor or Killer]** || It will give you a random 4 perk build for a survivor or killer.')
@@ -1409,8 +1427,7 @@ async function createLevelImage(message, initialLevel, targetLevel, bloodpoints,
   const canvas = Canvas.createCanvas(541, 447);
   const ctx = canvas.getContext('2d');
   let fontSize = 10
-  const background = await Canvas.loadImage(background_level);
-  ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
+  ctx.drawImage(backgroundLevel, 0, 0, canvas.width, canvas.height);
 
   ctx.strokeStyle = '#74037b';
   ctx.strokeRect(0, 0, canvas.width, canvas.height);
@@ -1430,7 +1447,7 @@ async function createLevelImage(message, initialLevel, targetLevel, bloodpoints,
 }
 
 function ObtenerValor(nivel, Deseado, id) {
-  var total = 0;
+  let total = 0;
   for (let x = nivel; x <= Deseado; x++) {
     if (x == Deseado) break;
     LC[id] = LC[id] + 1;
@@ -1444,7 +1461,7 @@ function ObtenerValor(nivel, Deseado, id) {
 }
 
 function ObtenerNP(nivel, id) {
-  var total = 0;
+  let total = 0;
   let x = nivel;
   while (DBC[id] != 0) {
     LC[id] = LC[id] + 1;
@@ -1507,107 +1524,156 @@ function ObtenerNP(nivel, id) {
  * @param {ObjectConstructor} data_steam - Steam profile data.
  * @param {ObjectConstructor} data_dbd - DBD Stats from profile steam.
  * @param {Int8Array} language - 0 = spanish | 1 = english
+
  * @description - Send embed stats with all info.
  */
-function sendEmbedStats(channel, isSurv, data_steam, data_dbd, language) {
-  console.log(`sendEmbedStats: isSurv: ${isSurv} - datastemName: ${data_steam.response.players[0].personaname} - datadbd bloodpoints: ${data_dbd.bloodpoints} - language: ${language}`)
-  console.log(`debug data_dbd: ${JSON.stringify(data_dbd)}`);
+async function sendEmbedStats(channel, isSurv, data_steam, data_dbd, language) {
   if (!isSurv) {
-    if (language == 0) {
-      const embedd = new Discord.MessageEmbed()
-        .setColor('#FF0000')
-        .setTitle('Estadisticas de Asesino de ' + data_steam.response.players[0].personaname)
-        .setAuthor(data_steam.response.players[0].personaname, data_steam.response.players[0].avatar)
-        .setThumbnail('https://i.imgur.com/y4KRvLf.png')
-        .addField('<:bp:724724401333076071> Puntos de sangre totales:', Coma(data_dbd.bloodpoints), true)
-        .addField('Horas de juego:', Math.round(data_dbd.playtime / 60), true)
-        .addField('Rango:', data_dbd.killer_rank, true)
-        .addField('Partidas perfectas:', data_dbd.killer_perfectgames, true)
-        .addField('<:Icons_killer:739182105870991410> Asesinatos con Mori:', data_dbd.killed, true)
-        .addField('<:Icons_Bgen:739182106474709042> Sacrificaste a todos después del último generador:', data_dbd.killed_sacrificed_afterlastgen, true)
-        .addField('Sacrificios en ganchos:', data_dbd.sacrificed, true)
-        .addField('Ataques con motosierra (HillBilly):', data_dbd.chainsawhits, true)
-        .addField('<:Icons_tramp:739182105900351578> Atrapados en trampas (Trampero):', data_dbd.beartrapcatches, true)
-        .addField('<:Icons_axe:739182102947299539> Hachas lanzadas:', data_dbd.hatchetsthrown, true)
-        .addField('<:Icons_Gen:739182107095466014> Surpervivientes interrumpidos en gens:', data_dbd.survivorsgrabbedrepairinggen, true)
-        .addField('<:icons_upa:739182105853952120> Supervivientes golpeados mientras cargas con otro:', data_dbd.survivorshitwhilecarrying, true)
-        .addField('<:Icons_Hatch:739182106751664168> Trampillas cerradas:', data_dbd.hatchesclosed, true)
-        .addField('<:icons_totem:739182106282033272> Supervivientes interrumpidos en totems:', data_dbd.survivorsinterruptedcleansingtotem, true)
-        .setTimestamp()
-        .setFooter('La entidad', client.user.avatarURL());
-      client.channels.cache.get(channel).send(embedd)
-    } else {
-      const embedd = new Discord.MessageEmbed()
-        .setColor('#FF0000')
-        .setTitle('Killer stats from ' + data_steam.response.players[0].personaname)
-        .setAuthor(data_steam.response.players[0].personaname, data_steam.response.players[0].avatar)
-        .setThumbnail('https://i.imgur.com/y4KRvLf.png')
-        .addField('<:bp:724724401333076071> Bloodpoints:', Coma(data_dbd.bloodpoints), true)
-        .addField('In-game hours:', Math.round(data_dbd.playtime / 60), true)
-        .addField('Rank:', data_dbd.killer_rank, true)
-        .addField('Perfect games:', data_dbd.killer_perfectgames, true)
-        .addField('<:Icons_killer:739182105870991410> Mori kills:', data_dbd.killed, true)
-        .addField('<:Icons_Bgen:739182106474709042> 4 kills on hook after last gen:', data_dbd.killed_sacrificed_afterlastgen, true)
-        .addField('On hook sacrifices:', data_dbd.sacrificed, true)
-        .addField('Chainsaw hits (HillBilly):', data_dbd.chainsawhits, true)
-        .addField('<:Icons_tramp:739182105900351578> Beartrap catches (Trapper):', data_dbd.beartrapcatches, true)
-        .addField('<:Icons_axe:739182102947299539> Hatchets thrown:', data_dbd.hatchetsthrown, true)
-        .addField('<:Icons_Gen:739182107095466014> Survivors grabbed repairing gens:', data_dbd.survivorsgrabbedrepairinggen, true)
-        .addField('<:icons_upa:739182105853952120> Survivors hit while carrying another survivor:', data_dbd.survivorshitwhilecarrying, true)
-        .addField('<:Icons_Hatch:739182106751664168> Hatches closed:', data_dbd.hatchesclosed, true)
-        .addField('<:icons_totem:739182106282033272> Survivors interrupted cleasing totems:', data_dbd.survivorsinterruptedcleansingtotem, true)
-        .setTimestamp()
-        .setFooter('Entity', client.user.avatarURL());
-      client.channels.cache.get(channel).send(embedd)
-    }
+    const canvas = Canvas.createCanvas(1920, 1080);
+    const ctx = canvas.getContext('2d');
+    let fontSize = 10;
+    ctx.drawImage(backgroundStatsKiller, 0, 0, canvas.width, canvas.height);
+
+    ctx.strokeStyle = '#74037b';
+    ctx.strokeRect(0, 0, canvas.width, canvas.height);
+
+    // Statistics centered
+    ctx.font = '80px "dbd"';
+    ctx.fillStyle = '#ffffff';
+    ctx.fillText(texts.stats.statistics[language], calculateCenter(910, texts.stats.statistics[language].length, fontSize), 75);
+
+    // Killer logo
+    ctx.drawImage(killerImage, 900, 150, 128, 128);
+
+    // Hours
+    ctx.font = '50px "dbd"';
+    ctx.fillText(texts.stats.hoursPlayed[language] + Coma(parseInt(data_dbd.playtime / 60)), 230, 180);
+
+    // Bloodpoints
+    ctx.drawImage(bpImage, 25, 230, 64, 64);
+    ctx.font = '50px "dbd"';
+    ctx.fillText(Coma(data_dbd.bloodpoints), 100, 280);
+
+    // Kills
+    ctx.drawImage(killsImage, 25, 330, 64, 64);
+    ctx.fillText(texts.stats.kills[language] + data_dbd.killed, 100, 380);
+
+    // Sacrificed
+    ctx.drawImage(sacrificedImage, 25, 430, 64, 64);
+    ctx.fillText(texts.stats.sacrificed[language] + data_dbd.sacrificed, 100, 480);
+
+    // Sacrificed obsessions
+    ctx.drawImage(sacrificedObsessionsImage, 25, 530, 64, 64);
+    ctx.fillText(texts.stats.sacrificedObessions[language] + data_dbd.sacrificed_obsessions, 100, 580);
+
+    // Perfect games
+    ctx.drawImage(perfectGamesImage, 25, 630, 64, 64);
+    ctx.fillText(texts.stats.perfectGames[language] + data_dbd.killer_perfectgames, 100, 680);
+
+    // Stuns
+    ctx.drawImage(paletImage, 25, 730, 64, 64);
+    ctx.fillText(texts.stats.stuns[language] + data_dbd.shocked, 100, 780);
+
+    // Gens damaged
+    ctx.drawImage(genDamagedImage, 25, 830, 64, 64);
+    ctx.fillText(texts.stats.gensDamaged[language] + data_dbd.gensdamagedwhileonehooked, 100, 880);
+
+    // Survivors grabbed
+    ctx.drawImage(carryImage, 25, 930, 64, 64);
+    ctx.fillText(texts.stats.survivorsGrabbed[language] + data_dbd.survivorsgrabbedrepairinggen, 100, 980);
+
+    // profile name
+    ctx.fillStyle = '#E52121';
+    ctx.font = '70px "dbd"';
+    ctx.fillText(data_steam.personaname, 230, 110);
+
+    // Draw circle
+    ctx.beginPath();
+    ctx.arc(125, 125, 80, 0, Math.PI * 2, true);
+    ctx.strokeStyle = '#F32C2C';
+    ctx.lineWidth = 8;
+    ctx.closePath();
+    ctx.clip();
+
+    const avatar = await Canvas.loadImage(data_steam.avatarfull);
+    ctx.drawImage(avatar, 25, 25, 200, 200);
+
+    const attachment = new Discord.MessageAttachment(canvas.toBuffer(), 'stats-image.jpg');
+    let flagOrSteam = data_steam.loccountrycode ? `:flag_${data_steam.loccountrycode.toLowerCase()}:` : "<:steam:914663956860248134>";
+    client.channels.cache.get(channel).send(`${flagOrSteam} **${data_steam.personaname}** | ${texts.stats.seeFullStatistics[language]} https://dbd.onteh.net.au/playerstats/${data_steam.steamid}`, attachment);
   } else {
-    if (language == 0) {
-      const embedd = new Discord.MessageEmbed()
-        .setColor('#FF0000')
-        .setTitle('Estadísticas de Superviviente de ' + data_steam.response.players[0].personaname)
-        .setAuthor(data_steam.response.players[0].personaname, data_steam.response.players[0].avatar)
-        .setThumbnail('https://i.imgur.com/DG6fm1A.png')
-        .addField('<:bp:724724401333076071> Puntos de sangre totales:', Coma(data_dbd.bloodpoints), true)
-        .addField('Horas de juego:', Math.round(data_dbd.playtime / 60), true)
-        .addField('Rango:', data_dbd.survivor_rank, true)
-        .addField('<:icons_perfect:739182106139295915> Partidas perfectas:', data_dbd.survivor_perfectgames, true)
-        .addField('<:Icons_Gen:739182107095466014> Generadores reparados:', data_dbd.gensrepaired, true)
-        .addField('<:Icons_Aidkit:739182102427467817> Jugadores curados:', data_dbd.survivorshealed + '/' + data_dbd.survivorshealed_coop + ' (Coop <:Icons_coop:739182106319650966>)', true)
-        .addField('<:icons_skillCheck:739182107259043860> SkillChecks:', data_dbd.skillchecks, true)
-        .addField('Total de Escapes:', data_dbd.escaped, true)
-        .addField('Escapes arrastrándose:', data_dbd.escaped_ko, true)
-        .addField('Escapes por trampilla:', data_dbd.escaped_hatch, true)
-        .addField('Zafarse del gancho:', data_dbd.unhookedself, true)
-        .addField('Hits de protección:', data_dbd.protectionhits, true)
-        .addField('Puertas abiertas:', data_dbd.exitgatesopened, true)
-        .addField('<:Icons_cofre:739182106651131957> Cofres abiertos:', data_dbd.mysteryboxesopened, true)
-        .setTimestamp()
-        .setFooter('La entidad', client.user.avatarURL())
-      client.channels.cache.get(channel).send(embedd)
-    } else {
-      const embedd = new Discord.MessageEmbed()
-        .setColor('#FF0000')
-        .setTitle('Survivor stats from ' + data_steam.response.players[0].personaname)
-        .setAuthor(data_steam.response.players[0].personaname, data_steam.response.players[0].avatar)
-        .setThumbnail('https://i.imgur.com/DG6fm1A.png')
-        .addField('<:bp:724724401333076071> Bloodpoints:', Coma(data_dbd.bloodpoints), true)
-        .addField('In-game hours:', Math.round(data_dbd.playtime / 60), true)
-        .addField('Rank:', data_dbd.survivor_rank, true)
-        .addField('<:icons_perfect:739182106139295915> Perfect games:', data_dbd.survivor_perfectgames, true)
-        .addField('<:Icons_Gen:739182107095466014> Gens repaired:', data_dbd.gensrepaired_2, true)
-        .addField('<:Icons_Aidkit:739182102427467817> Survivors healed:', data_dbd.survivorshealed + '/' + data_dbd.survivorshealed_coop + ' (Coop <:Icons_coop:739182106319650966>)', true)
-        .addField('<:icons_skillCheck:739182107259043860> SkillChecks:', data_dbd.skillchecks, true)
-        .addField('Escaped:', data_dbd.escaped, true)
-        .addField('Escapes in dying state:', data_dbd.escaped_ko, true)
-        .addField('Hatch escapes:', data_dbd.escaped_hatch, true)
-        .addField('Self unhook:', data_dbd.unhookedself, true)
-        .addField('Protection hits:', data_dbd.protectionhits, true)
-        .addField('Exit gates opened:', data_dbd.exitgatesopened, true)
-        .addField('<:Icons_cofre:739182106651131957> Mystery boxes opened:', data_dbd.mysteryboxesopened, true)
-        .setTimestamp()
-        .setFooter('Entity', client.user.avatarURL())
-      client.channels.cache.get(channel).send(embedd)
-    }
+    const canvas = Canvas.createCanvas(1920, 1080);
+    const ctx = canvas.getContext('2d');
+    let fontSize = 10;
+    ctx.drawImage(backgroundStatsSurvivor, 0, 0, canvas.width, canvas.height);
+
+    ctx.strokeStyle = '#74037b';
+    ctx.strokeRect(0, 0, canvas.width, canvas.height);
+
+    // Statistics centered
+    ctx.font = '80px "dbd"';
+    ctx.fillStyle = '#ffffff';
+    ctx.fillText(texts.stats.statistics[language], calculateCenter(910, texts.stats.statistics[language].length, fontSize), 75);
+
+    // Killer logo
+    ctx.drawImage(survivorImage, 900, 150, 128, 128);
+
+    // Hours
+    ctx.font = '50px "dbd"';
+    ctx.fillText(texts.stats.hoursPlayed[language] + Coma(parseInt(data_dbd.playtime / 60)), 230, 180);
+
+    // Bloodpoints
+    ctx.drawImage(bpImage, 25, 230, 64, 64);
+    ctx.font = '50px "dbd"';
+    ctx.fillText(Coma(data_dbd.bloodpoints), 100, 280);
+
+    // Kills
+    ctx.drawImage(killsImage, 25, 330, 64, 64);
+    ctx.fillText(texts.stats.perfectGames[language] + data_dbd.survivor_perfectgames, 100, 380);
+
+    // Sacrificed
+    ctx.drawImage(sacrificedImage, 25, 430, 64, 64);
+    ctx.fillText(texts.stats.gensRepaired[language] + data_dbd.gensrepaired, 100, 480);
+
+    // Sacrificed obsessions
+    ctx.drawImage(sacrificedObsessionsImage, 25, 530, 64, 64);
+    ctx.fillText(texts.stats.survivorsHealed[language] + data_dbd.survivorshealed, 100, 580);
+
+    // Perfect games
+    ctx.drawImage(perfectGamesImage, 25, 630, 64, 64);
+    ctx.fillText(texts.stats.skillchecks[language] + data_dbd.skillchecks, 100, 680);
+
+    // Stuns
+    ctx.drawImage(paletImage, 25, 730, 64, 64);
+    ctx.fillText(texts.stats.escaped[language] + data_dbd.escaped, 100, 780);
+
+    // Gens damaged
+    ctx.drawImage(genDamagedImage, 25, 830, 64, 64);
+    ctx.fillText(texts.stats.hexTotemsCleansed[language] + data_dbd.hextotemscleansed, 100, 880);
+
+    // Survivors grabbed
+    ctx.drawImage(carryImage, 25, 930, 64, 64);
+    ctx.fillText(texts.stats.exitGatesOpened[language] + data_dbd.exitgatesopened, 100, 980);
+
+    // profile name
+    ctx.fillStyle = '#E52121';
+    ctx.font = '70px "dbd"';
+    ctx.fillText(data_steam.personaname, 230, 110);
+
+    // Draw circle
+    ctx.beginPath();
+    ctx.arc(125, 125, 80, 0, Math.PI * 2, true);
+    ctx.strokeStyle = '#F32C2C';
+    ctx.lineWidth = 8;
+    ctx.closePath();
+    ctx.clip();
+
+    const avatar = await Canvas.loadImage(data_steam.avatarfull);
+    ctx.drawImage(avatar, 25, 25, 200, 200);
+
+    const attachment = new Discord.MessageAttachment(canvas.toBuffer(), 'stats-image.jpg');
+    let flagOrSteam = data_steam.loccountrycode ? `:flag_${data_steam.loccountrycode.toLowerCase()}:` : "<:steam:914663956860248134>";
+    client.channels.cache.get(channel).send(`${flagOrSteam} **${data_steam.personaname}** | ${texts.stats.seeFullStatistics[language]} https://dbd.onteh.net.au/playerstats/${data_steam.steamid}`, attachment);
   }
   return
 }
@@ -1719,7 +1785,7 @@ function sendEmbedError(type, user, channel, language) {
  * @description - Post stats to Australian Website.
  */
 function postStats(steamid, channelid, user, language) {
-  var options = {
+  let options = {
     host: "dbd.onteh.net.au",
     path: "/api/playerstats?steamid=" + steamid,
     method: 'POST',
@@ -1743,30 +1809,29 @@ function postStats(steamid, channelid, user, language) {
  * @param {JSON} data_steam - JSON with data from steam profile
  * @param {BigInt64Array} channelid - Channel ID to send info.
  * @param {ObjectConstructor} user - User ID to send private messages.
- * @param {BigInt64Array} steamid - Steam ID to get DBD Stats.
  * @param {Boolean} isSurv - true = survivor | false = killer
  * @param {Int8Array} language - 0 = spanish | 1 = english
  * @description - Get stats from Australian Website, and send this to the channel.
  */
-function getStats(data_steam, channelid, user, steamid, isSurv, language) {
-  var options = {
+function getStats(data_steam, channelid, user, isSurv, language) {
+  let options = {
     host: "dbd.onteh.net.au",
-    path: "/api/playerstats?steamid=" + steamid,
+    path: "/api/playerstats?steamid=" + data_steam.steamid,
     headers: { 'User-Agent': 'EntityBot/' + version_bot }
   };
   https.get(options, function (res) {
-    var bodyChunks_ = [];
+    let bodyChunks_ = [];
     res.on('data', function (chunk) {
       bodyChunks_.push(chunk);
     }).on('end', function () {
-      var body = Buffer.concat(bodyChunks_);
+      let body = Buffer.concat(bodyChunks_);
       console.log(`australian site code: ${res.statusCode}`)
       if (res.statusCode == 200 || res.statusCode == 201) {
-        body = JSON.parse(body)
+        body = JSON.parse(body);
         if (body.killer_rank == 20 && body.killed == 0 && body.sacrificed == 0 && body.bloodpoints == 0) sendEmbedError(1, user, channelid, language)
         else sendEmbedStats(channelid, isSurv, data_steam, body, language)
         return;
-      } else return postStats(steamid, channelid, user, language)
+      } else return postStats(data_steam.steamid, channelid, user, language)
     })
   })
 }
@@ -1782,12 +1847,12 @@ function handleDisconnect() {
       console.log('Error al conectar la base de datos (reconectado): ', err);
       setTimeout(handleDisconnect, 2000);
     } else {
-      var servers;
+      let servers;
       con.query('SELECT * FROM Servidores', (err, rows) => {
         if (err) throw err;
         if (rows.length >= 1) {
           servers = rows.length;
-          for (var x = 0; x < servers; x++) {
+          for (let x = 0; x < servers; x++) {
             let cidd = rows[x].cid;
             let IDD = rows[x].ID;
             let prefixx = rows[x].prefix
@@ -1831,14 +1896,14 @@ function verifyShrine(force = false) {
       headers: { 'User-Agent': 'EntityBot/' + version_bot }
     };
     https.get(options, function (res) {
-      var bodyChunks2 = [];
+      let bodyChunks2 = [];
       res.on('data', function (chunk) {
         bodyChunks2.push(chunk);
       }).on('end', function () {
-        var body2 = Buffer.concat(bodyChunks2);
+        let body2 = Buffer.concat(bodyChunks2);
         if (res.statusCode == 200 || res.statusCode == 201) {
           console.log(`parsing ${JSON.stringify(body2)} || ${body2.toString()} || ${body2}`)
-          var parsed = JSON.parse(body2)
+          let parsed = JSON.parse(body2)
           con.query(`DELETE FROM santuario`)
           con.query(`INSERT INTO santuario (perk_1, perk_2, perk_3, perk_4) VALUES ('${parsed.perks[0].id.toLowerCase()}:${parsed.perks[0].shards}', '${parsed.perks[1].id.toLowerCase()}:${parsed.perks[1].shards}', '${parsed.perks[2].id.toLowerCase()}:${parsed.perks[2].shards}', '${parsed.perks[3].id.toLowerCase()}:${parsed.perks[3].shards}')`)
         }
@@ -1890,9 +1955,9 @@ Date.prototype.toMysqlFormat = function () {
  * @description Return if steam account is private. DEPRECATED.
  */
 function verifyPrivate(buffer) {
-  var state_1 = buffer.slice(buffer.indexOf('"state"') + 9)
-  var state_2 = state_1.slice(0, state_1.indexOf(',') - 1)
-  var result = 0;
+  let state_1 = buffer.slice(buffer.indexOf('"state"') + 9)
+  let state_2 = state_1.slice(0, state_1.indexOf(',') - 1)
+  let result = 0;
   if (state_2 == 1) result = 1
   return result;
 }
@@ -1902,7 +1967,7 @@ function verifyPrivate(buffer) {
  * @description Replace all "_" with space.
  */
 function replaceSpace(text) {
-  var str = texto
+  let str = texto
   while (str.includes('_')) {
     str = str.replace('_', ' ')
   }
@@ -1995,8 +2060,8 @@ function loadRules() {
  * @description Get perk index from ID.
  */
 async function getPerkIndexByID(id) {
-  var index = -1;
-  var isSurv = false
+  let index = -1;
+  let isSurv = false
   for (let x = 0; x < getLength(survivorPerks); x++) {
     if (id == survivorPerks[x].id) {
       isSurv = true
@@ -2165,8 +2230,7 @@ async function createRandomBuild(message, numberCharacter, numberPerk1, numberPe
     const canvas = Canvas.createCanvas(1579, 1114);
     const ctx = canvas.getContext('2d');
     let fontSize = 21
-    const background = await Canvas.loadImage(background_survivor);
-    ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
+    ctx.drawImage(backgroundSurvivor, 0, 0, canvas.width, canvas.height);
 
     ctx.strokeStyle = '#74037b';
     ctx.strokeRect(0, 0, canvas.width, canvas.height);
@@ -2199,8 +2263,7 @@ async function createRandomBuild(message, numberCharacter, numberPerk1, numberPe
     const canvas = Canvas.createCanvas(1579, 1114);
     const ctx = canvas.getContext('2d');
     let fontSize = 21
-    const background = await Canvas.loadImage(background_killer);
-    ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
+    ctx.drawImage(backgroundKiller, 0, 0, canvas.width, canvas.height);
 
     ctx.strokeStyle = '#74037b';
     ctx.strokeRect(0, 0, canvas.width, canvas.height);
@@ -2239,7 +2302,7 @@ async function createRandomBuild(message, numberCharacter, numberPerk1, numberPe
  */
 function steamID_32(steamId64) {
   steamId64 = new bigNumber(steamId64);
-  var steamId32 = steamId64.minus(convert)
+  let steamId32 = steamId64.minus(convert)
   return steamId32.toString();
 }
 
@@ -2249,7 +2312,7 @@ function steamID_32(steamId64) {
  */
 function steamID_64(steamId32) {
   steamId32 = new bigNumber(steamId32);
-  var steamId64 = steamId32.plus(convert)
+  let steamId64 = steamId32.plus(convert)
   return steamId64.toString();
 }
 
@@ -2264,29 +2327,29 @@ function steamID_64(steamId32) {
  * @description - First part for get user stats from Australian Website.
  */
 function getSteamProfile(steamid, channelid, userid, serverid, isSurv, language) {
-  var server = client.guilds.cache.get(serverid)
-  var user = server.members.cache.get(userid)
-  var options = {
+  let server = client.guilds.cache.get(serverid)
+  let user = server.members.cache.get(userid)
+  let options = {
     host: 'api.steampowered.com',
     path: '/ISteamUser/GetPlayerSummaries/v0002/?key=DF0A08E817CCE67F129D35FFFB14901A&steamids=' + steamid,
     headers: { 'User-Agent': 'EntityBot/' + version_bot }
   };
   http.get(options, function (res) {
-    var bodyChunks_ = [];
+    let bodyChunks_ = [];
     res.on('data', function (chunk) {
       bodyChunks_.push(chunk);
     }).on('end', function () {
-      var body = Buffer.concat(bodyChunks_);
-      if (body.includes("<html><head><title>Bad Request</title>")) return user.send("Perfil de steam no encontrado.")
-      if (isEmptyObject(body)) return user.send("Perfil de steam no encontrado.")
+      let body = Buffer.concat(bodyChunks_);
+      if (body.includes("<html><head><title>Bad Request</title>")) return user.send(errors.profileNotFound[language]);
+      if (isEmptyObject(body)) return user.send(errors.profileNotFound[language]);
       if (res.statusCode == 200 || res.statusCode == 201) {
         body = JSON.parse(body)
         if (body.response && body.response.players && body.response.players[0].profilestate) {
-          if (body.response.players[0].profilestate != 1) return user.send("El perfil ingresado no está en 'público'.")
-          getStats(body, channelid, user, steamid, isSurv, language)
+          if (body.response.players[0].profilestate != 1) return user.send(errors.privateProfile[language]);
+          getStats(body.response.players[0], channelid, user, isSurv, language)
           return
-        } else return message.author.send("Tu perfil de steam no pudo ser encontrado.")
-      } else return message.author.send("Tu perfil de steam no pudo ser encontrado.")
+        } else return message.author.send(errors.profileNotFound[language]);
+      } else return message.author.send(errors.profileNotFound[language]);
     })
   })
 }
@@ -2294,8 +2357,7 @@ function getSteamProfile(steamid, channelid, userid, serverid, isSurv, language)
 async function sendShrine(perk1, perk2, perk3, perk4, shards, channel, language) {
   const canvas = Canvas.createCanvas(1163, 664);
   const ctx = canvas.getContext('2d');
-  const background = await Canvas.loadImage(background_shrine);
-  ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
+  ctx.drawImage(backgroundShrine, 0, 0, canvas.width, canvas.height);
 
   let perkImageName = [getImageName(perk1.index, perk1.isSurv), getImageName(perk2.index, perk2.isSurv), getImageName(perk3.index, perk3.isSurv), getImageName(perk4.index, perk4.isSurv)]
   const perkImage_1 = await getImage(perkImageName[0], perk1.isSurv)
@@ -2317,8 +2379,8 @@ async function sendShrine(perk1, perk2, perk3, perk4, shards, channel, language)
 
 async function getImage(name, isSurv) {
   let object;
-  if (isSurv) object = Canvas.loadImage("./assets/Visuals/Perks/Survivors/" + name)
-  else object = Canvas.loadImage("./assets/Visuals/Perks/Killers/" + name)
+  if (isSurv) object = await Canvas.loadImage("./assets/Visuals/Perks/Survivors/" + name)
+  else object = await Canvas.loadImage("./assets/Visuals/Perks/Killers/" + name)
   return object
 }
 
@@ -2334,4 +2396,23 @@ function getImageName(index, isSurv) {
   return text + ".png"
 }
 
-client.login(process.env.token);
+async function loadImages() {
+  backgroundKiller = await Canvas.loadImage("assets/Visuals/Background/random_killer.jpg");
+  backgroundSurvivor = await Canvas.loadImage("assets/Visuals/Background/random_survivor.jpg");
+  backgroundShrine = await Canvas.loadImage("assets/Visuals/Background/shrine.jpg");
+  backgroundLevel = await Canvas.loadImage("assets/Visuals/Background/level.jpg");
+  backgroundStatsSurvivor = await Canvas.loadImage("assets/Visuals/Background/stats_survivor.jpg");
+  backgroundStatsKiller = await Canvas.loadImage("assets/Visuals/Background/stats_killer.jpg");
+  killerImage = await Canvas.loadImage("./assets/Visuals/icons/killer_rank.png");
+  survivorImage = await Canvas.loadImage("./assets/Visuals/icons/survivor_rank.png");
+  bpImage = await Canvas.loadImage("./assets/Visuals/icons/bp.png");
+  killsImage = await Canvas.loadImage("./assets/Visuals/icons/killer.png");
+  sacrificedImage = await Canvas.loadImage("./assets/Visuals/icons/hook.png");
+  sacrificedObsessionsImage = await Canvas.loadImage("./assets/Visuals/icons/entity.png");
+  perfectGamesImage = await Canvas.loadImage("./assets/Visuals/icons/killer_perfect.png");
+  paletImage = await Canvas.loadImage("./assets/Visuals/icons/palet.png");
+  genDamagedImage = await Canvas.loadImage("./assets/Visuals/icons/genbreak.png");
+  carryImage = await Canvas.loadImage("./assets/Visuals/icons/carry.png");
+}
+
+client.login("NzQxNTE2NjE0MzM5Mzk1NjA2.Xy4tKQ.XfZC8iyNc4cPnPp_ehS7qGV1VqA");

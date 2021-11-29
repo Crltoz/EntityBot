@@ -1,0 +1,72 @@
+{
+    "stats": {
+        "statistics": [
+            "Estadisticas",
+            "Statistics"
+        ],
+        "hoursPlayed": [
+            "Horas jugadas: ",
+            "Hours played: "
+        ],
+        "seeFullStatistics": [
+            "Para ver tus estadísticas completas, ingresa a: ",
+            "For all statistics, enter in "
+        ],
+        "kills": [
+            "Asesinatos: ",
+            "Kills: "
+        ],
+        "sacrificed": [
+            "Sacrificios: ",
+            "Sacrificed: "
+        ],
+        "sacrificedObessions": [
+            "Sacrificios de obesion: ",
+            "Obessions sacrificed: "
+        ],
+        "perfectGames": [
+            "Partidas perfectas: ",
+            "Perfect games: "
+        ],
+        "stuns": [
+            "Aturdimientos: ",
+            "Shocks: "
+        ],
+        "gensDamaged": [
+            "Motores golpeados: ",
+            "Gens damaged: "
+        ],
+        "survivorsGrabbed": [
+            "Interrupciones: ",
+            "Survivors grabbed: "
+        ],
+        "gensRepaired": [
+            "Generadores reparados: ",
+            "Gens repaired: "
+        ],
+        "survivorsHealed": [
+            "Supervivientes curados: ",
+            "Survivors healed: "
+        ],
+        "skillchecks": [
+            "Skillchecks: ",
+            "Skillchecks: "
+        ],
+        "escaped": [
+            "Escapes: ",
+            "Escaped: "
+        ],
+        "hexTotemsCleansed": [
+            "Maleficios purificados: ",
+            "Hex totems cleansed: "
+        ],
+        "exitGatesOpened": [
+            "Puertas abiertas: ",
+            "Exit gates opened: "
+        ],
+        "chestsSearched": [
+            "Cofres abiertos: ",
+            "Chests searched: "
+        ]
+    }
+}
