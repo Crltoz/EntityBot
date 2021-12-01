@@ -968,11 +968,11 @@ client.on("message", async (message) => {
         let perkLength = isSurv ? getLength(survivorPerks) : getLength(killerPerks);
         if (isSurv) {
           character = getLength(survivors) - 1;
-          createRandomBuild(message, character - index, survivorPerks[perkLength.length - 1], perks[perkLength.length - 2], perks[perkLength.length - 3], perks[perkLength.length - 4], isSurv, lenguaje[message.guild.id])
+          createRandomBuild(message, character, survivorPerks[perkLength - 1], perks[perkLength - 2], perks[perkLength - 3], perks[perkLength - 4], isSurv, lenguaje[message.guild.id])
         }
         else {
           character = getLength(killers) - 1;
-          createRandomBuild(message, character - index, killerPerks[perkLength.length - 1], killerPerks[perkLength.length - 2], killerPerks[perkLength.length - 3], killerPerks[perkLength.length - 4], isSurv, lenguaje[message.guild.id])
+          createRandomBuild(message, character, killerPerks[perkLength - 1], killerPerks[perkLength - 2], killerPerks[perkLength - 3], killerPerks[perkLength - 4], isSurv, lenguaje[message.guild.id])
         }
         return
       }
