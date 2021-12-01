@@ -591,19 +591,19 @@
         {
             "nameEs": "Sobreponerse",
             "nameEn": "Overcome",
-            "emoji": "<:IconPerks_overcome:>",
+            "emoji": "<:IconPerks_Overcome:>",
             "id": "s29p01"
         },
         {
             "nameEs": "Medida Correctiva",
             "nameEn": "Corrective Action",
-            "emoji": "<:IconPerks_correctiveAction:>",
+            "emoji": "<:IconPerks_CorrectiveAction:>",
             "id": "s29p02"
         },
         {
             "nameEs": "Bendicion: Exponencial",
             "nameEn": "Boon: Exponential",
-            "emoji": "<:IconPerks_boonExponential:>",
+            "emoji": "<:IconPerks_BoonExponential:>",
             "id": "s29p03"
         }
     ]
