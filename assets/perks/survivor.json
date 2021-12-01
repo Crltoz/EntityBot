@@ -587,6 +587,24 @@
             "nameEn": "Boon: Shadow Step",
             "emoji": "<:iconPerks_boonShadowStep:>",
             "id": "s28p03"
+        },
+        {
+            "nameEs": "Sobreponerse",
+            "nameEn": "Overcome",
+            "emoji": "<:IconPerks_overcome:>",
+            "id": "s29p01"
+        },
+        {
+            "nameEs": "Medida Correctiva",
+            "nameEn": "Corrective Action",
+            "emoji": "<:IconPerks_correctiveAction:>",
+            "id": "s29p02"
+        },
+        {
+            "nameEs": "Bendicion: Exponencial",
+            "nameEn": "Boon: Exponential",
+            "emoji": "<:IconPerks_boonExponential:>",
+            "id": "s29p03"
         }
     ]
 }
