@@ -3,607 +3,607 @@
         {
             "nameEs": "As en la manga",
             "nameEn": "Ace in the Hole",
-            "emoji": "<:iconPerks_aceInTheHole:741712915408748546>",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/2/24/IconPerks_aceInTheHole.png",
             "id": "ace_in_the_hole"
         },
         {
             "nameEs": "Adrenalina",
             "nameEn": "Adrenaline",
-            "emoji": "<:iconPerks_adrenaline:741712917484798073>",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/f/f7/IconPerks_adrenaline.png",
             "id": "adrenaline"
         },
         {
             "nameEs": "Postratamiento",
             "nameEn": "Aftercare",
-            "emoji": "<:iconPerks_aftercare:741712926507008114>",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/0/0d/IconPerks_aftercare.png",
             "id": "aftercare"
         },
         {
             "nameEs": "Alerta",
             "nameEn": "Alert",
-            "emoji": "<:iconPerks_alert:741712927823888414>",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/7/71/IconPerks_alert.png",
             "id": "alert"
         },
         {
             "nameEs": "Cueste lo que cueste",
             "nameEn": "Any Means Necessary",
-            "emoji": "<:iconPerks_anyMeansNecessary:741712927827951677>",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/7/79/IconPerks_anyMeansNecessary.png",
             "id": "anymeansnecessary"
         },
         {
             "nameEs": "Autodidacta",
             "nameEn": "Autodidact",
-            "emoji": "<:iconPerks_autodidact:741712926775181421>",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/9/96/IconPerks_autodidact.png",
             "id": "autodidact"
         },
         {
             "nameEs": "Canguro",
             "nameEn": "Babysitter",
-            "emoji": "<:iconPerks_babySitter:741712928293519440>",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/d/db/IconPerks_babysitter.png",
             "id": "babysitter"
         },
         {
             "nameEs": "Caida equilibrada",
             "nameEn": "Balanced Landing",
-            "emoji": "<:iconPerks_balancedLanding:741712924820766790>",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/5/5e/IconPerks_balancedLanding.png",
             "id": "balanced_landing"
         },
         {
             "nameEs": "Mejor juntos",
             "nameEn": "Better Together",
-            "emoji": "<:iconPerks_betterTogether:741712928646103081>",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/0/02/IconPerks_betterTogether.png",
             "id": "bettertogether"
         },
         {
             "nameEs": "Pacto de sangre",
             "nameEn": "Blood Pact",
-            "emoji": "<:iconPerks_bloodPact:741712927500927046>",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/c/c9/IconPerks_bloodPact.png",
             "id": "bloodpact"
         },
         {
             "nameEs": "Arrebato",
             "nameEn": "Boil Over",
-            "emoji": "<:iconPerks_boilOver:741712924539617343>",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/f/f5/IconPerks_boilOver.png",
             "id": "boilover"
         },
         {
             "nameEs": "Vinculo",
             "nameEn": "Bond",
-            "emoji": "<:iconPerks_bond:741712926716461156>",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/a/a0/IconPerks_bond.png",
             "id": "bond"
         },
         {
             "nameEs": "Tiempo prestado",
             "nameEn": "Borrowed Time",
-            "emoji": "<:iconPerks_borrowedTime:741712926498488401>",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/a/a3/IconPerks_borrowedTime.png",
             "id": "borrowedtime"
         },
         {
             "nameEs": "Conocimientos de botanica",
             "nameEn": "Botany Knowledge",
-            "emoji": "<:iconPerks_botanyKnowledge:741712925965680681>",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/1/1e/IconPerks_botanyKnowledge.png",
             "id": "botany_knowledge"
         },
         {
             "nameEs": "Ruptura",
             "nameEn": "Breakdown",
-            "emoji": "<:iconPerks_breakdown:741712927563710484>",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/6/6c/IconPerks_breakdown.png",
             "id": "breakdown"
         },
         {
             "nameEs": "Fuga",
             "nameEn": "Breakout",
-            "emoji": "<:iconPerks_breakout:741712927748522115>",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/d/d0/IconPerks_breakout.png",
             "id": "breakout"
         },
         {
             "nameEs": "Sujetate",
             "nameEn": "Buckle Up",
-            "emoji": "<:iconPerks_buckleUp:741712928784384060>",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/7/74/IconPerks_buckleUp.png",
             "id": "buckleup"
         },
         {
             "nameEs": "Espiritu calmado",
             "nameEn": "Calm Spirit",
-            "emoji": "<:iconPerks_calmSpirit:741712928105037925>",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/6/6c/IconPerks_calmSpirit.png",
             "id": "calm_spirit"
         },
         {
             "nameEs": "Camaraderia",
             "nameEn": "Camaraderie",
-            "emoji": "<:iconPerks_camaraderie:741712928377667786>",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/1/1d/IconPerks_camaraderie.png",
             "id": "camaraderie"
         },
         {
             "nameEs": "Baila conmigo",
             "nameEn": "Dance With Me",
-            "emoji": "<:iconPerks_danceWithMe:741712928545439784>",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/1/17/IconPerks_danceWithMe.png",
             "id": "dance_with_me"
         },
         {
             "nameEs": "Percepcion oscura",
             "nameEn": "Dark Sense",
-            "emoji": "<:iconPerks_darkSense:741712926418927628>",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/9/92/IconPerks_darkSense.png",
             "id": "dark_sense"
         },
         {
             "nameEs": "Fajador",
             "nameEn": "Dead Hard",
-            "emoji": "<:iconPerks_DeadHard:741712927027101826>",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/7/75/IconPerks_deadHard.png",
             "id": "deadhard"
         },
         {
             "nameEs": "Golpe decisivo",
             "nameEn": "Decisive Strike",
-            "emoji": "<:iconPerks_decisiveStrike:741712926234247199>",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/e/ee/IconPerks_decisiveStrike.png",
             "id": "decisivestrike"
         },
         {
             "nameEs": "Déjà Vu",
             "nameEn": "Déjà Vu",
-            "emoji": "<:iconPerks_dejaVu:741712927907774464>",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/8/89/IconPerks_dejaVu.png",
             "id": "deja_vu"
         },
         {
             "nameEs": "Liberacion",
             "nameEn": "Deliverance",
-            "emoji": "<:iconPerks_deliverance:741712928876527746>",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/7/7e/IconPerks_deliverance.png",
             "id": "deliverance"
         },
         {
             "nameEs": "Corazonada",
             "nameEn": "Detective's Hunch",
-            "emoji": "<:iconPerks_detectivesHunch:741712927706578945>",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/7/7b/IconPerks_detectivesHunch.png",
             "id": "detectiveshunch"
         },
         {
             "nameEs": "Distorsion",
             "nameEn": "Distortion",
-            "emoji": "<:iconPerks_distortion:741712926473191537>",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/4/41/IconPerks_distortion.png",
             "id": "distortion"
         },
         {
             "nameEs": "Distraccion",
             "nameEn": "Diversion",
-            "emoji": "<:iconPerks_diversion:741712927597264986>",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/a/a6/IconPerks_diversion.png",
             "id": "diversion"
         },
         {
             "nameEs": "Empatia",
             "nameEn": "Empathy",
-            "emoji": "<:iconPerks_empathy:741712927601721365>",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/a/ae/IconPerks_empathy.png",
             "id": "empathy"
         },
         {
             "nameEs": "Fijacion",
             "nameEn": "Fixated",
-            "emoji": "<:iconPerks_fixated:741713034870784040>",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/7/7c/IconPerks_fixated.png",
             "id": "fixated"
         },
         {
             "nameEs": "Hasta otra",
             "nameEn": "Flip-Flop",
-            "emoji": "<:iconPerks_flipFlop:741713038310113281>",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/3/31/IconPerks_flip-Flop.png",
             "id": "flipflop"
         },
         {
             "nameEs": "Por los demas",
             "nameEn": "For the People",
-            "emoji": "<:iconPerks_forThePeople:741713039434186855>",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/3/31/IconPerks_forThePeople.png",
             "id": "forthepeople"
         },
         {
             "nameEs": "De frente",
             "nameEn": "Head On",
-            "emoji": "<:iconPerks_headOn:741713041191600187>",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/c/cb/IconPerks_headOn.png",
             "id": "headon"
         },
         {
             "nameEs": "Esperanza",
             "nameEn": "Hope",
-            "emoji": "<:iconPerks_hope:741713038566096967>",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/1/18/IconPerks_hope.png",
             "id": "hope"
         },
         {
             "nameEs": "Fuerza interior",
             "nameEn": "Inner Strength",
-            "emoji": "<:iconPerks_innerStrength:741713041288200352>",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/4/47/IconPerks_innerStrength.png",
             "id": "innerstrength"
         },
         {
             "nameEs": "Voluntad de hierro",
             "nameEn": "Iron Will",
-            "emoji": "<:iconPerks_ironWill:741713039501295728>",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/5/58/IconPerks_ironWill.png",
             "id": "iron_will"
         },
         {
             "nameEs": "Familia",
             "nameEn": "Kindred",
-            "emoji": "<:iconPerks_kindred:741713039207956500>",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/a/a8/IconPerks_kindred.png",
             "id": "kindred"
         },
         {
             "nameEs": "Lider",
             "nameEn": "Leader",
-            "emoji": "<:iconPerks_leader:741713037471252663>",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/3/3d/IconPerks_leader.png",
             "id": "leader"
         },
         {
             "nameEs": "Abandonado a tu suerte",
             "nameEn": "Left Behind",
-            "emoji": "<:iconPerks_leftBehind:741713040944398346>",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/c/c3/IconPerks_leftBehind.png",
             "id": "leftbehind"
         },
         {
             "nameEs": "De pies ligeros",
             "nameEn": "Lightweight",
-            "emoji": "<:iconPerks_lightweight:741713038419427409>",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/6/67/IconPerks_lightweight.png",
             "id": "lightweight"
         },
         {
             "nameEs": "Agilidad",
             "nameEn": "Lithe",
-            "emoji": "<:iconPerks_lithe:741713039929245887>",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/c/cc/IconPerks_lithe.png",
             "id": "lithe"
         },
         {
             "nameEs": "Golpe de suerte",
             "nameEn": "Lucky Break",
-            "emoji": "<:iconPerks_luckyBreak:741713039685845153>",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/a/a7/IconPerks_luckyBreak.png",
             "id": "luckybreak"
         },
         {
             "nameEs": "El temple del hombre",
             "nameEn": "Mettle of Man",
-            "emoji": "<:iconPerks_mettleOfMan:741713040474505366>",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/5/52/IconPerks_mettleOfMan.png",
             "id": "mettleofman"
         },
         {
             "nameEs": "Me la pela",
             "nameEn": "No Mither",
-            "emoji": "<:iconPerks_NoMither:741713041233805393>",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/f/f5/IconPerks_noMither.png",
             "id": "nomither"
         },
         {
             "nameEs": "Nadie se queda atras",
             "nameEn": "No One Left Behind",
-            "emoji": "<:iconPerks_noOneLeftBehind:741713039358820532>",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/b/b0/IconPerks_noOneLeftBehind.png",
             "id": "no_one_left_behind"
         },
         {
             "nameEs": "Obejeto de obsesion",
             "nameEn": "Object of Obsession",
-            "emoji": "<:iconPerks_objectOfObsession:741713039077670922>",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/2/2b/IconPerks_objectOfObsession.png",
             "id": "objectofobsession"
         },
         {
             "nameEs": "Extraoficial",
             "nameEn": "Off the Record",
-            "emoji": "<:iconPerks_offTheRecord:741713040235561114>",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/9/9e/IconPerks_offTheRecord.png",
             "id": "offtherecord"
         },
         {
             "nameEs": "A mano descubierta",
             "nameEn": "Open-Handed",
-            "emoji": "<:iconPerks_openHanded:741713040130703382>",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/5/5d/IconPerks_open-Handed.png",
             "id": "open_handed"
         },
         {
             "nameEs": "Farmacia",
             "nameEn": "Pharmacy",
-            "emoji": "<:iconPerks_pharmacy:741713040214589461>",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/f/f1/IconPerks_pharmacy.png",
             "id": "pharmacy"
         },
         {
             "nameEs": "Instinto de saqueador",
             "nameEn": "Plunderers Instinct",
-            "emoji": "<:iconPerks_plunderersInstinct:741713040780558407>",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/2/28/IconPerks_plunderersInstinct.png",
             "id": "plunderers_instinct"
         },
         {
             "nameEs": "Serenidad",
             "nameEn": "Poised",
-            "emoji": "<:iconPerks_poised:741713157919211611>",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/5/52/IconPerks_poised.png",
             "id": "poised"
         },
         {
             "nameEs": "Premonicion",
             "nameEn": "Premonition",
-            "emoji": "<:iconPerks_premonition:741713166320533664>",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/3/39/IconPerks_premonition.png",
             "id": "premonition"
         },
         {
             "nameEs": "Demuestra lo que vales",
             "nameEn": "Prove Thyself",
-            "emoji": "<:iconPerks_proveThyself:741713165334872156>",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/0/0f/IconPerks_proveThyself.png",
             "id": "prove_thyself"
         },
         {
             "nameEs": "Velocidad silenciosa",
             "nameEn": "Quick & Quiet",
-            "emoji": "<:iconPerks_quickAndQuiet:741713164617384046>",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/1/14/IconPerks_quickAndQuiet.png",
             "id": "quickquiet"
         },
         {
             "nameEs": "Bulo",
             "nameEn": "Red Herring",
-            "emoji": "<:iconPerks_redHerring:741713165644988457>",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/1/1c/IconPerks_redHerring.png",
             "id": "redherring"
         },
         {
             "nameEs": "Supresion de alianza",
             "nameEn": "Repressed Alliance",
-            "emoji": "<:iconPerks_repressedAlliance:741713164718309398>",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/3/31/IconPerks_repressedAlliance.png",
             "id": "repressedalliance"
         },
         {
             "nameEs": "Resiliencia",
             "nameEn": "Resilience",
-            "emoji": "<:iconPerks_resilience:741713165393461349>",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/e/ee/IconPerks_resilience.png",
             "id": "resilience"
         },
         {
             "nameEs": "Sabotear",
             "nameEn": "Saboteur",
-            "emoji": "<:iconPerks_saboteur:741713165259243634>",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/0/0e/IconPerks_saboteur.png",
             "id": "saboteur"
         },
         {
             "nameEs": "Segundo aliento",
             "nameEn": "Second Wind",
-            "emoji": "<:iconPerks_secondWind:741713166064550018>",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/9/97/IconPerks_secondWind.png",
             "id": "secondwind"
         },
         {
             "nameEs": "Autocuracion",
             "nameEn": "Self-Care",
-            "emoji": "<:iconPerks_selfCare:741713166068613160>",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/b/b2/IconPerks_self-Care.png",
             "id": "self_care"
         },
         {
             "nameEs": "Carne resbaladiza",
             "nameEn": "Slippery Meat",
-            "emoji": "<:iconPerks_slipperyMeat:741713164407668818>",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/0/03/IconPerks_slipperyMeat.png",
             "id": "slippery_meat"
         },
         {
             "nameEs": "Caza menor",
             "nameEn": "Small Game",
-            "emoji": "<:iconPerks_smallGame:741713165569491066>",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/d/dc/IconPerks_smallGame.png",
             "id": "small_game"
         },
         {
             "nameEs": "Solo quedo yo",
             "nameEn": "Sole Survivor",
-            "emoji": "<:iconPerks_soleSurvivor:741713167222046770>",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/8/8e/IconPerks_soleSurvivor.png",
             "id": "solesurvivor"
         },
         {
             "nameEs": "Solidaridad",
             "nameEn": "Solidarity",
-            "emoji": "<:iconPerks_solidarity:741713166437974068>",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/9/9e/IconPerks_solidarity.png",
             "id": "solidarity"
         },
         {
             "nameEs": "Salvaguarda de alma",
             "nameEn": "Soul Guard",
-            "emoji": "<:iconPerks_soulGuard:741713166454751242>",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/a/a5/IconPerks_soulGuard.png",
             "id": "soulguard"
         },
         {
             "nameEs": "Escalofrios",
             "nameEn": "Spine Chill",
-            "emoji": "<:iconPerks_spineChill:741713164734824550>",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/5/57/IconPerks_spineChill.png",
             "id": "spine_chill"
         },
         {
             "nameEs": "Esprint",
             "nameEn": "Sprint Burst",
-            "emoji": "<:iconPerks_sprintBurst:741713166865793184>",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/e/e4/IconPerks_sprintBurst.png",
             "id": "sprint_burst"
         },
         {
             "nameEs": "Bajo vigilancia",
             "nameEn": "Stake Out",
-            "emoji": "<:iconPerks_stakeOut:741713168476405770>",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/c/cd/IconPerks_stakeOut.png",
             "id": "stakeout"
         },
         {
             "nameEs": "Con calle",
             "nameEn": "Streetwise",
-            "emoji": "<:iconPerks_streetwise:741713166727381009>",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/f/ff/IconPerks_streetwise.png",
             "id": "streetwise"
         },
         {
             "nameEs": "Esto no puede estar pasando",
             "nameEn": "This Is Not Happening",
-            "emoji": "<:iconPerks_thisIsNotHappening:741713167058731098>",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/5/58/IconPerks_thisIsNotHappening.png",
             "id": "this_is_not_happening"
         },
         {
             "nameEs": "Pericia tecnica",
             "nameEn": "Technician",
-            "emoji": "<:iconPerks_tenacity:741713167826157592>",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/6/62/IconPerks_technician.png",
             "id": "technician"
         },
         {
             "nameEs": "Tenacidad",
             "nameEn": "Tenacity",
-            "emoji": "<:iconPerks_upTheAnte:741713166878244945>",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/9/9d/IconPerks_tenacity.png",
             "id": "tenacity"
         },
         {
             "nameEs": "Subir las apuestas",
             "nameEn": "Up the Ante",
-            "emoji": "<:iconPerks_upTheAnte:741713166878244945>",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/a/a3/IconPerks_upTheAnte.png",
             "id": "up_the_ante"
         },
         {
             "nameEs": "Inquebrantable",
             "nameEn": "Unbreakable",
-            "emoji": "<:iconPerks_unbreakable:741713167213658253>",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/4/4a/IconPerks_unbreakable.png",
             "id": "selfsufficient"
         },
         {
             "nameEs": "Evasion urbana",
             "nameEn": "Urban Evasion",
-            "emoji": "<:iconPerks_urbanEvasion:741713167167782922>",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/c/c7/IconPerks_urbanEvasion.png",
             "id": "urban_evasion"
         },
         {
             "nameEs": "Vigilia",
             "nameEn": "Vigil",
-            "emoji": "<:iconPerks_vigil:741713040558522418>",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/4/46/IconPerks_vigil.png",
             "id": "vigil"
         },
         {
             "nameEs": "Despierta!",
             "nameEn": "Wake Up!",
-            "emoji": "<:iconPerks_wakeUp:741713167339487412>",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/f/fd/IconPerks_wakeUp.png",
             "id": "wakeup"
         },
         {
             "nameEs": "Lo conseguiremos",
             "nameEn": "Well Make It",
-            "emoji": "<:iconPerks_wellMakeIt:741726257489641552>",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/8/8a/IconPerks_wellMakeIt.png",
             "id": "wellmakeit"
         },
         {
             "nameEs": "Vamos a vivir para siempre",
             "nameEn": "Were Gonna Live Forever",
-            "emoji": "<:iconPerks_WereGonnaLiveForever:741726258613977108>",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/b/b8/IconPerks_wereGonnaLiveForever.png",
             "id": "weregonnaliveforever"
         },
         {
             "nameEs": "Oportunidades",
             "nameEn": "Windows of Opportunity",
-            "emoji": "<:iconPerks_windowsOfOpportunity:741726257968054315>",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/1/17/IconPerks_windowsOfOpportunity.png",
             "id": "windowsofopportunity"
         },
         {
             "nameEs": "Medidas desesperadas",
             "nameEn": "Desperate Measures",
-            "emoji": "<:iconPerks_desperateMeasures:753423002103840868>",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/8/84/IconPerks_desperateMeasures.png",
             "id": "desperatemeasures"
         },
         {
             "nameEs": "Visionario",
             "nameEn": "Visionary",
-            "emoji": "<:iconPerks_visionary:753423002586185910>",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/7/7c/IconPerks_visionary.png",
             "id": "visionary"
         },
         {
             "nameEs": "Construido para perdurar",
             "nameEn": "Built to Last",
-            "emoji": "<:iconPerks_builtToLast:753423000149164032>",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/3/3b/IconPerks_builtToLast.png",
             "id": "builttolast"
         },
         {
             "nameEs": "Evaluacion",
             "nameEn": "Appraisal",
-            "emoji": "<:iconPerks_appraisal:784561401451642940>",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/c/c1/IconPerks_appraisal.png",
             "id": "s24p01"
         },
         {
             "nameEs": "Engaño",
             "nameEn": "Deception",
-            "emoji": "<:iconPerks_deception:784561401485721600>",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/e/eb/IconPerks_deception.png",
             "id": "s24p02"
         },
         {
             "nameEs": "Lucha intensa",
             "nameEn": "Power Struggle",
-            "emoji": "<:iconPerks_powerStruggle:784561402043695114>",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/4/4b/IconPerks_powerStruggle.png",
             "id": "s24p03"
         },
         {
             "nameEs": "Primera línea",
             "nameEn": "Fast Track",
-            "emoji": "<:iconPerks_FastTrack:826562715966767124>",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/7/75/IconPerks_fastTrack.png",
             "id": "s25p01"
         },
         {
             "nameEs": "Éxito aplastante",
             "nameEn": "Smash Hit",
-            "emoji": "<:iconPerks_SmashHit:826562717296885781>",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/e/e0/IconPerks_smashHit.png",
             "id": "s25p02"
         },
         {
             "nameEs": "Autoconservación",
             "nameEn": "Self-Preservation",
-            "emoji": "<:iconPerks_Self-Preservation:826562717674242068>",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/4/43/IconPerks_self-Preservation.png",
             "id": "s25p03"
         },
         {
             "nameEs": "Contrafuerza",
             "nameEn": "Counterforce",
-            "emoji": "<:iconPerks_Counterforce:>",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/d/d1/IconPerks_counterforce.png",
             "id": "s26p01"
         },
         {
             "nameEs": "Resurgimiento",
             "nameEn": "Resurgence",
-            "emoji": "<:iconPerks_Resurgence:>",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/f/f3/IconPerks_resurgence.png",
             "id": "s26p02"
         },
         {
             "nameEs": "Mina explosiva",
             "nameEn": "Blast Mine",
-            "emoji": "<:iconPerks_blastMine:>",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/1/1c/IconPerks_blastMine.png",
             "id": "s26p03"
         },
         {
             "nameEs": "De tripas corazon",
             "nameEn": "Bite the Bullet",
-            "emoji": "<:iconPerks_BiteTheBullet:>",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/a/a5/IconPerks_biteTheBullet.png",
             "id": "s27p01"
         },
         {
             "nameEs": "Granada aturdidora",
             "nameEn": "Flashbang",
-            "emoji": "<:iconPerks_Flashbang:>",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/d/db/IconPerks_flashbang.png",
             "id": "s27p02"
         },
         {
             "nameEs": "Espiritu de novato",
             "nameEn": "Rookie Spirit",
-            "emoji": "<:iconPerks_RookieSpirit:>",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/2/2f/IconPerks_rookieSpirit.png",
             "id": "s27p03"
         },
         {
             "nameEs": "Clarividencia",
             "nameEn": "Clairvoyance",
-            "emoji": "<:iconPerks_clairvoyance:>",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/9/91/IconPerks_clairvoyance.png",
             "id": "s28p01"
         },
         {
             "nameEs": "Bendicion: Circulo de curacion",
             "nameEn": "Boon: Circle of Healing",
-            "emoji": "<:iconPerks_boonCircleOfHealing:>",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/5/54/IconPerks_boonCircleOfHealing.png",
             "id": "s28p02"
         },
         {
             "nameEs": "Bendicion: Paso sombrio",
             "nameEn": "Boon: Shadow Step",
-            "emoji": "<:iconPerks_boonShadowStep:>",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/c/c7/IconPerks_boonShadowStep.png",
             "id": "s28p03"
         },
         {
             "nameEs": "Sobreponerse",
             "nameEn": "Overcome",
-            "emoji": "<:IconPerks_overcome:>",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/8/82/IconPerks_overcome.png",
             "id": "s29p01"
         },
         {
             "nameEs": "Medida Correctiva",
             "nameEn": "Corrective Action",
-            "emoji": "<:IconPerks_correctiveAction:>",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/4/4f/IconPerks_correctiveAction.png",
             "id": "s29p02"
         },
         {
             "nameEs": "Bendicion: Exponencial",
             "nameEn": "Boon: Exponential",
-            "emoji": "<:IconPerks_boonExponential:>",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/7/76/IconPerks_boonExponential.png",
             "id": "s29p03"
         }
     ]

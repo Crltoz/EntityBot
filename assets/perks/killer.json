@@ -3,541 +3,541 @@
         {
             "nameEs": "Vocacion de enfermera",
             "nameEn": "A Nurses Calling",
-            "emoji": "<:iconPerks_aNursesCalling:741712926666260557>",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/f/fe/IconPerks_aNursesCalling.png",
             "id": "nursecalling"
         },
         {
             "nameEs": "Agitacion",
             "nameEn": "Agitation",
-            "emoji": "<:iconPerks_agitation:741712927350063224>",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/a/ac/IconPerks_agitation.png",
             "id": "agitation"
         },
         {
             "nameEs": "Desconcierto",
             "nameEn": "Bamboozle",
-            "emoji": "<:iconPerks_bamboozle:741712928536789163>",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/7/7a/IconPerks_bamboozle.png",
             "id": "bamboozle"
         },
         {
             "nameEs": "Barbacoa y chile",
             "nameEn": "Barbecue & Chilli",
-            "emoji": "<:iconPerks_BBQAndChili:741712928327336018>",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/5/51/IconPerks_barbecueAndChilli.png",
             "id": "bbqandchilli"
         },
         {
             "nameEs": "Bestia de presa",
             "nameEn": "Beast of Prey",
-            "emoji": "<:iconPerks_BeastOfPrey:741712928000049215>",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/7/77/IconPerks_beastOfPrey.png",
             "id": "beastofprey"
         },
         {
             "nameEs": "Murmullo amargo",
             "nameEn": "Bitter Murmur",
-            "emoji": "<:iconPerks_bitterMurmur:741712925491724309>",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/5/5a/IconPerks_bitterMurmur.png",
             "id": "bitter_murmur"
         },
         {
             "nameEs": "Eco sangriento",
             "nameEn": "Blood Echo",
-            "emoji": "<:iconPerks_bloodEcho:741712928109232178>",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/c/c3/IconPerks_bloodEcho.png",
             "id": "bloodecho"
         },
         {
             "nameEs": "Guardian de sangre",
             "nameEn": "Blood Warden",
-            "emoji": "<:iconPerks_bloodWarden:741712928960544778>",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/e/eb/IconPerks_bloodWarden.png",
             "id": "bloodwarden"
         },
         {
             "nameEs": "Sabueso de sangre",
             "nameEn": "Bloodhound",
-            "emoji": "<:iconPerks_bloodhound:741712926028726302>",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/e/e0/IconPerks_bloodhound.png",
             "id": "bloodhound"
         },
         {
             "nameEs": "Fuerza brutal",
             "nameEn": "Brutal Strength",
-            "emoji": "<:iconPerks_brutalStrength:741712927417040926>",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/3/3d/IconPerks_brutalStrength.png",
             "id": "brutal_strength"
         },
         {
             "nameEs": "Intervencion corrupta",
             "nameEn": "Corrupt Intervention",
-            "emoji": "<:iconPerks_corruptIntervention:741712928864207008>",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/1/10/IconPerks_corruptIntervention.png",
             "id": "corruptintervention"
         },
         {
             "nameEs": "Coulrophobia",
             "nameEn": "Coulrophobia",
-            "emoji": "<:iconPerks_coulrophobia:741712928604028960>",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/4/45/IconPerks_coulrophobia.png",
             "id": "coulrophobia"
         },
         {
             "nameEs": "Restriccion cruel",
             "nameEn": "Cruel Limits",
-            "emoji": "<:iconPerks_cruelConfinement:741712928759218216>",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/c/c6/IconPerks_cruelLimits.png",
             "id": "cruelconfinement"
         },
         {
             "nameEs": "Devocion oscura",
             "nameEn": "Dark Devotion",
-            "emoji": "<:iconPerks_darkDevotion:741712929015070830>",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/4/4f/IconPerks_darkDevotion.png",
             "id": "darkdevotion"
         },
         {
             "nameEs": "Interruptor del hombre muerto",
             "nameEn": "Dead Mans Switch",
-            "emoji": "<:iconPerks_deadManSwitch:741712928507428916>",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/c/c3/IconPerks_deadMansSwitch.png",
             "id": "deadmansswitch"
         },
         {
             "nameEs": "Vinculo mortal",
             "nameEn": "Deathbound",
-            "emoji": "<:iconPerks_deathbound:741712928087998594>",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/e/e7/IconPerks_deathbound.png",
             "id": "deathbound"
         },
         {
             "nameEs": "Acechador de ciervos",
             "nameEn": "Deerstalker",
-            "emoji": "<:iconPerks_deerstalker:741712927328960562>",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/0/01/IconPerks_deerstalker.png",
             "id": "deerstalker"
         },
         {
             "nameEs": "Discordancia",
             "nameEn": "Discordance",
-            "emoji": "<:iconPerks_discordance:741712927043878964>",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/8/82/IconPerks_discordance.png",
             "id": "discordance"
         },
         {
             "nameEs": "Desasociego",
             "nameEn": "Distressing",
-            "emoji": "<:iconPerks_distressing:741712927999918181>",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/9/94/IconPerks_distressing.png",
             "id": "distressing"
         },
         {
             "nameEs": "Luz que agoniza",
             "nameEn": "Dying Light",
-            "emoji": "<:iconPerks_dyingLight:741712927765037206>",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/4/48/IconPerks_dyingLight.png",
             "id": "dying_light"
         },
         {
             "nameEs": "Resistente",
             "nameEn": "Enduring",
-            "emoji": "<:iconPerks_enduring:741713029728829484>",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/9/94/IconPerks_enduring.png",
             "id": "enduring"
         },
         {
             "nameEs": "Enfurecimiento",
             "nameEn": "Fire Up",
-            "emoji": "<:iconPerks_fireUp:741713030827737089>",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/5/5c/IconPerks_fireUp.png",
             "id": "fireup"
         },
         {
             "nameEs": "Imposicion de penitencia",
             "nameEn": "Forced Penance",
-            "emoji": "<:iconPerks_forcedPenance:741713038561902653>",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/1/1d/IconPerks_forcedPenance.png",
             "id": "forcedpenance"
         },
         {
             "nameEs": "Muerte de franklin",
             "nameEn": "Franklins Demise",
-            "emoji": "<:iconPerks_franklinsLoss:741713038838595594>",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/b/b2/IconPerks_franklinsDemise.png",
             "id": "franklinsloss"
         },
         {
             "nameEs": "Persecucion furtiva",
             "nameEn": "Furtive Chase",
-            "emoji": "<:iconPerks_furtiveChase:741713041086742611>",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/9/94/IconPerks_furtiveChase.png",
             "id": "furtivechase"
         },
         {
             "nameEs": "Oido para la maquinaria",
             "nameEn": "Gearhead",
-            "emoji": "<:iconPerks_gearHead:741713037592887326>",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/f/fd/IconPerks_gearhead.png",
             "id": "gearhead"
         },
         {
             "nameEs": "Truco del verdugo",
             "nameEn": "Hangmans Trick",
-            "emoji": "<:iconPerks_hangmansTrick:741713038054260736>",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/b/b4/IconPerks_hangmansTrick.png",
             "id": "hangmanstrick"
         },
         {
             "nameEs": "Maleficio: Devoradora de esperanza",
             "nameEn": "Hex: Devour Hope",
-            "emoji": "<:iconPerks_devourHope:741712927639470220>",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/c/c9/IconPerks_hexDevourHope.png",
             "id": "hex_devour_hope"
         },
         {
             "nameEs": "Maleficio: Tierra embrujada",
             "nameEn": "Hex: Haunted Ground",
-            "emoji": "<:iconPerks_hauntedGround:741713041334337577>",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/c/c4/IconPerks_hexHauntedGround.png",
             "id": "hex_hauntedground"
         },
         {
             "nameEs": "Maleficio: Nana de cazadora",
             "nameEn": "Hex: Huntress Lullaby",
-            "emoji": "<:iconPerks_HuntressLullaby:741713040831152160>",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/1/11/IconPerks_hexHuntressLullaby.png",
             "id": "hex_huntresslullaby"
         },
         {
             "nameEs": "Maleficio: Nadie escapa de la muerte",
             "nameEn": "Hex: No One Escapes Death",
-            "emoji": "<:iconPerks_noOneEscapesDeath:741713040508059749>",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/a/af/IconPerks_hexNoOneEscapesDeath.png",
             "id": "no_one_escapes_death"
         },
         {
             "nameEs": "Maleficio: Represalias",
             "nameEn": "Hex: Retribution",
-            "emoji": "<:iconPerks_hexRetribution:741713041212833884>",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/a/ab/IconPerks_hexRetribution.png",
             "id": "hexretribution"
         },
         {
             "nameEs": "Maleficio: Ruina",
             "nameEn": "Hex: Ruin",
-            "emoji": "<:iconPerks_ruin:741713167440150618>",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/a/a2/IconPerks_hexRuin.png",
             "id": "hex_ruin"
         },
         {
             "nameEs": "Maleficio: El tercer sello",
             "nameEn": "Hex: The Third Seal",
-            "emoji": "<:iconPerks_theThirdSeal:741713167763243098>",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/3/36/IconPerks_hexTheThirdSeal.png",
             "id": "hex_the_third_seal"
         },
         {
             "nameEs": "Maleficio: La emocion de la caza",
             "nameEn": "Hex: Thrill of the Hunt",
-            "emoji": "<:iconPerks_thrillOfTheHunt:741713167826026506>",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/0/02/IconPerks_hexThrillOfTheHunt.png",
             "id": "hex_thrill_of_the_hunt"
         },
         {
             "nameEs": "Soy todo oidos",
             "nameEn": "Im All Ears",
-            "emoji": "<:iconPerks_imAllEars:741713041338531841>",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/e/e3/IconPerks_imAllEars.png",
             "id": "imallears"
         },
         {
             "nameEs": "Terror contagioso",
             "nameEn": "Infectious Fright",
-            "emoji": "<:iconPerks_infectiousFright:741713040961175635>",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/6/6d/IconPerks_infectiousFright.png",
             "id": "infectiousfright"
         },
         {
             "nameEs": "Insidia",
             "nameEn": "Insidious",
-            "emoji": "<:iconPerks_insidious:741713038914355280>",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/4/40/IconPerks_insidious.png",
             "id": "insidious"
         },
         {
             "nameEs": "Apreton de hierro",
             "nameEn": "Iron Grasp",
-            "emoji": "<:iconPerks_ironGrasp:741713039241379930>",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/1/14/IconPerks_ironGrasp.png",
             "id": "iron_grasp"
         },
         {
             "nameEs": "Doncella de hierro",
             "nameEn": "Iron Maiden",
-            "emoji": "<:iconPerks_ironMaiden:741713041242194001>",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/b/b0/IconPerks_ironMaiden.png",
             "id": "ironmaiden"
         },
         {
             "nameEs": "Noqueo",
             "nameEn": "Knock Out",
-            "emoji": "<:iconPerks_knockOut:741713040474374145>",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/5/52/IconPerks_knockOut.png",
             "id": "inthedark"
         },
         {
             "nameEs": "Hijo de la luz",
             "nameEn": "Lightborn",
-            "emoji": "<:iconPerks_lightborn:741713040290087064>",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/4/48/IconPerks_lightborn.png",
             "id": "lightborn"
         },
         {
             "nameEs": "Furia ciega",
             "nameEn": "Mad Grit",
-            "emoji": "<:iconPerks_madGrit:741713041472749739>",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/d/da/IconPerks_madGrit.png",
             "id": "madgrit"
         },
         {
             "nameEs": "Toma una decicion",
             "nameEn": "Make Your Choice",
-            "emoji": "<:iconPerks_makeYourChoice:741713040067657738>",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/6/6b/IconPerks_makeYourChoice.png",
             "id": "makeyourchoice"
         },
         {
             "nameEs": "Quebrantamentes",
             "nameEn": "Mindbreaker",
-            "emoji": "<:iconPerks_mindBreaker:741713041443520752>",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/0/0f/IconPerks_mindbreaker.png",
             "id": "mindbreaker"
         },
         {
             "nameEs": "Monitorizacion y abuso",
             "nameEn": "Monitor & Abuse",
-            "emoji": "<:iconPerks_monitorAndAbuse:741713041326080072>",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/6/60/IconPerks_monitorAndAbuse.png",
             "id": "monitorandabuse"
         },
         {
             "nameEs": "Santuario monstruoso",
             "nameEn": "Monstrous Shrine",
-            "emoji": "<:iconPerks_monstrousShrine:741713039820324954>",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/f/f5/IconPerks_monstrousShrine.png",
             "id": "monstrous_shrine"
         },
         {
             "nameEs": "Nemesis",
             "nameEn": "Nemesis",
-            "emoji": "<:iconPerks_nemesis:741713041535795230>",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/3/33/IconPerks_nemesis.png",
             "id": "nemesis"
         },
         {
             "nameEs": "Sobrecarga",
             "nameEn": "Overcharge",
-            "emoji": "<:iconPerks_generatorOvercharge:741713040386424834>",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/c/c3/IconPerks_overcharge.png",
             "id": "generatorovercharge"
         },
         {
             "nameEs": "Presencia abrumadora",
             "nameEn": "Overwhelming Presence",
-            "emoji": "<:iconPerks_overwhelmingPresence:741713039929245879>",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/9/9a/IconPerks_overwhelmingPresence.png",
             "id": "overwhelmingpresence"
         },
         {
             "nameEs": "Jugar con la comida",
             "nameEn": "Play with Your Food",
-            "emoji": "<:iconPerks_playWithYourFood:741713041087004824>",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/1/18/IconPerks_playWithYourFood.png",
             "id": "play_with_your_food"
         },
         {
             "nameEs": "Pim, Pam, Pum",
             "nameEn": "Pop Goes the Weasel",
-            "emoji": "<:iconPerks_popGoesTheWeasel:741713158447693918>",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/0/0f/IconPerks_popGoesTheWeasel.png",
             "id": "pop_goes_the_weasel"
         },
         {
             "nameEs": "Depredacion",
             "nameEn": "Predator",
-            "emoji": "<:iconPerks_predator:741713162608443412>",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/7/73/IconPerks_predator.png",
             "id": "predator"
         },
         {
             "nameEs": "Rencor",
             "nameEn": "Rancor",
-            "emoji": "<:iconPerks_hatred:741713041632002098>",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/a/a2/IconPerks_rancor.png",
             "id": "rancor"
         },
         {
             "nameEs": "Recuerdame",
             "nameEn": "Remember Me",
-            "emoji": "<:iconPerks_rememberMe:741713166404157600>",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/6/62/IconPerks_rememberMe.png",
             "id": "rememberme"
         },
         {
             "nameEs": "Lo mejor para el final",
             "nameEn": "Save the Best for Last",
-            "emoji": "<:iconPerks_saveTheBestForLast:741713167276834847>",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/6/6a/IconPerks_saveTheBestForLast.png",
             "id": "save_the_best_for_last"
         },
         {
             "nameEs": "Hijo de las sombras",
             "nameEn": "Shadowborn",
-            "emoji": "<:iconPerks_shadowborn:741713166588969000>",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/a/ac/IconPerks_shadowborn.png",
             "id": "shadowborn"
         },
         {
             "nameEs": "Carnicero chapucero",
             "nameEn": "Sloppy Butcher",
-            "emoji": "<:iconPerks_sloppyButcher:741713165166968843>",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/5/5a/IconPerks_sloppyButcher.png",
             "id": "sloppy_butcher"
         },
         {
             "nameEs": "Espias de las sombras",
             "nameEn": "Spies from the Shadows",
-            "emoji": "<:iconPerks_spiesFromTheShadows:741713165120962591>",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/b/b1/IconPerks_spiesFromTheShadows.png",
             "id": "spies_from_the_shadows"
         },
         {
             "nameEs": "Furia espiritual",
             "nameEn": "Spirit Fury",
-            "emoji": "<:iconPerks_spiritFury:741713167729688737>",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/a/a6/IconPerks_spiritFury.png",
             "id": "spiritfury"
         },
         {
             "nameEs": "Aliento",
             "nameEn": "Stridor",
-            "emoji": "<:iconPerks_stridor:741713167654191165>",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/3/32/IconPerks_stridor.png",
             "id": "stridor"
         },
         {
             "nameEs": "Sobretencion",
             "nameEn": "Surge",
-            "emoji": "<:iconPerks_surge:741713168111501473>",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/3/3b/IconPerks_surge.png",
             "id": "surge"
         },
         {
             "nameEs": "Supervision",
             "nameEn": "Surveillance",
-            "emoji": "<:iconPerks_surveillance:741713167821832192>",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/e/eb/IconPerks_surveillance.png",
             "id": "surveillance"
         },
         {
             "nameEs": "Instinto territorial",
             "nameEn": "Territorial Imperative",
-            "emoji": "<:iconPerks_TerritorialImperative:741713167113257000>",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/2/2a/IconPerks_territorialImperative.png",
             "id": "territorialimperative"
         },
         {
             "nameEs": "Manitas",
             "nameEn": "Tinkerer",
-            "emoji": "<:iconPerks_tinkerer:741713166085652611>",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/d/d9/IconPerks_tinkerer.png",
             "id": "tinkerer"
         },
         {
             "nameEs": "Tanatofobia",
             "nameEn": "Thanatophobia",
-            "emoji": "<:iconPerks_thatanophobia:741713167079571526>",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/a/a2/IconPerks_thanatophobia.png",
             "id": "thanatophobia"
         },
         {
             "nameEs": "Temblores trepidantes",
             "nameEn": "Thrilling Tremors",
-            "emoji": "<:iconPerks_thrillingTremors:741713167838609541>",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/b/b8/IconPerks_thrillingTremors.png",
             "id": "thrillingtremors"
         },
         {
             "nameEs": "Rastro de tormento",
             "nameEn": "Trail of Torment",
-            "emoji": "<:iconPerks_trailOfTorment:741713167515910196>",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/9/94/IconPerks_trailOfTorment.png",
             "id": "trailoftorment"
         },
         {
             "nameEs": "Presencia perturbadora",
             "nameEn": "Unnerving Presence",
-            "emoji": "<:iconPerks_unnervingPresence:741713166878113947>",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/a/a4/IconPerks_unnervingPresence.png",
             "id": "unnerving_presence"
         },
         {
             "nameEs": "Implacable",
             "nameEn": "Unrelenting",
-            "emoji": "<:iconPerks_unrelenting:741713167607922751>",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/5/57/IconPerks_unrelenting.png",
             "id": "unrelenting"
         },
         {
             "nameEs": "Murmullos",
             "nameEn": "Whispers",
-            "emoji": "<:iconPerks_whispers:741726257615732828>",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/b/bb/IconPerks_whispers.png",
             "id": "whispers"
         },
         {
             "nameEs": "Tacticas de zanshin",
             "nameEn": "Zanshin Tactics",
-            "emoji": "<:iconPerks_zanshinTactics:741726259121225858>",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/d/d3/IconPerks_zanshinTactics.png",
             "id": "zanshintactics"
         },
         {
             "nameEs": "Maleficio: Inmortal",
             "nameEn": "Hex: Undying",
-            "emoji": "<:iconPerks_hexUndying:753423003500544031>",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/f/fe/IconPerks_hexUndying.png",
             "id": "hexundying"
         },
         {
             "nameEs": "Agarre del dragon",
             "nameEn": "Dragon's Grip",
-            "emoji": "<:iconPerks_dragonsGrip:753423004012118056>",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/f/ff/IconPerks_dragonsGrip.png",
             "id": "dragonsgrip"
         },
         {
             "nameEs": "Maleficio: Favor de sangre",
             "nameEn": "Hex: Blood Favour",
-            "emoji": "<:iconPerks_hexBloodFavor:753423003659927802>",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/6/6b/IconPerks_hexBloodFavour.png",
             "id": "hexbloodfavor"
         },
         {
             "nameEs": "Acaparadora",
             "nameEn": "Hoarder",
-            "emoji": "<:iconPerks_Hoarder:784561401938968636>",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/2/23/IconPerks_hoarder.png",
             "id": "k22p01"
         },
         {
             "nameEs": "Opresion",
             "nameEn": "Oppression",
-            "emoji": "<:iconPerks_Oppression:784561401326207006>",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/a/a1/IconPerks_oppression.png",
             "id": "k22p02"
         },
         {
             "nameEs": "Golpe de gracia",
             "nameEn": "Coup de Grâce",
-            "emoji": "<:iconPerks_coupDeGrace:784561400944656384>",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/b/bd/IconPerks_coupDeGrâce.png",
             "id": "k22p03"
         },
         {
             "nameEs": "Deslumbrado",
             "nameEn": "Starstruck",
-            "emoji": "<:iconPerks_Starstruck:826562717531504722>",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/6/6e/IconPerks_starstruck.png",
             "id": "k23p01"
         },
         {
             "nameEs": "Maleficio: Control de masas",
             "nameEn": "Hex: Crowd Control",
-            "emoji": "<:iconPerks_HexCrowdControl:826562717258612817>",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/f/f1/IconPerks_hexCrowdControl.png",
             "id": "k23p02"
         },
         {
             "nameEs": "Sin escapatoria",
             "nameEn": "No Way Out",
-            "emoji": "<:iconPerks_NoWayOut:826562717560209468>",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/b/bb/IconPerks_noWayOut.png",
             "id": "k23p03"
         },
         {
             "nameEs": "Acecho letal",
             "nameEn": "Lethal Pursuer",
-            "emoji": "<:iconPerks_lethalPursuer:>",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/6/61/IconPerks_lethalPursuer.png",
             "id": "k24p01"
         },
         {
             "nameEs": "Histeria",
             "nameEn": "Hysteria",
-            "emoji": "<:iconPerks_hysteria:>",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/3/3a/IconPerks_hysteria.png",
             "id": "k24p02"
         },
         {
             "nameEs": "Erupcion",
             "nameEn": "Eruption",
-            "emoji": "<:iconPerks_eruption:>",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/d/dd/IconPerks_eruption.png",
             "id": "k24p03"
         },
         {
             "nameEs": "Candado",
             "nameEn": "Deadlock",
-            "emoji": "<:iconPerks_deadlock:>",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/d/d3/IconPerks_deadlock.png",
             "id": "k25p01"
         },
         {
             "nameEs": "Maleficio: Juguete",
             "nameEn": "Hex: Plaything",
-            "emoji": "<:iconPerks_hexPlaything:>",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/1/18/IconPerks_hexPlaything.png",
             "id": "k25p02"
         },
         {
             "nameEs": "Gancho Flagelante: Obsequio Doloroso",
             "nameEn": "Scourge Hook: Gift of Pain",
-            "emoji": "<:iconPerks_scourgeHookGiftOfPain:>",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/2/26/IconPerks_scourgeHookGiftOfPain.png",
             "id": "k25p03"
         },
         {
             "nameEs": "Acogida Nefasta",
             "nameEn": "Grim Embrace",
-            "emoji": "<:IconPerks_grimEmbrace:>",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/1/1c/IconPerks_grimEmbrace.png",
             "id": "k26p01"
         },
         {
             "nameEs": "Gancho Flagelante: Dolor Retumbante",
             "nameEn": "Scourge Hook: Pain Resonance",
-            "emoji": "<:IconPerks_scourgeHookPainResonance:>",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/7/79/IconPerks_scourgeHookPainResonance.png",
             "id": "k26p02"
         },
         {
             "nameEs": "Maleficio: Pentimento",
             "nameEn": "Hex: Pentimento",
-            "emoji": "<:IconPerks_hexPentimento:>",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/5/5d/IconPerks_hexPentimento.png",
             "id": "k26p03"
         }
     ]

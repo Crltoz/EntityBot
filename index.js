@@ -620,12 +620,12 @@ client.on("message", async (message) => {
           if (err) throw err;
           let perksName = [rows[0].perk_1.split(":")[0], rows[0].perk_2.split(":")[0], rows[0].perk_3.split(":")[0], rows[0].perk_4.split(":")[0]]
           let perksShard = [rows[0].perk_1.split(":")[1], rows[0].perk_2.split(":")[1], rows[0].perk_3.split(":")[1], rows[0].perk_4.split(":")[1]]
-          let perk1 = await getPerkIndexByID(perksName[0])
-          let perk2 = await getPerkIndexByID(perksName[1])
-          let perk3 = await getPerkIndexByID(perksName[2])
-          let perk4 = await getPerkIndexByID(perksName[3])
-          if (!isValidPerk(perk1.index) || !isValidPerk(perk2.index) || !isValidPerk(perk3.index) || !isValidPerk(perk4.index)) {
-            console.log(`Invalid perks in shrine: ${perk1.index} (${rows[0].perk_1}) | ${perk2.index} (${rows[0].perk_2}) | ${perk3.index} (${rows[0].perk_3}) | ${perk4.index} (${rows[0].perk_4})`)
+          let perk1 = await getPerkById(perksName[0]);
+          let perk2 = await getPerkById(perksName[1]);
+          let perk3 = await getPerkById(perksName[2]);
+          let perk4 = await getPerkById(perksName[3]);
+          if (!perk1 || !perk2 || !perk3 || !perk4) {
+            console.log(`Invalid perks in shrine: ${perk1} (${rows[0].perk_1}) | ${perk2} (${rows[0].perk_2}) | ${perk3} (${rows[0].perk_3}) | ${perk4} (${rows[0].perk_4})`)
             message.channel.send("Actualmente no podemos mostrar esta información, por favor reportalo en nuestro Discord en la sección de bugs: https://discord.gg/T6rEERg")
             return
           }
@@ -934,49 +934,45 @@ client.on("message", async (message) => {
 
       if (command == 'random') {
         if (!texto) return message.member.send('Usa **' + prefix[message.guild.id] + 'random [Survivor o Killer]** || Te retornará un survivor o killer aleatorio con 4 perks.')
-        let isSurv, nCharacter, nPerk;
+        let isSurv, nCharacter, nPerks;
         if (texto.toLowerCase() == 'survivor') isSurv = true
         else if (texto.toLowerCase() == 'killer') isSurv = false
         else return message.member.send('Usa **/random [Survivor o Killer]** || Te retornará un survivor o killer aleatorio con 4 perks.').catch(function (err) { message.channel.send(message.member.user.toString() + ' Activa tus mensajes privados para que el bot pueda informarte.') });
+        let perk1, perk2, perk3, perk4;
         if (isSurv) {
           nCharacter = Math.floor(Math.random() * getLength(survivors));
-          nPerk = getRandomNumber(getLength(survivorPerks))
+          nPerks = getRandomNumber(getLength(survivorPerks));
+          perk1 = survivorPerks[nPerks.n1];
+          perk2 = survivorPerks[nPerks.n2];
+          perk3 = survivorPerks[nPerks.n3];
+          perk4 = survivorPerks[nPerks.n4];
         } else {
           nCharacter = Math.floor(Math.random() * getLength(killers));
-          nPerk = getRandomNumber(getLength(killerPerks))
+          nPerks = getRandomNumber(getLength(killerPerks));
+          perk1 = killerPerks[nPerks.n1];
+          perk2 = killerPerks[nPerks.n2];
+          perk3 = killerPerks[nPerks.n3];
+          perk4 = killerPerks[nPerks.n4];
         }
-        createRandomBuild(message, nCharacter, nPerk.n1, nPerk.n2, nPerk.n3, nPerk.n4, isSurv, lenguaje[message.guild.id])
+        createRandomBuild(message, nCharacter, perk1, perk2, perk3, perk4, isSurv, lenguaje[message.guild.id]);
         return;
       }
 
       if (command == 'tperks') {
-        let isSurv, perks = [], character
+        let isSurv, character;
         if (!texto) return message.member.send('Usa ' + prefix[message.guild.id] + 'tperks [Numero de perks a mostrar] [Survivor o Killer]')
         if (args[0] % 4 != 0) return message.member.send('Usa numeros multiplos de 4. Como la tienen a tu hermana')
         if (args[1].toLowerCase() == 'survivor') isSurv = true
         else if (args[1].toLowerCase() == 'killer') isSurv = false
         else return message.member.user('Usa survivor o killer de forma correcta. PD:Zander no lo rompas')
+        let perkLength = isSurv ? getLength(survivorPerks) : getLength(killerPerks);
         if (isSurv) {
-          character = getLength(survivors) - 1
-          for (let index = getLength(survivorPerks); index > getLength(survivorPerks) - args[0]; index--) {
-            perks.push(index - 1)
-          }
-          let builds = args[0] / 4
-          for (let index = 0; index < builds; index++) {
-            createRandomBuild(message, character - index, perks[perks.length - 1], perks[perks.length - 2], perks[perks.length - 3], perks[perks.length - 4], isSurv, lenguaje[message.guild.id])
-            perks = perks.slice(0, perks.length - 4)
-          }
+          character = getLength(survivors) - 1;
+          createRandomBuild(message, character - index, survivorPerks[perkLength.length - 1], perks[perkLength.length - 2], perks[perkLength.length - 3], perks[perkLength.length - 4], isSurv, lenguaje[message.guild.id])
         }
         else {
-          character = getLength(killers) - 1
-          for (let index = getLength(killerPerks); index > getLength(killerPerks) - args[0]; index--) {
-            perks.push(index - 1)
-          }
-          let builds = args[0] / 4
-          for (let index = 0; index < builds; index++) {
-            createRandomBuild(message, character - index, perks[perks.length - 1], perks[perks.length - 2], perks[perks.length - 3], perks[perks.length - 4], isSurv, lenguaje[message.guild.id])
-            perks = perks.slice(0, perks.length - 4)
-          }
+          character = getLength(killers) - 1;
+          createRandomBuild(message, character - index, killerPerks[perkLength.length - 1], killerPerks[perkLength.length - 2], killerPerks[perkLength.length - 3], killerPerks[perkLength.length - 4], isSurv, lenguaje[message.guild.id])
         }
         return
       }
@@ -1020,12 +1016,12 @@ client.on("message", async (message) => {
           if (err) throw err;
           let perksName = [rows[0].perk_1.split(":")[0], rows[0].perk_2.split(":")[0], rows[0].perk_3.split(":")[0], rows[0].perk_4.split(":")[0]]
           let perksShard = [rows[0].perk_1.split(":")[1], rows[0].perk_2.split(":")[1], rows[0].perk_3.split(":")[1], rows[0].perk_4.split(":")[1]]
-          let perk1 = await getPerkIndexByID(perksName[0])
-          let perk2 = await getPerkIndexByID(perksName[1])
-          let perk3 = await getPerkIndexByID(perksName[2])
-          let perk4 = await getPerkIndexByID(perksName[3])
-          if (!isValidPerk(perk1.index) || !isValidPerk(perk2.index) || !isValidPerk(perk3.index) || !isValidPerk(perk4.index)) {
-            console.log(`Invalid perks in shrine: ${perk1.index} (${rows[0].perk_1}) | ${perk2.index} (${rows[0].perk_2}) | ${perk3.index} (${rows[0].perk_3}) | ${perk4.index} (${rows[0].perk_4})`)
+          let perk1 = await getPerkById(perksName[0])
+          let perk2 = await getPerkById(perksName[1])
+          let perk3 = await getPerkById(perksName[2])
+          let perk4 = await getPerkById(perksName[3])
+          if (!perk1 || !perk2 || !perk3 || !perk4) {
+            console.log(`Invalid perks in shrine: ${perk1} (${rows[0].perk_1}) | ${perk2} (${rows[0].perk_2}) | ${perk3} (${rows[0].perk_3}) | ${perk4} (${rows[0].perk_4})`)
             message.channel.send("We are currently unable to display this information, please report it on our Discord in the bugs section: https://discord.gg/T6rEERg")
             return
           }
@@ -1361,18 +1357,27 @@ client.on("message", async (message) => {
 
       if (command == 'random') {
         if (!texto) return message.member.send('Use **' + prefix[message.guild.id] + 'random [Survivor or Killer]** || It will give you a random 4 perk build for a survivor or killer.')
-        let isSurv, nCharacter, nPerk;
+        let isSurv, nCharacter, nPerks;
         if (texto.toLowerCase() == 'survivor') isSurv = true
         else if (texto.toLowerCase() == 'killer') isSurv = false
         else return message.member.send('Use **' + prefix[message.guild.id] + 'random [Survivor or Killer]** || It will give you a random 4 perk build for a survivor or killer.')
+        let perk1, perk2, perk3, perk4;
         if (isSurv) {
           nCharacter = Math.floor(Math.random() * getLength(survivors));
-          nPerk = getRandomNumber(getLength(survivorPerks))
+          nPerks = getRandomNumber(getLength(survivorPerks));
+          perk1 = survivorPerks[nPerks.n1];
+          perk2 = survivorPerks[nPerks.n2];
+          perk3 = survivorPerks[nPerks.n3];
+          perk4 = survivorPerks[nPerks.n4];
         } else {
           nCharacter = Math.floor(Math.random() * getLength(killers));
-          nPerk = getRandomNumber(getLength(killerPerks))
+          nPerks = getRandomNumber(getLength(killerPerks));
+          perk1 = killerPerks[nPerks.n1];
+          perk2 = killerPerks[nPerks.n2];
+          perk3 = killerPerks[nPerks.n3];
+          perk4 = killerPerks[nPerks.n4];
         }
-        createRandomBuild(message, nCharacter, nPerk.n1, nPerk.n2, nPerk.n3, nPerk.n4, isSurv, lenguaje[message.guild.id])
+        createRandomBuild(message, nCharacter, perk1, perk2, perk3, perk4, isSurv, lenguaje[message.guild.id]);
         return;
       }
 
@@ -1392,19 +1397,27 @@ client.on('clickMenu', async (menu) => {
         break;
       }
       case "randomSurvivor": {
-        await menu.reply.think()
+        await menu.reply.think();
         let nCharacter = Math.floor(Math.random() * getLength(survivors));
-        let nPerk = getRandomNumber(getLength(survivorPerks))
-        let think = menu.reply
-        createRandomBuild(menu.message, nCharacter, nPerk.n1, nPerk.n2, nPerk.n3, nPerk.n4, true, lenguaje[menu.message.guild.id], think)
+        let nPerks = getRandomNumber(getLength(survivorPerks));
+        let think = menu.reply;
+        let perk1 = survivorPerks[nPerks.n1];
+        let perk2 = survivorPerks[nPerks.n2];
+        let perk3 = survivorPerks[nPerks.n3];
+        let perk4 = survivorPerks[nPerks.n4];
+        createRandomBuild(menu.message, nCharacter, perk1, perk2, perk3, perk4, true, lenguaje[menu.message.guild.id], think)
         break;
       }
       case "randomKiller": {
-        await menu.reply.think()
-        let think = menu.reply
+        await menu.reply.think();
+        let think = menu.reply;
         let nCharacter = Math.floor(Math.random() * getLength(killers));
-        let nPerk = getRandomNumber(getLength(killerPerks))
-        createRandomBuild(menu.message, nCharacter, nPerk.n1, nPerk.n2, nPerk.n3, nPerk.n4, false, lenguaje[menu.message.guild.id], think)
+        let nPerks = getRandomNumber(getLength(killerPerks));
+        let perk1 = killerPerks[nPerks.n1];
+        let perk2 = killerPerks[nPerks.n2];
+        let perk3 = killerPerks[nPerks.n3];
+        let perk4 = killerPerks[nPerks.n4];
+        createRandomBuild(menu.message, nCharacter, perk1, perk2, perk3, perk4, false, lenguaje[menu.message.guild.id], think);
         break;
       }
       case "help": {
@@ -1864,7 +1877,8 @@ function handleDisconnect() {
           }
         }
       });
-      console.log('Base de datos conectada.')
+      console.log('Base de datos conectada.');
+      //client.guilds.cache.get("731243458249097286").channels.cache.get("915426335512469514").send("Bot encendido, base de datos conectada.");
     }
     setInterval(function () {
       con.query('SELECT * FROM Servidores')
@@ -1985,8 +1999,10 @@ function loadPerks() {
       survivorPerks[x] = {
         nameEs: msg.perks[x].nameEs,
         nameEn: msg.perks[x].nameEn,
-        emoji: msg.perks[x].emoji,
-        id: msg.perks[x].id
+        link: msg.perks[x].link,
+        id: msg.perks[x].id,
+        index: x,
+        isSurv: true,
       }
     }
     return;
@@ -1999,9 +2015,11 @@ function loadPerks() {
         killerPerks[x] = {
           nameEs: msg.perks[x].nameEs,
           nameEn: msg.perks[x].nameEn,
-          emoji: msg.perks[x].emoji,
-          id: msg.perks[x].id
-        }
+          link: msg.perks[x].link,
+          id: msg.perks[x].id,
+          index: x,
+          isSurv: false
+        };
       }
       return;
     });
@@ -2057,30 +2075,26 @@ function loadRules() {
 
 /**
  * @param {String} id - Perk ID from Australian Site.
- * @description Get perk index from ID.
+ * @description Get perk (undefined if not find)
  */
-async function getPerkIndexByID(id) {
-  let index = -1;
-  let isSurv = false
+async function getPerkById(id) {
+  let perk;
   for (let x = 0; x < getLength(survivorPerks); x++) {
     if (id == survivorPerks[x].id) {
-      isSurv = true
-      index = x;
+      perk = survivorPerks[x];
       break;
     }
   }
-  if (index == -1) {
+
+  if (!perk) {
     for (let x = 0; x < getLength(killerPerks); x++) {
       if (id == killerPerks[x].id) {
-        index = x;
+        perk = killerPerks[x];
         break;
       }
     }
   }
-  return {
-    isSurv: isSurv,
-    index: index
-  };
+  return perk;
 }
 
 function createHelpMessage(message, think = null) {
@@ -2140,39 +2154,11 @@ function isValidPerk(index) {
 }
 
 /**
- * @param {Int8Array} index - Perk index from JSON file.
- * @param {Boolean} isSurv - true = survivor | false = killer
- * @param {Int8Array} language - 0 = spanish | 1 = english
- * @description Get perk name from index.
- */
-function getPerkName(index, isSurv, language) {
-  console.log(`index: ${index} | isSurv: ${isSurv} | language ${language}`)
-  if (isSurv) {
-    if (language == 0) return survivorPerks[index].nameEs
-    else return survivorPerks[index].nameEn
-  } else {
-    if (language == 0) return killerPerks[index].nameEs
-    else return killerPerks[index].nameEn
-  }
-}
-
-/**
- * @param {Int8Array} index - Perk index from JSON file.
- * @param {Boolean} isSurv - true = survivor | false = killer
- * @description Get perk icon from index.
- */
-function getPerkIcon(index, isSurv) {
-  if (isSurv) return survivorPerks[index].emoji
-  else return killerPerks[index].emoji
-}
-
-/**
  * @description Get length from object
  */
 function getLength(obj) {
   return Object.keys(obj).length
 }
-
 
 /**
  * @param {Int8Array} max - Max number for the random selector.
@@ -2217,83 +2203,54 @@ function getRandomNumber(max) {
 
 /**
  * @param {Int8Array} numberCharacter - Number of the character from JSON File.
- * @param {Int8Array} numberPerk1 - Number of the perk from JSON File.
- * @param {Int8Array} numberPerk2 - Number of the perk from JSON File.
- * @param {Int8Array} numberPerk3 - Number of the perk from JSON File.
- * @param {Int8Array} numberPerk4 - Number of the perk from JSON File.
+ * @param {Int8Array} perk1 - perk 1 data
+ * @param {Int8Array} perk2 - perk 2 data
+ * @param {Int8Array} perk3 - perk 3 data
+ * @param {Int8Array} perk4 - perk 4 data
  * @param {Boolean} isSurv - true = Survivor | false = Killer
  * @param {Int8Array} language - 0 = Spanish | 1 = English 
  * @description Get embed with random build and character.
  */
-async function createRandomBuild(message, numberCharacter, numberPerk1, numberPerk2, numberPerk3, numberPerk4, isSurv, language, think = null) {
-  if (isSurv) {
+async function createRandomBuild(message, numberCharacter, perk1, perk2, perk3, perk4, isSurv, language, think = null) {
     const canvas = Canvas.createCanvas(1579, 1114);
     const ctx = canvas.getContext('2d');
     let fontSize = 21
-    ctx.drawImage(backgroundSurvivor, 0, 0, canvas.width, canvas.height);
+    ctx.drawImage(isSurv ? backgroundSurvivor : backgroundKiller, 0, 0, canvas.width, canvas.height);
 
     ctx.strokeStyle = '#74037b';
     ctx.strokeRect(0, 0, canvas.width, canvas.height);
 
+    // avatar
     ctx.font = '101px "dbd"';
     ctx.fillStyle = '#ffffff';
-    ctx.fillText(survivors[numberCharacter].name, calculateCenter(1267, survivors[numberCharacter].name.length, fontSize), 207);
-    const avatar = await Canvas.loadImage(survivors[numberCharacter].link);
+    if (isSurv) ctx.fillText(survivors[numberCharacter].name, calculateCenter(1267, survivors[numberCharacter].name.length, fontSize), 207);
+    else {
+      let string = language == 0 ? killers[numberCharacter].nameEs : killers[numberCharacter].nameEn
+      ctx.fillText(string, calculateCenter(1267, string.length, fontSize), 207);
+    }
+    const avatar = await Canvas.loadImage(isSurv ? survivors[numberCharacter].link : killers[numberCharacter].link);
     ctx.drawImage(avatar, 1045, 227, 447, 619);
-    let perkImageName = [getImageName(numberPerk1, isSurv), getImageName(numberPerk2, isSurv), getImageName(numberPerk3, isSurv), getImageName(numberPerk4, isSurv)]
-    const perkImage_1 = await getImage(perkImageName[0], isSurv)
-    const perkImage_2 = await getImage(perkImageName[1], isSurv)
-    const perkImage_3 = await getImage(perkImageName[2], isSurv)
-    const perkImage_4 = await getImage(perkImageName[3], isSurv)
+
+    // perks
+    const perkImage_1 = await Canvas.loadImage(perk1.link);
+    const perkImage_2 = await Canvas.loadImage(perk2.link);
+    const perkImage_3 = await Canvas.loadImage(perk3.link);
+    const perkImage_4 = await Canvas.loadImage(perk4.link);
     ctx.drawImage(perkImage_1, 302, 234, 256, 256);
     ctx.drawImage(perkImage_2, 116, 429, 256, 256);
     ctx.drawImage(perkImage_3, 493, 429, 256, 256);
     ctx.drawImage(perkImage_4, 303, 605, 256, 256);
 
-    const attachment = new Discord.MessageAttachment(canvas.toBuffer(), 'survivor-random.png');
+    const attachment = new Discord.MessageAttachment(canvas.toBuffer(), 'random.png');
 
     if (language == 0) {
-      if (!think) message.channel.send(`**PERKS:**\n1⃣: ${survivorPerks[numberPerk1].nameEs}\n2⃣: ${survivorPerks[numberPerk2].nameEs}\n3⃣: ${survivorPerks[numberPerk3].nameEs}\n4⃣: ${survivorPerks[numberPerk4].nameEs}`, attachment)
-      else think.edit(`**PERKS:**\n1⃣: ${survivorPerks[numberPerk1].nameEs}\n2⃣: ${survivorPerks[numberPerk2].nameEs}\n3⃣: ${survivorPerks[numberPerk3].nameEs}\n4⃣: ${survivorPerks[numberPerk4].nameEs}`, attachment)
+      if (!think) message.channel.send(`**PERKS:**\n1⃣: ${perk1.nameEs}\n2⃣: ${perk2.nameEs}\n3⃣: ${perk3.nameEs}\n4⃣: ${perk4.nameEs}`, attachment);
+      else think.edit(`**PERKS:**\n1⃣: ${perk1.nameEs}\n2⃣: ${perk2.nameEs}\n3⃣: ${perk3.nameEs}\n4⃣: ${perk4.nameEs}`, attachment);
     } else {
-      if (!think) message.channel.send(`**PERKS:**\n1⃣: ${survivorPerks[numberPerk1].nameEn}\n2⃣: ${survivorPerks[numberPerk2].nameEn}\n3⃣: ${survivorPerks[numberPerk3].nameEn}\n4⃣: ${survivorPerks[numberPerk4].nameEn}`, attachment)
-      else think.edit(`**PERKS:**\n1⃣: ${survivorPerks[numberPerk1].nameEn}\n2⃣: ${survivorPerks[numberPerk2].nameEn}\n3⃣: ${survivorPerks[numberPerk3].nameEn}\n4⃣: ${survivorPerks[numberPerk4].nameEn}`, attachment)
+      if (!think) message.channel.send(`**PERKS:**\n1⃣: ${perk1.nameEn}\n2⃣: ${perk2.nameEn}\n3⃣: ${perk3.nameEn}\n4⃣: ${perk4.nameEn}`, attachment);
+      else think.edit(`**PERKS:**\n1⃣: ${perk1.nameEn}\n2⃣: ${perk2.nameEn}\n3⃣: ${perk3.nameEn}\n4⃣: ${perk4.nameEn}`, attachment);
     }
-  } else {
-    const canvas = Canvas.createCanvas(1579, 1114);
-    const ctx = canvas.getContext('2d');
-    let fontSize = 21
-    ctx.drawImage(backgroundKiller, 0, 0, canvas.width, canvas.height);
-
-    ctx.strokeStyle = '#74037b';
-    ctx.strokeRect(0, 0, canvas.width, canvas.height);
-
-    ctx.font = '101px "dbd"';
-    ctx.fillStyle = '#ffffff';
-    let string = language == 0 ? killers[numberCharacter].nameEs : killers[numberCharacter].nameEn
-    ctx.fillText(string, calculateCenter(1267, string.length, fontSize), 207);
-    const avatar = await Canvas.loadImage(killers[numberCharacter].link);
-    ctx.drawImage(avatar, 1045, 227, 447, 619);
-    let perkImageName = [getImageName(numberPerk1, isSurv), getImageName(numberPerk2, isSurv), getImageName(numberPerk3, isSurv), getImageName(numberPerk4, isSurv)]
-    const perkImage_1 = await getImage(perkImageName[0], isSurv)
-    const perkImage_2 = await getImage(perkImageName[1], isSurv)
-    const perkImage_3 = await getImage(perkImageName[2], isSurv)
-    const perkImage_4 = await getImage(perkImageName[3], isSurv)
-    ctx.drawImage(perkImage_1, 302, 234, 256, 256);
-    ctx.drawImage(perkImage_2, 116, 429, 256, 256);
-    ctx.drawImage(perkImage_3, 493, 429, 256, 256);
-    ctx.drawImage(perkImage_4, 303, 605, 256, 256);
-
-    const attachment = new Discord.MessageAttachment(canvas.toBuffer(), 'killer-random.png');
-    if (language == 0) {
-      if (!think) message.channel.send(`**PERKS:**\n1⃣: ${killerPerks[numberPerk1].nameEs}\n2⃣: ${killerPerks[numberPerk2].nameEs}\n3⃣: ${killerPerks[numberPerk3].nameEs}\n4⃣: ${killerPerks[numberPerk4].nameEs}`, attachment)
-      else think.edit(`**PERKS:**\n1⃣: ${killerPerks[numberPerk1].nameEs}\n2⃣: ${killerPerks[numberPerk2].nameEs}\n3⃣: ${killerPerks[numberPerk3].nameEs}\n4⃣: ${killerPerks[numberPerk4].nameEs}`, attachment)
-    } else {
-      if (!think) message.channel.send(`**PERKS:**\n1⃣: ${killerPerks[numberPerk1].nameEn}\n2⃣: ${killerPerks[numberPerk2].nameEn}\n3⃣: ${killerPerks[numberPerk3].nameEn}\n4⃣: ${killerPerks[numberPerk4].nameEn}`, attachment)
-      else think.edit(`**PERKS:**\n1⃣: ${killerPerks[numberPerk1].nameEn}\n2⃣: ${killerPerks[numberPerk2].nameEn}\n3⃣: ${killerPerks[numberPerk3].nameEn}\n4⃣: ${killerPerks[numberPerk4].nameEn}`, attachment)
-    }
-  }
-  return
+  return;
 }
 
 /**
@@ -2358,12 +2315,10 @@ async function sendShrine(perk1, perk2, perk3, perk4, shards, channel, language)
   const canvas = Canvas.createCanvas(1163, 664);
   const ctx = canvas.getContext('2d');
   ctx.drawImage(backgroundShrine, 0, 0, canvas.width, canvas.height);
-
-  let perkImageName = [getImageName(perk1.index, perk1.isSurv), getImageName(perk2.index, perk2.isSurv), getImageName(perk3.index, perk3.isSurv), getImageName(perk4.index, perk4.isSurv)]
-  const perkImage_1 = await getImage(perkImageName[0], perk1.isSurv)
-  const perkImage_2 = await getImage(perkImageName[1], perk2.isSurv)
-  const perkImage_3 = await getImage(perkImageName[2], perk3.isSurv)
-  const perkImage_4 = await getImage(perkImageName[3], perk4.isSurv)
+  const perkImage_1 = await Canvas.loadImage(perk1.link);
+  const perkImage_2 = await Canvas.loadImage(perk2.link);
+  const perkImage_3 = await Canvas.loadImage(perk3.link);
+  const perkImage_4 = await Canvas.loadImage(perk4.link);
   ctx.drawImage(perkImage_1, 454, 3.5, 256, 256);
   ctx.drawImage(perkImage_2, 280, 177, 256, 256);
   ctx.drawImage(perkImage_3, 626, 177, 256, 256);
@@ -2371,29 +2326,15 @@ async function sendShrine(perk1, perk2, perk3, perk4, shards, channel, language)
   ctx.strokeRect(0, 0, canvas.width, canvas.height);
   const attachment = new Discord.MessageAttachment(canvas.toBuffer(), 'shrine-image.png');
   if (language == 0) {
-    channel.send(`🈴 **Santuario:**\n1⃣ ${getPerkName(perk1.index, perk1.isSurv, language)} - <:frag_iri:739690491829813369> ${shards[0]}\n2⃣ ${getPerkName(perk2.index, perk2.isSurv, language)} - <:frag_iri:739690491829813369> ${shards[1]}\n3⃣ ${getPerkName(perk3.index, perk3.isSurv, language)} - <:frag_iri:739690491829813369> ${shards[2]}\n4⃣ ${getPerkName(perk4.index, perk4.isSurv, language)} - <:frag_iri:739690491829813369> ${shards[3]}`, attachment)
+    channel.send(`🈴 **Santuario:**\n1⃣ ${perk1.nameEs} - <:frag_iri:739690491829813369> ${shards[0]}\n2⃣ ${perk2.nameEs} - <:frag_iri:739690491829813369> ${shards[1]}\n3⃣ ${perk3.nameEs} - <:frag_iri:739690491829813369> ${shards[2]}\n4⃣ ${perk4.nameEs} - <:frag_iri:739690491829813369> ${shards[3]}`, attachment)
   } else {
-    channel.send(`🈴 **Santuario:**\n1⃣ ${getPerkName(perk1.index, perk1.isSurv, language)} - <:frag_iri:739690491829813369> ${shards[0]}\n2⃣ ${getPerkName(perk2.index, perk2.isSurv, language)} - <:frag_iri:739690491829813369> ${shards[1]}\n3⃣ ${getPerkName(perk3.index, perk3.isSurv, language)} - <:frag_iri:739690491829813369> ${shards[2]}\n4⃣ ${getPerkName(perk4.index, perk4.isSurv, language)} - <:frag_iri:739690491829813369> ${shards[3]}`, attachment)
+    channel.send(`🈴 **Santuario:**\n1⃣ ${perk1.nameEn} - <:frag_iri:739690491829813369> ${shards[0]}\n2⃣ ${perk2.nameEn} - <:frag_iri:739690491829813369> ${shards[1]}\n3⃣ ${perk3.nameEn} - <:frag_iri:739690491829813369> ${shards[2]}\n4⃣ ${perk4.nameEn} - <:frag_iri:739690491829813369> ${shards[3]}`, attachment)
   }
 }
 
-async function getImage(name, isSurv) {
-  let object;
-  if (isSurv) object = await Canvas.loadImage("./assets/Visuals/Perks/Survivors/" + name)
-  else object = await Canvas.loadImage("./assets/Visuals/Perks/Killers/" + name)
-  return object
-}
 
 function calculateCenter(x, letters, fontSize) {
   return x - (letters * fontSize)
-}
-
-function getImageName(index, isSurv) {
-  let text;
-  if (isSurv) text = survivorPerks[index].emoji
-  else text = killerPerks[index].emoji
-  text = text.slice(2, text.indexOf(":", 2))
-  return text + ".png"
 }
 
 async function loadImages() {
