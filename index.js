@@ -2301,12 +2301,12 @@ function getSteamProfile(steamid, channelid, userid, serverid, isSurv, language)
       if (isEmptyObject(body)) return user.send(errors.profileNotFound[language]);
       if (res.statusCode == 200 || res.statusCode == 201) {
         body = JSON.parse(body)
-        if (body.response && body.response.players && body.response.players[0].profilestate) {
+        if (body.response && body.response.players && body.response.players.length && body.response.players[0].profilestate) {
           if (body.response.players[0].profilestate != 1) return user.send(errors.privateProfile[language]);
           getStats(body.response.players[0], channelid, user, isSurv, language)
           return
-        } else return message.author.send(errors.profileNotFound[language]);
-      } else return message.author.send(errors.profileNotFound[language]);
+        } else return user.send(errors.profileNotFound[language]);
+      } else return user.send(errors.profileNotFound[language]);
     })
   })
 }
