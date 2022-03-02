@@ -595,7 +595,7 @@ client.on("message", async (message) => {
           }]
         });
         if (texto) forceShrine(texto)
-        else verifyShrine(true)
+        else verifyShrine(true);
         return;
       }
 
@@ -630,7 +630,8 @@ client.on("message", async (message) => {
             return
           }
           sendShrine(perk1, perk2, perk3, perk4, perksShard, message.channel, lenguaje[message.guild.id])
-        })
+        });
+        verifyShrine(true);
         return;
       }
 
@@ -1026,7 +1027,8 @@ client.on("message", async (message) => {
             return
           }
           sendShrine(perk1, perk2, perk3, perk4, perksShard, message.channel, lenguaje[message.guild.id])
-        })
+        });
+        verifyShrine(true);
         return;
       }
 
