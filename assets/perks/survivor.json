@@ -605,6 +605,24 @@
             "nameEn": "Boon: Exponential",
             "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/7/76/IconPerks_boonExponential.png",
             "id": "s29p03"
+        },
+        {
+            "nameEs": "Consejo Paterno",
+            "nameEn": "Parental Guidance",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/4/46/IconPerks_parentalGuidance.png",
+            "id": "s30p01"
+        },
+        {
+            "nameEs": "Conexion Empatica",
+            "nameEn": "Empathic Connection",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/1/14/IconPerks_empathicConnection.png",
+            "id": "s30p02"
+        },
+        {
+            "nameEs": "Bendicion: Teoria Oscura",
+            "nameEn": "Boon: Dark Theory",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/6/60/IconPerks_boonDarkTheory.png",
+            "id": "s30p03"
         }
     ]
 }

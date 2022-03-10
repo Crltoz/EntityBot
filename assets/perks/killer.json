@@ -539,6 +539,24 @@
             "nameEn": "Hex: Pentimento",
             "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/5/5d/IconPerks_hexPentimento.png",
             "id": "k26p03"
+        },
+        {
+            "nameEs": "Gancho Flagelante: Oleada de Ira",
+            "nameEn": "Scourge Hook: Floods of Rage",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/1/1c/IconPerks_scourgeHookFloodsOfRage.png",
+            "id": "k27p01"
+        },
+        {
+            "nameEs": "Salmuera",
+            "nameEn": "Call of Brine",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/3/3b/IconPerks_callOfBrine.png",
+            "id": "k27p02"
+        },
+        {
+            "nameEs": "Tormenta Vil",
+            "nameEn": "Merciless Storm",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/3/36/IconPerks_mercilessStorm.png",
+            "id": "k27p03"
         }
     ]
 }
