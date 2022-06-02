@@ -6,7 +6,7 @@ function messageHandler(context, message) {
 
     let serverConfig = context.client.servers.get(message.guildId);
     if (serverConfig) {
-        if (serverConfig.prefix !== "/" && message.content.startWith(serverConfig.prefix) && !serversNotified[message.guildId]) {
+        if (serverConfig.prefix !== "/" && !serversNotified[message.guildId]) {
             serversNotified[message.guildId] = true;
             message.channel.send(texts.errors.slashCommands[serverConfig.language]);
         }
