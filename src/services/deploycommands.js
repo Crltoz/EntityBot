@@ -18,12 +18,12 @@ function deployCommands(context) {
     registerCommands(context, rest, commands);
 }
 
-function registerCommands(context, rest, commands, private = false) {
+function registerCommands(context, rest, commands) {
     (async () => {
         try {
             console.log('Started refreshing application (/) commands.');
 
-            if (context.config.state === "dev" || private) {
+            if (context.config.state === "dev") {
                 await rest.put(
                     Routes.applicationGuildCommands(context.config.clientId, context.config.guildId),
                     { body: commands },
