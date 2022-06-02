@@ -152,7 +152,7 @@ async function getStats(context, interaction, steamLink, isSurvivor) {
             return
         } else if (steamLink.includes('steamcommunity.com/profiles/')) {
             // Profile with steam id (64 bits)
-            const steamid = steamLink.slice(steamLink.indexOf("profiles/") + 9, steamLink.length)
+            let steamid = steamLink.slice(steamLink.indexOf("profiles/") + 9, steamLink.length);
             steamid = steamid.replace("/", "")
             getSteamProfile(context, interaction, steamid, isSurvivor);
             return
