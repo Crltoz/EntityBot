@@ -1,33 +1,33 @@
 {
-  "name": "dbd-bot.",
+  "name": "entidadbotfinal",
   "version": "1.0.0",
-  "description": "Bot con funciones para Dead By Daylight. ¡Disfrutalo!",
+  "description": "Entity bot for Dead By Daylight",
   "main": "index.js",
-  "keywords": [],
-  "author": "Crltoz#0001, Creepzster#7467, Rosper#4718 & Zander#1979",
-  "license": "ISC",
-  "engines": {
-    "node": "13.3.0",
-    "npm": "6.14.8"
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Crltoz/EntidadBotFinal.git"
+  },
+  "keywords": [
+    "}"
+  ],
+  "author": "Crltoz, Creepzster, Zander & Rosper",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Crltoz/EntidadBotFinal/issues"
+  },
+  "homepage": "https://github.com/Crltoz/EntidadBotFinal#readme",
   "dependencies": {
-    "bignumber.js": "^9.0.1",
-    "canvas": "^2.7.0",
-    "constants": "0.0.2",
-    "discord-buttons": "^4.0.0",
-    "discord.js": "^12.5.3",
-    "fs": "0.0.1-security",
-    "http": "0.0.1-security",
-    "mysql": "^2.18.1",
-    "node-fetch": "^2.6.1",
-    "node-pre-gyp": "^0.17.0",
-    "os": "^0.1.1",
-    "path": "^0.12.7",
-    "process": "^0.11.10",
-    "query-string": "^6.13.1",
-    "require": "^2.4.20",
-    "snekfetch": "^4.0.4",
-    "superagent": "^5.3.1",
-    "uglify-js": "^3.10.0"
+    "@discordjs/builders": "^0.13.0",
+    "@discordjs/rest": "^0.4.1",
+    "bignumber": "^1.1.0",
+    "canvas": "^2.9.1",
+    "discord-api-types": "^0.33.0",
+    "discord.js": "^13.7.0",
+    "fs": "^0.0.1-security",
+    "https": "^1.0.0",
+    "mysql": "^2.18.1"
   }
 }

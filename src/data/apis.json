@@ -1,0 +1,15 @@
+{
+    "steam": {
+        "host": "api.steampowered.com",
+        "vanityURL": {
+            "path": "/ISteamUser/ResolveVanityURL/v0001/?key=DF0A08E817CCE67F129D35FFFB14901A&vanityurl="
+        },
+        "playerSummaries": {
+            "path": "/ISteamUser/GetPlayerSummaries/v0002/?key=DF0A08E817CCE67F129D35FFFB14901A&steamids="
+        }
+    },
+    "dbdStats": {
+        "host": "dbd.onteh.net.au",
+        "path": "/api/playerstats?steamid="
+    }
+}

@@ -68,5 +68,316 @@
             "Cofres abiertos: ",
             "Chests searched: "
         ]
+    },
+    "errors": {
+        "privateProfile": [
+            "Tu perfil de steam está privado.",
+            "Your steam profile is private."
+        ],
+        "profileNotFound": [
+            "El perfil de steam no fue encontrado.",
+            "Steam profile not found."
+        ],
+        "slashCommands": [
+            "ℹ️ ¡Ey! Este es un recordatorio periodico de que Discord actualizó sus funciones para bots verificados, por lo tanto los comandos de Entity se usan con la barra diagonal (**/**). Discord cuida la privacidad de sus usuarios, y este es un gran paso que ayudará a ello. En caso de que los comandos de barra (**/**) no funcionen en tu servidor con Entity, deberás invitarlo nuevamente al servidor desde nuestra página web: https://entitybot.me",
+            "ℹ️ Hears! This is a regular reminder that Discord has updated its features for verified bots, therefore Entity commands will start using the slash (**/**). Discord cares about the privacy of its users, and this is a great step that will help that. In case the slash commands (**/**) do not work on your server with Entity, you will have to invite it back to the server from our website: https://entitybot.me"
+        ],
+        "interactionFail": [
+            "El comando falló! Envía esto a nuestro Discord de soporte (**interactionFail**): https://discord.gg/6eBRcRK",
+            "The command failed! Send this error to our support discord (**interactionFail**): https://discord.gg/6eBRcRK"
+        ],
+        "commandsNotAllowed": [
+            "Los comandos sólo están disponibles en el canal: ",
+            "The commands are avaiables only in channel: "
+        ],
+        "permissionsError": [
+            "No tienes los permisos necesarios para usar este comando.",
+            "You do not have the necessary permissions to use this command."
+        ],
+        "invalidPerk": [
+            "Actualmente no podemos mostrar esta información, por favor reporta esto en nuestro discord, en la sección de bugs: ",
+            "We are currently unable to display this information, please report it on our Discord in the bugs section: "
+        ],
+        "invalidFriendCode": [
+            "El código de amigo o el URL de perfil de Steam es incorrecto.",
+            "The friend code or Steam profile URL is incorrect."
+        ],
+        "invalidLevel": [
+            "El nivel ingresado es inválido, el nivel actual tiene que ser entre 1-49 y el nivel deseado entre 2-50",
+            "Level invalid, current level must be between 1-49 and the wanted level must be between 2-50"
+        ],
+        "types": {
+            "1": {
+                "title": [
+                    "Cuenta en actualización...",
+                    "Your account is being updated..."
+                ],
+                "fields": [
+                    {
+                        "name": [
+                            "¿Hay algún problema?",
+                            "Is there any problem?"
+                        ],
+                        "value": [
+                            "Parece ser que tu cuenta estuvo en privado anteriormente, aunque no tienes de qué preocuparte. ¡Ya está siendo actualizada! Prueba cada **10** minutos obtener tus estadísticas.",
+                            "Seems like your account was private previously, but dont worry. Your account is being updated! Try again every **10** minutes to get your statistics."
+                        ]
+                    }
+                ]
+            },
+            "2": {
+                "title": [
+                    "¡Ups! Esto es vergonzoso...",
+                    "¡Ups! This is embarrassing..."
+                ],
+                "fields": [
+                    {
+                        "name": [
+                            "Al parecer tu cuenta está en privada.",
+                            "Seems like your steam account is private."
+                        ],
+                        "value": [
+                            "Recuerda tener todas las opciones de privacidad en público.",
+                            "Remember switching all privacy options to public."
+                        ]
+                    },
+                    {
+                        "name": [
+                            "¿Ya cambiaste todas tus configuraciones a público y sigues sin aparecer?",
+                            "Already changed all the privacy confing and still doesnt work?"
+                        ],
+                        "value": [
+                            "Normalmente al pasar tu perfil a público, puede tardar desde 24 a 48 horas en actualizar tus datos la web (ajeno a nosotros).",
+                            "Usually when switching the privacy confing to public might take between 24 to 48 hours to refresh the data from the web (Not in our hands)."
+                        ]
+                    },
+                    {
+                        "name": [
+                            "Si siempre tuviste todo en público y no funciona:",
+                            "If your profile always has been public and still doesnt work:"
+                        ],
+                        "value": [
+                            "Revisa esta imagen y asegurate de tener todo en orden.",
+                            "Check this image and make sure you have everything in order"
+                        ]
+                    }
+                ],
+                "image": "https://cdn.discordapp.com/attachments/738848207328772237/739269462510796800/unknown.png"
+            },
+            "3": {
+                "title": [
+                    "No podemos agregar tu cuenta...",
+                    "We can't add your account..."
+                ],
+                "fields": [
+                    {
+                        "name": [
+                            "Tenemos problemas con la web.",
+                            "There are problems with the web."
+                        ],
+                        "value": [
+                            "Actualmente, por muchas peticiones, la web no nos permite postear cuentas, por lo que deberás hacerlo apretando el botón de abajo y pegando tu link de perfil. Luego de ponerla ya podrás ver tus **/stats** por aquí sin problema.",
+                            "Currently, due to many requests, the web does not allow us to post accounts, so you must do it by pressing the button below and pasting your profile link. After putting it in, you will be able to see your **stats** around here without problem."
+                        ]
+                    },
+                    {
+                        "name": [
+                            "Agregar cuenta:",
+                            "Add account:"
+                        ],
+                        "value": [
+                            "[Haz click aquí](https://dbd.onteh.net.au)",
+                            "[Click here](https://dbd.onteh.net.au)"
+                        ]
+                    }
+                ]
+            }
+        }
+    },
+    "languageChanged": [
+        "Cambiaste el idioma del bot a Español.",
+        "You changed the bot language to English."
+    ],
+    "commands": {
+        "help": {
+            "header": [
+                "🔰 Ayuda - Comandos 🔰",
+                "🔰 Help - Commands 🔰"
+            ],
+            "discord": [
+                "Obtén el link para unir el bot a otro servidor de Discord.",
+                "Gets invitation link bot."
+            ],
+            "noteDescription": [
+                "Los paréntesis: **[]** no deben ser usados en los comandos, es simplemente para resaltar cómo se usa el comando.",
+                "Brackets **[]** should not be used, only use spacebar between words."
+            ],
+            "note": [
+                "NOTA:",
+                "BTW:"
+            ],
+            "shrine": [
+                "Te mostrará el santuario de los secretos actual del juego.",
+                "It will show you the shrine of secrets that is current in the game."
+            ],
+            "moreInfo": [
+                "Para más información: **/ayuda",
+                "More info: **/help"
+            ],
+            "channel": [
+                "(ADMIN) Selecciona un canal para que los comandos sólo funcionen ahí. Usa **/cualquiercanal** para que se pueda usar en cualquier canal.",
+                "(ADMIN) Select a channel so that the commands only work there. Use **/anychannel** so it can be used on any channel."
+            ],
+            "isFor": [
+                "¿Para qué sirve?",
+                "What is it for?"
+            ],
+            "example": [
+                "Por ejemplo:",
+                "For example:"
+            ],
+            "statsExample": [
+                "Si quiero ver las estadísticas de killer uso: **/stats killer steamcommunity.com/id/Creepzstah** | Este es el link de mi perfil de steam.",
+                "If i wanna see my killer stats i use: **/stats killer steamcommunity.com/id/Creepzstah** | This link is from my steam profile."
+            ],
+            "statsIsFor": [
+                "Este comando te mostrará las estadísticas específicas de un perfil de steam de un jugador de Dead By Daylight. Recuerda que el perfil debe estar en público.",
+                "It will tell you specific stats of a Dead by Daylight Steam player, remember that the steam profile privacy config must be all public."
+            ],
+            "levelExample": [
+                "Si con Dwight estoy en nivel 5 y quiero llegar al 20 debo usar: **/nivel 5 20** | El bot me enviará toda la información de los puntos de sangre necesarios y la cantidad de niveles comprados.",
+                "You have Dwight level 5 and you wanna level it up to 20 just use: **/level 5 20** | The bot will tell you the amaunt of bloodpoints needed and how many levels you wanna buy."
+            ],
+            "levelIsFor": [
+                "Calcula los puntos de sangre necesarios para comprar los niveles de la red de sangre que quieras.",
+                "It calculate the amaount of Bloodpoints to buy those levels of bloodweb you want."
+            ],
+            "lobby": [
+                "El lobby funciona como los comandos, pero usa reacciones para los usuarios que no les gusta usar comandos.",
+                "The lobby works like the commands, but using reactions for those users that doesnt like using commands."
+            ],
+            "random": [
+                "Genera un killer o survivor random con 4 perks.",
+                "It will show you a random 4 perk build for a random killer or survivor."
+            ],
+            "random-killer": [
+                "Genera un killer random con 4 perks.",
+                "It will show you a random 4 perks build for a random killer"
+            ],
+            "random-survivor": [
+                "Genera un survivor random con 4 perks.",
+                "It will show you a random 4 perks build for a random survivor"
+            ],
+            "webUrl": [
+                "Puedes añadir al bot haciendo click en su perfil o desde nuestra web: https://entitybot.me",
+                "You can add the bot by clicking on its profile or from our website: https://entitybot.me"
+            ],
+            "helpInfo": [
+                "Muestra los comandos del bot.",
+                "Show bot commands."
+            ]
+        },
+        "name": {
+            "stats": [
+                "stats",
+                "stats"
+            ],
+            "level": [
+                "nivel",
+                "level"
+            ],
+            "help": [
+                "ayuda",
+                "help"
+            ],
+            "random": [
+                "random",
+                "random"
+            ],
+            "lobby": [
+                "lobby",
+                "lobby"
+            ],
+            "shrine": [
+                "santuario",
+                "shrine"
+            ],
+            "channel": [
+                "canal",
+                "channel"
+            ],
+            "resetChannel": [
+                "resetearcanal",
+                "resetchannel"
+            ]
+        },
+        "args": {
+            "stats": [
+                "[Survivor o Killer] [URL Perfil Steam o Código de amigo]",
+                "[Survivor or Killer] [Steam profile URL or friend code]"
+            ],
+            "level": [
+                "[Nivel Actual] [Nivel Deseado]",
+                "[Current Level] [Level wanted]"
+            ],
+            "random": [
+                "[Survivor or Killer]",
+                "[Survivor or Killer]"
+            ],
+            "channel": [
+                "[#Canal]",
+                "[#Channel]"
+            ]
+        }
+    },
+    "accountUpdating": [
+        "La cuenta de Steam está en la cola para ser agregada ya que no estaba registrada, recuerda que puede tardar hasta 1 hora.",
+        "The Steam account is in the queue to be added since it was not registered, remember that it can take up to 1 hour."
+    ],
+    "channelChanged": [
+        "A partir de ahora los comandos sólo funcionarán en: ",
+        "From now on the commans will work in: "
+    ],
+    "channelRemoved": [
+        "A partir de ahora los comandos funcionan en todos los canales.",
+        "From now on the commands will work in every channel."
+    ],
+    "lobby": {
+        "description": [
+            "Selecciona la opción que quieras utilizar en el menú:",
+            "Select the option in the menu:"
+        ],
+        "placeholder": [
+            "➡ Opciones",
+            "➡ Options"
+        ],
+        "option-1": [
+            "Comprar niveles",
+            "Buy bloodweb levels"
+        ],
+        "option-2": [
+            "Build random (survivor)",
+            "Random build (survivor)"
+        ],
+        "option-3": [
+            "Build random (killer)",
+            "Random build (killer)"
+        ],
+        "option-4": [
+            "Ayuda",
+            "Help"
+        ],
+        "currentLevel": [
+            "Nivel actual del personaje:",
+            "Character's current bloodweb level:"
+        ],
+        "wantedLevel": [
+            "Nivel en la red de sangre que quieres:",
+            "Level in the bloodweb you want to reach:"
+        ],
+        "calculateLevel": [
+            "Calcular puntos de sangre.",
+            "Calculate bloodpoints."
+        ]
     }
 }

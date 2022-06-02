@@ -1,0 +1,7 @@
+{
+    "host": "dbd.onteh.net.au",
+    "paths": {
+        "shrine": "/api/shrine",
+        "stats": ""
+    }
+}
