@@ -4,8 +4,7 @@ const texts = require("../data/texts.json");
 module.exports = {
     data: new ContextMenuCommandBuilder()
         .setType(2)
-        .setName("Killer stats")
-        .setDefaultPermission(false),
+        .setName("Killer stats"),
     async execute(context, interaction) {
         await interaction.deferReply({ ephemeral: true });
         const serverConfig = context.client.servers.get(interaction.guildId);
