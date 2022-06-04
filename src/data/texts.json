@@ -275,6 +275,10 @@
             "helpInfo": [
                 "Muestra los comandos del bot.",
                 "Show bot commands."
+            ],
+            "profile": [
+                "Asocia tu perfil de steam con tu Discord para que puedas obtener stats al hacer click derecho sobre tu perfil -> Aplicaciones -> Survivor stats / Killer stats",
+                "Associate your steam profile with your Discord so you can get stats by right clicking on your profile -> Applications -> Survivor stats / Killer stats"
             ]
         },
         "name": {
@@ -309,6 +313,10 @@
             "resetChannel": [
                 "resetearcanal",
                 "resetchannel"
+            ],
+            "profile": [
+                "perfil",
+                "profile"
             ]
         },
         "args": {
@@ -327,6 +335,10 @@
             "channel": [
                 "[#Canal]",
                 "[#Channel]"
+            ],
+            "profile": [
+                "[URL Perfil Steam o Código de amigo]",
+                "[Steam profile URL or friend code]"
             ]
         }
     },
@@ -378,6 +390,16 @@
         "calculateLevel": [
             "Calcular puntos de sangre.",
             "Calculate bloodpoints."
+        ]
+    },
+    "profileStats": {
+        "setter": [
+            "Actualizaste tu perfil! De ahora en más tú y las otras personas pueden hacer click derecho en tu perfil de Discord -> Aplicaciones -> Survivor stats / Killer stats",
+            "You updated your profile! From now on you and other people can right click on your Discord profile -> Apps -> Survivor stats / Killer stats"
+        ],
+        "missingProfile": [
+            "Ese usuario no tiene su perfil asociado, recuerda usar **/perfil [Steam-link]** para asociar tu cuenta de steam y obtener tus estadísticas con un botón.",
+            "That user does not have his associated profile, remember to use **/profile [Steam-link]** to associate your steam account and get your statistics with a button."
         ]
     }
 }

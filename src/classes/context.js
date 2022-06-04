@@ -7,7 +7,7 @@ const client = new Discord.Client({
 });
 
 // services
-const { deployCommands } = require("../services/deploycommands.js");
+const interactions = require("../services/interactions.js");
 const database = require("../services/database.js"); 
 const stats = require("../services/stats.js");
 const perks = require("../services/perks.js");
@@ -24,7 +24,7 @@ class Context {
         this.discord = Discord;
         this.config = config;
         this.services = {};
-        this.services.deployCommands = deployCommands;
+        this.services.interactions = interactions;
         this.services.database = database;
         this.services.stats = stats;
         this.services.perks = perks;

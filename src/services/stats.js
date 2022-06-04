@@ -143,19 +143,26 @@ async function getStats(context, interaction, steamLink, isSurvivor) {
     steamLink = steamLink.toLowerCase();
 
     if (serverConfig) {
+        const steamId = await getSteamId(context, interaction, steamLink);
+        getSteamProfile(context, interaction, steamId, isSurvivor);
+    }
+}
+
+async function getSteamId(context, interaction, steamLink) {
+    return new Promise((resolve, reject) => {
+        const serverConfig = context.client.servers.get(interaction.guildId);
+        
         // Profile with friend code (32 bits)
         if (!steamLink.includes('steamcommunity.com/id/') && !steamLink.includes('steamcommunity.com/profiles/')) {
             if (isNaN(steamLink)) return interaction.editReply({ content: texts.errors.invalidFriendCode[serverConfig.language] });
             if (steamLink.length < 8) return interaction.editReply({ content: texts.errors.invalidFriendCode[serverConfig.language] });
             const steamid = steamID_64(steamLink);
-            getSteamProfile(context, interaction, steamid, isSurvivor);
-            return
+            resolve(steamid);
         } else if (steamLink.includes('steamcommunity.com/profiles/')) {
             // Profile with steam id (64 bits)
             let steamid = steamLink.slice(steamLink.indexOf("profiles/") + 9, steamLink.length);
-            steamid = steamid.replace("/", "")
-            getSteamProfile(context, interaction, steamid, isSurvivor);
-            return
+            steamid = steamid.replace("/", "");
+            resolve(steamid);
         } else if (steamLink.includes('steamcommunity.com/id/')) {
             // Profile with vanity URL
             steamLink = steamLink.slice(steamLink.indexOf("/id/") + 4, steamLink.length);
@@ -165,7 +172,7 @@ async function getStats(context, interaction, steamLink, isSurvivor) {
                 path: apis.steam.vanityURL.path + steamLink,
                 headers: { 'User-Agent': 'EntityBot/' + context.config.version }
             };
-            let req = http.get(options, function (res) {
+            const req = http.get(options, function (res) {
                 let bodyChunks_ = [];
                 res.on('data', function (chunk) {
                     bodyChunks_.push(chunk);
@@ -178,8 +185,9 @@ async function getStats(context, interaction, steamLink, isSurvivor) {
                             body = JSON.parse(body);
                             if (utils.isEmptyObject(body)) return interaction.editReply(texts.errors.profileNotFound[serverConfig.language]);
                             if (body.response.success != 1) return interaction.editReply(texts.errors.profileNotFound[serverConfig.language]);
-                            getSteamProfile(context, interaction, body.response.steamid, isSurvivor);
+                            resolve(body.response.steamid);
                         } catch (err) {
+                            resolve(0);
                             console.log(`Error trying to parse body from steam resolving vanity URL: ${err} --- BODY: ${JSON.stringify(body)}`);
                         }
                     } else return interaction.editReply(texts.errors.profileNotFound[serverConfig.language]);
@@ -188,10 +196,11 @@ async function getStats(context, interaction, steamLink, isSurvivor) {
 
             req.on("error", (err) => {
                 console.log(`Error with vanity URL from steam api: ${err}`);
+                resolve(0);
             });
             req.end();
         }
-    }
+    });
 }
 
 /**
@@ -217,19 +226,19 @@ function getSteamProfile(context, interaction, steamId, isSurv) {
 
         res.on('end', function () {
             let body = Buffer.concat(bodyChunks_);
-            if (body.includes("<html><head><title>Bad Request</title>")) return interaction.editReply(texts.errors.profileNotFound[serverConfig.language]);
-            if (utils.isEmptyObject(body)) return interaction.editReply(texts.errors.profileNotFound[serverConfig.language]);
+            if (body.includes("<html><head><title>Bad Request</title>")) return interaction.editReply({ content: texts.errors.profileNotFound[serverConfig.language] });
+            if (utils.isEmptyObject(body)) return interaction.editReply({ content: texts.errors.profileNotFound[serverConfig.language] });
             if (res.statusCode == 200 || res.statusCode == 201) {
                 try {
                     body = JSON.parse(body);
                     if (body.response && body.response.players && body.response.players.length && body.response.players[0].profilestate) {
-                        if (body.response.players[0].profilestate != 1) return interaction.editReply(texts.errors.privateProfile[serverConfig.language]);
+                        if (body.response.players[0].profilestate != 1) return interaction.editReply({ content: texts.errors.privateProfile[serverConfig.language] });
                         sendStats(context, interaction, body.response.players[0], isSurv);
-                    } else return interaction.editReply(texts.errors.profileNotFound[serverConfig.language]);
+                    } else return interaction.editReply({ content: texts.errors.profileNotFound[serverConfig.language] });
                 } catch (err) {
                     console.log(`Error trying to parse body from steam player summaries: ${err} --- BODY: ${JSON.stringify(body)}`);
                 }
-            } else return interaction.editReply(texts.errors.profileNotFound[serverConfig.language]);
+            } else return interaction.editReply({ content: texts.errors.profileNotFound[serverConfig.language] });
         });
     });
 
@@ -501,7 +510,7 @@ function sendEmbedError(context, interaction, type) {
             embedd.setImage(text.image);
         }
         embedd.setThumbnail(context.client.user.avatarURL());
-        interaction.editReply({ embeds: [embedd], ephemeral: true });
+        interaction.editReply({ embeds: [embedd] });
     }
 }
 
@@ -613,7 +622,7 @@ async function generateRandomBuild(context, interaction, isSurv) {
     if (language == 0) {
         interaction.editReply({ content: `**PERKS:**\n1⃣: ${perk1.nameEs}\n2⃣: ${perk2.nameEs}\n3⃣: ${perk3.nameEs}\n4⃣: ${perk4.nameEs}`, files: [attachment] });
     } else {
-        interaction.editReply({ content:`**PERKS:**\n1⃣: ${perk1.nameEn}\n2⃣: ${perk2.nameEn}\n3⃣: ${perk3.nameEn}\n4⃣: ${perk4.nameEn}`, files: [attachment] });
+        interaction.editReply({ content: `**PERKS:**\n1⃣: ${perk1.nameEn}\n2⃣: ${perk2.nameEn}\n3⃣: ${perk3.nameEn}\n4⃣: ${perk4.nameEn}`, files: [attachment] });
     }
 }
 
@@ -675,5 +684,6 @@ module.exports = {
     init: init,
     getStats: getStats,
     calculateLevel: calculateLevel,
-    generateRandomBuild: generateRandomBuild
+    generateRandomBuild: generateRandomBuild,
+    getSteamId: getSteamId
 }

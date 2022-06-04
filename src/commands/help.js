@@ -33,7 +33,8 @@ module.exports = {
                         .addField(`/${texts.commands.name.level[serverConfig.language]} ${texts.commands.args.level[serverConfig.language]}`, `${texts.commands.help.moreInfo[serverConfig.language]} ${texts.commands.name.level[serverConfig.language]}**`)
                         .addField('/lobby', `${texts.commands.help.lobby[serverConfig.language]}`)
                         .addField(`/${texts.commands.name.random[serverConfig.language]} ${texts.commands.args.random[serverConfig.language]}`, texts.commands.help.random[serverConfig.language])
-                        .addField(`/${texts.commands.name.shrine[serverConfig.language]}`, texts.commands.help.shrine[serverConfig.language]);
+                        .addField(`/${texts.commands.name.shrine[serverConfig.language]}`, texts.commands.help.shrine[serverConfig.language])
+                        .addField(`/${texts.commands.name.profile[serverConfig.language]} ${texts.commands.args.profile[serverConfig.language]}`, texts.commands.help.profile[serverConfig.language]);
 
                     if (interaction.member.permissions.has("ADMINISTRATOR")) {
                         embedd.addField(`/${texts.commands.name.channel[serverConfig.language]} ${texts.commands.args.channel[serverConfig.language]}`, texts.commands.help.channel[serverConfig.language])
@@ -60,7 +61,7 @@ module.exports = {
                         .setThumbnail(context.client.user.avatarURL())
                         .addField(texts.commands.help.isFor[serverConfig.language], texts.commands.help.levelIsFor[serverConfig.language])
                         .addField(texts.commands.help.example[serverConfig.language], texts.commands.help.levelExample[serverConfig.language])
-                    interaction.reply({ embeds: [embedd] });
+                    interaction.reply({ embeds: [embedd], ephemeral: true });
                     break;
                 }
             }

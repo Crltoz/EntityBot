@@ -15,6 +15,37 @@ async function interactionHandler(context, interaction) {
         modalHandler(context, interaction);
         return;
     }
+
+    if (interaction.isUserContextMenu()) {
+        userMenuHandler(context, interaction);
+        return;
+    }
+
+    if (interaction.isMessageContextMenu()) {
+        messageMenuHandler(context, interaction);
+        return;
+    }
+}
+
+async function userMenuHandler(context, interaction) {
+    const menu = context.client.menus.get(interaction.commandName);
+    if (!menu) return;
+
+    const serverConfig = context.client.servers.get(interaction.guildId);
+    if (serverConfig) {
+
+        console.log(`${interaction.member.user.username} use menu: ${interaction.commandName}`)
+        try {
+            await menu.execute(context, interaction);
+        } catch (error) {
+            console.error(error);
+            await interaction.reply({ content: texts.errors.interactionFail[serverConfig.language], ephemeral: true });
+        }
+    }
+}
+
+async function messageMenuHandler(context, interaction) {
+    return;
 }
 
 async function modalHandler(context, interaction) {
@@ -59,13 +90,13 @@ async function menuHandler(context, interaction) {
                         .setMaxLength(2)
                         .setMinLength(1)
                         .setRequired(true);
-                    
+
                     const currentLevelRow = new context.discord.MessageActionRow()
                         .addComponents(currentLevel);
 
                     const wantedLevelRow = new context.discord.MessageActionRow()
                         .addComponents(wantedLevel);
-                    
+
                     askLevelsModals.addComponents(currentLevelRow, wantedLevelRow);
                     await interaction.showModal(askLevelsModals);
                     break;

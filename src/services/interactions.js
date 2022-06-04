@@ -3,39 +3,52 @@ const path = require('node:path');
 const { REST } = require('@discordjs/rest');
 const { Routes } = require('discord-api-types/v9');
 
-function deployCommands(context) {
+function init(context) {
+    const interactions = [];
+
+    // commands
     context.client.commands = new context.discord.Collection();
     const commandsPath = path.join("src", "commands");
     const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith('.js'));
-    const commands = [];
+    
+    // menus
+    context.client.menus = new context.discord.Collection();
+    const menusPath = path.join("src", "menus");
+    const menuFiles = fs.readdirSync(menusPath).filter(file => file.endsWith('.js'));
 
     for (const file of commandFiles) {
         const command = require(`../commands/${file}`);
         context.client.commands.set(command.data.name, command);
-        commands.push(command.data.toJSON());
+        interactions.push(command.data.toJSON());
+    }
+
+    for (const file of menuFiles) {
+        const menu = require(`../menus/${file}`);
+        context.client.menus.set(menu.data.name, menu);
+        interactions.push(menu.data.toJSON());
     }
     const rest = new REST({ version: '9' }).setToken(context.config.token);
-    registerCommands(context, rest, commands);
+    registerInteractions(context, rest, interactions);
 }
 
-function registerCommands(context, rest, commands) {
+function registerInteractions(context, rest, interactions) {
     (async () => {
         try {
-            console.log('Started refreshing application (/) commands.');
+            console.log('Started refreshing application interactions.');
 
             if (context.config.state === "dev") {
                 await rest.put(
                     Routes.applicationGuildCommands(context.config.clientId, context.config.guildId),
-                    { body: commands },
+                    { body: interactions },
                 );
             } else {
                 await rest.put(
                     Routes.applicationCommands(context.config.clientId),
-                    { body: commands },
+                    { body: interactions },
                 );
             }
 
-            console.log(`Successfully reloaded application (/) commands. (State: ${context.config.state})`);
+            console.log(`Successfully reloaded application interactions. (State: ${context.config.state})`);
         } catch (error) {
             console.error(error);
         }
@@ -43,5 +56,5 @@ function registerCommands(context, rest, commands) {
 }
 
 module.exports = {
-    deployCommands: deployCommands
+    init: init
 }

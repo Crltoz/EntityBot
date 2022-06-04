@@ -7,7 +7,7 @@ const messageHandler = require("./src/handlers/messageHandler.js");
 const guildHandler = require("./src/handlers/guildHandler.js");
 
 context.client.on("ready", () => { 
-    context.services.deployCommands(context);
+    context.services.interactions.init(context);
     context.services.database.init(context);
     context.services.perks.init();
     context.services.stats.init();
