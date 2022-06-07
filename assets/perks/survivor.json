@@ -623,6 +623,24 @@
             "nameEn": "Boon: Dark Theory",
             "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/6/60/IconPerks_boonDarkTheory.png",
             "id": "s30p03"
+        },
+        {
+            "nameEs": "Concentracion Interna",
+            "nameEn": "Inner Focus",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/7/7e/IconPerks_innerFocus.png",
+            "id": "s31p01"
+        },
+        {
+            "nameEs": "Manifestacion Residual",
+            "nameEn": "Residual Manifest",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/d/d0/IconPerks_residualManifest.png",
+            "id": "s31p02"
+        },
+        {
+            "nameEs": "Pasion",
+            "nameEn": "Overzealous",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/9/99/IconPerks_overzealous.png",
+            "id": "s31p03"
         }
     ]
 }

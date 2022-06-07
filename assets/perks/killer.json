@@ -557,6 +557,24 @@
             "nameEn": "Merciless Storm",
             "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/3/36/IconPerks_mercilessStorm.png",
             "id": "k27p03"
+        },
+        {
+            "nameEs": "Disolucion",
+            "nameEn": "Dissolution",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/1/1d/IconPerks_dissolution.png",
+            "id": "k28p01"
+        },
+        {
+            "nameEs": "Oscuridad Expuesta",
+            "nameEn": "Darkness Revealed",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/e/ed/IconPerks_darknessRevealed.png",
+            "id": "k28p02"
+        },
+        {
+            "nameEs": "Toque Septico",
+            "nameEn": "Septic Touch",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/d/d8/IconPerks_septicTouch.png",
+            "id": "k28p03"
         }
     ]
 }
