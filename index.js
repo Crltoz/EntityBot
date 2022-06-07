@@ -5,6 +5,7 @@ const context = new ContextConstructor();
 const interactionHandler = require("./src/handlers/interactionHandler.js");
 const messageHandler = require("./src/handlers/messageHandler.js");
 const guildHandler = require("./src/handlers/guildHandler.js");
+const messageReactionHandler = require("./src/handlers/messageReactionHandler.js");
 
 context.client.on("ready", () => { 
     context.services.interactions.init(context);
@@ -21,6 +22,8 @@ context.client.on("interactionCreate", (interaction) => { interactionHandler(con
 context.client.on("messageCreate", (message) => { messageHandler(context, message); });
 
 context.client.on("guildCreate", (guild) => { guildHandler(context, guild); });
+
+context.client.on("messageReactionAdd", (reaction, user) => { messageReactionHandler(context, reaction, user) });
 
 context.client.login(context.config.token);
 

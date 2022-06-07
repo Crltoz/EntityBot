@@ -79,8 +79,8 @@
             "Steam profile not found."
         ],
         "slashCommands": [
-            "ℹ️ ¡Ey! Este es un recordatorio periodico de que Discord actualizó sus funciones para bots verificados, por lo tanto los comandos de Entity se usan con la barra diagonal (**/**). Discord cuida la privacidad de sus usuarios, y este es un gran paso que ayudará a ello. En caso de que los comandos de barra (**/**) no funcionen en tu servidor con Entity, deberás invitarlo nuevamente al servidor desde nuestra página web: https://entitybot.me",
-            "ℹ️ Hears! This is a regular reminder that Discord has updated its features for verified bots, therefore Entity commands will start using the slash (**/**). Discord cares about the privacy of its users, and this is a great step that will help that. In case the slash commands (**/**) do not work on your server with Entity, you will have to invite it back to the server from our website: https://entitybot.me"
+            "ℹ️ ¡Ey! Este es un recordatorio periodico de que Discord actualizó sus funciones para bots verificados, por lo tanto los comandos de Entity se usan con la barra diagonal (**/**). Discord cuida la privacidad de sus usuarios, y este es un gran paso que ayudará a ello. En caso de que los comandos de barra (**/**) no funcionen en tu servidor con Entity, deberás invitarlo nuevamente al servidor desde nuestra página web: https://entitybot.me | Reacciona con ✅ a este mensaje para desactivar este mensaje diario.",
+            "ℹ️ Hears! This is a regular reminder that Discord has updated its features for verified bots, therefore Entity commands will start using the slash (**/**). Discord cares about the privacy of its users, and this is a great step that will help that. In case the slash commands (**/**) do not work on your server with Entity, you will have to invite it back to the server from our website: https://entitybot.me | React with ✅ to this message to disable this daily message."
         ],
         "interactionFail": [
             "El comando falló! Envía esto a nuestro Discord de soporte (**interactionFail**): https://discord.gg/6eBRcRK",
@@ -401,5 +401,9 @@
             "Ese usuario no tiene su perfil asociado, recuerda usar **/perfil [Steam-link]** para asociar tu cuenta de steam y obtener tus estadísticas con un botón.",
             "That user does not have his associated profile, remember to use **/profile [Steam-link]** to associate your steam account and get your statistics with a button."
         ]
-    }
+    },
+    "dailyMessageDisabled": [
+        "¡Muy bien! Ya no recordaremos esto. ¡Suerte en tus partidas! <:Entityicon:881447186896916500>",
+        "Ok! We won't remember this anymore. Good luck in your games! <:Entityicon:881447186896916500>"
+    ]
 }
