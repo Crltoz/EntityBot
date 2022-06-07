@@ -1,5 +1,4 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
-const texts = require("../data/texts.json");
 
 module.exports = {
     data: new SlashCommandBuilder()
@@ -14,7 +13,7 @@ module.exports = {
         }),
     async execute(context, interaction) {
         await interaction.deferReply();
-        const isSurvivor = interaction.options.get("role").value;
+        const isSurvivor = interaction.options.get("role").value === "survivor";
         context.services.stats.generateRandomBuild(context, interaction, isSurvivor);
     },
 };
