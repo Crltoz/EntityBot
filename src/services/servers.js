@@ -8,7 +8,7 @@ function changeChannel(context, guildId, channelId = null) {
 }
 
 function add(context, guildId) {
-    context.services.database.query(`SELECT FROM Servidores WHERE ID = '${guildId}'`, (err, rows) => {
+    context.services.database.query(`SELECT * FROM Servidores WHERE ID = '${guildId}'`, (err, rows) => {
         if (err) return console.log(`error add ${guildId}: ${err}`);
         if (rows.length == 0) {
             context.services.database.query(`INSERT INTO Servidores (ID, lenguaje) VALUES ('${guildId}', '0')`);
