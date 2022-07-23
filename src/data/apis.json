@@ -9,7 +9,7 @@
         }
     },
     "dbdStats": {
-        "host": "dbd.onteh.net.au",
+        "host": "dbd.tricky.lol",
         "path": "/api/playerstats?steamid="
     }
 }
