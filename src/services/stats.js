@@ -409,7 +409,7 @@ async function sendEmbedStats(context, interaction, steamProfile, dbdProfile, is
 
             const attachment = new context.discord.MessageAttachment(canvas.toBuffer(), 'stats-image.jpg');
             let flagOrSteam = steamProfile.loccountrycode ? `:flag_${steamProfile.loccountrycode.toLowerCase()}:` : "<:steam:914663956860248134>";
-            interaction.editReply({ content: `${flagOrSteam} **${steamProfile.personaname}** | ${texts.stats.seeFullStatistics[language]} https://dbd.onteh.net.au/playerstats/${steamProfile.steamid}`, files: [attachment] });
+            interaction.editReply({ content: `${flagOrSteam} **${steamProfile.personaname}** | ${texts.stats.seeFullStatistics[language]} https://dbd.tricky.lol/playerstats/${steamProfile.steamid}`, files: [attachment] });
         } else {
             const canvas = Canvas.createCanvas(1920, 1080);
             const ctx = canvas.getContext('2d');
@@ -482,7 +482,7 @@ async function sendEmbedStats(context, interaction, steamProfile, dbdProfile, is
 
             const attachment = new context.discord.MessageAttachment(canvas.toBuffer(), 'stats-image.jpg');
             let flagOrSteam = steamProfile.loccountrycode ? `:flag_${steamProfile.loccountrycode.toLowerCase()}:` : "<:steam:914663956860248134>";
-            interaction.editReply({ content: `${flagOrSteam} **${steamProfile.personaname}** | ${texts.stats.seeFullStatistics[language]} https://dbd.onteh.net.au/playerstats/${steamProfile.steamid} `, files: [attachment] });
+            interaction.editReply({ content: `${flagOrSteam} **${steamProfile.personaname}** | ${texts.stats.seeFullStatistics[language]} https://dbd.tricky.lol/playerstats/${steamProfile.steamid} `, files: [attachment] });
         }
     }
 }
