@@ -151,7 +151,7 @@ async function getStats(context, interaction, steamLink, isSurvivor) {
 async function getSteamId(context, interaction, steamLink) {
     return new Promise((resolve, reject) => {
         const serverConfig = context.client.servers.get(interaction.guildId);
-        
+
         // Profile with friend code (32 bits)
         if (!steamLink.includes('steamcommunity.com/id/') && !steamLink.includes('steamcommunity.com/profiles/')) {
             if (isNaN(steamLink)) return interaction.editReply({ content: texts.errors.invalidFriendCode[serverConfig.language] });
@@ -678,6 +678,104 @@ function steamID_64(steamId32) {
     return steamId64.toString();
 }
 
+async function test(context, interaction, type, index) {
+    switch (type) {
+        case "survivor": {
+            const canvas = Canvas.createCanvas(1579, 1114);
+            const ctx = canvas.getContext('2d');
+            const survivors = context.services.characters.getSurvivors();
+            if (!survivors[index]) {
+                interaction.editReply({ content: `Survivor not exists!` });
+                return;
+            }
+            let fontSize = 21
+            ctx.drawImage(backgroundSurvivor, 0, 0, canvas.width, canvas.height);
+
+            ctx.strokeStyle = '#74037b';
+            ctx.strokeRect(0, 0, canvas.width, canvas.height);
+
+            // avatar
+            ctx.font = '101px "dbd"';
+            ctx.fillStyle = '#ffffff';
+            ctx.fillText(survivors[index].name, utils.calculateCenter(1267, survivors[index].name.length, fontSize), 207);
+            const avatar = await Canvas.loadImage(survivors[index].link);
+            ctx.drawImage(avatar, 1045, 227, 447, 619);
+            const attachment = new context.discord.MessageAttachment(canvas.toBuffer(), 'random.png');
+            interaction.editReply({ content: `Testing survivor! ${survivors[index].name} || Current length: ${Object.keys(survivors).length}`, files: [attachment] });
+            break;
+        }
+        case "killer": {
+            const canvas = Canvas.createCanvas(1579, 1114);
+            const ctx = canvas.getContext('2d');
+            const killers = context.services.characters.getKillers();
+            if (!killers[index]) {
+                interaction.editReply({ content: `Killer not exists!` });
+                return;
+            }
+            let fontSize = 21
+            ctx.drawImage(backgroundKiller, 0, 0, canvas.width, canvas.height);
+
+            ctx.strokeStyle = '#74037b';
+            ctx.strokeRect(0, 0, canvas.width, canvas.height);
+
+            // avatar
+            ctx.font = '101px "dbd"';
+            ctx.fillStyle = '#ffffff';
+            ctx.fillText(killers[index].nameEn, utils.calculateCenter(1267, killers[index].nameEn.length, fontSize), 207);
+            const avatar = await Canvas.loadImage(killers[index].link);
+            ctx.drawImage(avatar, 1045, 227, 447, 619);
+            const attachment = new context.discord.MessageAttachment(canvas.toBuffer(), 'random.png');
+            interaction.editReply({ content: `Testing killer! Es: ${killers[index].nameEs} | Eng: ${killers[index].nameEn} || current length: ${Object.keys(killers).length}`, files: [attachment] });
+            break;
+        }
+        case "kperk": {
+            const canvas = Canvas.createCanvas(1579, 1114);
+            const ctx = canvas.getContext('2d');
+            const killerPerks = context.services.perks.getKillerPerks();
+            if (!killerPerks[index]) {
+                interaction.editReply({ content: `Killer perk not exists!` });
+                return;
+            }
+            ctx.drawImage(backgroundKiller, 0, 0, canvas.width, canvas.height);
+
+            ctx.strokeStyle = '#74037b';
+            ctx.strokeRect(0, 0, canvas.width, canvas.height);
+            const perkImage = await Canvas.loadImage(killerPerks[index].link);
+            ctx.drawImage(perkImage, 302, 234, 256, 256);
+            ctx.drawImage(perkImage, 116, 429, 256, 256);
+            ctx.drawImage(perkImage, 493, 429, 256, 256);
+            ctx.drawImage(perkImage, 303, 605, 256, 256);
+            const attachment = new context.discord.MessageAttachment(canvas.toBuffer(), 'random.png');
+            interaction.editReply({ content: `Testing killer perk! Es: ${killerPerks[index].nameEs} | Eng: ${killerPerks[index].nameEn} || current length: ${Object.keys(killerPerks).length}`, files: [attachment] });
+            break;
+        }
+        case "sperk": {
+            const canvas = Canvas.createCanvas(1579, 1114);
+            const ctx = canvas.getContext('2d');
+            const survivorPerks = context.services.perks.getSurvivorPerks();
+            if (!survivorPerks[index]) {
+                interaction.editReply({ content: `Survivor perk not exists!` });
+                return;
+            }
+            ctx.drawImage(backgroundSurvivor, 0, 0, canvas.width, canvas.height);
+
+            ctx.strokeStyle = '#74037b';
+            ctx.strokeRect(0, 0, canvas.width, canvas.height);
+            const perkImage = await Canvas.loadImage(survivorPerks[index].link);
+            ctx.drawImage(perkImage, 302, 234, 256, 256);
+            ctx.drawImage(perkImage, 116, 429, 256, 256);
+            ctx.drawImage(perkImage, 493, 429, 256, 256);
+            ctx.drawImage(perkImage, 303, 605, 256, 256);
+            const attachment = new context.discord.MessageAttachment(canvas.toBuffer(), 'random.png');
+            interaction.editReply({ content: `Testing survivor perk! Es: ${survivorPerks[index].nameEs} | Eng: ${survivorPerks[index].nameEn} || || current length: ${Object.keys(survivorPerks).length}`, files: [attachment] });
+            break;
+        }
+        default: {
+            interaction.editReply({ content: "type not exists." });
+        }
+    }
+}
+
 module.exports = {
     verifyShrine: verifyShrine,
     sendShrine: sendShrine,
@@ -685,5 +783,6 @@ module.exports = {
     getStats: getStats,
     calculateLevel: calculateLevel,
     generateRandomBuild: generateRandomBuild,
-    getSteamId: getSteamId
+    getSteamId: getSteamId,
+    test: test
 }
