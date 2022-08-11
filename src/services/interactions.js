@@ -17,6 +17,7 @@ function init(context) {
     const menuFiles = fs.readdirSync(menusPath).filter(file => file.endsWith('.js'));
 
     for (const file of commandFiles) {
+        if (file.includes("test")) continue; // avoid test commands
         const command = require(`../commands/${file}`);
         context.client.commands.set(command.data.name, command);
         interactions.push(command.data.toJSON());
