@@ -641,6 +641,42 @@
             "nameEn": "Overzealous",
             "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/9/99/IconPerks_overzealous.png",
             "id": "s31p03"
+        },
+        {
+            "nameEs": "Interceptor",
+            "nameEn": "Wiretap",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/2/23/IconPerks_wiretap.png",
+            "id": "s32p01"
+        },
+        {
+            "nameEs": "Curacion Reactiva",
+            "nameEn": "Reactive Healing",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/5/5a/IconPerks_reactiveHealing.png",
+            "id": "s32p02"
+        },
+        {
+            "nameEs": "Perfil Bajo",
+            "nameEn": "Low Profile",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/f/fb/IconPerks_lowProfile.png",
+            "id": "s32p03"
+        },
+        {
+            "nameEs": "Mejor que nuevo",
+            "nameEn": "Better than New",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/b/b1/IconPerks_betterThanNew.png",
+            "id": "s33p01"
+        },
+        {
+            "nameEs": "Reafirmacion",
+            "nameEn": "Reassurance",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/5/5b/IconPerks_reassurance.png",
+            "id": "s33p02"
+        },
+        {
+            "nameEs": "Hiperconcentracion",
+            "nameEn": "Hyperfocus",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/5/5d/IconPerks_hyperfocus.png",
+            "id": "s33p03"
         }
     ]
 }

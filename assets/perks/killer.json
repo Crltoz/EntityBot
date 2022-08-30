@@ -575,6 +575,24 @@
             "nameEn": "Septic Touch",
             "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/d/d8/IconPerks_septicTouch.png",
             "id": "k28p03"
+        },
+        {
+            "nameEs": "Anatomia Superior",
+            "nameEn": "Superior Anatomy",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/4/4a/IconPerks_superiorAnatomy.png",
+            "id": "k29p01"
+        },
+        {
+            "nameEs": "Percepcion Activada",
+            "nameEn": "Awakened Awareness",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/9/97/IconPerks_awakenedAwareness.png",
+            "id": "k29p02"
+        },
+        {
+            "nameEs": "Terminal",
+            "nameEn": "Terminus",
+            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/4/4c/IconPerks_terminus.png",
+            "id": "k29p03"
         }
     ]
 }
