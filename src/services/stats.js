@@ -106,7 +106,7 @@ async function sendShrine(context, interaction) {
             let perk4 = await context.services.perks.getPerkById(perksName[3]);
             if (!perk1 || !perk2 || !perk3 || !perk4) {
                 console.log(`Invalid perks in shrine: ${perk1} ${perksName[0]} (${rows[0].perk_1}) | ${perk2} (${rows[0].perk_2}) | ${perk3} (${rows[0].perk_3}) | ${perk4} (${rows[0].perk_4})`)
-                interaction.reply("We are currently unable to display this information, please report it on our Discord in the bugs section: https://discord.gg/T6rEERg")
+                interaction.editReply("We are currently unable to display this information, please report it on our Discord in the bugs section: https://discord.gg/T6rEERg")
                 return
             }
 
