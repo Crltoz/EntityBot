@@ -1,6 +1,10 @@
 {
   "name": "entidadbotfinal",
   "version": "1.0.0",
+  "engines": {
+    "node": "16.17.0",
+    "npm": "8.19.1"
+  },
   "description": "Entity bot for Dead By Daylight",
   "main": "index.js",
   "scripts": {
