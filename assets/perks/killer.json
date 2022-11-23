@@ -593,6 +593,24 @@
             "nameEn": "Terminus",
             "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/4/4c/IconPerks_terminus.png",
             "id": "k29p03"
+        },
+        {
+            "nameEs": "Sin escondite",
+            "nameEn": "Nowhere to Hide",
+            "link": "https://i.imgur.com/QEClxl8.png",
+            "id": "k30p01"
+        },
+        {
+            "nameEs": "Meleficio: Enfrentate a la oscuridad",
+            "nameEn": "Hex: Face the Darkness",
+            "link": "https://i.imgur.com/8cNqTkn.png",
+            "id": "k30p02"
+        },
+        {
+            "nameEs": "Soberbia",
+            "nameEn": "Hubris",
+            "link": "https://i.imgur.com/zNG3ysx.png",
+            "id": "k30p03"
         }
     ]
 }

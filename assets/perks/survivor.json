@@ -677,6 +677,24 @@
             "nameEn": "Hyperfocus",
             "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/5/5d/IconPerks_hyperfocus.png",
             "id": "s33p03"
+        },
+        {
+            "nameEs": "Energia potencial",
+            "nameEn": "Potential Energy",
+            "link": "https://i.imgur.com/FfrNzk8.png",
+            "id": "s34p01"
+        },
+        {
+            "nameEs": "Neblinoso",
+            "nameEn": "Fogwise",
+            "link": "https://i.imgur.com/Uw4Gl5t.png",
+            "id": "s34p02"
+        },
+        {
+            "nameEs": "Tactica veloz",
+            "nameEn": "Quick Gambit",
+            "link": "https://i.imgur.com/iojpXoy.png",
+            "id": "s34p03"
         }
     ]
 }
