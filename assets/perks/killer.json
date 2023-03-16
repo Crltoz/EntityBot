@@ -611,6 +611,24 @@
             "nameEn": "Hubris",
             "link": "https://i.imgur.com/zNG3ysx.png",
             "id": "k30p03"
+        },
+        {
+            "nameEs": "PLAF!",
+            "nameEn": "THWACK!",
+            "link": "https://i.imgur.com/1vPM36z.png",
+            "id": "k31p01"
+        },
+        {
+            "nameEs": "Influencia",
+            "nameEn": "Leverage",
+            "link": "https://i.imgur.com/eRnqN4C.png",
+            "id": "k31p02"
+        },
+        {
+            "nameEs": "Veda Abierta",
+            "nameEn": "Game Afoot",
+            "link": "https://i.imgur.com/mWufhNb.png",
+            "id": "k31p03"
         }
     ]
 }

@@ -695,6 +695,42 @@
             "nameEn": "Quick Gambit",
             "link": "https://i.imgur.com/iojpXoy.png",
             "id": "s34p03"
+        },
+        {
+            "nameEs": "Torrente de Sangre",
+            "nameEn": "Blood Rush",
+            "link": "https://i.imgur.com/d5N1sXO.png",
+            "id": "s35p01"
+        },
+        {
+            "nameEs": "Trabajo en Equipo: Sigilo Colectivo",
+            "nameEn": "Teamwork: Collective Stealth",
+            "link": "https://i.imgur.com/yXxSP6x.png",
+            "id": "s35p02"
+        },
+        {
+            "nameEs": "Jugador Secundario",
+            "nameEn": "Background Player",
+            "link": "https://i.imgur.com/h0LDw1q.png",
+            "id": "s35p03"
+        },
+        {
+            "nameEs": "Rivalidad Amistosa",
+            "nameEn": "Friendly Competition",
+            "link": "https://i.imgur.com/dca5YEd.png",
+            "id": "s36p01"
+        },
+        {
+            "nameEs": "Trabajo en Equipo: Poder Dual",
+            "nameEn": "Teamwork: Power of Two",
+            "link": "https://i.imgur.com/tgDixJs.png",
+            "id": "s36p02"
+        },
+        {
+            "nameEs": "Desatame",
+            "nameEn": "Cut Loose",
+            "link": "https://i.imgur.com/N1gSLL9.png",
+            "id": "s36p03"
         }
     ]
 }

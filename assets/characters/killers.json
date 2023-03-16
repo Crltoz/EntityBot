@@ -147,9 +147,14 @@
             "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/8/87/K29_charSelect_portrait.png"
         },
         {
-            "nameEs": "El caballero",
+            "nameEs": "El Caballero",
             "nameEn": "The Knight",
             "link": "https://i.imgur.com/2BVcEp5.png"
+        },
+        {
+            "nameEs": "La Comerciante de Calaveras",
+            "nameEn": "The Skull Merchant",
+            "link": "https://i.imgur.com/1O1QvWg.png"
         }
     ]
 }
