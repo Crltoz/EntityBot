@@ -14,9 +14,6 @@
     "type": "git",
     "url": "git+https://github.com/Crltoz/EntidadBotFinal.git"
   },
-  "keywords": [
-    "}"
-  ],
   "author": "Crltoz, Creepzster, Zander & Rosper",
   "license": "ISC",
   "bugs": {
@@ -29,7 +26,7 @@
     "bignumber": "^1.1.0",
     "canvas": "^2.9.1",
     "discord-api-types": "^0.33.0",
-    "discord.js": "^13.7.0",
+    "discord.js": "^13.16.0",
     "fs": "^0.0.1-security",
     "https": "^1.0.0",
     "mysql": "^2.18.1"
