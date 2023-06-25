@@ -731,6 +731,24 @@
             "nameEn": "Cut Loose",
             "link": "https://i.imgur.com/N1gSLL9.png",
             "id": "s36p03"
+        },
+        {
+            "nameEs": "Solucionador de Problemas",
+            "nameEn": "Troubleshooter",
+            "link": "https://i.imgur.com/w1Ojtbr.png",
+            "id": "s37p01"
+        },
+        {
+            "nameEs": "Hecho Para Esto",
+            "nameEn": "Made for This",
+            "link": "https://i.imgur.com/GNrfNXX.png",
+            "id": "s37p02"
+        },
+        {
+            "nameEs": "Buscador",
+            "nameEn": "Scavenger",
+            "link": "https://i.imgur.com/4BAJfmG.png",
+            "id": "s37p03"
         }
     ]
 }

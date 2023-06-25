@@ -629,6 +629,24 @@
             "nameEn": "Game Afoot",
             "link": "https://i.imgur.com/mWufhNb.png",
             "id": "k31p03"
+        },
+        {
+            "nameEs": "Limitaciones Geneticas",
+            "nameEn": "Genetic Limits",
+            "link": "https://i.imgur.com/9f9UoIx.png",
+            "id": "k32p01"
+        },
+        {
+            "nameEs": "Duda Impuesta",
+            "nameEn": "Forced Hesitation",
+            "link": "https://i.imgur.com/Y0BZ8Gn.png",
+            "id": "k32p02"
+        },
+        {
+            "nameEs": "Aprendizaje de Maquina",
+            "nameEn": "Machine Learning",
+            "link": "https://i.imgur.com/Box1dZY.png",
+            "id": "k32p03"
         }
     ]
 }
