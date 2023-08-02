@@ -749,6 +749,24 @@
             "nameEn": "Scavenger",
             "link": "https://i.imgur.com/4BAJfmG.png",
             "id": "s37p03"
+        },
+        {
+            "nameEs": "Dramaturgia",
+            "nameEn": "Dramaturgy",
+            "link": "https://i.imgur.com/v1hnLoQ.png",
+            "id": "s38p01"
+        },
+        {
+            "nameEs": "Compañero de Escena",
+            "nameEn": "Scene Partner",
+            "link": "https://i.imgur.com/HuoRhm6.png",
+            "id": "s38p02"
+        },
+        {
+            "nameEs": "Giro Argumental",
+            "nameEn": "Plot Twist",
+            "link": "https://i.imgur.com/Urh45QC.png",
+            "id": "s38p03"
         }
     ]
 }
