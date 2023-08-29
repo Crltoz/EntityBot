@@ -647,6 +647,24 @@
             "nameEn": "Machine Learning",
             "link": "https://i.imgur.com/Box1dZY.png",
             "id": "k32p03"
+        },
+        {
+            "nameEs": "Brutalidad Feroz",
+            "nameEn": "Rapid Brutality",
+            "link": "https://i.imgur.com/ULqvLfE.png",
+            "id": "k33p01"
+        },
+        {
+            "nameEs": "Instinto Alienigena",
+            "nameEn": "Alien Instinct",
+            "link": "https://i.imgur.com/2aQeRjX.png",
+            "id": "k33p02"
+        },
+        {
+            "nameEs": "Arma Definitiva",
+            "nameEn": "Ultimate Weapon",
+            "link": "https://i.imgur.com/H9ooqpq.png",
+            "id": "k33p03"
         }
     ]
 }

@@ -767,6 +767,24 @@
             "nameEn": "Plot Twist",
             "link": "https://i.imgur.com/Urh45QC.png",
             "id": "s38p03"
+        },
+        {
+            "nameEs": "Trampa Quimica",
+            "nameEn": "Chemical Trap",
+            "link": "https://i.imgur.com/uqIZH6G.png",
+            "id": "s39p01"
+        },
+        {
+            "nameEs": "Ligera de Pies",
+            "nameEn": "Light-Footed",
+            "link": "https://i.imgur.com/iBZ6LTk.png",
+            "id": "s39p02"
+        },
+        {
+            "nameEs": "Estrella de la Suerte",
+            "nameEn": "Lucky Star",
+            "link": "https://i.imgur.com/F3bUNI2.png",
+            "id": "s39p03"
         }
     ]
 }
