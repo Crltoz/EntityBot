@@ -601,7 +601,7 @@
             "id": "k30p01"
         },
         {
-            "nameEs": "Meleficio: Enfrentate a la oscuridad",
+            "nameEs": "Maleficio: Enfrentate a la oscuridad",
             "nameEn": "Hex: Face the Darkness",
             "link": "https://i.imgur.com/8cNqTkn.png",
             "id": "k30p02"
@@ -665,6 +665,24 @@
             "nameEn": "Ultimate Weapon",
             "link": "https://i.imgur.com/H9ooqpq.png",
             "id": "k33p03"
+        },
+        {
+            "nameEs": "Maleficio: Dos Pueden Jugar",
+            "nameEn": "Hex: Two Can Play",
+            "link": "https://i.imgur.com/LWCB1wE.png",
+            "id": "k34p01"
+        },
+        {
+            "nameEs": "Amigos Para Siempre",
+            "nameEn": "Friends 'til the End",
+            "link": "https://i.imgur.com/92sd1Pg.png",
+            "id": "k34p02"
+        },
+        {
+            "nameEs": "Pilas Incluidas",
+            "nameEn": "Batteries Included",
+            "link": "https://i.imgur.com/NCzpMNd.png",
+            "id": "k34p03"
         }
     ]
 }
