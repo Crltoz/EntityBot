@@ -9,7 +9,7 @@ function init(context) {
     // commands
     context.client.commands = new context.discord.Collection();
     const commandsPath = path.join("src", "commands");
-    const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith('.js'));
+    const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith('.js') && (!file.includes("test") || process.env.ENVIROMENT != "production"));
     
     // menus
     context.client.menus = new context.discord.Collection();
@@ -17,7 +17,6 @@ function init(context) {
     const menuFiles = fs.readdirSync(menusPath).filter(file => file.endsWith('.js'));
 
     for (const file of commandFiles) {
-        if (file.includes("test") && context.config.state === "prod") continue; // avoid test commands
         const command = require(`../commands/${file}`);
         context.client.commands.set(command.data.name, command);
         interactions.push(command.data.toJSON());
@@ -28,7 +27,7 @@ function init(context) {
         context.client.menus.set(menu.data.name, menu);
         interactions.push(menu.data.toJSON());
     }
-    const rest = new REST({ version: '9' }).setToken(context.config.token);
+    const rest = new REST({ version: '9' }).setToken(process.env.TOKEN);
     registerInteractions(context, rest, interactions);
 }
 
@@ -37,19 +36,19 @@ function registerInteractions(context, rest, interactions) {
         try {
             console.log('Started refreshing application interactions.');
 
-            if (context.config.state === "dev") {
+            if (process.env.ENVIROMENT != "production") {
                 await rest.put(
-                    Routes.applicationGuildCommands(context.config.clientId, context.config.guildId),
+                    Routes.applicationGuildCommands(process.env.CLIENT_ID, process.env.GUILD_ID),
                     { body: interactions },
                 );
             } else {
                 await rest.put(
-                    Routes.applicationCommands(context.config.clientId),
+                    Routes.applicationCommands(process.env.CLIENT_ID),
                     { body: interactions },
                 );
             }
 
-            console.log(`Successfully reloaded application interactions. (State: ${context.config.state})`);
+            console.log(`Successfully reloaded application interactions. (Enviroment: ${process.env.ENVIROMENT != "production" ? "Development" : "Production"})`);
         } catch (error) {
             console.error(error);
         }

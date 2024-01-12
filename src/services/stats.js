@@ -1,4 +1,3 @@
-const statsConfig = require("../data/stats.json");
 const https = require("https");
 const http = require("http");
 const Canvas = require("canvas");
@@ -29,12 +28,12 @@ const font = "./assets/Font/BRUTTALL.ttf";
 Canvas.registerFont(font, { family: "dbd" });
 
 async function init() {
-    backgroundKiller = await Canvas.loadImage("assets/Visuals/Background/random_killer.jpg");
-    backgroundSurvivor = await Canvas.loadImage("assets/Visuals/Background/random_survivor.jpg");
+    backgroundKiller = await Canvas.loadImage("./assets/Visuals/Background/random_killer.jpg");
+    backgroundSurvivor = await Canvas.loadImage("./assets/Visuals/Background/random_survivor.jpg");
     backgroundShrine = await Canvas.loadImage("./assets/Visuals/Background/shrine.jpg");
-    backgroundLevel = await Canvas.loadImage("assets/Visuals/Background/level.jpg");
-    backgroundStatsSurvivor = await Canvas.loadImage("assets/Visuals/Background/stats_survivor.jpg");
-    backgroundStatsKiller = await Canvas.loadImage("assets/Visuals/Background/stats_killer.jpg");
+    backgroundLevel = await Canvas.loadImage("./assets/Visuals/Background/level.jpg");
+    backgroundStatsSurvivor = await Canvas.loadImage("./assets/Visuals/Background/stats_survivor.jpg");
+    backgroundStatsKiller = await Canvas.loadImage("./assets/Visuals/Background/stats_killer.jpg");
     killerImage = await Canvas.loadImage("./assets/Visuals/icons/killer_rank.png");
     survivorImage = await Canvas.loadImage("./assets/Visuals/icons/survivor_rank.png");
     bpImage = await Canvas.loadImage("./assets/Visuals/icons/bp.png");
@@ -48,109 +47,78 @@ async function init() {
     console.log(`Stats images loaded.`)
 }
 
-let updateShrine = true;
-
-function verifyShrine(context, force = false) {
-    const time = new Date();
-    if (time.toUTCString().toLowerCase().includes('wed') && time.getUTCHours() == '0' && time.getUTCMinutes() == '1' && updateShrine || force) {
-        updateShrine = !updateShrine;
-        setTimeout(() => {
-            updateShrine = true;
-        }, 120000);
-
-        let options = {
-            host: statsConfig.host,
-            path: statsConfig.paths.shrine,
-            headers: { 'User-Agent': 'EntityBot/' + context.config.version }
-        };
-        let req = https.get(options, function (res) {
-            let bodyChunks = [];
-
-            res.on('data', function (chunk) {
-                bodyChunks.push(chunk);
-            });
-
-            res.on('end', function () {
-                let body = Buffer.concat(bodyChunks);
-                if (res.statusCode == 200 || res.statusCode == 201) {
-                    try {
-                        let parsed = JSON.parse(body);
-                        context.services.database.query(`DELETE FROM santuario`)
-                        context.services.database.query(`INSERT INTO santuario (perk_1, perk_2, perk_3, perk_4) VALUES ('${parsed.perks[0].id.toLowerCase()}:${parsed.perks[0].shards}', '${parsed.perks[1].id.toLowerCase()}:${parsed.perks[1].shards}', '${parsed.perks[2].id.toLowerCase()}:${parsed.perks[2].shards}', '${parsed.perks[3].id.toLowerCase()}:${parsed.perks[3].shards}')`)
-                    } catch (err) {
-                        console.log(`Error parsing shrine body: ${err} --- body: ${JSON.stringify(body)}`);
-                    }
-                }
-            });
-        });
-
-        req.on('error', function (e) {
-            console.error(`verify shrine error: ${e}`);
-        });
-
-        req.end();
-        return;
-    }
-}
-
 async function sendShrine(context, interaction) {
-    const serverConfig = context.client.servers.get(interaction.guildId);
-    if (serverConfig) {
-        context.services.database.query(`SELECT * FROM santuario`, async (err, rows) => {
-            if (err) throw err;
-            let perksName = [rows[0].perk_1.split(":")[0], rows[0].perk_2.split(":")[0], rows[0].perk_3.split(":")[0], rows[0].perk_4.split(":")[0]];
-            let shards = [rows[0].perk_1.split(":")[1], rows[0].perk_2.split(":")[1], rows[0].perk_3.split(":")[1], rows[0].perk_4.split(":")[1]];
-            let perk1 = await context.services.perks.getPerkById(perksName[0]);
-            let perk2 = await context.services.perks.getPerkById(perksName[1]);
-            let perk3 = await context.services.perks.getPerkById(perksName[2]);
-            let perk4 = await context.services.perks.getPerkById(perksName[3]);
-            if (!perk1 || !perk2 || !perk3 || !perk4) {
-                console.log(`Invalid perks in shrine: ${perk1} ${perksName[0]} (${rows[0].perk_1}) | ${perk2} (${rows[0].perk_2}) | ${perk3} (${rows[0].perk_3}) | ${perk4} (${rows[0].perk_4})`)
-                interaction.editReply("We are currently unable to display this information, please report it on our Discord in the bugs section: https://discord.gg/T6rEERg")
-                return
-            }
+    const serverConfig = await context.services.database.getOrCreateServer(interaction.guildId);
+    const options = {
+        host: apis.dbdStats.host,
+        path: apis.dbdStats.shrine,
+        headers: { 'User-Agent': 'EntityBot/' + context.config.version }
+    };
 
-            const canvas = Canvas.createCanvas(1163, 664);
-            const ctx = canvas.getContext('2d');
-            ctx.drawImage(backgroundShrine, 0, 0, canvas.width, canvas.height);
-            const perkImage_1 = await Canvas.loadImage(perk1.link);
-            const perkImage_2 = await Canvas.loadImage(perk2.link);
-            const perkImage_3 = await Canvas.loadImage(perk3.link);
-            const perkImage_4 = await Canvas.loadImage(perk4.link);
-            ctx.drawImage(perkImage_1, 454, 3.5, 256, 256);
-            ctx.drawImage(perkImage_2, 280, 177, 256, 256);
-            ctx.drawImage(perkImage_3, 626, 177, 256, 256);
-            ctx.drawImage(perkImage_4, 454, 355, 256, 256);
-            ctx.strokeRect(0, 0, canvas.width, canvas.height);
-            const attachment = new context.discord.MessageAttachment(canvas.toBuffer(), 'shrine-image.png');
+    const req = https.get(options, function (res) {
+        const bodyChunks = [];
 
-            if (serverConfig.language === 0) {
-                await interaction.editReply({ content: `🈴 **Santuario:**\n1⃣ ${perk1.nameEs} - <:frag_iri:739690491829813369> ${shards[0]}\n2⃣ ${perk2.nameEs} - <:frag_iri:739690491829813369> ${shards[1]}\n3⃣ ${perk3.nameEs} - <:frag_iri:739690491829813369> ${shards[2]}\n4⃣ ${perk4.nameEs} - <:frag_iri:739690491829813369> ${shards[3]}`, files: [attachment] });
-            } else if (serverConfig.language === 1) {
-                await interaction.editReply({ content: `🈴 **Santuario:**\n1⃣ ${perk1.nameEn} - <:frag_iri:739690491829813369> ${shards[0]}\n2⃣ ${perk2.nameEn} - <:frag_iri:739690491829813369> ${shards[1]}\n3⃣ ${perk3.nameEn} - <:frag_iri:739690491829813369> ${shards[2]}\n4⃣ ${perk4.nameEn} - <:frag_iri:739690491829813369> ${shards[3]}`, files: [attachment] });
-            }
-
-
-            setTimeout(() => {
-                verifyShrine(context, true);
-            }, 2000);
+        res.on('data', function (chunk) {
+            bodyChunks.push(chunk);
         });
-    }
+
+        res.on('end', async function () {
+            let body = Buffer.concat(bodyChunks);
+            if (res.statusCode == 200 || res.statusCode == 201) {
+                try {
+                    const shrineResult = JSON.parse(body);
+                    const perks = []
+                    for (let perk of shrineResult.perks) {
+                        const perkData = await context.services.perks.getPerkById(perk.id);
+                        perks.push({ data: perkData, shards: perk.shards });
+                    }
+                    if (perks.length != 4 || perks.some(it => it.data == null)) {
+                        console.log(`Invalid perks in shrine: ${JSON.stringify(perks)}`)
+                        interaction.editReply(texts.errors.unknownError[serverConfig.language] + process.env.SUPPORT_DISCORD)
+                        return
+                    }
+
+                    const canvas = Canvas.createCanvas(1163, 664);
+                    const ctx = canvas.getContext('2d');
+                    ctx.drawImage(backgroundShrine, 0, 0, canvas.width, canvas.height);
+
+                    const perkImages = []
+                    for (let data of perks) {
+                        const perkImage = await Canvas.loadImage(data.data.link);
+                        perkImages.push(perkImage);
+                    }
+                    ctx.drawImage(perkImages[0], 454, 3.5, 256, 256);
+                    ctx.drawImage(perkImages[1], 280, 177, 256, 256);
+                    ctx.drawImage(perkImages[2], 626, 177, 256, 256);
+                    ctx.drawImage(perkImages[3], 454, 355, 256, 256);
+                    ctx.strokeRect(0, 0, canvas.width, canvas.height);
+                    const attachment = new context.discord.MessageAttachment(canvas.toBuffer(), 'shrine-image.png');
+
+                    if (serverConfig.language === 0) {
+                        await interaction.editReply({ content: `🈴 **Santuario:**\n1⃣ ${perks[0].data.nameEs} - <:frag_iri:739690491829813369> ${perks[0].shards}\n2⃣ ${perks[1].data.nameEs} - <:frag_iri:739690491829813369> ${perks[1].shards}\n3⃣ ${perks[2].data.nameEs} - <:frag_iri:739690491829813369> ${perks[2].shards}\n4⃣ ${perks[3].data.nameEs} - <:frag_iri:739690491829813369> ${perks[3].shards}`, files: [attachment] });
+                    } else if (serverConfig.language === 1) {
+                        await interaction.editReply({ content: `🈴 **Shrine:**\n1⃣ ${perks[0].data.nameEn} - <:frag_iri:739690491829813369> ${perks[0].shards}\n2⃣ ${perks[1].data.nameEn} - <:frag_iri:739690491829813369> ${perks[1].shards}\n3⃣ ${perks[2].data.nameEn} - <:frag_iri:739690491829813369> ${perks[2].shards}\n4⃣ ${perks[3].data.nameEn} - <:frag_iri:739690491829813369> ${perks[3].shards}`, files: [attachment] });
+                    }
+                } catch (err) {
+                    console.log(`Error parsing shrine body: ${err} --- body: ${JSON.stringify(body)}`);
+                }
+            }
+        });
+    });
+
+    req.end();
 }
 
 async function getStats(context, interaction, steamLink, isSurvivor) {
-    const serverConfig = context.client.servers.get(interaction.guildId);
     steamLink = steamLink.toLowerCase();
 
-    if (serverConfig) {
-        const steamId = await getSteamId(context, interaction, steamLink);
-        getSteamProfile(context, interaction, steamId, isSurvivor);
-    }
+    const steamId = await getSteamId(context, interaction, steamLink);
+    getSteamProfile(context, interaction, steamId, isSurvivor);
 }
 
 async function getSteamId(context, interaction, steamLink) {
-    return new Promise((resolve, reject) => {
-        const serverConfig = context.client.servers.get(interaction.guildId);
+    return new Promise(async (resolve, reject) => {
+        const serverConfig = await context.services.database.getOrCreateServer(interaction.guildId);
 
         // Profile with friend code (32 bits)
         if (!steamLink.includes('steamcommunity.com/id/') && !steamLink.includes('steamcommunity.com/profiles/')) {
@@ -167,19 +135,20 @@ async function getSteamId(context, interaction, steamLink) {
             // Profile with vanity URL
             steamLink = steamLink.slice(steamLink.indexOf("/id/") + 4, steamLink.length);
             steamLink = steamLink.replace("/", "");
-            let options = {
+            const options = {
                 host: apis.steam.host,
-                path: apis.steam.vanityURL.path + steamLink,
+                path: apis.steam.vanityURL.path + process.env.STEAM_APIKEY + apis.steam.vanityURL.vanity + steamLink,
                 headers: { 'User-Agent': 'EntityBot/' + context.config.version }
             };
+
             const req = http.get(options, function (res) {
-                let bodyChunks_ = [];
+                const bodyChunks = [];
                 res.on('data', function (chunk) {
-                    bodyChunks_.push(chunk);
+                    bodyChunks.push(chunk);
                 });
 
                 res.on('end', function () {
-                    let body = Buffer.concat(bodyChunks_);
+                    let body = Buffer.concat(bodyChunks);
                     if (res.statusCode == 200 || res.statusCode == 201) {
                         try {
                             body = JSON.parse(body);
@@ -210,22 +179,22 @@ async function getSteamId(context, interaction, steamLink) {
  * @param {Boolean} isSurv - true = survivor | false = killer
  * @description First part for get user stats from Australian Website.
  */
-function getSteamProfile(context, interaction, steamId, isSurv) {
-    const serverConfig = context.client.servers.get(interaction.guildId);
-    let options = {
+async function getSteamProfile(context, interaction, steamId, isSurv) {
+    const serverConfig = await context.services.database.getOrCreateServer(interaction.guildId);
+    const options = {
         host: apis.steam.host,
-        path: apis.steam.playerSummaries.path + steamId,
+        path: apis.steam.playerSummaries.path + process.env.STEAM_APIKEY + apis.steam.playerSummaries.steamid + steamId,
         headers: { 'User-Agent': 'EntityBot/' + context.config.version }
     };
 
-    let req = http.get(options, function (res) {
-        let bodyChunks_ = [];
+    const req = http.get(options, function (res) {
+        const bodyChunks = [];
         res.on('data', function (chunk) {
-            bodyChunks_.push(chunk);
+            bodyChunks.push(chunk);
         });
 
         res.on('end', function () {
-            let body = Buffer.concat(bodyChunks_);
+            let body = Buffer.concat(bodyChunks);
             if (body.includes("<html><head><title>Bad Request</title>")) return interaction.editReply({ content: texts.errors.profileNotFound[serverConfig.language] });
             if (utils.isEmptyObject(body)) return interaction.editReply({ content: texts.errors.profileNotFound[serverConfig.language] });
             if (res.statusCode == 200 || res.statusCode == 201) {
@@ -256,22 +225,20 @@ function getSteamProfile(context, interaction, steamId, isSurv) {
  * @description - Get stats from Australian Website, and send this to the channel.
  */
 function sendStats(context, interaction, steamProfile, isSurv) {
-    let options = {
+    const options = {
         host: apis.dbdStats.host,
-        path: apis.dbdStats.path + steamProfile.steamid,
+        path: apis.dbdStats.playerStats + steamProfile.steamid,
         headers: { 'User-Agent': 'EntityBot/' + context.config.version }
     };
 
-    let req = https.get(options, function (res) {
-        let bodyChunks_ = [];
+    const req = https.get(options, function (res) {
+        const bodyChunks = [];
         res.on('data', function (chunk) {
-            bodyChunks_.push(chunk);
+            bodyChunks.push(chunk);
         });
 
         res.on('end', function () {
-            let body = Buffer.concat(bodyChunks_);
-            console.log(`australian site code: ${res.statusCode}`);
-
+            let body = Buffer.concat(bodyChunks);
             if (res.statusCode == 200 || res.statusCode == 201) {
                 try {
                     body = JSON.parse(body);
@@ -297,32 +264,30 @@ function sendStats(context, interaction, steamProfile, isSurv) {
  * @param {BigInt64Array} steamId - SteamID in 64bits.
  * @description - Post stats to Australian Website.
  */
-function postStats(context, interaction, steamId) {
-    const serverConfig = context.client.servers.get(interaction.guildId);
-    if (serverConfig) {
-        let options = {
-            host: apis.dbdStats.host,
-            path: apis.dbdStats.path + steamId,
-            method: 'POST',
-            headers: { 'User-Agent': 'EntityBot/' + context.config.version }
-        };
+async function postStats(context, interaction, steamId) {
+    const serverConfig = await context.services.database.getOrCreateServer(interaction.guildId);
+    const options = {
+        host: apis.dbdStats.host,
+        path: apis.dbdStats.playerStats + steamId,
+        method: 'POST',
+        headers: { 'User-Agent': 'EntityBot/' + context.config.version }
+    };
 
-        let req = https.request(options, function (res) {
-            if (res.statusCode != 201) {
-                console.log(`ERROR POST: ${res.statusCode} | message: ${res.statusMessage} | headers: ${JSON.stringify(res.headers)} | steamid: ${steamId}`);
-                sendEmbedError(context, interaction, 2);
-            } else {
-                console.log(`SUCCESS POST: ${res.statusCode} | steamid: ${steamId}`);
-                interaction.editReply(texts.accountUpdating[serverConfig.language]);
-            }
-        })
+    const req = https.request(options, function (res) {
+        if (res.statusCode != 201) {
+            console.log(`ERROR POST: ${res.statusCode} | message: ${res.statusMessage} | headers: ${JSON.stringify(res.headers)} | steamid: ${steamId}`);
+            sendEmbedError(context, interaction, 2);
+        } else {
+            console.log(`SUCCESS POST: ${res.statusCode} | steamid: ${steamId}`);
+            interaction.editReply(texts.accountUpdating[serverConfig.language]);
+        }
+    })
 
-        req.on("error", (err) => {
-            console.log(`error posting account to dbd stats: ${err}`);
-            sendEmbedError(context, interaction, 3);
-        })
-        req.end();
-    }
+    req.on("error", (err) => {
+        console.log(`error posting account to dbd stats: ${err}`);
+        sendEmbedError(context, interaction, 3);
+    })
+    req.end();
 }
 
 /**
@@ -334,156 +299,154 @@ function postStats(context, interaction, steamId) {
  * @description - Send embed stats with all info.
  */
 async function sendEmbedStats(context, interaction, steamProfile, dbdProfile, isSurv) {
-    const serverConfig = context.client.servers.get(interaction.guildId);
-    if (serverConfig) {
-        const language = serverConfig.language;
-        if (!isSurv) {
-            const canvas = Canvas.createCanvas(1920, 1080);
-            const ctx = canvas.getContext('2d');
-            let fontSize = 10;
-            ctx.drawImage(backgroundStatsKiller, 0, 0, canvas.width, canvas.height);
+    const serverConfig = await context.services.database.getOrCreateServer(interaction.guildId);
+    const language = serverConfig.language;
+    if (!isSurv) {
+        const canvas = Canvas.createCanvas(1920, 1080);
+        const ctx = canvas.getContext('2d');
+        let fontSize = 10;
+        ctx.drawImage(backgroundStatsKiller, 0, 0, canvas.width, canvas.height);
 
-            ctx.strokeStyle = '#74037b';
-            ctx.strokeRect(0, 0, canvas.width, canvas.height);
+        ctx.strokeStyle = '#74037b';
+        ctx.strokeRect(0, 0, canvas.width, canvas.height);
 
-            // Statistics centered
-            ctx.font = '80px "dbd"';
-            ctx.fillStyle = '#ffffff';
-            ctx.fillText(texts.stats.statistics[language], utils.calculateCenter(910, texts.stats.statistics[language].length, fontSize), 75);
+        // Statistics centered
+        ctx.font = '80px "dbd"';
+        ctx.fillStyle = '#ffffff';
+        ctx.fillText(texts.stats.statistics[language], utils.calculateCenter(910, texts.stats.statistics[language].length, fontSize), 75);
 
-            // Killer logo
-            ctx.drawImage(killerImage, 900, 150, 128, 128);
+        // Killer logo
+        ctx.drawImage(killerImage, 900, 150, 128, 128);
 
-            // Hours
-            ctx.font = '50px "dbd"';
-            ctx.fillText(texts.stats.hoursPlayed[language] + utils.comma(parseInt(dbdProfile.playtime / 60)), 230, 180);
+        // Hours
+        ctx.font = '50px "dbd"';
+        ctx.fillText(texts.stats.hoursPlayed[language] + utils.comma(parseInt(dbdProfile.playtime / 60)), 230, 180);
 
-            // Bloodpoints
-            ctx.drawImage(bpImage, 25, 230, 64, 64);
-            ctx.font = '50px "dbd"';
-            ctx.fillText(utils.comma(dbdProfile.bloodpoints), 100, 280);
+        // Bloodpoints
+        ctx.drawImage(bpImage, 25, 230, 64, 64);
+        ctx.font = '50px "dbd"';
+        ctx.fillText(utils.comma(dbdProfile.bloodpoints), 100, 280);
 
-            // Kills
-            ctx.drawImage(killsImage, 25, 330, 64, 64);
-            ctx.fillText(texts.stats.kills[language] + dbdProfile.killed, 100, 380);
+        // Kills
+        ctx.drawImage(killsImage, 25, 330, 64, 64);
+        ctx.fillText(texts.stats.kills[language] + dbdProfile.killed, 100, 380);
 
-            // Sacrificed
-            ctx.drawImage(sacrificedImage, 25, 430, 64, 64);
-            ctx.fillText(texts.stats.sacrificed[language] + dbdProfile.sacrificed, 100, 480);
+        // Sacrificed
+        ctx.drawImage(sacrificedImage, 25, 430, 64, 64);
+        ctx.fillText(texts.stats.sacrificed[language] + dbdProfile.sacrificed, 100, 480);
 
-            // Sacrificed obsessions
-            ctx.drawImage(sacrificedObsessionsImage, 25, 530, 64, 64);
-            ctx.fillText(texts.stats.sacrificedObessions[language] + dbdProfile.sacrificed_obsessions, 100, 580);
+        // Sacrificed obsessions
+        ctx.drawImage(sacrificedObsessionsImage, 25, 530, 64, 64);
+        ctx.fillText(texts.stats.sacrificedObessions[language] + dbdProfile.sacrificed_obsessions, 100, 580);
 
-            // Perfect games
-            ctx.drawImage(perfectGamesImage, 25, 630, 64, 64);
-            ctx.fillText(texts.stats.perfectGames[language] + dbdProfile.killer_perfectgames, 100, 680);
+        // Perfect games
+        ctx.drawImage(perfectGamesImage, 25, 630, 64, 64);
+        ctx.fillText(texts.stats.perfectGames[language] + dbdProfile.killer_perfectgames, 100, 680);
 
-            // Full load out
-            ctx.drawImage(paletImage, 25, 730, 64, 64);
-            ctx.fillText(texts.stats.killerFullLoadout[language] + dbdProfile.killer_fullloadout, 100, 780);
+        // Full load out
+        ctx.drawImage(paletImage, 25, 730, 64, 64);
+        ctx.fillText(texts.stats.killerFullLoadout[language] + dbdProfile.killer_fullloadout, 100, 780);
 
-            // Gens damaged
-            ctx.drawImage(genDamagedImage, 25, 830, 64, 64);
-            ctx.fillText(texts.stats.gensDamaged[language] + dbdProfile.gensdamagedwhileonehooked, 100, 880);
+        // Gens damaged
+        ctx.drawImage(genDamagedImage, 25, 830, 64, 64);
+        ctx.fillText(texts.stats.gensDamaged[language] + dbdProfile.gensdamagedwhileonehooked, 100, 880);
 
-            // Survivors grabbed
-            ctx.drawImage(carryImage, 25, 930, 64, 64);
-            ctx.fillText(texts.stats.survivorsGrabbed[language] + dbdProfile.survivorsgrabbedrepairinggen, 100, 980);
+        // Survivors grabbed
+        ctx.drawImage(carryImage, 25, 930, 64, 64);
+        ctx.fillText(texts.stats.survivorsGrabbed[language] + dbdProfile.survivorsgrabbedrepairinggen, 100, 980);
 
-            // profile name
-            ctx.fillStyle = '#E52121';
-            ctx.font = '70px "dbd"';
-            ctx.fillText(steamProfile.personaname, 230, 110);
+        // profile name
+        ctx.fillStyle = '#E52121';
+        ctx.font = '70px "dbd"';
+        ctx.fillText(steamProfile.personaname, 230, 110);
 
-            // Draw circle
-            ctx.beginPath();
-            ctx.arc(125, 125, 80, 0, Math.PI * 2, true);
-            ctx.strokeStyle = '#F32C2C';
-            ctx.lineWidth = 8;
-            ctx.closePath();
-            ctx.clip();
+        // Draw circle
+        ctx.beginPath();
+        ctx.arc(125, 125, 80, 0, Math.PI * 2, true);
+        ctx.strokeStyle = '#F32C2C';
+        ctx.lineWidth = 8;
+        ctx.closePath();
+        ctx.clip();
 
-            const avatar = await Canvas.loadImage(steamProfile.avatarfull);
-            ctx.drawImage(avatar, 25, 25, 200, 200);
+        const avatar = await Canvas.loadImage(steamProfile.avatarfull);
+        ctx.drawImage(avatar, 25, 25, 200, 200);
 
-            const attachment = new context.discord.MessageAttachment(canvas.toBuffer(), 'stats-image.jpg');
-            let flagOrSteam = steamProfile.loccountrycode ? `:flag_${steamProfile.loccountrycode.toLowerCase()}:` : "<:steam:914663956860248134>";
-            interaction.editReply({ content: `${flagOrSteam} **${steamProfile.personaname}** | ${texts.stats.seeFullStatistics[language]} https://dbd.tricky.lol/playerstats/${steamProfile.steamid}`, files: [attachment] });
-        } else {
-            const canvas = Canvas.createCanvas(1920, 1080);
-            const ctx = canvas.getContext('2d');
-            let fontSize = 10;
-            ctx.drawImage(backgroundStatsSurvivor, 0, 0, canvas.width, canvas.height);
+        const attachment = new context.discord.MessageAttachment(canvas.toBuffer(), 'stats-image.jpg');
+        let flagOrSteam = steamProfile.loccountrycode ? `:flag_${steamProfile.loccountrycode.toLowerCase()}:` : "<:steam:914663956860248134>";
+        interaction.editReply({ content: `${flagOrSteam} **${steamProfile.personaname}** | ${texts.stats.seeFullStatistics[language]} https://dbd.tricky.lol/playerstats/${steamProfile.steamid}`, files: [attachment] });
+    } else {
+        const canvas = Canvas.createCanvas(1920, 1080);
+        const ctx = canvas.getContext('2d');
+        let fontSize = 10;
+        ctx.drawImage(backgroundStatsSurvivor, 0, 0, canvas.width, canvas.height);
 
-            ctx.strokeStyle = '#74037b';
-            ctx.strokeRect(0, 0, canvas.width, canvas.height);
+        ctx.strokeStyle = '#74037b';
+        ctx.strokeRect(0, 0, canvas.width, canvas.height);
 
-            // Statistics centered
-            ctx.font = '80px "dbd"';
-            ctx.fillStyle = '#ffffff';
-            ctx.fillText(texts.stats.statistics[language], utils.calculateCenter(910, texts.stats.statistics[language].length, fontSize), 75);
+        // Statistics centered
+        ctx.font = '80px "dbd"';
+        ctx.fillStyle = '#ffffff';
+        ctx.fillText(texts.stats.statistics[language], utils.calculateCenter(910, texts.stats.statistics[language].length, fontSize), 75);
 
-            // Killer logo
-            ctx.drawImage(survivorImage, 900, 150, 128, 128);
+        // Killer logo
+        ctx.drawImage(survivorImage, 900, 150, 128, 128);
 
-            // Hours
-            ctx.font = '50px "dbd"';
-            ctx.fillText(texts.stats.hoursPlayed[language] + utils.comma(parseInt(dbdProfile.playtime / 60)), 230, 180);
+        // Hours
+        ctx.font = '50px "dbd"';
+        ctx.fillText(texts.stats.hoursPlayed[language] + utils.comma(parseInt(dbdProfile.playtime / 60)), 230, 180);
 
-            // Bloodpoints
-            ctx.drawImage(bpImage, 25, 230, 64, 64);
-            ctx.font = '50px "dbd"';
-            ctx.fillText(utils.comma(dbdProfile.bloodpoints), 100, 280);
+        // Bloodpoints
+        ctx.drawImage(bpImage, 25, 230, 64, 64);
+        ctx.font = '50px "dbd"';
+        ctx.fillText(utils.comma(dbdProfile.bloodpoints), 100, 280);
 
-            // Kills
-            ctx.drawImage(killsImage, 25, 330, 64, 64);
-            ctx.fillText(texts.stats.perfectGames[language] + dbdProfile.survivor_perfectgames, 100, 380);
+        // Kills
+        ctx.drawImage(killsImage, 25, 330, 64, 64);
+        ctx.fillText(texts.stats.perfectGames[language] + dbdProfile.survivor_perfectgames, 100, 380);
 
-            // Sacrificed
-            ctx.drawImage(sacrificedImage, 25, 430, 64, 64);
-            ctx.fillText(texts.stats.gensRepaired[language] + dbdProfile.gensrepaired, 100, 480);
+        // Sacrificed
+        ctx.drawImage(sacrificedImage, 25, 430, 64, 64);
+        ctx.fillText(texts.stats.gensRepaired[language] + dbdProfile.gensrepaired, 100, 480);
 
-            // Sacrificed obsessions
-            ctx.drawImage(sacrificedObsessionsImage, 25, 530, 64, 64);
-            ctx.fillText(texts.stats.survivorsHealed[language] + dbdProfile.survivorshealed, 100, 580);
+        // Sacrificed obsessions
+        ctx.drawImage(sacrificedObsessionsImage, 25, 530, 64, 64);
+        ctx.fillText(texts.stats.survivorsHealed[language] + dbdProfile.survivorshealed, 100, 580);
 
-            // Perfect games
-            ctx.drawImage(perfectGamesImage, 25, 630, 64, 64);
-            ctx.fillText(texts.stats.skillchecks[language] + dbdProfile.skillchecks, 100, 680);
+        // Perfect games
+        ctx.drawImage(perfectGamesImage, 25, 630, 64, 64);
+        ctx.fillText(texts.stats.skillchecks[language] + dbdProfile.skillchecks, 100, 680);
 
-            // Stuns
-            ctx.drawImage(paletImage, 25, 730, 64, 64);
-            ctx.fillText(texts.stats.escaped[language] + dbdProfile.escaped, 100, 780);
+        // Stuns
+        ctx.drawImage(paletImage, 25, 730, 64, 64);
+        ctx.fillText(texts.stats.escaped[language] + dbdProfile.escaped, 100, 780);
 
-            // Gens damaged
-            ctx.drawImage(genDamagedImage, 25, 830, 64, 64);
-            ctx.fillText(texts.stats.hexTotemsCleansed[language] + dbdProfile.hextotemscleansed, 100, 880);
+        // Gens damaged
+        ctx.drawImage(genDamagedImage, 25, 830, 64, 64);
+        ctx.fillText(texts.stats.hexTotemsCleansed[language] + dbdProfile.hextotemscleansed, 100, 880);
 
-            // Survivors grabbed
-            ctx.drawImage(carryImage, 25, 930, 64, 64);
-            ctx.fillText(texts.stats.exitGatesOpened[language] + dbdProfile.exitgatesopened, 100, 980);
+        // Survivors grabbed
+        ctx.drawImage(carryImage, 25, 930, 64, 64);
+        ctx.fillText(texts.stats.exitGatesOpened[language] + dbdProfile.exitgatesopened, 100, 980);
 
-            // profile name
-            ctx.fillStyle = '#E52121';
-            ctx.font = '70px "dbd"';
-            ctx.fillText(steamProfile.personaname, 230, 110);
+        // profile name
+        ctx.fillStyle = '#E52121';
+        ctx.font = '70px "dbd"';
+        ctx.fillText(steamProfile.personaname, 230, 110);
 
-            // Draw circle
-            ctx.beginPath();
-            ctx.arc(125, 125, 80, 0, Math.PI * 2, true);
-            ctx.strokeStyle = '#F32C2C';
-            ctx.lineWidth = 8;
-            ctx.closePath();
-            ctx.clip();
+        // Draw circle
+        ctx.beginPath();
+        ctx.arc(125, 125, 80, 0, Math.PI * 2, true);
+        ctx.strokeStyle = '#F32C2C';
+        ctx.lineWidth = 8;
+        ctx.closePath();
+        ctx.clip();
 
-            const avatar = await Canvas.loadImage(steamProfile.avatarfull);
-            ctx.drawImage(avatar, 25, 25, 200, 200);
+        const avatar = await Canvas.loadImage(steamProfile.avatarfull);
+        ctx.drawImage(avatar, 25, 25, 200, 200);
 
-            const attachment = new context.discord.MessageAttachment(canvas.toBuffer(), 'stats-image.jpg');
-            let flagOrSteam = steamProfile.loccountrycode ? `:flag_${steamProfile.loccountrycode.toLowerCase()}:` : "<:steam:914663956860248134>";
-            interaction.editReply({ content: `${flagOrSteam} **${steamProfile.personaname}** | ${texts.stats.seeFullStatistics[language]} https://dbd.tricky.lol/playerstats/${steamProfile.steamid} `, files: [attachment] });
-        }
+        const attachment = new context.discord.MessageAttachment(canvas.toBuffer(), 'stats-image.jpg');
+        let flagOrSteam = steamProfile.loccountrycode ? `:flag_${steamProfile.loccountrycode.toLowerCase()}:` : "<:steam:914663956860248134>";
+        interaction.editReply({ content: `${flagOrSteam} **${steamProfile.personaname}** | ${texts.stats.seeFullStatistics[language]} https://dbd.tricky.lol/playerstats/${steamProfile.steamid} `, files: [attachment] });
     }
 }
 
@@ -494,56 +457,53 @@ async function sendEmbedStats(context, interaction, steamProfile, dbdProfile, is
  * @param {Int8Array} type - 1 = Update in progress | 2 = Account Private. | 3 = Unknown error.
  * @description - Send embed error with information.
  */
-function sendEmbedError(context, interaction, type) {
-    const serverConfig = context.client.servers.get(interaction.guildId);
-    if (serverConfig) {
-        const text = texts.errors.types[type.toString()];
-        const embedd = new context.discord.MessageEmbed()
-            .setColor('#FF0000')
-            .setTitle(text.title[serverConfig.language]);
+async function sendEmbedError(context, interaction, type) {
+    const serverConfig = await context.services.database.getOrCreateServer(interaction.guildId);
+    const text = texts.errors.types[type.toString()];
+    const embedd = new context.discord.MessageEmbed()
+        .setColor('#FF0000')
+        .setTitle(text.title[serverConfig.language]);
 
-        for (let field of text.fields) {
-            embedd.addField(field.name[serverConfig.language], field.value[serverConfig.language]);
-        }
-
-        if (text.image) {
-            embedd.setImage(text.image);
-        }
-        embedd.setThumbnail(context.client.user.avatarURL());
-        interaction.editReply({ embeds: [embedd] });
+    for (let field of text.fields) {
+        embedd.addField(field.name[serverConfig.language], field.value[serverConfig.language]);
     }
+
+    if (text.image) {
+        embedd.setImage(text.image);
+    }
+    embedd.setThumbnail(context.client.user.avatarURL());
+    interaction.editReply({ embeds: [embedd] });
 }
 
-function calculateLevel(context, interaction, currentLevel, wantedLevel) {
-    const serverConfig = context.client.servers.get(interaction.guildId);
-    if (serverConfig) {
-        const operation = getBloodpointsToBuyLevels(currentLevel, wantedLevel);
-        const language = serverConfig.language;
+async function calculateLevel(context, interaction, currentLevel, wantedLevel) {
+    const serverConfig = await context.services.database.getOrCreateServer(interaction.guildId);
+    const operation = getBloodpointsToBuyLevels(currentLevel, wantedLevel);
+    const language = serverConfig.language;
 
-        // image creation
-        const canvas = Canvas.createCanvas(541, 447);
-        const ctx = canvas.getContext('2d');
-        let fontSize = 10
-        ctx.drawImage(backgroundLevel, 0, 0, canvas.width, canvas.height);
+    // image creation
+    const canvas = Canvas.createCanvas(541, 447);
+    const ctx = canvas.getContext('2d');
+    let fontSize = 10
+    ctx.drawImage(backgroundLevel, 0, 0, canvas.width, canvas.height);
 
-        ctx.strokeStyle = '#74037b';
-        ctx.strokeRect(0, 0, canvas.width, canvas.height);
+    ctx.strokeStyle = '#74037b';
+    ctx.strokeRect(0, 0, canvas.width, canvas.height);
 
-        // Slightly smaller text placed above the member's display name
-        ctx.font = '50px "dbd"';
-        ctx.fillStyle = '#ffffff';
-        let levelHeader = language == 0 ? "Nivel" : "Level"
+    // Slightly smaller text placed above the member's display name
+    ctx.font = '50px "dbd"';
+    ctx.fillStyle = '#ffffff';
+    let levelHeader = language == 0 ? "Nivel" : "Level"
 
-        ctx.fillText(levelHeader, utils.calculateCenter(270, levelHeader.length, fontSize), 75);
-        ctx.fillText(currentLevel, utils.calculateCenter(113, currentLevel.toString().length, fontSize), 210);
-        ctx.fillText(wantedLevel, utils.calculateCenter(419, wantedLevel.toString().length, fontSize), 213);
-        ctx.fillText(utils.comma(operation.price), utils.calculateCenter(290, operation.price.toString().length, fontSize), 355);
+    ctx.fillText(levelHeader, utils.calculateCenter(270, levelHeader.length, fontSize), 75);
+    ctx.fillText(currentLevel, utils.calculateCenter(113, currentLevel.toString().length, fontSize), 210);
+    ctx.fillText(wantedLevel, utils.calculateCenter(419, wantedLevel.toString().length, fontSize), 213);
+    ctx.fillText(utils.comma(operation.price), utils.calculateCenter(290, operation.price.toString().length, fontSize), 355);
 
-        const attachment = new context.discord.MessageAttachment(canvas.toBuffer(), 'calculate-image.png');
-        interaction.editReply({ content: "‎      ‏‏‎", files: [attachment] });
-    }
+    const attachment = new context.discord.MessageAttachment(canvas.toBuffer(), 'calculate-image.png');
+    interaction.editReply({ content: "‎      ‏‏‎", files: [attachment] });
 }
 
+/** Deprecated, need value update */
 function getBloodpointsToBuyLevels(currentLevel, wantedLevel) {
     let total = 0;
     let levelsToBuy = 0;
@@ -563,7 +523,8 @@ function getBloodpointsToBuyLevels(currentLevel, wantedLevel) {
 }
 
 async function generateRandomBuild(context, interaction, isSurv) {
-    const serverConfig = context.client.servers.get(interaction.guildId);
+    const serverConfig = await context.services.database.getOrCreateServer(interaction.guildId);
+
     let perk1, perk2, perk3, perk4, numberCharacter;
     const survivors = context.services.characters.getSurvivors();
     const killers = context.services.characters.getKillers();
@@ -573,18 +534,18 @@ async function generateRandomBuild(context, interaction, isSurv) {
         numberCharacter = Math.floor(Math.random() * utils.getLength(survivors));
         const survivorPerks = context.services.perks.getSurvivorPerks();
         nPerks = getRandomNumber(utils.getLength(survivorPerks));
-        perk1 = survivorPerks[nPerks.n1];
-        perk2 = survivorPerks[nPerks.n2];
-        perk3 = survivorPerks[nPerks.n3];
-        perk4 = survivorPerks[nPerks.n4];
+        perk1 = context.services.perks.getSurvivorPerkByIndex(nPerks.n1);
+        perk2 = context.services.perks.getSurvivorPerkByIndex(nPerks.n2);
+        perk3 = context.services.perks.getSurvivorPerkByIndex(nPerks.n3);
+        perk4 = context.services.perks.getSurvivorPerkByIndex(nPerks.n4);
     } else {
         numberCharacter = Math.floor(Math.random() * utils.getLength(killers));
         const killerPerks = context.services.perks.getKillerPerks();
         nPerks = getRandomNumber(utils.getLength(killerPerks));
-        perk1 = killerPerks[nPerks.n1];
-        perk2 = killerPerks[nPerks.n2];
-        perk3 = killerPerks[nPerks.n3];
-        perk4 = killerPerks[nPerks.n4];
+        perk1 = context.services.perks.getKillerPerkByIndex(nPerks.n1);
+        perk2 = context.services.perks.getKillerPerkByIndex(nPerks.n2);
+        perk3 = context.services.perks.getKillerPerkByIndex(nPerks.n3);
+        perk4 = context.services.perks.getKillerPerkByIndex(nPerks.n4);
     }
 
     // send build
@@ -777,7 +738,6 @@ async function test(context, interaction, type, index) {
 }
 
 module.exports = {
-    verifyShrine: verifyShrine,
     sendShrine: sendShrine,
     init: init,
     getStats: getStats,

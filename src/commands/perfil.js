@@ -13,21 +13,15 @@ module.exports = {
         }),
 	async execute(context, interaction) {
         await interaction.deferReply();
-        const serverConfig = context.client.servers.get(interaction.guildId);
+        const serverConfig = await context.services.database.getOrCreateServer(interaction.guildId);
         const steamLink = interaction.options.get("steam-link").value;
-        if (serverConfig && steamLink && interaction.member) {
+        if (steamLink && interaction.member) {
             const memberId = interaction.member.id;
             const steamId = await context.services.stats.getSteamId(context, interaction, steamLink);
-            context.services.database.query(`SELECT * FROM userlink WHERE ID = ${memberId}`, (err, rows) => {
-                if (err) throw err;
-                if (rows.length > 0) {
-                    context.services.database.query(`UPDATE userlink SET steamid = ${steamId} WHERE ID = ${memberId}`);
-                    interaction.editReply(texts.profileStats.setter[serverConfig.language]);
-                } else {
-                    context.services.database.query(`INSERT INTO userlink (ID, steamid) VALUES ('${memberId}', '${steamId}')`);
-                    interaction.editReply(texts.profileStats.setter[serverConfig.language]);
-                }
-            });
+            const member = await context.services.database.getOrCreateUser(memberId);
+            member.steamID = steamId;
+            await member.save()
+            interaction.editReply(texts.profileStats.setter[serverConfig.language]);
         }
 	},
 };

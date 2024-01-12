@@ -9,12 +9,11 @@ const client = new Discord.Client({
 
 // services
 const interactions = require("../services/interactions.js");
-const database = require("../services/database.js"); 
 const stats = require("../services/stats.js");
 const perks = require("../services/perks.js");
-const servers = require("../services/servers.js");
 const characters = require("../services/characters.js");
 const rules = require("../services/rules.js");
+const database = require("../services/database.js");
 
 // config
 const config = require("../data/config.json");
@@ -26,12 +25,11 @@ class Context {
         this.config = config;
         this.services = {};
         this.services.interactions = interactions;
-        this.services.database = database;
         this.services.stats = stats;
         this.services.perks = perks;
-        this.services.servers = servers;
         this.services.characters = characters;
         this.services.rules = rules;
+        this.services.database = database;
     }
 }
 

@@ -15,9 +15,10 @@ module.exports = {
         }),
     async execute(context, interaction) {
         const channel = interaction.options.get("command-channel").channel;
-        const serverConfig = context.client.servers.get(interaction.guildId);
-        if (channel && serverConfig) {
-            context.services.servers.changeChannel(context, interaction.guildId, channel.id);
+        const serverConfig = await context.services.database.getOrCreateServer(interaction.guildId);
+        if (channel) {
+            serverConfig.channelID = channel.id;
+            await serverConfig.save();
             interaction.reply(texts.channelChanged[serverConfig.language] + `<#${channel.id}>`);
         } else interaction.reply(texts.errors.interactionFail[serverConfig.language]);
     },

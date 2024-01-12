@@ -17,7 +17,7 @@ function init() {
 }
 
 function getRule(number, language) {
-    switch(language) {
+    switch (language) {
         case 0: {
             if (number >= rulesEng.length) return rulesEsp[rulesEsp.length - 1];
             return rulesEsp[number];
@@ -29,14 +29,15 @@ function getRule(number, language) {
     }
 }
 
-function getRandomRule(context, interaction) {
+async function getRandomRule(context, interaction) {
     const randomNum = Math.floor(Math.random() * rulesEsp.length + 1);
-    const serverConfig = context.client.servers.get(interaction.guildId);
+    const serverConfig = await context.services.database.getOrCreateServer(interaction.guildId);
     const rule = getRule(randomNum, serverConfig.language);
-    interaction.reply({ content: `> ${rule}`, files: [{
-        attachment: 'https://i.imgur.com/I4LhmO8.png',
-        name: 'Survivor_rule_book_for_killers.jpg'
-      }]
+    interaction.reply({
+        content: `> ${rule}`, files: [{
+            attachment: 'https://i.imgur.com/I4LhmO8.png',
+            name: 'Survivor_rule_book_for_killers.jpg'
+        }]
     });
 }
 

@@ -1,68 +1,58 @@
-const mysql = require("mysql");
-const localConfig = require("../data/database.json");
+const mongoose = require('mongoose');
 
-let con;
-
-/* MySQL config */
-let db_config = {
-    host: localConfig.host,
-    user: localConfig.user,
-    password: localConfig.password,
-    database: localConfig.db
-}
-
-/**
- * @description - Load MySQL Data base.
- */
-async function init(context) {
-    con = mysql.createConnection(db_config);
-    context.client.servers = new context.discord.Collection();
-
-    con.connect(function (err) {
-        if (err) {
-            console.log('Error connecting to database (retry in 2 seconds): ', err);
-            setTimeout(init, 2000);
-        } else {
-            const start = Date.now();
-            con.query('SELECT * FROM Servidores', (err, rows) => {
-                if (err) throw err;
-                if (rows.length >= 1) {
-                    for (let x = 0; x < rows.length; x++) {
-                        let cidd = typeof rows[x].cid === "string" && rows[x].cid === "null" ? null : rows[x].cid;
-                        let IDD = rows[x].ID;
-                        let prefixx = rows[x].prefix;
-                        let lan = rows[x].lenguaje;
-                        let serverConfig = {
-                            channelId: cidd,
-                            prefix: prefixx,
-                            language: lan
-                        };
-                        context.client.servers.set(IDD, serverConfig);
-                    }
-                }
-            });
-            console.log(`Database loaded in ${Date.now() - start}ms.`);
-        }
-        setInterval(function () {
-            con.query('SELECT * FROM Servidores')
-            context.services.stats.verifyShrine(context);
-        }, 5000);
+async function init() {
+    await mongoose.connect(process.env.MONGO_URI, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
     });
+    console.log("Connected to database.");
+}
 
-    con.on('error', function (err) {
-        console.log('Data base error.', err);
-        if (err.code === 'PROTOCOL_CONNECTION_LOST') {
-            init();
-            console.log('Trying to reconnect...');
-        }
+async function getOrCreateServer(guildId) {
+    let serverConfig = await serverModel.findOne({ _id: guildId });
+    if (serverConfig) return serverConfig;
+    serverConfig = new serverModel({
+        _id: guildId,
+        channelID: "",
+        language: 0
     });
+    await serverConfig.save();
+    return serverConfig;
 }
 
-function query(q, callback) {
-    con.query(q, callback);
+async function getOrCreateUser(memberId) {
+    let userConfig = await userdataModel.findOne({ _id: memberId });
+    if (userConfig) return userConfig;
+    userConfig = new userdataModel({
+        _id: memberId,
+        steamID: ""
+    });
+    await userConfig.save();
+    return userConfig;
 }
+
+const userdataSchema = mongoose.Schema({
+    _id: String,
+    steamID: String
+}, {
+    versionKey: false
+});
+
+const serverSchema = mongoose.Schema({
+    _id: String,
+    channelID: String,
+    language: Number,
+}, {
+    versionKey: false
+});
+
+const userdataModel = mongoose.model("userdata", userdataSchema);
+const serverModel = mongoose.model("server", serverSchema);
 
 module.exports = {
-    query: query,
-    init: init
+    init: init,
+    userdataSchema: userdataModel,
+    serverSchema: serverModel,
+    getOrCreateServer: getOrCreateServer,
+    getOrCreateUser: getOrCreateUser
 }
