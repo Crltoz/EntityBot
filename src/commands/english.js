@@ -13,7 +13,6 @@ module.exports = {
                 return;
             }
             serverConfig.language = 1;
-            context.services.database.query(`UPDATE Servidores SET lenguaje = 1 WHERE ID = ${interaction.guildId}`);
             await interaction.reply({ content: texts.languageChanged[serverConfig.language], ephemeral: true });
         }
 	},
