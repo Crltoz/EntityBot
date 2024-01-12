@@ -9,7 +9,7 @@ function init(context) {
     // commands
     context.client.commands = new context.discord.Collection();
     const commandsPath = path.join("src", "commands");
-    const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith('.js') && (!file.includes("test") || process.env.ENVIROMENT != "production"));
+    const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith('.js') && (!file.includes("test") || process.env.ENVIRONMENT != "production"));
     
     // menus
     context.client.menus = new context.discord.Collection();
