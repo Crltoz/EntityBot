@@ -1,4 +1,3 @@
-const statsConfig = require("../data/stats.json");
 const https = require("https");
 const http = require("http");
 const Canvas = require("canvas");
@@ -29,12 +28,12 @@ const font = "./assets/Font/BRUTTALL.ttf";
 Canvas.registerFont(font, { family: "dbd" });
 
 async function init() {
-    backgroundKiller = await Canvas.loadImage("assets/Visuals/Background/random_killer.jpg");
-    backgroundSurvivor = await Canvas.loadImage("assets/Visuals/Background/random_survivor.jpg");
+    backgroundKiller = await Canvas.loadImage("./assets/Visuals/Background/random_killer.jpg");
+    backgroundSurvivor = await Canvas.loadImage("./assets/Visuals/Background/random_survivor.jpg");
     backgroundShrine = await Canvas.loadImage("./assets/Visuals/Background/shrine.jpg");
-    backgroundLevel = await Canvas.loadImage("assets/Visuals/Background/level.jpg");
-    backgroundStatsSurvivor = await Canvas.loadImage("assets/Visuals/Background/stats_survivor.jpg");
-    backgroundStatsKiller = await Canvas.loadImage("assets/Visuals/Background/stats_killer.jpg");
+    backgroundLevel = await Canvas.loadImage("./assets/Visuals/Background/level.jpg");
+    backgroundStatsSurvivor = await Canvas.loadImage("./assets/Visuals/Background/stats_survivor.jpg");
+    backgroundStatsKiller = await Canvas.loadImage("./assets/Visuals/Background/stats_killer.jpg");
     killerImage = await Canvas.loadImage("./assets/Visuals/icons/killer_rank.png");
     survivorImage = await Canvas.loadImage("./assets/Visuals/icons/survivor_rank.png");
     bpImage = await Canvas.loadImage("./assets/Visuals/icons/bp.png");
@@ -48,35 +47,59 @@ async function init() {
     console.log(`Stats images loaded.`)
 }
 
-let updateShrine = true;
-
-function verifyShrine(context, force = false) {
-    const time = new Date();
-    if (time.toUTCString().toLowerCase().includes('wed') && time.getUTCHours() == '0' && time.getUTCMinutes() == '1' && updateShrine || force) {
-        updateShrine = !updateShrine;
-        setTimeout(() => {
-            updateShrine = true;
-        }, 120000);
-
-        let options = {
+async function sendShrine(context, interaction) {
+    const serverConfig = context.client.servers.get(interaction.guildId);
+    if (serverConfig) {
+        const options = {
             host: statsConfig.host,
             path: statsConfig.paths.shrine,
             headers: { 'User-Agent': 'EntityBot/' + context.config.version }
         };
-        let req = https.get(options, function (res) {
-            let bodyChunks = [];
+
+        const req = https.get(options, function (res) {
+            const bodyChunks = [];
 
             res.on('data', function (chunk) {
                 bodyChunks.push(chunk);
             });
 
-            res.on('end', function () {
+            res.on('end', async function () {
                 let body = Buffer.concat(bodyChunks);
                 if (res.statusCode == 200 || res.statusCode == 201) {
                     try {
-                        let parsed = JSON.parse(body);
-                        context.services.database.query(`DELETE FROM santuario`)
-                        context.services.database.query(`INSERT INTO santuario (perk_1, perk_2, perk_3, perk_4) VALUES ('${parsed.perks[0].id.toLowerCase()}:${parsed.perks[0].shards}', '${parsed.perks[1].id.toLowerCase()}:${parsed.perks[1].shards}', '${parsed.perks[2].id.toLowerCase()}:${parsed.perks[2].shards}', '${parsed.perks[3].id.toLowerCase()}:${parsed.perks[3].shards}')`)
+                        const shrineResult = JSON.parse(body);
+                        const perks = []
+                        for (let perk of shrineResult.perks) {
+                           const perkData = await context.services.perks.getPerkById(perk.id);
+                           perks.push({ data: perkData, shards: perk.shards });
+                        }
+                        if (perks.length != 4 || perks.some(data => data.perk == null)) {
+                            console.log(`Invalid perks in shrine: ${JSON.stringify(perks)}`)
+                            interaction.editReply("We are currently unable to display this information, please report it on our Discord in the bugs section: https://discord.gg/T6rEERg")
+                            return
+                        }
+
+                        const canvas = Canvas.createCanvas(1163, 664);
+                        const ctx = canvas.getContext('2d');
+                        ctx.drawImage(backgroundShrine, 0, 0, canvas.width, canvas.height);
+
+                        const perkImages = []
+                        for (let data of perks) {
+                            const perkImage = await Canvas.loadImage(data.perk.link);
+                            perkImages.push({ image: perkImage, shards: data.shards });
+                        }
+                        ctx.drawImage(perkImages[0], 454, 3.5, 256, 256);
+                        ctx.drawImage(perkImages[1], 280, 177, 256, 256);
+                        ctx.drawImage(perkImages[2], 626, 177, 256, 256);
+                        ctx.drawImage(perkImages[3], 454, 355, 256, 256);
+                        ctx.strokeRect(0, 0, canvas.width, canvas.height);
+                        const attachment = new context.discord.MessageAttachment(canvas.toBuffer(), 'shrine-image.png');
+
+                        if (serverConfig.language === 0) {
+                            await interaction.editReply({ content: `🈴 **Santuario:**\n1⃣ ${perk1.nameEs} - <:frag_iri:739690491829813369> ${shards[0]}\n2⃣ ${perk2.nameEs} - <:frag_iri:739690491829813369> ${shards[1]}\n3⃣ ${perk3.nameEs} - <:frag_iri:739690491829813369> ${shards[2]}\n4⃣ ${perk4.nameEs} - <:frag_iri:739690491829813369> ${shards[3]}`, files: [attachment] });
+                        } else if (serverConfig.language === 1) {
+                            await interaction.editReply({ content: `🈴 **Shrine:**\n1⃣ ${perk1.nameEn} - <:frag_iri:739690491829813369> ${shards[0]}\n2⃣ ${perk2.nameEn} - <:frag_iri:739690491829813369> ${shards[1]}\n3⃣ ${perk3.nameEn} - <:frag_iri:739690491829813369> ${shards[2]}\n4⃣ ${perk4.nameEn} - <:frag_iri:739690491829813369> ${shards[3]}`, files: [attachment] });
+                        }
                     } catch (err) {
                         console.log(`Error parsing shrine body: ${err} --- body: ${JSON.stringify(body)}`);
                     }
@@ -84,57 +107,7 @@ function verifyShrine(context, force = false) {
             });
         });
 
-        req.on('error', function (e) {
-            console.error(`verify shrine error: ${e}`);
-        });
-
         req.end();
-        return;
-    }
-}
-
-async function sendShrine(context, interaction) {
-    const serverConfig = context.client.servers.get(interaction.guildId);
-    if (serverConfig) {
-        context.services.database.query(`SELECT * FROM santuario`, async (err, rows) => {
-            if (err) throw err;
-            let perksName = [rows[0].perk_1.split(":")[0], rows[0].perk_2.split(":")[0], rows[0].perk_3.split(":")[0], rows[0].perk_4.split(":")[0]];
-            let shards = [rows[0].perk_1.split(":")[1], rows[0].perk_2.split(":")[1], rows[0].perk_3.split(":")[1], rows[0].perk_4.split(":")[1]];
-            let perk1 = await context.services.perks.getPerkById(perksName[0]);
-            let perk2 = await context.services.perks.getPerkById(perksName[1]);
-            let perk3 = await context.services.perks.getPerkById(perksName[2]);
-            let perk4 = await context.services.perks.getPerkById(perksName[3]);
-            if (!perk1 || !perk2 || !perk3 || !perk4) {
-                console.log(`Invalid perks in shrine: ${perk1} ${perksName[0]} (${rows[0].perk_1}) | ${perk2} (${rows[0].perk_2}) | ${perk3} (${rows[0].perk_3}) | ${perk4} (${rows[0].perk_4})`)
-                interaction.editReply("We are currently unable to display this information, please report it on our Discord in the bugs section: https://discord.gg/T6rEERg")
-                return
-            }
-
-            const canvas = Canvas.createCanvas(1163, 664);
-            const ctx = canvas.getContext('2d');
-            ctx.drawImage(backgroundShrine, 0, 0, canvas.width, canvas.height);
-            const perkImage_1 = await Canvas.loadImage(perk1.link);
-            const perkImage_2 = await Canvas.loadImage(perk2.link);
-            const perkImage_3 = await Canvas.loadImage(perk3.link);
-            const perkImage_4 = await Canvas.loadImage(perk4.link);
-            ctx.drawImage(perkImage_1, 454, 3.5, 256, 256);
-            ctx.drawImage(perkImage_2, 280, 177, 256, 256);
-            ctx.drawImage(perkImage_3, 626, 177, 256, 256);
-            ctx.drawImage(perkImage_4, 454, 355, 256, 256);
-            ctx.strokeRect(0, 0, canvas.width, canvas.height);
-            const attachment = new context.discord.MessageAttachment(canvas.toBuffer(), 'shrine-image.png');
-
-            if (serverConfig.language === 0) {
-                await interaction.editReply({ content: `🈴 **Santuario:**\n1⃣ ${perk1.nameEs} - <:frag_iri:739690491829813369> ${shards[0]}\n2⃣ ${perk2.nameEs} - <:frag_iri:739690491829813369> ${shards[1]}\n3⃣ ${perk3.nameEs} - <:frag_iri:739690491829813369> ${shards[2]}\n4⃣ ${perk4.nameEs} - <:frag_iri:739690491829813369> ${shards[3]}`, files: [attachment] });
-            } else if (serverConfig.language === 1) {
-                await interaction.editReply({ content: `🈴 **Santuario:**\n1⃣ ${perk1.nameEn} - <:frag_iri:739690491829813369> ${shards[0]}\n2⃣ ${perk2.nameEn} - <:frag_iri:739690491829813369> ${shards[1]}\n3⃣ ${perk3.nameEn} - <:frag_iri:739690491829813369> ${shards[2]}\n4⃣ ${perk4.nameEn} - <:frag_iri:739690491829813369> ${shards[3]}`, files: [attachment] });
-            }
-
-
-            setTimeout(() => {
-                verifyShrine(context, true);
-            }, 2000);
-        });
     }
 }
 
@@ -169,17 +142,17 @@ async function getSteamId(context, interaction, steamLink) {
             steamLink = steamLink.replace("/", "");
             let options = {
                 host: apis.steam.host,
-                path: apis.steam.vanityURL.path + steamLink,
+                path: apis.steam.vanityURL.path + process.env.STEAM_APIKEY + apis.steam.playerSummaries + steamLink,
                 headers: { 'User-Agent': 'EntityBot/' + context.config.version }
             };
             const req = http.get(options, function (res) {
-                let bodyChunks_ = [];
+                const bodyChunks = [];
                 res.on('data', function (chunk) {
-                    bodyChunks_.push(chunk);
+                    bodyChunks.push(chunk);
                 });
 
                 res.on('end', function () {
-                    let body = Buffer.concat(bodyChunks_);
+                    let body = Buffer.concat(bodyChunks);
                     if (res.statusCode == 200 || res.statusCode == 201) {
                         try {
                             body = JSON.parse(body);
@@ -258,7 +231,7 @@ function getSteamProfile(context, interaction, steamId, isSurv) {
 function sendStats(context, interaction, steamProfile, isSurv) {
     let options = {
         host: apis.dbdStats.host,
-        path: apis.dbdStats.path + steamProfile.steamid,
+        path: apis.dbdStats.playerStats + steamProfile.steamid,
         headers: { 'User-Agent': 'EntityBot/' + context.config.version }
     };
 
@@ -302,7 +275,7 @@ function postStats(context, interaction, steamId) {
     if (serverConfig) {
         let options = {
             host: apis.dbdStats.host,
-            path: apis.dbdStats.path + steamId,
+            path: apis.dbdStats.playerStats + steamId,
             method: 'POST',
             headers: { 'User-Agent': 'EntityBot/' + context.config.version }
         };
@@ -544,6 +517,7 @@ function calculateLevel(context, interaction, currentLevel, wantedLevel) {
     }
 }
 
+/** Deprecated, need value update */
 function getBloodpointsToBuyLevels(currentLevel, wantedLevel) {
     let total = 0;
     let levelsToBuy = 0;
@@ -777,7 +751,6 @@ async function test(context, interaction, type, index) {
 }
 
 module.exports = {
-    verifyShrine: verifyShrine,
     sendShrine: sendShrine,
     init: init,
     getStats: getStats,
