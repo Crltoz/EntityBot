@@ -70,6 +70,10 @@
         ]
     },
     "errors": {
+        "unknownError": [
+            "Ocurrió un error desconocido, por favor reportalo en nuestro Discord de soporte: ",
+            "We are currently unable to display this information, please report it on our Discord in the bugs section: "
+        ],
         "privateProfile": [
             "Tu perfil de steam está privado.",
             "Your steam profile is private."

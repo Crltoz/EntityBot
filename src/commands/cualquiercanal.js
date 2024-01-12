@@ -6,12 +6,11 @@ module.exports = {
         .setName('cualquiercanal')
         .setDescription('Permite que los comandos se puedan usar en cualquier canal.'),
     async execute(context, interaction) {
-        const serverConfig = context.client.servers.get(interaction.guildId);
+        const serverConfig = await context.services.database.getOrCreateServer(interaction.guildId);
         const hasPermission = interaction.member.permissions.has("ADMINISTRATOR");
-        if (serverConfig) {
-            if (!hasPermission) return interaction.reply(texts.errors.permissionsError[serverConfig.language]);
-            context.services.servers.changeChannel(context, interaction.guildId, null);
-            interaction.reply(texts.channelRemoved[serverConfig.language]);
-        }
+        if (!hasPermission) return interaction.reply(texts.errors.permissionsError[serverConfig.language]);
+        serverConfig.channelID = "";
+        await serverConfig.save();
+        interaction.reply(texts.channelRemoved[serverConfig.language]);
     },
 };

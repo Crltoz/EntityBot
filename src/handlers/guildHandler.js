@@ -1,5 +1,3 @@
-const { serverSchema } = require("../classes/models");
-
 async function guildHandler(context, guild) {
     let defaultChannel = "";
     guild.channels.cache.forEach((channel) => {
@@ -10,14 +8,8 @@ async function guildHandler(context, guild) {
         }
     });
     if (defaultChannel) defaultChannel.send("**Gracias por añadirme!** :white_check_mark:\n**-** Mi prefijo es `/`\n**-** Puedes ver mis comandos con `/ayuda`\n**-** Change the bot language with `/english`");
-    context.client.channels.cache.get(STATS_CHANNEL).send('| Nuevo servidor | Nombre: ' + guild.name + ' | Usuarios: ' + guild.memberCount);
-    const server = new serverSchema({
-        _id: guild.id,
-        serverID: guild.id,
-        channelID: null,
-        language: 0,
-    });
-    await server.save()
+    context.client.channels.cache.get(process.env.STATS_CHANNEL).send('| Nuevo servidor | Nombre: ' + guild.name + ' | Usuarios: ' + guild.memberCount);
+    await context.services.database.getOrCreateServer(guild.id);
 }
 
 

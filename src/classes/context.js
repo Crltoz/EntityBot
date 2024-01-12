@@ -11,7 +11,6 @@ const client = new Discord.Client({
 const interactions = require("../services/interactions.js");
 const stats = require("../services/stats.js");
 const perks = require("../services/perks.js");
-const servers = require("../services/servers.js");
 const characters = require("../services/characters.js");
 const rules = require("../services/rules.js");
 const database = require("../services/database.js");
@@ -28,7 +27,6 @@ class Context {
         this.services.interactions = interactions;
         this.services.stats = stats;
         this.services.perks = perks;
-        this.services.servers = servers;
         this.services.characters = characters;
         this.services.rules = rules;
         this.services.database = database;
