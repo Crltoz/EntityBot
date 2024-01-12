@@ -53,9 +53,19 @@ function getSurvivorPerks() {
   return survivorPerks;
 }
 
+function getSurvivorPerkByIndex(index) {
+  return Object.values(survivorPerks).find(p => p.index == index);
+}
+
+function getKillerPerkByIndex(index) {
+  return Object.values(killerPerks).find(p => p.index == index);
+}
+
 module.exports = {
   init: init,
   getPerkById: getPerkById,
   getKillerPerks: getKillerPerks,
-  getSurvivorPerks: getSurvivorPerks
+  getSurvivorPerks: getSurvivorPerks,
+  getSurvivorPerkByIndex: getSurvivorPerkByIndex,
+  getKillerPerkByIndex: getKillerPerkByIndex,
 }
