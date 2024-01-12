@@ -50,8 +50,8 @@ async function init() {
 async function sendShrine(context, interaction) {
     const serverConfig = await context.services.database.getOrCreateServer(interaction.guildId);
     const options = {
-        host: statsConfig.host,
-        path: statsConfig.paths.shrine,
+        host: apis.dbdStats.host,
+        path: apis.dbdStats.shrine,
         headers: { 'User-Agent': 'EntityBot/' + context.config.version }
     };
 
@@ -72,9 +72,9 @@ async function sendShrine(context, interaction) {
                         const perkData = await context.services.perks.getPerkById(perk.id);
                         perks.push({ data: perkData, shards: perk.shards });
                     }
-                    if (perks.length != 4 || perks.some(data => data.perk == null)) {
+                    if (perks.length != 4 || perks.some(it => it.data == null)) {
                         console.log(`Invalid perks in shrine: ${JSON.stringify(perks)}`)
-                        interaction.editReply(texts.errors.unknownError[serverConfig.language])
+                        interaction.editReply(texts.errors.unknownError[serverConfig.language] + process.env.SUPPORT_DISCORD)
                         return
                     }
 
@@ -84,8 +84,8 @@ async function sendShrine(context, interaction) {
 
                     const perkImages = []
                     for (let data of perks) {
-                        const perkImage = await Canvas.loadImage(data.perk.link);
-                        perkImages.push({ image: perkImage, shards: data.shards });
+                        const perkImage = await Canvas.loadImage(data.data.link);
+                        perkImages.push(perkImage);
                     }
                     ctx.drawImage(perkImages[0], 454, 3.5, 256, 256);
                     ctx.drawImage(perkImages[1], 280, 177, 256, 256);
@@ -95,9 +95,9 @@ async function sendShrine(context, interaction) {
                     const attachment = new context.discord.MessageAttachment(canvas.toBuffer(), 'shrine-image.png');
 
                     if (serverConfig.language === 0) {
-                        await interaction.editReply({ content: `🈴 **Santuario:**\n1⃣ ${perk1.nameEs} - <:frag_iri:739690491829813369> ${shards[0]}\n2⃣ ${perk2.nameEs} - <:frag_iri:739690491829813369> ${shards[1]}\n3⃣ ${perk3.nameEs} - <:frag_iri:739690491829813369> ${shards[2]}\n4⃣ ${perk4.nameEs} - <:frag_iri:739690491829813369> ${shards[3]}`, files: [attachment] });
+                        await interaction.editReply({ content: `🈴 **Santuario:**\n1⃣ ${perks[0].data.nameEs} - <:frag_iri:739690491829813369> ${perks[0].shards}\n2⃣ ${perks[1].data.nameEs} - <:frag_iri:739690491829813369> ${perks[1].shards}\n3⃣ ${perks[2].data.nameEs} - <:frag_iri:739690491829813369> ${perks[2].shards}\n4⃣ ${perks[3].data.nameEs} - <:frag_iri:739690491829813369> ${perks[3].shards}`, files: [attachment] });
                     } else if (serverConfig.language === 1) {
-                        await interaction.editReply({ content: `🈴 **Shrine:**\n1⃣ ${perk1.nameEn} - <:frag_iri:739690491829813369> ${shards[0]}\n2⃣ ${perk2.nameEn} - <:frag_iri:739690491829813369> ${shards[1]}\n3⃣ ${perk3.nameEn} - <:frag_iri:739690491829813369> ${shards[2]}\n4⃣ ${perk4.nameEn} - <:frag_iri:739690491829813369> ${shards[3]}`, files: [attachment] });
+                        await interaction.editReply({ content: `🈴 **Shrine:**\n1⃣ ${perks[0].data.nameEn} - <:frag_iri:739690491829813369> ${perks[0].shards}\n2⃣ ${perks[1].data.nameEn} - <:frag_iri:739690491829813369> ${perks[1].shards}\n3⃣ ${perks[2].data.nameEn} - <:frag_iri:739690491829813369> ${perks[2].shards}\n4⃣ ${perks[3].data.nameEn} - <:frag_iri:739690491829813369> ${perks[3].shards}`, files: [attachment] });
                     }
                 } catch (err) {
                     console.log(`Error parsing shrine body: ${err} --- body: ${JSON.stringify(body)}`);
