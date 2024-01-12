@@ -1,7 +1,0 @@
-{
-    "host": "dbd.tricky.lol",
-    "paths": {
-        "shrine": "/api/shrine",
-        "stats": ""
-    }
-}

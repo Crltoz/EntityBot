@@ -2,14 +2,17 @@
     "steam": {
         "host": "api.steampowered.com",
         "vanityURL": {
-            "path": "/ISteamUser/ResolveVanityURL/v0001/?key=DF0A08E817CCE67F129D35FFFB14901A&vanityurl="
+            "path": "/ISteamUser/ResolveVanityURL/v0001/?key=",
+            "vanity": "&vanityurl="
         },
         "playerSummaries": {
-            "path": "/ISteamUser/GetPlayerSummaries/v0002/?key=DF0A08E817CCE67F129D35FFFB14901A&steamids="
+            "path": "/ISteamUser/GetPlayerSummaries/v0002/?key=",
+            "steamid": "&steamids="
         }
     },
     "dbdStats": {
         "host": "dbd.tricky.lol",
-        "path": "/api/playerstats?steamid="
+        "playerStats": "/api/playerstats?steamid=",
+        "shrine": "/api/shrine"
     }
 }

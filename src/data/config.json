@@ -1,9 +1,3 @@
 {
-    "state": "prod",
-    "clientId": "724702760355758235",
-    "clientId-dev": "602942653067165706",
-    "token": "NzI0NzAyNzYwMzU1NzU4MjM1.XvECWQ.XhJKHaD9n2pXN2gFeR25PezJkps",
-    "token-dev": "NjAyOTQyNjUzMDY3MTY1NzA2.GStKSO.zDL6Q4kPuVqx9x0ytRI5S-nGu5AZO6eYYT3-3U",
-    "guildId": "526190746634813441",
-    "version": "1.0.0"
+    "version": "1.0.1"
 }
