@@ -409,5 +409,13 @@
     "dailyMessageDisabled": [
         "¡Muy bien! Ya no recordaremos esto. ¡Suerte en tus partidas! <:Entityicon:881447186896916500>",
         "Ok! We won't remember this anymore. Good luck in your games! <:Entityicon:881447186896916500>"
+    ],
+    "servers": [
+        "Actualmente estoy en los siguientes servidores: ",
+        "I'm currently in "
+    ],
+    "users": [
+        "usuarios tienen acceso a los comandos.",
+        "users have access to the commands."
     ]
 }
