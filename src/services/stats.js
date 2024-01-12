@@ -534,18 +534,18 @@ async function generateRandomBuild(context, interaction, isSurv) {
         numberCharacter = Math.floor(Math.random() * utils.getLength(survivors));
         const survivorPerks = context.services.perks.getSurvivorPerks();
         nPerks = getRandomNumber(utils.getLength(survivorPerks));
-        perk1 = survivorPerks[nPerks.n1];
-        perk2 = survivorPerks[nPerks.n2];
-        perk3 = survivorPerks[nPerks.n3];
-        perk4 = survivorPerks[nPerks.n4];
+        perk1 = context.services.perks.getSurvivorPerkByIndex(nPerks.n1);
+        perk2 = context.services.perks.getSurvivorPerkByIndex(nPerks.n2);
+        perk3 = context.services.perks.getSurvivorPerkByIndex(nPerks.n3);
+        perk4 = context.services.perks.getSurvivorPerkByIndex(nPerks.n4);
     } else {
         numberCharacter = Math.floor(Math.random() * utils.getLength(killers));
         const killerPerks = context.services.perks.getKillerPerks();
         nPerks = getRandomNumber(utils.getLength(killerPerks));
-        perk1 = killerPerks[nPerks.n1];
-        perk2 = killerPerks[nPerks.n2];
-        perk3 = killerPerks[nPerks.n3];
-        perk4 = killerPerks[nPerks.n4];
+        perk1 = context.services.perks.getKillerPerkByIndex(nPerks.n1);
+        perk2 = context.services.perks.getKillerPerkByIndex(nPerks.n2);
+        perk3 = context.services.perks.getKillerPerkByIndex(nPerks.n3);
+        perk4 = context.services.perks.getKillerPerkByIndex(nPerks.n4);
     }
 
     // send build
