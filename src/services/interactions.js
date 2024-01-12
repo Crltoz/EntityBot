@@ -36,7 +36,7 @@ function registerInteractions(context, rest, interactions) {
         try {
             console.log('Started refreshing application interactions.');
 
-            if (process.env.ENVIROMENT != "production") {
+            if (process.env.ENVIRONMENT != "production") {
                 await rest.put(
                     Routes.applicationGuildCommands(process.env.CLIENT_ID, process.env.GUILD_ID),
                     { body: interactions },
