@@ -48,7 +48,7 @@ function registerInteractions(context, rest, interactions) {
                 );
             }
 
-            console.log(`Successfully reloaded application interactions. (Enviroment: ${process.env.ENVIROMENT != "production" ? "Development" : "Production"})`);
+            console.log(`Successfully reloaded application interactions. (Environment: ${process.env.ENVIRONMENT != "production" ? "Development" : "Production"})`);
         } catch (error) {
             console.error(error);
         }
