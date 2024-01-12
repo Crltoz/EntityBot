@@ -12,11 +12,10 @@ function init() {
     if (err) return console.log(err);
     const msg = JSON.parse(data);
     for (let x = 0; x < msg.perks.length; x++) {
-      survivorPerks[x] = {
+      survivorPerks[msg.perks[x].id.toLowerCase()] = {
         nameEs: msg.perks[x].nameEs,
         nameEn: msg.perks[x].nameEn,
         link: msg.perks[x].link,
-        id: msg.perks[x].id,
         index: x,
         isSurv: true,
       }
@@ -26,11 +25,10 @@ function init() {
     if (err) return console.log(err);
     const msg = JSON.parse(data);
     for (let x = 0; x < msg.perks.length; x++) {
-      killerPerks[x] = {
+      killerPerks[msg.perks[x].id.toLowerCase()] = {
         nameEs: msg.perks[x].nameEs,
         nameEn: msg.perks[x].nameEn,
         link: msg.perks[x].link,
-        id: msg.perks[x].id,
         index: x,
         isSurv: false
       };
@@ -44,23 +42,7 @@ function init() {
  * @description Get perk (undefined if not find)
  */
 function getPerkById(id) {
-  let perk;
-  for (let x = 0; x < utils.getLength(survivorPerks); x++) {
-    if (id == survivorPerks[x].id) {
-      perk = survivorPerks[x];
-      break;
-    }
-  }
-
-  if (!perk) {
-    for (let x = 0; x < utils.getLength(killerPerks); x++) {
-      if (id == killerPerks[x].id) {
-        perk = killerPerks[x];
-        break;
-      }
-    }
-  }
-  return perk;
+  return survivorPerks[id.toLowerCase()] || killerPerks[id.toLowerCase()];
 }
 
 function getKillerPerks() {
