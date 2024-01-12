@@ -27,7 +27,7 @@
   •
   <a href="#installation">Installation</a>
   •
-  <a href="#environment">Environment Variables</a>
+  <a href="#environment-variables">Environment-Variables</a>
   •
   <a href="#tutorials">Tutorials</a>
   •
@@ -72,7 +72,7 @@ Before starting the [installation](#installation), please note that you should m
 
 <br>
 
-# Environment Variables
+# Environment-Variables
 
 To make the project work, environment variables need to be set, which are necessary for the bot to function. Here, we'll provide a sample file for you to modify with the values you have.
 
