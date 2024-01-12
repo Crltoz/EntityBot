@@ -19,12 +19,6 @@ module.exports = {
                 .setRequired(true)
         }),
     async execute(context, interaction) {
-        if (interaction.member.id != '277506787261939712' && interaction.member.id != '313496742156959745' && interaction.member.id != '389320439932911626' && interaction.member.id != '169818091281186816') return interaction.member.send('SACA LA MANO DE AHÍ CARAJO', {
-            files: [{
-              attachment: 'https://i.ytimg.com/vi/7A6FricobFA/hqdefault.jpg',
-              name: "SACA_LA_MANO.jpg"
-            }]
-          });
         await interaction.deferReply({ ephemeral: true });
         const type = interaction.options.get("type").value;
         const index = interaction.options.get("index").value;
