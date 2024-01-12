@@ -59,12 +59,6 @@ Before starting the [installation](#installation), please note that you should m
 
 **Before this step, install all [requeriments](#requeriments)** 
 
-- [Windows](#windows)
-
-<br>
-
-## Windows
-
 - Clone this repository.
 - Inside repository, use in command line `npm install`
 - Create file `.env` and set the [Environment Variables](#Environment Variables)
