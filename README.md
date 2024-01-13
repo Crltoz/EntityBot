@@ -48,7 +48,23 @@ Before starting the [installation](#installation), please note that you should m
 - Save steam profile link get stats by menu (Right click on your profile -> Apps -> EntityBot -> Stats)
 - Set channel to use commands.
 - Calculate bloodpoints to get level in characters (need update)
-- Multilanguage (Spanish/English)
+- Multi-language (Spanish/English)
+
+# Media
+
+All the images are generated with canvas through code using the statistics and build data. 
+The images used are either free-to-use or created by someone on the team. Credits are given to certain background artists who created them.
+
+#### Stats by user menu (Attach your steam profile url with **/profile**)
+![CR67TYP](https://github.com/Crltoz/EntityBot/assets/43712486/0405f9b0-5c58-4f2b-b004-317cb1701cea)
+
+#### Random command
+<img width="421" alt="image" src="https://github.com/Crltoz/EntityBot/assets/43712486/3c39b820-e1f3-4805-bd43-26254b685317">
+
+#### Statistics (survivor and killer)
+<img width="512" alt="image" src="https://github.com/Crltoz/EntityBot/assets/43712486/37e324b9-1aea-4760-ac66-4667295d3324">
+<img width="785" alt="image" src="https://github.com/Crltoz/EntityBot/assets/43712486/b9d7ea3b-e2db-4d3f-a86e-e0d39463f587">
+
 
 # Requeriments
 
