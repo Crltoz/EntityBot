@@ -52,7 +52,7 @@ async function sendShrine(context, interaction) {
     const options = {
         host: apis.dbdStats.host,
         path: apis.dbdStats.shrine,
-        headers: { 'User-Agent': 'EntityBot/' + context.config.version }
+        headers: { 'User-Agent': process.env.USER_AGENT + context.config.version }
     };
 
     const req = https.get(options, function (res) {
@@ -138,7 +138,7 @@ async function getSteamId(context, interaction, steamLink) {
             const options = {
                 host: apis.steam.host,
                 path: apis.steam.vanityURL.path + process.env.STEAM_APIKEY + apis.steam.vanityURL.vanity + steamLink,
-                headers: { 'User-Agent': 'EntityBot/' + context.config.version }
+                headers: { 'User-Agent': process.env.USER_AGENT + context.config.version }
             };
 
             const req = http.get(options, function (res) {
@@ -184,7 +184,7 @@ async function getSteamProfile(context, interaction, steamId, isSurv) {
     const options = {
         host: apis.steam.host,
         path: apis.steam.playerSummaries.path + process.env.STEAM_APIKEY + apis.steam.playerSummaries.steamid + steamId,
-        headers: { 'User-Agent': 'EntityBot/' + context.config.version }
+        headers: { 'User-Agent': process.env.USER_AGENT + context.config.version }
     };
 
     const req = http.get(options, function (res) {
@@ -228,7 +228,7 @@ function sendStats(context, interaction, steamProfile, isSurv) {
     const options = {
         host: apis.dbdStats.host,
         path: apis.dbdStats.playerStats + steamProfile.steamid,
-        headers: { 'User-Agent': 'EntityBot/' + context.config.version }
+        headers: { 'User-Agent': process.env.USER_AGENT + context.config.version }
     };
 
     const req = https.get(options, function (res) {
@@ -270,7 +270,7 @@ async function postStats(context, interaction, steamId) {
         host: apis.dbdStats.host,
         path: apis.dbdStats.playerStats + steamId,
         method: 'POST',
-        headers: { 'User-Agent': 'EntityBot/' + context.config.version }
+        headers: { 'User-Agent': process.env.USER_AGENT + context.config.version }
     };
 
     const req = https.request(options, function (res) {
