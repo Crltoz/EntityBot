@@ -32,6 +32,8 @@
   <a href="#tutorials">Tutorials</a>
   •
   <a href="#license">License</a>
+  •
+  <a href="https://github.com/Crltoz/EntityBot/blob/dev/CONTRIBUTING.md">Contributing</a>
 </p>
 
 # Overview
