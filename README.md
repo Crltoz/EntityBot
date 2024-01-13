@@ -127,4 +127,4 @@ This is the name with which your bot will identify itself with the statistics AP
 
 # License
 
-Released under the [MIT](https://github.com/Crltoz/EntityBot/LICENSE) license.
+Released under the [MIT](https://github.com/Crltoz/EntityBot/blob/main/LICENSE) license.
