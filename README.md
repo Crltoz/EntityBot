@@ -36,14 +36,16 @@
   <a href="https://github.com/Crltoz/EntityBot/blob/main/CONTRIBUTING.md">Contributing</a>
 </p>
 
-# Overview
+# ▶️ Overview
 
 This bot was born with the idea of providing Dead By Daylight players with their statistics without the need to search for them on the web. 
 Therefore, this Discord bot was created with simple commands to retrieve statistics by making API requests to the Dead By Daylight statistics [website](https://dbd.tricky.lol) created by Tricky.
+After surpassing 100 servers, the bot was verified by the Discord team, granting the team a recognition badge on their Discord profiles and the verified icon to the bot.
 
 Before starting the [installation](#installation), please note that you should meet the requirements as it requires some basic knowledge of MongoDB.
 
-**Features:**
+
+**🛠️ Features:**
 
 - Random builds (survivor/killer)
 - Get player stats (only steam supported) in canvas image.
@@ -52,7 +54,7 @@ Before starting the [installation](#installation), please note that you should m
 - Calculate bloodpoints to get level in characters (need update)
 - Multi-language (Spanish/English)
 
-# Media
+# 📷 Media
 
 All the images are generated with canvas through code using the statistics and build data. 
 The images used are either free-to-use or created by someone on the team. Credits are given to certain background artists who created them.
@@ -68,12 +70,12 @@ The images used are either free-to-use or created by someone on the team. Credit
 <img width="785" alt="image" src="https://github.com/Crltoz/EntityBot/assets/43712486/b9d7ea3b-e2db-4d3f-a86e-e0d39463f587">
 
 
-# Requeriments
+# 🗒️Requeriments
 
 - NodeJS (v16 or higher) - <a href="https://nodejs.org/en/download">Download</a>
 - MongoDB (I recommend to install Mongo Compass also) - <a href="https://www.mongodb.com/docs/manual/installation/">Download</a>
 
-# Installation
+# 🔧 Installation
 
 **Before this step, install all [requeriments](#requeriments)** 
 
@@ -84,9 +86,10 @@ The images used are either free-to-use or created by someone on the team. Credit
 
 <br>
 
-# Environment-Variables
+# ⚠️ Environment-Variables
 
 To make the project work, environment variables need to be set, which are necessary for the bot to function. Here, we'll provide a sample file for you to modify with the values you have.
+Never disclose these variables to anyone as they can gain access to your bot and perform improper actions. All this data is confidential, and only you and your closest team members should have access.
 
 `.env`
 ```.env
@@ -137,12 +140,20 @@ This is the name with which your bot will identify itself with the statistics AP
 
 <hr>
 
-# Tutorials
+# 📺 Tutorials
 
 - [How to Get Your Steam Web API Key](https://www.youtube.com/watch?v=Sb5p8cGyVQw&ab_channel=EnriqueCalTech)
 - [How to Get Server ID, Channel ID, User ID in Discord - Copy ID's](https://www.youtube.com/watch?v=NLWtSHWKbAI&ab_channel=GaugingGadgets)
 
 
-# License
+# 📝 Credits
+
+- <a href="https://github.com/Crltoz">@Crltoz</a> Developer & Deployment
+- <a href="https://github.com/Creepzster">@Creepzster</a> Testing & Datadumps
+- <a href="https://github.com/Rospper">@Rospper</a> UX / Designer
+- <a href="https://github.com/Zander159">@Zander159</a> Testing & Community Manager
+
+
+# 🧾 License
 
 Released under the [MIT](https://github.com/Crltoz/EntityBot/blob/main/LICENSE) license.
