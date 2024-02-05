@@ -785,6 +785,24 @@
             "nameEn": "Lucky Star",
             "link": "https://i.imgur.com/F3bUNI2.png",
             "id": "s39p03"
+        },
+        {
+            "nameEs": "Campeon de la Luz",
+            "nameEn": "Champion of Light",
+            "link": "https://i.imgur.com/NJycH2j.png",
+            "id": "s40p01"
+        },
+        {
+            "nameEs": "Bendicion: Iluminacion",
+            "nameEn": "Boon: Illumination",
+            "link": "https://i.imgur.com/0lhhpTo.png",
+            "id": "s40p02"
+        },
+        {
+            "nameEs": "Fecha limite",
+            "nameEn": "Deadline",
+            "link": "https://i.imgur.com/af8YhVo.png",
+            "id": "s40p03"
         }
     ]
 }
