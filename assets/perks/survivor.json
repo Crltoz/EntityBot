@@ -803,6 +803,24 @@
             "nameEn": "Deadline",
             "link": "https://i.imgur.com/af8YhVo.png",
             "id": "s40p03"
+        },
+        {
+            "nameEs": "Invocacion: Arañas Tejedoras",
+            "nameEn": "Invocation: Weaving Spiders",
+            "link": "https://i.imgur.com/hCK1MPR.png",
+            "id": "s41p01"
+        },
+        {
+            "nameEs": "Fortaleza en las Sombras",
+            "nameEn": "Strength in Shadows",
+            "link": "https://i.imgur.com/BfLhRaj.png",
+            "id": "s41p02"
+        },
+        {
+            "nameEs": "Malicia",
+            "nameEn": "Wicked",
+            "link": "https://i.imgur.com/P7tD3By.png",
+            "id": "s41p03"
         }
     ]
 }
