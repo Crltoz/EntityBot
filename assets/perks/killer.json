@@ -683,6 +683,24 @@
             "nameEn": "Batteries Included",
             "link": "https://i.imgur.com/NCzpMNd.png",
             "id": "k34p03"
+        },
+        {
+            "nameEs": "Desatado",
+            "nameEn": "Unbound",
+            "link": "https://i.imgur.com/2GtR0sx.png",
+            "id": "k35p01"
+        },
+        {
+            "nameEs": "Inacabado",
+            "nameEn": "Undone",
+            "link": "https://i.imgur.com/9kqCKhG.png",
+            "id": "k35p02"
+        },
+        {
+            "nameEs": "Imprevisto",
+            "nameEn": "Unforeseen",
+            "link": "https://i.imgur.com/Ie5eeIT.png",
+            "id": "k35p03"
         }
     ]
 }
