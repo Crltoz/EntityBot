@@ -821,6 +821,24 @@
             "nameEn": "Wicked",
             "link": "https://i.imgur.com/P7tD3By.png",
             "id": "s41p03"
+        },
+        {
+            "nameEs": "Inspiracion Bardica",
+            "nameEn": "Bardic Inspiration",
+            "link": "https://i.imgur.com/WhXmG7G.png",
+            "id": "s42p01"
+        },
+        {
+            "nameEs": "Ilusion Reflejada",
+            "nameEn": "Mirrored Illusion",
+            "link": "https://i.imgur.com/A0VtXX7.png",
+            "id": "s42p02"
+        },
+        {
+            "nameEs": "Mirada Fija",
+            "nameEn": "Still Sight",
+            "link": "https://i.imgur.com/O24o5rL.png",
+            "id": "s42p03"
         }
     ]
 }

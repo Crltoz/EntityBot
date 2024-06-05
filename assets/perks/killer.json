@@ -701,6 +701,24 @@
             "nameEn": "Unforeseen",
             "link": "https://i.imgur.com/Ie5eeIT.png",
             "id": "k35p03"
+        },
+        {
+            "nameEs": "Arrogancia Obscura",
+            "nameEn": "Dark Arrogance",
+            "link": "https://i.imgur.com/YJ2oOAQ.png",
+            "id": "k36p01"
+        },
+        {
+            "nameEs": "Toque Languido",
+            "nameEn": "Languid Touch",
+            "link": "https://i.imgur.com/0kuHpXP.png",
+            "id": "k36p01"
+        },
+        {
+            "nameEs": "Armonizacion De Tejido",
+            "nameEn": "Weave Attunement",
+            "link": "https://i.imgur.com/X4iAqNb.png",
+            "id": "k36p01"
         }
     ]
 }
