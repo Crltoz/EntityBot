@@ -839,6 +839,24 @@
             "nameEn": "Still Sight",
             "link": "https://i.imgur.com/O24o5rL.png",
             "id": "s42p03"
+        },
+        {
+            "nameEs": "Elegancia",
+            "nameEn": "Finesse",
+            "link": "https://i.imgur.com/KlmlTTO.png",
+            "id": "s43p01"
+        },
+        {
+            "nameEs": "Endurecida",
+            "nameEn": "Hardened",
+            "link": "https://i.imgur.com/xNokAsJ.png",
+            "id": "s43p02"
+        },
+        {
+            "nameEs": "Especialista",
+            "nameEn": "Specialist",
+            "link": "https://i.imgur.com/y86jhe6.png",
+            "id": "s43p03"
         }
     ]
 }
