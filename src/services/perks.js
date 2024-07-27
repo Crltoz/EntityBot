@@ -42,7 +42,9 @@ function init() {
  * @description Get perk (undefined if not find)
  */
 function getPerkById(id) {
-  return survivorPerks[id.toLowerCase()] || killerPerks[id.toLowerCase()];
+  const perk = survivorPerks[id.toLowerCase()] || killerPerks[id.toLowerCase()];
+  console.log(`Getting perk by id '${id}' -> ${perk}`);
+  return perk;
 }
 
 function getKillerPerks() {
