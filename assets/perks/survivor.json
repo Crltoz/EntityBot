@@ -857,6 +857,24 @@
             "nameEn": "Specialist",
             "link": "https://i.imgur.com/y86jhe6.png",
             "id": "s43p03"
+        },
+        {
+            "nameEs": "Ojos De Belmont",
+            "nameEn": "Eyes of Belmont",
+            "link": "https://i.imgur.com/vxrmKu1.png",
+            "id": "s44p01"
+        },
+        {
+            "nameEs": "Exultacion",
+            "nameEn": "Exultation",
+            "link": "https://i.imgur.com/f6VRzWU.png",
+            "id": "s44p02"
+        },
+        {
+            "nameEs": "Momento De Gloria",
+            "nameEn": "Moment of Glory",
+            "link": "https://i.imgur.com/Empmnh7.png",
+            "id": "s44p03"
         }
     ]
 }

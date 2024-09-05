@@ -719,6 +719,24 @@
             "nameEn": "Weave Attunement",
             "link": "https://i.imgur.com/X4iAqNb.png",
             "id": "k36p03"
+        },
+        {
+            "nameEs": "Maleficio: Destino Miserable",
+            "nameEn": "Hex: Wretched Fate",
+            "link": "https://i.imgur.com/O7FGxzh.png",
+            "id": "k37p01"
+        },
+        {
+            "nameEs": "Codicia Humana",
+            "nameEn": "Human Greed",
+            "link": "https://i.imgur.com/QYtYEuN.png",
+            "id": "k37p02"
+        },
+        {
+            "nameEs": "Dominacion",
+            "nameEn": "Dominance",
+            "link": "https://i.imgur.com/FE4SVpG.png",
+            "id": "k37p03"
         }
     ]
 }
