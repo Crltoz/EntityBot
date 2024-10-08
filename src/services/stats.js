@@ -102,6 +102,12 @@ async function sendShrine(context, interaction) {
                 } catch (err) {
                     console.log(`Error parsing shrine body: ${err} --- body: ${JSON.stringify(body)}`);
                 }
+                return;
+            }
+
+            if (res.statusCode == 400) {
+                interaction.editReply(texts.errors.shrineNotFound[serverConfig.language])
+                return;
             }
         });
     });

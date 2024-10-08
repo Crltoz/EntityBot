@@ -70,6 +70,10 @@
         ]
     },
     "errors": {
+        "shrineNotFound": [
+            "Parece que el santuario está en mantenimiento, intentalo de nuevo más tarde.",
+            "It seems like the shrine is in maintenance, try again later."
+        ],
         "unknownError": [
             "Ocurrió un error desconocido, por favor reportalo en nuestro Discord de soporte: ",
             "We are currently unable to display this information, please report it on our Discord in the bugs section: "
