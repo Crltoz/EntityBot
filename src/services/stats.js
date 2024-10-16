@@ -574,7 +574,8 @@ async function generateRandomBuild(context, interaction, isSurv) {
         let string = language == 0 ? killers[numberCharacter].nameEs : killers[numberCharacter].nameEn
         ctx.fillText(string, utils.calculateCenter(1267, string.length, fontSize), 207);
     }
-    const avatar = await Canvas.loadImage(prefixAssetCharacters + isSurv ? survivors[numberCharacter].link : killers[numberCharacter].link);
+    const characterImageLink = isSurv ? survivors[numberCharacter].link : killers[numberCharacter].link
+    const avatar = await Canvas.loadImage(prefixAssetCharacters + characterImageLink);
     ctx.drawImage(avatar, 1045, 227, 447, 619);
 
     // perks
