@@ -1,742 +1,742 @@
 {
-    "perks": [
-        {
-            "nameEs": "Vocacion de enfermera",
-            "nameEn": "A Nurses Calling",
-            "link": "https://i.imgur.com/Cq69F6z.png",
-            "id": "nursecalling"
-        },
-        {
-            "nameEs": "Agitacion",
-            "nameEn": "Agitation",
-            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/a/ac/IconPerks_agitation.png",
-            "id": "agitation"
-        },
-        {
-            "nameEs": "Desconcierto",
-            "nameEn": "Bamboozle",
-            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/7/7a/IconPerks_bamboozle.png",
-            "id": "bamboozle"
-        },
-        {
-            "nameEs": "Barbacoa y chile",
-            "nameEn": "Barbecue & Chilli",
-            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/5/51/IconPerks_barbecueAndChilli.png",
-            "id": "bbqandchilli"
-        },
-        {
-            "nameEs": "Bestia de presa",
-            "nameEn": "Beast of Prey",
-            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/7/77/IconPerks_beastOfPrey.png",
-            "id": "beastofprey"
-        },
-        {
-            "nameEs": "Murmullo amargo",
-            "nameEn": "Bitter Murmur",
-            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/5/5a/IconPerks_bitterMurmur.png",
-            "id": "bitter_murmur"
-        },
-        {
-            "nameEs": "Eco sangriento",
-            "nameEn": "Blood Echo",
-            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/c/c3/IconPerks_bloodEcho.png",
-            "id": "bloodecho"
-        },
-        {
-            "nameEs": "Guardian de sangre",
-            "nameEn": "Blood Warden",
-            "link": "https://entity.works/3DIofx.png",
-            "id": "bloodwarden"
-        },
-        {
-            "nameEs": "Sabueso de sangre",
-            "nameEn": "Bloodhound",
-            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/e/e0/IconPerks_bloodhound.png",
-            "id": "bloodhound"
-        },
-        {
-            "nameEs": "Fuerza brutal",
-            "nameEn": "Brutal Strength",
-            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/3/3d/IconPerks_brutalStrength.png",
-            "id": "brutal_strength"
-        },
-        {
-            "nameEs": "Intervencion corrupta",
-            "nameEn": "Corrupt Intervention",
-            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/1/10/IconPerks_corruptIntervention.png",
-            "id": "corruptintervention"
-        },
-        {
-            "nameEs": "Coulrophobia",
-            "nameEn": "Coulrophobia",
-            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/4/45/IconPerks_coulrophobia.png",
-            "id": "coulrophobia"
-        },
-        {
-            "nameEs": "Restriccion cruel",
-            "nameEn": "Cruel Limits",
-            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/c/c6/IconPerks_cruelLimits.png",
-            "id": "cruelconfinement"
-        },
-        {
-            "nameEs": "Devocion oscura",
-            "nameEn": "Dark Devotion",
-            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/4/4f/IconPerks_darkDevotion.png",
-            "id": "darkdevotion"
-        },
-        {
-            "nameEs": "Interruptor del hombre muerto",
-            "nameEn": "Dead Mans Switch",
-            "link": "https://i.imgur.com/nmI2Ccz.png",
-            "id": "deadmansswitch"
-        },
-        {
-            "nameEs": "Vinculo mortal",
-            "nameEn": "Deathbound",
-            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/e/e7/IconPerks_deathbound.png",
-            "id": "deathbound"
-        },
-        {
-            "nameEs": "Acechador de ciervos",
-            "nameEn": "Deerstalker",
-            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/0/01/IconPerks_deerstalker.png",
-            "id": "deerstalker"
-        },
-        {
-            "nameEs": "Discordancia",
-            "nameEn": "Discordance",
-            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/8/82/IconPerks_discordance.png",
-            "id": "discordance"
-        },
-        {
-            "nameEs": "Desasociego",
-            "nameEn": "Distressing",
-            "link": "https://i.imgur.com/XxuvnCz.png",
-            "id": "distressing"
-        },
-        {
-            "nameEs": "Luz que agoniza",
-            "nameEn": "Dying Light",
-            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/4/48/IconPerks_dyingLight.png",
-            "id": "dying_light"
-        },
-        {
-            "nameEs": "Resistente",
-            "nameEn": "Enduring",
-            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/9/94/IconPerks_enduring.png",
-            "id": "enduring"
-        },
-        {
-            "nameEs": "Enfurecimiento",
-            "nameEn": "Fire Up",
-            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/5/5c/IconPerks_fireUp.png",
-            "id": "fireup"
-        },
-        {
-            "nameEs": "Imposicion de penitencia",
-            "nameEn": "Forced Penance",
-            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/1/1d/IconPerks_forcedPenance.png",
-            "id": "forcedpenance"
-        },
-        {
-            "nameEs": "Muerte de franklin",
-            "nameEn": "Franklins Demise",
-            "link": "https://i.imgur.com/gx10JX3.png",
-            "id": "franklinsloss"
-        },
-        {
-            "nameEs": "Persecucion furtiva",
-            "nameEn": "Furtive Chase",
-            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/9/94/IconPerks_furtiveChase.png",
-            "id": "furtivechase"
-        },
-        {
-            "nameEs": "Oido para la maquinaria",
-            "nameEn": "Gearhead",
-            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/f/fd/IconPerks_gearhead.png",
-            "id": "gearhead"
-        },
-        {
-            "nameEs": "Truco del verdugo",
-            "nameEn": "Hangmans Trick",
-            "link": "https://i.imgur.com/FDmgFmM.png",
-            "id": "hangmanstrick"
-        },
-        {
-            "nameEs": "Maleficio: Devoradora de esperanza",
-            "nameEn": "Hex: Devour Hope",
-            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/c/c9/IconPerks_hexDevourHope.png",
-            "id": "hex_devour_hope"
-        },
-        {
-            "nameEs": "Maleficio: Tierra embrujada",
-            "nameEn": "Hex: Haunted Ground",
-            "link": "https://i.imgur.com/Wr2qzsF.png",
-            "id": "hex_hauntedground"
-        },
-        {
-            "nameEs": "Maleficio: Nana de cazadora",
-            "nameEn": "Hex: Huntress Lullaby",
-            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/1/11/IconPerks_hexHuntressLullaby.png",
-            "id": "hex_huntresslullaby"
-        },
-        {
-            "nameEs": "Maleficio: Nadie escapa de la muerte",
-            "nameEn": "Hex: No One Escapes Death",
-            "link": "https://i.imgur.com/rOgrQVU.png",
-            "id": "no_one_escapes_death"
-        },
-        {
-            "nameEs": "Maleficio: Represalias",
-            "nameEn": "Hex: Retribution",
-            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/a/ab/IconPerks_hexRetribution.png",
-            "id": "hexretribution"
-        },
-        {
-            "nameEs": "Maleficio: Ruina",
-            "nameEn": "Hex: Ruin",
-            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/a/a2/IconPerks_hexRuin.png",
-            "id": "hex_ruin"
-        },
-        {
-            "nameEs": "Maleficio: El tercer sello",
-            "nameEn": "Hex: The Third Seal",
-            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/3/36/IconPerks_hexTheThirdSeal.png",
-            "id": "hex_the_third_seal"
-        },
-        {
-            "nameEs": "Maleficio: La emocion de la caza",
-            "nameEn": "Hex: Thrill of the Hunt",
-            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/0/02/IconPerks_hexThrillOfTheHunt.png",
-            "id": "hex_thrill_of_the_hunt"
-        },
-        {
-            "nameEs": "Soy todo oidos",
-            "nameEn": "Im All Ears",
-            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/e/e3/IconPerks_imAllEars.png",
-            "id": "imallears"
-        },
-        {
-            "nameEs": "Terror contagioso",
-            "nameEn": "Infectious Fright",
-            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/6/6d/IconPerks_infectiousFright.png",
-            "id": "infectiousfright"
-        },
-        {
-            "nameEs": "Insidia",
-            "nameEn": "Insidious",
-            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/4/40/IconPerks_insidious.png",
-            "id": "insidious"
-        },
-        {
-            "nameEs": "Apreton de hierro",
-            "nameEn": "Iron Grasp",
-            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/1/14/IconPerks_ironGrasp.png",
-            "id": "iron_grasp"
-        },
-        {
-            "nameEs": "Doncella de hierro",
-            "nameEn": "Iron Maiden",
-            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/b/b0/IconPerks_ironMaiden.png",
-            "id": "ironmaiden"
-        },
-        {
-            "nameEs": "Noqueo",
-            "nameEn": "Knock Out",
-            "link": "https://i.imgur.com/dKjcoli.png",
-            "id": "inthedark"
-        },
-        {
-            "nameEs": "Hijo de la luz",
-            "nameEn": "Lightborn",
-            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/4/48/IconPerks_lightborn.png",
-            "id": "lightborn"
-        },
-        {
-            "nameEs": "Furia ciega",
-            "nameEn": "Mad Grit",
-            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/d/da/IconPerks_madGrit.png",
-            "id": "madgrit"
-        },
-        {
-            "nameEs": "Toma una decicion",
-            "nameEn": "Make Your Choice",
-            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/6/6b/IconPerks_makeYourChoice.png",
-            "id": "makeyourchoice"
-        },
-        {
-            "nameEs": "Quebrantamentes",
-            "nameEn": "Mindbreaker",
-            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/0/0f/IconPerks_mindbreaker.png",
-            "id": "mindbreaker"
-        },
-        {
-            "nameEs": "Monitorizacion y abuso",
-            "nameEn": "Monitor & Abuse",
-            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/6/60/IconPerks_monitorAndAbuse.png",
-            "id": "monitorandabuse"
-        },
-        {
-            "nameEs": "Santuario monstruoso",
-            "nameEn": "Monstrous Shrine",
-            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/9/91/IconPerks_scourgeHookMonstrousShrine.png",
-            "id": "monstrous_shrine"
-        },
-        {
-            "nameEs": "Nemesis",
-            "nameEn": "Nemesis",
-            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/3/33/IconPerks_nemesis.png",
-            "id": "nemesis"
-        },
-        {
-            "nameEs": "Sobrecarga",
-            "nameEn": "Overcharge",
-            "link": "https://i.imgur.com/DASPWIX.png",
-            "id": "generatorovercharge"
-        },
-        {
-            "nameEs": "Presencia abrumadora",
-            "nameEn": "Overwhelming Presence",
-            "link": "https://i.imgur.com/RXrSLiF.png",
-            "id": "overwhelmingpresence"
-        },
-        {
-            "nameEs": "Jugar con la comida",
-            "nameEn": "Play with Your Food",
-            "link": "https://i.imgur.com/5dcRc37.png",
-            "id": "play_with_your_food"
-        },
-        {
-            "nameEs": "Pim, Pam, Pum",
-            "nameEn": "Pop Goes the Weasel",
-            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/0/0f/IconPerks_popGoesTheWeasel.png",
-            "id": "pop_goes_the_weasel"
-        },
-        {
-            "nameEs": "Depredacion",
-            "nameEn": "Predator",
-            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/7/73/IconPerks_predator.png",
-            "id": "predator"
-        },
-        {
-            "nameEs": "Rencor",
-            "nameEn": "Rancor",
-            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/a/a2/IconPerks_rancor.png",
-            "id": "rancor"
-        },
-        {
-            "nameEs": "Recuerdame",
-            "nameEn": "Remember Me",
-            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/6/62/IconPerks_rememberMe.png",
-            "id": "rememberme"
-        },
-        {
-            "nameEs": "Lo mejor para el final",
-            "nameEn": "Save the Best for Last",
-            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/6/6a/IconPerks_saveTheBestForLast.png",
-            "id": "save_the_best_for_last"
-        },
-        {
-            "nameEs": "Hijo de las sombras",
-            "nameEn": "Shadowborn",
-            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/a/ac/IconPerks_shadowborn.png",
-            "id": "shadowborn"
-        },
-        {
-            "nameEs": "Carnicero chapucero",
-            "nameEn": "Sloppy Butcher",
-            "link": "https://i.imgur.com/EfJPlzj.png",
-            "id": "sloppy_butcher"
-        },
-        {
-            "nameEs": "Espias de las sombras",
-            "nameEn": "Spies from the Shadows",
-            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/b/b1/IconPerks_spiesFromTheShadows.png",
-            "id": "spies_from_the_shadows"
-        },
-        {
-            "nameEs": "Furia espiritual",
-            "nameEn": "Spirit Fury",
-            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/a/a6/IconPerks_spiritFury.png",
-            "id": "spiritfury"
-        },
-        {
-            "nameEs": "Aliento",
-            "nameEn": "Stridor",
-            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/3/32/IconPerks_stridor.png",
-            "id": "stridor"
-        },
-        {
-            "nameEs": "Sobretencion",
-            "nameEn": "Surge",
-            "link": "https://i.imgur.com/o4YlEIP.png",
-            "id": "surge"
-        },
-        {
-            "nameEs": "Supervision",
-            "nameEn": "Surveillance",
-            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/e/eb/IconPerks_surveillance.png",
-            "id": "surveillance"
-        },
-        {
-            "nameEs": "Instinto territorial",
-            "nameEn": "Territorial Imperative",
-            "link": "https://i.imgur.com/sIph9Z4.png",
-            "id": "territorialimperative"
-        },
-        {
-            "nameEs": "Manitas",
-            "nameEn": "Tinkerer",
-            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/d/d9/IconPerks_tinkerer.png",
-            "id": "tinkerer"
-        },
-        {
-            "nameEs": "Tanatofobia",
-            "nameEn": "Thanatophobia",
-            "link": "https://i.imgur.com/36mdE9r.png",
-            "id": "thanatophobia"
-        },
-        {
-            "nameEs": "Temblores trepidantes",
-            "nameEn": "Thrilling Tremors",
-            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/b/b8/IconPerks_thrillingTremors.png",
-            "id": "thrillingtremors"
-        },
-        {
-            "nameEs": "Rastro de tormento",
-            "nameEn": "Trail of Torment",
-            "link": "https://i.imgur.com/GRd5vYK.png",
-            "id": "trailoftorment"
-        },
-        {
-            "nameEs": "Presencia perturbadora",
-            "nameEn": "Unnerving Presence",
-            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/a/a4/IconPerks_unnervingPresence.png",
-            "id": "unnerving_presence"
-        },
-        {
-            "nameEs": "Implacable",
-            "nameEn": "Unrelenting",
-            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/5/57/IconPerks_unrelenting.png",
-            "id": "unrelenting"
-        },
-        {
-            "nameEs": "Murmullos",
-            "nameEn": "Whispers",
-            "link": "https://i.imgur.com/CMOclnv.png",
-            "id": "whispers"
-        },
-        {
-            "nameEs": "Tacticas de zanshin",
-            "nameEn": "Zanshin Tactics",
-            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/d/d3/IconPerks_zanshinTactics.png",
-            "id": "zanshintactics"
-        },
-        {
-            "nameEs": "Maleficio: Inmortal",
-            "nameEn": "Hex: Undying",
-            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/f/fe/IconPerks_hexUndying.png",
-            "id": "hexundying"
-        },
-        {
-            "nameEs": "Agarre del dragon",
-            "nameEn": "Dragon's Grip",
-            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/f/ff/IconPerks_dragonsGrip.png",
-            "id": "dragonsgrip"
-        },
-        {
-            "nameEs": "Maleficio: Favor de sangre",
-            "nameEn": "Hex: Blood Favour",
-            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/6/6b/IconPerks_hexBloodFavour.png",
-            "id": "hexbloodfavor"
-        },
-        {
-            "nameEs": "Acaparadora",
-            "nameEn": "Hoarder",
-            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/2/23/IconPerks_hoarder.png",
-            "id": "k22p01"
-        },
-        {
-            "nameEs": "Opresion",
-            "nameEn": "Oppression",
-            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/a/a1/IconPerks_oppression.png",
-            "id": "k22p02"
-        },
-        {
-            "nameEs": "Golpe de gracia",
-            "nameEn": "Coup de Grâce",
-            "link": "https://i.imgur.com/rAbyBwB.png",
-            "id": "k22p03"
-        },
-        {
-            "nameEs": "Deslumbrado",
-            "nameEn": "Starstruck",
-            "link": "https://i.imgur.com/82sRtrf.png",
-            "id": "k23p01"
-        },
-        {
-            "nameEs": "Maleficio: Control de masas",
-            "nameEn": "Hex: Crowd Control",
-            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/f/f1/IconPerks_hexCrowdControl.png",
-            "id": "k23p02"
-        },
-        {
-            "nameEs": "Sin escapatoria",
-            "nameEn": "No Way Out",
-            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/b/bb/IconPerks_noWayOut.png",
-            "id": "k23p03"
-        },
-        {
-            "nameEs": "Acecho letal",
-            "nameEn": "Lethal Pursuer",
-            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/6/61/IconPerks_lethalPursuer.png",
-            "id": "k24p01"
-        },
-        {
-            "nameEs": "Histeria",
-            "nameEn": "Hysteria",
-            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/3/3a/IconPerks_hysteria.png",
-            "id": "k24p02"
-        },
-        {
-            "nameEs": "Erupcion",
-            "nameEn": "Eruption",
-            "link": "https://i.imgur.com/Yq6oMT3.png",
-            "id": "k24p03"
-        },
-        {
-            "nameEs": "Candado",
-            "nameEn": "Deadlock",
-            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/d/d3/IconPerks_deadlock.png",
-            "id": "k25p01"
-        },
-        {
-            "nameEs": "Maleficio: Juguete",
-            "nameEn": "Hex: Plaything",
-            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/1/18/IconPerks_hexPlaything.png",
-            "id": "k25p02"
-        },
-        {
-            "nameEs": "Gancho Flagelante: Obsequio Doloroso",
-            "nameEn": "Scourge Hook: Gift of Pain",
-            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/2/26/IconPerks_scourgeHookGiftOfPain.png",
-            "id": "k25p03"
-        },
-        {
-            "nameEs": "Acogida Nefasta",
-            "nameEn": "Grim Embrace",
-            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/1/1c/IconPerks_grimEmbrace.png",
-            "id": "k26p01"
-        },
-        {
-            "nameEs": "Gancho Flagelante: Dolor Retumbante",
-            "nameEn": "Scourge Hook: Pain Resonance",
-            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/7/79/IconPerks_scourgeHookPainResonance.png",
-            "id": "k26p02"
-        },
-        {
-            "nameEs": "Maleficio: Pentimento",
-            "nameEn": "Hex: Pentimento",
-            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/5/5d/IconPerks_hexPentimento.png",
-            "id": "k26p03"
-        },
-        {
-            "nameEs": "Gancho Flagelante: Oleada de Ira",
-            "nameEn": "Scourge Hook: Floods of Rage",
-            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/1/1c/IconPerks_scourgeHookFloodsOfRage.png",
-            "id": "k27p01"
-        },
-        {
-            "nameEs": "Salmuera",
-            "nameEn": "Call of Brine",
-            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/3/3b/IconPerks_callOfBrine.png",
-            "id": "k27p02"
-        },
-        {
-            "nameEs": "Tormenta Vil",
-            "nameEn": "Merciless Storm",
-            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/3/36/IconPerks_mercilessStorm.png",
-            "id": "k27p03"
-        },
-        {
-            "nameEs": "Disolucion",
-            "nameEn": "Dissolution",
-            "link": "https://i.imgur.com/Se6FxpA.png",
-            "id": "k28p01"
-        },
-        {
-            "nameEs": "Oscuridad Expuesta",
-            "nameEn": "Darkness Revealed",
-            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/e/ed/IconPerks_darknessRevealed.png",
-            "id": "k28p02"
-        },
-        {
-            "nameEs": "Toque Septico",
-            "nameEn": "Septic Touch",
-            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/d/d8/IconPerks_septicTouch.png",
-            "id": "k28p03"
-        },
-        {
-            "nameEs": "Anatomia Superior",
-            "nameEn": "Superior Anatomy",
-            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/4/4a/IconPerks_superiorAnatomy.png",
-            "id": "k29p01"
-        },
-        {
-            "nameEs": "Percepcion Activada",
-            "nameEn": "Awakened Awareness",
-            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/9/97/IconPerks_awakenedAwareness.png",
-            "id": "k29p02"
-        },
-        {
-            "nameEs": "Terminal",
-            "nameEn": "Terminus",
-            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/4/4c/IconPerks_terminus.png",
-            "id": "k29p03"
-        },
-        {
-            "nameEs": "Sin escondite",
-            "nameEn": "Nowhere to Hide",
-            "link": "https://i.imgur.com/QEClxl8.png",
-            "id": "k30p01"
-        },
-        {
-            "nameEs": "Maleficio: Enfrentate a la oscuridad",
-            "nameEn": "Hex: Face the Darkness",
-            "link": "https://i.imgur.com/8cNqTkn.png",
-            "id": "k30p02"
-        },
-        {
-            "nameEs": "Soberbia",
-            "nameEn": "Hubris",
-            "link": "https://i.imgur.com/zNG3ysx.png",
-            "id": "k30p03"
-        },
-        {
-            "nameEs": "PLAF!",
-            "nameEn": "THWACK!",
-            "link": "https://i.imgur.com/1vPM36z.png",
-            "id": "k31p01"
-        },
-        {
-            "nameEs": "Influencia",
-            "nameEn": "Leverage",
-            "link": "https://i.imgur.com/eRnqN4C.png",
-            "id": "k31p02"
-        },
-        {
-            "nameEs": "Veda Abierta",
-            "nameEn": "Game Afoot",
-            "link": "https://i.imgur.com/mWufhNb.png",
-            "id": "k31p03"
-        },
-        {
-            "nameEs": "Limitaciones Geneticas",
-            "nameEn": "Genetic Limits",
-            "link": "https://i.imgur.com/9f9UoIx.png",
-            "id": "k32p01"
-        },
-        {
-            "nameEs": "Duda Impuesta",
-            "nameEn": "Forced Hesitation",
-            "link": "https://i.imgur.com/Y0BZ8Gn.png",
-            "id": "k32p02"
-        },
-        {
-            "nameEs": "Aprendizaje de Maquina",
-            "nameEn": "Machine Learning",
-            "link": "https://i.imgur.com/Box1dZY.png",
-            "id": "k32p03"
-        },
-        {
-            "nameEs": "Brutalidad Feroz",
-            "nameEn": "Rapid Brutality",
-            "link": "https://i.imgur.com/ULqvLfE.png",
-            "id": "k33p01"
-        },
-        {
-            "nameEs": "Instinto Alienigena",
-            "nameEn": "Alien Instinct",
-            "link": "https://i.imgur.com/2aQeRjX.png",
-            "id": "k33p02"
-        },
-        {
-            "nameEs": "Arma Definitiva",
-            "nameEn": "Ultimate Weapon",
-            "link": "https://i.imgur.com/H9ooqpq.png",
-            "id": "k33p03"
-        },
-        {
-            "nameEs": "Maleficio: Dos Pueden Jugar",
-            "nameEn": "Hex: Two Can Play",
-            "link": "https://i.imgur.com/LWCB1wE.png",
-            "id": "k34p01"
-        },
-        {
-            "nameEs": "Amigos Para Siempre",
-            "nameEn": "Friends 'til the End",
-            "link": "https://i.imgur.com/92sd1Pg.png",
-            "id": "k34p02"
-        },
-        {
-            "nameEs": "Pilas Incluidas",
-            "nameEn": "Batteries Included",
-            "link": "https://i.imgur.com/NCzpMNd.png",
-            "id": "k34p03"
-        },
-        {
-            "nameEs": "Desatado",
-            "nameEn": "Unbound",
-            "link": "https://i.imgur.com/2GtR0sx.png",
-            "id": "k35p01"
-        },
-        {
-            "nameEs": "Inacabado",
-            "nameEn": "Undone",
-            "link": "https://i.imgur.com/9kqCKhG.png",
-            "id": "k35p02"
-        },
-        {
-            "nameEs": "Imprevisto",
-            "nameEn": "Unforeseen",
-            "link": "https://i.imgur.com/Ie5eeIT.png",
-            "id": "k35p03"
-        },
-        {
-            "nameEs": "Arrogancia Obscura",
-            "nameEn": "Dark Arrogance",
-            "link": "https://i.imgur.com/YJ2oOAQ.png",
-            "id": "k36p01"
-        },
-        {
-            "nameEs": "Toque Languido",
-            "nameEn": "Languid Touch",
-            "link": "https://i.imgur.com/0kuHpXP.png",
-            "id": "k36p02"
-        },
-        {
-            "nameEs": "Armonizacion De Tejido",
-            "nameEn": "Weave Attunement",
-            "link": "https://i.imgur.com/X4iAqNb.png",
-            "id": "k36p03"
-        },
-        {
-            "nameEs": "Maleficio: Destino Miserable",
-            "nameEn": "Hex: Wretched Fate",
-            "link": "https://i.imgur.com/O7FGxzh.png",
-            "id": "k37p01"
-        },
-        {
-            "nameEs": "Codicia Humana",
-            "nameEn": "Human Greed",
-            "link": "https://i.imgur.com/QYtYEuN.png",
-            "id": "k37p02"
-        },
-        {
-            "nameEs": "Dominacion",
-            "nameEn": "Dominance",
-            "link": "https://i.imgur.com/FE4SVpG.png",
-            "id": "k37p03"
-        }
-    ]
+  "perks": [
+    {
+      "nameEs": "Vocacion de enfermera",
+      "nameEn": "A Nurses Calling",
+      "link": "../Visuals/Perks/Killers/nursecalling.png",
+      "id": "nursecalling"
+    },
+    {
+      "nameEs": "Agitacion",
+      "nameEn": "Agitation",
+      "link": "../Visuals/Perks/Killers/agitation.png",
+      "id": "agitation"
+    },
+    {
+      "nameEs": "Desconcierto",
+      "nameEn": "Bamboozle",
+      "link": "../Visuals/Perks/Killers/bamboozle.png",
+      "id": "bamboozle"
+    },
+    {
+      "nameEs": "Barbacoa y chile",
+      "nameEn": "Barbecue & Chilli",
+      "link": "../Visuals/Perks/Killers/bbqandchilli.png",
+      "id": "bbqandchilli"
+    },
+    {
+      "nameEs": "Bestia de presa",
+      "nameEn": "Beast of Prey",
+      "link": "../Visuals/Perks/Killers/beastofprey.png",
+      "id": "beastofprey"
+    },
+    {
+      "nameEs": "Murmullo amargo",
+      "nameEn": "Bitter Murmur",
+      "link": "../Visuals/Perks/Killers/bitter_murmur.png",
+      "id": "bitter_murmur"
+    },
+    {
+      "nameEs": "Eco sangriento",
+      "nameEn": "Blood Echo",
+      "link": "../Visuals/Perks/Killers/bloodecho.png",
+      "id": "bloodecho"
+    },
+    {
+      "nameEs": "Guardian de sangre",
+      "nameEn": "Blood Warden",
+      "link": "../Visuals/Perks/Killers/bloodwarden.png",
+      "id": "bloodwarden"
+    },
+    {
+      "nameEs": "Sabueso de sangre",
+      "nameEn": "Bloodhound",
+      "link": "../Visuals/Perks/Killers/bloodhound.png",
+      "id": "bloodhound"
+    },
+    {
+      "nameEs": "Fuerza brutal",
+      "nameEn": "Brutal Strength",
+      "link": "../Visuals/Perks/Killers/brutal_strength.png",
+      "id": "brutal_strength"
+    },
+    {
+      "nameEs": "Intervencion corrupta",
+      "nameEn": "Corrupt Intervention",
+      "link": "../Visuals/Perks/Killers/corruptintervention.png",
+      "id": "corruptintervention"
+    },
+    {
+      "nameEs": "Coulrophobia",
+      "nameEn": "Coulrophobia",
+      "link": "../Visuals/Perks/Killers/coulrophobia.png",
+      "id": "coulrophobia"
+    },
+    {
+      "nameEs": "Restriccion cruel",
+      "nameEn": "Cruel Limits",
+      "link": "../Visuals/Perks/Killers/cruelconfinement.png",
+      "id": "cruelconfinement"
+    },
+    {
+      "nameEs": "Devocion oscura",
+      "nameEn": "Dark Devotion",
+      "link": "../Visuals/Perks/Killers/darkdevotion.png",
+      "id": "darkdevotion"
+    },
+    {
+      "nameEs": "Interruptor del hombre muerto",
+      "nameEn": "Dead Mans Switch",
+      "link": "../Visuals/Perks/Killers/deadmansswitch.png",
+      "id": "deadmansswitch"
+    },
+    {
+      "nameEs": "Vinculo mortal",
+      "nameEn": "Deathbound",
+      "link": "../Visuals/Perks/Killers/deathbound.png",
+      "id": "deathbound"
+    },
+    {
+      "nameEs": "Acechador de ciervos",
+      "nameEn": "Deerstalker",
+      "link": "../Visuals/Perks/Killers/deerstalker.png",
+      "id": "deerstalker"
+    },
+    {
+      "nameEs": "Discordancia",
+      "nameEn": "Discordance",
+      "link": "../Visuals/Perks/Killers/discordance.png",
+      "id": "discordance"
+    },
+    {
+      "nameEs": "Desasociego",
+      "nameEn": "Distressing",
+      "link": "../Visuals/Perks/Killers/distressing.png",
+      "id": "distressing"
+    },
+    {
+      "nameEs": "Luz que agoniza",
+      "nameEn": "Dying Light",
+      "link": "../Visuals/Perks/Killers/dying_light.png",
+      "id": "dying_light"
+    },
+    {
+      "nameEs": "Resistente",
+      "nameEn": "Enduring",
+      "link": "../Visuals/Perks/Killers/enduring.png",
+      "id": "enduring"
+    },
+    {
+      "nameEs": "Enfurecimiento",
+      "nameEn": "Fire Up",
+      "link": "../Visuals/Perks/Killers/fireup.png",
+      "id": "fireup"
+    },
+    {
+      "nameEs": "Imposicion de penitencia",
+      "nameEn": "Forced Penance",
+      "link": "../Visuals/Perks/Killers/forcedpenance.png",
+      "id": "forcedpenance"
+    },
+    {
+      "nameEs": "Muerte de franklin",
+      "nameEn": "Franklins Demise",
+      "link": "../Visuals/Perks/Killers/franklinsloss.png",
+      "id": "franklinsloss"
+    },
+    {
+      "nameEs": "Persecucion furtiva",
+      "nameEn": "Furtive Chase",
+      "link": "../Visuals/Perks/Killers/furtivechase.png",
+      "id": "furtivechase"
+    },
+    {
+      "nameEs": "Oido para la maquinaria",
+      "nameEn": "Gearhead",
+      "link": "../Visuals/Perks/Killers/gearhead.png",
+      "id": "gearhead"
+    },
+    {
+      "nameEs": "Truco del verdugo",
+      "nameEn": "Hangmans Trick",
+      "link": "../Visuals/Perks/Killers/hangmanstrick.png",
+      "id": "hangmanstrick"
+    },
+    {
+      "nameEs": "Maleficio: Devoradora de esperanza",
+      "nameEn": "Hex: Devour Hope",
+      "link": "../Visuals/Perks/Killers/hex_devour_hope.png",
+      "id": "hex_devour_hope"
+    },
+    {
+      "nameEs": "Maleficio: Tierra embrujada",
+      "nameEn": "Hex: Haunted Ground",
+      "link": "../Visuals/Perks/Killers/hex_hauntedground.png",
+      "id": "hex_hauntedground"
+    },
+    {
+      "nameEs": "Maleficio: Nana de cazadora",
+      "nameEn": "Hex: Huntress Lullaby",
+      "link": "../Visuals/Perks/Killers/hex_huntresslullaby.png",
+      "id": "hex_huntresslullaby"
+    },
+    {
+      "nameEs": "Maleficio: Nadie escapa de la muerte",
+      "nameEn": "Hex: No One Escapes Death",
+      "link": "../Visuals/Perks/Killers/no_one_escapes_death.png",
+      "id": "no_one_escapes_death"
+    },
+    {
+      "nameEs": "Maleficio: Represalias",
+      "nameEn": "Hex: Retribution",
+      "link": "../Visuals/Perks/Killers/hexretribution.png",
+      "id": "hexretribution"
+    },
+    {
+      "nameEs": "Maleficio: Ruina",
+      "nameEn": "Hex: Ruin",
+      "link": "../Visuals/Perks/Killers/hex_ruin.png",
+      "id": "hex_ruin"
+    },
+    {
+      "nameEs": "Maleficio: El tercer sello",
+      "nameEn": "Hex: The Third Seal",
+      "link": "../Visuals/Perks/Killers/hex_the_third_seal.png",
+      "id": "hex_the_third_seal"
+    },
+    {
+      "nameEs": "Maleficio: La emocion de la caza",
+      "nameEn": "Hex: Thrill of the Hunt",
+      "link": "../Visuals/Perks/Killers/hex_thrill_of_the_hunt.png",
+      "id": "hex_thrill_of_the_hunt"
+    },
+    {
+      "nameEs": "Soy todo oidos",
+      "nameEn": "Im All Ears",
+      "link": "../Visuals/Perks/Killers/imallears.png",
+      "id": "imallears"
+    },
+    {
+      "nameEs": "Terror contagioso",
+      "nameEn": "Infectious Fright",
+      "link": "../Visuals/Perks/Killers/infectiousfright.png",
+      "id": "infectiousfright"
+    },
+    {
+      "nameEs": "Insidia",
+      "nameEn": "Insidious",
+      "link": "../Visuals/Perks/Killers/insidious.png",
+      "id": "insidious"
+    },
+    {
+      "nameEs": "Apreton de hierro",
+      "nameEn": "Iron Grasp",
+      "link": "../Visuals/Perks/Killers/iron_grasp.png",
+      "id": "iron_grasp"
+    },
+    {
+      "nameEs": "Doncella de hierro",
+      "nameEn": "Iron Maiden",
+      "link": "../Visuals/Perks/Killers/ironmaiden.png",
+      "id": "ironmaiden"
+    },
+    {
+      "nameEs": "Noqueo",
+      "nameEn": "Knock Out",
+      "link": "../Visuals/Perks/Killers/inthedark.png",
+      "id": "inthedark"
+    },
+    {
+      "nameEs": "Hijo de la luz",
+      "nameEn": "Lightborn",
+      "link": "../Visuals/Perks/Killers/lightborn.png",
+      "id": "lightborn"
+    },
+    {
+      "nameEs": "Furia ciega",
+      "nameEn": "Mad Grit",
+      "link": "../Visuals/Perks/Killers/madgrit.png",
+      "id": "madgrit"
+    },
+    {
+      "nameEs": "Toma una decicion",
+      "nameEn": "Make Your Choice",
+      "link": "../Visuals/Perks/Killers/makeyourchoice.png",
+      "id": "makeyourchoice"
+    },
+    {
+      "nameEs": "Quebrantamentes",
+      "nameEn": "Mindbreaker",
+      "link": "../Visuals/Perks/Killers/mindbreaker.png",
+      "id": "mindbreaker"
+    },
+    {
+      "nameEs": "Monitorizacion y abuso",
+      "nameEn": "Monitor & Abuse",
+      "link": "../Visuals/Perks/Killers/monitorandabuse.png",
+      "id": "monitorandabuse"
+    },
+    {
+      "nameEs": "Santuario monstruoso",
+      "nameEn": "Monstrous Shrine",
+      "link": "../Visuals/Perks/Killers/monstrous_shrine.png",
+      "id": "monstrous_shrine"
+    },
+    {
+      "nameEs": "Nemesis",
+      "nameEn": "Nemesis",
+      "link": "../Visuals/Perks/Killers/nemesis.png",
+      "id": "nemesis"
+    },
+    {
+      "nameEs": "Sobrecarga",
+      "nameEn": "Overcharge",
+      "link": "../Visuals/Perks/Killers/generatorovercharge.png",
+      "id": "generatorovercharge"
+    },
+    {
+      "nameEs": "Presencia abrumadora",
+      "nameEn": "Overwhelming Presence",
+      "link": "../Visuals/Perks/Killers/overwhelmingpresence.png",
+      "id": "overwhelmingpresence"
+    },
+    {
+      "nameEs": "Jugar con la comida",
+      "nameEn": "Play with Your Food",
+      "link": "../Visuals/Perks/Killers/play_with_your_food.png",
+      "id": "play_with_your_food"
+    },
+    {
+      "nameEs": "Pim, Pam, Pum",
+      "nameEn": "Pop Goes the Weasel",
+      "link": "../Visuals/Perks/Killers/pop_goes_the_weasel.png",
+      "id": "pop_goes_the_weasel"
+    },
+    {
+      "nameEs": "Depredacion",
+      "nameEn": "Predator",
+      "link": "../Visuals/Perks/Killers/predator.png",
+      "id": "predator"
+    },
+    {
+      "nameEs": "Rencor",
+      "nameEn": "Rancor",
+      "link": "../Visuals/Perks/Killers/rancor.png",
+      "id": "rancor"
+    },
+    {
+      "nameEs": "Recuerdame",
+      "nameEn": "Remember Me",
+      "link": "../Visuals/Perks/Killers/rememberme.png",
+      "id": "rememberme"
+    },
+    {
+      "nameEs": "Lo mejor para el final",
+      "nameEn": "Save the Best for Last",
+      "link": "../Visuals/Perks/Killers/save_the_best_for_last.png",
+      "id": "save_the_best_for_last"
+    },
+    {
+      "nameEs": "Hijo de las sombras",
+      "nameEn": "Shadowborn",
+      "link": "../Visuals/Perks/Killers/shadowborn.png",
+      "id": "shadowborn"
+    },
+    {
+      "nameEs": "Carnicero chapucero",
+      "nameEn": "Sloppy Butcher",
+      "link": "../Visuals/Perks/Killers/sloppy_butcher.png",
+      "id": "sloppy_butcher"
+    },
+    {
+      "nameEs": "Espias de las sombras",
+      "nameEn": "Spies from the Shadows",
+      "link": "../Visuals/Perks/Killers/spies_from_the_shadows.png",
+      "id": "spies_from_the_shadows"
+    },
+    {
+      "nameEs": "Furia espiritual",
+      "nameEn": "Spirit Fury",
+      "link": "../Visuals/Perks/Killers/spiritfury.png",
+      "id": "spiritfury"
+    },
+    {
+      "nameEs": "Aliento",
+      "nameEn": "Stridor",
+      "link": "../Visuals/Perks/Killers/stridor.png",
+      "id": "stridor"
+    },
+    {
+      "nameEs": "Sobretencion",
+      "nameEn": "Surge",
+      "link": "../Visuals/Perks/Killers/surge.png",
+      "id": "surge"
+    },
+    {
+      "nameEs": "Supervision",
+      "nameEn": "Surveillance",
+      "link": "../Visuals/Perks/Killers/surveillance.png",
+      "id": "surveillance"
+    },
+    {
+      "nameEs": "Instinto territorial",
+      "nameEn": "Territorial Imperative",
+      "link": "../Visuals/Perks/Killers/territorialimperative.png",
+      "id": "territorialimperative"
+    },
+    {
+      "nameEs": "Manitas",
+      "nameEn": "Tinkerer",
+      "link": "../Visuals/Perks/Killers/tinkerer.png",
+      "id": "tinkerer"
+    },
+    {
+      "nameEs": "Tanatofobia",
+      "nameEn": "Thanatophobia",
+      "link": "../Visuals/Perks/Killers/thanatophobia.png",
+      "id": "thanatophobia"
+    },
+    {
+      "nameEs": "Temblores trepidantes",
+      "nameEn": "Thrilling Tremors",
+      "link": "../Visuals/Perks/Killers/thrillingtremors.png",
+      "id": "thrillingtremors"
+    },
+    {
+      "nameEs": "Rastro de tormento",
+      "nameEn": "Trail of Torment",
+      "link": "../Visuals/Perks/Killers/trailoftorment.png",
+      "id": "trailoftorment"
+    },
+    {
+      "nameEs": "Presencia perturbadora",
+      "nameEn": "Unnerving Presence",
+      "link": "../Visuals/Perks/Killers/unnerving_presence.png",
+      "id": "unnerving_presence"
+    },
+    {
+      "nameEs": "Implacable",
+      "nameEn": "Unrelenting",
+      "link": "../Visuals/Perks/Killers/unrelenting.png",
+      "id": "unrelenting"
+    },
+    {
+      "nameEs": "Murmullos",
+      "nameEn": "Whispers",
+      "link": "../Visuals/Perks/Killers/whispers.png",
+      "id": "whispers"
+    },
+    {
+      "nameEs": "Tacticas de zanshin",
+      "nameEn": "Zanshin Tactics",
+      "link": "../Visuals/Perks/Killers/zanshintactics.png",
+      "id": "zanshintactics"
+    },
+    {
+      "nameEs": "Maleficio: Inmortal",
+      "nameEn": "Hex: Undying",
+      "link": "../Visuals/Perks/Killers/hexundying.png",
+      "id": "hexundying"
+    },
+    {
+      "nameEs": "Agarre del dragon",
+      "nameEn": "Dragon's Grip",
+      "link": "../Visuals/Perks/Killers/dragonsgrip.png",
+      "id": "dragonsgrip"
+    },
+    {
+      "nameEs": "Maleficio: Favor de sangre",
+      "nameEn": "Hex: Blood Favour",
+      "link": "../Visuals/Perks/Killers/hexbloodfavor.png",
+      "id": "hexbloodfavor"
+    },
+    {
+      "nameEs": "Acaparadora",
+      "nameEn": "Hoarder",
+      "link": "../Visuals/Perks/Killers/k22p01.png",
+      "id": "k22p01"
+    },
+    {
+      "nameEs": "Opresion",
+      "nameEn": "Oppression",
+      "link": "../Visuals/Perks/Killers/k22p02.png",
+      "id": "k22p02"
+    },
+    {
+      "nameEs": "Golpe de gracia",
+      "nameEn": "Coup de Grâce",
+      "link": "../Visuals/Perks/Killers/k22p03.png",
+      "id": "k22p03"
+    },
+    {
+      "nameEs": "Deslumbrado",
+      "nameEn": "Starstruck",
+      "link": "../Visuals/Perks/Killers/k23p01.png",
+      "id": "k23p01"
+    },
+    {
+      "nameEs": "Maleficio: Control de masas",
+      "nameEn": "Hex: Crowd Control",
+      "link": "../Visuals/Perks/Killers/k23p02.png",
+      "id": "k23p02"
+    },
+    {
+      "nameEs": "Sin escapatoria",
+      "nameEn": "No Way Out",
+      "link": "../Visuals/Perks/Killers/k23p03.png",
+      "id": "k23p03"
+    },
+    {
+      "nameEs": "Acecho letal",
+      "nameEn": "Lethal Pursuer",
+      "link": "../Visuals/Perks/Killers/k24p01.png",
+      "id": "k24p01"
+    },
+    {
+      "nameEs": "Histeria",
+      "nameEn": "Hysteria",
+      "link": "../Visuals/Perks/Killers/k24p02.png",
+      "id": "k24p02"
+    },
+    {
+      "nameEs": "Erupcion",
+      "nameEn": "Eruption",
+      "link": "../Visuals/Perks/Killers/k24p03.png",
+      "id": "k24p03"
+    },
+    {
+      "nameEs": "Candado",
+      "nameEn": "Deadlock",
+      "link": "../Visuals/Perks/Killers/k25p01.png",
+      "id": "k25p01"
+    },
+    {
+      "nameEs": "Maleficio: Juguete",
+      "nameEn": "Hex: Plaything",
+      "link": "../Visuals/Perks/Killers/k25p02.png",
+      "id": "k25p02"
+    },
+    {
+      "nameEs": "Gancho Flagelante: Obsequio Doloroso",
+      "nameEn": "Scourge Hook: Gift of Pain",
+      "link": "../Visuals/Perks/Killers/k25p03.png",
+      "id": "k25p03"
+    },
+    {
+      "nameEs": "Acogida Nefasta",
+      "nameEn": "Grim Embrace",
+      "link": "../Visuals/Perks/Killers/k26p01.png",
+      "id": "k26p01"
+    },
+    {
+      "nameEs": "Gancho Flagelante: Dolor Retumbante",
+      "nameEn": "Scourge Hook: Pain Resonance",
+      "link": "../Visuals/Perks/Killers/k26p02.png",
+      "id": "k26p02"
+    },
+    {
+      "nameEs": "Maleficio: Pentimento",
+      "nameEn": "Hex: Pentimento",
+      "link": "../Visuals/Perks/Killers/k26p03.png",
+      "id": "k26p03"
+    },
+    {
+      "nameEs": "Gancho Flagelante: Oleada de Ira",
+      "nameEn": "Scourge Hook: Floods of Rage",
+      "link": "../Visuals/Perks/Killers/k27p01.png",
+      "id": "k27p01"
+    },
+    {
+      "nameEs": "Salmuera",
+      "nameEn": "Call of Brine",
+      "link": "../Visuals/Perks/Killers/k27p02.png",
+      "id": "k27p02"
+    },
+    {
+      "nameEs": "Tormenta Vil",
+      "nameEn": "Merciless Storm",
+      "link": "../Visuals/Perks/Killers/k27p03.png",
+      "id": "k27p03"
+    },
+    {
+      "nameEs": "Disolucion",
+      "nameEn": "Dissolution",
+      "link": "../Visuals/Perks/Killers/k28p01.png",
+      "id": "k28p01"
+    },
+    {
+      "nameEs": "Oscuridad Expuesta",
+      "nameEn": "Darkness Revealed",
+      "link": "../Visuals/Perks/Killers/k28p02.png",
+      "id": "k28p02"
+    },
+    {
+      "nameEs": "Toque Septico",
+      "nameEn": "Septic Touch",
+      "link": "../Visuals/Perks/Killers/k28p03.png",
+      "id": "k28p03"
+    },
+    {
+      "nameEs": "Anatomia Superior",
+      "nameEn": "Superior Anatomy",
+      "link": "../Visuals/Perks/Killers/k29p01.png",
+      "id": "k29p01"
+    },
+    {
+      "nameEs": "Percepcion Activada",
+      "nameEn": "Awakened Awareness",
+      "link": "../Visuals/Perks/Killers/k29p02.png",
+      "id": "k29p02"
+    },
+    {
+      "nameEs": "Terminal",
+      "nameEn": "Terminus",
+      "link": "../Visuals/Perks/Killers/k29p03.png",
+      "id": "k29p03"
+    },
+    {
+      "nameEs": "Sin escondite",
+      "nameEn": "Nowhere to Hide",
+      "link": "../Visuals/Perks/Killers/k30p01.png",
+      "id": "k30p01"
+    },
+    {
+      "nameEs": "Maleficio: Enfrentate a la oscuridad",
+      "nameEn": "Hex: Face the Darkness",
+      "link": "../Visuals/Perks/Killers/k30p02.png",
+      "id": "k30p02"
+    },
+    {
+      "nameEs": "Soberbia",
+      "nameEn": "Hubris",
+      "link": "../Visuals/Perks/Killers/k30p03.png",
+      "id": "k30p03"
+    },
+    {
+      "nameEs": "PLAF!",
+      "nameEn": "THWACK!",
+      "link": "../Visuals/Perks/Killers/k31p01.png",
+      "id": "k31p01"
+    },
+    {
+      "nameEs": "Influencia",
+      "nameEn": "Leverage",
+      "link": "../Visuals/Perks/Killers/k31p02.png",
+      "id": "k31p02"
+    },
+    {
+      "nameEs": "Veda Abierta",
+      "nameEn": "Game Afoot",
+      "link": "../Visuals/Perks/Killers/k31p03.png",
+      "id": "k31p03"
+    },
+    {
+      "nameEs": "Limitaciones Geneticas",
+      "nameEn": "Genetic Limits",
+      "link": "../Visuals/Perks/Killers/k32p01.png",
+      "id": "k32p01"
+    },
+    {
+      "nameEs": "Duda Impuesta",
+      "nameEn": "Forced Hesitation",
+      "link": "../Visuals/Perks/Killers/k32p02.png",
+      "id": "k32p02"
+    },
+    {
+      "nameEs": "Aprendizaje de Maquina",
+      "nameEn": "Machine Learning",
+      "link": "../Visuals/Perks/Killers/k32p03.png",
+      "id": "k32p03"
+    },
+    {
+      "nameEs": "Brutalidad Feroz",
+      "nameEn": "Rapid Brutality",
+      "link": "../Visuals/Perks/Killers/k33p01.png",
+      "id": "k33p01"
+    },
+    {
+      "nameEs": "Instinto Alienigena",
+      "nameEn": "Alien Instinct",
+      "link": "../Visuals/Perks/Killers/k33p02.png",
+      "id": "k33p02"
+    },
+    {
+      "nameEs": "Arma Definitiva",
+      "nameEn": "Ultimate Weapon",
+      "link": "../Visuals/Perks/Killers/k33p03.png",
+      "id": "k33p03"
+    },
+    {
+      "nameEs": "Maleficio: Dos Pueden Jugar",
+      "nameEn": "Hex: Two Can Play",
+      "link": "../Visuals/Perks/Killers/k34p01.png",
+      "id": "k34p01"
+    },
+    {
+      "nameEs": "Amigos Para Siempre",
+      "nameEn": "Friends 'til the End",
+      "link": "../Visuals/Perks/Killers/k34p02.png",
+      "id": "k34p02"
+    },
+    {
+      "nameEs": "Pilas Incluidas",
+      "nameEn": "Batteries Included",
+      "link": "../Visuals/Perks/Killers/k34p03.png",
+      "id": "k34p03"
+    },
+    {
+      "nameEs": "Desatado",
+      "nameEn": "Unbound",
+      "link": "../Visuals/Perks/Killers/k35p01.png",
+      "id": "k35p01"
+    },
+    {
+      "nameEs": "Inacabado",
+      "nameEn": "Undone",
+      "link": "../Visuals/Perks/Killers/k35p02.png",
+      "id": "k35p02"
+    },
+    {
+      "nameEs": "Imprevisto",
+      "nameEn": "Unforeseen",
+      "link": "../Visuals/Perks/Killers/k35p03.png",
+      "id": "k35p03"
+    },
+    {
+      "nameEs": "Arrogancia Obscura",
+      "nameEn": "Dark Arrogance",
+      "link": "../Visuals/Perks/Killers/k36p01.png",
+      "id": "k36p01"
+    },
+    {
+      "nameEs": "Toque Languido",
+      "nameEn": "Languid Touch",
+      "link": "../Visuals/Perks/Killers/k36p02.png",
+      "id": "k36p02"
+    },
+    {
+      "nameEs": "Armonizacion De Tejido",
+      "nameEn": "Weave Attunement",
+      "link": "../Visuals/Perks/Killers/k36p03.png",
+      "id": "k36p03"
+    },
+    {
+      "nameEs": "Maleficio: Destino Miserable",
+      "nameEn": "Hex: Wretched Fate",
+      "link": "../Visuals/Perks/Killers/k37p01.png",
+      "id": "k37p01"
+    },
+    {
+      "nameEs": "Codicia Humana",
+      "nameEn": "Human Greed",
+      "link": "../Visuals/Perks/Killers/k37p02.png",
+      "id": "k37p02"
+    },
+    {
+      "nameEs": "Dominacion",
+      "nameEn": "Dominance",
+      "link": "../Visuals/Perks/Killers/k37p03.png",
+      "id": "k37p03"
+    }
+  ]
 }
