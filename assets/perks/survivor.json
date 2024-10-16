@@ -3,877 +3,877 @@
     {
       "nameEs": "As en la manga",
       "nameEn": "Ace in the Hole",
-      "link": "../Visuals/Perks/Killers/ace_in_the_hole.png",
+      "link": "Survivors/ace_in_the_hole.png",
       "id": "ace_in_the_hole"
     },
     {
       "nameEs": "Adrenalina",
       "nameEn": "Adrenaline",
-      "link": "../Visuals/Perks/Killers/adrenaline.png",
+      "link": "Survivors/adrenaline.png",
       "id": "adrenaline"
     },
     {
       "nameEs": "Postratamiento",
       "nameEn": "Aftercare",
-      "link": "../Visuals/Perks/Killers/aftercare.png",
+      "link": "Survivors/aftercare.png",
       "id": "aftercare"
     },
     {
       "nameEs": "Alerta",
       "nameEn": "Alert",
-      "link": "../Visuals/Perks/Killers/alert.png",
+      "link": "Survivors/alert.png",
       "id": "alert"
     },
     {
       "nameEs": "Cueste lo que cueste",
       "nameEn": "Any Means Necessary",
-      "link": "../Visuals/Perks/Killers/anymeansnecessary.png",
+      "link": "Survivors/anymeansnecessary.png",
       "id": "anymeansnecessary"
     },
     {
       "nameEs": "Autodidacta",
       "nameEn": "Autodidact",
-      "link": "../Visuals/Perks/Killers/autodidact.png",
+      "link": "Survivors/autodidact.png",
       "id": "autodidact"
     },
     {
       "nameEs": "Canguro",
       "nameEn": "Babysitter",
-      "link": "../Visuals/Perks/Killers/babysitter.png",
+      "link": "Survivors/babysitter.png",
       "id": "babysitter"
     },
     {
       "nameEs": "Caida equilibrada",
       "nameEn": "Balanced Landing",
-      "link": "../Visuals/Perks/Killers/balanced_landing.png",
+      "link": "Survivors/balanced_landing.png",
       "id": "balanced_landing"
     },
     {
       "nameEs": "Mejor juntos",
       "nameEn": "Better Together",
-      "link": "../Visuals/Perks/Killers/bettertogether.png",
+      "link": "Survivors/bettertogether.png",
       "id": "bettertogether"
     },
     {
       "nameEs": "Pacto de sangre",
       "nameEn": "Blood Pact",
-      "link": "../Visuals/Perks/Killers/bloodpact.png",
+      "link": "Survivors/bloodpact.png",
       "id": "bloodpact"
     },
     {
       "nameEs": "Arrebato",
       "nameEn": "Boil Over",
-      "link": "../Visuals/Perks/Killers/boilover.png",
+      "link": "Survivors/boilover.png",
       "id": "boilover"
     },
     {
       "nameEs": "Vinculo",
       "nameEn": "Bond",
-      "link": "../Visuals/Perks/Killers/bond.png",
+      "link": "Survivors/bond.png",
       "id": "bond"
     },
     {
       "nameEs": "Tiempo prestado",
       "nameEn": "Borrowed Time",
-      "link": "../Visuals/Perks/Killers/borrowedtime.png",
+      "link": "Survivors/borrowedtime.png",
       "id": "borrowedtime"
     },
     {
       "nameEs": "Conocimientos de botanica",
       "nameEn": "Botany Knowledge",
-      "link": "../Visuals/Perks/Killers/botany_knowledge.png",
+      "link": "Survivors/botany_knowledge.png",
       "id": "botany_knowledge"
     },
     {
       "nameEs": "Ruptura",
       "nameEn": "Breakdown",
-      "link": "../Visuals/Perks/Killers/breakdown.png",
+      "link": "Survivors/breakdown.png",
       "id": "breakdown"
     },
     {
       "nameEs": "Fuga",
       "nameEn": "Breakout",
-      "link": "../Visuals/Perks/Killers/breakout.png",
+      "link": "Survivors/breakout.png",
       "id": "breakout"
     },
     {
       "nameEs": "Sujetate",
       "nameEn": "Buckle Up",
-      "link": "../Visuals/Perks/Killers/buckleup.png",
+      "link": "Survivors/buckleup.png",
       "id": "buckleup"
     },
     {
       "nameEs": "Espiritu calmado",
       "nameEn": "Calm Spirit",
-      "link": "../Visuals/Perks/Killers/calm_spirit.png",
+      "link": "Survivors/calm_spirit.png",
       "id": "calm_spirit"
     },
     {
       "nameEs": "Camaraderia",
       "nameEn": "Camaraderie",
-      "link": "../Visuals/Perks/Killers/camaraderie.png",
+      "link": "Survivors/camaraderie.png",
       "id": "camaraderie"
     },
     {
       "nameEs": "Baila conmigo",
       "nameEn": "Dance With Me",
-      "link": "../Visuals/Perks/Killers/dance_with_me.png",
+      "link": "Survivors/dance_with_me.png",
       "id": "dance_with_me"
     },
     {
       "nameEs": "Percepcion oscura",
       "nameEn": "Dark Sense",
-      "link": "../Visuals/Perks/Killers/dark_sense.png",
+      "link": "Survivors/dark_sense.png",
       "id": "dark_sense"
     },
     {
       "nameEs": "Fajador",
       "nameEn": "Dead Hard",
-      "link": "../Visuals/Perks/Killers/deadhard.png",
+      "link": "Survivors/deadhard.png",
       "id": "deadhard"
     },
     {
       "nameEs": "Golpe decisivo",
       "nameEn": "Decisive Strike",
-      "link": "../Visuals/Perks/Killers/decisivestrike.png",
+      "link": "Survivors/decisivestrike.png",
       "id": "decisivestrike"
     },
     {
       "nameEs": "Déjà Vu",
       "nameEn": "Déjà Vu",
-      "link": "../Visuals/Perks/Killers/deja_vu.png",
+      "link": "Survivors/deja_vu.png",
       "id": "deja_vu"
     },
     {
       "nameEs": "Liberacion",
       "nameEn": "Deliverance",
-      "link": "../Visuals/Perks/Killers/deliverance.png",
+      "link": "Survivors/deliverance.png",
       "id": "deliverance"
     },
     {
       "nameEs": "Corazonada",
       "nameEn": "Detective's Hunch",
-      "link": "../Visuals/Perks/Killers/detectiveshunch.png",
+      "link": "Survivors/detectiveshunch.png",
       "id": "detectiveshunch"
     },
     {
       "nameEs": "Distorsion",
       "nameEn": "Distortion",
-      "link": "../Visuals/Perks/Killers/distortion.png",
+      "link": "Survivors/distortion.png",
       "id": "distortion"
     },
     {
       "nameEs": "Distraccion",
       "nameEn": "Diversion",
-      "link": "../Visuals/Perks/Killers/diversion.png",
+      "link": "Survivors/diversion.png",
       "id": "diversion"
     },
     {
       "nameEs": "Empatia",
       "nameEn": "Empathy",
-      "link": "../Visuals/Perks/Killers/empathy.png",
+      "link": "Survivors/empathy.png",
       "id": "empathy"
     },
     {
       "nameEs": "Fijacion",
       "nameEn": "Fixated",
-      "link": "../Visuals/Perks/Killers/fixated.png",
+      "link": "Survivors/fixated.png",
       "id": "fixated"
     },
     {
       "nameEs": "Hasta otra",
       "nameEn": "Flip-Flop",
-      "link": "../Visuals/Perks/Killers/flipflop.png",
+      "link": "Survivors/flipflop.png",
       "id": "flipflop"
     },
     {
       "nameEs": "Por los demas",
       "nameEn": "For the People",
-      "link": "../Visuals/Perks/Killers/forthepeople.png",
+      "link": "Survivors/forthepeople.png",
       "id": "forthepeople"
     },
     {
       "nameEs": "De frente",
       "nameEn": "Head On",
-      "link": "../Visuals/Perks/Killers/headon.png",
+      "link": "Survivors/headon.png",
       "id": "headon"
     },
     {
       "nameEs": "Esperanza",
       "nameEn": "Hope",
-      "link": "../Visuals/Perks/Killers/hope.png",
+      "link": "Survivors/hope.png",
       "id": "hope"
     },
     {
       "nameEs": "Fuerza interior",
       "nameEn": "Inner Strength",
-      "link": "../Visuals/Perks/Killers/innerstrength.png",
+      "link": "Survivors/innerstrength.png",
       "id": "innerstrength"
     },
     {
       "nameEs": "Voluntad de hierro",
       "nameEn": "Iron Will",
-      "link": "../Visuals/Perks/Killers/iron_will.png",
+      "link": "Survivors/iron_will.png",
       "id": "iron_will"
     },
     {
       "nameEs": "Familia",
       "nameEn": "Kindred",
-      "link": "../Visuals/Perks/Killers/kindred.png",
+      "link": "Survivors/kindred.png",
       "id": "kindred"
     },
     {
       "nameEs": "Lider",
       "nameEn": "Leader",
-      "link": "../Visuals/Perks/Killers/leader.png",
+      "link": "Survivors/leader.png",
       "id": "leader"
     },
     {
       "nameEs": "Abandonado a tu suerte",
       "nameEn": "Left Behind",
-      "link": "../Visuals/Perks/Killers/leftbehind.png",
+      "link": "Survivors/leftbehind.png",
       "id": "leftbehind"
     },
     {
       "nameEs": "De pies ligeros",
       "nameEn": "Lightweight",
-      "link": "../Visuals/Perks/Killers/lightweight.png",
+      "link": "Survivors/lightweight.png",
       "id": "lightweight"
     },
     {
       "nameEs": "Agilidad",
       "nameEn": "Lithe",
-      "link": "../Visuals/Perks/Killers/lithe.png",
+      "link": "Survivors/lithe.png",
       "id": "lithe"
     },
     {
       "nameEs": "Golpe de suerte",
       "nameEn": "Lucky Break",
-      "link": "../Visuals/Perks/Killers/luckybreak.png",
+      "link": "Survivors/luckybreak.png",
       "id": "luckybreak"
     },
     {
       "nameEs": "El temple del hombre",
       "nameEn": "Mettle of Man",
-      "link": "../Visuals/Perks/Killers/themettleofman.png",
+      "link": "Survivors/themettleofman.png",
       "id": "themettleofman"
     },
     {
       "nameEs": "Me la pela",
       "nameEn": "No Mither",
-      "link": "../Visuals/Perks/Killers/nomither.png",
+      "link": "Survivors/nomither.png",
       "id": "nomither"
     },
     {
       "nameEs": "Nadie se queda atras",
       "nameEn": "No One Left Behind",
-      "link": "../Visuals/Perks/Killers/no_one_left_behind.png",
+      "link": "Survivors/no_one_left_behind.png",
       "id": "no_one_left_behind"
     },
     {
       "nameEs": "Obejeto de obsesion",
       "nameEn": "Object of Obsession",
-      "link": "../Visuals/Perks/Killers/objectofobsession.png",
+      "link": "Survivors/objectofobsession.png",
       "id": "objectofobsession"
     },
     {
       "nameEs": "Extraoficial",
       "nameEn": "Off the Record",
-      "link": "../Visuals/Perks/Killers/offtherecord.png",
+      "link": "Survivors/offtherecord.png",
       "id": "offtherecord"
     },
     {
       "nameEs": "A mano descubierta",
       "nameEn": "Open-Handed",
-      "link": "../Visuals/Perks/Killers/open_handed.png",
+      "link": "Survivors/open_handed.png",
       "id": "open_handed"
     },
     {
       "nameEs": "Farmacia",
       "nameEn": "Pharmacy",
-      "link": "../Visuals/Perks/Killers/pharmacy.png",
+      "link": "Survivors/pharmacy.png",
       "id": "pharmacy"
     },
     {
       "nameEs": "Instinto de saqueador",
       "nameEn": "Plunderers Instinct",
-      "link": "../Visuals/Perks/Killers/plunderers_instinct.png",
+      "link": "Survivors/plunderers_instinct.png",
       "id": "plunderers_instinct"
     },
     {
       "nameEs": "Serenidad",
       "nameEn": "Poised",
-      "link": "../Visuals/Perks/Killers/poised.png",
+      "link": "Survivors/poised.png",
       "id": "poised"
     },
     {
       "nameEs": "Premonicion",
       "nameEn": "Premonition",
-      "link": "../Visuals/Perks/Killers/premonition.png",
+      "link": "Survivors/premonition.png",
       "id": "premonition"
     },
     {
       "nameEs": "Demuestra lo que vales",
       "nameEn": "Prove Thyself",
-      "link": "../Visuals/Perks/Killers/prove_thyself.png",
+      "link": "Survivors/prove_thyself.png",
       "id": "prove_thyself"
     },
     {
       "nameEs": "Velocidad silenciosa",
       "nameEn": "Quick & Quiet",
-      "link": "../Visuals/Perks/Killers/quickquiet.png",
+      "link": "Survivors/quickquiet.png",
       "id": "quickquiet"
     },
     {
       "nameEs": "Bulo",
       "nameEn": "Red Herring",
-      "link": "../Visuals/Perks/Killers/redherring.png",
+      "link": "Survivors/redherring.png",
       "id": "redherring"
     },
     {
       "nameEs": "Supresion de alianza",
       "nameEn": "Repressed Alliance",
-      "link": "../Visuals/Perks/Killers/repressedalliance.png",
+      "link": "Survivors/repressedalliance.png",
       "id": "repressedalliance"
     },
     {
       "nameEs": "Resiliencia",
       "nameEn": "Resilience",
-      "link": "../Visuals/Perks/Killers/resilience.png",
+      "link": "Survivors/resilience.png",
       "id": "resilience"
     },
     {
       "nameEs": "Sabotear",
       "nameEn": "Saboteur",
-      "link": "../Visuals/Perks/Killers/saboteur.png",
+      "link": "Survivors/saboteur.png",
       "id": "saboteur"
     },
     {
       "nameEs": "Segundo aliento",
       "nameEn": "Second Wind",
-      "link": "../Visuals/Perks/Killers/secondwind.png",
+      "link": "Survivors/secondwind.png",
       "id": "secondwind"
     },
     {
       "nameEs": "Autocuracion",
       "nameEn": "Self-Care",
-      "link": "../Visuals/Perks/Killers/self_care.png",
+      "link": "Survivors/self_care.png",
       "id": "self_care"
     },
     {
       "nameEs": "Carne resbaladiza",
       "nameEn": "Slippery Meat",
-      "link": "../Visuals/Perks/Killers/slippery_meat.png",
+      "link": "Survivors/slippery_meat.png",
       "id": "slippery_meat"
     },
     {
       "nameEs": "Caza menor",
       "nameEn": "Small Game",
-      "link": "../Visuals/Perks/Killers/small_game.png",
+      "link": "Survivors/small_game.png",
       "id": "small_game"
     },
     {
       "nameEs": "Solo quedo yo",
       "nameEn": "Sole Survivor",
-      "link": "../Visuals/Perks/Killers/solesurvivor.png",
+      "link": "Survivors/solesurvivor.png",
       "id": "solesurvivor"
     },
     {
       "nameEs": "Solidaridad",
       "nameEn": "Solidarity",
-      "link": "../Visuals/Perks/Killers/solidarity.png",
+      "link": "Survivors/solidarity.png",
       "id": "solidarity"
     },
     {
       "nameEs": "Salvaguarda de alma",
       "nameEn": "Soul Guard",
-      "link": "../Visuals/Perks/Killers/soulguard.png",
+      "link": "Survivors/soulguard.png",
       "id": "soulguard"
     },
     {
       "nameEs": "Escalofrios",
       "nameEn": "Spine Chill",
-      "link": "../Visuals/Perks/Killers/spine_chill.png",
+      "link": "Survivors/spine_chill.png",
       "id": "spine_chill"
     },
     {
       "nameEs": "Esprint",
       "nameEn": "Sprint Burst",
-      "link": "../Visuals/Perks/Killers/sprint_burst.png",
+      "link": "Survivors/sprint_burst.png",
       "id": "sprint_burst"
     },
     {
       "nameEs": "Bajo vigilancia",
       "nameEn": "Stake Out",
-      "link": "../Visuals/Perks/Killers/stakeout.png",
+      "link": "Survivors/stakeout.png",
       "id": "stakeout"
     },
     {
       "nameEs": "Con calle",
       "nameEn": "Streetwise",
-      "link": "../Visuals/Perks/Killers/streetwise.png",
+      "link": "Survivors/streetwise.png",
       "id": "streetwise"
     },
     {
       "nameEs": "Esto no puede estar pasando",
       "nameEn": "This Is Not Happening",
-      "link": "../Visuals/Perks/Killers/this_is_not_happening.png",
+      "link": "Survivors/this_is_not_happening.png",
       "id": "this_is_not_happening"
     },
     {
       "nameEs": "Pericia tecnica",
       "nameEn": "Technician",
-      "link": "../Visuals/Perks/Killers/technician.png",
+      "link": "Survivors/technician.png",
       "id": "technician"
     },
     {
       "nameEs": "Tenacidad",
       "nameEn": "Tenacity",
-      "link": "../Visuals/Perks/Killers/tenacity.png",
+      "link": "Survivors/tenacity.png",
       "id": "tenacity"
     },
     {
       "nameEs": "Subir las apuestas",
       "nameEn": "Up the Ante",
-      "link": "../Visuals/Perks/Killers/up_the_ante.png",
+      "link": "Survivors/up_the_ante.png",
       "id": "up_the_ante"
     },
     {
       "nameEs": "Inquebrantable",
       "nameEn": "Unbreakable",
-      "link": "../Visuals/Perks/Killers/selfsufficient.png",
+      "link": "Survivors/selfsufficient.png",
       "id": "selfsufficient"
     },
     {
       "nameEs": "Evasion urbana",
       "nameEn": "Urban Evasion",
-      "link": "../Visuals/Perks/Killers/urban_evasion.png",
+      "link": "Survivors/urban_evasion.png",
       "id": "urban_evasion"
     },
     {
       "nameEs": "Vigilia",
       "nameEn": "Vigil",
-      "link": "../Visuals/Perks/Killers/vigil.png",
+      "link": "Survivors/vigil.png",
       "id": "vigil"
     },
     {
       "nameEs": "Despierta!",
       "nameEn": "Wake Up!",
-      "link": "../Visuals/Perks/Killers/wakeup.png",
+      "link": "Survivors/wakeup.png",
       "id": "wakeup"
     },
     {
       "nameEs": "Lo conseguiremos",
       "nameEn": "Well Make It",
-      "link": "../Visuals/Perks/Killers/wellmakeit.png",
+      "link": "Survivors/wellmakeit.png",
       "id": "wellmakeit"
     },
     {
       "nameEs": "Vamos a vivir para siempre",
       "nameEn": "Were Gonna Live Forever",
-      "link": "../Visuals/Perks/Killers/weregonnaliveforever.png",
+      "link": "Survivors/weregonnaliveforever.png",
       "id": "weregonnaliveforever"
     },
     {
       "nameEs": "Oportunidades",
       "nameEn": "Windows of Opportunity",
-      "link": "../Visuals/Perks/Killers/windowsofopportunity.png",
+      "link": "Survivors/windowsofopportunity.png",
       "id": "windowsofopportunity"
     },
     {
       "nameEs": "Medidas desesperadas",
       "nameEn": "Desperate Measures",
-      "link": "../Visuals/Perks/Killers/desperatemeasures.png",
+      "link": "Survivors/desperatemeasures.png",
       "id": "desperatemeasures"
     },
     {
       "nameEs": "Visionario",
       "nameEn": "Visionary",
-      "link": "../Visuals/Perks/Killers/visionary.png",
+      "link": "Survivors/visionary.png",
       "id": "visionary"
     },
     {
       "nameEs": "Construido para perdurar",
       "nameEn": "Built to Last",
-      "link": "../Visuals/Perks/Killers/builttolast.png",
+      "link": "Survivors/builttolast.png",
       "id": "builttolast"
     },
     {
       "nameEs": "Evaluacion",
       "nameEn": "Appraisal",
-      "link": "../Visuals/Perks/Killers/s24p01.png",
+      "link": "Survivors/s24p01.png",
       "id": "s24p01"
     },
     {
       "nameEs": "Engaño",
       "nameEn": "Deception",
-      "link": "../Visuals/Perks/Killers/s24p02.png",
+      "link": "Survivors/s24p02.png",
       "id": "s24p02"
     },
     {
       "nameEs": "Lucha intensa",
       "nameEn": "Power Struggle",
-      "link": "../Visuals/Perks/Killers/s24p03.png",
+      "link": "Survivors/s24p03.png",
       "id": "s24p03"
     },
     {
       "nameEs": "Primera línea",
       "nameEn": "Fast Track",
-      "link": "../Visuals/Perks/Killers/s25p01.png",
+      "link": "Survivors/s25p01.png",
       "id": "s25p01"
     },
     {
       "nameEs": "Éxito aplastante",
       "nameEn": "Smash Hit",
-      "link": "../Visuals/Perks/Killers/s25p02.png",
+      "link": "Survivors/s25p02.png",
       "id": "s25p02"
     },
     {
       "nameEs": "Autoconservación",
       "nameEn": "Self-Preservation",
-      "link": "../Visuals/Perks/Killers/s25p03.png",
+      "link": "Survivors/s25p03.png",
       "id": "s25p03"
     },
     {
       "nameEs": "Contrafuerza",
       "nameEn": "Counterforce",
-      "link": "../Visuals/Perks/Killers/s26p01.png",
+      "link": "Survivors/s26p01.png",
       "id": "s26p01"
     },
     {
       "nameEs": "Resurgimiento",
       "nameEn": "Resurgence",
-      "link": "../Visuals/Perks/Killers/s26p02.png",
+      "link": "Survivors/s26p02.png",
       "id": "s26p02"
     },
     {
       "nameEs": "Mina explosiva",
       "nameEn": "Blast Mine",
-      "link": "../Visuals/Perks/Killers/s26p03.png",
+      "link": "Survivors/s26p03.png",
       "id": "s26p03"
     },
     {
       "nameEs": "De tripas corazon",
       "nameEn": "Bite the Bullet",
-      "link": "../Visuals/Perks/Killers/s27p01.png",
+      "link": "Survivors/s27p01.png",
       "id": "s27p01"
     },
     {
       "nameEs": "Granada aturdidora",
       "nameEn": "Flashbang",
-      "link": "../Visuals/Perks/Killers/s27p02.png",
+      "link": "Survivors/s27p02.png",
       "id": "s27p02"
     },
     {
       "nameEs": "Espiritu de novato",
       "nameEn": "Rookie Spirit",
-      "link": "../Visuals/Perks/Killers/s27p03.png",
+      "link": "Survivors/s27p03.png",
       "id": "s27p03"
     },
     {
       "nameEs": "Clarividencia",
       "nameEn": "Clairvoyance",
-      "link": "../Visuals/Perks/Killers/s28p01.png",
+      "link": "Survivors/s28p01.png",
       "id": "s28p01"
     },
     {
       "nameEs": "Bendicion: Circulo de curacion",
       "nameEn": "Boon: Circle of Healing",
-      "link": "../Visuals/Perks/Killers/s28p02.png",
+      "link": "Survivors/s28p02.png",
       "id": "s28p02"
     },
     {
       "nameEs": "Bendicion: Paso sombrio",
       "nameEn": "Boon: Shadow Step",
-      "link": "../Visuals/Perks/Killers/s28p03.png",
+      "link": "Survivors/s28p03.png",
       "id": "s28p03"
     },
     {
       "nameEs": "Sobreponerse",
       "nameEn": "Overcome",
-      "link": "../Visuals/Perks/Killers/s29p01.png",
+      "link": "Survivors/s29p01.png",
       "id": "s29p01"
     },
     {
       "nameEs": "Medida Correctiva",
       "nameEn": "Corrective Action",
-      "link": "../Visuals/Perks/Killers/s29p02.png",
+      "link": "Survivors/s29p02.png",
       "id": "s29p02"
     },
     {
       "nameEs": "Bendicion: Exponencial",
       "nameEn": "Boon: Exponential",
-      "link": "../Visuals/Perks/Killers/s29p03.png",
+      "link": "Survivors/s29p03.png",
       "id": "s29p03"
     },
     {
       "nameEs": "Consejo Paterno",
       "nameEn": "Parental Guidance",
-      "link": "../Visuals/Perks/Killers/s30p01.png",
+      "link": "Survivors/s30p01.png",
       "id": "s30p01"
     },
     {
       "nameEs": "Conexion Empatica",
       "nameEn": "Empathic Connection",
-      "link": "../Visuals/Perks/Killers/s30p02.png",
+      "link": "Survivors/s30p02.png",
       "id": "s30p02"
     },
     {
       "nameEs": "Bendicion: Teoria Oscura",
       "nameEn": "Boon: Dark Theory",
-      "link": "../Visuals/Perks/Killers/s30p03.png",
+      "link": "Survivors/s30p03.png",
       "id": "s30p03"
     },
     {
       "nameEs": "Concentracion Interna",
       "nameEn": "Inner Focus",
-      "link": "../Visuals/Perks/Killers/s31p01.png",
+      "link": "Survivors/s31p01.png",
       "id": "s31p01"
     },
     {
       "nameEs": "Manifestacion Residual",
       "nameEn": "Residual Manifest",
-      "link": "../Visuals/Perks/Killers/s31p02.png",
+      "link": "Survivors/s31p02.png",
       "id": "s31p02"
     },
     {
       "nameEs": "Pasion",
       "nameEn": "Overzealous",
-      "link": "../Visuals/Perks/Killers/s31p03.png",
+      "link": "Survivors/s31p03.png",
       "id": "s31p03"
     },
     {
       "nameEs": "Interceptor",
       "nameEn": "Wiretap",
-      "link": "../Visuals/Perks/Killers/s32p01.png",
+      "link": "Survivors/s32p01.png",
       "id": "s32p01"
     },
     {
       "nameEs": "Curacion Reactiva",
       "nameEn": "Reactive Healing",
-      "link": "../Visuals/Perks/Killers/s32p02.png",
+      "link": "Survivors/s32p02.png",
       "id": "s32p02"
     },
     {
       "nameEs": "Perfil Bajo",
       "nameEn": "Low Profile",
-      "link": "../Visuals/Perks/Killers/s32p03.png",
+      "link": "Survivors/s32p03.png",
       "id": "s32p03"
     },
     {
       "nameEs": "Mejor que nuevo",
       "nameEn": "Better than New",
-      "link": "../Visuals/Perks/Killers/s33p01.png",
+      "link": "Survivors/s33p01.png",
       "id": "s33p01"
     },
     {
       "nameEs": "Reafirmacion",
       "nameEn": "Reassurance",
-      "link": "../Visuals/Perks/Killers/s33p02.png",
+      "link": "Survivors/s33p02.png",
       "id": "s33p02"
     },
     {
       "nameEs": "Hiperconcentracion",
       "nameEn": "Hyperfocus",
-      "link": "../Visuals/Perks/Killers/s33p03.png",
+      "link": "Survivors/s33p03.png",
       "id": "s33p03"
     },
     {
       "nameEs": "Energia potencial",
       "nameEn": "Potential Energy",
-      "link": "../Visuals/Perks/Killers/s34p01.png",
+      "link": "Survivors/s34p01.png",
       "id": "s34p01"
     },
     {
       "nameEs": "Neblinoso",
       "nameEn": "Fogwise",
-      "link": "../Visuals/Perks/Killers/s34p02.png",
+      "link": "Survivors/s34p02.png",
       "id": "s34p02"
     },
     {
       "nameEs": "Tactica veloz",
       "nameEn": "Quick Gambit",
-      "link": "../Visuals/Perks/Killers/s34p03.png",
+      "link": "Survivors/s34p03.png",
       "id": "s34p03"
     },
     {
       "nameEs": "Torrente de Sangre",
       "nameEn": "Blood Rush",
-      "link": "../Visuals/Perks/Killers/s35p01.png",
+      "link": "Survivors/s35p01.png",
       "id": "s35p01"
     },
     {
       "nameEs": "Trabajo en Equipo: Sigilo Colectivo",
       "nameEn": "Teamwork: Collective Stealth",
-      "link": "../Visuals/Perks/Killers/s35p02.png",
+      "link": "Survivors/s35p02.png",
       "id": "s35p02"
     },
     {
       "nameEs": "Jugador Secundario",
       "nameEn": "Background Player",
-      "link": "../Visuals/Perks/Killers/s35p03.png",
+      "link": "Survivors/s35p03.png",
       "id": "s35p03"
     },
     {
       "nameEs": "Rivalidad Amistosa",
       "nameEn": "Friendly Competition",
-      "link": "../Visuals/Perks/Killers/s36p01.png",
+      "link": "Survivors/s36p01.png",
       "id": "s36p01"
     },
     {
       "nameEs": "Trabajo en Equipo: Poder Dual",
       "nameEn": "Teamwork: Power of Two",
-      "link": "../Visuals/Perks/Killers/s36p02.png",
+      "link": "Survivors/s36p02.png",
       "id": "s36p02"
     },
     {
       "nameEs": "Desatame",
       "nameEn": "Cut Loose",
-      "link": "../Visuals/Perks/Killers/s36p03.png",
+      "link": "Survivors/s36p03.png",
       "id": "s36p03"
     },
     {
       "nameEs": "Solucionador de Problemas",
       "nameEn": "Troubleshooter",
-      "link": "../Visuals/Perks/Killers/s37p01.png",
+      "link": "Survivors/s37p01.png",
       "id": "s37p01"
     },
     {
       "nameEs": "Hecho Para Esto",
       "nameEn": "Made for This",
-      "link": "../Visuals/Perks/Killers/s37p02.png",
+      "link": "Survivors/s37p02.png",
       "id": "s37p02"
     },
     {
       "nameEs": "Buscador",
       "nameEn": "Scavenger",
-      "link": "../Visuals/Perks/Killers/s37p03.png",
+      "link": "Survivors/s37p03.png",
       "id": "s37p03"
     },
     {
       "nameEs": "Dramaturgia",
       "nameEn": "Dramaturgy",
-      "link": "../Visuals/Perks/Killers/s38p01.png",
+      "link": "Survivors/s38p01.png",
       "id": "s38p01"
     },
     {
       "nameEs": "Compañero de Escena",
       "nameEn": "Scene Partner",
-      "link": "../Visuals/Perks/Killers/s38p02.png",
+      "link": "Survivors/s38p02.png",
       "id": "s38p02"
     },
     {
       "nameEs": "Giro Argumental",
       "nameEn": "Plot Twist",
-      "link": "../Visuals/Perks/Killers/s38p03.png",
+      "link": "Survivors/s38p03.png",
       "id": "s38p03"
     },
     {
       "nameEs": "Trampa Quimica",
       "nameEn": "Chemical Trap",
-      "link": "../Visuals/Perks/Killers/s39p01.png",
+      "link": "Survivors/s39p01.png",
       "id": "s39p01"
     },
     {
       "nameEs": "Ligera de Pies",
       "nameEn": "Light-Footed",
-      "link": "../Visuals/Perks/Killers/s39p02.png",
+      "link": "Survivors/s39p02.png",
       "id": "s39p02"
     },
     {
       "nameEs": "Estrella de la Suerte",
       "nameEn": "Lucky Star",
-      "link": "../Visuals/Perks/Killers/s39p03.png",
+      "link": "Survivors/s39p03.png",
       "id": "s39p03"
     },
     {
       "nameEs": "Campeon de la Luz",
       "nameEn": "Champion of Light",
-      "link": "../Visuals/Perks/Killers/s40p01.png",
+      "link": "Survivors/s40p01.png",
       "id": "s40p01"
     },
     {
       "nameEs": "Bendicion: Iluminacion",
       "nameEn": "Boon: Illumination",
-      "link": "../Visuals/Perks/Killers/s40p02.png",
+      "link": "Survivors/s40p02.png",
       "id": "s40p02"
     },
     {
       "nameEs": "Fecha limite",
       "nameEn": "Deadline",
-      "link": "../Visuals/Perks/Killers/s40p03.png",
+      "link": "Survivors/s40p03.png",
       "id": "s40p03"
     },
     {
       "nameEs": "Invocacion: Arañas Tejedoras",
       "nameEn": "Invocation: Weaving Spiders",
-      "link": "../Visuals/Perks/Killers/s41p01.png",
+      "link": "Survivors/s41p01.png",
       "id": "s41p01"
     },
     {
       "nameEs": "Fortaleza en las Sombras",
       "nameEn": "Strength in Shadows",
-      "link": "../Visuals/Perks/Killers/s41p02.png",
+      "link": "Survivors/s41p02.png",
       "id": "s41p02"
     },
     {
       "nameEs": "Malicia",
       "nameEn": "Wicked",
-      "link": "../Visuals/Perks/Killers/s41p03.png",
+      "link": "Survivors/s41p03.png",
       "id": "s41p03"
     },
     {
       "nameEs": "Inspiracion Bardica",
       "nameEn": "Bardic Inspiration",
-      "link": "../Visuals/Perks/Killers/s42p01.png",
+      "link": "Survivors/s42p01.png",
       "id": "s42p01"
     },
     {
       "nameEs": "Ilusion Reflejada",
       "nameEn": "Mirrored Illusion",
-      "link": "../Visuals/Perks/Killers/s42p02.png",
+      "link": "Survivors/s42p02.png",
       "id": "s42p02"
     },
     {
       "nameEs": "Mirada Fija",
       "nameEn": "Still Sight",
-      "link": "../Visuals/Perks/Killers/s42p03.png",
+      "link": "Survivors/s42p03.png",
       "id": "s42p03"
     },
     {
       "nameEs": "Elegancia",
       "nameEn": "Finesse",
-      "link": "../Visuals/Perks/Killers/s43p01.png",
+      "link": "Survivors/s43p01.png",
       "id": "s43p01"
     },
     {
       "nameEs": "Endurecida",
       "nameEn": "Hardened",
-      "link": "../Visuals/Perks/Killers/s43p02.png",
+      "link": "Survivors/s43p02.png",
       "id": "s43p02"
     },
     {
       "nameEs": "Especialista",
       "nameEn": "Specialist",
-      "link": "../Visuals/Perks/Killers/s43p03.png",
+      "link": "Survivors/s43p03.png",
       "id": "s43p03"
     },
     {
       "nameEs": "Ojos De Belmont",
       "nameEn": "Eyes of Belmont",
-      "link": "../Visuals/Perks/Killers/s44p01.png",
+      "link": "Survivors/s44p01.png",
       "id": "s44p01"
     },
     {
       "nameEs": "Exultacion",
       "nameEn": "Exultation",
-      "link": "../Visuals/Perks/Killers/s44p02.png",
+      "link": "Survivors/s44p02.png",
       "id": "s44p02"
     },
     {
       "nameEs": "Momento De Gloria",
       "nameEn": "Moment of Glory",
-      "link": "../Visuals/Perks/Killers/s44p03.png",
+      "link": "Survivors/s44p03.png",
       "id": "s44p03"
     }
   ]

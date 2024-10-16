@@ -27,6 +27,9 @@ let genDamagedImage;
 const font = "./assets/Font/BRUTTALL.ttf";
 Canvas.registerFont(font, { family: "dbd" });
 
+const prefixAssetCharacters = "./assets/Visuals/Characters/";
+const prefixAssetPerks = "./assets/Visuals/Perks/";
+
 async function init() {
     backgroundKiller = await Canvas.loadImage("./assets/Visuals/Background/random_killer.jpg");
     backgroundSurvivor = await Canvas.loadImage("./assets/Visuals/Background/random_survivor.jpg");
@@ -84,7 +87,7 @@ async function sendShrine(context, interaction) {
 
                     const perkImages = []
                     for (let data of perks) {
-                        const perkImage = await Canvas.loadImage(data.data.link);
+                        const perkImage = await Canvas.loadImage(`${prefixAssetPerks}${data.data.link}`);
                         perkImages.push(perkImage);
                     }
                     ctx.drawImage(perkImages[0], 454, 3.5, 256, 256);
@@ -571,14 +574,14 @@ async function generateRandomBuild(context, interaction, isSurv) {
         let string = language == 0 ? killers[numberCharacter].nameEs : killers[numberCharacter].nameEn
         ctx.fillText(string, utils.calculateCenter(1267, string.length, fontSize), 207);
     }
-    const avatar = await Canvas.loadImage(isSurv ? survivors[numberCharacter].link : killers[numberCharacter].link);
+    const avatar = await Canvas.loadImage(prefixAssetCharacters + isSurv ? survivors[numberCharacter].link : killers[numberCharacter].link);
     ctx.drawImage(avatar, 1045, 227, 447, 619);
 
     // perks
-    const perkImage_1 = await Canvas.loadImage(perk1.link);
-    const perkImage_2 = await Canvas.loadImage(perk2.link);
-    const perkImage_3 = await Canvas.loadImage(perk3.link);
-    const perkImage_4 = await Canvas.loadImage(perk4.link);
+    const perkImage_1 = await Canvas.loadImage(prefixAssetPerks + perk1.link);
+    const perkImage_2 = await Canvas.loadImage(prefixAssetPerks + perk2.link);
+    const perkImage_3 = await Canvas.loadImage(prefixAssetPerks + perk3.link);
+    const perkImage_4 = await Canvas.loadImage(prefixAssetPerks + perk4.link);
     ctx.drawImage(perkImage_1, 302, 234, 256, 256);
     ctx.drawImage(perkImage_2, 116, 429, 256, 256);
     ctx.drawImage(perkImage_3, 493, 429, 256, 256);
@@ -665,7 +668,7 @@ async function test(context, interaction, type, index) {
             ctx.font = '101px "dbd"';
             ctx.fillStyle = '#ffffff';
             ctx.fillText(survivors[index].name, utils.calculateCenter(1267, survivors[index].name.length, fontSize), 207);
-            const avatar = await Canvas.loadImage(survivors[index].link);
+            const avatar = await Canvas.loadImage(prefixAssetCharacters + survivors[index].link);
             ctx.drawImage(avatar, 1045, 227, 447, 619);
             const attachment = new context.discord.MessageAttachment(canvas.toBuffer(), 'random.png');
             interaction.editReply({ content: `Testing survivor! ${survivors[index].name} || Current length: ${Object.keys(survivors).length}`, files: [attachment] });
@@ -689,7 +692,7 @@ async function test(context, interaction, type, index) {
             ctx.font = '101px "dbd"';
             ctx.fillStyle = '#ffffff';
             ctx.fillText(killers[index].nameEn, utils.calculateCenter(1267, killers[index].nameEn.length, fontSize), 207);
-            const avatar = await Canvas.loadImage(killers[index].link);
+            const avatar = await Canvas.loadImage(prefixAssetCharacters + killers[index].link);
             ctx.drawImage(avatar, 1045, 227, 447, 619);
             const attachment = new context.discord.MessageAttachment(canvas.toBuffer(), 'random.png');
             interaction.editReply({ content: `Testing killer! Es: ${killers[index].nameEs} | Eng: ${killers[index].nameEn} || current length: ${Object.keys(killers).length}`, files: [attachment] });
@@ -707,7 +710,7 @@ async function test(context, interaction, type, index) {
 
             ctx.strokeStyle = '#74037b';
             ctx.strokeRect(0, 0, canvas.width, canvas.height);
-            const perkImage = await Canvas.loadImage(killerPerks[index].link);
+            const perkImage = await Canvas.loadImage(prefixAssetPerks + killerPerks[index].link);
             ctx.drawImage(perkImage, 302, 234, 256, 256);
             ctx.drawImage(perkImage, 116, 429, 256, 256);
             ctx.drawImage(perkImage, 493, 429, 256, 256);
@@ -728,7 +731,7 @@ async function test(context, interaction, type, index) {
 
             ctx.strokeStyle = '#74037b';
             ctx.strokeRect(0, 0, canvas.width, canvas.height);
-            const perkImage = await Canvas.loadImage(survivorPerks[index].link);
+            const perkImage = await Canvas.loadImage(prefixAssetPerks + survivorPerks[index].link);
             ctx.drawImage(perkImage, 302, 234, 256, 256);
             ctx.drawImage(perkImage, 116, 429, 256, 256);
             ctx.drawImage(perkImage, 493, 429, 256, 256);

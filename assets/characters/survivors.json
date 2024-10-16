@@ -1,180 +1,180 @@
 {
-    "survivors": [
-        {
-            "name": "Dwight Fairfield",
-            "link": "https://gamepedia.cursecdn.com/deadbydaylight_gamepedia_en/b/b0/AS_DF_charSelect_portrait.png"
-        },
-        {
-            "name": "Meg Thomas",
-            "link": "https://gamepedia.cursecdn.com/deadbydaylight_gamepedia_en/3/3d/AS_MT_charSelect_portrait.png"
-        },
-        {
-            "name": "Claudette Morel",
-            "link": "https://gamepedia.cursecdn.com/deadbydaylight_gamepedia_en/1/10/AS_CM_charSelect_portrait.png"
-        },
-        {
-            "name": "Jake Park",
-            "link": "https://gamepedia.cursecdn.com/deadbydaylight_gamepedia_en/e/e8/AS_JP_charSelect_portrait.png"
-        },
-        {
-            "name": "Nea Karlsson",
-            "link": "https://gamepedia.cursecdn.com/deadbydaylight_gamepedia_en/2/28/BS_NK_charSelect_portrait.png"
-        },
-        {
-            "name": "Laurie Strode",
-            "link": "https://gamepedia.cursecdn.com/deadbydaylight_gamepedia_en/1/12/CS_LS_charSelect_portrait.png"
-        },
-        {
-            "name": "Ace Visconti",
-            "link": "https://gamepedia.cursecdn.com/deadbydaylight_gamepedia_en/1/16/DS_AV_charSelect_portrait.png"
-        },
-        {
-            "name": "Bill",
-            "link": "https://gamepedia.cursecdn.com/deadbydaylight_gamepedia_en/6/6d/DS_BO_charSelect_portrait.png"
-        },
-        {
-            "name": "Feng Min",
-            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/a/ac/S09_charSelect_portrait.png"
-        },
-        {
-            "name": "David King",
-            "link": "https://gamepedia.cursecdn.com/deadbydaylight_gamepedia_en/d/d5/JK_DK_charSelect_portrait.png"
-        },
-        {
-            "name": "Quentin Smith",
-            "link": "https://gamepedia.cursecdn.com/deadbydaylight_gamepedia_en/5/52/ES_QS_charSelect_portrait.png"
-        },
-        {
-            "name": "David Tapp",
-            "link": "https://gamepedia.cursecdn.com/deadbydaylight_gamepedia_en/f/f1/FS_DT_charSelect_portrait.png"
-        },
-        {
-            "name": "Kate Denson",
-            "link": "https://gamepedia.cursecdn.com/deadbydaylight_gamepedia_en/0/0d/GS_KD_charSelect_portrait.png"
-        },
-        {
-            "name": "Adam Francis",
-            "link": "https://gamepedia.cursecdn.com/deadbydaylight_gamepedia_en/f/f3/HS_AF_charSelect_portrait.png"
-        },
-        {
-            "name": "Jeff Johansen",
-            "link": "https://gamepedia.cursecdn.com/deadbydaylight_gamepedia_en/5/51/KS_JJ_charSelect_portrait.png"
-        },
-        {
-            "name": "Jane Romero",
-            "link": "https://gamepedia.cursecdn.com/deadbydaylight_gamepedia_en/0/01/MS_JR_charSelect_portrait.png"
-        },
-        {
-            "name": "Ash",
-            "link": "https://gamepedia.cursecdn.com/deadbydaylight_gamepedia_en/6/65/MS_AW_charSelect_portrait.png"
-        },
-        {
-            "name": "Nancy Wheeler",
-            "link": "https://gamepedia.cursecdn.com/deadbydaylight_gamepedia_en/6/68/QS_NW_charSelect_portrait.png"
-        },
-        {
-            "name": "Steve Harrington",
-            "link": "https://gamepedia.cursecdn.com/deadbydaylight_gamepedia_en/f/f0/QS_SH_charSelect_portrait.png"
-        },
-        {
-            "name": "Yui Kimura",
-            "link": "https://gamepedia.cursecdn.com/deadbydaylight_gamepedia_en/c/c5/SS_YK_charSelect_portrait.png"
-        },
-        {
-            "name": "Zarina Kassir",
-            "link": "https://gamepedia.cursecdn.com/deadbydaylight_gamepedia_en/e/e2/US_ZK_charSelect_portrait.png"
-        },
-        {
-            "name": "Cheryl Mason",
-            "link": "https://gamepedia.cursecdn.com/deadbydaylight_gamepedia_en/5/5c/WS_charSelect_portrait.png"
-        },
-        {
-            "name": "Felix Richter",
-            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/2/2e/S23_charSelect_portrait.png"
-        },
-        {
-            "name": "Elodie Rakoto",
-            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/4/45/S24_charSelect_portrait.png"
-        },
-        {
-            "name": "Yun-Jin Lee",
-            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/7/79/S25_charSelect_portrait.png"
-        },
-        {
-            "name": "Jill Valentine",
-            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/9/99/S26_charSelect_portrait.png"
-        },
-        {
-            "name": "Leon S. Kennedy",
-            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/5/5d/S27_charSelect_portrait.png"
-        },
-        {
-            "name": "Mikaela Reid",
-            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/4/42/S28_charSelect_portrait.png"
-        },
-        {
-            "name": "Jonah Vasquez",
-            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/c/c6/S29_charSelect_portrait.png"
-        },
-        {
-            "name": "Yoichi Asakawa",
-            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/0/07/S30_charSelect_portrait.png"
-        },
-        {
-            "name": "Haddie Kaur",
-            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/9/97/S31_charSelect_portrait.png"
-        },
-        {
-            "name": "Ada Wong",
-            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/f/f7/S32_charSelect_portrait.png"
-        },
-        {
-            "name": "Rebecca Chambers",
-            "link": "https://static.wikia.nocookie.net/deadbydaylight_gamepedia_en/images/9/93/S33_charSelect_portrait.png"
-        },
-        {
-            "name": "Vittorio Toscano",
-            "link": "https://i.imgur.com/23RUVGP.png"
-        },
-        {
-            "name": "Renato Lyra",
-            "link": "https://i.imgur.com/aQG14IF.png"
-        },
-        {
-            "name": "Thalita Lyra",
-            "link": "https://i.imgur.com/bP2CWDU.png"
-        },
-        {
-            "name": "Gabriel Soma",
-            "link": "https://i.imgur.com/hz7OlcR.png"
-        },
-        {
-            "name": "Nicolas Cage",
-            "link": "https://i.imgur.com/V5tcoDi.png"
-        },
-        {
-            "name": "Ellen Ripley",
-            "link": "https://i.imgur.com/BlQSelI.png"
-        },
-        {
-            "name": "Alan Wake",
-            "link": "https://i.imgur.com/h1Vjwvy.png"
-        },
-        {
-            "name": "Sable Ward",
-            "link": "https://i.imgur.com/Lm1ukDK.png"
-        },
-        {
-            "name": "Aestri Yazar - Baermar Uraz",
-            "link": "https://i.imgur.com/LZuXwGu.png"
-        },
-        {
-            "name": "Lara Croft",
-            "link": "https://i.imgur.com/VoROrPQ.png"
-        },
-        {
-            "name": "Trevor Belmont",
-            "link": "https://i.imgur.com/xEVURoj.png"
-        }
-    ]
+  "survivors": [
+    {
+      "name": "Dwight Fairfield",
+      "link": "Survivors/dwight-fairfield.png"
+    },
+    {
+      "name": "Meg Thomas",
+      "link": "Survivors/meg-thomas.png"
+    },
+    {
+      "name": "Claudette Morel",
+      "link": "Survivors/claudette-morel.png"
+    },
+    {
+      "name": "Jake Park",
+      "link": "Survivors/jake-park.png"
+    },
+    {
+      "name": "Nea Karlsson",
+      "link": "Survivors/nea-karlsson.png"
+    },
+    {
+      "name": "Laurie Strode",
+      "link": "Survivors/laurie-strode.png"
+    },
+    {
+      "name": "Ace Visconti",
+      "link": "Survivors/ace-visconti.png"
+    },
+    {
+      "name": "Bill",
+      "link": "Survivors/bill.png"
+    },
+    {
+      "name": "Feng Min",
+      "link": "Survivors/feng-min.png"
+    },
+    {
+      "name": "David King",
+      "link": "Survivors/david-king.png"
+    },
+    {
+      "name": "Quentin Smith",
+      "link": "Survivors/quentin-smith.png"
+    },
+    {
+      "name": "David Tapp",
+      "link": "Survivors/david-tapp.png"
+    },
+    {
+      "name": "Kate Denson",
+      "link": "Survivors/kate-denson.png"
+    },
+    {
+      "name": "Adam Francis",
+      "link": "Survivors/adam-francis.png"
+    },
+    {
+      "name": "Jeff Johansen",
+      "link": "Survivors/jeff-johansen.png"
+    },
+    {
+      "name": "Jane Romero",
+      "link": "Survivors/jane-romero.png"
+    },
+    {
+      "name": "Ash",
+      "link": "Survivors/ash.png"
+    },
+    {
+      "name": "Nancy Wheeler",
+      "link": "Survivors/nancy-wheeler.png"
+    },
+    {
+      "name": "Steve Harrington",
+      "link": "Survivors/steve-harrington.png"
+    },
+    {
+      "name": "Yui Kimura",
+      "link": "Survivors/yui-kimura.png"
+    },
+    {
+      "name": "Zarina Kassir",
+      "link": "Survivors/zarina-kassir.png"
+    },
+    {
+      "name": "Cheryl Mason",
+      "link": "Survivors/cheryl-mason.png"
+    },
+    {
+      "name": "Felix Richter",
+      "link": "Survivors/felix-richter.png"
+    },
+    {
+      "name": "Elodie Rakoto",
+      "link": "Survivors/elodie-rakoto.png"
+    },
+    {
+      "name": "Yun-Jin Lee",
+      "link": "Survivors/yun-jin-lee.png"
+    },
+    {
+      "name": "Jill Valentine",
+      "link": "Survivors/jill-valentine.png"
+    },
+    {
+      "name": "Leon S. Kennedy",
+      "link": "Survivors/leon-s.-kennedy.png"
+    },
+    {
+      "name": "Mikaela Reid",
+      "link": "Survivors/mikaela-reid.png"
+    },
+    {
+      "name": "Jonah Vasquez",
+      "link": "Survivors/jonah-vasquez.png"
+    },
+    {
+      "name": "Yoichi Asakawa",
+      "link": "Survivors/yoichi-asakawa.png"
+    },
+    {
+      "name": "Haddie Kaur",
+      "link": "Survivors/haddie-kaur.png"
+    },
+    {
+      "name": "Ada Wong",
+      "link": "Survivors/ada-wong.png"
+    },
+    {
+      "name": "Rebecca Chambers",
+      "link": "Survivors/rebecca-chambers.png"
+    },
+    {
+      "name": "Vittorio Toscano",
+      "link": "Survivors/vittorio-toscano.png"
+    },
+    {
+      "name": "Renato Lyra",
+      "link": "Survivors/renato-lyra.png"
+    },
+    {
+      "name": "Thalita Lyra",
+      "link": "Survivors/thalita-lyra.png"
+    },
+    {
+      "name": "Gabriel Soma",
+      "link": "Survivors/gabriel-soma.png"
+    },
+    {
+      "name": "Nicolas Cage",
+      "link": "Survivors/nicolas-cage.png"
+    },
+    {
+      "name": "Ellen Ripley",
+      "link": "Survivors/ellen-ripley.png"
+    },
+    {
+      "name": "Alan Wake",
+      "link": "Survivors/alan-wake.png"
+    },
+    {
+      "name": "Sable Ward",
+      "link": "Survivors/sable-ward.png"
+    },
+    {
+      "name": "Aestri Yazar - Baermar Uraz",
+      "link": "Survivors/aestri-yazar---baermar-uraz.png"
+    },
+    {
+      "name": "Lara Croft",
+      "link": "Survivors/lara-croft.png"
+    },
+    {
+      "name": "Trevor Belmont",
+      "link": "Survivors/trevor-belmont.png"
+    }
+  ]
 }
