@@ -741,19 +741,19 @@
     {
       "nameEs": "Trueno Ensordecedor",
       "nameEn": "All-Shaking Thunder",
-      "link": "Killers/allshakingthunder.webp",
+      "link": "Killers/allshakingthunder.png",
       "id": "k38p01"
     },
     {
       "nameEs": "Sin Descanso",
       "nameEn": "No Quarter",
-      "link": "Killers/noquarter.webp",
+      "link": "Killers/noquarter.png",
       "id": "k38p02"
     },
     {
       "nameEs": "Gancho Flagelante: Brujula Serrada",
       "nameEn": "Scourge Hook: Jagged Compass",
-      "link": "Killers/scourgehookjaggedcompass.webp",
+      "link": "Killers/scourgehookjaggedcompass.png",
       "id": "k38p03"
     }
   ]
