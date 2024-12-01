@@ -879,19 +879,19 @@
     {
       "nameEs": "Invocacion: Cuervos Traicioneros",
       "nameEn": "Invocation: Treacherous Crows",
-      "link": "Survivors/invocationtreacherouscrows.webp",
+      "link": "Survivors/invocationtreacherouscrows.png",
       "id": "s45p01"
     },
     {
       "nameEs": "Separacion Limpia",
       "nameEn": "Clean Break",
-      "link": "Survivors/cleanbreak.webp",
+      "link": "Survivors/cleanbreak.png",
       "id": "s45p02"
     },
     {
       "nameEs": "Carga Sobre Los Hombros",
       "nameEn": "Shoulder the Burden",
-      "link": "Survivors/shouldertheburden.webp",
+      "link": "Survivors/shouldertheburden.png",
       "id": "s45p03"
     }
   ]
