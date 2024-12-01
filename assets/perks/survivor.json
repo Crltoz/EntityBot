@@ -875,6 +875,24 @@
       "nameEn": "Moment of Glory",
       "link": "Survivors/s44p03.png",
       "id": "s44p03"
+    },
+    {
+      "nameEs": "Invocacion: Cuervos Traicioneros",
+      "nameEn": "Invocation: Treacherous Crows",
+      "link": "Survivors/invocationtreacherouscrows.webp",
+      "id": "s45p01"
+    },
+    {
+      "nameEs": "Separacion Limpia",
+      "nameEn": "Clean Break",
+      "link": "Survivors/cleanbreak.webp",
+      "id": "s45p02"
+    },
+    {
+      "nameEs": "Carga Sobre Los Hombros",
+      "nameEn": "Shoulder the Burden",
+      "link": "Survivors/shouldertheburden.webp",
+      "id": "s45p03"
     }
   ]
 }

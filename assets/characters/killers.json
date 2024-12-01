@@ -176,14 +176,19 @@
       "link": "Killers/the-unknown.png"
     },
     {
-      "nameEs": "Vecna - The Lich",
-      "nameEn": "El Liche",
+      "nameEs": "El Liche",
+      "nameEn": "Vecna - The Lich",
       "link": "Killers/el-liche.png"
     },
     {
-      "nameEs": "Dracula — The Dark Lord",
-      "nameEn": "El Señor Oscuro",
+      "nameEs": "El Señor Oscuro",
+      "nameEn": "Dracula — The Dark Lord",
       "link": "Killers/el-señor-oscuro.png"
+    },
+    {
+      "nameEs": "La Adiestradora Canina",
+      "nameEn": "The Houndmaster",
+      "link": "Killers/the-houndmaster.webp"
     }
   ]
 }
