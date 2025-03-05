@@ -2,8 +2,8 @@
   "name": "entidadbotfinal",
   "version": "1.0.0",
   "engines": {
-    "node": "16.17.0",
-    "npm": "8.19.1"
+    "node": "20.18.3",
+    "npm": "10.8.2"
   },
   "description": "Entity bot for Dead By Daylight",
   "main": "index.js",
@@ -23,6 +23,7 @@
   "dependencies": {
     "@discordjs/builders": "^0.13.0",
     "@discordjs/rest": "^0.4.1",
+    "axios": "^1.7.7",
     "bignumber": "^1.1.0",
     "canvas": "^2.9.1",
     "discord-api-types": "^0.33.0",
