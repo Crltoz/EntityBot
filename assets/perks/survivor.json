@@ -893,6 +893,24 @@
       "nameEn": "Shoulder the Burden",
       "link": "Survivors/shouldertheburden.png",
       "id": "s45p03"
+    },
+    {
+      "nameEs": "No hacer daño",
+      "nameEn": "Do No Harm",
+      "link": "Survivors/donoharm.webp",
+      "id": "s46p01"
+    },
+    {
+      "nameEs": "Deber de socorro",
+      "nameEn": "Duty of Care",
+      "link": "Survivors/dutyofcare.webp",
+      "id": "s46p02"
+    },
+    {
+      "nameEs": "Respuesta rápida",
+      "nameEn": "Rapid Response",
+      "link": "Survivors/rapidresponse.webp",
+      "id": "s46p03"
     }
   ]
 }
