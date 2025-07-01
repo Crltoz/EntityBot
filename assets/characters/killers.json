@@ -189,6 +189,16 @@
       "nameEs": "Houndmaster",
       "nameEn": "The Houndmaster",
       "link": "Killers/the-houndmaster.png"
+    },
+    {
+      "nameEs": "El Ghoul",
+      "nameEn": "The Ghoul",
+      "link": "Killers/the-ghoul.png"
+    },
+    {
+      "nameEs": "El animatrónico",
+      "nameEn": "The Animatronic",
+      "link": "Killers/the-animatronic.png"
     }
   ]
 }

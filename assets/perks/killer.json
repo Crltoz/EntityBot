@@ -755,6 +755,42 @@
       "nameEn": "Scourge Hook: Jagged Compass",
       "link": "Killers/scourgehookjaggedcompass.png",
       "id": "k38p03"
+    },
+    {
+      "nameEs": "Maleficio: Solo hay miseria",
+      "nameEn": "Hex: Nothing but Misery",
+      "link": "Killers/hexonlymisery.webp",
+      "id": "k39p01"
+    },
+    {
+      "nameEs": "Unidos eternamente",
+      "nameEn": "Forever Entwined",
+      "link": "Killers/foreverunited.webp",
+      "id": "k39p02"
+    },
+    {
+      "nameEs": "Nadie es libre",
+      "nameEn": "No One is Free",
+      "link": "Killers/nonearefree.webp",
+      "id": "k39p03"
+    },
+    {
+      "nameEs": "Empleo disponible",
+      "nameEn": "Help Wanted",
+      "link": "Killers/helpwanted.webp",
+      "id": "k40p01"
+    },
+    {
+      "nameEs": "Miedo fantasmal",
+      "nameEn": "Phantom Fear",
+      "link": "Killers/phantomfear.webp",
+      "id": "k40p02"
+    },
+    {
+      "nameEn": "Haywire",
+      "nameEs": "Aver",
+      "link": "Killers/haywire.webp",
+      "id": "k40p03"
     }
   ]
 }
