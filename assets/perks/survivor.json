@@ -897,19 +897,19 @@
     {
       "nameEs": "No hacer daño",
       "nameEn": "Do No Harm",
-      "link": "Survivors/donoharm.webp",
+      "link": "Survivors/donoharm.png",
       "id": "s46p01"
     },
     {
       "nameEs": "Deber de socorro",
       "nameEn": "Duty of Care",
-      "link": "Survivors/dutyofcare.webp",
+      "link": "Survivors/dutyofcare.png",
       "id": "s46p02"
     },
     {
       "nameEs": "Respuesta rápida",
       "nameEn": "Rapid Response",
-      "link": "Survivors/rapidresponse.webp",
+      "link": "Survivors/rapidresponse.png",
       "id": "s46p03"
     }
   ]
