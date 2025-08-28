@@ -1,17 +1,26 @@
 const texts = require("../data/texts.json");
 
+const stats = {
+    commands: 0,
+    menu: 0,
+    modal: 0
+}
+
 async function interactionHandler(context, interaction) {
     if (interaction.isCommand()) {
+        stats.commands++;
         commandHandler(context, interaction);
         return;
     }
 
     if (interaction.isSelectMenu()) {
+        stats.menu++;
         menuHandler(context, interaction);
         return;
     }
 
     if (interaction.isModalSubmit()) {
+        stats.modal++;
         modalHandler(context, interaction);
         return;
     }
@@ -26,6 +35,10 @@ async function interactionHandler(context, interaction) {
         return;
     }
 }
+
+setInterval(() => {
+    console.log("Interaction stats:", JSON.stringify(stats));
+}, 60000 * 30);
 
 async function userMenuHandler(context, interaction) {
     const menu = context.client.menus.get(interaction.commandName);
