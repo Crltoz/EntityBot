@@ -519,11 +519,11 @@ function getBloodpointsToBuyLevels(currentLevel, wantedLevel) {
     for (let x = currentLevel; x <= wantedLevel; x++) {
         if (x == wantedLevel) break;
         levelsToBuy++;
-        if (x >= 1 && x <= 9) total = total + 12000;
-        if (x >= 10 && x <= 19) total = total + 24000;
-        if (x >= 20 && x <= 29) total = total + 34000;
-        if (x >= 30 && x <= 39) total = total + 40000;
-        if (x >= 40 && x <= 50) total = total + 50000;
+        if (x >= 1 && x <= 9) total = total + 12500;
+        else if (x >= 10 && x <= 19) total = total + 19500;
+        else if (x >= 20 && x <= 29) total = total + 23000;
+        else if (x >= 30 && x <= 39) total = total + 28000;
+        else if (x >= 40 && x <= 50) total = total + 33500;
     }
     return {
         levelsToBuy: levelsToBuy,
