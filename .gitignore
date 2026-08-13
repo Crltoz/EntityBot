@@ -1,3 +1,6 @@
 node_modules/
 package-lock.json
 .env
+servers.txt
+users.txt
+migration.js
