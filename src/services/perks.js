@@ -43,7 +43,6 @@ function init() {
  */
 function getPerkById(id) {
   const perk = survivorPerks[id.toLowerCase()] || killerPerks[id.toLowerCase()];
-  console.log(`Getting perk by id '${id}' -> ${perk}`);
   return perk;
 }
 
