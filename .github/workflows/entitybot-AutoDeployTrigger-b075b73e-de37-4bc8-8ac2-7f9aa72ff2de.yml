@@ -9,16 +9,43 @@ concurrency:
   group: deploy-entitybot
   cancel-in-progress: false
 
+env:
+  # GHCR rejects uppercase paths, so this is spelled out rather than derived
+  # from github.repository_owner.
+  IMAGE: ghcr.io/crltoz/entitybot
+
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     permissions:
       id-token: write #This is required for requesting the OIDC JWT Token
       contents: read
+      packages: write #Required to push the image to GHCR
 
     steps:
       - name: Checkout to the branch
         uses: actions/checkout@v4
+
+      - name: Set up Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Log in to GHCR
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build and push image
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          push: true
+          tags: |
+            ${{ env.IMAGE }}:${{ github.sha }}
+            ${{ env.IMAGE }}:latest
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
 
       - name: Azure Login
         uses: azure/login@v2
@@ -27,16 +54,14 @@ jobs:
           tenant-id: ${{ secrets.ENTITYBOT_AZURE_TENANT_ID }}
           subscription-id: ${{ secrets.ENTITYBOT_AZURE_SUBSCRIPTION_ID }}
 
-      # Builds the image with the Container Apps managed builder (no registry of
-      # our own is involved) and rolls out a new revision of the existing app.
-      - name: Build from source and deploy revision
+      - name: Roll out new revision
         uses: azure/cli@v2
         with:
           azcliversion: latest
           inlineScript: |
             az config set extension.use_dynamic_install=yes_without_prompt
-            az extension add --name containerapp --upgrade --allow-preview true --yes
+            az extension add --name containerapp --upgrade --yes
             az containerapp update \
               --name entitybot \
               --resource-group DefaultResourceGroup-EUS2 \
-              --source .
+              --image ${{ env.IMAGE }}:${{ github.sha }}
