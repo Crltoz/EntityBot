@@ -2,6 +2,8 @@ const { SlashCommandBuilder } = require('@discordjs/builders');
 const texts = require('../data/texts.json');
 
 module.exports = {
+  // Bot-wide stats: only useful to whoever runs the bot, so it never reaches the 1.8k guilds.
+  guildOnly: true,
   data: new SlashCommandBuilder()
     .setName('sv')
     .setDescription('Get count servers that the bot is in'),

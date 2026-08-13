@@ -2,6 +2,8 @@ const { SlashCommandBuilder } = require('@discordjs/builders');
 const texts = require("../data/texts.json");
 
 module.exports = {
+    // Diagnostic tool for inspecting the roster, not something guilds should see.
+    guildOnly: true,
     data: new SlashCommandBuilder()
         .setName('test')
         .setDescription('Command to test jsons')
