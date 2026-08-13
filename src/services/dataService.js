@@ -97,10 +97,10 @@ function buildViews() {
         const translated = overrides.characters[id];
         const entry = {
             id: id,
-            name: translated || character.name,
+            name: translated || character.nameEs || character.name,
             nameEn: character.name,
-            nameEs: translated || character.name,
-            link: characterIcons[id] || null
+            nameEs: translated || character.nameEs || character.name,
+            link: characterIcons[id] || character.link || null
         };
         if (character.role === "survivor") survivors[survivorCount++] = entry;
         else killers[killerCount++] = entry;
