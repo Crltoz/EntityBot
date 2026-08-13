@@ -123,10 +123,10 @@ function loadBundled() {
     const bundledCharacters = {};
     let n = 0;
     for (const character of require("../../assets/characters/survivors.json").survivors) {
-        bundledCharacters[n++] = { id: character.name, name: character.name, role: "survivor" };
+        bundledCharacters[n++] = { id: character.name, name: character.name, role: "survivor", link: character.link };
     }
     for (const character of require("../../assets/characters/killers.json").killers) {
-        bundledCharacters[n++] = { id: character.nameEn, name: character.nameEn, role: "killer" };
+        bundledCharacters[n++] = { id: character.nameEn, name: character.nameEn, nameEs: character.nameEs, role: "killer", link: character.link };
     }
 
     raw.perks = bundledPerks;
