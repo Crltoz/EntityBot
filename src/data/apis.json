@@ -13,6 +13,9 @@
     "dbdStats": {
         "host": "dbd.tricky.lol",
         "playerStats": "/api/playerstats?steamid=",
-        "shrine": "/api/shrine"
+        "shrine": "/api/shrine?includeperkinfo=1",
+        "perks": "/api/perks",
+        "characters": "/api/characters",
+        "dlc": "/api/dlc"
     }
 }

@@ -3,12 +3,16 @@ const texts = require("../data/texts.json");
 const stats = {
     commands: 0,
     menu: 0,
-    modal: 0
+    modal: 0,
+    byCommand: {}
 }
 
 async function interactionHandler(context, interaction) {
     if (interaction.isCommand()) {
         stats.commands++;
+        stats.byCommand[interaction.commandName] = (stats.byCommand[interaction.commandName] || 0) + 1;
+        // Logged before any early return, so a grep of "CMD |" gives the real command mix.
+        console.log(`CMD | ${interaction.commandName} | guild: ${interaction.guildId}`);
         commandHandler(context, interaction);
         return;
     }

@@ -31,6 +31,27 @@ async function getOrCreateUser(memberId) {
     return userConfig;
 }
 
+/**
+ * @param {String} name - Snapshot name ("perks", "characters" or "dlc").
+ * @description Read the last snapshot stored for an API endpoint, or null if there is none.
+ */
+async function getDataSnapshot(name) {
+    return dataCacheModel.findOne({ _id: name });
+}
+
+/**
+ * @param {String} name - Snapshot name ("perks", "characters" or "dlc").
+ * @param {Object} payload - Raw API response.
+ * @description Store a snapshot so the bot survives a restart while the API is down.
+ */
+async function saveDataSnapshot(name, payload) {
+    await dataCacheModel.updateOne(
+        { _id: name },
+        { $set: { payload: JSON.stringify(payload), updatedAt: new Date() } },
+        { upsert: true }
+    );
+}
+
 const userdataSchema = mongoose.Schema({
     _id: String,
     steamID: String
@@ -46,13 +67,27 @@ const serverSchema = mongoose.Schema({
     versionKey: false
 });
 
+// The payload is kept as a JSON string on purpose: the API keys are arbitrary
+// ("Ace_In_The_Hole", "Monitor_&_Abuse"), and storing them as document fields would
+// put us at the mercy of Mongo's field-name rules.
+const dataCacheSchema = mongoose.Schema({
+    _id: String,
+    payload: String,
+    updatedAt: Date
+}, {
+    versionKey: false
+});
+
 const userdataModel = mongoose.model("userdata", userdataSchema);
 const serverModel = mongoose.model("server", serverSchema);
+const dataCacheModel = mongoose.model("datacache", dataCacheSchema);
 
 module.exports = {
     init: init,
     userdataSchema: userdataModel,
     serverSchema: serverModel,
     getOrCreateServer: getOrCreateServer,
-    getOrCreateUser: getOrCreateUser
+    getOrCreateUser: getOrCreateUser,
+    getDataSnapshot: getDataSnapshot,
+    saveDataSnapshot: saveDataSnapshot
 }

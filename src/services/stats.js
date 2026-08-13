@@ -1,5 +1,4 @@
 const https = require("https");
-const http = require("http");
 const Canvas = require("canvas");
 const bigNumber = require("bignumber.js");
 const convert = new bigNumber('76561197960265728');
@@ -50,6 +49,64 @@ async function init() {
     console.log(`Stats images loaded.`)
 }
 
+/**
+ * @param {Number} width - Placeholder width in pixels.
+ * @param {Number} height - Placeholder height in pixels.
+ * @description Draw a generic "unknown asset" icon, so new content never breaks a command.
+ */
+function buildPlaceholder(width, height) {
+    const canvas = Canvas.createCanvas(width, height);
+    const ctx = canvas.getContext('2d');
+    const margin = Math.min(width, height) * 0.05;
+    const centerX = width / 2;
+    const centerY = height / 2;
+
+    ctx.beginPath();
+    ctx.moveTo(centerX, margin);
+    ctx.lineTo(width - margin, centerY);
+    ctx.lineTo(centerX, height - margin);
+    ctx.lineTo(margin, centerY);
+    ctx.closePath();
+    ctx.fillStyle = '#161616';
+    ctx.fill();
+    ctx.lineWidth = Math.max(2, Math.min(width, height) * 0.025);
+    ctx.strokeStyle = '#8A6412';
+    ctx.stroke();
+
+    ctx.font = `${Math.floor(Math.min(width, height) * 0.45)}px "dbd"`;
+    ctx.fillStyle = '#C9A227';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText('?', centerX, centerY);
+
+    return canvas;
+}
+
+/**
+ * @param {String} path - Local path or remote URL of the image.
+ * @param {Number} width - Placeholder width used if the image cannot be loaded.
+ * @param {Number} height - Placeholder height used if the image cannot be loaded.
+ * @description Load an image, falling back to a placeholder instead of throwing.
+ */
+async function loadImageOrPlaceholder(path, width, height) {
+    if (!path) return buildPlaceholder(width, height);
+    try {
+        return await Canvas.loadImage(path);
+    } catch (err) {
+        console.log(`Could not load asset '${path}', drawing placeholder instead: ${err.message}`);
+        return buildPlaceholder(width, height);
+    }
+}
+
+/**
+ * @param {String} prefix - Asset folder.
+ * @param {String} link - Relative asset path, or null when the roster has no icon for it yet.
+ * @description Resolve an asset path without turning a missing link into a bogus ".../null".
+ */
+function assetPath(prefix, link) {
+    return link ? prefix + link : null;
+}
+
 async function sendShrine(context, interaction) {
     const serverConfig = await context.services.database.getOrCreateServer(interaction.guildId);
     const options = {
@@ -67,54 +124,67 @@ async function sendShrine(context, interaction) {
 
         res.on('end', async function () {
             let body = Buffer.concat(bodyChunks);
-            if (res.statusCode == 200 || res.statusCode == 201) {
-                try {
-                    const shrineResult = JSON.parse(body);
-                    const perks = []
-                    for (let perk of shrineResult.perks) {
-                        const perkData = await context.services.perks.getPerkById(perk.id);
-                        perks.push({ data: perkData, shards: perk.shards });
-                    }
-                    if (perks.length != 4 || perks.some(it => it.data == null)) {
-                        console.log(`Invalid perks in shrine: ${JSON.stringify(perks)}`)
-                        interaction.editReply(texts.errors.unknownError[serverConfig.language] + process.env.SUPPORT_DISCORD)
-                        return
-                    }
-
-                    const canvas = Canvas.createCanvas(1163, 664);
-                    const ctx = canvas.getContext('2d');
-                    ctx.drawImage(backgroundShrine, 0, 0, canvas.width, canvas.height);
-
-                    const perkImages = []
-                    for (let data of perks) {
-                        const perkImage = await Canvas.loadImage(`${prefixAssetPerks}${data.data.link}`);
-                        perkImages.push(perkImage);
-                    }
-                    ctx.drawImage(perkImages[0], 454, 3.5, 256, 256);
-                    ctx.drawImage(perkImages[1], 280, 177, 256, 256);
-                    ctx.drawImage(perkImages[2], 626, 177, 256, 256);
-                    ctx.drawImage(perkImages[3], 454, 355, 256, 256);
-                    ctx.strokeRect(0, 0, canvas.width, canvas.height);
-                    const attachment = new context.discord.MessageAttachment(canvas.toBuffer(), 'shrine-image.png');
-
-                    if (serverConfig.language === 0) {
-                        await interaction.editReply({ content: `🈴 **Santuario:**\n1⃣ ${perks[0].data.nameEs} - <:frag_iri:739690491829813369> ${perks[0].shards}\n2⃣ ${perks[1].data.nameEs} - <:frag_iri:739690491829813369> ${perks[1].shards}\n3⃣ ${perks[2].data.nameEs} - <:frag_iri:739690491829813369> ${perks[2].shards}\n4⃣ ${perks[3].data.nameEs} - <:frag_iri:739690491829813369> ${perks[3].shards}`, files: [attachment] });
-                    } else if (serverConfig.language === 1) {
-                        await interaction.editReply({ content: `🈴 **Shrine:**\n1⃣ ${perks[0].data.nameEn} - <:frag_iri:739690491829813369> ${perks[0].shards}\n2⃣ ${perks[1].data.nameEn} - <:frag_iri:739690491829813369> ${perks[1].shards}\n3⃣ ${perks[2].data.nameEn} - <:frag_iri:739690491829813369> ${perks[2].shards}\n4⃣ ${perks[3].data.nameEn} - <:frag_iri:739690491829813369> ${perks[3].shards}`, files: [attachment] });
-                    }
-                } catch (err) {
-                    console.log(`Error parsing shrine body: ${err} --- body: ${JSON.stringify(body)}`);
-                }
+            if (res.statusCode != 200 && res.statusCode != 201) {
+                console.log(`Shrine request failed with status ${res.statusCode}`);
+                interaction.editReply(texts.errors.shrineNotFound[serverConfig.language]);
                 return;
             }
 
-            if (res.statusCode == 400) {
-                interaction.editReply(texts.errors.shrineNotFound[serverConfig.language])
-                return;
+            try {
+                const shrineResult = JSON.parse(body);
+                if (!shrineResult.perks || shrineResult.perks.length != 4) {
+                    console.log(`Invalid shrine payload: ${JSON.stringify(shrineResult)}`);
+                    interaction.editReply(texts.errors.shrineNotFound[serverConfig.language]);
+                    return;
+                }
+
+                // The roster is the source of truth. It is refreshed from the same API, but a
+                // perk added between refreshes still resolves via the names the shrine itself
+                // returns, and any perk without an icon yet renders with the placeholder.
+                const perks = shrineResult.perks.map((perk) => {
+                    const known = context.services.perks.getPerkById(perk.id);
+                    return {
+                        nameEs: known ? known.nameEs : perk.name,
+                        nameEn: known ? known.nameEn : perk.name,
+                        link: known ? assetPath(prefixAssetPerks, known.link) : null,
+                        shards: perk.shards
+                    };
+                });
+
+                const canvas = Canvas.createCanvas(1163, 664);
+                const ctx = canvas.getContext('2d');
+                ctx.drawImage(backgroundShrine, 0, 0, canvas.width, canvas.height);
+
+                const perkImages = [];
+                for (let perk of perks) {
+                    perkImages.push(await loadImageOrPlaceholder(perk.link, 256, 256));
+                }
+                ctx.drawImage(perkImages[0], 454, 3.5, 256, 256);
+                ctx.drawImage(perkImages[1], 280, 177, 256, 256);
+                ctx.drawImage(perkImages[2], 626, 177, 256, 256);
+                ctx.drawImage(perkImages[3], 454, 355, 256, 256);
+                ctx.strokeRect(0, 0, canvas.width, canvas.height);
+                const attachment = new context.discord.MessageAttachment(canvas.toBuffer(), 'shrine-image.png');
+
+                const header = serverConfig.language === 0 ? "🈴 **Santuario:**" : "🈴 **Shrine:**";
+                const numbers = ["1⃣", "2⃣", "3⃣", "4⃣"];
+                const lines = perks.map((perk, index) => {
+                    const name = serverConfig.language === 0 ? perk.nameEs : perk.nameEn;
+                    return `${numbers[index]} ${name} - <:frag_iri:739690491829813369> ${perk.shards}`;
+                });
+
+                await interaction.editReply({ content: `${header}\n${lines.join("\n")}`, files: [attachment] });
+            } catch (err) {
+                console.log(`Error building shrine: ${err} --- body: ${body.toString()}`);
+                interaction.editReply(texts.errors.unknownError[serverConfig.language] + process.env.SUPPORT_DISCORD);
             }
         });
     });
 
+    req.on("error", (err) => {
+        console.log(`Error requesting the shrine: ${err}`);
+        interaction.editReply(texts.errors.shrineNotFound[serverConfig.language]);
+    });
     req.end();
 }
 
@@ -150,7 +220,7 @@ async function getSteamId(context, interaction, steamLink) {
                 headers: { 'User-Agent': process.env.USER_AGENT + context.config.version }
             };
 
-            const req = http.get(options, function (res) {
+            const req = https.get(options, function (res) {
                 const bodyChunks = [];
                 res.on('data', function (chunk) {
                     bodyChunks.push(chunk);
@@ -196,7 +266,7 @@ async function getSteamProfile(context, interaction, steamId, isSurv) {
         headers: { 'User-Agent': process.env.USER_AGENT + context.config.version }
     };
 
-    const req = http.get(options, function (res) {
+    const req = https.get(options, function (res) {
         const bodyChunks = [];
         res.on('data', function (chunk) {
             bodyChunks.push(chunk);
@@ -377,7 +447,7 @@ async function sendEmbedStats(context, interaction, steamProfile, dbdProfile, is
         ctx.closePath();
         ctx.clip();
 
-        const avatar = await Canvas.loadImage(steamProfile.avatarfull);
+        const avatar = await loadImageOrPlaceholder(steamProfile.avatarfull, 200, 200);
         ctx.drawImage(avatar, 25, 25, 200, 200);
 
         const attachment = new context.discord.MessageAttachment(canvas.toBuffer(), 'stats-image.jpg');
@@ -450,7 +520,7 @@ async function sendEmbedStats(context, interaction, steamProfile, dbdProfile, is
         ctx.closePath();
         ctx.clip();
 
-        const avatar = await Canvas.loadImage(steamProfile.avatarfull);
+        const avatar = await loadImageOrPlaceholder(steamProfile.avatarfull, 200, 200);
         ctx.drawImage(avatar, 25, 25, 200, 200);
 
         const attachment = new context.discord.MessageAttachment(canvas.toBuffer(), 'stats-image.jpg');
@@ -575,14 +645,14 @@ async function generateRandomBuild(context, interaction, isSurv) {
         ctx.fillText(string, utils.calculateCenter(1267, string.length, fontSize), 207);
     }
     const characterImageLink = isSurv ? survivors[numberCharacter].link : killers[numberCharacter].link
-    const avatar = await Canvas.loadImage(prefixAssetCharacters + characterImageLink);
+    const avatar = await loadImageOrPlaceholder(assetPath(prefixAssetCharacters, characterImageLink), 447, 619);
     ctx.drawImage(avatar, 1045, 227, 447, 619);
 
     // perks
-    const perkImage_1 = await Canvas.loadImage(prefixAssetPerks + perk1.link);
-    const perkImage_2 = await Canvas.loadImage(prefixAssetPerks + perk2.link);
-    const perkImage_3 = await Canvas.loadImage(prefixAssetPerks + perk3.link);
-    const perkImage_4 = await Canvas.loadImage(prefixAssetPerks + perk4.link);
+    const perkImage_1 = await loadImageOrPlaceholder(assetPath(prefixAssetPerks, perk1.link), 256, 256);
+    const perkImage_2 = await loadImageOrPlaceholder(assetPath(prefixAssetPerks, perk2.link), 256, 256);
+    const perkImage_3 = await loadImageOrPlaceholder(assetPath(prefixAssetPerks, perk3.link), 256, 256);
+    const perkImage_4 = await loadImageOrPlaceholder(assetPath(prefixAssetPerks, perk4.link), 256, 256);
     ctx.drawImage(perkImage_1, 302, 234, 256, 256);
     ctx.drawImage(perkImage_2, 116, 429, 256, 256);
     ctx.drawImage(perkImage_3, 493, 429, 256, 256);
