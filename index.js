@@ -9,7 +9,8 @@ const interactionHandler = require("./src/handlers/interactionHandler.js");
 const guildHandler = require("./src/handlers/guildHandler.js");
 const guildDeleteHandler = require("./src/handlers/guildDeleteHandler.js");
 
-context.client.on("ready", async () => {
+// "ready" was renamed to "clientReady" in discord.js 14.19; the old name still fires but warns.
+context.client.on("clientReady", async () => {
     context.services.interactions.init(context);
     context.services.stats.init();
     context.services.rules.init();

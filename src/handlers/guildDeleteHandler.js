@@ -8,6 +8,8 @@
 async function guildDeleteHandler(context, guild) {
     console.log(`GUILD_LEAVE | id: ${guild.id} | name: ${guild.name} | members: ${guild.memberCount} | total: ${context.client.guilds.cache.size}`);
 
+    context.services.database.forgetServer(guild.id);
+
     const statsChannel = context.client.channels.cache.get(process.env.STATS_CHANNEL);
     if (statsChannel) {
         statsChannel.send(`| Servidor perdido | Nombre: ${guild.name} | Usuarios: ${guild.memberCount} | Total: ${context.client.guilds.cache.size}`)

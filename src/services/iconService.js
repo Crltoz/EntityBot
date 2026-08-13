@@ -1,7 +1,7 @@
 const fs = require("fs");
 const path = require("path");
-const https = require("https");
 const utils = require("../utils/utils.js");
+const http = require("./http.js");
 
 /**
  * @description Keeps the perk icons on disk in sync with the wiki.
@@ -26,7 +26,6 @@ const WIKI_API = "https://deadbydaylight.wiki.gg/api.php";
 // which keeps the game's "T_UI_" prefix.
 const ICON_PREFIXES = ["IconPerks_", "IconsPerks_", "T_UI_iconPerks_", "T_UI_iconsPerks_"];
 const PERK_PREFIX_PATTERN = /^(T_UI_)?icons?Perks_/i;
-const REQUEST_TIMEOUT = 20000;
 
 let icons = {};
 let characterIcons = {};
@@ -47,23 +46,8 @@ function getIcons() {
 }
 
 function get(url, binary) {
-    return new Promise((resolve, reject) => {
-        const req = https.get(url, { headers: { 'User-Agent': process.env.USER_AGENT || "EntityBot" } }, (res) => {
-            if (res.statusCode >= 300 && res.statusCode < 400 && res.headers.location) {
-                res.resume();
-                return resolve(get(res.headers.location, binary));
-            }
-            if (res.statusCode !== 200) {
-                res.resume();
-                return reject(new Error(`HTTP ${res.statusCode} for ${url}`));
-            }
-            const chunks = [];
-            res.on("data", (c) => chunks.push(c));
-            res.on("end", () => resolve(binary ? Buffer.concat(chunks) : Buffer.concat(chunks).toString()));
-        });
-        req.on("error", reject);
-        req.setTimeout(REQUEST_TIMEOUT, () => req.destroy(new Error(`${url} timed out`)));
-    });
+    const options = { headers: { 'User-Agent': http.userAgent() } };
+    return binary ? http.getBuffer(url, options) : http.getText(url, options);
 }
 
 /**

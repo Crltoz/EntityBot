@@ -1,4 +1,4 @@
-const { SlashCommandBuilder } = require('@discordjs/builders');
+const { SlashCommandBuilder, MessageFlags } = require('discord.js');
 const texts = require("../data/texts.json");
 
 module.exports = {
@@ -21,7 +21,7 @@ module.exports = {
                 .setRequired(true)
         }),
     async execute(context, interaction) {
-        await interaction.deferReply({ ephemeral: true });
+        await interaction.deferReply({ flags: MessageFlags.Ephemeral });
         const type = interaction.options.get("type").value;
         const index = interaction.options.get("index").value;
         context.services.stats.test(context, interaction, type, index);

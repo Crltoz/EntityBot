@@ -1,10 +1,11 @@
-const https = require("https");
 const Canvas = require("canvas");
-const bigNumber = require("bignumber.js");
-const convert = new bigNumber('76561197960265728');
 const texts = require("../data/texts.json");
 const apis = require("../data/apis.json");
 const utils = require("../utils/utils.js");
+const http = require("./http.js");
+
+const dbdStatsUrl = (path) => `https://${apis.dbdStats.host}${path}`;
+const steamUrl = (path) => `https://${apis.steam.host}${path}`;
 
 // Images
 let backgroundStatsKiller;
@@ -109,146 +110,119 @@ function assetPath(prefix, link) {
 
 async function sendShrine(context, interaction) {
     const serverConfig = await context.services.database.getOrCreateServer(interaction.guildId);
-    const options = {
-        host: apis.dbdStats.host,
-        path: apis.dbdStats.shrine,
-        headers: { 'User-Agent': process.env.USER_AGENT + context.config.version }
-    };
 
-    const req = https.get(options, function (res) {
-        const bodyChunks = [];
-
-        res.on('data', function (chunk) {
-            bodyChunks.push(chunk);
+    let shrineResult;
+    try {
+        shrineResult = await http.getJson(dbdStatsUrl(apis.dbdStats.shrine), {
+            headers: { 'User-Agent': http.userAgent(context.config.version) }
         });
-
-        res.on('end', async function () {
-            let body = Buffer.concat(bodyChunks);
-            if (res.statusCode != 200 && res.statusCode != 201) {
-                console.log(`Shrine request failed with status ${res.statusCode}`);
-                interaction.editReply(texts.errors.shrineNotFound[serverConfig.language]);
-                return;
-            }
-
-            try {
-                const shrineResult = JSON.parse(body);
-                if (!shrineResult.perks || shrineResult.perks.length != 4) {
-                    console.log(`Invalid shrine payload: ${JSON.stringify(shrineResult)}`);
-                    interaction.editReply(texts.errors.shrineNotFound[serverConfig.language]);
-                    return;
-                }
-
-                // The roster is the source of truth. It is refreshed from the same API, but a
-                // perk added between refreshes still resolves via the names the shrine itself
-                // returns, and any perk without an icon yet renders with the placeholder.
-                const perks = shrineResult.perks.map((perk) => {
-                    const known = context.services.perks.getPerkById(perk.id);
-                    return {
-                        nameEs: known ? known.nameEs : perk.name,
-                        nameEn: known ? known.nameEn : perk.name,
-                        link: known ? assetPath(prefixAssetPerks, known.link) : null,
-                        shards: perk.shards
-                    };
-                });
-
-                const canvas = Canvas.createCanvas(1163, 664);
-                const ctx = canvas.getContext('2d');
-                ctx.drawImage(backgroundShrine, 0, 0, canvas.width, canvas.height);
-
-                const perkImages = [];
-                for (let perk of perks) {
-                    perkImages.push(await loadImageOrPlaceholder(perk.link, 256, 256));
-                }
-                ctx.drawImage(perkImages[0], 454, 3.5, 256, 256);
-                ctx.drawImage(perkImages[1], 280, 177, 256, 256);
-                ctx.drawImage(perkImages[2], 626, 177, 256, 256);
-                ctx.drawImage(perkImages[3], 454, 355, 256, 256);
-                ctx.strokeRect(0, 0, canvas.width, canvas.height);
-                const attachment = new context.discord.MessageAttachment(canvas.toBuffer(), 'shrine-image.png');
-
-                const header = serverConfig.language === 0 ? "🈴 **Santuario:**" : "🈴 **Shrine:**";
-                const numbers = ["1⃣", "2⃣", "3⃣", "4⃣"];
-                const lines = perks.map((perk, index) => {
-                    const name = serverConfig.language === 0 ? perk.nameEs : perk.nameEn;
-                    return `${numbers[index]} ${name} - <:frag_iri:739690491829813369> ${perk.shards}`;
-                });
-
-                await interaction.editReply({ content: `${header}\n${lines.join("\n")}`, files: [attachment] });
-            } catch (err) {
-                console.log(`Error building shrine: ${err} --- body: ${body.toString()}`);
-                interaction.editReply(texts.errors.unknownError[serverConfig.language] + process.env.SUPPORT_DISCORD);
-            }
-        });
-    });
-
-    req.on("error", (err) => {
-        console.log(`Error requesting the shrine: ${err}`);
+    } catch (err) {
+        console.log(`Error requesting the shrine: ${err.message}`);
         interaction.editReply(texts.errors.shrineNotFound[serverConfig.language]);
-    });
-    req.end();
+        return;
+    }
+
+    try {
+        if (!shrineResult.perks || shrineResult.perks.length != 4) {
+            console.log(`Invalid shrine payload: ${JSON.stringify(shrineResult)}`);
+            interaction.editReply(texts.errors.shrineNotFound[serverConfig.language]);
+            return;
+        }
+
+        // The roster is the source of truth. It is refreshed from the same API, but a
+        // perk added between refreshes still resolves via the names the shrine itself
+        // returns, and any perk without an icon yet renders with the placeholder.
+        const perks = shrineResult.perks.map((perk) => {
+            const known = context.services.perks.getPerkById(perk.id);
+            return {
+                nameEs: known ? known.nameEs : perk.name,
+                nameEn: known ? known.nameEn : perk.name,
+                link: known ? assetPath(prefixAssetPerks, known.link) : null,
+                shards: perk.shards
+            };
+        });
+
+        const canvas = Canvas.createCanvas(1163, 664);
+        const ctx = canvas.getContext('2d');
+        ctx.drawImage(backgroundShrine, 0, 0, canvas.width, canvas.height);
+
+        const perkImages = [];
+        for (let perk of perks) {
+            perkImages.push(await loadImageOrPlaceholder(perk.link, 256, 256));
+        }
+        ctx.drawImage(perkImages[0], 454, 3.5, 256, 256);
+        ctx.drawImage(perkImages[1], 280, 177, 256, 256);
+        ctx.drawImage(perkImages[2], 626, 177, 256, 256);
+        ctx.drawImage(perkImages[3], 454, 355, 256, 256);
+        ctx.strokeRect(0, 0, canvas.width, canvas.height);
+        const attachment = new context.discord.AttachmentBuilder(canvas.toBuffer(), { name: 'shrine-image.png' });
+
+        const header = serverConfig.language === 0 ? "🈴 **Santuario:**" : "🈴 **Shrine:**";
+        const numbers = ["1⃣", "2⃣", "3⃣", "4⃣"];
+        const lines = perks.map((perk, index) => {
+            const name = serverConfig.language === 0 ? perk.nameEs : perk.nameEn;
+            return `${numbers[index]} ${name} - <:frag_iri:739690491829813369> ${perk.shards}`;
+        });
+
+        await interaction.editReply({ content: `${header}\n${lines.join("\n")}`, files: [attachment] });
+    } catch (err) {
+        console.log(`Error building shrine: ${err}`);
+        interaction.editReply(texts.errors.unknownError[serverConfig.language] + process.env.SUPPORT_DISCORD);
+    }
 }
 
 async function getStats(context, interaction, steamLink, isSurvivor) {
     steamLink = steamLink.toLowerCase();
 
     const steamId = await getSteamId(context, interaction, steamLink);
-    getSteamProfile(context, interaction, steamId, isSurvivor);
+    // getSteamId already told the user what went wrong.
+    if (!steamId) return;
+    await getSteamProfile(context, interaction, steamId, isSurvivor);
 }
 
+/**
+ * @param context - BotContext.
+ * @param interaction - Discord command interaction.
+ * @param {String} steamLink - Friend code, profile URL or vanity URL, lowercased.
+ * @description Resolve any of the three shapes to a 64-bit SteamID, or null if it cannot be
+ *              resolved — in which case the interaction has already been answered.
+ */
 async function getSteamId(context, interaction, steamLink) {
-    return new Promise(async (resolve, reject) => {
-        const serverConfig = await context.services.database.getOrCreateServer(interaction.guildId);
+    const serverConfig = await context.services.database.getOrCreateServer(interaction.guildId);
 
-        // Profile with friend code (32 bits)
-        if (!steamLink.includes('steamcommunity.com/id/') && !steamLink.includes('steamcommunity.com/profiles/')) {
-            if (isNaN(steamLink)) return interaction.editReply({ content: texts.errors.invalidFriendCode[serverConfig.language] });
-            if (steamLink.length < 8) return interaction.editReply({ content: texts.errors.invalidFriendCode[serverConfig.language] });
-            const steamid = steamID_64(steamLink);
-            resolve(steamid);
-        } else if (steamLink.includes('steamcommunity.com/profiles/')) {
-            // Profile with steam id (64 bits)
-            let steamid = steamLink.slice(steamLink.indexOf("profiles/") + 9, steamLink.length);
-            steamid = steamid.replace("/", "");
-            resolve(steamid);
-        } else if (steamLink.includes('steamcommunity.com/id/')) {
-            // Profile with vanity URL
-            steamLink = steamLink.slice(steamLink.indexOf("/id/") + 4, steamLink.length);
-            steamLink = steamLink.replace("/", "");
-            const options = {
-                host: apis.steam.host,
-                path: apis.steam.vanityURL.path + process.env.STEAM_APIKEY + apis.steam.vanityURL.vanity + steamLink,
-                headers: { 'User-Agent': process.env.USER_AGENT + context.config.version }
-            };
-
-            const req = https.get(options, function (res) {
-                const bodyChunks = [];
-                res.on('data', function (chunk) {
-                    bodyChunks.push(chunk);
-                });
-
-                res.on('end', function () {
-                    let body = Buffer.concat(bodyChunks);
-                    if (res.statusCode == 200 || res.statusCode == 201) {
-                        try {
-                            body = JSON.parse(body);
-                            if (utils.isEmptyObject(body)) return interaction.editReply(texts.errors.profileNotFound[serverConfig.language]);
-                            if (body.response.success != 1) return interaction.editReply(texts.errors.profileNotFound[serverConfig.language]);
-                            resolve(body.response.steamid);
-                        } catch (err) {
-                            resolve(0);
-                            console.log(`Error trying to parse body from steam resolving vanity URL: ${err} --- BODY: ${JSON.stringify(body)}`);
-                        }
-                    } else return interaction.editReply(texts.errors.profileNotFound[serverConfig.language]);
-                });
-            });
-
-            req.on("error", (err) => {
-                console.log(`Error with vanity URL from steam api: ${err}`);
-                resolve(0);
-            });
-            req.end();
+    // Profile with friend code (32 bits)
+    if (!steamLink.includes('steamcommunity.com/id/') && !steamLink.includes('steamcommunity.com/profiles/')) {
+        // Digits only: anything else (a float, a sign, an exponent) would blow up BigInt.
+        if (!/^\d{8,}$/.test(steamLink)) {
+            await interaction.editReply({ content: texts.errors.invalidFriendCode[serverConfig.language] });
+            return null;
         }
-    });
+        return steamID_64(steamLink);
+    }
+
+    // Profile with steam id (64 bits)
+    if (steamLink.includes('steamcommunity.com/profiles/')) {
+        return steamLink.slice(steamLink.indexOf("profiles/") + 9).replace("/", "");
+    }
+
+    // Profile with vanity URL
+    const vanity = steamLink.slice(steamLink.indexOf("/id/") + 4).replace("/", "");
+    const url = steamUrl(apis.steam.vanityURL.path + process.env.STEAM_APIKEY + apis.steam.vanityURL.vanity + vanity);
+
+    try {
+        const body = await http.getJson(url, {
+            headers: { 'User-Agent': http.userAgent(context.config.version) }
+        });
+        if (utils.isEmptyObject(body) || !body.response || body.response.success != 1) {
+            await interaction.editReply(texts.errors.profileNotFound[serverConfig.language]);
+            return null;
+        }
+        return body.response.steamid;
+    } catch (err) {
+        console.log(`Error resolving the vanity URL with the Steam API: ${err.message}`);
+        await interaction.editReply(texts.errors.profileNotFound[serverConfig.language]);
+        return null;
+    }
 }
 
 /**
@@ -260,40 +234,32 @@ async function getSteamId(context, interaction, steamLink) {
  */
 async function getSteamProfile(context, interaction, steamId, isSurv) {
     const serverConfig = await context.services.database.getOrCreateServer(interaction.guildId);
-    const options = {
-        host: apis.steam.host,
-        path: apis.steam.playerSummaries.path + process.env.STEAM_APIKEY + apis.steam.playerSummaries.steamid + steamId,
-        headers: { 'User-Agent': process.env.USER_AGENT + context.config.version }
-    };
+    const url = steamUrl(apis.steam.playerSummaries.path + process.env.STEAM_APIKEY + apis.steam.playerSummaries.steamid + steamId);
 
-    const req = https.get(options, function (res) {
-        const bodyChunks = [];
-        res.on('data', function (chunk) {
-            bodyChunks.push(chunk);
+    let body;
+    try {
+        body = await http.getJson(url, {
+            headers: { 'User-Agent': http.userAgent(context.config.version) }
         });
+    } catch (err) {
+        // A malformed SteamID makes Steam answer with an HTML "Bad Request" page, so an
+        // unparseable body here is the user's input, not an outage.
+        console.log(`Error getting the player summaries from the Steam API: ${err.message}`);
+        await interaction.editReply({ content: texts.errors.profileNotFound[serverConfig.language] });
+        return;
+    }
 
-        res.on('end', function () {
-            let body = Buffer.concat(bodyChunks);
-            if (body.includes("<html><head><title>Bad Request</title>")) return interaction.editReply({ content: texts.errors.profileNotFound[serverConfig.language] });
-            if (utils.isEmptyObject(body)) return interaction.editReply({ content: texts.errors.profileNotFound[serverConfig.language] });
-            if (res.statusCode == 200 || res.statusCode == 201) {
-                try {
-                    body = JSON.parse(body);
-                    if (body.response && body.response.players && body.response.players.length && body.response.players[0].profilestate) {
-                        if (body.response.players[0].profilestate != 1) return interaction.editReply({ content: texts.errors.privateProfile[serverConfig.language] });
-                        sendStats(context, interaction, body.response.players[0], isSurv);
-                    } else return interaction.editReply({ content: texts.errors.profileNotFound[serverConfig.language] });
-                } catch (err) {
-                    console.log(`Error trying to parse body from steam player summaries: ${err} --- BODY: ${JSON.stringify(body)}`);
-                }
-            } else return interaction.editReply({ content: texts.errors.profileNotFound[serverConfig.language] });
-        });
-    });
+    const player = body.response && body.response.players && body.response.players[0];
+    if (!player || !player.profilestate) {
+        await interaction.editReply({ content: texts.errors.profileNotFound[serverConfig.language] });
+        return;
+    }
+    if (player.profilestate != 1) {
+        await interaction.editReply({ content: texts.errors.privateProfile[serverConfig.language] });
+        return;
+    }
 
-    req.on("error", (err) => {
-        console.log(`Error with get player summaries from steam api: ${err}`);
-    });
-    req.end();
+    await sendStats(context, interaction, player, isSurv);
 }
 
 /**
@@ -303,38 +269,34 @@ async function getSteamProfile(context, interaction, steamId, isSurv) {
  * @param {Boolean} isSurv - true = survivor | false = killer
  * @description - Get stats from Australian Website, and send this to the channel.
  */
-function sendStats(context, interaction, steamProfile, isSurv) {
-    const options = {
-        host: apis.dbdStats.host,
-        path: apis.dbdStats.playerStats + steamProfile.steamid,
-        headers: { 'User-Agent': process.env.USER_AGENT + context.config.version }
-    };
+async function sendStats(context, interaction, steamProfile, isSurv) {
+    const url = dbdStatsUrl(apis.dbdStats.playerStats + steamProfile.steamid);
 
-    const req = https.get(options, function (res) {
-        const bodyChunks = [];
-        res.on('data', function (chunk) {
-            bodyChunks.push(chunk);
+    let response;
+    try {
+        response = await http.request(url, {
+            headers: { 'User-Agent': http.userAgent(context.config.version) }
         });
+    } catch (err) {
+        console.log(`Error getting the player stats from dbd.tricky.lol: ${err.message}`);
+        await sendEmbedError(context, interaction, 3);
+        return;
+    }
 
-        res.on('end', function () {
-            let body = Buffer.concat(bodyChunks);
-            if (res.statusCode == 200 || res.statusCode == 201) {
-                try {
-                    body = JSON.parse(body);
-                    if (body.killer_rank == 20 && body.killed == 0 && body.sacrificed == 0 && body.bloodpoints == 0) sendEmbedError(context, interaction, 1);
-                    else sendEmbedStats(context, interaction, steamProfile, body, isSurv);
-                } catch (err) {
-                    console.log(`Error trying to parse body from australian website: ${err} --- BODY: ${JSON.stringify(body)}`);
-                }
-            } else return postStats(context, interaction, steamProfile.steamid)
-        });
-    });
+    // Any non-2xx means the site has never seen this profile: ask it to index the account.
+    if (!response.ok) return postStats(context, interaction, steamProfile.steamid);
 
-    req.on("error", (err) => {
-        console.log(`Error with get player stats from australian website: ${err}`);
-        sendEmbedError(context, interaction, 3);
-    });
-    req.end();
+    let body;
+    try {
+        body = JSON.parse(response.body);
+    } catch (err) {
+        console.log(`Error parsing the player stats from dbd.tricky.lol: ${err.message}`);
+        await sendEmbedError(context, interaction, 3);
+        return;
+    }
+
+    if (body.killer_rank == 20 && body.killed == 0 && body.sacrificed == 0 && body.bloodpoints == 0) await sendEmbedError(context, interaction, 1);
+    else await sendEmbedStats(context, interaction, steamProfile, body, isSurv);
 }
 
 /**
@@ -345,28 +307,28 @@ function sendStats(context, interaction, steamProfile, isSurv) {
  */
 async function postStats(context, interaction, steamId) {
     const serverConfig = await context.services.database.getOrCreateServer(interaction.guildId);
-    const options = {
-        host: apis.dbdStats.host,
-        path: apis.dbdStats.playerStats + steamId,
-        method: 'POST',
-        headers: { 'User-Agent': process.env.USER_AGENT + context.config.version }
-    };
+    const url = dbdStatsUrl(apis.dbdStats.playerStats + steamId);
 
-    const req = https.request(options, function (res) {
-        if (res.statusCode != 201) {
-            console.log(`ERROR POST: ${res.statusCode} | message: ${res.statusMessage} | headers: ${JSON.stringify(res.headers)} | steamid: ${steamId}`);
-            sendEmbedError(context, interaction, 2);
-        } else {
-            console.log(`SUCCESS POST: ${res.statusCode} | steamid: ${steamId}`);
-            interaction.editReply(texts.accountUpdating[serverConfig.language]);
-        }
-    })
+    let response;
+    try {
+        response = await http.request(url, {
+            method: 'POST',
+            headers: { 'User-Agent': http.userAgent(context.config.version) }
+        });
+    } catch (err) {
+        console.log(`Error posting the account to dbd.tricky.lol: ${err.message}`);
+        await sendEmbedError(context, interaction, 3);
+        return;
+    }
 
-    req.on("error", (err) => {
-        console.log(`error posting account to dbd stats: ${err}`);
-        sendEmbedError(context, interaction, 3);
-    })
-    req.end();
+    if (response.status != 201) {
+        console.log(`ERROR POST: ${response.status} | steamid: ${steamId}`);
+        await sendEmbedError(context, interaction, 2);
+        return;
+    }
+
+    console.log(`SUCCESS POST: ${response.status} | steamid: ${steamId}`);
+    await interaction.editReply(texts.accountUpdating[serverConfig.language]);
 }
 
 /**
@@ -450,7 +412,7 @@ async function sendEmbedStats(context, interaction, steamProfile, dbdProfile, is
         const avatar = await loadImageOrPlaceholder(steamProfile.avatarfull, 200, 200);
         ctx.drawImage(avatar, 25, 25, 200, 200);
 
-        const attachment = new context.discord.MessageAttachment(canvas.toBuffer(), 'stats-image.jpg');
+        const attachment = new context.discord.AttachmentBuilder(canvas.toBuffer(), { name: 'stats-image.jpg' });
         let flagOrSteam = steamProfile.loccountrycode ? `:flag_${steamProfile.loccountrycode.toLowerCase()}:` : "<:steam:914663956860248134>";
         interaction.editReply({ content: `${flagOrSteam} **${steamProfile.personaname}** | ${texts.stats.seeFullStatistics[language]} https://dbd.tricky.lol/playerstats/${steamProfile.steamid}`, files: [attachment] });
     } else {
@@ -523,7 +485,7 @@ async function sendEmbedStats(context, interaction, steamProfile, dbdProfile, is
         const avatar = await loadImageOrPlaceholder(steamProfile.avatarfull, 200, 200);
         ctx.drawImage(avatar, 25, 25, 200, 200);
 
-        const attachment = new context.discord.MessageAttachment(canvas.toBuffer(), 'stats-image.jpg');
+        const attachment = new context.discord.AttachmentBuilder(canvas.toBuffer(), { name: 'stats-image.jpg' });
         let flagOrSteam = steamProfile.loccountrycode ? `:flag_${steamProfile.loccountrycode.toLowerCase()}:` : "<:steam:914663956860248134>";
         interaction.editReply({ content: `${flagOrSteam} **${steamProfile.personaname}** | ${texts.stats.seeFullStatistics[language]} https://dbd.tricky.lol/playerstats/${steamProfile.steamid} `, files: [attachment] });
     }
@@ -539,12 +501,12 @@ async function sendEmbedStats(context, interaction, steamProfile, dbdProfile, is
 async function sendEmbedError(context, interaction, type) {
     const serverConfig = await context.services.database.getOrCreateServer(interaction.guildId);
     const text = texts.errors.types[type.toString()];
-    const embedd = new context.discord.MessageEmbed()
+    const embedd = new context.discord.EmbedBuilder()
         .setColor('#FF0000')
         .setTitle(text.title[serverConfig.language]);
 
     for (let field of text.fields) {
-        embedd.addField(field.name[serverConfig.language], field.value[serverConfig.language]);
+        embedd.addFields({ name: field.name[serverConfig.language], value: field.value[serverConfig.language] });
     }
 
     if (text.image) {
@@ -578,7 +540,7 @@ async function calculateLevel(context, interaction, currentLevel, wantedLevel) {
     ctx.fillText(wantedLevel, utils.calculateCenter(419, wantedLevel.toString().length, fontSize), 213);
     ctx.fillText(utils.comma(operation.price), utils.calculateCenter(290, operation.price.toString().length, fontSize), 355);
 
-    const attachment = new context.discord.MessageAttachment(canvas.toBuffer(), 'calculate-image.png');
+    const attachment = new context.discord.AttachmentBuilder(canvas.toBuffer(), { name: 'calculate-image.png' });
     interaction.editReply({ content: "‎      ‏‏‎", files: [attachment] });
 }
 
@@ -658,7 +620,7 @@ async function generateRandomBuild(context, interaction, isSurv) {
     ctx.drawImage(perkImage_3, 493, 429, 256, 256);
     ctx.drawImage(perkImage_4, 303, 605, 256, 256);
 
-    const attachment = new context.discord.MessageAttachment(canvas.toBuffer(), 'random.png');
+    const attachment = new context.discord.AttachmentBuilder(canvas.toBuffer(), { name: 'random.png' });
 
     if (language == 0) {
         interaction.editReply({ content: `**PERKS:**\n1⃣: ${perk1.nameEs}\n2⃣: ${perk2.nameEs}\n3⃣: ${perk3.nameEs}\n4⃣: ${perk4.nameEs}`, files: [attachment] });
@@ -668,55 +630,43 @@ async function generateRandomBuild(context, interaction, isSurv) {
 }
 
 /**
- * @param {Int8Array} max - Max number for the random selector.
- * @description Get 4 random numbers without repeating.
+ * @param {Number} max - Exclusive upper bound, i.e. the number of perks to draw from.
+ * @description Get 4 random indexes without repeating.
+ *
+ * A partial Fisher-Yates shuffle, which the previous nested `while` loops only approximated:
+ * re-rolling `n3` until it stopped matching `n1` could land it back on `n2`, and the same for
+ * `n4`, so a build could come out with the same perk twice.
  */
 function getRandomNumber(max) {
-    let n1 = Math.floor(Math.random() * max);
-    let n2 = Math.floor(Math.random() * max);
-    if (n2 == n1) {
-        while (n2 == n1) {
-            n2 = Math.floor(Math.random() * max);
-        }
+    const pool = Array.from({ length: max }, (value, index) => index);
+    const picked = [];
+
+    while (picked.length < 4 && pool.length) {
+        picked.push(pool.splice(Math.floor(Math.random() * pool.length), 1)[0]);
     }
-    let n3 = Math.floor(Math.random() * max);
-    if (n3 == n1 || n3 == n2) {
-        while (n3 == n1) {
-            n3 = Math.floor(Math.random() * max);
-        }
-        while (n3 == n2) {
-            n3 = Math.floor(Math.random() * max);
-        }
-    }
-    let n4 = Math.floor(Math.random() * max);
-    if (n4 == n1 || n4 == n2 || n4 == n3) {
-        while (n4 == n1) {
-            n4 = Math.floor(Math.random() * max);
-        }
-        while (n4 == n2) {
-            n4 = Math.floor(Math.random() * max);
-        }
-        while (n4 == n3) {
-            n4 = Math.floor(Math.random() * max);
-        }
-    }
+
+    // Fewer than 4 perks in the roster should never happen, but repeating one beats
+    // handing the caller an undefined index.
+    while (picked.length && picked.length < 4) picked.push(picked[0]);
+
     return {
-        n1: n1,
-        n2: n2,
-        n3: n3,
-        n4: n4
+        n1: picked[0],
+        n2: picked[1],
+        n3: picked[2],
+        n4: picked[3]
     }
 }
 
 
+// Offset between the 32-bit account id and the 64-bit SteamID.
+const STEAM_ID64_BASE = 76561197960265728n;
+
 /**
- * @param {BigInt32Array} steamId32 - SteamID in 32bits.
+ * @param {String} steamId32 - SteamID in 32bits, digits only.
  * @description - Return steamID 64 bits.
  */
 function steamID_64(steamId32) {
-    steamId32 = new bigNumber(steamId32);
-    let steamId64 = steamId32.plus(convert)
-    return steamId64.toString();
+    return (BigInt(steamId32) + STEAM_ID64_BASE).toString();
 }
 
 async function test(context, interaction, type, index) {
@@ -741,7 +691,7 @@ async function test(context, interaction, type, index) {
             ctx.fillText(survivors[index].name, utils.calculateCenter(1267, survivors[index].name.length, fontSize), 207);
             const avatar = await Canvas.loadImage(prefixAssetCharacters + survivors[index].link);
             ctx.drawImage(avatar, 1045, 227, 447, 619);
-            const attachment = new context.discord.MessageAttachment(canvas.toBuffer(), 'random.png');
+            const attachment = new context.discord.AttachmentBuilder(canvas.toBuffer(), { name: 'random.png' });
             interaction.editReply({ content: `Testing survivor! ${survivors[index].name} || Current length: ${Object.keys(survivors).length}`, files: [attachment] });
             break;
         }
@@ -765,7 +715,7 @@ async function test(context, interaction, type, index) {
             ctx.fillText(killers[index].nameEn, utils.calculateCenter(1267, killers[index].nameEn.length, fontSize), 207);
             const avatar = await Canvas.loadImage(prefixAssetCharacters + killers[index].link);
             ctx.drawImage(avatar, 1045, 227, 447, 619);
-            const attachment = new context.discord.MessageAttachment(canvas.toBuffer(), 'random.png');
+            const attachment = new context.discord.AttachmentBuilder(canvas.toBuffer(), { name: 'random.png' });
             interaction.editReply({ content: `Testing killer! Es: ${killers[index].nameEs} | Eng: ${killers[index].nameEn} || current length: ${Object.keys(killers).length}`, files: [attachment] });
             break;
         }
@@ -786,7 +736,7 @@ async function test(context, interaction, type, index) {
             ctx.drawImage(perkImage, 116, 429, 256, 256);
             ctx.drawImage(perkImage, 493, 429, 256, 256);
             ctx.drawImage(perkImage, 303, 605, 256, 256);
-            const attachment = new context.discord.MessageAttachment(canvas.toBuffer(), 'random.png');
+            const attachment = new context.discord.AttachmentBuilder(canvas.toBuffer(), { name: 'random.png' });
             interaction.editReply({ content: `Testing killer perk! Es: ${killerPerks[index].nameEs} | Eng: ${killerPerks[index].nameEn} || current length: ${Object.keys(killerPerks).length}`, files: [attachment] });
             break;
         }
@@ -807,7 +757,7 @@ async function test(context, interaction, type, index) {
             ctx.drawImage(perkImage, 116, 429, 256, 256);
             ctx.drawImage(perkImage, 493, 429, 256, 256);
             ctx.drawImage(perkImage, 303, 605, 256, 256);
-            const attachment = new context.discord.MessageAttachment(canvas.toBuffer(), 'random.png');
+            const attachment = new context.discord.AttachmentBuilder(canvas.toBuffer(), { name: 'random.png' });
             interaction.editReply({ content: `Testing survivor perk! Es: ${survivorPerks[index].nameEs} | Eng: ${survivorPerks[index].nameEn} || || current length: ${Object.keys(survivorPerks).length}`, files: [attachment] });
             break;
         }

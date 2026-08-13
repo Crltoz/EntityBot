@@ -1,4 +1,4 @@
-const { ContextMenuCommandBuilder } = require('@discordjs/builders');
+const { ContextMenuCommandBuilder, MessageFlags } = require('discord.js');
 const texts = require("../data/texts.json");
 
 module.exports = {
@@ -6,7 +6,7 @@ module.exports = {
         .setType(2)
         .setName("Killer stats"),
     async execute(context, interaction) {
-        await interaction.deferReply({ ephemeral: true });
+        await interaction.deferReply({ flags: MessageFlags.Ephemeral });
         const serverConfig = await context.services.database.getOrCreateServer(interaction.guildId);
         const user = await context.services.database.userdataSchema.findOne({ _id: interaction.targetUser.id });
         if (user) {

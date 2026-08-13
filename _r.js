@@ -3,9 +3,9 @@ const fs=require('fs');
 const ds=require('./src/services/dataService.js');
 const stats=require('./src/services/stats.js');
 const D=process.argv[2];
-class MA{constructor(b,n){this.buffer=b;this.name=n}}
+class MA{constructor(b,o){this.buffer=b;this.name=o.name}}
 const saved={};
-const ctx={discord:{MessageAttachment:MA},config:require('./src/data/config.json'),services:{
+const ctx={discord:{AttachmentBuilder:MA},config:require('./src/data/config.json'),services:{
   dataService:ds,perks:require('./src/services/perks.js'),characters:require('./src/services/characters.js'),
   database:{getDataSnapshot:async n=>saved[n]||null,saveDataSnapshot:async(n,p)=>{saved[n]={payload:JSON.stringify(p)}},getOrCreateServer:async()=>({language:0})}}};
 const mk=out=>({guildId:'g',editReply:async p=>{if(typeof p==='string')return console.log(' ',p);

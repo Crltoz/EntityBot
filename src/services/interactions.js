@@ -1,7 +1,6 @@
 const fs = require('node:fs');
 const path = require('node:path');
-const { REST } = require('@discordjs/rest');
-const { Routes } = require('discord-api-types/v9');
+const { REST, Routes } = require('discord.js');
 
 /**
  * @description Loads the commands and menus and registers them with Discord.
@@ -36,7 +35,7 @@ function init(context) {
         (menu.guildOnly ? guildInteractions : globalInteractions).push(menu.data.toJSON());
     }
 
-    const rest = new REST({ version: '9' }).setToken(process.env.TOKEN);
+    const rest = new REST({ version: '10' }).setToken(process.env.TOKEN);
     registerInteractions(context, rest, globalInteractions, guildInteractions);
 }
 
