@@ -13,6 +13,6 @@
     "dbdStats": {
         "host": "dbd.tricky.lol",
         "playerStats": "/api/playerstats?steamid=",
-        "shrine": "/api/shrine"
+        "shrine": "/api/shrine?includeperkinfo=1"
     }
 }
