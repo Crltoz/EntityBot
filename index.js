@@ -9,13 +9,25 @@ const interactionHandler = require("./src/handlers/interactionHandler.js");
 const guildHandler = require("./src/handlers/guildHandler.js");
 const guildDeleteHandler = require("./src/handlers/guildDeleteHandler.js");
 
-context.client.on("ready", () => { 
+context.client.on("ready", async () => {
     context.services.interactions.init(context);
-    context.services.perks.init();
     context.services.stats.init();
-    context.services.characters.init();
     context.services.rules.init();
-    context.services.database.init();
+
+    // The snapshot cache lives in Mongo, so the database goes first — but a database that
+    // is down must not take the game data with it, hence the separate guards.
+    try {
+        await context.services.database.init();
+    } catch (err) {
+        console.error(`Database connection failed: ${err.message}`);
+    }
+
+    try {
+        await context.services.dataService.init(context);
+    } catch (err) {
+        console.error(`Failed to load game data: ${err.message}`);
+    }
+
     console.log(`Client ${context.client.user.username} loading!`);
 });
 

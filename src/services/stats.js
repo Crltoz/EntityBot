@@ -89,16 +89,22 @@ function buildPlaceholder(width, height) {
  * @description Load an image, falling back to a placeholder instead of throwing.
  */
 async function loadImageOrPlaceholder(path, width, height) {
-    if (!path) {
-        console.log(`Missing asset path, drawing placeholder instead.`);
-        return buildPlaceholder(width, height);
-    }
+    if (!path) return buildPlaceholder(width, height);
     try {
         return await Canvas.loadImage(path);
     } catch (err) {
         console.log(`Could not load asset '${path}', drawing placeholder instead: ${err.message}`);
         return buildPlaceholder(width, height);
     }
+}
+
+/**
+ * @param {String} prefix - Asset folder.
+ * @param {String} link - Relative asset path, or null when the roster has no icon for it yet.
+ * @description Resolve an asset path without turning a missing link into a bogus ".../null".
+ */
+function assetPath(prefix, link) {
+    return link ? prefix + link : null;
 }
 
 async function sendShrine(context, interaction) {
@@ -132,15 +138,15 @@ async function sendShrine(context, interaction) {
                     return;
                 }
 
-                // The API is the source of truth for names; the local JSON only adds the
-                // Spanish translation and the icon. A perk missing locally (new chapter)
-                // falls back to the English name from the API and a placeholder icon.
+                // The roster is the source of truth. It is refreshed from the same API, but a
+                // perk added between refreshes still resolves via the names the shrine itself
+                // returns, and any perk without an icon yet renders with the placeholder.
                 const perks = shrineResult.perks.map((perk) => {
-                    const local = context.services.perks.getPerkById(perk.id);
+                    const known = context.services.perks.getPerkById(perk.id);
                     return {
-                        nameEs: local ? local.nameEs : perk.name,
-                        nameEn: local ? local.nameEn : perk.name,
-                        link: local ? prefixAssetPerks + local.link : null,
+                        nameEs: known ? known.nameEs : perk.name,
+                        nameEn: known ? known.nameEn : perk.name,
+                        link: known ? assetPath(prefixAssetPerks, known.link) : null,
                         shards: perk.shards
                     };
                 });
@@ -639,14 +645,14 @@ async function generateRandomBuild(context, interaction, isSurv) {
         ctx.fillText(string, utils.calculateCenter(1267, string.length, fontSize), 207);
     }
     const characterImageLink = isSurv ? survivors[numberCharacter].link : killers[numberCharacter].link
-    const avatar = await loadImageOrPlaceholder(prefixAssetCharacters + characterImageLink, 447, 619);
+    const avatar = await loadImageOrPlaceholder(assetPath(prefixAssetCharacters, characterImageLink), 447, 619);
     ctx.drawImage(avatar, 1045, 227, 447, 619);
 
     // perks
-    const perkImage_1 = await loadImageOrPlaceholder(prefixAssetPerks + perk1.link, 256, 256);
-    const perkImage_2 = await loadImageOrPlaceholder(prefixAssetPerks + perk2.link, 256, 256);
-    const perkImage_3 = await loadImageOrPlaceholder(prefixAssetPerks + perk3.link, 256, 256);
-    const perkImage_4 = await loadImageOrPlaceholder(prefixAssetPerks + perk4.link, 256, 256);
+    const perkImage_1 = await loadImageOrPlaceholder(assetPath(prefixAssetPerks, perk1.link), 256, 256);
+    const perkImage_2 = await loadImageOrPlaceholder(assetPath(prefixAssetPerks, perk2.link), 256, 256);
+    const perkImage_3 = await loadImageOrPlaceholder(assetPath(prefixAssetPerks, perk3.link), 256, 256);
+    const perkImage_4 = await loadImageOrPlaceholder(assetPath(prefixAssetPerks, perk4.link), 256, 256);
     ctx.drawImage(perkImage_1, 302, 234, 256, 256);
     ctx.drawImage(perkImage_2, 116, 429, 256, 256);
     ctx.drawImage(perkImage_3, 493, 429, 256, 256);

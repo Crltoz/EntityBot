@@ -14,6 +14,7 @@ const perks = require("../services/perks.js");
 const characters = require("../services/characters.js");
 const rules = require("../services/rules.js");
 const database = require("../services/database.js");
+const dataService = require("../services/dataService.js");
 
 // config
 const config = require("../data/config.json");
@@ -30,6 +31,7 @@ class Context {
         this.services.characters = characters;
         this.services.rules = rules;
         this.services.database = database;
+        this.services.dataService = dataService;
     }
 }
 

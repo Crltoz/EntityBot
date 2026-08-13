@@ -1,45 +1,19 @@
-const fs = require("fs");
-
-let survivors = {};
-let killers = {};
+const dataService = require("./dataService.js");
 
 /**
- * @description Load characters info.
+ * @description Character lookups. Backed by dataService, which keeps the roster in sync
+ *              with the API; this module only exposes it in the shape the commands expect.
  */
-function init() {
-    fs.readFile('assets/characters/survivors.json', 'utf8', function (err, data) {
-        if (err) return console.log(err);
-        const msg = JSON.parse(data);
-        for (let x = 0; x < msg.survivors.length; x++) {
-            survivors[x] = {
-                name: msg.survivors[x].name,
-                link: msg.survivors[x].link
-            }
-        }
-    });
-    fs.readFile('assets/characters/killers.json', 'utf8', function (err, data) {
-        if (err) return console.log(err);
-        const msg = JSON.parse(data);
-        for (let x = 0; x < msg.killers.length; x++) {
-            killers[x] = {
-                nameEs: msg.killers[x].nameEs,
-                nameEn: msg.killers[x].nameEn,
-                link: msg.killers[x].link
-            }
-        }
-    });
-}
 
 function getKillers() {
-    return killers;
+    return dataService.getKillers();
 }
 
 function getSurvivors() {
-    return survivors;
+    return dataService.getSurvivors();
 }
 
 module.exports = {
-    init: init,
     getKillers: getKillers,
     getSurvivors: getSurvivors
 }
