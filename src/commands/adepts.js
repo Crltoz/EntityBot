@@ -15,11 +15,14 @@ module.exports = {
         await interaction.deferReply();
         const serverConfig = await context.services.database.getOrCreateServer(interaction.guildId);
         const member = await context.services.database.getOrCreateUser(interaction.member.id);
-        if (!member.steamID) {
+        // The stored value is validated rather than trusted — an old bug stored a literal
+        // "0" for profiles it failed to resolve, and "0" is truthy.
+        const stored = context.services.stats.parseSteamInput(member.steamID);
+        if (!stored || stored.kind !== "id64") {
             await interaction.editReply(texts.adepts.needsProfile[serverConfig.language]);
             return;
         }
         const role = interaction.options.get("role") ? interaction.options.get("role").value : null;
-        await context.services.gameInfo.sendAdepts(context, interaction, member.steamID, role);
+        await context.services.gameInfo.sendAdepts(context, interaction, stored.value, role);
     },
 };

@@ -50,6 +50,10 @@ function truncate(value, limit) {
     if (text.length <= limit) return text;
 
     const ellipsis = "\n…";
+    // With no room for the marker there is nothing to mark: a hard cut is the only
+    // way to stay within `limit`.
+    if (limit <= ellipsis.length) return text.slice(0, Math.max(limit, 0));
+
     const cut = text.slice(0, limit - ellipsis.length);
     const lastBreak = cut.lastIndexOf("\n");
     return (lastBreak > limit / 2 ? cut.slice(0, lastBreak) : cut) + ellipsis;

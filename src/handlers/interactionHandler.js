@@ -108,8 +108,8 @@ async function modalHandler(context, interaction) {
         // The modal only asks for levels, so this is always a single-prestige calculation.
         const inRange = currentLevel >= 1 && currentLevel <= 50 && wantedLevel >= 1 && wantedLevel <= 50;
         if (inRange && context.services.stats.isValidProgression(currentLevel, wantedLevel, 0, 0)) {
-            context.services.stats.calculateLevel(context, interaction, currentLevel, wantedLevel, 0, 0);
-        } else interaction.editReply({ content: texts.errors.invalidLevel[serverConfig.language] });
+            await context.services.stats.calculateLevel(context, interaction, currentLevel, wantedLevel, 0, 0);
+        } else await interaction.editReply({ content: texts.errors.invalidLevel[serverConfig.language] });
         return;
     }
 }

@@ -362,14 +362,14 @@ async function sendShrine(context, interaction) {
         });
     } catch (err) {
         console.log(`Error requesting the shrine: ${err.message}`);
-        interaction.editReply(texts.errors.shrineNotFound[serverConfig.language]);
+        await interaction.editReply(texts.errors.shrineNotFound[serverConfig.language]);
         return;
     }
 
     try {
         if (!shrineResult.perks || shrineResult.perks.length != 4) {
             console.log(`Invalid shrine payload: ${JSON.stringify(shrineResult)}`);
-            interaction.editReply(texts.errors.shrineNotFound[serverConfig.language]);
+            await interaction.editReply(texts.errors.shrineNotFound[serverConfig.language]);
             return;
         }
 
@@ -411,7 +411,7 @@ async function sendShrine(context, interaction) {
         await interaction.editReply({ content: `${header}\n${lines.join("\n")}`, files: [attachment] });
     } catch (err) {
         console.log(`Error building shrine: ${err}`);
-        interaction.editReply(texts.errors.unknownError[serverConfig.language] + process.env.SUPPORT_DISCORD);
+        await interaction.editReply(texts.errors.unknownError[serverConfig.language] + process.env.SUPPORT_DISCORD);
     }
 }
 
@@ -520,13 +520,6 @@ async function getSteamId(context, interaction, steamLink) {
     }
 }
 
-/**
- * @param context - BotContext.
- * @param interaction - Discord command interaction.
- * @param {BigInt64Array} steamId - SteamID in 64bits.
- * @param {String} role - "survivor", "killer", or null for the combined card.
- * @description First part for get user stats from Australian Website.
- */
 /**
  * @param context - BotContext.
  * @param {String} steamId - SteamID in 64 bits.
