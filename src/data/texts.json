@@ -21,8 +21,8 @@
             "Sacrificed: "
         ],
         "sacrificedObessions": [
-            "Sacrificios de obesion: ",
-            "Obessions sacrificed: "
+            "Sacrificios de obsesión: ",
+            "Obsessions sacrificed: "
         ],
         "perfectGames": [
             "Partidas perfectas: ",
@@ -67,6 +67,14 @@
         "chestsSearched": [
             "Cofres abiertos: ",
             "Chests searched: "
+        ],
+        "roleSurvivor": [
+            "Superviviente",
+            "Survivor"
+        ],
+        "roleKiller": [
+            "Asesino",
+            "Killer"
         ]
     },
     "errors": {

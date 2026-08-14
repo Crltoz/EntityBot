@@ -22,9 +22,12 @@
   },
   "homepage": "https://github.com/Crltoz/EntidadBotFinal#readme",
   "dependencies": {
+    "@resvg/resvg-js": "^2.6.2",
     "canvas": "^3.1.2",
     "discord.js": "^14.27.0",
     "dotenv": "^16.3.1",
-    "mongoose": "^8.0.4"
+    "mongoose": "^8.0.4",
+    "satori": "^0.29.0",
+    "satori-html": "^0.3.2"
   }
 }

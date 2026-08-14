@@ -4,26 +4,18 @@ const texts = require("../data/texts.json");
 const apis = require("../data/apis.json");
 const utils = require("../utils/utils.js");
 const http = require("./http.js");
+const render = require("./render.js");
+const statsTemplate = require("../templates/stats.js");
 
 const dbdStatsUrl = (path) => `https://${apis.dbdStats.host}${path}`;
 const steamUrl = (path) => `https://${apis.steam.host}${path}`;
 
-// Images
-let backgroundStatsKiller;
+// Backgrounds for the commands still drawn on canvas. The stats icons and their two backdrops
+// went with sendEmbedStats: that card is HTML now and embeds what it needs itself.
 let backgroundKiller;
 let backgroundSurvivor;
 let backgroundLevel;
 let backgroundShrine;
-let backgroundStatsSurvivor;
-let killerImage;
-let survivorImage;
-let bpImage;
-let killsImage;
-let sacrificedImage;
-let sacrificedObsessionsImage;
-let perfectGamesImage;
-let paletImage;
-let genDamagedImage;
 
 const font = "./assets/Font/BRUTTALL.ttf";
 Canvas.registerFont(font, { family: "dbd" });
@@ -36,18 +28,6 @@ async function init() {
     backgroundSurvivor = await Canvas.loadImage("./assets/Visuals/Background/random_survivor.jpg");
     backgroundShrine = await Canvas.loadImage("./assets/Visuals/Background/shrine.jpg");
     backgroundLevel = await Canvas.loadImage("./assets/Visuals/Background/level.jpg");
-    backgroundStatsSurvivor = await Canvas.loadImage("./assets/Visuals/Background/stats_survivor.jpg");
-    backgroundStatsKiller = await Canvas.loadImage("./assets/Visuals/Background/stats_killer.jpg");
-    killerImage = await Canvas.loadImage("./assets/Visuals/icons/killer_rank.png");
-    survivorImage = await Canvas.loadImage("./assets/Visuals/icons/survivor_rank.png");
-    bpImage = await Canvas.loadImage("./assets/Visuals/icons/bp.png");
-    killsImage = await Canvas.loadImage("./assets/Visuals/icons/killer.png");
-    sacrificedImage = await Canvas.loadImage("./assets/Visuals/icons/hook.png");
-    sacrificedObsessionsImage = await Canvas.loadImage("./assets/Visuals/icons/entity.png");
-    perfectGamesImage = await Canvas.loadImage("./assets/Visuals/icons/killer_perfect.png");
-    paletImage = await Canvas.loadImage("./assets/Visuals/icons/palet.png");
-    genDamagedImage = await Canvas.loadImage("./assets/Visuals/icons/genbreak.png");
-    carryImage = await Canvas.loadImage("./assets/Visuals/icons/carry.png");
     console.log(`Stats images loaded.`)
 }
 
@@ -512,158 +492,35 @@ async function postStats(context, interaction, steamId) {
  * @param steamProfile - Steam profile object.
  * @param dbdProfile - Dead By Daylight stats object.
  * @param {Boolean} isSurv - true = survivor | false = killer
- * @description - Send embed stats with all info.
+ * @description - Render the stats card and send it.
+ *
+ * The card is HTML laid out by satori rather than the ~150 lines of hand-placed fillText this
+ * replaced: adding a number is now a row in the template's field table instead of picking
+ * pixel coordinates that do not collide with the background art.
  */
 async function sendEmbedStats(context, interaction, steamProfile, dbdProfile, isSurv) {
     const serverConfig = await context.services.database.getOrCreateServer(interaction.guildId);
     const language = serverConfig.language;
-    if (!isSurv) {
-        const canvas = Canvas.createCanvas(1920, 1080);
-        const ctx = canvas.getContext('2d');
-        let fontSize = 10;
-        ctx.drawImage(backgroundStatsKiller, 0, 0, canvas.width, canvas.height);
 
-        ctx.strokeStyle = '#74037b';
-        ctx.strokeRect(0, 0, canvas.width, canvas.height);
-
-        // Statistics centered
-        ctx.font = '80px "dbd"';
-        ctx.fillStyle = '#ffffff';
-        ctx.fillText(texts.stats.statistics[language], utils.calculateCenter(910, texts.stats.statistics[language].length, fontSize), 75);
-
-        // Killer logo
-        ctx.drawImage(killerImage, 900, 150, 128, 128);
-
-        // Hours
-        ctx.font = '50px "dbd"';
-        ctx.fillText(texts.stats.hoursPlayed[language] + utils.comma(parseInt(dbdProfile.playtime / 60)), 230, 180);
-
-        // Bloodpoints
-        ctx.drawImage(bpImage, 25, 230, 64, 64);
-        ctx.font = '50px "dbd"';
-        ctx.fillText(utils.comma(dbdProfile.bloodpoints), 100, 280);
-
-        // Kills
-        ctx.drawImage(killsImage, 25, 330, 64, 64);
-        ctx.fillText(texts.stats.kills[language] + dbdProfile.killed, 100, 380);
-
-        // Sacrificed
-        ctx.drawImage(sacrificedImage, 25, 430, 64, 64);
-        ctx.fillText(texts.stats.sacrificed[language] + dbdProfile.sacrificed, 100, 480);
-
-        // Sacrificed obsessions
-        ctx.drawImage(sacrificedObsessionsImage, 25, 530, 64, 64);
-        ctx.fillText(texts.stats.sacrificedObessions[language] + dbdProfile.sacrificed_obsessions, 100, 580);
-
-        // Perfect games
-        ctx.drawImage(perfectGamesImage, 25, 630, 64, 64);
-        ctx.fillText(texts.stats.perfectGames[language] + dbdProfile.killer_perfectgames, 100, 680);
-
-        // Full load out
-        ctx.drawImage(paletImage, 25, 730, 64, 64);
-        ctx.fillText(texts.stats.killerFullLoadout[language] + dbdProfile.killer_fullloadout, 100, 780);
-
-        // Gens damaged
-        ctx.drawImage(genDamagedImage, 25, 830, 64, 64);
-        ctx.fillText(texts.stats.gensDamaged[language] + dbdProfile.gensdamagedwhileonehooked, 100, 880);
-
-        // Survivors grabbed
-        ctx.drawImage(carryImage, 25, 930, 64, 64);
-        ctx.fillText(texts.stats.survivorsGrabbed[language] + dbdProfile.survivorsgrabbedrepairinggen, 100, 980);
-
-        // profile name
-        ctx.fillStyle = '#E52121';
-        ctx.font = '70px "dbd"';
-        ctx.fillText(steamProfile.personaname, 230, 110);
-
-        // Draw circle
-        ctx.beginPath();
-        ctx.arc(125, 125, 80, 0, Math.PI * 2, true);
-        ctx.strokeStyle = '#F32C2C';
-        ctx.lineWidth = 8;
-        ctx.closePath();
-        ctx.clip();
-
-        const avatar = await loadImageOrPlaceholder(steamProfile.avatarfull, 200, 200);
-        ctx.drawImage(avatar, 25, 25, 200, 200);
-
-        const attachment = new context.discord.AttachmentBuilder(canvas.toBuffer(), { name: 'stats-image.jpg' });
-        let flagOrSteam = steamProfile.loccountrycode ? `:flag_${steamProfile.loccountrycode.toLowerCase()}:` : "<:steam:914663956860248134>";
-        interaction.editReply({ content: `${flagOrSteam} **${steamProfile.personaname}** | ${texts.stats.seeFullStatistics[language]} https://dbd.tricky.lol/playerstats/${steamProfile.steamid}`, files: [attachment] });
-    } else {
-        const canvas = Canvas.createCanvas(1920, 1080);
-        const ctx = canvas.getContext('2d');
-        let fontSize = 10;
-        ctx.drawImage(backgroundStatsSurvivor, 0, 0, canvas.width, canvas.height);
-
-        ctx.strokeStyle = '#74037b';
-        ctx.strokeRect(0, 0, canvas.width, canvas.height);
-
-        // Statistics centered
-        ctx.font = '80px "dbd"';
-        ctx.fillStyle = '#ffffff';
-        ctx.fillText(texts.stats.statistics[language], utils.calculateCenter(910, texts.stats.statistics[language].length, fontSize), 75);
-
-        // Killer logo
-        ctx.drawImage(survivorImage, 900, 150, 128, 128);
-
-        // Hours
-        ctx.font = '50px "dbd"';
-        ctx.fillText(texts.stats.hoursPlayed[language] + utils.comma(parseInt(dbdProfile.playtime / 60)), 230, 180);
-
-        // Bloodpoints
-        ctx.drawImage(bpImage, 25, 230, 64, 64);
-        ctx.font = '50px "dbd"';
-        ctx.fillText(utils.comma(dbdProfile.bloodpoints), 100, 280);
-
-        // Kills
-        ctx.drawImage(killsImage, 25, 330, 64, 64);
-        ctx.fillText(texts.stats.perfectGames[language] + dbdProfile.survivor_perfectgames, 100, 380);
-
-        // Sacrificed
-        ctx.drawImage(sacrificedImage, 25, 430, 64, 64);
-        ctx.fillText(texts.stats.gensRepaired[language] + dbdProfile.gensrepaired, 100, 480);
-
-        // Sacrificed obsessions
-        ctx.drawImage(sacrificedObsessionsImage, 25, 530, 64, 64);
-        ctx.fillText(texts.stats.survivorsHealed[language] + dbdProfile.survivorshealed, 100, 580);
-
-        // Perfect games
-        ctx.drawImage(perfectGamesImage, 25, 630, 64, 64);
-        ctx.fillText(texts.stats.skillchecks[language] + dbdProfile.skillchecks, 100, 680);
-
-        // Stuns
-        ctx.drawImage(paletImage, 25, 730, 64, 64);
-        ctx.fillText(texts.stats.escaped[language] + dbdProfile.escaped, 100, 780);
-
-        // Gens damaged
-        ctx.drawImage(genDamagedImage, 25, 830, 64, 64);
-        ctx.fillText(texts.stats.hexTotemsCleansed[language] + dbdProfile.hextotemscleansed, 100, 880);
-
-        // Survivors grabbed
-        ctx.drawImage(carryImage, 25, 930, 64, 64);
-        ctx.fillText(texts.stats.exitGatesOpened[language] + dbdProfile.exitgatesopened, 100, 980);
-
-        // profile name
-        ctx.fillStyle = '#E52121';
-        ctx.font = '70px "dbd"';
-        ctx.fillText(steamProfile.personaname, 230, 110);
-
-        // Draw circle
-        ctx.beginPath();
-        ctx.arc(125, 125, 80, 0, Math.PI * 2, true);
-        ctx.strokeStyle = '#F32C2C';
-        ctx.lineWidth = 8;
-        ctx.closePath();
-        ctx.clip();
-
-        const avatar = await loadImageOrPlaceholder(steamProfile.avatarfull, 200, 200);
-        ctx.drawImage(avatar, 25, 25, 200, 200);
-
-        const attachment = new context.discord.AttachmentBuilder(canvas.toBuffer(), { name: 'stats-image.jpg' });
-        let flagOrSteam = steamProfile.loccountrycode ? `:flag_${steamProfile.loccountrycode.toLowerCase()}:` : "<:steam:914663956860248134>";
-        interaction.editReply({ content: `${flagOrSteam} **${steamProfile.personaname}** | ${texts.stats.seeFullStatistics[language]} https://dbd.tricky.lol/playerstats/${steamProfile.steamid} `, files: [attachment] });
+    let png;
+    try {
+        const markup = await statsTemplate.build(steamProfile, dbdProfile, isSurv, language);
+        png = await render.toPng(markup, statsTemplate.WIDTH, statsTemplate.HEIGHT);
+    } catch (err) {
+        console.log(`Error rendering the stats card: ${err.message}`);
+        await sendEmbedError(context, interaction, 3);
+        return;
     }
+
+    const attachment = new context.discord.AttachmentBuilder(png, { name: 'stats.png' });
+    const flagOrSteam = steamProfile.loccountrycode
+        ? `:flag_${steamProfile.loccountrycode.toLowerCase()}:`
+        : "<:steam:914663956860248134>";
+
+    await interaction.editReply({
+        content: `${flagOrSteam} **${steamProfile.personaname}** | ${texts.stats.seeFullStatistics[language]} https://dbd.tricky.lol/playerstats/${steamProfile.steamid}`,
+        files: [attachment]
+    });
 }
 
 
@@ -1033,6 +890,7 @@ async function test(context, interaction, type, index) {
 }
 
 module.exports = {
+    sendEmbedStats: sendEmbedStats,
     sendShrine: sendShrine,
     init: init,
     getStats: getStats,
