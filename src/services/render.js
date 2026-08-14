@@ -2,9 +2,19 @@ const fs = require("fs");
 const path = require("path");
 const Canvas = require("canvas");
 const satori = require("satori").default;
-const { html } = require("satori-html");
 const { Resvg } = require("@resvg/resvg-js");
 const http = require("./http.js");
+
+// satori-html ships ESM only, and require() of an ES module is a hard error before Node
+// 22.12 — which is exactly the runtime the image pins, so a plain require works on a dev
+// machine and takes the bot down on deploy. Importing it lazily keeps this file CommonJS
+// and works on every version. The promise is cached, not awaited at load, so concurrent
+// renders share the single import.
+let satoriHtml;
+function loadHtml() {
+    if (!satoriHtml) satoriHtml = import("satori-html").then((mod) => mod.html);
+    return satoriHtml;
+}
 
 /**
  * @description Turns HTML + CSS into a PNG, without a browser.
@@ -109,6 +119,7 @@ async function remoteAsset(url, width, height) {
  * @description Render markup to a PNG buffer.
  */
 async function toPng(markup, width, height) {
+    const html = await loadHtml();
     const svg = await satori(html(markup), {
         width: width,
         height: height,
