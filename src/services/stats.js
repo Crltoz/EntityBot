@@ -1,4 +1,4 @@
-const fs = require("fs");
+const fs = require("fs/promises");
 const Canvas = require("canvas");
 const { escapeMarkdown } = require("discord.js");
 const texts = require("../data/texts.json");
@@ -335,7 +335,9 @@ async function loadImageOrPlaceholder(path, width, height) {
         // Local files are read here rather than handed to Canvas as a path: node-canvas cannot
         // open a path with non-ASCII characters on Windows, which silently cost us the
         // portraits for The Onryō and The Dark Lord in every command that draws a character.
-        const source = /^https?:\/\//i.test(path) ? path : fs.readFileSync(path);
+        // The read is async so a card that loads a dozen assets does not park the event loop
+        // and push the interaction towards its timeout.
+        const source = /^https?:\/\//i.test(path) ? path : await fs.readFile(path);
         return await Canvas.loadImage(source);
     } catch (err) {
         console.log(`Could not load asset '${path}', drawing placeholder instead: ${err.message}`);
