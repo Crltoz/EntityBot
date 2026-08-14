@@ -1,7 +1,7 @@
 const fs = require("fs");
 const path = require("path");
-const https = require("https");
 const utils = require("../utils/utils.js");
+const http = require("./http.js");
 
 /**
  * @description Pulls the official Spanish perk names from the wiki.
@@ -22,7 +22,6 @@ const utils = require("../utils/utils.js");
 const NAMES_FILE = path.join(__dirname, "../data/names.es.json");
 const WIKI_API = "https://deadbydaylight.wiki.gg/api.php";
 const BATCH_SIZE = 50;
-const REQUEST_TIMEOUT = 20000;
 
 let names = {};
 
@@ -41,19 +40,7 @@ function getNames() {
 }
 
 function get(url) {
-    return new Promise((resolve, reject) => {
-        const req = https.get(url, { headers: { 'User-Agent': process.env.USER_AGENT || "EntityBot" } }, (res) => {
-            if (res.statusCode !== 200) {
-                res.resume();
-                return reject(new Error(`HTTP ${res.statusCode}`));
-            }
-            let body = "";
-            res.on("data", (c) => body += c);
-            res.on("end", () => resolve(body));
-        });
-        req.on("error", reject);
-        req.setTimeout(REQUEST_TIMEOUT, () => req.destroy(new Error("timed out")));
-    });
+    return http.getText(url, { headers: { 'User-Agent': http.userAgent() } });
 }
 
 /**

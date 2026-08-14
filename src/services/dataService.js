@@ -1,12 +1,11 @@
-const https = require("https");
 const apis = require("../data/apis.json");
 const utils = require("../utils/utils.js");
 const overrides = require("../data/overrides.es.json");
 const iconService = require("./iconService.js");
 const namesService = require("./namesService.js");
+const http = require("./http.js");
 
 const ENDPOINTS = ["perks", "characters", "dlc"];
-const REQUEST_TIMEOUT = 20000;
 
 // Raw API payloads, whatever their origin (live API, Mongo snapshot or bundled files).
 let raw = { perks: null, characters: null, dlc: null };
@@ -28,29 +27,8 @@ let refreshTimer = null;
  * @description GET a JSON endpoint, rejecting on any non-2xx, timeout or malformed body.
  */
 function fetchJson(path, version) {
-    return new Promise((resolve, reject) => {
-        const req = https.get({
-            host: apis.dbdStats.host,
-            path: path,
-            headers: { 'User-Agent': process.env.USER_AGENT + version }
-        }, function (res) {
-            const bodyChunks = [];
-            res.on('data', (chunk) => bodyChunks.push(chunk));
-            res.on('end', function () {
-                if (res.statusCode != 200 && res.statusCode != 201) {
-                    return reject(new Error(`${path} responded ${res.statusCode}`));
-                }
-                try {
-                    resolve(JSON.parse(Buffer.concat(bodyChunks)));
-                } catch (err) {
-                    reject(new Error(`${path} returned invalid JSON: ${err.message}`));
-                }
-            });
-        });
-
-        req.on('error', reject);
-        req.setTimeout(REQUEST_TIMEOUT, () => req.destroy(new Error(`${path} timed out`)));
-        req.end();
+    return http.getJson(`https://${apis.dbdStats.host}${path}`, {
+        headers: { 'User-Agent': http.userAgent(version) }
     });
 }
 

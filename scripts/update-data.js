@@ -18,8 +18,8 @@ require("dotenv").config();
 
 const fs = require("fs");
 const path = require("path");
-const https = require("https");
 
+const http = require("../src/services/http.js");
 const iconService = require("../src/services/iconService.js");
 const utils = require("../src/utils/utils.js");
 
@@ -34,23 +34,8 @@ const API = "https://dbd.tricky.lol/api";
 const write = process.argv.includes("--write");
 
 function get(url, binary) {
-    return new Promise((resolve, reject) => {
-        const req = https.get(url, { headers: { "User-Agent": process.env.USER_AGENT || "EntityBot" } }, (res) => {
-            if (res.statusCode >= 300 && res.statusCode < 400 && res.headers.location) {
-                res.resume();
-                return resolve(get(res.headers.location, binary));
-            }
-            if (res.statusCode !== 200) {
-                res.resume();
-                return reject(new Error(`HTTP ${res.statusCode}`));
-            }
-            const chunks = [];
-            res.on("data", (c) => chunks.push(c));
-            res.on("end", () => resolve(binary ? Buffer.concat(chunks) : Buffer.concat(chunks).toString()));
-        });
-        req.on("error", reject);
-        req.setTimeout(30000, () => req.destroy(new Error("timed out")));
-    });
+    const options = { headers: { "User-Agent": http.userAgent() }, timeout: 30000 };
+    return binary ? http.getBuffer(url, options) : http.getText(url, options);
 }
 
 function readJson(file, fallback) {

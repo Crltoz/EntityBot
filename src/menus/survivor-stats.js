@@ -1,4 +1,4 @@
-const { ContextMenuCommandBuilder } = require('@discordjs/builders');
+const { ContextMenuCommandBuilder, MessageFlags } = require('discord.js');
 const texts = require("../data/texts.json");
 
 module.exports = {
@@ -6,12 +6,13 @@ module.exports = {
         .setType(2)
         .setName("Survivor stats"),
     async execute(context, interaction) {
-        await interaction.deferReply({ ephemeral: true });
+        await interaction.deferReply({ flags: MessageFlags.Ephemeral });
         const serverConfig = await context.services.database.getOrCreateServer(interaction.guildId);
         const user = await context.services.database.userdataSchema.findOne({ _id: interaction.targetUser.id });
-        if (user) {
-            const userSteamId = user.steamID;
-            context.services.stats.getStats(context, interaction, `https://steamcommunity.com/profiles/${userSteamId}`, true);
-        } else interaction.editReply(texts.profileStats.missingProfile[serverConfig.language]);
+        // Same guard as /stats: a stored id that is not a SteamID64 is no profile at all.
+        const stored = user ? context.services.stats.parseSteamInput(user.steamID) : null;
+        if (stored && stored.kind === "id64") {
+            await context.services.stats.getStatsForSteamId(context, interaction, stored.value, "survivor");
+        } else await interaction.editReply(texts.profileStats.missingProfile[serverConfig.language]);
     }
 };

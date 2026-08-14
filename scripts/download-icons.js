@@ -11,28 +11,14 @@
 
 require("dotenv").config();
 
-const https = require("https");
 const iconService = require("../src/services/iconService.js");
+const http = require("../src/services/http.js");
 
 const PERKS_API = "https://dbd.tricky.lol/api/perks";
 const write = process.argv.includes("--write");
 
-function get(url) {
-    return new Promise((resolve, reject) => {
-        https.get(url, { headers: { "User-Agent": process.env.USER_AGENT || "EntityBot" } }, (res) => {
-            if (res.statusCode !== 200) {
-                res.resume();
-                return reject(new Error(`HTTP ${res.statusCode} for ${url}`));
-            }
-            let body = "";
-            res.on("data", (c) => body += c);
-            res.on("end", () => resolve(body));
-        }).on("error", reject);
-    });
-}
-
 (async () => {
-    const perks = JSON.parse(await get(PERKS_API));
+    const perks = await http.getJson(PERKS_API, { headers: { "User-Agent": http.userAgent() } });
     const before = Object.keys(iconService.loadIcons()).length;
     console.log(`Perks in the API: ${Object.keys(perks).length} | icons already on disk: ${before}`);
 

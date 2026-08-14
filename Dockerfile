@@ -1,7 +1,7 @@
 # node-canvas is the only awkward dependency here: it needs a toolchain and the
 # cairo/pango headers to build, but only the shared libraries to run. Two stages
 # keep those headers out of the shipped image.
-FROM node:20.18.3-slim AS build
+FROM node:22.11.0-slim AS build
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
       build-essential python3 pkg-config \
@@ -14,7 +14,7 @@ COPY package.json package-lock.json ./
 RUN npm ci --omit=dev
 
 
-FROM node:20.18.3-slim AS runtime
+FROM node:22.11.0-slim AS runtime
 
 # fontconfig is what lets Canvas.registerFont() pick up assets/Font/BRUTTALL.ttf
 # instead of silently falling back to the default sans face.

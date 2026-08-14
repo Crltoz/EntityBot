@@ -1,4 +1,4 @@
-const { SlashCommandBuilder } = require('@discordjs/builders');
+const { SlashCommandBuilder } = require('discord.js');
 const texts = require("../data/texts.json");
 
 module.exports = {
@@ -8,7 +8,7 @@ module.exports = {
         .addStringOption(steamLink => {
             return steamLink
                 .setName("steam-link")
-                .setDescription("Steam profile link")
+                .setDescription("Steam link, SteamID, friend code or username")
                 .setRequired(true)
         }),
 	async execute(context, interaction) {
@@ -17,7 +17,9 @@ module.exports = {
         const steamLink = interaction.options.get("steam-link").value;
         if (steamLink && interaction.member) {
             const memberId = interaction.member.id;
-            const steamId = await context.services.stats.getSteamId(context, interaction, steamLink);
+            const steamId = await context.services.stats.getSteamId(context, interaction, steamLink.toLowerCase());
+            // A link that could not be resolved is not worth storing, and getSteamId already replied.
+            if (!steamId) return;
             const member = await context.services.database.getOrCreateUser(memberId);
             member.steamID = steamId;
             await member.save()

@@ -1,9 +1,11 @@
+const { ChannelType, PermissionFlagsBits } = require("discord.js");
+
 async function guildHandler(context, guild) {
     let defaultChannel = "";
     guild.channels.cache.forEach((channel) => {
-        // discord.js v13 reports text channels as "GUILD_TEXT", not "text".
-        if (channel.type == "GUILD_TEXT" && defaultChannel == "") {
-            if (channel.permissionsFor(guild.me).has("SEND_MESSAGES")) {
+        // v14 reports the channel type as a numeric enum, not the "GUILD_TEXT" string of v13.
+        if (channel.type === ChannelType.GuildText && defaultChannel == "") {
+            if (channel.permissionsFor(guild.members.me).has(PermissionFlagsBits.SendMessages)) {
                 defaultChannel = channel;
             }
         }

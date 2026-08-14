@@ -1,9 +1,9 @@
 const Discord = require("discord.js");
 const client = new Discord.Client({
     intents: [
-        Discord.Intents.FLAGS.GUILDS,
-        Discord.Intents.FLAGS.GUILD_MESSAGES,
-        Discord.Intents.FLAGS.GUILD_MESSAGE_REACTIONS
+        Discord.GatewayIntentBits.Guilds,
+        Discord.GatewayIntentBits.GuildMessages,
+        Discord.GatewayIntentBits.GuildMessageReactions
     ]
 });
 
@@ -15,6 +15,7 @@ const characters = require("../services/characters.js");
 const rules = require("../services/rules.js");
 const database = require("../services/database.js");
 const dataService = require("../services/dataService.js");
+const gameInfo = require("../services/gameInfo.js");
 
 // config
 const config = require("../data/config.json");
@@ -32,6 +33,7 @@ class Context {
         this.services.rules = rules;
         this.services.database = database;
         this.services.dataService = dataService;
+        this.services.gameInfo = gameInfo;
     }
 }
 

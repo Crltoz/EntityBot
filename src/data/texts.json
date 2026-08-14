@@ -21,8 +21,8 @@
             "Sacrificed: "
         ],
         "sacrificedObessions": [
-            "Sacrificios de obesion: ",
-            "Obessions sacrificed: "
+            "Sacrificios de obsesión: ",
+            "Obsessions sacrificed: "
         ],
         "perfectGames": [
             "Partidas perfectas: ",
@@ -67,6 +67,26 @@
         "chestsSearched": [
             "Cofres abiertos: ",
             "Chests searched: "
+        ],
+        "roleSurvivor": [
+            "Superviviente",
+            "Survivor"
+        ],
+        "roleKiller": [
+            "Asesino",
+            "Killer"
+        ],
+        "saved": [
+            "Desenganches: ",
+            "Unhooks: "
+        ],
+        "hatchesClosed": [
+            "Trampillas cerradas: ",
+            "Hatches closed: "
+        ],
+        "needsProfile": [
+            "No tengo tu perfil de Steam. Pásalo en el comando (**/stats [link]**) o asócialo una vez con **/perfil [link]** y después te bastará con **/stats**.\nVale cualquiera de estos: el link del perfil, tu SteamID, tu código de amigo o tu nombre de usuario.",
+            "I don't have your Steam profile. Pass it in the command (**/stats [link]**) or link it once with **/profile [link]** and then **/stats** alone is enough.\nAny of these work: the profile link, your SteamID, your friend code or your username."
         ]
     },
     "errors": {
@@ -200,7 +220,15 @@
                     }
                 ]
             }
-        }
+        },
+        "apiUnavailable": [
+            "La API de estadísticas no responde ahora mismo, intentalo de nuevo en un rato.",
+            "The stats API is not responding right now, try again in a while."
+        ],
+        "invalidPrestige": [
+            "El prestigio y el nivel deseados tienen que estar por delante de los actuales, y el prestigio llega hasta 100.",
+            "The wanted prestige and level have to be ahead of the current ones, and prestige caps at 100."
+        ]
     },
     "languageChanged": [
         "Cambiaste el idioma del bot a Español.",
@@ -287,6 +315,22 @@
             "profile": [
                 "Asocia tu perfil de steam con tu Discord para que puedas obtener stats al hacer click derecho sobre tu perfil -> Aplicaciones -> Survivor stats / Killer stats",
                 "Associate your steam profile with your Discord so you can get stats by right clicking on your profile -> Applications -> Survivor stats / Killer stats"
+            ],
+            "killswitch": [
+                "Muestra qué perks, objetos, add-ons u ofrendas están deshabilitados ahora mismo por el equipo del juego.",
+                "Shows which perks, items, add-ons or offerings are disabled right now by the game team."
+            ],
+            "events": [
+                "Muestra el evento activo y el próximo, además de cuándo es el siguiente reinicio de rango.",
+                "Shows the active and upcoming event, plus when the next rank reset happens."
+            ],
+            "patchNotes": [
+                "Muestra las notas del último parche de Dead by Daylight.",
+                "Shows the notes of the latest Dead by Daylight patch."
+            ],
+            "adepts": [
+                "Muestra los adepts conseguidos, usando el perfil de Steam que asociaste.",
+                "Shows the adepts earned, using the Steam profile you associated."
             ]
         },
         "name": {
@@ -325,6 +369,22 @@
             "profile": [
                 "perfil",
                 "profile"
+            ],
+            "killswitch": [
+                "killswitch",
+                "killswitch"
+            ],
+            "events": [
+                "eventos",
+                "events"
+            ],
+            "patchNotes": [
+                "patchnotes",
+                "patchnotes"
+            ],
+            "adepts": [
+                "adeptos",
+                "adepts"
             ]
         },
         "args": {
@@ -347,6 +407,10 @@
             "profile": [
                 "[URL Perfil Steam o Código de amigo]",
                 "[Steam profile URL or friend code]"
+            ],
+            "adepts": [
+                "[Rol opcional]",
+                "[Optional role]"
             ]
         }
     },
@@ -421,5 +485,131 @@
     "users": [
         "usuarios tienen acceso a los comandos.",
         "users have access to the commands."
+    ],
+    "killswitch": {
+        "title": [
+            "🚫 Deshabilitado ahora mismo",
+            "🚫 Disabled right now"
+        ],
+        "empty": [
+            "No hay nada deshabilitado ahora mismo. Todo el contenido del juego está activo. <:Entityicon:881447186896916500>",
+            "Nothing is disabled right now. All the game content is active. <:Entityicon:881447186896916500>"
+        ],
+        "footer": [
+            "Fuente: dbd.tricky.lol · el equipo del juego deshabilita contenido cuando encuentra un bug grave",
+            "Source: dbd.tricky.lol · the game team disables content when it finds a serious bug"
+        ],
+        "types": {
+            "perk": [
+                "Perks",
+                "Perks"
+            ],
+            "item": [
+                "Objetos",
+                "Items"
+            ],
+            "addon": [
+                "Add-ons",
+                "Add-ons"
+            ],
+            "offering": [
+                "Ofrendas",
+                "Offerings"
+            ],
+            "map": [
+                "Mapas",
+                "Maps"
+            ],
+            "character": [
+                "Personajes",
+                "Characters"
+            ],
+            "other": [
+                "Otros",
+                "Other"
+            ]
+        }
+    },
+    "events": {
+        "title": [
+            "📅 Eventos",
+            "📅 Events"
+        ],
+        "active": [
+            "En curso",
+            "Active"
+        ],
+        "upcoming": [
+            "Próximo",
+            "Upcoming"
+        ],
+        "none": [
+            "No hay ningún evento en curso.",
+            "There is no event running."
+        ],
+        "noneUpcoming": [
+            "No hay ningún evento anunciado todavía.",
+            "No event has been announced yet."
+        ],
+        "rankReset": [
+            "Próximo reinicio de rango",
+            "Next rank reset"
+        ],
+        "bonus": [
+            "Bonus de puntos de sangre",
+            "Bloodpoint bonus"
+        ],
+        "ends": [
+            "Termina",
+            "Ends"
+        ],
+        "starts": [
+            "Empieza",
+            "Starts"
+        ]
+    },
+    "patchNotes": {
+        "title": [
+            "📄 Parche",
+            "📄 Patch"
+        ],
+        "readMore": [
+            "Notas completas",
+            "Full notes"
+        ],
+        "notFound": [
+            "No pude conseguir las notas del parche, intentalo de nuevo más tarde.",
+            "I could not get the patch notes, try again later."
+        ]
+    },
+    "adepts": {
+        "title": [
+            "🏆 Adepts",
+            "🏆 Adepts"
+        ],
+        "none": [
+            "Todavía no tienes ningún adept registrado.",
+            "You do not have any adept recorded yet."
+        ],
+        "survivors": [
+            "Supervivientes",
+            "Survivors"
+        ],
+        "killers": [
+            "Asesinos",
+            "Killers"
+        ],
+        "notFound": [
+            "No encontré las estadísticas de esa cuenta. Usa **/stats** primero para que se registre.",
+            "I could not find the stats for that account. Use **/stats** first so it gets recorded."
+        ],
+        "needsProfile": [
+            "Primero asocia tu cuenta de Steam con **/perfil [Steam-link]** para que pueda buscar tus adepts.",
+            "Associate your Steam account first with **/profile [Steam-link]** so I can look up your adepts."
+        ]
+    },
+    "levelEstimate": [
+        "*Cálculo aproximado: el coste de cada red de sangre depende de los nodos que salgan y de cuáles devore la Entidad.*",
+        "*Rough estimate: each bloodweb's cost depends on which nodes spawn and which ones the Entity devours.*"
     ]
 }

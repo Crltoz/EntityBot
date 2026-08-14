@@ -1,4 +1,4 @@
-const { SlashCommandBuilder } = require('@discordjs/builders');
+const { SlashCommandBuilder, PermissionFlagsBits, MessageFlags } = require('discord.js');
 const texts = require("../data/texts.json");
 
 module.exports = {
@@ -21,46 +21,50 @@ module.exports = {
         const serverConfig = await context.services.database.getOrCreateServer(interaction.guildId);
         switch (interaction.options.getSubcommand()) {
             case "general": {
-                const embedd = new context.discord.MessageEmbed()
+                const embedd = new context.discord.EmbedBuilder()
                     .setColor('#FF0000')
                     .setTitle(texts.commands.help.header[serverConfig.language])
                     .setURL('https://deadbydaylight.gamepedia.com/Dead_by_Daylight_Wiki')
                     .setThumbnail(context.client.user.avatarURL())
-                    .addField('/discord', texts.commands.help.discord[serverConfig.language])
-                    .addField(texts.commands.help.note[serverConfig.language], texts.commands.help.noteDescription[serverConfig.language])
-                    .addField(`/${texts.commands.name.stats[serverConfig.language]} ${texts.commands.args.stats[serverConfig.language]}`, `${texts.commands.help.moreInfo[serverConfig.language]} stats**`)
-                    .addField(`/${texts.commands.name.level[serverConfig.language]} ${texts.commands.args.level[serverConfig.language]}`, `${texts.commands.help.moreInfo[serverConfig.language]} ${texts.commands.name.level[serverConfig.language]}**`)
-                    .addField('/lobby', `${texts.commands.help.lobby[serverConfig.language]}`)
-                    .addField(`/${texts.commands.name.random[serverConfig.language]} ${texts.commands.args.random[serverConfig.language]}`, texts.commands.help.random[serverConfig.language])
-                    .addField(`/${texts.commands.name.shrine[serverConfig.language]}`, texts.commands.help.shrine[serverConfig.language])
-                    .addField(`/${texts.commands.name.profile[serverConfig.language]} ${texts.commands.args.profile[serverConfig.language]}`, texts.commands.help.profile[serverConfig.language]);
+                    .addFields({ name: '/discord', value: texts.commands.help.discord[serverConfig.language] })
+                    .addFields({ name: texts.commands.help.note[serverConfig.language], value: texts.commands.help.noteDescription[serverConfig.language] })
+                    .addFields({ name: `/${texts.commands.name.stats[serverConfig.language]} ${texts.commands.args.stats[serverConfig.language]}`, value: `${texts.commands.help.moreInfo[serverConfig.language]} stats**` })
+                    .addFields({ name: `/${texts.commands.name.level[serverConfig.language]} ${texts.commands.args.level[serverConfig.language]}`, value: `${texts.commands.help.moreInfo[serverConfig.language]} ${texts.commands.name.level[serverConfig.language]}**` })
+                    .addFields({ name: '/lobby', value: `${texts.commands.help.lobby[serverConfig.language]}` })
+                    .addFields({ name: `/${texts.commands.name.random[serverConfig.language]} ${texts.commands.args.random[serverConfig.language]}`, value: texts.commands.help.random[serverConfig.language] })
+                    .addFields({ name: `/${texts.commands.name.shrine[serverConfig.language]}`, value: texts.commands.help.shrine[serverConfig.language] })
+                    .addFields({ name: `/${texts.commands.name.profile[serverConfig.language]} ${texts.commands.args.profile[serverConfig.language]}`, value: texts.commands.help.profile[serverConfig.language] })
+                    .addFields({ name: `/${texts.commands.name.killswitch[serverConfig.language]}`, value: texts.commands.help.killswitch[serverConfig.language] })
+                    .addFields({ name: `/${texts.commands.name.events[serverConfig.language]}`, value: texts.commands.help.events[serverConfig.language] })
+                    .addFields({ name: `/${texts.commands.name.patchNotes[serverConfig.language]}`, value: texts.commands.help.patchNotes[serverConfig.language] })
+                    .addFields({ name: `/${texts.commands.name.adepts[serverConfig.language]} ${texts.commands.args.adepts[serverConfig.language]}`, value: texts.commands.help.adepts[serverConfig.language] });
 
-                if (interaction.member.permissions.has("ADMINISTRATOR")) {
-                    embedd.addField(`/${texts.commands.name.channel[serverConfig.language]} ${texts.commands.args.channel[serverConfig.language]}`, texts.commands.help.channel[serverConfig.language])
+                if (interaction.member.permissions.has(PermissionFlagsBits.Administrator)) {
+                    embedd.addFields({ name: `/${texts.commands.name.channel[serverConfig.language]} ${texts.commands.args.channel[serverConfig.language]}`, value: texts.commands.help.channel[serverConfig.language] })
                 }
-                interaction.reply({ embeds: [embedd], ephemeral: true });
+                interaction.reply({ embeds: [embedd], flags: MessageFlags.Ephemeral });
                 break;
             }
             case "stats": {
-                const embedd = new context.discord.MessageEmbed()
+                const embedd = new context.discord.EmbedBuilder()
                     .setColor('#FF0000')
                     .setTitle(`🔰 /${texts.commands.name.stats[serverConfig.language]} ${texts.commands.args.stats[serverConfig.language]} 🔰`)
                     .setURL('https://deadbydaylight.gamepedia.com/Dead_by_Daylight_Wiki')
                     .setThumbnail(context.client.user.avatarURL())
-                    .addField(texts.commands.help.isFor[serverConfig.language], texts.commands.help.statsIsFor[serverConfig.language])
-                    .addField(texts.commands.help.example[serverConfig.language], texts.commands.help.statsExample[serverConfig.language])
-                interaction.reply({ embeds: [embedd], ephemeral: true });
+                    .addFields({ name: texts.commands.help.isFor[serverConfig.language], value: texts.commands.help.statsIsFor[serverConfig.language] })
+                    .addFields({ name: texts.commands.help.example[serverConfig.language], value: texts.commands.help.statsExample[serverConfig.language] })
+                interaction.reply({ embeds: [embedd], flags: MessageFlags.Ephemeral });
                 break;
             }
             case "nivel": {
-                const embedd = new context.discord.MessageEmbed()
+                const embedd = new context.discord.EmbedBuilder()
                     .setColor('#FF0000')
                     .setTitle(`🔰 /${texts.commands.name.level[serverConfig.language]} ${texts.commands.args.level[serverConfig.language]} 🔰`)
                     .setURL('https://deadbydaylight.gamepedia.com/Dead_by_Daylight_Wiki')
                     .setThumbnail(context.client.user.avatarURL())
-                    .addField(texts.commands.help.isFor[serverConfig.language], texts.commands.help.levelIsFor[serverConfig.language])
-                    .addField(texts.commands.help.example[serverConfig.language], texts.commands.help.levelExample[serverConfig.language])
-                interaction.reply({ embeds: [embedd], ephemeral: true });
+                    .addFields({ name: texts.commands.help.isFor[serverConfig.language], value: texts.commands.help.levelIsFor[serverConfig.language] })
+                    .addFields({ name: texts.commands.help.example[serverConfig.language], value: texts.commands.help.levelExample[serverConfig.language] })
+                interaction.reply({ embeds: [embedd], flags: MessageFlags.Ephemeral });
                 break;
             }
         }

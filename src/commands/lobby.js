@@ -1,4 +1,4 @@
-const { SlashCommandBuilder } = require('@discordjs/builders');
+const { SlashCommandBuilder } = require('discord.js');
 const texts = require("../data/texts.json");
 
 module.exports = {
@@ -7,16 +7,16 @@ module.exports = {
         .setDescription('Menu-selector for bot functions | Menú para usar las funciones del bot.'),
     async execute(context, interaction) {
         const serverConfig = await context.services.database.getOrCreateServer(interaction.guildId);
-        const embed = new context.discord.MessageEmbed()
+        const embed = new context.discord.EmbedBuilder()
             .setColor('#FF0000')
             .setTitle('🔰 Lobby 🔰')
             .setURL('https://deadbydaylight.gamepedia.com/Dead_by_Daylight_Wiki')
             .setDescription(texts.lobby.description[serverConfig.language])
             .setThumbnail(context.client.user.avatarURL());
 
-        const menu = new context.discord.MessageActionRow()
+        const menu = new context.discord.ActionRowBuilder()
             .addComponents(
-                new context.discord.MessageSelectMenu()
+                new context.discord.StringSelectMenuBuilder()
                     .setCustomId("lobby")
                     .setPlaceholder(texts.lobby.placeholder[serverConfig.language])
                     .addOptions([

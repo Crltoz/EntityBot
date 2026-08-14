@@ -1,14 +1,20 @@
 const mongoose = require('mongoose');
 
 async function init() {
-    await mongoose.connect(process.env.MONGO_URI, {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-    });
+    // useNewUrlParser/useUnifiedTopology were dropped in the driver mongoose 8 ships with.
+    await mongoose.connect(process.env.MONGO_URI);
     console.log("Connected to database.");
 }
 
-async function getOrCreateServer(guildId) {
+// Every interaction asks for the server config, and the handler often asks a second and third
+// time down the call chain. Caching the *promise* collapses those into one round-trip and also
+// prevents two concurrent commands in a fresh guild from both inserting the document.
+// The cached value is the live mongoose document, so a caller that mutates and saves it is
+// immediately visible to the next reader; the TTL only exists to pick up edits made elsewhere.
+const SERVER_CACHE_TTL = 10 * 60 * 1000;
+const serverCache = new Map();
+
+async function loadServer(guildId) {
     let serverConfig = await serverModel.findOne({ _id: guildId });
     if (serverConfig) return serverConfig;
     serverConfig = new serverModel({
@@ -18,6 +24,28 @@ async function getOrCreateServer(guildId) {
     });
     await serverConfig.save();
     return serverConfig;
+}
+
+function getOrCreateServer(guildId) {
+    const cached = serverCache.get(guildId);
+    if (cached && cached.expiresAt > Date.now()) return cached.promise;
+
+    const promise = loadServer(guildId).catch((err) => {
+        // A failed lookup must not be remembered, or the guild stays broken until the TTL.
+        serverCache.delete(guildId);
+        throw err;
+    });
+    serverCache.set(guildId, { promise: promise, expiresAt: Date.now() + SERVER_CACHE_TTL });
+    return promise;
+}
+
+/**
+ * @param {String} guildId - Guild id.
+ * @description Drop a guild from the cache, so a guild that removes and re-adds the bot
+ *              does not answer from a stale document.
+ */
+function forgetServer(guildId) {
+    serverCache.delete(guildId);
 }
 
 async function getOrCreateUser(memberId) {
@@ -87,6 +115,7 @@ module.exports = {
     userdataSchema: userdataModel,
     serverSchema: serverModel,
     getOrCreateServer: getOrCreateServer,
+    forgetServer: forgetServer,
     getOrCreateUser: getOrCreateUser,
     getDataSnapshot: getDataSnapshot,
     saveDataSnapshot: saveDataSnapshot
