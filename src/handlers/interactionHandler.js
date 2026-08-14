@@ -8,6 +8,19 @@ const stats = {
     byCommand: {}
 }
 
+/**
+ * @param {Promise} work - A handler that was started but not awaited.
+ * @param interaction - The interaction it belongs to, for the log line.
+ * @description Nothing awaits the handlers, so a rejection escaping one of them becomes an
+ *              unhandled rejection — which Node treats as fatal. A dispatch failing must cost
+ *              one interaction, not the whole bot.
+ */
+function dispatch(work, interaction) {
+    Promise.resolve(work).catch((error) => {
+        console.error(`Unhandled failure in '${interaction.commandName || interaction.customId}':`, error);
+    });
+}
+
 async function interactionHandler(context, interaction) {
     // isChatInputCommand(), not isCommand(): in v14 the latter also matches the context menus,
     // which are dispatched further down and would otherwise never be reached.
@@ -16,30 +29,51 @@ async function interactionHandler(context, interaction) {
         stats.byCommand[interaction.commandName] = (stats.byCommand[interaction.commandName] || 0) + 1;
         // Logged before any early return, so a grep of "CMD |" gives the real command mix.
         console.log(`CMD | ${interaction.commandName} | guild: ${interaction.guildId}`);
-        commandHandler(context, interaction);
+        dispatch(commandHandler(context, interaction), interaction);
         return;
     }
 
     if (interaction.isStringSelectMenu()) {
         stats.menu++;
-        menuHandler(context, interaction);
+        dispatch(menuHandler(context, interaction), interaction);
         return;
     }
 
     if (interaction.isModalSubmit()) {
         stats.modal++;
-        modalHandler(context, interaction);
+        dispatch(modalHandler(context, interaction), interaction);
         return;
     }
 
     if (interaction.isUserContextMenuCommand()) {
-        userMenuHandler(context, interaction);
+        dispatch(userMenuHandler(context, interaction), interaction);
         return;
     }
 
     if (interaction.isMessageContextMenuCommand()) {
-        messageMenuHandler(context, interaction);
+        dispatch(messageMenuHandler(context, interaction), interaction);
         return;
+    }
+}
+
+/**
+ * @param interaction - The interaction that failed.
+ * @param {String} content - Message to show the user.
+ * @description Tell the user the command failed, without ever throwing.
+ *
+ * Two things go wrong here often enough to matter. An interaction that was already deferred
+ * cannot be replied to again, so it needs followUp; and the interaction may simply be gone —
+ * if Discord 503s the first acknowledgement, or the three-second window closes, the token is
+ * dead and every further call answers 10062. Neither is worth taking the process down for,
+ * which is exactly what used to happen.
+ */
+async function notifyFailure(interaction, content) {
+    try {
+        const payload = { content: content, flags: MessageFlags.Ephemeral };
+        if (interaction.deferred || interaction.replied) await interaction.followUp(payload);
+        else await interaction.reply(payload);
+    } catch (error) {
+        console.error(`Could not deliver the failure notice for '${interaction.commandName}': ${error.message}`);
     }
 }
 
@@ -57,7 +91,7 @@ async function userMenuHandler(context, interaction) {
         await menu.execute(context, interaction);
     } catch (error) {
         console.error(error);
-        await interaction.reply({ content: texts.errors.interactionFail[serverConfig.language], flags: MessageFlags.Ephemeral });
+        await notifyFailure(interaction, texts.errors.interactionFail[serverConfig.language]);
     }
 }
 
@@ -175,7 +209,7 @@ async function commandHandler(context, interaction) {
         await command.execute(context, interaction);
     } catch (error) {
         console.error(error);
-        await interaction.reply({ content: texts.errors.interactionFail[serverConfig.language], flags: MessageFlags.Ephemeral });
+        await notifyFailure(interaction, texts.errors.interactionFail[serverConfig.language]);
     }
 
 }
