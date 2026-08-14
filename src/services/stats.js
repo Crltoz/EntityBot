@@ -1,5 +1,6 @@
 const fs = require("fs");
 const Canvas = require("canvas");
+const { escapeMarkdown } = require("discord.js");
 const texts = require("../data/texts.json");
 const apis = require("../data/apis.json");
 const utils = require("../utils/utils.js");
@@ -83,12 +84,13 @@ function roundedRectPath(ctx, x, y, width, height, radius) {
  * @param {Array} roster - Every character as { side, name, link, count }.
  * @param {String} role - "survivor", "killer" or null for both.
  * @param {Number} language - 0 = Spanish, 1 = English.
+ * @param steamProfile - Steam player summary, or null when Steam did not answer.
  * @description Draw the whole roster as a grid of portraits: earned in colour, missing greyed
  *              out. A completionist has 90+ adepts, and a list that long is unreadable in an
  *              embed — as a grid it reads at a glance, and it also shows what is *missing*,
  *              which a list of what you already have never could.
  */
-async function sendAdeptsCanvas(context, interaction, roster, role, language) {
+async function sendAdeptsCanvas(context, interaction, roster, role, language, steamProfile) {
     const sides = ["survivors", "killers"].filter((side) => !role || role === side.slice(0, -1));
     const groups = sides
         .map((side) => ({ side: side, characters: roster.filter((character) => character.side === side) }))
@@ -152,7 +154,11 @@ async function sendAdeptsCanvas(context, interaction, roster, role, language) {
     }
 
     const attachment = new context.discord.AttachmentBuilder(canvas.toBuffer(), { name: 'adepts.png' });
-    await interaction.editReply({ files: [attachment] });
+    await interaction.editReply({
+        content: profileHeadline(steamProfile) || undefined,
+        files: [attachment],
+        allowedMentions: { parse: [] }
+    });
 }
 
 /**
@@ -521,24 +527,49 @@ async function getSteamId(context, interaction, steamLink) {
  * @param {String} role - "survivor", "killer", or null for the combined card.
  * @description First part for get user stats from Australian Website.
  */
-async function getSteamProfile(context, interaction, steamId, role) {
-    const serverConfig = await context.services.database.getOrCreateServer(interaction.guildId);
+/**
+ * @param context - BotContext.
+ * @param {String} steamId - SteamID in 64 bits.
+ * @description The Steam player summary, or null if Steam will not give one. Has no opinion
+ *              about the interaction: callers that need the profile to continue report the
+ *              failure themselves, and callers that only want a name can ignore it.
+ */
+async function fetchSteamSummary(context, steamId) {
     const url = steamUrl(apis.steam.playerSummaries.path + process.env.STEAM_APIKEY + apis.steam.playerSummaries.steamid + steamId);
-
-    let body;
     try {
-        body = await http.getJson(url, {
+        const body = await http.getJson(url, {
             headers: { 'User-Agent': http.userAgent(context.config.version) }
         });
+        return (body.response && body.response.players && body.response.players[0]) || null;
     } catch (err) {
         // A malformed SteamID makes Steam answer with an HTML "Bad Request" page, so an
         // unparseable body here is the user's input, not an outage.
         console.log(`Error getting the player summaries from the Steam API: ${err.message}`);
-        await interaction.editReply({ content: texts.errors.profileNotFound[serverConfig.language] });
-        return;
+        return null;
     }
+}
 
-    const player = body.response && body.response.players && body.response.players[0];
+/**
+ * @param steamProfile - Steam player summary, or null.
+ * @description Who the reply is about: the country flag and the account name, so an image is
+ *              attributable without spending space inside it on a header.
+ *
+ *              Only the identity, so every command can append its own tail. The persona is
+ *              arbitrary user text, so its markdown is escaped — and because it lands in
+ *              message content, callers must send it with mentions disabled.
+ */
+function profileHeadline(steamProfile) {
+    if (!steamProfile) return null;
+    const flag = steamProfile.loccountrycode
+        ? `:flag_${steamProfile.loccountrycode.toLowerCase()}:`
+        : "<:steam:914663956860248134>";
+    return `${flag} **${escapeMarkdown(String(steamProfile.personaname || steamProfile.steamid))}**`;
+}
+
+async function getSteamProfile(context, interaction, steamId, role) {
+    const serverConfig = await context.services.database.getOrCreateServer(interaction.guildId);
+    const player = await fetchSteamSummary(context, steamId);
+
     if (!player || !player.profilestate) {
         await interaction.editReply({ content: texts.errors.profileNotFound[serverConfig.language] });
         return;
@@ -648,13 +679,14 @@ async function sendEmbedStats(context, interaction, steamProfile, dbdProfile, ro
     }
 
     const attachment = new context.discord.AttachmentBuilder(png, { name: 'stats.png' });
-    const flagOrSteam = steamProfile.loccountrycode
-        ? `:flag_${steamProfile.loccountrycode.toLowerCase()}:`
-        : "<:steam:914663956860248134>";
 
+    const headline = profileHeadline(steamProfile);
     await interaction.editReply({
-        content: `${flagOrSteam} **${steamProfile.personaname}** | ${texts.stats.seeFullStatistics[language]} https://dbd.tricky.lol/playerstats/${steamProfile.steamid}`,
-        files: [attachment]
+        content: `${headline} | ${texts.stats.seeFullStatistics[language]} https://dbd.tricky.lol/playerstats/${steamProfile.steamid}`,
+        files: [attachment],
+        // The persona is whatever the account owner typed, and it lands in message content:
+        // without this an "@everyone" in a Steam name would ping the guild.
+        allowedMentions: { parse: [] }
     });
 }
 
@@ -1031,6 +1063,8 @@ module.exports = {
     init: init,
     getStats: getStats,
     getStatsForSteamId: getStatsForSteamId,
+    fetchSteamSummary: fetchSteamSummary,
+    profileHeadline: profileHeadline,
     calculateLevel: calculateLevel,
     sendAdeptsCanvas: sendAdeptsCanvas,
     isValidProgression: isValidProgression,

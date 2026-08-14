@@ -388,7 +388,12 @@ async function sendAdepts(context, interaction, steamId, role) {
     }
     for (const character of roster) character.count = byCanonical[character.canonical] || 0;
 
-    await context.services.stats.sendAdeptsCanvas(context, interaction, roster, role, language);
+    // Best effort: the grid says nothing about whose account it is, so the reply names it in
+    // its text rather than spending image space on it. Steam being unreachable costs the
+    // headline, not the adepts.
+    const steamProfile = await context.services.stats.fetchSteamSummary(context, steamId);
+
+    await context.services.stats.sendAdeptsCanvas(context, interaction, roster, role, language, steamProfile);
 }
 
 /**
