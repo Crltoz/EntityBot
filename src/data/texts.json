@@ -75,6 +75,14 @@
         "roleKiller": [
             "Asesino",
             "Killer"
+        ],
+        "saved": [
+            "Desenganches: ",
+            "Unhooks: "
+        ],
+        "hatchesClosed": [
+            "Trampillas cerradas: ",
+            "Hatches closed: "
         ]
     },
     "errors": {

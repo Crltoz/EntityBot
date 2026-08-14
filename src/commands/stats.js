@@ -15,7 +15,7 @@ module.exports = {
         .addStringOption(steamLink => {
             return steamLink
                 .setName("steam-link")
-                .setDescription("Steam profile link")
+                .setDescription("Steam link, SteamID, friend code or username | Link, SteamID, codigo o usuario")
                 .setRequired(true)
         }),
     async execute(context, interaction) {

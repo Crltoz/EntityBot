@@ -342,27 +342,61 @@ async function getStats(context, interaction, steamLink, isSurvivor) {
  * @description Resolve any of the three shapes to a 64-bit SteamID, or null if it cannot be
  *              resolved — in which case the interaction has already been answered.
  */
+// A 64-bit SteamID for an individual account: 17 digits starting with the 7656119 prefix.
+const STEAM_ID64 = /^7656119\d{10}$/;
+// The 32-bit account id, i.e. the "friend code" the profile shows.
+const ACCOUNT_ID = /^\d{1,10}$/;
+// A custom URL. Steam allows letters, digits, underscores and hyphens, 2 to 32 characters.
+const VANITY = /^[a-z0-9_-]{2,32}$/i;
+
+const PROFILE_URL = /steamcommunity\.com\/profiles\/(\d+)/i;
+const VANITY_URL = /steamcommunity\.com\/id\/([^/?#\s]+)/i;
+
+/**
+ * @param {String} input - Whatever the user typed.
+ * @description Work out what kind of Steam reference this is.
+ *
+ * Accepts the two profile URL shapes with or without scheme, "www.", a trailing slash or a
+ * query string, and also a bare SteamID64, a bare friend code or a bare custom URL name —
+ * pasting any of those is far more natural than hunting for the full link.
+ *
+ * Returns { kind, value }, where kind is "id64" (ready to use), "accountId" (needs the 64-bit
+ * conversion) or "vanity" (needs a round-trip to Steam), or null if it is none of them.
+ */
+function parseSteamInput(input) {
+    const trimmed = String(input || "").trim();
+
+    const profileMatch = trimmed.match(PROFILE_URL);
+    if (profileMatch) return { kind: "id64", value: profileMatch[1] };
+
+    const vanityMatch = trimmed.match(VANITY_URL);
+    if (vanityMatch) return { kind: "vanity", value: vanityMatch[1] };
+
+    // Anything else that still looks like a URL is not a profile we can read.
+    if (trimmed.includes("/") || trimmed.includes(".")) return null;
+
+    // Order matters: a SteamID64 is all digits too, and treating one as a friend code used to
+    // add the 64-bit offset a second time and look up a profile that cannot exist.
+    if (STEAM_ID64.test(trimmed)) return { kind: "id64", value: trimmed };
+    if (ACCOUNT_ID.test(trimmed)) return { kind: "accountId", value: trimmed };
+    if (VANITY.test(trimmed)) return { kind: "vanity", value: trimmed };
+
+    return null;
+}
+
 async function getSteamId(context, interaction, steamLink) {
     const serverConfig = await context.services.database.getOrCreateServer(interaction.guildId);
+    const parsed = parseSteamInput(steamLink);
 
-    // Profile with friend code (32 bits)
-    if (!steamLink.includes('steamcommunity.com/id/') && !steamLink.includes('steamcommunity.com/profiles/')) {
-        // Digits only: anything else (a float, a sign, an exponent) would blow up BigInt.
-        if (!/^\d{8,}$/.test(steamLink)) {
-            await interaction.editReply({ content: texts.errors.invalidFriendCode[serverConfig.language] });
-            return null;
-        }
-        return steamID_64(steamLink);
+    if (!parsed) {
+        await interaction.editReply({ content: texts.errors.invalidFriendCode[serverConfig.language] });
+        return null;
     }
 
-    // Profile with steam id (64 bits)
-    if (steamLink.includes('steamcommunity.com/profiles/')) {
-        return steamLink.slice(steamLink.indexOf("profiles/") + 9).replace("/", "");
-    }
+    if (parsed.kind === "id64") return parsed.value;
+    if (parsed.kind === "accountId") return steamID_64(parsed.value);
 
-    // Profile with vanity URL
-    const vanity = steamLink.slice(steamLink.indexOf("/id/") + 4).replace("/", "");
-    const url = steamUrl(apis.steam.vanityURL.path + process.env.STEAM_APIKEY + apis.steam.vanityURL.vanity + vanity);
+    const url = steamUrl(apis.steam.vanityURL.path + process.env.STEAM_APIKEY + apis.steam.vanityURL.vanity + encodeURIComponent(parsed.value));
 
     try {
         const body = await http.getJson(url, {
@@ -890,6 +924,7 @@ async function test(context, interaction, type, index) {
 }
 
 module.exports = {
+    parseSteamInput: parseSteamInput,
     sendEmbedStats: sendEmbedStats,
     sendShrine: sendShrine,
     init: init,

@@ -41,7 +41,7 @@ const FIELDS = {
         { key: "sacrificed", label: "sacrificed", icon: "hook.png" },
         { key: "sacrificed_obsessions", label: "sacrificedObessions", icon: "entity.png" },
         { key: "killer_perfectgames", label: "perfectGames", icon: "killer_perfect.png" },
-        { key: "killer_fullloadout", label: "killerFullLoadout", icon: "palet.png" },
+        { key: "hatchesclosed", label: "hatchesClosed", icon: "hatch.png" },
         { key: "gensdamagedwhileonehooked", label: "gensDamaged", icon: "genbreak.png" },
         { key: "survivorsgrabbedrepairinggen", label: "survivorsGrabbed", icon: "carry.png" }
     ],
@@ -51,8 +51,8 @@ const FIELDS = {
         { key: "survivorshealed", label: "survivorsHealed", icon: "medkit.png" },
         { key: "skillchecks", label: "skillchecks", icon: "skillcheck.png" },
         { key: "escaped", label: "escaped", icon: "hatch.png" },
-        { key: "hextotemscleansed", label: "hexTotemsCleansed", icon: "totem.png" },
-        { key: "exitgatesopened", label: "exitGatesOpened", icon: "coop.png" }
+        { key: "saved", label: "saved", icon: "coop.png" },
+        { key: "exitgatesopened", label: "exitGatesOpened", icon: "survivor.png" }
     ]
 };
 
