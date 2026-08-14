@@ -23,9 +23,26 @@ const http = require("./http.js");
  *    fontconfig fallback that silently turns "dbd" into Sans.
  */
 
-const FONT_PATH = path.join(__dirname, "../../assets/Font/BRUTTALL.ttf");
-const FONT_NAME = "dbd";
-const font = fs.readFileSync(FONT_PATH);
+/**
+ * The display face is BRUTTALL, the game's own, but it is decorative and hard to read at the
+ * sizes a number needs, so it is reserved for titles and Inter carries the body text.
+ *
+ * The families are embedded as outlines (satori's default) rather than resolved by resvg,
+ * because BRUTTALL has no `name` table at all — resvg indexes fonts by their internal family
+ * name and simply cannot see it, silently substituting whatever else is loaded. With BRUTTALL
+ * limited to a title, the outline tracing that was too expensive when it set the whole card is
+ * cheap again; Inter's outlines are ordinary.
+ */
+const FONTS = [
+    { name: "Bruttall", file: "BRUTTALL.ttf", weight: 400 },
+    { name: "Inter", file: "Inter-Regular.ttf", weight: 400 },
+    { name: "Inter", file: "Inter-SemiBold.ttf", weight: 600 }
+].map((entry) => ({
+    name: entry.name,
+    weight: entry.weight,
+    style: "normal",
+    data: fs.readFileSync(path.join(__dirname, "../../assets/Font", entry.file))
+}));
 
 // Local assets never change, so their scaled copies are worth keeping. Remote avatars are not
 // cached: they are per-player and would grow without bound.
@@ -95,22 +112,14 @@ async function toPng(markup, width, height) {
     const svg = await satori(html(markup), {
         width: width,
         height: height,
-        // Without this satori traces every glyph into an SVG <path>. BRUTTALL is a 1MB
-        // decorative face, so a single line of text produced a 1.3MB SVG and ten renders held
-        // on to ~280MB of native memory that no GC gave back — fatal in a 1GiB container.
-        // Emitting <text> and handing resvg the same TTF renders identically at 1KB and ~114MB.
-        embedFont: false,
-        fonts: [{ name: FONT_NAME, data: font, weight: 400, style: "normal" }]
+        fonts: FONTS
     });
 
     return new Resvg(svg, {
         fitTo: { mode: "width", value: width },
-        font: {
-            fontFiles: [FONT_PATH],
-            defaultFontFamily: FONT_NAME,
-            // The container has no fonts installed and scanning for them costs a second.
-            loadSystemFonts: false
-        }
+        // Everything is already an outline, so resvg needs no fonts. Scanning the system for
+        // them costs about a second on a cold container that has none installed anyway.
+        font: { loadSystemFonts: false }
     }).render().asPng();
 }
 

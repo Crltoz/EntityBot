@@ -17,14 +17,21 @@ const ICONS = "./assets/Visuals/icons/";
 
 const PALETTE = {
     background: "#0E0E10",
-    card: "#17171B",
-    border: "#26262C",
+    // Cards are a gradient rather than a flat fill, lit from the top-left so a row of them
+    // reads as raised panels instead of holes cut out of the background.
+    card: "linear-gradient(145deg, #22222A 0%, #191920 45%, #131318 100%)",
+    cardStrong: "linear-gradient(145deg, #2A2A34 0%, #1D1D25 45%, #15151B 100%)",
+    border: "#2E2E38",
     label: "#9A9AA4",
     value: "#FFFFFF",
     accent: "#C9A227",
     role: "#E52121",
     muted: "#5A5A60"
 };
+
+// BRUTTALL is the game's face: great for a title, unreadable for a seven-digit number.
+const DISPLAY_FONT = "Bruttall";
+const BODY_FONT = "Inter";
 
 // The nine numbers each role has always shown, now with an icon and a shorter label. The
 // labels come from texts.json with their trailing ": " dropped, so the two stay in sync.
@@ -59,15 +66,34 @@ function label(key, language) {
     return String(texts.stats[key][language]).replace(/\s*:\s*$/, "");
 }
 
+// What Inter actually covers: Latin, its supplements and extensions, Greek, Cyrillic and
+// common punctuation. Bundling a CJK face to widen this would cost more than the whole render
+// stack, so anything outside is dropped.
+const SUPPORTED_CHARACTERS = /[^ -ɏͰ-ӿ‐-‧‰-⁞₠-₿]/g;
+const NAME_MAX_LENGTH = 14;
+
+/**
+ * @param {String} name - Steam persona, which is arbitrary user input.
+ * @param {String} steamId - Fallback when nothing renderable is left.
+ * @description Steam names carry CJK, emoji and decorative symbols that no bundled font has;
+ *              left alone they render as tofu boxes and wrap the panel. Drop what cannot be
+ *              drawn and cap the length so the name stays on one line.
+ */
+function displayName(name, steamId) {
+    const cleaned = String(name || "").replace(SUPPORTED_CHARACTERS, "").replace(/\s+/g, " ").trim();
+    if (!cleaned) return steamId;
+    return cleaned.length > NAME_MAX_LENGTH ? `${cleaned.slice(0, NAME_MAX_LENGTH - 1)}…` : cleaned;
+}
+
 function card(title, value, icon) {
     return `
       <div style="display:flex;flex-direction:column;justify-content:space-between;
-                  width:248px;height:104px;background:${PALETTE.card};
+                  width:248px;height:104px;background-image:${PALETTE.card};
                   border:1px solid ${PALETTE.border};border-radius:10px;
                   padding:14px 16px;margin:0 12px 12px 0;">
-        <div style="display:flex;color:${PALETTE.label};font-size:19px;">${render.escape(title)}</div>
+        <div style="display:flex;color:${PALETTE.label};font-size:16px;">${render.escape(title)}</div>
         <div style="display:flex;align-items:center;justify-content:space-between;">
-          <div style="display:flex;color:${PALETTE.value};font-size:32px;">${render.escape(value)}</div>
+          <div style="display:flex;color:${PALETTE.value};font-size:30px;font-weight:600;">${render.escape(value)}</div>
           ${icon ? `<img src="${icon}" style="width:34px;height:34px;" />` : ""}
         </div>
       </div>`;
@@ -101,45 +127,48 @@ async function build(steamProfile, dbdProfile, isSurv, language) {
 
     return `
 <div style="display:flex;flex-direction:column;width:${WIDTH}px;height:${HEIGHT}px;
-            background:${PALETTE.background};font-family:dbd;padding:30px 32px;">
+            background:${PALETTE.background};font-family:${BODY_FONT};padding:30px 32px;">
 
   <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;">
     <div style="display:flex;align-items:center;">
       ${roleIcon ? `<img src="${roleIcon}" style="width:40px;height:40px;margin-right:14px;" />` : ""}
-      <div style="display:flex;color:${PALETTE.value};font-size:46px;">${render.escape(texts.stats.statistics[language])}</div>
+      <div style="display:flex;font-family:${DISPLAY_FONT};color:${PALETTE.value};font-size:48px;">${render.escape(texts.stats.statistics[language])}</div>
     </div>
-    <div style="display:flex;background:#1E1E24;color:${PALETTE.accent};font-size:20px;
-                padding:8px 18px;border-radius:20px;">${render.escape(roleName)}</div>
+    <div style="display:flex;align-items:center;background-image:${PALETTE.cardStrong};
+                border:1px solid ${PALETTE.accent};color:${PALETTE.accent};
+                font-size:30px;font-weight:600;padding:10px 26px;border-radius:26px;">${render.escape(roleName)}</div>
   </div>
 
   <div style="display:flex;">
-    <div style="display:flex;flex-direction:column;width:300px;height:336px;background:${PALETTE.card};
+    <div style="display:flex;flex-direction:column;width:300px;height:336px;background-image:${PALETTE.card};
                 border:1px solid ${PALETTE.border};border-radius:10px;padding:20px;margin-right:12px;">
       <div style="display:flex;align-items:center;">
         ${avatar ? `<img src="${avatar}" style="width:104px;height:104px;border-radius:8px;" />` : ""}
         <div style="display:flex;flex-direction:column;margin-left:16px;width:144px;">
-          <div style="display:flex;color:${PALETTE.role};font-size:26px;">${render.escape(steamProfile.personaname)}</div>
+          <div style="display:flex;color:${PALETTE.role};font-size:24px;font-weight:600;">${render.escape(displayName(steamProfile.personaname, steamProfile.steamid))}</div>
         </div>
       </div>
 
       <div style="display:flex;flex-direction:column;margin-top:22px;">
-        <div style="display:flex;color:${PALETTE.label};font-size:19px;">${render.escape(label("hoursPlayed", language))}</div>
-        <div style="display:flex;color:${PALETTE.value};font-size:34px;">${hours}</div>
+        <div style="display:flex;color:${PALETTE.label};font-size:16px;">${render.escape(label("hoursPlayed", language))}</div>
+        <div style="display:flex;color:${PALETTE.value};font-size:32px;font-weight:600;">${hours}</div>
       </div>
 
       <div style="display:flex;flex-direction:column;margin-top:18px;">
-        <div style="display:flex;color:${PALETTE.label};font-size:19px;">Bloodpoints</div>
-        <div style="display:flex;align-items:center;justify-content:space-between;">
-          <div style="display:flex;color:${PALETTE.accent};font-size:34px;">${utils.comma(dbdProfile.bloodpoints || 0)}</div>
-          ${bpIcon ? `<img src="${bpIcon}" style="width:34px;height:34px;" />` : ""}
+        <div style="display:flex;align-items:center;">
+          ${bpIcon ? `<img src="${bpIcon}" style="width:22px;height:22px;margin-right:8px;" />` : ""}
+          <div style="display:flex;color:${PALETTE.label};font-size:16px;">Bloodpoints</div>
         </div>
+        <!-- The icon sits by the label, not beside the number: a lifetime bloodpoint total runs
+             to ten digits and the two collided at the edge of the panel. -->
+        <div style="display:flex;color:${PALETTE.accent};font-size:30px;font-weight:600;">${utils.comma(dbdProfile.bloodpoints || 0)}</div>
       </div>
     </div>
 
     <div style="display:flex;flex-wrap:wrap;width:808px;">${cards}</div>
   </div>
 
-  <div style="display:flex;margin-top:auto;color:${PALETTE.muted};font-size:18px;">
+  <div style="display:flex;margin-top:auto;color:${PALETTE.muted};font-size:15px;">
     dbd.tricky.lol/playerstats/${render.escape(steamProfile.steamid)}
   </div>
 </div>`;
