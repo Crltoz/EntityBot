@@ -17,6 +17,10 @@ const utils = require("../utils/utils.js");
 const CACHE_TTL = 5 * 60 * 1000;
 const cache = new Map();
 
+// Where the full notes live. dbd.tricky.lol serves the API but puts its HTML pages behind
+// Cloudflare, so the official forum is the link that actually opens for everyone.
+const PATCH_NOTES_URL = "https://forums.bhvr.com/dead-by-daylight/categories/patch-notes";
+
 /**
  * @param {String} path - API path, used as the cache key.
  * @param {String} version - Bot version, sent in the User-Agent.
@@ -284,14 +288,15 @@ async function sendPatchNotes(context, interaction) {
         return;
     }
 
+    // Short on purpose: the notes run past 100k characters and nobody reads a wall of them in
+    // a chat. This is the headline plus the first section, and the link carries the rest.
+    const excerpt = utils.truncate(htmlToMarkdown(latest.notes), 900);
     const embed = new context.discord.EmbedBuilder()
         .setColor('#FF0000')
         .setTitle(`${texts.patchNotes.title[language]} ${latest.id}`)
-        .setURL(`https://${apis.dbdStats.host}/patchnotes`)
+        .setURL(PATCH_NOTES_URL)
         .setThumbnail(context.client.user.avatarURL())
-        // Embed descriptions cap at 4096; the notes routinely run past 100k characters.
-        .setDescription(utils.truncate(htmlToMarkdown(latest.notes), 4000))
-        .setFooter({ text: `${texts.patchNotes.readMore[language]}: dbd.tricky.lol/patchnotes` });
+        .setDescription(`${excerpt}\n\n**[${texts.patchNotes.readMore[language]} →](${PATCH_NOTES_URL})**`);
 
     await interaction.editReply({ embeds: [embed] });
 }
@@ -344,9 +349,9 @@ function htmlToMarkdown(html) {
  * @param interaction - Discord command interaction.
  * @param {String} steamId - SteamID in 64 bits.
  * @param {String} role - "survivor", "killer" or null for both.
- * @description Adept counts per character. The API answers with a flat
- *              "<character>_count"/"<character>_time" pair per character, so the roster is what
- *              tells us which side each one belongs to.
+ * @description Fetch the adepts and hand the whole roster to the canvas, earned or not.
+ *              The API answers with a flat "<character>_count"/"<character>_time" pair, so the
+ *              roster is what turns that into something with portraits and sides.
  */
 async function sendAdepts(context, interaction, steamId, role) {
     const serverConfig = await context.services.database.getOrCreateServer(interaction.guildId);
@@ -361,56 +366,36 @@ async function sendAdepts(context, interaction, steamId, role) {
         return;
     }
 
-    const earned = [];
-    for (const [key, value] of Object.entries(payload)) {
-        if (!key.endsWith("_count") || !value) continue;
-        earned.push({ id: key.slice(0, -"_count".length), count: value });
+    // Keys with a count of zero are kept, not filtered out: resolveAdepts pairs the leftovers
+    // by position, and dropping the adepts a player is missing would shift every key after
+    // them onto the wrong character.
+    const counts = {};
+    const ids = [];
+    for (const key of Object.keys(payload)) {
+        if (!key.endsWith("_count")) continue;
+        const id = key.slice(0, -"_count".length);
+        ids.push(id);
+        counts[id] = payload[key] || 0;
     }
 
-    const embed = new context.discord.EmbedBuilder()
-        .setColor('#FF0000')
-        .setTitle(texts.adepts.title[language])
-        .setThumbnail(context.client.user.avatarURL());
+    const roster = adeptCandidates(context, language);
+    const resolved = resolveAdepts(roster, ids);
 
-    if (!earned.length) {
-        embed.setDescription(texts.adepts.none[language]);
-        await interaction.editReply({ embeds: [embed] });
-        return;
+    // Fold the counts onto the roster, so a character nobody has an adept for is still drawn.
+    const byCanonical = {};
+    for (const [id, match] of Object.entries(resolved)) {
+        if (match) byCanonical[match.canonical] = counts[id];
     }
+    for (const character of roster) character.count = byCanonical[character.canonical] || 0;
 
-    const resolved = resolveAdepts(adeptCandidates(context, language), earned.map((adept) => adept.id));
-    const grouped = { survivors: [], killers: [] };
-
-    // Ties are broken by name so the list is stable between calls — most characters sit at 1.
-    const sorted = earned.sort((a, b) => b.count - a.count || a.id.localeCompare(b.id));
-    for (const adept of sorted) {
-        const match = resolved[adept.id];
-        const name = match ? match.name : prettifyId(adept.id);
-        const side = match ? match.side : "survivors";
-        grouped[side].push(adept.count > 1 ? `${name} **×${adept.count}**` : name);
-    }
-
-    const total = earned.reduce((sum, adept) => sum + adept.count, 0);
-    embed.setDescription(`${texts.adepts.summary[language]}: **${utils.comma(total)}** · ${earned.length} ${texts.adepts.characters[language]}`);
-
-    for (const side of ["survivors", "killers"]) {
-        if (role && role !== side.slice(0, -1)) continue;
-        if (!grouped[side].length) continue;
-        // Comma-separated rather than one per line: a completionist has 90+ characters here
-        // and bullets would blow past the 1024-character field cap after a dozen of them.
-        embed.addFields({
-            name: `${texts.adepts[side][language]} (${grouped[side].length})`,
-            value: utils.truncate(grouped[side].join(", "), 1024)
-        });
-    }
-
-    await interaction.editReply({ embeds: [embed] });
+    await context.services.stats.sendAdeptsCanvas(context, interaction, roster, role, language);
 }
 
 /**
  * @param context - BotContext.
  * @param {Number} language - 0 = Spanish, 1 = English.
- * @description The roster flattened to { side, name, canonical }, ready to match against.
+ * @description The roster flattened to { side, name, canonical, link }, ready to match against
+ *              and to draw.
  */
 function adeptCandidates(context, language) {
     const sides = [
@@ -424,7 +409,8 @@ function adeptCandidates(context, language) {
             candidates.push({
                 side: side,
                 name: language === 0 ? (character.nameEs || character.name) : (character.nameEn || character.name),
-                canonical: utils.canonicalId(character.nameEn || character.name)
+                canonical: utils.canonicalId(character.nameEn || character.name),
+                link: character.link || null
             });
         }
     }
@@ -434,17 +420,22 @@ function adeptCandidates(context, language) {
 /**
  * @param {Array} candidates - Output of adeptCandidates.
  * @param {Array} ids - Adept keys, e.g. "meg", "ghostface", "tapp".
- * @description Adept key -> roster character, or null for a key the roster cannot explain.
+ * @description Adept key -> roster character, or null for a key nothing can explain.
  *
  * The adepts endpoint keys characters by a short name that appears nowhere else in the API, so
- * the roster has to be searched by substring — and substrings collide. Two rules settle it:
- * a character can only be claimed once, and the longest keys go first, because a longer key is
- * the more specific one. That is what sends "billy" to The Hillbilly and leaves "bill" for
- * William "Bill" Overbeck, instead of both landing on the killer.
+ * two passes are needed.
  *
- * Licensed characters whose adept key is their real name ("myers", "freddy", "vecna") match
- * nothing, since the roster knows them by their title. Those fall back to a prettified key,
- * which is a name players recognise anyway — better than guessing wrong.
+ * By name first. Substrings collide, so a character can only be claimed once and the longest
+ * keys go first, being the more specific ones: that sends "billy" to The Hillbilly and leaves
+ * "bill" for William "Bill" Overbeck instead of both landing on the killer. This settles about
+ * 89 of the 95 keys.
+ *
+ * By position for the rest. Licensed characters are keyed by their real name ("myers",
+ * "freddy", "springtrap") while the roster knows them by their title, so no substring will ever
+ * connect them. Both lists are in release order and both sides line up one-to-one, so pairing
+ * the leftovers in order resolves them without hardcoding a table that would rot every chapter.
+ * The data backs the ordering: a player can hold "lich" and "vecna" at the same time, so those
+ * are two characters and not one renamed, exactly as their positions say.
  */
 function resolveAdepts(candidates, ids) {
     const claimed = new Set();
@@ -462,7 +453,47 @@ function resolveAdepts(candidates, ids) {
         if (match) claimed.add(match.canonical);
     }
 
+    // `ids` keeps the API's order and `candidates` the roster's, so the leftovers pair up — but
+    // only within a side, or a leftover killer key would claim a leftover survivor. A key does
+    // not say which side it belongs to, so it is taken from the nearest key that did resolve.
+    const orphans = { survivors: [], killers: [] };
+    for (let i = 0; i < ids.length; i++) {
+        if (resolved[ids[i]]) continue;
+        const side = nearestResolvedSide(ids, resolved, i);
+        if (side) orphans[side].push(ids[i]);
+    }
+
+    for (const side of ["survivors", "killers"]) {
+        const free = candidates.filter((candidate) => candidate.side === side && !claimed.has(candidate.canonical));
+        for (const id of orphans[side]) {
+            const match = free.shift();
+            if (!match) {
+                console.log(`Adept key '${id}' matched no character, its count is not shown.`);
+                continue;
+            }
+            resolved[id] = match;
+            claimed.add(match.canonical);
+        }
+    }
+
     return resolved;
+}
+
+/**
+ * @param {Array} ids - Adept keys in API order.
+ * @param {Object} resolved - Matches so far.
+ * @param {Number} index - Position of the key with no match.
+ * @description Side of the closest key that did resolve. The keys are grouped by side, so a
+ *              neighbour is a reliable answer for the ones stranded in between.
+ */
+function nearestResolvedSide(ids, resolved, index) {
+    for (let distance = 1; distance < ids.length; distance++) {
+        const before = resolved[ids[index - distance]];
+        const after = resolved[ids[index + distance]];
+        if (before) return before.side;
+        if (after) return after.side;
+    }
+    return null;
 }
 
 module.exports = {

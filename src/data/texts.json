@@ -567,10 +567,6 @@
             "🏆 Adepts",
             "🏆 Adepts"
         ],
-        "summary": [
-            "Conseguidos",
-            "Earned"
-        ],
         "none": [
             "Todavía no tienes ningún adept registrado.",
             "You do not have any adept recorded yet."
@@ -583,10 +579,6 @@
             "Asesinos",
             "Killers"
         ],
-        "more": [
-            "y {n} más",
-            "and {n} more"
-        ],
         "notFound": [
             "No encontré las estadísticas de esa cuenta. Usa **/stats** primero para que se registre.",
             "I could not find the stats for that account. Use **/stats** first so it gets recorded."
@@ -594,10 +586,6 @@
         "needsProfile": [
             "Primero asocia tu cuenta de Steam con **/perfil [Steam-link]** para que pueda buscar tus adepts.",
             "Associate your Steam account first with **/profile [Steam-link]** so I can look up your adepts."
-        ],
-        "characters": [
-            "personajes",
-            "characters"
         ]
     },
     "levelEstimate": [

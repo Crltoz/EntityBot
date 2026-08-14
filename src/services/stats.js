@@ -1,3 +1,4 @@
+const fs = require("fs");
 const Canvas = require("canvas");
 const texts = require("../data/texts.json");
 const apis = require("../data/apis.json");
@@ -50,6 +51,176 @@ async function init() {
     console.log(`Stats images loaded.`)
 }
 
+// Adept grid geometry. The portraits are 447x619, so the cells keep that ~1:1.385 ratio.
+const ADEPT_GRID = {
+    columns: 12,
+    cellWidth: 104,
+    cellHeight: 144,
+    gapX: 10,
+    gapY: 34,
+    margin: 40,
+    headerHeight: 118,
+    sectionHeight: 54
+};
+
+/**
+ * @param context - BotContext.
+ * @param interaction - Discord command interaction.
+ * @param {Array} roster - Every character as { side, name, link, count }.
+ * @param {String} role - "survivor", "killer" or null for both.
+ * @param {Number} language - 0 = Spanish, 1 = English.
+ * @description Draw the whole roster as a grid of portraits: earned in colour, missing greyed
+ *              out. A completionist has 90+ adepts, and a list that long is unreadable in an
+ *              embed — as a grid it reads at a glance, and it also shows what is *missing*,
+ *              which a list of what you already have never could.
+ */
+async function sendAdeptsCanvas(context, interaction, roster, role, language) {
+    const sides = ["survivors", "killers"].filter((side) => !role || role === side.slice(0, -1));
+    const groups = sides
+        .map((side) => ({ side: side, characters: roster.filter((character) => character.side === side) }))
+        .filter((group) => group.characters.length);
+
+    if (!groups.length) {
+        await interaction.editReply(texts.adepts.none[language]);
+        return;
+    }
+
+    const grid = ADEPT_GRID;
+    const rowsFor = (count) => Math.ceil(count / grid.columns);
+    const width = grid.margin * 2 + grid.columns * grid.cellWidth + (grid.columns - 1) * grid.gapX;
+    const height = grid.headerHeight + grid.margin
+        + groups.reduce((total, group) => total
+            + grid.sectionHeight
+            + rowsFor(group.characters.length) * (grid.cellHeight + grid.gapY), 0);
+
+    const canvas = Canvas.createCanvas(width, height);
+    const ctx = canvas.getContext('2d');
+
+    ctx.fillStyle = '#0E0E10';
+    ctx.fillRect(0, 0, width, height);
+    ctx.strokeStyle = '#8A6412';
+    ctx.lineWidth = 4;
+    ctx.strokeRect(0, 0, width, height);
+
+    const earned = roster.filter((character) => character.count > 0).length;
+    ctx.textAlign = 'center';
+    ctx.fillStyle = '#ffffff';
+    ctx.font = '54px "dbd"';
+    ctx.fillText(texts.adepts.title[language].replace(/^\S+\s/, ""), width / 2, 66);
+    ctx.font = '30px "dbd"';
+    ctx.fillStyle = '#C9A227';
+    ctx.fillText(`${earned} / ${roster.length}`, width / 2, 104);
+
+    let y = grid.headerHeight;
+    for (const group of groups) {
+        const done = group.characters.filter((character) => character.count > 0).length;
+        ctx.textAlign = 'left';
+        ctx.font = '30px "dbd"';
+        ctx.fillStyle = '#E52121';
+        ctx.fillText(`${texts.adepts[group.side][language]}  ${done}/${group.characters.length}`, grid.margin, y + 34);
+        y += grid.sectionHeight;
+
+        for (let index = 0; index < group.characters.length; index++) {
+            const column = index % grid.columns;
+            const row = Math.floor(index / grid.columns);
+            const x = grid.margin + column * (grid.cellWidth + grid.gapX);
+            await drawAdeptCell(ctx, group.characters[index], x, y + row * (grid.cellHeight + grid.gapY));
+        }
+
+        y += rowsFor(group.characters.length) * (grid.cellHeight + grid.gapY);
+    }
+
+    const attachment = new context.discord.AttachmentBuilder(canvas.toBuffer(), { name: 'adepts.png' });
+    await interaction.editReply({ files: [attachment] });
+}
+
+/**
+ * @param ctx - Canvas context of the grid.
+ * @param character - Roster entry with name, link and count.
+ * @param {Number} x - Cell left edge.
+ * @param {Number} y - Cell top edge.
+ * @description One portrait plus its name, dimmed to greyscale when the adept is missing and
+ *              badged with a multiplier when it was earned more than once.
+ */
+async function drawAdeptCell(ctx, character, x, y) {
+    const { cellWidth, cellHeight } = ADEPT_GRID;
+    const portrait = await loadImageOrPlaceholder(assetPath(prefixAssetCharacters, character.link), cellWidth, cellHeight);
+    const earned = character.count > 0;
+
+    ctx.drawImage(earned ? portrait : desaturate(portrait, cellWidth, cellHeight), x, y, cellWidth, cellHeight);
+
+    ctx.lineWidth = 2;
+    ctx.strokeStyle = earned ? '#C9A227' : '#2A2A2E';
+    ctx.strokeRect(x, y, cellWidth, cellHeight);
+
+    if (character.count > 1) {
+        ctx.font = '20px "dbd"';
+        ctx.textAlign = 'right';
+        ctx.fillStyle = '#0E0E10';
+        ctx.fillRect(x + cellWidth - 42, y + 2, 40, 26);
+        ctx.fillStyle = '#C9A227';
+        ctx.fillText(`x${character.count}`, x + cellWidth - 5, y + 22);
+    }
+
+    ctx.font = '17px "dbd"';
+    ctx.textAlign = 'center';
+    ctx.fillStyle = earned ? '#ffffff' : '#5A5A60';
+    ctx.fillText(fitText(ctx, character.name, cellWidth), x + cellWidth / 2, y + cellHeight + 22);
+}
+
+/**
+ * @param image - Loaded portrait.
+ * @param {Number} width - Target width.
+ * @param {Number} height - Target height.
+ * @description Greyed-out copy of a portrait. node-canvas does not apply CSS filters, so the
+ *              pixels are converted by hand — at this cell size it is a few thousand of them.
+ */
+function desaturate(image, width, height) {
+    const offscreen = Canvas.createCanvas(width, height);
+    const offctx = offscreen.getContext('2d');
+    offctx.drawImage(image, 0, 0, width, height);
+
+    const pixels = offctx.getImageData(0, 0, width, height);
+    const data = pixels.data;
+    for (let i = 0; i < data.length; i += 4) {
+        // Rec. 601 luma, then pulled down so a missing character reads as locked rather than
+        // as a portrait that merely lost its colour.
+        const luma = (data[i] * 0.299 + data[i + 1] * 0.587 + data[i + 2] * 0.114) * 0.42;
+        data[i] = data[i + 1] = data[i + 2] = luma;
+    }
+    offctx.putImageData(pixels, 0, 0);
+    return offscreen;
+}
+
+// Killers are titles in both languages ("The Nurse", "La Enfermera"), and the article carries
+// none of the meaning — dropping it is what keeps the label from reading just "La".
+const NAME_ARTICLES = /^(the|el|la|lo|los|las)\s+/i;
+
+/**
+ * @param ctx - Canvas context, already set to the target font.
+ * @param {String} text - Name to fit.
+ * @param {Number} maxWidth - Cell width.
+ * @description Shorten a name until it fits its cell: drop the article, then keep the first
+ *              word, then clip. Full names run long ("Aestri Yazar - Baermar Uraz") and the
+ *              cells are 104px wide, so most names lose something.
+ */
+function fitText(ctx, text, maxWidth) {
+    const limit = maxWidth - 6;
+    const fits = (value) => ctx.measureText(value).width <= limit;
+
+    if (fits(text)) return text;
+
+    const withoutArticle = String(text).replace(NAME_ARTICLES, "");
+    if (fits(withoutArticle)) return withoutArticle;
+
+    const first = withoutArticle.split(/[\s-]+/)[0];
+    if (fits(first)) return first;
+
+    let clipped = first;
+    while (clipped.length > 1 && !fits(`${clipped}.`)) clipped = clipped.slice(0, -1);
+    return `${clipped}.`;
+}
+
 /**
  * @param {Number} width - Placeholder width in pixels.
  * @param {Number} height - Placeholder height in pixels.
@@ -92,7 +263,11 @@ function buildPlaceholder(width, height) {
 async function loadImageOrPlaceholder(path, width, height) {
     if (!path) return buildPlaceholder(width, height);
     try {
-        return await Canvas.loadImage(path);
+        // Local files are read here rather than handed to Canvas as a path: node-canvas cannot
+        // open a path with non-ASCII characters on Windows, which silently cost us the
+        // portraits for The Onryō and The Dark Lord in every command that draws a character.
+        const source = /^https?:\/\//i.test(path) ? path : fs.readFileSync(path);
+        return await Canvas.loadImage(source);
     } catch (err) {
         console.log(`Could not load asset '${path}', drawing placeholder instead: ${err.message}`);
         return buildPlaceholder(width, height);
@@ -862,6 +1037,7 @@ module.exports = {
     init: init,
     getStats: getStats,
     calculateLevel: calculateLevel,
+    sendAdeptsCanvas: sendAdeptsCanvas,
     isValidProgression: isValidProgression,
     getBloodpointsToBuyLevels: getBloodpointsToBuyLevels,
     generateRandomBuild: generateRandomBuild,

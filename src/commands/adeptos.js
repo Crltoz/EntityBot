@@ -9,7 +9,7 @@ module.exports = {
             return role
                 .setName("rol")
                 .setDescription("Filtra por rol; sin esto se muestran ambos.")
-                .addChoices({ name: "survivor", value: "survivor" }, { name: "killer", value: "killer" })
+                .addChoices({ name: "Superviviente", value: "survivor" }, { name: "Asesino", value: "killer" })
         }),
     async execute(context, interaction) {
         await interaction.deferReply();
