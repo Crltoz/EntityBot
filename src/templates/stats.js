@@ -1,6 +1,7 @@
 const texts = require("../data/texts.json");
 const utils = require("../utils/utils.js");
 const render = require("../services/render.js");
+const theme = require("./theme.js");
 
 /**
  * @description The /stats card, as HTML.
@@ -15,18 +16,11 @@ const WIDTH = 1180;
 const HEIGHT = 532;
 const ICONS = "./assets/Visuals/icons/";
 
+// Shared with the canvas commands through theme.js, so the two cannot drift apart.
 const PALETTE = {
-    background: "#0E0E10",
-    // Cards are a gradient rather than a flat fill, lit from the top-left so a row of them
-    // reads as raised panels instead of holes cut out of the background.
-    card: "linear-gradient(145deg, #22222A 0%, #191920 45%, #131318 100%)",
-    cardStrong: "linear-gradient(145deg, #2A2A34 0%, #1D1D25 45%, #15151B 100%)",
-    border: "#2E2E38",
-    label: "#9A9AA4",
-    value: "#FFFFFF",
-    accent: "#C9A227",
-    role: "#E52121",
-    muted: "#5A5A60"
+    ...theme.COLORS,
+    card: theme.cssGradient(theme.CARD_STOPS, 145),
+    cardStrong: theme.cssGradient(theme.CARD_STRONG_STOPS, 145)
 };
 
 // BRUTTALL is the game's face: great for a title, unreadable for a seven-digit number.

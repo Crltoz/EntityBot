@@ -6,6 +6,7 @@ const utils = require("../utils/utils.js");
 const http = require("./http.js");
 const render = require("./render.js");
 const statsTemplate = require("../templates/stats.js");
+const theme = require("../templates/theme.js");
 
 const dbdStatsUrl = (path) => `https://${apis.dbdStats.host}${path}`;
 const steamUrl = (path) => `https://${apis.steam.host}${path}`;
@@ -17,8 +18,15 @@ let backgroundSurvivor;
 let backgroundLevel;
 let backgroundShrine;
 
-const font = "./assets/Font/BRUTTALL.ttf";
-Canvas.registerFont(font, { family: "dbd" });
+// SemiBold is registered as its own family rather than as weight 600 of "Inter": node-canvas
+// matches numeric weights through fontconfig and quietly falls back to Sans when it misses.
+Canvas.registerFont("./assets/Font/BRUTTALL.ttf", { family: "dbd" });
+Canvas.registerFont("./assets/Font/Inter-Regular.ttf", { family: "Inter" });
+Canvas.registerFont("./assets/Font/Inter-SemiBold.ttf", { family: "Inter SemiBold" });
+
+const FONT_DISPLAY = '"dbd"';
+const FONT_BODY = '"Inter"';
+const FONT_BODY_STRONG = '"Inter SemiBold"';
 
 const prefixAssetCharacters = "./assets/Visuals/Characters/";
 const prefixAssetPerks = "./assets/Visuals/Perks/";
@@ -31,17 +39,43 @@ async function init() {
     console.log(`Stats images loaded.`)
 }
 
-// Adept grid geometry. The portraits are 447x619, so the cells keep that ~1:1.385 ratio.
+// Adept grid geometry. Each character is a card like the ones on /stats, with the portrait
+// inset at the roughly 1:1.385 ratio the source art uses and the name underneath.
 const ADEPT_GRID = {
     columns: 12,
     cellWidth: 104,
-    cellHeight: 144,
-    gapX: 10,
-    gapY: 34,
-    margin: 40,
-    headerHeight: 118,
-    sectionHeight: 54
+    cellHeight: 172,
+    portraitWidth: 88,
+    portraitHeight: 122,
+    portraitInset: 8,
+    radius: 10,
+    gapX: 8,
+    gapY: 12,
+    margin: 36,
+    headerHeight: 116,
+    sectionHeight: 56
 };
+
+/**
+ * @param ctx - Canvas 2D context.
+ * @param {Number} x - Left edge.
+ * @param {Number} y - Top edge.
+ * @param {Number} width - Box width.
+ * @param {Number} height - Box height.
+ * @param {Number} radius - Corner radius.
+ * @description Trace a rounded rectangle. node-canvas has roundRect, but not on every build
+ *              this project has run against, so the path is drawn by hand.
+ */
+function roundedRectPath(ctx, x, y, width, height, radius) {
+    const r = Math.min(radius, width / 2, height / 2);
+    ctx.beginPath();
+    ctx.moveTo(x + r, y);
+    ctx.arcTo(x + width, y, x + width, y + height, r);
+    ctx.arcTo(x + width, y + height, x, y + height, r);
+    ctx.arcTo(x, y + height, x, y, r);
+    ctx.arcTo(x, y, x + width, y, r);
+    ctx.closePath();
+}
 
 /**
  * @param context - BotContext.
@@ -75,29 +109,36 @@ async function sendAdeptsCanvas(context, interaction, roster, role, language) {
 
     const canvas = Canvas.createCanvas(width, height);
     const ctx = canvas.getContext('2d');
+    const colors = theme.COLORS;
 
-    ctx.fillStyle = '#0E0E10';
+    ctx.fillStyle = colors.background;
     ctx.fillRect(0, 0, width, height);
-    ctx.strokeStyle = '#8A6412';
-    ctx.lineWidth = 4;
-    ctx.strokeRect(0, 0, width, height);
 
+    // Header, laid out like the /stats one: display face on the left, a pill on the right.
     const earned = roster.filter((character) => character.count > 0).length;
-    ctx.textAlign = 'center';
-    ctx.fillStyle = '#ffffff';
-    ctx.font = '54px "dbd"';
-    ctx.fillText(texts.adepts.title[language].replace(/^\S+\s/, ""), width / 2, 66);
-    ctx.font = '30px "dbd"';
-    ctx.fillStyle = '#C9A227';
-    ctx.fillText(`${earned} / ${roster.length}`, width / 2, 104);
+    ctx.textAlign = 'left';
+    ctx.textBaseline = 'alphabetic';
+    ctx.fillStyle = colors.value;
+    ctx.font = `48px ${FONT_DISPLAY}`;
+    // texts.adepts.title carries an emoji the canvas has no glyph for.
+    ctx.fillText(texts.adepts.title[language].replace(/^\S+\s/, ""), grid.margin, 64);
+
+    drawPill(ctx, `${earned} / ${roster.length}`, width - grid.margin, 40);
 
     let y = grid.headerHeight;
     for (const group of groups) {
         const done = group.characters.filter((character) => character.count > 0).length;
         ctx.textAlign = 'left';
-        ctx.font = '30px "dbd"';
-        ctx.fillStyle = '#E52121';
-        ctx.fillText(`${texts.adepts[group.side][language]}  ${done}/${group.characters.length}`, grid.margin, y + 34);
+        ctx.font = `26px ${FONT_BODY_STRONG}`;
+        ctx.fillStyle = colors.value;
+        const heading = texts.adepts[group.side][language];
+        ctx.fillText(heading, grid.margin, y + 30);
+        // Measured while the heading's own font is still set: switching first sized the gap
+        // with the smaller face and the count landed on top of the title.
+        const headingWidth = ctx.measureText(heading).width;
+        ctx.font = `22px ${FONT_BODY}`;
+        ctx.fillStyle = colors.accent;
+        ctx.fillText(`${done} / ${group.characters.length}`, grid.margin + headingWidth + 16, y + 30);
         y += grid.sectionHeight;
 
         for (let index = 0; index < group.characters.length; index++) {
@@ -123,29 +164,71 @@ async function sendAdeptsCanvas(context, interaction, roster, role, language) {
  *              badged with a multiplier when it was earned more than once.
  */
 async function drawAdeptCell(ctx, character, x, y) {
-    const { cellWidth, cellHeight } = ADEPT_GRID;
-    const portrait = await loadImageOrPlaceholder(assetPath(prefixAssetCharacters, character.link), cellWidth, cellHeight);
+    const { cellWidth, cellHeight, portraitWidth, portraitHeight, portraitInset, radius } = ADEPT_GRID;
+    const colors = theme.COLORS;
     const earned = character.count > 0;
 
-    ctx.drawImage(earned ? portrait : desaturate(portrait, cellWidth, cellHeight), x, y, cellWidth, cellHeight);
+    // The card, same gradient and radius as a /stats card.
+    roundedRectPath(ctx, x, y, cellWidth, cellHeight, radius);
+    ctx.fillStyle = theme.canvasGradient(ctx, theme.CARD_STOPS, x, y, cellWidth, cellHeight);
+    ctx.fill();
+    ctx.lineWidth = 1.5;
+    ctx.strokeStyle = earned ? colors.accent : colors.border;
+    ctx.stroke();
 
-    ctx.lineWidth = 2;
-    ctx.strokeStyle = earned ? '#C9A227' : '#2A2A2E';
-    ctx.strokeRect(x, y, cellWidth, cellHeight);
+    const portrait = await loadImageOrPlaceholder(assetPath(prefixAssetCharacters, character.link), portraitWidth, portraitHeight);
+    const px = x + portraitInset;
+    const py = y + portraitInset;
+
+    ctx.save();
+    roundedRectPath(ctx, px, py, portraitWidth, portraitHeight, 6);
+    ctx.clip();
+    ctx.drawImage(earned ? portrait : desaturate(portrait, portraitWidth, portraitHeight), px, py, portraitWidth, portraitHeight);
+    ctx.restore();
 
     if (character.count > 1) {
-        ctx.font = '20px "dbd"';
-        ctx.textAlign = 'right';
-        ctx.fillStyle = '#0E0E10';
-        ctx.fillRect(x + cellWidth - 42, y + 2, 40, 26);
-        ctx.fillStyle = '#C9A227';
-        ctx.fillText(`x${character.count}`, x + cellWidth - 5, y + 22);
+        const badge = `x${character.count}`;
+        ctx.font = `16px ${FONT_BODY_STRONG}`;
+        const badgeWidth = ctx.measureText(badge).width + 14;
+        roundedRectPath(ctx, px + portraitWidth - badgeWidth, py + 4, badgeWidth, 22, 6);
+        ctx.fillStyle = colors.background;
+        ctx.fill();
+        ctx.fillStyle = colors.accent;
+        ctx.textAlign = 'center';
+        ctx.fillText(badge, px + portraitWidth - badgeWidth / 2, py + 20);
     }
 
-    ctx.font = '17px "dbd"';
+    ctx.font = `15px ${FONT_BODY}`;
     ctx.textAlign = 'center';
-    ctx.fillStyle = earned ? '#ffffff' : '#5A5A60';
-    ctx.fillText(fitText(ctx, character.name, cellWidth), x + cellWidth / 2, y + cellHeight + 22);
+    ctx.fillStyle = earned ? colors.value : colors.disabled;
+    ctx.fillText(fitText(ctx, character.name, cellWidth - 10), x + cellWidth / 2, y + cellHeight - 14);
+}
+
+/**
+ * @param ctx - Canvas 2D context.
+ * @param {String} label - Pill text.
+ * @param {Number} right - Right edge to align to.
+ * @param {Number} centerY - Vertical centre of the pill.
+ * @description The accented pill from the /stats header, which is where the totals live.
+ */
+function drawPill(ctx, label, right, centerY) {
+    const colors = theme.COLORS;
+    ctx.font = `26px ${FONT_BODY_STRONG}`;
+    const width = ctx.measureText(label).width + 52;
+    const height = 48;
+    const x = right - width;
+    const y = centerY - height / 2;
+
+    roundedRectPath(ctx, x, y, width, height, height / 2);
+    ctx.fillStyle = theme.canvasGradient(ctx, theme.CARD_STRONG_STOPS, x, y, width, height);
+    ctx.fill();
+    ctx.lineWidth = 1.5;
+    ctx.strokeStyle = colors.accent;
+    ctx.stroke();
+
+    ctx.fillStyle = colors.accent;
+    ctx.textAlign = 'center';
+    ctx.fillText(label, x + width / 2, centerY + 9);
 }
 
 /**
