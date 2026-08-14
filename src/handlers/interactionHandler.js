@@ -71,8 +71,10 @@ async function modalHandler(context, interaction) {
         await interaction.deferReply();
         const currentLevel = parseInt(interaction.fields.getTextInputValue('currentLevel'));
         const wantedLevel = parseInt(interaction.fields.getTextInputValue('wantedLevel'));
-        if (currentLevel > 0 && currentLevel <= 50 && wantedLevel > 1 && wantedLevel > currentLevel && wantedLevel <= 50) {
-            context.services.stats.calculateLevel(context, interaction, currentLevel, wantedLevel);
+        // The modal only asks for levels, so this is always a single-prestige calculation.
+        const inRange = currentLevel >= 1 && currentLevel <= 50 && wantedLevel >= 1 && wantedLevel <= 50;
+        if (inRange && context.services.stats.isValidProgression(currentLevel, wantedLevel, 0, 0)) {
+            context.services.stats.calculateLevel(context, interaction, currentLevel, wantedLevel, 0, 0);
         } else interaction.editReply({ content: texts.errors.invalidLevel[serverConfig.language] });
         return;
     }
@@ -136,7 +138,11 @@ async function menuHandler(context, interaction) {
                     .addFields({ name: `/${texts.commands.name.level[serverConfig.language]} ${texts.commands.args.level[serverConfig.language]}`, value: `${texts.commands.help.moreInfo[serverConfig.language]} ${texts.commands.name.level[serverConfig.language]}**` })
                     .addFields({ name: '/lobby', value: `${texts.commands.help.lobby[serverConfig.language]}` })
                     .addFields({ name: `/${texts.commands.name.random[serverConfig.language]} ${texts.commands.args.random[serverConfig.language]}`, value: texts.commands.help.random[serverConfig.language] })
-                    .addFields({ name: `/${texts.commands.name.shrine[serverConfig.language]}`, value: texts.commands.help.shrine[serverConfig.language] });
+                    .addFields({ name: `/${texts.commands.name.shrine[serverConfig.language]}`, value: texts.commands.help.shrine[serverConfig.language] })
+                    .addFields({ name: `/${texts.commands.name.killswitch[serverConfig.language]}`, value: texts.commands.help.killswitch[serverConfig.language] })
+                    .addFields({ name: `/${texts.commands.name.events[serverConfig.language]}`, value: texts.commands.help.events[serverConfig.language] })
+                    .addFields({ name: `/${texts.commands.name.patchNotes[serverConfig.language]}`, value: texts.commands.help.patchNotes[serverConfig.language] })
+                    .addFields({ name: `/${texts.commands.name.adepts[serverConfig.language]} ${texts.commands.args.adepts[serverConfig.language]}`, value: texts.commands.help.adepts[serverConfig.language] });
 
                 if (interaction.member.permissions.has(PermissionFlagsBits.Administrator)) {
                     embedd.addFields({ name: `/${texts.commands.name.channel[serverConfig.language]} ${texts.commands.args.channel[serverConfig.language]}`, value: texts.commands.help.channel[serverConfig.language] })

@@ -516,10 +516,16 @@ async function sendEmbedError(context, interaction, type) {
     interaction.editReply({ embeds: [embedd] });
 }
 
-async function calculateLevel(context, interaction, currentLevel, wantedLevel) {
+async function calculateLevel(context, interaction, currentLevel, wantedLevel, currentPrestige, wantedPrestige) {
     const serverConfig = await context.services.database.getOrCreateServer(interaction.guildId);
-    const operation = getBloodpointsToBuyLevels(currentLevel, wantedLevel);
+    const operation = getBloodpointsToBuyLevels(currentLevel, wantedLevel, currentPrestige, wantedPrestige);
     const language = serverConfig.language;
+
+    // The canvas has one slot per level, so the prestige rides along in the same slot when
+    // there is one — "P3-12" instead of "12".
+    const label = (prestige, level) => (prestige ? `P${prestige}-${level}` : String(level));
+    const fromLabel = label(currentPrestige, currentLevel);
+    const toLabel = label(wantedPrestige, wantedLevel);
 
     // image creation
     const canvas = Canvas.createCanvas(541, 447);
@@ -536,30 +542,114 @@ async function calculateLevel(context, interaction, currentLevel, wantedLevel) {
     let levelHeader = language == 0 ? "Nivel" : "Level"
 
     ctx.fillText(levelHeader, utils.calculateCenter(270, levelHeader.length, fontSize), 75);
-    ctx.fillText(currentLevel, utils.calculateCenter(113, currentLevel.toString().length, fontSize), 210);
-    ctx.fillText(wantedLevel, utils.calculateCenter(419, wantedLevel.toString().length, fontSize), 213);
+    ctx.fillText(fromLabel, utils.calculateCenter(113, fromLabel.length, fontSize), 210);
+    ctx.fillText(toLabel, utils.calculateCenter(419, toLabel.length, fontSize), 213);
     ctx.fillText(utils.comma(operation.price), utils.calculateCenter(290, operation.price.toString().length, fontSize), 355);
 
     const attachment = new context.discord.AttachmentBuilder(canvas.toBuffer(), { name: 'calculate-image.png' });
-    interaction.editReply({ content: "‎      ‏‏‎", files: [attachment] });
+    // The number is an average, so it is labelled as one rather than presented as exact.
+    interaction.editReply({ content: texts.levelEstimate[language], files: [attachment] });
 }
 
-/** Deprecated, need value update */
-function getBloodpointsToBuyLevels(currentLevel, wantedLevel) {
+/**
+ * Average bloodpoints spent to complete one bloodweb, by level band.
+ *
+ * The exact figure is not knowable: a bloodweb's cost depends on how many nodes spawn, their
+ * rarity mix, and how much the Entity eats before the level is done. Neither the game nor the
+ * wiki publishes a per-level total, so these stay averages.
+ *
+ * What *is* documented is the node price list, and Patch 6.2.0 cut every node price without
+ * touching the node counts:
+ *   Common 3,000 -> 2,000 | Uncommon 4,000 -> 2,500 | Rare 5,000 -> 3,250
+ *   Very Rare 6,000 -> 4,000 | Ultra Rare 7,000 -> 5,000 | Event 3,000 -> 2,000
+ * That is a mean reduction to ~0.665 of the old price, applied here to the pre-6.2.0 averages
+ * this command used to carry. The spread across rarities is narrow (0.625–0.714), so the mix
+ * of a given bloodweb barely moves the result.
+ */
+const BLOODWEB_COST_BY_LEVEL = [
+    { upTo: 9, cost: 8300 },
+    { upTo: 19, cost: 13000 },
+    { upTo: 29, cost: 15300 },
+    { upTo: 39, cost: 18600 },
+    { upTo: 50, cost: 22300 }
+];
+
+// Buying the central node at level 50 to prestige, unchanged since Patch 6.1.0.
+const PRESTIGE_NODE_COST = 20000;
+const MAX_LEVEL = 50;
+const MAX_PRESTIGE = 100;
+
+/**
+ * @param {Number} level - Bloodweb level being completed.
+ * @description Average cost of the bloodweb at that level.
+ */
+function bloodwebCost(level) {
+    const band = BLOODWEB_COST_BY_LEVEL.find((entry) => level <= entry.upTo);
+    return band ? band.cost : 0;
+}
+
+/**
+ * @param {Number} fromLevel - First level to buy, inclusive.
+ * @param {Number} toLevel - Level to stop at, exclusive.
+ * @description Cost of every bloodweb between two levels of the same prestige.
+ */
+function costBetweenLevels(fromLevel, toLevel) {
     let total = 0;
-    let levelsToBuy = 0;
-    for (let x = currentLevel; x <= wantedLevel; x++) {
-        if (x == wantedLevel) break;
-        levelsToBuy++;
-        if (x >= 1 && x <= 9) total = total + 12500;
-        else if (x >= 10 && x <= 19) total = total + 19500;
-        else if (x >= 20 && x <= 29) total = total + 23000;
-        else if (x >= 30 && x <= 39) total = total + 28000;
-        else if (x >= 40 && x <= 50) total = total + 33500;
+    for (let level = fromLevel; level < toLevel; level++) total += bloodwebCost(level);
+    return total;
+}
+
+/**
+ * @param {Number} currentLevel - Level now (1-50).
+ * @param {Number} wantedLevel - Level wanted (1-50).
+ * @param {Number} currentPrestige - Prestige now (0-99).
+ * @param {Number} wantedPrestige - Prestige wanted (0-100).
+ * @description Whether the target is actually ahead of the starting point. Within one prestige
+ *              the level has to move forward; across prestiges any level is reachable, because
+ *              prestiging sends the character back to level 1.
+ */
+function isValidProgression(currentLevel, wantedLevel, currentPrestige, wantedPrestige) {
+    if (currentPrestige < 0 || wantedPrestige > MAX_PRESTIGE) return false;
+    if (wantedPrestige < currentPrestige) return false;
+    if (wantedPrestige === currentPrestige) return wantedLevel > currentLevel;
+    return true;
+}
+
+/**
+ * @param {Number} currentLevel - Level now (1-50).
+ * @param {Number} wantedLevel - Level wanted (1-50).
+ * @param {Number} currentPrestige - Prestige now (0-99), 0 when the command was called without it.
+ * @param {Number} wantedPrestige - Prestige wanted (0-100).
+ * @description Estimated bloodpoints to go from one point of a character's progression to
+ *              another, across prestiges. Reaching level 50 and prestiging resets to level 1,
+ *              so a multi-prestige span is: finish the current one, then whole cycles, then
+ *              the levels left over in the last one.
+ */
+function getBloodpointsToBuyLevels(currentLevel, wantedLevel, currentPrestige, wantedPrestige) {
+    const fromPrestige = currentPrestige || 0;
+    const toPrestige = wantedPrestige || 0;
+
+    if (toPrestige === fromPrestige) {
+        return {
+            levelsToBuy: Math.max(0, wantedLevel - currentLevel),
+            prestigesToBuy: 0,
+            price: costBetweenLevels(currentLevel, wantedLevel)
+        };
     }
+
+    const fullCycle = costBetweenLevels(1, MAX_LEVEL) + PRESTIGE_NODE_COST;
+    const cycles = toPrestige - fromPrestige - 1;
+
+    const price = costBetweenLevels(currentLevel, MAX_LEVEL) + PRESTIGE_NODE_COST
+        + cycles * fullCycle
+        + costBetweenLevels(1, wantedLevel);
+
+    const levelsToBuy = (MAX_LEVEL - currentLevel) + cycles * (MAX_LEVEL - 1) + (wantedLevel - 1);
+
     return {
         levelsToBuy: levelsToBuy,
-        price: total
+        prestigesToBuy: toPrestige - fromPrestige,
+        price: price
     };
 }
 
@@ -772,6 +862,8 @@ module.exports = {
     init: init,
     getStats: getStats,
     calculateLevel: calculateLevel,
+    isValidProgression: isValidProgression,
+    getBloodpointsToBuyLevels: getBloodpointsToBuyLevels,
     generateRandomBuild: generateRandomBuild,
     getSteamId: getSteamId,
     test: test

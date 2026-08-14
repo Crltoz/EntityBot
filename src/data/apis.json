@@ -16,6 +16,15 @@
         "shrine": "/api/shrine?includeperkinfo=1",
         "perks": "/api/perks",
         "characters": "/api/characters",
-        "dlc": "/api/dlc"
+        "dlc": "/api/dlc",
+        "killswitch": "/api/killswitch",
+        "events": "/api/events",
+        "rankReset": "/api/rankreset",
+        "patchNotes": "/api/patchnotes",
+        "playerAdepts": "/api/playeradepts?steamid=",
+        "offerings": "/api/offerings",
+        "items": "/api/items",
+        "addons": "/api/addons",
+        "maps": "/api/maps"
     }
 }

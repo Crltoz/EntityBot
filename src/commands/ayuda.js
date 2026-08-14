@@ -33,7 +33,11 @@ module.exports = {
                     .addFields({ name: '/lobby', value: `${texts.commands.help.lobby[serverConfig.language]}` })
                     .addFields({ name: `/${texts.commands.name.random[serverConfig.language]} ${texts.commands.args.random[serverConfig.language]}`, value: texts.commands.help.random[serverConfig.language] })
                     .addFields({ name: `/${texts.commands.name.shrine[serverConfig.language]}`, value: texts.commands.help.shrine[serverConfig.language] })
-                    .addFields({ name: `/${texts.commands.name.profile[serverConfig.language]} ${texts.commands.args.profile[serverConfig.language]}`, value: texts.commands.help.profile[serverConfig.language] });
+                    .addFields({ name: `/${texts.commands.name.profile[serverConfig.language]} ${texts.commands.args.profile[serverConfig.language]}`, value: texts.commands.help.profile[serverConfig.language] })
+                    .addFields({ name: `/${texts.commands.name.killswitch[serverConfig.language]}`, value: texts.commands.help.killswitch[serverConfig.language] })
+                    .addFields({ name: `/${texts.commands.name.events[serverConfig.language]}`, value: texts.commands.help.events[serverConfig.language] })
+                    .addFields({ name: `/${texts.commands.name.patchNotes[serverConfig.language]}`, value: texts.commands.help.patchNotes[serverConfig.language] })
+                    .addFields({ name: `/${texts.commands.name.adepts[serverConfig.language]} ${texts.commands.args.adepts[serverConfig.language]}`, value: texts.commands.help.adepts[serverConfig.language] });
 
                 if (interaction.member.permissions.has(PermissionFlagsBits.Administrator)) {
                     embedd.addFields({ name: `/${texts.commands.name.channel[serverConfig.language]} ${texts.commands.args.channel[serverConfig.language]}`, value: texts.commands.help.channel[serverConfig.language] })

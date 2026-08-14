@@ -39,12 +39,27 @@ function canonicalId(value) {
         .replace(/[^a-z0-9]/g, '');
 }
 
+/**
+ * @param {String} value - Text to fit.
+ * @param {Number} limit - Hard maximum, i.e. the Discord field or description cap.
+ * @description Cut to `limit`, preferring the last line break so an entry is never left
+ *              half-written, and mark that something was dropped.
+ */
+function truncate(value, limit) {
+    const text = String(value);
+    if (text.length <= limit) return text;
 
+    const ellipsis = "\n…";
+    const cut = text.slice(0, limit - ellipsis.length);
+    const lastBreak = cut.lastIndexOf("\n");
+    return (lastBreak > limit / 2 ? cut.slice(0, lastBreak) : cut) + ellipsis;
+}
 
 module.exports = {
     getLength: getLength,
     isEmptyObject: isEmptyObject,
     comma: comma,
     calculateCenter: calculateCenter,
-    canonicalId: canonicalId
+    canonicalId: canonicalId,
+    truncate: truncate
 }
