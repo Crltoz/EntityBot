@@ -83,6 +83,10 @@
         "hatchesClosed": [
             "Trampillas cerradas: ",
             "Hatches closed: "
+        ],
+        "needsProfile": [
+            "No tengo tu perfil de Steam. Pásalo en el comando (**/stats [link]**) o asócialo una vez con **/perfil [link]** y después te bastará con **/stats**.\nVale cualquiera de estos: el link del perfil, tu SteamID, tu código de amigo o tu nombre de usuario.",
+            "I don't have your Steam profile. Pass it in the command (**/stats [link]**) or link it once with **/profile [link]** and then **/stats** alone is enough.\nAny of these work: the profile link, your SteamID, your friend code or your username."
         ]
     },
     "errors": {

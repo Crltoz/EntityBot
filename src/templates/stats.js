@@ -96,12 +96,12 @@ function card(title, value, icon) {
 /**
  * @param steamProfile - Steam player summary.
  * @param dbdProfile - Player stats payload.
- * @param {Boolean} isSurv - true = survivor | false = killer
+ * @param {String} role - "survivor" or "killer".
  * @param {Number} language - 0 = Spanish, 1 = English.
- * @description Build the markup and everything it embeds.
+ * @description Build the markup for one role, the full seven cards.
  */
-async function build(steamProfile, dbdProfile, isSurv, language) {
-    const role = isSurv ? "survivor" : "killer";
+async function build(steamProfile, dbdProfile, role, language) {
+    const isSurv = role === "survivor";
     const fields = FIELDS[role];
 
     const [avatar, roleIcon, bpIcon, ...icons] = await Promise.all([
@@ -172,8 +172,142 @@ async function build(steamProfile, dbdProfile, isSurv, language) {
 </div>`;
 }
 
+// The headline numbers of each role, for the card that shows both at once. Four apiece: the
+// core actions the role is actually judged on, and enough to keep the two sections the same
+// height so neither reads as the afterthought.
+const HEADLINE_FIELDS = {
+    survivor: [
+        { key: "gensrepaired", label: "gensRepaired", icon: "gen.png" },
+        { key: "saved", label: "saved", icon: "coop.png" },
+        { key: "survivorshealed", label: "survivorsHealed", icon: "medkit.png" },
+        { key: "escaped", label: "escaped", icon: "hatch.png" }
+    ],
+    killer: [
+        { key: "killed", label: "kills", icon: "killer.png" },
+        { key: "sacrificed", label: "sacrificed", icon: "hook.png" },
+        { key: "killer_perfectgames", label: "perfectGames", icon: "killer_perfect.png" },
+        { key: "hatchesclosed", label: "hatchesClosed", icon: "hatch.png" }
+    ]
+};
+
+const COMBINED_HEIGHT = 626;
+// Four across the content width, against three on the single-role card.
+const WIDE_CARD_WIDTH = 264;
+
+function wideCard(title, value, icon) {
+    return `
+      <div style="display:flex;flex-direction:column;justify-content:space-between;
+                  width:${WIDE_CARD_WIDTH}px;height:100px;background-image:${PALETTE.card};
+                  border:1px solid ${PALETTE.border};border-radius:10px;
+                  padding:14px 16px;margin:0 12px 0 0;">
+        <div style="display:flex;color:${PALETTE.label};font-size:16px;">${render.escape(title)}</div>
+        <div style="display:flex;align-items:center;justify-content:space-between;">
+          <div style="display:flex;color:${PALETTE.value};font-size:28px;font-weight:600;">${render.escape(value)}</div>
+          ${icon ? `<img src="${icon}" style="width:32px;height:32px;" />` : ""}
+        </div>
+      </div>`;
+}
+
+/**
+ * @param steamProfile - Steam player summary.
+ * @param dbdProfile - Player stats payload.
+ * @param {Number} language - 0 = Spanish, 1 = English.
+ * @description Both roles on one card, which is what /stats answers with when no role is given.
+ *              The two are kept in labelled sections rather than mixed, because a survivor
+ *              number and a killer number sitting side by side mean nothing together.
+ */
+async function buildCombined(steamProfile, dbdProfile, language) {
+    const roles = ["survivor", "killer"];
+
+    const [avatar, bpIcon, survivorIcon, killerIcon] = await Promise.all([
+        render.remoteAsset(steamProfile.avatarfull, 84, 84),
+        render.asset(ICONS + "bp.png", 30, 30),
+        render.asset(ICONS + "survivor_rank.png", 34, 34),
+        render.asset(ICONS + "killer_rank.png", 34, 34)
+    ]);
+
+    const icons = {};
+    for (const role of roles) {
+        icons[role] = await Promise.all(HEADLINE_FIELDS[role].map((field) => render.asset(ICONS + field.icon, 32, 32)));
+    }
+
+    const minutes = Number(dbdProfile.playtime);
+    const hours = Number.isFinite(minutes) && minutes > 0 ? utils.comma(Math.floor(minutes / 60)) : "—";
+
+    const section = (role) => {
+        const roleIcon = role === "survivor" ? survivorIcon : killerIcon;
+        const roleName = role === "survivor" ? texts.stats.roleSurvivor[language] : texts.stats.roleKiller[language];
+        const cards = HEADLINE_FIELDS[role]
+            .map((field, index) => wideCard(label(field.label, language), utils.comma(dbdProfile[field.key] || 0), icons[role][index]))
+            .join("");
+
+        return `
+      <div style="display:flex;flex-direction:column;margin-top:18px;">
+        <div style="display:flex;align-items:center;margin-bottom:10px;">
+          ${roleIcon ? `<img src="${roleIcon}" style="width:34px;height:34px;margin-right:12px;" />` : ""}
+          <div style="display:flex;color:${PALETTE.value};font-size:24px;font-weight:600;">${render.escape(roleName)}</div>
+        </div>
+        <div style="display:flex;">${cards}</div>
+      </div>`;
+    };
+
+    return `
+<div style="display:flex;flex-direction:column;width:${WIDTH}px;height:${COMBINED_HEIGHT}px;
+            background:${PALETTE.background};font-family:${BODY_FONT};padding:30px 32px;">
+
+  <div style="display:flex;align-items:center;margin-bottom:18px;">
+    <div style="display:flex;font-family:${DISPLAY_FONT};color:${PALETTE.value};font-size:48px;">${render.escape(texts.stats.statistics[language])}</div>
+  </div>
+
+  <div style="display:flex;align-items:center;background-image:${PALETTE.card};
+              border:1px solid ${PALETTE.border};border-radius:10px;padding:18px 20px;">
+    ${avatar ? `<img src="${avatar}" style="width:84px;height:84px;border-radius:8px;margin-right:18px;" />` : ""}
+    <div style="display:flex;flex-direction:column;width:250px;">
+      <div style="display:flex;color:${PALETTE.role};font-size:26px;font-weight:600;">${render.escape(displayName(steamProfile.personaname, steamProfile.steamid))}</div>
+      <div style="display:flex;color:${PALETTE.muted};font-size:15px;margin-top:4px;">${render.escape(steamProfile.steamid)}</div>
+    </div>
+    <div style="display:flex;flex-direction:column;margin-left:auto;margin-right:48px;">
+      <div style="display:flex;color:${PALETTE.label};font-size:16px;">${render.escape(label("hoursPlayed", language))}</div>
+      <div style="display:flex;color:${PALETTE.value};font-size:30px;font-weight:600;">${hours}</div>
+    </div>
+    <div style="display:flex;flex-direction:column;">
+      <div style="display:flex;align-items:center;">
+        ${bpIcon ? `<img src="${bpIcon}" style="width:20px;height:20px;margin-right:8px;" />` : ""}
+        <div style="display:flex;color:${PALETTE.label};font-size:16px;">Bloodpoints</div>
+      </div>
+      <div style="display:flex;color:${PALETTE.accent};font-size:30px;font-weight:600;">${utils.comma(dbdProfile.bloodpoints || 0)}</div>
+    </div>
+  </div>
+
+  ${roles.map(section).join("")}
+
+  <div style="display:flex;margin-top:auto;color:${PALETTE.muted};font-size:15px;">
+    dbd.tricky.lol/playerstats/${render.escape(steamProfile.steamid)}
+  </div>
+</div>`;
+}
+
+/**
+ * @param {String} role - "survivor", "killer", or null.
+ * @description Pick the layout: a role gives its seven cards, no role gives the combined card
+ *              with the headline numbers of both, which is what /stats renders with no arguments.
+ */
+function layoutFor(role) {
+    if (role === "survivor" || role === "killer") {
+        return {
+            width: WIDTH,
+            height: HEIGHT,
+            build: (steamProfile, dbdProfile, language) => build(steamProfile, dbdProfile, role, language)
+        };
+    }
+    return { width: WIDTH, height: COMBINED_HEIGHT, build: buildCombined };
+}
+
 module.exports = {
     build: build,
+    buildCombined: buildCombined,
+    layoutFor: layoutFor,
     WIDTH: WIDTH,
-    HEIGHT: HEIGHT
+    HEIGHT: HEIGHT,
+    COMBINED_HEIGHT: COMBINED_HEIGHT
 }

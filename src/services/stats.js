@@ -409,13 +409,30 @@ async function sendShrine(context, interaction) {
     }
 }
 
-async function getStats(context, interaction, steamLink, isSurvivor) {
+/**
+ * @param context - BotContext.
+ * @param interaction - Discord command interaction.
+ * @param {String} steamLink - Any Steam reference, see parseSteamInput.
+ * @param {String} role - "survivor", "killer", or null for the combined card.
+ */
+async function getStats(context, interaction, steamLink, role) {
     steamLink = steamLink.toLowerCase();
 
     const steamId = await getSteamId(context, interaction, steamLink);
     // getSteamId already told the user what went wrong.
     if (!steamId) return;
-    await getSteamProfile(context, interaction, steamId, isSurvivor);
+    await getStatsForSteamId(context, interaction, steamId, role);
+}
+
+/**
+ * @param context - BotContext.
+ * @param interaction - Discord command interaction.
+ * @param {String} steamId - SteamID in 64 bits, already resolved.
+ * @param {String} role - "survivor", "killer", or null for the combined card.
+ * @description Entry point for callers that already hold a SteamID, i.e. the stored profile.
+ */
+async function getStatsForSteamId(context, interaction, steamId, role) {
+    await getSteamProfile(context, interaction, steamId, role);
 }
 
 /**
@@ -501,10 +518,10 @@ async function getSteamId(context, interaction, steamLink) {
  * @param context - BotContext.
  * @param interaction - Discord command interaction.
  * @param {BigInt64Array} steamId - SteamID in 64bits.
- * @param {Boolean} isSurv - true = survivor | false = killer
+ * @param {String} role - "survivor", "killer", or null for the combined card.
  * @description First part for get user stats from Australian Website.
  */
-async function getSteamProfile(context, interaction, steamId, isSurv) {
+async function getSteamProfile(context, interaction, steamId, role) {
     const serverConfig = await context.services.database.getOrCreateServer(interaction.guildId);
     const url = steamUrl(apis.steam.playerSummaries.path + process.env.STEAM_APIKEY + apis.steam.playerSummaries.steamid + steamId);
 
@@ -531,17 +548,17 @@ async function getSteamProfile(context, interaction, steamId, isSurv) {
         return;
     }
 
-    await sendStats(context, interaction, player, isSurv);
+    await sendStats(context, interaction, player, role);
 }
 
 /**
  * @param context - BotContext
  * @param interaction - Discord command interaction.
  * @param steamProfile - Steam profile object.
- * @param {Boolean} isSurv - true = survivor | false = killer
+ * @param {String} role - "survivor", "killer", or null for the combined card.
  * @description - Get stats from Australian Website, and send this to the channel.
  */
-async function sendStats(context, interaction, steamProfile, isSurv) {
+async function sendStats(context, interaction, steamProfile, role) {
     const url = dbdStatsUrl(apis.dbdStats.playerStats + steamProfile.steamid);
 
     let response;
@@ -568,7 +585,7 @@ async function sendStats(context, interaction, steamProfile, isSurv) {
     }
 
     if (body.killer_rank == 20 && body.killed == 0 && body.sacrificed == 0 && body.bloodpoints == 0) await sendEmbedError(context, interaction, 1);
-    else await sendEmbedStats(context, interaction, steamProfile, body, isSurv);
+    else await sendEmbedStats(context, interaction, steamProfile, body, role);
 }
 
 /**
@@ -608,21 +625,22 @@ async function postStats(context, interaction, steamId) {
  * @param interaction - Discord command interaction.
  * @param steamProfile - Steam profile object.
  * @param dbdProfile - Dead By Daylight stats object.
- * @param {Boolean} isSurv - true = survivor | false = killer
+ * @param {String} role - "survivor", "killer", or null for the combined card.
  * @description - Render the stats card and send it.
  *
  * The card is HTML laid out by satori rather than the ~150 lines of hand-placed fillText this
  * replaced: adding a number is now a row in the template's field table instead of picking
  * pixel coordinates that do not collide with the background art.
  */
-async function sendEmbedStats(context, interaction, steamProfile, dbdProfile, isSurv) {
+async function sendEmbedStats(context, interaction, steamProfile, dbdProfile, role) {
     const serverConfig = await context.services.database.getOrCreateServer(interaction.guildId);
     const language = serverConfig.language;
 
     let png;
     try {
-        const markup = await statsTemplate.build(steamProfile, dbdProfile, isSurv, language);
-        png = await render.toPng(markup, statsTemplate.WIDTH, statsTemplate.HEIGHT);
+        const layout = statsTemplate.layoutFor(role);
+        const markup = await layout.build(steamProfile, dbdProfile, language);
+        png = await render.toPng(markup, layout.width, layout.height);
     } catch (err) {
         console.log(`Error rendering the stats card: ${err.message}`);
         await sendEmbedError(context, interaction, 3);
@@ -1012,6 +1030,7 @@ module.exports = {
     sendShrine: sendShrine,
     init: init,
     getStats: getStats,
+    getStatsForSteamId: getStatsForSteamId,
     calculateLevel: calculateLevel,
     sendAdeptsCanvas: sendAdeptsCanvas,
     isValidProgression: isValidProgression,
