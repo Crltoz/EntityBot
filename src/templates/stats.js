@@ -118,7 +118,11 @@ async function build(steamProfile, dbdProfile, isSurv, language) {
         ...fields.map((field) => render.asset(ICONS + field.icon, 34, 34))
     ]);
 
-    const hours = utils.comma(parseInt(dbdProfile.playtime / 60, 10) || 0);
+    // playtime is total minutes played, and the API often does not have it at all — it comes
+    // from Steam, which withholds it when the account's game details are not public. Rendering
+    // that as "0" claimed the player had never played; an em dash says we do not know.
+    const minutes = Number(dbdProfile.playtime);
+    const hours = Number.isFinite(minutes) && minutes > 0 ? utils.comma(Math.floor(minutes / 60)) : "—";
     const roleName = isSurv ? texts.stats.roleSurvivor[language] : texts.stats.roleKiller[language];
 
     const cards = fields
